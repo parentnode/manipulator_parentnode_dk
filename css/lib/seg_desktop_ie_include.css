@@ -1,12 +1,12 @@
-@import url(/dear-resources/css/s-fonts.css);
+@import url(/css/dearcss/src/css/s-fonts.css);
 
-@import url(/dear-resources/css/s-page.css);
-@import url(/dear-resources/css/s-header.css);
-@import url(/dear-resources/css/s-content.css);
-@import url(/dear-resources/css/s-navigation.css);
-@import url(/dear-resources/css/s-footer.css);
+@import url(/css/dearcss/src/css/s-page.css);
+@import url(/css/dearcss/src/css/s-header.css);
+@import url(/css/dearcss/src/css/s-content.css);
+@import url(/css/dearcss/src/css/s-navigation.css);
+@import url(/css/dearcss/src/css/s-footer.css);
 
-@import url(/dear-resources/css/s-form.css);
+@import url(/css/dearcss/src/css/s-form.css);
 
 
 @import url(/documentation/css/lib/s-documentation.css);
