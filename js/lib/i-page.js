@@ -1,0 +1,26 @@
+Util.Objects["page"] = new function() {
+	this.init = function(page) {
+
+		// MAIN ELEMENTS
+		// header element
+		page.hN = u.qs("#header", page);
+		page.hN.page = page;
+		// content element
+		page.cN = u.qs("#content", page);
+		page.cN.page = page;
+
+		// navigation element
+		page.nN = u.qs("#navigation", page);
+		if(page.nN) {
+			// move navigation in front of content node in the DOM
+			page.nN = page.insertBefore(page.nN, page.cN);
+			page.nN.page = page;
+		}
+
+		// footer element
+		page.fN = u.qs("#footer", page);
+		page.fN.page = page;
+
+
+	}
+}

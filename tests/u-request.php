@@ -2,87 +2,162 @@
 <? $body_class = "tests" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-	<style type="text/css">
-		.scene div {margin: 0 0 5px;}
-		.correct {background: green;}
-		.error {background: red;}
-	</style>
-	<script type="text/javascript">
-		Util.Objects["test"] = new function() {
-			this.init = function(node) {
+<style type="text/css">
+	.scene div {margin: 0 0 5px; padding: 2px 5px;}
+	.correct {background: green; color: white;}
 
-				node._span = u.qs("span", node);
+	.error {background: red; color: white;}
+	#content .scene .error span {color: white;}
+</style>
 
-				node.Response = function(response) {
-					if(response.isHTML && u.qs("h1", response).innerHTML == "test") {
-						u.ac(this, "correct");
-						this._span.innerHTML += (u.getIJ(node, "async") ? " - async " : " - ") + u.getIJ(node, "method") + " request valid";
-					}
-					else if(response.isJSON && response.h1 == "test") {
-						u.ac(this, "correct");
-						this._span.innerHTML += (u.getIJ(node, "async") ? " - async " : " - ") + u.getIJ(node, "method") + " request valid";
-					}
-					else {
-						u.ac(this, "error");
-						this._span.innerHTML += (u.getIJ(node, "async") ? " - async " : " - ") + u.getIJ(node, "method") + " request invalid";
-					}
+<script type="text/javascript">
+
+	Util.Objects["test"] = new function() {
+		this.init = function(node) {
+
+
+			node._span = u.qs("span", node);
+
+			node.Response = function(response) {
+				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = u.qs(".test", response).innerHTML
 				}
-				u.Request(node, node._span.innerHTML, u.f.getParams(node), u.getIJ(node, "method"), u.getIJ(node, "async"));
+				else if(response.isJSON && this.request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = response.test;
+				}
+				else {
 
+					u.bug("error:" + response.isJSON + ":" + this.request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+
+					u.ac(this, "error");
+					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
+				}
 			}
+			node.ResponseError = function(response) {
+				u.ac(this, "error");
+
+				if(response.exception) {
+					this.innerHTML += " EXCEPTION: " + response.exception;
+				}
+				else {
+					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
+				}
+			}
+
+
+			var method = u.cv(node, "method");
+			var params = u.f.getParams(node, (u.cv(node, "send") ? ({"type":u.cv(node, "send")}) : ""));
+			var async = u.cv(node, "async");
+			var headers = u.cv(node, "headers");
+
+			var settings = {};
+			if(method) {
+				settings.method = method;
+			}
+			if(params) {
+				settings.params = params;
+			}
+			if(async) {
+				settings.async = async;
+			}
+			if(headers) {
+				var h = headers.split(":");
+				if(h.length > 1) {
+					settings.headers = {};
+					settings.headers[h[0]] = h[1];
+				}
+			}
+
+			u.Request(node, node._span.innerHTML, settings);
+
 
 		}
 
-	</script>
-	<div id="content" class="events">
-		<h2>Request</h2>
-		<div class="scene">
+	}
 
-			<form name="test" action="" method="">
+</script>
 
-				<div class="i:test method:post">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.json</span>
-				</div>
-				<div class="i:test method:post">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.html</span>
-				</div>
-				<div class="i:test method:post async:true">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.json</span>
-				</div>
-				<div class="i:test method:post async:true">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.html</span>
-				</div>
-				<div class="i:test method:get">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.json?test=fisk</span>
-				</div>
-				<div class="i:test method:get">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.html</span>
-				</div>
-				<div class="i:test method:get async:true">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.json</span>
-				</div>
-				<div class="i:test method:get async:true">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.html</span>
-				</div>
-				<div class="i:test method:script">
-					<input type="hidden" name="hidden_field" value="hidden_value" />
-					<span>ajax/test.jsonp.php</span>
-				</div>
+<div class="scene">
+	<h2>Request</h2>
 
-			</form>
+	<form name="test" action="" method="">
+
+		<div class="i:test method:post">
+			<input type="hidden" name="test" value="POST, to HTML: correct" />
+			<span>ajax/post.php</span>
 		</div>
-		<div class="comments">
-			Add parameters to test!
+		<div class="i:test method:post send:json">
+			<input type="hidden" name="test" value="POST, to JSON, send JSON: correct" />
+			<span>ajax/post_json.json.php</span>
 		</div>
 
-	</div>
+		<div class="i:test method:post async:true">
+			<input type="hidden" name="test" value="POST, to JSON, async: correct" />
+			<span>ajax/post.json.php</span>
+		</div>
+		<div class="i:test method:post async:true">
+			<input type="hidden" name="test" value="POST, to HTML, async: correct" />
+			<span>ajax/post.php</span>
+		</div>
+
+		<div class="i:test method:post async:true headers:test:value">
+			<input type="hidden" name="test" value="POST, to HTML, async, headers: correct" />
+			<span>ajax/post_headers.php</span>
+		</div>
+
+
+		<div class="i:test method:get">
+			<input type="hidden" name="test" value="GET, to JSON: correct" />
+			<span>ajax/get.json.php?test=error</span>
+		</div>
+		<div class="i:test method:get">
+			<input type="hidden" name="test" value="GET, to HTML: correct" />
+			<span>ajax/get.php</span>
+		</div>
+		<div class="i:test method:get async:true">
+			<input type="hidden" name="test" value="GET, to JSON, async: correct" />
+			<span>ajax/get.json.php</span>
+		</div>
+
+		<div class="i:test method:get async:true headers:test:value">
+			<input type="hidden" name="test" value="GET, to JSON, async, headers: correct" />
+			<span>ajax/get_headers.json.php</span>
+		</div>
+
+
+		<div class="i:test method:script">
+			<input type="hidden" name="test" value="SCRIPT, to JSONP" />
+			<span>ajax/script.jsonp.php</span>
+		</div>
+
+		<div class="i:test method:script">
+			<input type="hidden" name="test" value="SCRIPT, param URL, to JSONP" />
+			<span>ajax/script.jsonp.php?test=error</span>
+		</div>
+
+		<div class="i:test method:script send:json">
+			<input type="hidden" name="test" value="SCRIPT, param URL, send JSON, to JSONP" />
+			<span>ajax/script.jsonp.php?test=error</span>
+		</div>
+
+		<div class="i:test method:script">
+			<input type="hidden" name="test" value="SCRIPT, to JSONP outside domain: correct" />
+			<span>http://jes.wires.dk/documentation/tests/ajax/script.jsonp.php</span>
+		</div>
+
+
+		<div class="i:test method:post">
+			<input type="hidden" name="test" value="POST, outside domain: correct" />
+			<span>http://jes.wires.dk/documentation/tests/ajax/post.php - EXCEPTION</span>
+		</div>
+
+	</form>
+</div>
+
+<div class="comments">
+	Errors seen in Safari 4 + safari 4 iOS
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

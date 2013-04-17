@@ -2,175 +2,237 @@
 <? $body_class = "tests" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-	<style type="text/css">
-		.scene div {margin: 0 0 5px;}
-		.correct {background: green;}
-		.error {background: red;}
-	</style>
-	<script type="text/javascript">
-		Util.Objects["test"] = new function() {
-			this.init = function(scene) {
+<style type="text/css">
+	.scene > div {margin: 0 0 5px;}
+	.correct {background: green;}
+	.error {background: red;}
+</style>
 
-				var node;
+<script type="text/javascript">
+	Util.Objects["test"] = new function() {
+		this.init = function(scene) {
 
-				// u.sc, u.ac, u.rc, u.tc, u.hc
-				u.setClass(u.qs("h2"), "headline")
-				if(u.qs("h2").className == "headline") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "setClass: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "setClass: error";
-				}
+			var node;
 
-				u.addClass(u.qs("h2"), "added_headline")
-				if(u.qs("h2").className == "headline added_headline") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "addedClass: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "addedClass: error";
-				}
+			// querySelector
+			if(u.qs("#qstest > h3 span").innerHTML == "querySelector") {
+				u.qs("#qstest", scene).innerHTML = "querySelector: correct";
+			}
+			// querySelectorAll
+			if(u.qsa("#content #qstest, #content .qsatest").length == 2) {
+				u.qsa("#content #qstest, #content .qsatest")[1].innerHTML = "querySelectorAll: correct";
+			}
 
-				u.removeClass(u.qs("h2"), "added_headline")
-				if(u.qs("h2").className == "headline") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "removeClass: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "removeClass: error";
-				}
+			// ge + ges
+			// getElement
+			if(u.ge("type:1").innerHTML == "getElement") {
+				u.ge("type:1").innerHTML = "getElement: correct";
+				u.ge("type:1", scene).parentNode.className = "correct"
+			}
+			// getElements
+			if(u.ges("type\:[1-2]", scene).length == 2) {
+				u.ges("type\:[1-2]")[1].innerHTML = "getElements: correct";
+			}
 
-				u.toggleClass(u.qs("h2"), "headline", "new_headline")
-				if(u.qs("h2").className == "new_headline") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "toggleClass: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "toggleClass: error";
-				}
+			// parent node
+			if(u.pn(u.qs(".parentnode ul li span", scene), "div").className == "parentnode correct") {
+				u.pn(u.qs(".parentnode ul li span", scene), "div").innerHTML = "u.parentNode: correct";
+			}
 
-				if(u.hc(u.qs("h2"), "new_headline") == true) {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "hasClass: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "hasClass: error";
-				}
+			// ns + ps
+			// nextSibling
+			if(u.ns(u.qs("div.ns .start", scene)).className == "nons" && !u.ns(u.qs("div.ns .start", scene), "li") && u.ns(u.qs("div.ns .start", scene), "nons").className == "end") {
+				u.qs("div.ns").innerHTML = "nextSibling: correct";
+			}
+			
+			// previousSibling
+			if(u.ps(u.qs("div.ps .start", scene), "nops").className == "end") {
+				u.qs("div.ps").innerHTML = "previousSibling: correct";
+			}
 
-				// u.getIJ
-				if(u.getIJ(u.qs("#domtest"), "pastel") == "lime") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "getIJ: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "getIJ: error";
-				}
-				
-				// selector test 1
-				node = u.qs("#domtest", scene);
-				u.ac(node, "correct", "error");
-
-				// selector test 2
-				node = u.qs(".domtest span", scene);
-				u.tc(node.parentNode, "correct", "error");
+			// childNodes
+			if(u.cn(u.qs("div.cn", scene), "span").length == 2) {
+				u.qs("div.cn").innerHTML = "childNodes: correct";
+			}
 
 
-				// append child
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "append element: correct";
+
+			// appendElement
+			u.ae(scene, "div", ({"class":"correct", "html":"append element: correct"}));
+
+			// insertElement
+			node = u.ie(scene, "div", ({"class":"error", "html":"insert element"}));
+			if(node == u.qs("div", scene)) {
+				u.ae(scene, node, ({"class":"correct"}));
+			}
+
+			// wrap element
+			node = u.ae(scene, "div", ({"class":"error", "html":"wrap error"}));
+			u.we(node, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
 
 
-				// return matches (can we uses references for comparison)
-				if(scene == u.qs("#content .scene")) {
-					u.ie(scene, "div", ({"class":"correct"})).innerHTML = "insert element and element type: correct";
-				}
-				else {
-					u.ie(scene, "div", ({"class":"error"})).innerHTML = "insert element and element type: error";
-				}
+			// node.textContent
+			var text = u.text(u.qs(".textcontent", scene));
+			if(text.trim() == "node.textContent") {
+				u.ae(scene, u.qs(".textcontent", scene), ({"class":"correct", "html":"textContent correct"}))
+			}
 
-				// u.qs
-				if(u.qs("#content").className == "events") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "querySelector: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "querySelector: error";
-				}
 
-				// u.qsa
-				if(u.qsa("#content #domtest, #content .domtest").length == 2) {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "querySelectorAll: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "querySelectorAll: error";
-				}
-				
+			// clickableElement
+			node = u.qs(".ce", scene);
+			u.ce(node);
+			if(!u.qs("a", node).href && node.url == "http://index/") {
+				node.innerHTML = "clickableElement: correct";
+			}
 
-				// ge + ges
-				if(u.ge("content").id == "content") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "getElement: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "getElement: error";
-				}
-				if(u.ges("span").length == 1) {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "getElements: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "getElements: error";
-				}
-				
-				// ns + ps + gs
-				if(u.ns(u.qs(".scene")).className == "bla") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "nextSibling: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "nextSibling: error";
-				}				
 
-				if(u.ps(u.qs(".bla")).className == "scene") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "previousSibling: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "previousSibling: error";
-				}
+			// classVar
+			if(u.cv(u.qs("#qstest"), "type") == "cv") {
+				u.ae(scene, "div", ({"class":"correct", "html":"classVar: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"classVar: error"}));
+			}
 
-				if(u.gs(u.qs(".domtest"), "prev").id == "domtest") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "getSibling: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "getSibling: error";
-				}
-				
-				// wrap element
-				u.we(u.qs(".bla"), "div", ({"class":"wrap"}))
-				if(u.qs(".bla").parentNode.className == "wrap") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "wrapElement: error";
-				}
-				
-				//as & gcs
-				u.as(u.qs(".domtest"), "height", "20px")
-				if(u.gcs(u.qs(".domtest"), "height") == "20px") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "addStyle: correct";
-				}
-				else {
-					u.ae(scene, "div", ({"class":"error"})).innerHTML = "addStyle: error";
-				}
 
+			// u.sc, u.ac, u.rc, u.tc, u.hc
+			// setClass
+			u.qs("h2", scene).className = "before";
+			var old_class = u.setClass(u.qs("h2", scene), "test_headline");
+			if(u.qs("h2", scene).className == "test_headline") {
+				u.ae(scene, "div", ({"class":"correct", "html":"setClass: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"setClass: error"}));
+			}
+
+			// hasClass
+			u.qs("h2", scene).className = "test_headline type1";
+			if(
+				u.hc(u.qs("h2", scene), "headline") == false && 
+				u.hc(u.qs("h2", scene), "test|headline") == false && 
+				u.hc(u.qs("h2", scene), "test_headline") == true && 
+				u.hc(u.qs("h2", scene), "test_headline2") == false && 
+				u.hc(u.qs("h2", scene), "2test_headline") == false && 
+				u.hc(u.qs("h2", scene), "type[0-1]") == true
+				) {
+				u.ae(scene, "div", ({"class":"correct", "html":"hasClass: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"hasClass: error"}));
+			}
+
+			// addClass
+			u.qs("h2", scene).className = "test_headline";
+			u.addClass(u.qs("h2", scene), "headline:example");
+			u.addClass(u.qs("h2", scene), "headline");
+			u.addClass(u.qs("h2", scene), "headline");
+			if(u.qs("h2", scene).className == "test_headline headline:example headline") {
+				u.ae(scene, "div", ({"class":"correct", "html":"addedClass: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"addedClass: error"}));
+			}
+
+			// removeClass
+			u.qs("h2", scene).className = "test_headline test:1 headline headline:example test:2 test:3 bye farewell later headline";
+			u.removeClass(u.qs("h2", scene), "headline");
+			u.removeClass(u.qs("h2", scene), "bye|farewell|later");
+			u.removeClass(u.qs("h2", scene), "test\:[0-2]+");
+			if(u.qs("h2", scene).className == "test_headline headline:example test:3") {
+				u.ae(scene, "div", ({"class":"correct", "html":"removeClass: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"removeClass: error"}));
+			}
+
+			// toggleClass
+			u.qs("h2", scene).className = "test_headline";
+			u.toggleClass(u.qs("h2", scene), "test_headline", old_class);
+			if(u.qs("h2", scene).className == old_class) {
+				u.ae(scene, "div", ({"class":"correct", "html":"toggleClass: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"toggleClass: error"}));
+			}
+
+
+
+			//as & gcs
+			// applyStyle
+			var org_display = u.qs("h2", scene).style.display;
+			u.qs("h2", scene).style.display == "block";
+			u.as(u.qs("h2", scene), "display", "none");
+			if(u.qs("h2", scene).style.display == "none") {
+				u.as(u.qs("h2", scene), "display", org_display);
+				u.ae(scene, "div", ({"class":"correct", "html":"addStyle: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"addStyle: error"}));
+			}
+
+
+
+			// getComputedStyle
+			var gcs_node = u.ae(scene, "div");
+			u.as(gcs_node, "backgroundColor", "#ff0000");
+			u.as(gcs_node, "height", "1px");
+			if(u.gcs(gcs_node, "background-color") == "#ff0000" || u.gcs(gcs_node, "background-color") == "rgb(255, 0, 0)" && u.gcs(gcs_node, "height") == "1px") {
+				gcs_node.parentNode.removeChild(gcs_node);
+				u.ae(scene, "div", ({"class":"correct", "html":"getComputedStyle: correct"}));
+			}
+			else {
+				gcs_node.parentNode.removeChild(gcs_node);
+				u.ae(scene, "div", ({"class":"error", "html":"getComputedStyle: error"}));
+			}
+
+
+			// hasFixedParent
+			var hfp_node = u.ae(scene, "div");
+			var hfp_child = u.ae(hfp_node, "div");
+			u.as(hfp_node, "position", "fixed");
+			if(u.hfp(hfp_child) && !u.hfp(hfp_node)) {
+				hfp_node.parentNode.removeChild(hfp_node);
+				u.ae(scene, "div", ({"class":"correct", "html":"hasFixedParent: correct"}));
+			}
+			else {
+				hfp_node.parentNode.removeChild(hfp_node);
+				u.ae(scene, "div", ({"class":"error", "html":"hasFixedParent: error"}));
 			}
 
 		}
-	</script>
-	<div id="content" class="events">
-		<h2>DOM</h2>
-		<div class="scene i:test">
 
-			<div id="domtest" class="pastel:lime">querySelector: #content .scene #domtest and addClass</div>
-			<div class="domtest error"><span>querySelector: #content .scene .domtest span and toggleClass</span></div>
+	}
+</script>
 
-		</div>
-		<div class="bla"></div>
-		<div class="comments">
-			As for the computed style in u.gcs IE8- and newer browsers returns different values. For height IE8- returns just "20" and FF returns "20px".
-		</div>
-		
+<div class="scene i:test">
+	<h2>DOM</h2>
 
+	<div id="qstest" class="correct type:cv othertype:notcv"><h3 class="error"><span>querySelector</span> error</h3></div>
+	<div class="qsatest correct"><span class="error">querySelectorAll</span></div>
+	<div class="error"><div class="type:1">getElement</div></div>
+	<div class="type:2 correct"><span class="error">getElements</span></div>
+	<div class="parentnode correct"><ul><li><span class="error">parentNode</span></li></ul></div>
+
+	<div class="ns correct"><ul><li class="start"><span class="error">nextSibling</span></li><li class="nons"></li><li class="end"></li></ul></div>
+	<div class="ps correct"><ul><li class="end"><span class="error">previousSibling</span></li><li class="nops"></li><li class="start"></li></ul></div>
+	<div class="cn correct">
+		<div class="error">childNodes</div>
+		<a class="error"><span>childNodes</span></a>
+		<span class="error">childNodes</span>
 	</div>
+	<div class="textcontent">
+		<!-- COMMENT -->
+		<span class="error">node.textContent</span>
+	</div>
+	<div class="ce correct">
+		<a href="http://index/" class="error">Index</a>
+	</div>
+</div>
+
+<div class="comments">
+	<p>u.gcs: Firefox+webkit will return the computed value in px, regardless of how it is specified.</p>
+	<p>u.gcs: Firefox+webkit will return bg-color as rgb(), regardless of how it is specified.</p>
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

@@ -1,29 +1,92 @@
 <? $page_title = "Tests" ?>
-<? $body_class = "tests" ?>
+<? $body_class = "library tests" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-	<div id="content">
-		<h2>Tests</h2>
+<div class="scene">
+	<h1>Tests</h1>
 
-		<ul>
-			<li><h3><a href="u-animation.php">Animation</a></h3></li>
-			<li><h3><a href="u-array.php">Array</a></h3></li>
-			<li><h3><a href="u-cookie.php">Cookie (not done)</a></h3></li>
-			<li><h3><a href="u-date.php">Date</a></h3></li>
-			<li><h3><a href="u-dom.php">DOM (started)</a></h3></li>
-			<li><h3><a href="u-events.php">Events (drag error in IE)</a></h3></li>
-			<li><h3><a href="u-form.php">Form (started)</a></h3></li>
-			<li><h3><a href="u-init.php">Init (started)</a></h3></li>
-			<li><h3><a href="u-link.php">Link (started)</a></h3></li>
-			<li><h3><a href="u-pushstate-hash.php">PushState/HashChanged (only hash changed - IE7 error)</a></h3></li>
-			<li><h3><a href="u-request.php">Request (started)</a></h3></li>
-			<li><h3><a href="u-segment.php">Segment test</a></h3></li>
-			<li><h3><a href="u-sortable.php">Sortable (started)</a></h3></li>
-			<li><h3><a href="u-string.php">String (started)</a></h3></li>
-			<li><h3><a href="u-system.php">System (started)</a></h3></li>
-			<li><h3><a href="u-video.php">Video (started)</a></h3></li>
-		</ul>
+	<ul>
+		<li>
+			<h2><a href="u-animation">Animation (started)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-array">Array</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-audio">Audio (not done)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-cookie">Cookie</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-date">Date</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-debug">Debug (started)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-dom">DOM</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-events">Events</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-events-movements">Movements events (drag, swipe, scrolling) (drag error in IE 8)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-events-browser">Browser events (waiting)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-flash">Flash</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-form">Form (started)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-geometry">Geometry</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-init">Init (started)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-math">Math</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-period">Period</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-popup">Popup</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-preloader">Preloader (started)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-pushstate-hash">PushState/HashChanged (only hash changed - IE7 error)</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-request">Request</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-string">String</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-system">System</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-timer">Timer</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-url">URL</a></h2>
+		</li>
+		<li>
+			<h2><a href="u-video">Video (not done)</a></h2>
+		</li>
 
-	</div>
+		<li>
+			<h2><a href="u-segment">Segment test (started)</a></h2>
+		</li>
+	</ul>
+
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

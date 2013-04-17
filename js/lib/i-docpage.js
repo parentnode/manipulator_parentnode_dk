@@ -1,4 +1,4 @@
-Util.Objects["docpage_"] = new function() {
+Util.Objects["docpage"] = new function() {
 	this.init = function(content) {
 
 		var i, func;
@@ -19,7 +19,8 @@ Util.Objects["docpage_"] = new function() {
 
 			u.e.click(func._header);
 			func._header.clicked = function(event) {
-				if(u.tc(this._func._body, "hide", "show") == "show") {
+				u.tc(this._func._body, "hide", "show");
+				if(u.hc(this._func._body, "show")) {
 					u.as(this._func._body, "display", "block");
 				}
 				else {
@@ -29,6 +30,13 @@ Util.Objects["docpage_"] = new function() {
 			}
 		}
 
+		// add test link to segments section
+		var segments = u.qs(".segments", content);
+		var test = u.ae(segments, "div", {"class":"test", "html":"Test utilities"});
+		u.e.click(test);
+		test.clicked = function() {
+			location.href = "tests/" + location.href.split("/").pop();
+		}
 
 //		alert("fis")
 		

@@ -1,33 +1,111 @@
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-	<div id="content">
-		<h2>Documentation</h2>
+<div class="scene">
+	<h1>Documentation</h1>
 
-		<ul>
-			<li><a href="u-animation.php">Animation</a> (waiting)</li>
-			<li><a href="u-array.php">Arrays</a> (proofread)</li>
-			<li><a href="u-cookie.php">Cookie</a> (in progress)</li>
-			<li><a href="u-date.php">Date</a> (proofread)</li>
-			<li><a href="u-debug.php">Debug</a> (waiting)</li>
-			<li><a href="u-dom.php">DOM</a> (proofread)</li>
-			<li><a href="u-events.php">Events</a> (waiting)</li>
-			<li><a href="u-flash.php">Flash</a> (waiting)</li>
-			<li><a href="u-form.php">Form</a> (waiting)</li>
-			<li><a href="u-hash.php">Hash</a> (waiting)</li>
-			<li><a href="u-image.php">Image</a> (waiting)</li>
-			<li><a href="u-init.php">init</a> (in progress)</li>
-			<li><a href="u-interface.php">interface</a> (waiting)</li>
-			<li><a href="u-link.php">init</a> (in progress)</li>
-			<li><a href="u-popup.php">popup</a> (waiting)</li>
-			<li><a href="u-position.php">position</a> (waiting)</li>
-			<li><a href="u-request.php">request</a> (in progress)</li>
-			<li><a href="u-string.php">string</a> (in progress)</li>
-			<li><a href="u-system.php">system</a> (in progress)</li>
-			<li><a href="u-timer.php">timer</a> (waiting)</li>
-			<li><a href="u-url.php">url</a> (waiting)</li>
-			<li><a href="u-video.php">video</a> (waiting)</li>
-		</ul>
+	<ul>
+		<li>
+			<h2><a href="u-animation">Animation</a></h2>
+			<p>CSS3 transitions with fallback.</p>
+		</li>
+		<li>
+			<h2><a href="u-array">Arrays</a></h2>
+			<p>Array prototypes for older browsers</p>
+		</li>
+		<li>
+			<h2><a href="u-audio">Audio (beta)</a></h2>
+			<p>Audio player</p>
+		</li>
+		<li>
+			<h2><a href="u-cookie">Cookie</a></h2>
+			<p>Cookie handling.</p>
+		</li>
+		<li>
+			<h2><a href="u-date">Date</a></h2>
+			<p>Date formatting.</p>
+		</li>
+		<li>
+			<h2><a href="u-debug">Debug</a></h2>
+			<p>Debugging tools.</p>
+		</li>
+		<li>
+			<h2><a href="u-dom">DOM</a></h2>
+			<p>DOM query- and manipulation.</p>
+		</li>
+		<li>
+			<h2><a href="u-events">Events</a></h2>
+			<p>Add/remove events and basic event shorthands for Click, Hold, Dblclick</p>
+		</li>
+		<li>
+			<h2><a href="u-events-movements">Events, Movements</a></h2>
+			<p>Extended events. Drag, Swipe</p>
+		</li>
+		<li>
+			<h2><a href="u-flash">Flash</a></h2>
+			<p>Flash object and detection</p>
+		</li>
+		<li>
+			<h2><a href="u-form">Form (in progress)</a></h2>
+			<p></p>
+		</li>
+		<li>
+			<h2><a href="u-geometry">Geometry (waiting)</a></h2>
+			<p>Positioning, sizes and offsets</p>
+		</li>
+		<li>
+			<h2><a href="u-geometry">Google Analytics (waiting)</a></h2>
+			<p>Built-in Google Analytics tracking</p>
+		</li>
+		<li>
+			<h2><a href="u-hash">Hash (waiting)</a></h2>
+			<p></p>
+		</li>
+		<li>
+			<h2><a href="u-image">Image (Or preloader?) (In progress)</a></h2>
+			<p></p>
+		</li>
+		<li>
+			<h2><a href="u-init">init (in progress)</a></h2>
+			<p>JES Object initializer</p>
+		</li>
+		<li>
+			<h2><a href="u-popup">popup (waiting)</a></h2>
+			<p></p>
+		</li>
+		<li>
+			<h2><a href="u-period">Period</a></h2>
+			<p>Time period formatting</p>
+		</li>
+		<li>
+			<h2><a href="u-request">request (in progress)</a></h2>
+			<p>POST, GET, Script injection - any kind of server request, with response type detection.</p>
+		</li>
+		<li>
+			<h2><a href="u-string">String</a></h2>
+			<p>String manipulation and random key generation.</p>
+		</li>
+		<li>
+			<h2><a href="u-system">system (in progress)</a></h2>
+			<p>System and browser information</p>
+		</li>
+		<li>
+			<h2><a href="u-timer">Timer</a></h2>
+			<p>Timeouts and intervals</p>
+		</li>
+		<li>
+			<h2><a href="u-url">url (waiting)</a></h2>
+			<p></p>
+		</li>
+		<li>
+			<h2><a href="u-video">video (beta)</a></h2>
+			<p>Video player</p>
+		</li>
 
-	</div>
+		<li class="tests">
+			<h3><a href="/documentation/tests/">Tests</a></h3>
+			<p>Component tests</p>
+		</li>
+	</ul>
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

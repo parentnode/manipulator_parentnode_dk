@@ -1,96 +1,35 @@
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-	<div id="content">
-		<h2>Init</h2>
+<div class="scene i:docpage">
+	<h1>Init</h1>
 
-		<div class="section files">
-			<div class="header">
-				<h3>Files</h3>
-			</div>
-			<div class="body">
+	Notes:
+	When using dom-ready with webfonts - the line-height will update after dom-ready (when the fonts load) and
+	this my have an impact on absolute positioning. This can be solved by always stating line-heights in the CSS.
 
-				<div class="files main">
-					<h4>Main file</h4>
-					<ul>
-						<li>u-init.js</li>
-					</ul>
-				</div>
-
-				<div class="files support">
-					<h4>Segment support files</h4>
-					<ul>
-						<li>none</li>
-					</ul>
-				</div>
-
-				<div class="files dependency">
-					<h4>Dependency files</h4>
-					<ul>
-						<!-- specify segment support js files (like: u-string.js) -->
-						<li>none</li>
-					</ul>
-				</div>
-
-			</div>
+	<div class="section functions">
+		<div class="header">
+			<h2>Functions</h2>
 		</div>
+		<div class="body">
 
-		<div class="section segments">
-			<div class="header">
-				<h3>Segment dependencies</h3>
-			</div>
-			<div class="body">
-				<dl class="segments">
-					<!-- specify which files are required for which segments -->
-					<!-- add todo class if segment is not tested yet -->
-					<dt>desktop</dt>
-					<dd><span class="file">u-init.js</span></dd>
+			<div class="function">
+				<div class="header">
+					<h3>Util.init</h3>
+				</div>
+				<div class="body">
 
-					<dt>desktop_ie</dt>
-					<dd><span class="file">u-init.js</span></dd>
-
-					<dt>desktop_light</dt>
-					<dd><span class="file">u-init.js</span></dd>
-
-					<dt>tablet</dt>
-					<dd><span class="file">u-init.js</span></dd>
-
-					<dt>tv</dt>
-					<dd><span class="file">u-init.js</span></dd>
-
-					<dt>mobile_touch</dt>
-					<dd><span class="file">u-init.js</span></dd>
-		
-					<dt>mobile</dt>
-					<dd>not tested</dd>
-		
-					<dt>mobile_light</dt>
-					<dd>not tested</dd>
-
-					<dt>basic</dt>
-					<dd>not supported</dd>
-				</dl>
-			</div>
-		</div>
-
-		<div class="section functions">
-			<div class="header">
-				<h3>Functions</h3>
-			</div>
-			<div class="body">
-
-saveCookie
-savePermCookie
-getCookie
-delCookie
-				<div class="function">
-					<dl class="definition">
-						<dt class="name">Name</dt>
-						<dd class="name">Util.saveCookie</dd>
-						<dt class="shorthand">Shorthand</dt>
-						<dd class="shorthand">u.saveCookie</dd>
-						<dt class="syntax">Syntax</dt>
-						<dd class="syntax"><span class="type">_returntype_</span> = _functionname_(<span class="type">String</span> <span class="var">format</span> [, <span class="type">Mixed</span> <span class="var">timestamp</span> ]);</dd>
-					</dl>
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.init</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.init</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">_returntype_</span> = _functionname_(<span class="type">String</span> <span class="var">format</span> [, <span class="type">Mixed</span> <span class="var">timestamp</span> ]);</dd>
+						</dl>
+					</div>
 
 					<div class="description">
 						<h4>Description</h4>
@@ -149,10 +88,73 @@ delCookie
 					</div>
 
 				</div>
-
 			</div>
-		</div>
 
+		</div>
 	</div>
+
+
+
+	<div class="section files">
+		<div class="header">
+			<h2>Files</h2>
+		</div>
+		<div class="body">
+
+			<div class="files main">
+				<h3>Main file</h3>
+				<ul>
+					<li>u-init.js</li>
+				</ul>
+			</div>
+
+			<div class="files support">
+				<h3>Segment support files</h3>
+				<ul>
+					<li>none</li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="section segments">
+		<div class="header">
+			<h2>Segment dependencies</h2>
+		</div>
+		<div class="body">
+			<dl class="segments">
+				<!-- specify which files are required for which segments -->
+				<!-- add todo class if segment is not tested yet -->
+				<dt>desktop</dt>
+				<dd><span class="file">u-init.js</span></dd>
+
+				<dt>desktop_ie</dt>
+				<dd><span class="file">u-init.js</span></dd>
+
+				<dt>desktop_light</dt>
+				<dd><span class="file">u-init.js</span></dd>
+
+				<dt>tablet</dt>
+				<dd><span class="file">u-init.js</span></dd>
+
+				<dt>tv</dt>
+				<dd><span class="file">u-init.js</span></dd>
+
+				<dt>mobile_touch</dt>
+				<dd><span class="file">u-init.js</span></dd>
+	
+				<dt>mobile</dt>
+				<dd>not tested</dd>
+	
+				<dt>mobile_light</dt>
+				<dd>not tested</dd>
+
+				<dt>basic</dt>
+				<dd>not supported</dd>
+			</dl>
+		</div>
+	</div>
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

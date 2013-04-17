@@ -1,2 +1,12 @@
-@import url(/css/lib/s-page.css);
-@import url(/css/lib/s-documentation.css);
+@import url(/dear-resources/css/s-fonts.css);
+
+@import url(/dear-resources/css/s-page.css);
+@import url(/dear-resources/css/s-header.css);
+@import url(/dear-resources/css/s-content.css);
+@import url(/dear-resources/css/s-navigation.css);
+@import url(/dear-resources/css/s-footer.css);
+
+@import url(/dear-resources/css/s-form.css);
+
+
+@import url(/documentation/css/lib/s-documentation.css);

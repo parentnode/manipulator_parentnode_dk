@@ -1,69 +1,76 @@
-#header {padding: 0 0 30px;}
-#navigation {padding: 30px 0;}
+#header {position: relative;}
+#header .servicenavigation li.front {position: absolute; top: 25px; left: 0px;}
+#header .servicenavigation li.front a {font-size: 36px; text-decoration: none; color: #000000;}
+#header .servicenavigation li.front:after {content: "";}
 
-#content h2 {padding: 0 0 20px;}
-
-#content h3 {}
-#content h4 {}
-#content h5 {}
-
+#navigation h3 a {font-weight: bold;}
 
 .section {padding: 0 0 20px;}
-.section .body {overflow: hidden;}
+.section .body {}
 
 
-#content .var {font-style: italic; color: #800080;}
-#content .value {font-style: italic; color: #800080;}
+#content .var {font-style: italic; color: #880088; font-weight: bold;}
+#content .value {font-style: italic; color: #880088;}
+#content .domnode {font-style: italic; color: #880088;}
+#content .attribute {font-style: italic; color: #880088;}
+
 #content .type {font-style: italic; font-weight: bold; color: pink;}
+
 #content .file {font-style: italic;}
 
 #content .todo {color: red;}
 
-
-#content .section.segments dl dt {float: left; width: 200px;}
-#content .section.segments dl dd {float: left; width: 600px; clear: right;}
+#content .scene li h2 {font-size: 16px; padding: 0;}
 
 
-
+/* FUNCTIONS */
+#content .functions {}
 #content .functions .header {border-bottom: 1px solid #bbbbbb;}
+#content .functions .body {}
 
 
+#content .functions .function {padding: 10px 0 20px; overflow: hidden; border-bottom: 1px solid #bbbbbb;}
+#content .functions .function .header {}
+#content .functions .function .body {}
 
-#content .function {padding: 10px 0 20px; overflow: hidden; border-bottom: 1px solid #bbbbbb;}
 
 
 /* DEFINITION */
-#content .function dl.definition {overflow: hidden; padding: 0 0 20px;}
-#content .function dl.definition dt,
-#content .function dl.definition dd {float: left; padding: 0 0 5px;}
-#content .function dl.definition dt {width: 200px;}
-#content .function dl.definition dd {width: 760px; clear: right;}
+#content .functions div.definition {padding: 0 0 20px;}
+#content .functions div.definition > dl {font-size: 0;}
+#content .functions div.definition > dl dt,
+#content .functions div.definition > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+#content .functions div.definition > dl dt {width: 100px;}
+#content .functions div.definition > dl dd {width: 580px;}
 
-#content .function dl.definition dt.name,
-#content .function dl.definition dd.name {background: #dddddd;}
-#content .function dl.definition dd.name {font-weight: bold;}
+#content .functions div.definition > dl dt.name,
+#content .functions div.definition > dl dd.name {background: #dddddd;}
+#content .functions div.definition > dl dd.name {font-weight: bold;}
 
 
 /* DESCRIPTION */
-#content .function .description {padding: 0 0 20px;}
+#content .functions div.description {padding: 0 0 20px;}
 
 
 /* PARAMETERS */
-#content .function .parameters {padding: 0 0 20px;}
-#content .function .parameters dl.parameters {overflow: hidden;}
-#content .function .parameters dl.parameters dt,
-#content .function .parameters dl.parameters dd {float: left; border-top: 1px solid #dddddd;}
-#content .function .parameters dl.parameters dt {width: 200px;}
-#content .function .parameters dl.parameters dd {width: 760px; clear: right;}
+#content .functions div.parameters {padding: 0 0 20px;}
+#content .functions div.parameters > dl {font-size: 0;}
+#content .functions div.parameters > dl dt,
+#content .functions div.parameters > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+#content .functions div.parameters > dl dt {width: 100px;}
+#content .functions div.parameters > dl dd {width: 580px;}
 
-#content .function .parameters dl.parameters dd .summary {padding: 0 0 10px;}
-#content .function .parameters dl.parameters dd .details {padding: 0 0 10px;}
+#content .functions div.parameters > dl dd .summary {padding: 0 0 5px;}
 
-#content .function .parameters dl.options {overflow: hidden;}
-#content .function .parameters dl.options dt,
-#content .function .parameters dl.options dd {float: left; border: none;}
-#content .function .parameters dl.options dt {width: 100px;}
-#content .function .parameters dl.options dd {width: 660px; clear: right;}
+#content .functions div.parameters > dl dd .details {padding: 0 0 10px; margin: 0 0 0 -80px;}
+#content .functions div.parameters > dl dd .details h5 {padding: 0 0 5px;}
+
+
+#content .functions div.parameters > dl dd .details dl.options {font-size: 0; padding: 0;}
+#content .functions div.parameters > dl dd .details dl.options dt,
+#content .functions div.parameters > dl dd .details dl.options dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+#content .functions div.parameters > dl dd .details dl.options dt {width: 90px; padding: 0 10px 0 0; text-align: right;}
+#content .functions div.parameters > dl dd .details dl.options dd {width: 560px;}
 
 
 /* RETURN VALUE */
@@ -72,12 +79,38 @@
 
 /* EXAMPLES */
 #content .function .examples {padding: 0 0 20px;}
+#content .function .examples .example {padding: 0 20px 10px;}
 
 
 /* USES */
 #content .function .uses {padding: 0 0 20px;}
+#content .function .uses ul {padding-left: 40px;}
+
+
+/* FILES */
+#content .files {}
+#content .files .header {}
+#content .files .body {}
+#content .files .body ul {padding-left: 40px;}
+
+
+/* SEGMENTS */
+#content .segments {}
+#content .segments .header {}
+#content .segments .body {}
+#content .segments .body > dl {font-size: 0;}
+#content .segments .body > dl dt,
+#content .segments .body > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+
+#content .segments .body > dl dt {width: 200px;}
+#content .segments .body > dl dd {width: 480px;}
+
+
+
+
+
 
 
 code {
-	-moz-tab-size: 4; background: none repeat scroll 0 0 #F7F7F5; display: block; font-family: monaco,courier,sans-serif; font-size: 12px; margin: 0 0 20px; padding: 0 20px; white-space: pre;
+	-moz-tab-size: 4; background: none repeat scroll 0 0 #F7F7F5; display: block; font-family: monaco, courier, sans-serif; font-size: 12px; padding: 20px; white-space: pre;
 }
