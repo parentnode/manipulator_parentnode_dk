@@ -1,9 +1,15 @@
+/*
+JES v0.5-full Copyright 2013 http://whattheframework.org/jes/license
+wtf-js-merged @ 2013-04-17 10:22:45
+*/
 
+/*u.js*/
 var u, Util = u = new function() {}
-u.version = 5;
+u.version = 0.5;
 u.bug = function() {}
 u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){}}
 
+/*u-debug.js*/
 Util.testURL = function(url) {
 	return true;
 	return document.domain.match(/.local$|^w\./);
@@ -110,6 +116,7 @@ Util.listObjectContent = function(object) {
 Util.nodeId = function(node) {
 	return node.id ? node.id : (node.className ? node.className : (node.name ? node.name : node.nodeName));
 }
+/*u-animation.js*/
 Util.Animation = u.a = new function() {
 	this.support = function() {
 		var node = document.createElement("div");
@@ -240,6 +247,7 @@ Util.Animation = u.a = new function() {
 	}
 }
 
+/*u-cookie.js*/
 Util.saveCookie = function(name, value) {
 	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) +";"
 }
@@ -254,6 +262,7 @@ Util.delCookie = function(name) {
 	document.cookie = encodeURIComponent(name) + "=;expires=Thu, 01-Jan-70 00:00:01 GMT";
 }
 
+/*u-date.js*/
 Util.date = function(format, timestamp, months) {
 	var date = timestamp ? new Date(timestamp) : new Date();
 	if(isNaN(date.getTime())) {
@@ -285,6 +294,7 @@ Util.date = function(format, timestamp, months) {
 	});
 };
 
+/*u-dom.js*/
 Util.getElement = u.ge = function(identifier, target) {
 	var e, i, regexp, t;
 	t = target ? target : document;
@@ -529,6 +539,7 @@ Util.wrapElement = u.we = function(e, wrap, attributes) {
 	return wrap;
 }
 
+/*u-events.js*/
 Util.Events = u.e = new function() {
 	this.event_pref = typeof(document.ontouchmove) == "undefined" ? "mouse" : "touch";
 	this.kill = function(event) {
@@ -979,6 +990,7 @@ Util.Events = u.e = new function() {
 	}
 }
 
+/*u-flash.js*/
 Util.flash = function(e, url, id, w, h, background) {
 	w = w ? w : e.offsetWidth;
 	h = h ? h : e.offsetHeight;
@@ -1012,6 +1024,7 @@ Util.flash = function(e, url, id, w, h, background) {
 	return obj;
 }
 
+/*u-form.js*/
 Util.Form = u.f = new function() {
 	this.init = function(form) {
 		var i, o;
@@ -1505,6 +1518,7 @@ u.f.recurseName = function(object, indexes, value) {
 	}
 	return object;
 }
+/*u-position.js*/
 Util.absoluteX = u.absX = function(e) {
 	if(e.offsetParent) {
 		return e.offsetLeft + u.absX(e.offsetParent);
@@ -1572,6 +1586,7 @@ Util.pageScrollY = u.scrollY = function() {
 	return window.pageYOffset;
 }
 
+/*u-hash.js*/
 Util.Hash = u.h = new function() {
 	this.catchEvent = function(callback, node) {
 		this.node = node;
@@ -1640,6 +1655,7 @@ Util.Hash = u.h = new function() {
 	}
 }
 
+/*u-image.js*/
 Util.Image = u.i = new function() {
 	this.load = function(e, src) {
 		var image = new Image();
@@ -1665,6 +1681,7 @@ Util.Image = u.i = new function() {
 	}
 }
 
+/*u-popup.js*/
 Util.popUp = function(url, name, w, h, extra) {
 	var p;
 	name = name ? name : "POPUP_" + new Date().getHours() + "_" + new Date().getMinutes() + "_" + new Date().getMilliseconds();
@@ -1677,6 +1694,7 @@ Util.popUp = function(url, name, w, h, extra) {
 	document[name] = window.open(url, name, p);
 }
 
+/*u-request.js*/
 Util.createRequestObject = function(type) {
 	var request_object = false;
 		try {
@@ -1841,6 +1859,7 @@ Util.validateResponse = function(response){
 	}
 }
 
+/*u-string.js*/
 Util.cutString = function(string, length) {
 	var matches, i;
 	if(string.length <= length) {
@@ -1901,6 +1920,7 @@ Util.stringOr = function(value, replacement) {
 		return replacement ? replacement : "";
 	}	
 }
+/*u-system.js*/
 Util.explorer = function(version, scope) {
 	if(document.all) {
 		var undefined;
@@ -1983,6 +2003,7 @@ Util.osx = function() {
 	return (navigator.userAgent.indexOf("OS X") >= 0) ? true : false;
 }
 
+/*u-timer.js*/
 Util.Timer = u.t = new function() {
 	this.actions = new Array();
 	this.objects = new Array();
@@ -2026,6 +2047,7 @@ Util.Timer = u.t = new function() {
 	}
 }
 
+/*u-url.js*/
 Util.getVar = function(s) {
 	var p = location.search;
 	var start_index = (p.indexOf("&" + s + "=") > -1) ? p.indexOf("&" + s + "=") + s.length + 2 : ((p.indexOf("?" + s + "=") > -1) ? p.indexOf("?" + s + "=") + s.length + 2 : false);
@@ -2064,6 +2086,7 @@ Util.setHashPath = function(path) {
 	return Util.getHashPath();
 }
 
+/*u-array-desktop_light.js*/
 if(!Array.prototype.unshift || new Array(1,2).unshift(0) != 3) {
 	Array.prototype.unshift = function(a) {
 		var b;
@@ -2093,6 +2116,7 @@ if(!Array.prototype.indexOf) {
 	}
 }
 
+/*u-animation-desktop_light.js*/
 this.transition = function(e, transition) {
 	var duration = transition.match(/[0-9.]+[ms]+/g);
 	if(duration) {
@@ -2244,6 +2268,7 @@ u.a.translate = function(e, x, y) {
 	e.offsetHeight;
 }
 
+/*u-dom-desktop_light.js*/
 Util.getComputedStyle = u.gcs = function(e, attribute) {
 	e.offsetHeight;
 	if(document.defaultView && document.defaultView.getComputedStyle) {
@@ -3364,6 +3389,7 @@ if(document.querySelector == undefined) {
 	}
 }
 
+/*u-events-desktop_ie.js*/
 if(document.all) {
 	window.attachedEvents = new Array();
 	window.eventHandler = function() {
@@ -3441,6 +3467,7 @@ if(document.all) {
 	}
 }
 
+/*u-position-desktop_ie.js*/
 if(window.pageXOffset == undefined && Object.defineProperty) {
 	Object.defineProperty(window, "pageXOffset",
 		{get: function() {
@@ -3458,6 +3485,7 @@ if(window.pageYOffset == undefined && Object.defineProperty) {
 	);
 }
 
+/*u-image-desktop_ie.js*/
 u.i.load = function(e, src) {
 	var image = new Image();
 	image.e = e;
@@ -3473,6 +3501,7 @@ u.i.load = function(e, src) {
 	image.src = src;
 }
 
+/*u-string-desktop_ie.js*/
 if(String.prototype.trim == undefined) {
 	String.prototype.trim = function() {
 		return this.replace(/^\s+|\s+$/g, "");
