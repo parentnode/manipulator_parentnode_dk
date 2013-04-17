@@ -1,7 +1,7 @@
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 	<div id="content">
-		<h2>Utilities</h2>
+		<h2>Documentation</h2>
 
 		<ul>
 			<li><a href="u-animation.php">Animation</a> (waiting)</li>

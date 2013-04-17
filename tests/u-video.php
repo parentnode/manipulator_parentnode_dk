@@ -19,7 +19,6 @@
 //				scene.player.pause();
 //				scene.player.play(100);
 
-
 			}
 
 
@@ -27,10 +26,10 @@
 		function play1() {
 			var scene = u.qs(".scene");
 			scene.appendChild(scene.player);
-			scene.player.loadAndPlay("/documentation/media/video/video.mp4");
+			scene.player.loadAndPlay("/media/video/video.mp4");
 		}
 		function play2() {
-			u.qs(".player").loadAndPlay("/documentation/media/video/video.mp4");
+			u.qs(".player").loadAndPlay("/media/video/video.mp4");
 		}
 
 //		var obj = u.flash(document.createElement("div"), "/documentation/media/flash/videoplayer.swf")	
