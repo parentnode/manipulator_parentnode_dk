@@ -24,6 +24,6 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-video.js"></sc
 
 document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');
 
-document.write('<script type="text/javascript" src="/documentation/js/lib/i-page-desktop.js"></script>');
-document.write('<script type="text/javascript" src="/documentation/js/lib/i-docpage.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/i-page-desktop.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/i-docpage.js"></script>');
 
