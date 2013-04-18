@@ -40,7 +40,7 @@ var test3 = function() {
 
 	Util.Objects["test"] = new function() {
 
-		this.iterations = 10000000;
+		this.iterations = 100000;
 
 		this.init = function(scene) {
 			var i;
@@ -77,7 +77,7 @@ var test3 = function() {
 
 <div class="scene i:test">
 	<h2>Functions speed test</h2>
-
+	<p>Testing different types of function declarations.</p>
 
 </div>
 <div class="comments"></div>

@@ -9,59 +9,16 @@
 	ul.info li {padding: 3px;}
 
 
-	/* FIXED */
-	div.fixed {width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
-	div.fixed div.handle {width: 50px; height: 50px; background: green;}
-
-
 	/* MIXED */
 	div.level1 {width: 720px; height: 500px; position: relative; background: red;}
 	div.level2 {width: 400px; height: 400px; position: absolute; left: 60px; top: 50px; padding: 0px 100px; background: green;}
-	div.level3 {width: 50px; height: 50px; padding: 175px 175px; background: blue; position: relative;}
+	div.level3 {width: 50px; height: 50px; padding: 175px 175px; background: blue;}
 	div.level4 {width: 50px; height: 50px; background: yellow;}
 
 	ul.info li.level1 {background: red; color: white;}
 	ul.info li.level2 {background: green; color: white;}
 	ul.info li.level3 {background: blue; color: white;}
 	ul.info li.level4 {background: yellow;}
-
-
-	/* NESTED */
-	#content div.nested_view {width: 200px; height: 200px; overflow: hidden;
-		background: LawnGreen;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-	#content div.nested_view ul {width: 600px; height: 200px; margin: 0; padding: 0; list-style: none; font-size: 0;
-		border-radius: 35px; overflow: hidden;
-		background: Purple; 
-	}
-	#content div.nested_view ul li {width: 200px; height: 200px; display: inline-block; vertical-align: top; overflow: hidden;
-		border-radius: 50px;
-	}
-	#content div.nested_view ul ul {height: 600px; width: 200px;}
-	#content div.nested_view ul ul li {display: block; padding-top: 90px; height: 110px; text-align: center;
-		border-radius: 100px;
-	}
-	#content div.nested_view ul ul.inner_a {
-		background: Tomato;
-	}
-	#content div.nested_view ul ul.inner_a li {
-		background: DeepSkyBlue;
-	}
-	#content div.nested_view ul ul.inner_b {
-		background: PeachPuff;
-	}
-	#content div.nested_view ul ul.inner_b li {
-		background: Brown;
-	}
-	#content div.nested_view ul ul.inner_c {
-		background: DarkCyan;
-	}
-	#content div.nested_view ul ul.inner_c li {
-		background: Aquamarine;
-	}
 
 
 	/* LINKS */
@@ -118,29 +75,9 @@
 <script type="text/javascript">
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
-//			u.bug_position = "fixed";
+			u.bug_position = "fixed";
 
 			var drag = u.qs("div.drag", scene);
-
-			// FIXED
-			var fixed = u.qs("div.fixed", scene);
-			var handle = u.qs("div.fixed .handle", scene);
-			u.e.drag(handle, fixed);
-			handle.picked = function(event) {
-//				u.bug("handle picked")
-			}
-			handle.moved = function(event) {
-				var progress = this._y / (fixed.offsetHeight - this.offsetHeight);
-				var offset = Math.round((u.htmlH() - u.browserH()) * progress);
-				window.scrollTo(0, offset);
-			}
-			handle.dropped = function(event) {
-//				u.bug("handle dropped")
-			}
-			u.e.addEvent(window, "scroll", function() {
-					u.a.translate(handle, 0, Math.round((fixed.offsetHeight - handle.offsetHeight) * (u.scrollY() / (u.htmlH() - u.browserH()))))
-				}
-			);
 
 
 			// MIXED
@@ -200,80 +137,6 @@
 			}
 			level4.dropped = function(event) {
 //				u.bug("level 4 dropped")
-			}
-
-			// NESTED
-			var nested_outer = u.qs("ul.outer", scene);
-			var nested_inner_a = u.qs("ul.inner_a", scene);
-			var nested_inner_b = u.qs("ul.inner_b", scene);
-			var nested_inner_c = u.qs("ul.inner_c", scene);
-
-			u.e.swipe(nested_outer, [-400, 0, 600, 200], {"strict":false, "elastica":100});
-
-			nested_outer.nodes = u.cn(nested_outer);
-			nested_outer.current_index = 0;
-			nested_outer.picked = function(event) {
-				u.e.resetEvents(nested_inner_a);
-				u.e.resetEvents(nested_inner_b);
-				u.e.resetEvents(nested_inner_c);
-			}
-			nested_outer.swipedLeft = function(event) {
-				this.transitioned = function() {
-					this.transitioned = null;
-					u.a.transition(this, "none");
-				}
-				this.current_index = Math.abs(Math.floor(this._x/this.nodes[0].offsetWidth));
-				var new_x = this.current_index * this.nodes[0].offsetWidth;
-				u.a.transition(this, "all 0.4s linear");
-				u.a.translate(this, -(new_x), 0);
-//				u.bug("nested_outer swipedLeft")
-			}
-			nested_outer.swipedRight = function(event) {
-				this.transitioned = function() {
-					this.transitioned = null;
-					u.a.transition(this, "none");
-				}
-				this.current_index = Math.abs(Math.ceil(this._x/this.nodes[0].offsetWidth));
-				var new_x = this.current_index * this.nodes[0].offsetWidth;
-				u.a.transition(this, "all 0.4s linear");
-				u.a.translate(this, -(new_x), 0);
-//				u.bug("nested_outer swipedRight")
-			}
-
-			u.e.swipe(nested_inner_a, [0, -400, 200, 600], {"strict":false, "elastica":100});
-			nested_inner_a.nodes = u.cn(nested_inner_a);
-			nested_inner_a.current_index = 0;
-
-			u.e.swipe(nested_inner_b, [0, -400, 200, 600], {"strict":false, "elastica":100});
-			nested_inner_b.nodes = u.cn(nested_inner_b);
-			nested_inner_b.current_index = 0;
-
-			u.e.swipe(nested_inner_c, [0, -400, 200, 600], {"strict":false, "elastica":100});
-			nested_inner_c.nodes = u.cn(nested_inner_c);
-			nested_inner_c.current_index = 0;
-
-
-			nested_inner_a.swipedUp = nested_inner_b.swipedUp = nested_inner_c.swipedUp = function(event) {
-				this.transitioned = function() {
-					this.transitioned = null;
-					u.a.transition(this, "none");
-				}
-				this.current_index = Math.abs(Math.floor(this._y/this.nodes[0].offsetHeight));
-				var new_y = this.current_index * this.nodes[0].offsetHeight;
-				u.a.transition(this, "all 0.4s linear");
-				u.a.translate(this, 0, -(new_y));
-//				u.bug("imagesul swipedUp")
-			}
-			nested_inner_a.swipedDown = nested_inner_b.swipedDown = nested_inner_c.swipedDown = function(event) {
-				this.transitioned = function() {
-					this.transitioned = null;
-					u.a.transition(this, "none");
-				}
-				this.current_index = Math.abs(Math.ceil(this._y/this.nodes[0].offsetHeight));
-				var new_y = this.current_index * this.nodes[0].offsetHeight;
-				u.a.transition(this, "all 0.4s linear");
-				u.a.translate(this, 0, -(new_y));
-//				u.bug("imagesul swipedDown")
 			}
 
 
@@ -546,22 +409,10 @@
 
 <div class="scene i:test">
 
-	<h2>Events, movements</h2>
+	<h2>Events</h2>
 
 	<div class="drag">
-		<h3>Fixed node with drag</h3>
-
-		<div class="fixed">
-			<div class="handle"></div>
-		</div>
-
-		<ul class="info">
-			<li class="handle">handle: to be dragged inside fixed element</li>
-		</ul>
-	</div>
-
-	<div class="drag">
-		<h3>Mixed and Nested drag variations, with different positioning</h3>
+		<h3>Nested drag variations, with different positioning</h3>
 		<div class="level1">
 			<div class="level2">
 				<div class="level3">
@@ -578,46 +429,6 @@
 		</ul>
 
 	</div>
-
-	<div class="drag">
-		<h3>Nested drags, horizontal inside vertical</h3>
-
-		<div class="nested_view">
-			<ul class="outer">
-				<li>
-					<ul class="inner_a">
-						<li>Inner A 1</li>
-						<li>Inner A 2</li>
-						<li>Inner A 3</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="inner_b">
-						<li>Inner B 1</li>
-						<li>Inner B 2</li>
-						<li>Inner B 3</li>
-					</ul>
-				</li>
-				<li>
-					<ul class="inner_c">
-						<li>Inner C 1</li>
-						<li>Inner C 2</li>
-						<li>Inner C 3</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-
-
-		<ul class="info">
-			<li class="level1">level1: click (also fire after down+move)</li>
-			<li class="level2">level2: drag (boundary: .level1) + click (should not bubble, cancel on down+move) - abs positioned div</li>
-			<li class="level3">level3: drag (boundary: .level2, strict=false) + click (should not bubble, cancel on down+move) - div with padding</li>
-			<li class="level4">level4: drag (boundary: .level3, strict=false, elastica=200) + click (should not bubble, cancel on down+move) - empty div, in div with padding</li>
-		</ul>
-
-	</div>
-
 
 	<div class="drag">
 		<h3>Drag links</h3>

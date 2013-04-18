@@ -71,12 +71,6 @@
 			u.we(node, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
 
 
-			// node.textContent
-			var text = u.text(u.qs(".textcontent", scene));
-			if(text.trim() == "node.textContent") {
-				u.ae(scene, u.qs(".textcontent", scene), ({"class":"correct", "html":"textContent correct"}))
-			}
-
 
 			// clickableElement
 			node = u.qs(".ce", scene);
@@ -108,14 +102,7 @@
 
 			// hasClass
 			u.qs("h2", scene).className = "test_headline type1";
-			if(
-				u.hc(u.qs("h2", scene), "headline") == false && 
-				u.hc(u.qs("h2", scene), "test|headline") == false && 
-				u.hc(u.qs("h2", scene), "test_headline") == true && 
-				u.hc(u.qs("h2", scene), "test_headline2") == false && 
-				u.hc(u.qs("h2", scene), "2test_headline") == false && 
-				u.hc(u.qs("h2", scene), "type[0-1]") == true
-				) {
+			if(u.hc(u.qs("h2", scene), "headline") == false && u.hc(u.qs("h2", scene), "test_headline") == true && u.hc(u.qs("h2", scene), "test_headline2") == false && u.hc(u.qs("h2", scene), "type[0-1]") == true) {
 				u.ae(scene, "div", ({"class":"correct", "html":"hasClass: correct"}));
 			}
 			else {
@@ -186,20 +173,6 @@
 				u.ae(scene, "div", ({"class":"error", "html":"getComputedStyle: error"}));
 			}
 
-
-			// hasFixedParent
-			var hfp_node = u.ae(scene, "div");
-			var hfp_child = u.ae(hfp_node, "div");
-			u.as(hfp_node, "position", "fixed");
-			if(u.hfp(hfp_child) && !u.hfp(hfp_node)) {
-				hfp_node.parentNode.removeChild(hfp_node);
-				u.ae(scene, "div", ({"class":"correct", "html":"hasFixedParent: correct"}));
-			}
-			else {
-				hfp_node.parentNode.removeChild(hfp_node);
-				u.ae(scene, "div", ({"class":"error", "html":"hasFixedParent: error"}));
-			}
-
 		}
 
 	}
@@ -220,10 +193,6 @@
 		<div class="error">childNodes</div>
 		<a class="error"><span>childNodes</span></a>
 		<span class="error">childNodes</span>
-	</div>
-	<div class="textcontent">
-		<!-- COMMENT -->
-		<span class="error">node.textContent</span>
 	</div>
 	<div class="ce correct">
 		<a href="http://index/" class="error">Index</a>

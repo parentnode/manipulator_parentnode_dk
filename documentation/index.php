@@ -102,7 +102,7 @@
 		</li>
 
 		<li class="tests">
-			<h3><a href="/documentation/tests/">Tests</a></h3>
+			<h3><a href="/tests/">Tests</a></h3>
 			<p>Component tests</p>
 		</li>
 	</ul>

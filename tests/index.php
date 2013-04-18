@@ -1,5 +1,5 @@
 <? $page_title = "Tests" ?>
-<? $body_class = "library tests" ?>
+<? $body_class = "tests" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene">
@@ -7,83 +7,82 @@
 
 	<ul>
 		<li>
-			<h2><a href="u-animation">Animation (started)</a></h2>
+			<h2><a href="u-animation.php">Animation (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-array">Array</a></h2>
+			<h2><a href="u-array.php">Array</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-audio">Audio (not done)</a></h2>
+			<h2><a href="u-audio.php">Audio (not done)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-cookie">Cookie</a></h2>
+			<h2><a href="u-cookie.php">Cookie</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-date">Date</a></h2>
+			<h2><a href="u-date.php">Date</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-debug">Debug (started)</a></h2>
+			<h2><a href="u-debug.php">Debug (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-dom">DOM</a></h2>
+			<h2><a href="u-dom.php">DOM</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-events">Events</a></h2>
+			<h2><a href="u-events.php">Events</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-events-movements">Movements events (drag, swipe, scrolling) (drag error in IE 8)</a></h2>
+			<h2><a href="u-events-movements.php">Events, movements (drag, swipe, scrolling) (drag error in IE 8)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-events-browser">Browser events (waiting)</a></h2>
+			<h2><a href="u-flash.php">Flash</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-flash">Flash</a></h2>
+			<h2><a href="u-form.php">Form (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-form">Form (started)</a></h2>
+			<h2><a href="u-image.php">Image (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-geometry">Geometry</a></h2>
+			<h2><a href="u-init.php">Init (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-init">Init (started)</a></h2>
+			<h2><a href="u-period.php">Period</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-math">Math</a></h2>
+			<h2><a href="u-pushstate-hash.php">PushState/HashChanged (only hash changed - IE7 error)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-period">Period</a></h2>
+			<h2><a href="u-request.php">Request (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-popup">Popup</a></h2>
+			<h2><a href="u-segment.php">Segment test (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-preloader">Preloader (started)</a></h2>
+			<h2><a href="u-sortable.php">Sortable (started)</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-pushstate-hash">PushState/HashChanged (only hash changed - IE7 error)</a></h2>
+			<h2><a href="u-speed-functions.php">Speed test, functions</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-request">Request</a></h2>
+			<h2><a href="u-speed-jquery.php">Speed test, jQuery</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-string">String</a></h2>
+			<h2><a href="u-speed-plain.php">Speed test, plain</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-system">System</a></h2>
+			<h2><a href="u-speed-jes.php">Speed test, JES</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-timer">Timer</a></h2>
+			<h2><a href="u-string.php">String</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-url">URL</a></h2>
+			<h2><a href="u-timer.php">Timer</a></h2>
 		</li>
 		<li>
-			<h2><a href="u-video">Video (not done)</a></h2>
+			<h2><a href="u-system.php">System</a></h2>
 		</li>
-
 		<li>
-			<h2><a href="u-segment">Segment test (started)</a></h2>
+			<h2><a href="u-video.php">Video (not done)</a></h2>
 		</li>
 	</ul>
 

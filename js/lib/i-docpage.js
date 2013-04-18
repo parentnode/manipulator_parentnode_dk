@@ -35,7 +35,7 @@ Util.Objects["docpage"] = new function() {
 		var test = u.ae(segments, "div", {"class":"test", "html":"Test utilities"});
 		u.e.click(test);
 		test.clicked = function() {
-			location.href = "tests/" + location.href.split("/").pop();
+			location.href = "/tests/" + location.href.split("/").pop();
 		}
 
 //		alert("fis")

@@ -23,12 +23,20 @@
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "cutString: error";
 			}
 
-			// u.prefix
-			if(u.prefix("F", 5, "-") == "----F" && u.prefix(10, 2) == "10" && u.prefix(1, 5) == "00001") {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "prefix: correct";
+			// u.random
+			if(u.random(1,10) >= 1 && u.random(1,10) <= 10) {
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "random: correct";
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "prefix: error";
+				u.ae(scene, "div", ({"class":"error"})).innerHTML = "random: error";
+			}
+
+			// u.randomKey
+			if(u.randomKey(10).length == 10) {
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "randomKey: correct";
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error"})).innerHTML = "randomKey: error";
 			}
 
 			// u.randomString
@@ -56,24 +64,19 @@
 			}
 
 
+			// node.textContent
+			var test = u.qs(".textcontent", scene);
+			if(test.textContent != undefined && test.textContent.trim() == "node.textContent") {
+				test.innerHTML += ": correct";
+				u.ac(test, "correct");
+			}
+			else {
+				test.innerHTML += ": error";
+				u.ac(test, "error");
+			}
 
 			// trim
-			var test_trim = "\n	test string		\n";
-			if(test_trim.trim() == "test string") {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "trim: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "trim: error";
-			}
-
 			// substr
-			var test_substr = "test string";
-			if(test_substr.substr(-2) == "ng" && test_substr.substr(2, 4) == "st s") {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "substr: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "substr: error";
-			}
 
 		}
 
@@ -83,6 +86,10 @@
 <div class="scene i:test">
 	<h2>STRING</h2>
 
+	<div class="textcontent">
+		<!-- COMMENT -->
+		<span>node.textContent</span>
+	</div>
 
 </div>
 <div class="comments">

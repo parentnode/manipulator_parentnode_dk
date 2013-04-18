@@ -28,7 +28,7 @@
 
 			if(u.flashDetection()) {
 				var flash = u.ae(scene, "div", {"class":"flash"});
-				u.flash(flash, "/documentation/media/flash/videoplayer.swf");
+				u.flash(flash, "/media/flash/videoplayer.swf");
 			}
 			else {
 				var flash = u.ae(scene, "div", {"html":"NO FLASH PLUGIN"});

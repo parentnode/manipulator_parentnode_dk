@@ -22,6 +22,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-timer.js"></sc
 document.write('<script type="text/javascript" src="/js/jes/src/u-url.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-video.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-devices.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-sortable.js"></script>');
 
 
 document.write('<script type="text/javascript" src="/js/jes/src/u-animation-desktop_light.js"></script>');

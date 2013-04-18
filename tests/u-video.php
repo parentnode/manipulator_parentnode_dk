@@ -141,10 +141,8 @@
 	<p>Videotest requires interaction and observation :)</p>
 	
 	<ul class="videos">
-		<li><a href="/documentation/media/video/1/960x480.mp4">Video 1</a></li>
-		<li><a href="/documentation/media/video/2/320x160.mp4">Video 2</a></li>
-		<li><a href="/documentation/media/video/3/960x540.mp4">Video 3</a></li>
-		<li><a href="/documentation/media/video/4/960x540.mp4">Video 4</a></li>
+		<li><a href="/media/video/video_1.mp4">Video 1</a></li>
+		<li><a href="/media/video/video_2.mp4">Video 2</a></li>
 	</ul>
 </div>
 

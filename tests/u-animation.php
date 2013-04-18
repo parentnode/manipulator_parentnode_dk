@@ -1,11 +1,11 @@
 <? $page_title = "Animation tests" ?>
-<? $body_class = "library tests" ?>
+<? $body_class = "tests" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <style type="text/css">
 	.scene {position: relative; height: 400px;}
 	.scene div {margin: 0 0 5px;}
-	.block {display: inline-block; vertical-align: top; width: 50px; height: 50px; background: #ff0000; margin-right: 10px;}
+	.block {display: inline-block; vertical-align: top; width: 50px; height: 50px; background: red; margin-right: 10px;}
 
 	.bgpos {background-image: url(/documentation/img/test.jpg); background-position: 0 0;}
 
@@ -77,7 +77,6 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
-//			alert("test")
 			var div;
 
 			div = u.qs(".block.translate", scene);
@@ -137,7 +136,6 @@
 	<div class="block height">height</div>
 
 	<div class="block bgpos">bgpos</div>
-
 	<div class="block bgcolor">bgcolor</div>
 
 	<!--div class="block linear"></div>

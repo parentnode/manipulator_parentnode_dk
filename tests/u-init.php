@@ -10,6 +10,11 @@
 
 <script type="text/javascript">
 
+	var text = "";
+	var dom_time = "";
+	var time = 0;
+
+
 	// Mozilla, Opera and webkit nightlies currently support this event
     if(document.addEventListener ) {
         // Use the handy event callback
