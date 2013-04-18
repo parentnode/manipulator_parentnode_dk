@@ -1,3 +1,5 @@
+<? $page_title = "Period documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -9,7 +11,7 @@
 		</div>
 		<div class="body">
 
-			<div class="function">
+			<div class="function" id="Util.period">
 				<div class="header">
 					<h3>Util.period</h3>
 				</div>
@@ -23,7 +25,7 @@
 							<dd class="syntax"><span class="type">String</span> = 
 								Util.period(
 									<span class="type">String</span> <span class="var">format</span> 
-									[, <span class="type">JSON</span> <span class="var">arguments</span> ]
+									[, <span class="type">JSON</span> <span class="var">time</span> ]
 								);
 							</dd>
 						</dl>
@@ -101,7 +103,7 @@
 									</dl>
 								</div>
 							</dd>
-							<dt><span class="var">arguments</span></dt>
+							<dt><span class="var">time</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Optional, JSON object with time argument

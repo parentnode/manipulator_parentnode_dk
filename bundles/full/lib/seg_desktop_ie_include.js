@@ -6,12 +6,14 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-cookie.js"></s
 document.write('<script type="text/javascript" src="/js/jes/src/u-date.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-dom.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-events.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/u-events-browser.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-events-movements.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-flash.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-hash.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-image.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-period.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-popup.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-request.js"></script>');

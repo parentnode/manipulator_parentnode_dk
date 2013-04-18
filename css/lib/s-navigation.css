@@ -1,0 +1,18 @@
+#navigation {position: absolute; bottom: 0; right: 20px;}
+
+#navigation ul {}
+#navigation ul li {display: inline-block; vertical-align: top; 
+	padding: 5px 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	
+	border: 1px solid #dedede;
+	border-bottom: none;
+}
+#navigation a {color: inherit; font-size: inherit;}
+
+
+body.download #navigation li.download,
+body.docs #navigation li.docs,
+body.tests #navigation li.tests,
+body.demo #navigation li.demo {background: black; color: white; border-color: black;}

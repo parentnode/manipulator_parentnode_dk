@@ -6,84 +6,37 @@
 	<h1>Tests</h1>
 
 	<ul>
-		<li>
-			<h2><a href="u-animation.php">Animation (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-array.php">Array</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-audio.php">Audio (not done)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-cookie.php">Cookie</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-date.php">Date</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-debug.php">Debug (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-dom.php">DOM</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-events.php">Events</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-events-movements.php">Events, movements (drag, swipe, scrolling) (drag error in IE 8)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-flash.php">Flash</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-form.php">Form (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-image.php">Image (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-init.php">Init (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-period.php">Period</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-pushstate-hash.php">PushState/HashChanged (only hash changed - IE7 error)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-request.php">Request (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-segment.php">Segment test (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-sortable.php">Sortable (started)</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-speed-functions.php">Speed test, functions</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-speed-jquery.php">Speed test, jQuery</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-speed-plain.php">Speed test, plain</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-speed-jes.php">Speed test, JES</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-string.php">String</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-timer.php">Timer</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-system.php">System</a></h2>
-		</li>
-		<li>
-			<h2><a href="u-video.php">Video (not done)</a></h2>
-		</li>
+		<li><a href="u-animation">Animation (started)</a></li>
+		<li><a href="u-array">Array</a></li>
+		<li><a href="u-audio">Audio (not done)</a></li>
+		<li><a href="u-cookie">Cookie</a></li>
+		<li><a href="u-date">Date</a></li>
+		<li><a href="u-debug">Debug (started)</a></li>
+		<li><a href="u-dom">DOM</a></li>
+		<li><a href="u-events">Events</a></li>
+		<li><a href="u-events-movements">Movements events (drag, swipe, scrolling)</a></li>
+		<li><a href="u-events-browser">Browser events (started)</a></li>
+		<li><a href="u-flash">Flash</a></li>
+		<li><a href="u-form">Form (started)</a></li>
+		<li><a href="u-geometry">Geometry</a></li>
+		<li><a href="u-init">Init (started)</a></li>
+		<li><a href="u-math">Math</a></li>
+		<li><a href="u-period">Period</a></li>
+		<li><a href="u-popup">Popup</a></li>
+		<li><a href="u-preloader">Preloader (started)</a></li>
+		<li><a href="u-pushstate-hash">PushState/HashChanged (only hash changed - IE7 error)</a></li>
+		<li><a href="u-request">Request</a></li>
+		<li><a href="u-segment">Segment test (started)</a></li>
+		<li><a href="u-sortable">Sortable</a></li>
+		<li><a href="u-speed-functions">Speed test, functions</a></li>
+		<li><a href="u-speed-jes">Speed test, JES</a></li>
+		<li><a href="u-speed-jquery">Speed test, jQuery</a></li>
+		<li><a href="u-speed-plain">Speed test, Plain JavaScript</a></li>
+		<li><a href="u-string">String</a></li>
+		<li><a href="u-system">System</a></li>
+		<li><a href="u-timer">Timer</a></li>
+		<li><a href="u-url">URL</a></li>
+		<li><a href="u-video">Video (not done)</a></li>
 	</ul>
 
 </div>

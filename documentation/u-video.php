@@ -1,3 +1,5 @@
+<? $page_title = "Video documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -10,7 +12,7 @@
 		</div>
 		<div class="body">
 
-			<div class="function">
+			<div class="function" id="Util.videoPlayer">
 				<div class="header">
 					<h3>Util.videoPlayer</h3>
 				</div>

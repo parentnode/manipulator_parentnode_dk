@@ -24,7 +24,9 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Sortable</h2>
+	<h1>Sortable</h1>
+	<p>Needs to be updated!!!</p>
+
 
 	<ul class="sortable">
 		<li>test 1</li>
@@ -33,6 +35,9 @@
 	</ul>
 
 </div>
-<div class="comments"></div>
+<div class="comments">
+	
+	
+</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

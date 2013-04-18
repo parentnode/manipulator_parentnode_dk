@@ -62,7 +62,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Period</h2>
+	<h1>Period</h1>
 
 
 </div>

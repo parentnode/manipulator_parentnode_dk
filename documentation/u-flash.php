@@ -1,3 +1,5 @@
+<? $page_title = "Flash documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -135,7 +137,7 @@
 								Util.flash(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">String</span> <span class="var">url</span> 
-									[, <span class="type">JSON</span> <span class="var">arguments</span> ]
+									[, <span class="type">JSON</span> <span class="var">settings</span> ]
 								);
 							</dd>
 						</dl>
@@ -162,7 +164,7 @@
 									<span class="type">String</span> path to .swf file
 								</div>
 							</dd>
-							<dt><span class="var">arguments</span></dt>
+							<dt><span class="var">settings</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Optional, JSON object with flash object settings

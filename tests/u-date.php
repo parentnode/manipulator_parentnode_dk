@@ -53,7 +53,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Date</h2>
+	<h1>Date</h1>
 
 
 </div>

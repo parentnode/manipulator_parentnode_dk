@@ -5,7 +5,7 @@
 <style type="text/css">
 	.scene {position: relative; height: 400px;}
 	.scene div {margin: 0 0 5px;}
-	.block {display: inline-block; vertical-align: top; width: 50px; height: 50px; background: red; margin-right: 10px;}
+	.block {display: inline-block; vertical-align: top; width: 50px; height: 50px; background: #ff0000; margin-right: 10px;}
 
 	.bgpos {background-image: url(/documentation/img/test.jpg); background-position: 0 0;}
 
@@ -77,6 +77,7 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+//			alert("test")
 			var div;
 
 			div = u.qs(".block.translate", scene);
@@ -125,7 +126,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Animation - module in development</h2>
+	<h1>Animation</h1>
 
 	<div class="block translate">translate</div>
 	<div class="block rotate">rotate</div>
@@ -136,6 +137,7 @@
 	<div class="block height">height</div>
 
 	<div class="block bgpos">bgpos</div>
+
 	<div class="block bgcolor">bgcolor</div>
 
 	<!--div class="block linear"></div>

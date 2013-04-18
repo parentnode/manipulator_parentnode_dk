@@ -1,3 +1,5 @@
+<? $page_title = "String documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -88,165 +90,6 @@ u.cutString(string, 10);</code>
 						<div class="jes">
 							<h5>JES</h5>
 							<p>none</p>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="function" id="Util.random">
-				<div class="header">
-					<h3>Util.random</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.random</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.random</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax">Number = 
-								Util.random(
-									<span class="type">Number</span> <span class="var">min</span>,
-									<span class="type">Number</span> <span class="var">max</span>
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>
-							Generate a random number between min and max (both included).
-						</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-						<dl class="parameters">
-							<dt><span class="var">min</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Number</span> The min number that can be returned
-								</div>
-							</dd>
-							<dt><span class="var">max</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Number</span> The max number that can be returned
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p>A random number from the given min/max range</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-
-						<div class="example">
-							<code>u.random(1,10);</code>
-	
-							<p>returns <span class="type">Number</span> between 1 and 10. Both included.</p>
-						</div>
-					</div>
-				
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>Math.round</li>
-								<li>Math.random</li>
-							</ul>
-						</div>
-
-						<div class="jes">
-							<h5>JES</h5>
-							<p>none</p>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="function" id="Util.randomKey">
-				<div class="header">
-					<h3>Util.randomKey</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.randomKey</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.randomKey</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax">String =
-								Util.randomKey(
-									[<span class="type">Number</span> <span class="var">length</span>]
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>
-							Will return a random key consisting of lowercase letters and/or numbers. If no length is specified, 8 is the default length.
-						</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-						<dl class="parameters">
-							<dt><span class="var">length</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">String</span> Optional. The length of the random key.
-								</div>
-							</dd>
-			
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p>A random key consisting of lowercase letters and/or numbers</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-
-						<div class="example">
-							<code>u.randomKey(10);</code>
-	
-							<p>returns <span class="type">String</span> like cc65epfpsq</p>
-						</div>
-					</div>
-				
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>String.split</li>
-							</ul>
-						</div>
-
-						<div class="jes">
-							<h5>JES</h5>
-							<ul>
-								<li>u.random</li>
-							</ul>
 						</div>
 
 					</div>
@@ -358,7 +201,7 @@ u.cutString(string, 10);</code>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>none</p>
+						<p>No parameters</p>
 					</div>
 
 					<div class="return">
@@ -385,6 +228,99 @@ u.cutString(string, 10);</code>
 								<li>String.split</li>
 								<li>Array.join</li>
 								<li>Math.random</li>
+							</ul>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.prefix">
+				<div class="header">
+					<h3>Util.prefix</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.prefix</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.prefix</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.prefix(
+									<span class="type">String</span> <span class="var">string</span>,
+									<span class="type">Number</span> <span class="var">length</span>,
+									[<span class="type">String</span> <span class="var">prefix</span>]
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Pad <span class="var">string</span> to <span class="var">length</span> using <span class="var">prefix</span>.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to be padded
+								</div>
+							</dd>
+							<dt><span class="var">length</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Number</span> length to pad string to
+								</div>
+							</dd>
+							<dt><span class="var">prefix</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Optional. String to use as prefix padding. Default "0".
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>A string padded to length using prefix</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>Util.prefix(1, 2);</code>
+	
+							<p>returns <span class="type">String</span> 01</p>
+						</div>
+						<div class="example">
+							<code>Util.prefix("F", 5, "-");</code>
+	
+							<p>returns <span class="type">String</span> ----F</p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>.toString</li>
 							</ul>
 						</div>
 
@@ -475,6 +411,229 @@ u.cutString(string, 10);</code>
 						<div class="jes">
 							<h5>JES</h5>
 							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="function" id="String.trim">
+				<div class="header">
+					<h3>String.trim</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">String.trim</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">none</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								String.trim();
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							String trim support for older browsers. Removes whitespace, newlines and tabs from either end of string.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<p>No parameters</p>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>Trimmed string</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>("	test \n").trim();</code>
+	
+							<p>returns <span class="value">test</span></p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>String.replace</p>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="String.substr">
+				<div class="header">
+					<h3>String.substr</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">String.substr</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">none</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								String.substr(from, length);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							String.substr support in older browsers, primarily correcting faulty implementation in IE8 and older.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">from</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Number</span> Starting point for substring. Negative value to state starting point from end of string.
+								</div>
+							</dd>
+							<dt><span class="var">length</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Number</span> Optional length of substring
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>Substring of string</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>("string").substr(-3, 2);</code>
+	
+							<p>returns <span class="value">in</span></p>
+						</div>
+						<div class="example">
+							<code>("string").substr(4);</code>
+	
+							<p>returns <span class="value">ng</span></p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>String.substring</p>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.randomKey">
+				<div class="header">
+					<h3>Util.randomKey - DEPRECATED - use Util.randomString</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.randomKey</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.randomKey</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.randomKey(
+									[<span class="type">Number</span> <span class="var">length</span>]
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Will return a random key consisting of lowercase letters and/or numbers. If no length is specified, 8 is the default length.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">length</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Optional. The length of the random key.
+								</div>
+							</dd>
+			
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>A random key consisting of lowercase letters and/or numbers</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.randomKey(10);</code>
+	
+							<p>returns <span class="type">String</span> like cc65epfpsq</p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.split</li>
+							</ul>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<ul>
+								<li>u.random</li>
+							</ul>
 						</div>
 
 					</div>

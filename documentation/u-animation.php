@@ -1,3 +1,5 @@
+<? $page_title = "Animation documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -854,7 +856,7 @@
 							<dt><span class="var">color</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> new background-color of node.
+									<span class="type">String</span> new HEX background-color of node.
 								</div>
 							</dd>
 						</dl>
@@ -901,69 +903,6 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.support">
-				<div class="header">
-					<h3>Util.Animation.support</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.support</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.support</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Boolean</span> = 
-								Util.Animation.support();
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Check for CSS3-transition support.</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-						<p>none</p>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Boolean</span> Whether the browser supports CSS3-transitions.</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>No examples</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<!-- list javascript functions used by function -->
-							<h5>JavaScript</h5>
-							<ul>
-								<li>document.createElement</li>
-							</ul>
-						</div>
-
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
-							<ul>
-								<li>Util.Animation.variant</li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
 			<div class="function" id="Util.Animation.support3d">
 				<div class="header">
 					<h3>Util.Animation.support3d</h3>
@@ -994,7 +933,7 @@
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>none</p>
+						<p>No parameters</p>
 					</div>
 
 					<div class="return">
@@ -1058,7 +997,7 @@
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>none</p>
+						<p>No parameters</p>
 					</div>
 
 					<div class="return">
@@ -1132,7 +1071,8 @@
 				<dt>desktop</dt>
 				<dd>
 					<span class="file">u-animation.js</span> +
-					<span class="file">u-events.js</span>
+					<span class="file">u-events.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 
 				<dt>desktop_ie</dt>
@@ -1141,7 +1081,8 @@
 					<span class="file">u-animation-desktop_ie.js</span> +
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-geometry.js</span> + 
-					<span class="file">u-dom.js</span>
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
@@ -1152,13 +1093,15 @@
 					<span class="file">u-events-desktop_light.js</span> + 
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-dom-desktop_light.js</span> +
-					<span class="file">u-geometry.js</span>
+					<span class="file">u-geometry.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 
 				<dt>tablet</dt>
 				<dd>
 					<span class="file">u-animation.js</span> +
-					<span class="file">u-events.js</span>
+					<span class="file">u-events.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 
 				<dt>tv</dt>
@@ -1169,13 +1112,15 @@
 					<span class="file">u-events-desktop_light.js</span> + 
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-dom-desktop_light.js</span> +
-					<span class="file">u-geometry.js</span>
+					<span class="file">u-geometry.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 
 				<dt>mobile_touch</dt>
 				<dd>
 					<span class="file">u-animation.js</span> +
-					<span class="file">u-events.js</span>
+					<span class="file">u-events.js</span> +
+					<span class="file">u-math.js</span>
 				</dd>
 	
 				<dt>mobile</dt>

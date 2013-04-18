@@ -41,8 +41,11 @@
 				node.click();
 			}
 
+			
+
 			var mid1_time = new Date().getTime();
 			node = u.ae(u.qs(".n1 .m"), "div", {"class":"status", "html":mid1_time-start_time});
+
 
 		}
 

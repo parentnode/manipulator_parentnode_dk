@@ -71,6 +71,12 @@
 			u.we(node, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
 
 
+			// node.textContent
+			var text = u.text(u.qs(".textcontent", scene));
+			if(text.trim() == "node.textContent") {
+				u.ae(scene, u.qs(".textcontent", scene), ({"class":"correct", "html":"textContent correct"}))
+			}
+
 
 			// clickableElement
 			node = u.qs(".ce", scene);
@@ -91,9 +97,9 @@
 
 			// u.sc, u.ac, u.rc, u.tc, u.hc
 			// setClass
-			u.qs("h2", scene).className = "before";
-			var old_class = u.setClass(u.qs("h2", scene), "test_headline");
-			if(u.qs("h2", scene).className == "test_headline") {
+			u.qs("h1", scene).className = "before";
+			var old_class = u.setClass(u.qs("h1", scene), "test_headline");
+			if(u.qs("h1", scene).className == "test_headline") {
 				u.ae(scene, "div", ({"class":"correct", "html":"setClass: correct"}));
 			}
 			else {
@@ -101,8 +107,15 @@
 			}
 
 			// hasClass
-			u.qs("h2", scene).className = "test_headline type1";
-			if(u.hc(u.qs("h2", scene), "headline") == false && u.hc(u.qs("h2", scene), "test_headline") == true && u.hc(u.qs("h2", scene), "test_headline2") == false && u.hc(u.qs("h2", scene), "type[0-1]") == true) {
+			u.qs("h1", scene).className = "test_headline type1";
+			if(
+				u.hc(u.qs("h1", scene), "headline") == false && 
+				u.hc(u.qs("h1", scene), "test|headline") == false && 
+				u.hc(u.qs("h1", scene), "test_headline") == true && 
+				u.hc(u.qs("h1", scene), "test_headline2") == false && 
+				u.hc(u.qs("h1", scene), "2test_headline") == false && 
+				u.hc(u.qs("h1", scene), "type[0-1]") == true
+				) {
 				u.ae(scene, "div", ({"class":"correct", "html":"hasClass: correct"}));
 			}
 			else {
@@ -110,11 +123,11 @@
 			}
 
 			// addClass
-			u.qs("h2", scene).className = "test_headline";
-			u.addClass(u.qs("h2", scene), "headline:example");
-			u.addClass(u.qs("h2", scene), "headline");
-			u.addClass(u.qs("h2", scene), "headline");
-			if(u.qs("h2", scene).className == "test_headline headline:example headline") {
+			u.qs("h1", scene).className = "test_headline";
+			u.addClass(u.qs("h1", scene), "headline:example");
+			u.addClass(u.qs("h1", scene), "headline");
+			u.addClass(u.qs("h1", scene), "headline");
+			if(u.qs("h1", scene).className == "test_headline headline:example headline") {
 				u.ae(scene, "div", ({"class":"correct", "html":"addedClass: correct"}));
 			}
 			else {
@@ -122,11 +135,11 @@
 			}
 
 			// removeClass
-			u.qs("h2", scene).className = "test_headline test:1 headline headline:example test:2 test:3 bye farewell later headline";
-			u.removeClass(u.qs("h2", scene), "headline");
-			u.removeClass(u.qs("h2", scene), "bye|farewell|later");
-			u.removeClass(u.qs("h2", scene), "test\:[0-2]+");
-			if(u.qs("h2", scene).className == "test_headline headline:example test:3") {
+			u.qs("h1", scene).className = "test_headline test:1 headline headline:example test:2 test:3 bye farewell later headline";
+			u.removeClass(u.qs("h1", scene), "headline");
+			u.removeClass(u.qs("h1", scene), "bye|farewell|later");
+			u.removeClass(u.qs("h1", scene), "test\:[0-2]+");
+			if(u.qs("h1", scene).className == "test_headline headline:example test:3") {
 				u.ae(scene, "div", ({"class":"correct", "html":"removeClass: correct"}));
 			}
 			else {
@@ -134,9 +147,9 @@
 			}
 
 			// toggleClass
-			u.qs("h2", scene).className = "test_headline";
-			u.toggleClass(u.qs("h2", scene), "test_headline", old_class);
-			if(u.qs("h2", scene).className == old_class) {
+			u.qs("h1", scene).className = "test_headline";
+			u.toggleClass(u.qs("h1", scene), "test_headline", old_class);
+			if(u.qs("h1", scene).className == old_class) {
 				u.ae(scene, "div", ({"class":"correct", "html":"toggleClass: correct"}));
 			}
 			else {
@@ -147,11 +160,11 @@
 
 			//as & gcs
 			// applyStyle
-			var org_display = u.qs("h2", scene).style.display;
-			u.qs("h2", scene).style.display == "block";
-			u.as(u.qs("h2", scene), "display", "none");
-			if(u.qs("h2", scene).style.display == "none") {
-				u.as(u.qs("h2", scene), "display", org_display);
+			var org_display = u.qs("h1", scene).style.display;
+			u.qs("h1", scene).style.display == "block";
+			u.as(u.qs("h1", scene), "display", "none");
+			if(u.qs("h1", scene).style.display == "none") {
+				u.as(u.qs("h1", scene), "display", org_display);
 				u.ae(scene, "div", ({"class":"correct", "html":"addStyle: correct"}));
 			}
 			else {
@@ -173,13 +186,27 @@
 				u.ae(scene, "div", ({"class":"error", "html":"getComputedStyle: error"}));
 			}
 
+
+			// hasFixedParent
+			var hfp_node = u.ae(scene, "div");
+			var hfp_child = u.ae(hfp_node, "div");
+			u.as(hfp_node, "position", "fixed");
+			if(u.hfp(hfp_child) && !u.hfp(hfp_node)) {
+				hfp_node.parentNode.removeChild(hfp_node);
+				u.ae(scene, "div", ({"class":"correct", "html":"hasFixedParent: correct"}));
+			}
+			else {
+				hfp_node.parentNode.removeChild(hfp_node);
+				u.ae(scene, "div", ({"class":"error", "html":"hasFixedParent: error"}));
+			}
+
 		}
 
 	}
 </script>
 
 <div class="scene i:test">
-	<h2>DOM</h2>
+	<h1>DOM</h1>
 
 	<div id="qstest" class="correct type:cv othertype:notcv"><h3 class="error"><span>querySelector</span> error</h3></div>
 	<div class="qsatest correct"><span class="error">querySelectorAll</span></div>
@@ -193,6 +220,10 @@
 		<div class="error">childNodes</div>
 		<a class="error"><span>childNodes</span></a>
 		<span class="error">childNodes</span>
+	</div>
+	<div class="textcontent">
+		<!-- COMMENT -->
+		<span class="error">node.textContent</span>
 	</div>
 	<div class="ce correct">
 		<a href="http://index/" class="error">Index</a>

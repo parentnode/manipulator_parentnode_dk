@@ -99,7 +99,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Segment test</h2>
+	<h1>Segment test</h1>
 	<div class="testNode"></div>
 
 </div>

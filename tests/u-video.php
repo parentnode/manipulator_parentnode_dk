@@ -137,7 +137,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Video</h2>
+	<h1>Video</h1>
 	<p>Videotest requires interaction and observation :)</p>
 	
 	<ul class="videos">

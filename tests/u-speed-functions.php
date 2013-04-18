@@ -76,8 +76,9 @@ var test3 = function() {
 </script>
 
 <div class="scene i:test">
-	<h2>Functions speed test</h2>
-	<p>Testing different types of function declarations.</p>
+	<h1>Functions speed test</h1>
+	<p>Testing different types of function declaration</p>
+
 
 </div>
 <div class="comments"></div>

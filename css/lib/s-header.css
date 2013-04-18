@@ -1,0 +1,14 @@
+#header {border-bottom: 1px solid #cccccc; height: 80px; position: relative;}
+
+#header .servicenavigation {display: block; text-align: right; padding: 3px 0; font-size: 0;}
+
+#header .servicenavigation li {display: inline-block;}
+#header .servicenavigation li a {text-decoration: underline;}
+#header .servicenavigation li a:hover {color: #000000;}
+
+#header .servicenavigation li.front {position: absolute; top: 25px; left: 20px;}
+#header .servicenavigation li.front a {font-size: 36px; text-decoration: none; color: #000000;}
+
+
+#header .servicenavigation li.navigation {display: none;}
+#header .servicenavigation li.help {display: none;}

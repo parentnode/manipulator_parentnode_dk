@@ -1,37 +1,92 @@
-#header {position: relative;}
-#header .servicenavigation li.front {position: absolute; top: 25px; left: 0px;}
-#header .servicenavigation li.front a {font-size: 36px; text-decoration: none; color: #000000;}
-#header .servicenavigation li.front:after {content: "";}
-
-#navigation h3 a {font-weight: bold;}
-
-.section {padding: 0 0 20px;}
-.section .body {}
+.c {font-size: 0;}
+.c400, .c300, .c200, .c100, .c50 {display: inline-block; vertical-align: top; font-size: 0; min-height: 10px;}
+.c400 {width: 960px;}
+.c300 {width: 720px;}
+.c200 {width: 480px;}
+.c100 {width: 240px;}
+.c50 {width: 120px;}
 
 
-#content .var {font-style: italic; color: #880088; font-weight: bold;}
-#content .value {font-style: italic; color: #880088;}
-#content .domnode {font-style: italic; color: #880088;}
-#content .attribute {font-style: italic; color: #880088;}
 
-#content .type {font-style: italic; font-weight: bold; color: pink;}
+#content .section {padding: 0 0 20px;}
+#content .section .body {}
 
-#content .file {font-style: italic;}
+
+#content {display: block; width: auto;}
+#content h1 {padding-top: 30px;}
+
+#content span.var {font-style: italic; color: #880088; font-weight: bold;}
+#content span.value {font-style: italic; color: #880088;}
+#content span.domnode {font-style: italic; color: #880088;}
+#content span.attribute {font-style: italic; color: #880088;}
+#content span.type {font-style: italic; font-weight: bold; color: pink;}
+#content span.file {font-style: italic;}
 
 #content .todo {color: red;}
 
-#content .scene li h2 {font-size: 16px; padding: 0;}
+
+#content .promotion {margin: 0 20px 20px; padding: 20px 0 10px; border-radius: 5px; border: 1px solid #dedede}
+#content .promotion .actions {text-align: right; margin-right: 10px;}
+
+
+/* FRONT */
+.front #content ul.jesgoal {margin: 0 0 0 20px; padding: 0 0 0 20px; list-style: disc;}
+.front #content ul.jesgoal li {padding-bottom: 10px;}
+
+
+/* DOWNLOAD */
+
+
+
+/* LIBRARY */
+.docs #content #library_files {padding-top: 30px;}
+.docs #content #library_files li {position: relative; z-index: 40;}
+.docs #content #library_files li.hover {background: #dedede;}
+.docs #content #library_files h2 {line-height: 53px; font-size: 20px; padding-bottom: 10px;}
+
+.docs #content #library_files h3 {font-size: 16px; padding: 5px 20px;}
+.docs #content #library_files h3 a {text-decoration: none;}
+.docs #content #library_files p {display: none; position: absolute; top: 0; left: 0; padding: 10px; border: 1px solid #dedede; background: #ffffff; box-shadow: 1px 1px 3px #dedede;}
+
+.docs #content .search {padding-bottom: 0px;}
+.docs #content .search.loading {background: transparent url(/img/gx_loader.gif) no-repeat 410px 68px;}
+.docs #content .search h2 {font-size: 20px;}
+.docs #content .search .field {padding: 0 18px 20px;}
+.docs #content .search .field input.default {color: #bcbcbc;}
+
+.docs #content .search .results .function {padding: 15px 0 0; border-top: 1px solid #dedede;}
+.docs #content .search .results .function .header h3 {padding-bottom: 5px;}
+
+.docs #content .search .results .function .parameters,
+.docs #content .search .results .function .examples,
+.docs #content .search .results .function .return,
+.docs #content .search .results .function .uses,
+.docs #content .search .results .function .description,
+
+.docs #content .search .results .function .definition h4,
+.docs #content .search .results .function .definition .name,
+.docs #content .search .results .function .definition .shorthand,
+.docs #content .search .results .function .definition dt {display: none;}
+.docs #content .search .results .function.hover {background: #dedede;}
+
+
+.docs #content .notes p {display: none;}
+.docs #content ul.tools {display: none;}
+
+
+/* LIBRARY DOCSPAGE */
+.docs.docpage #content .functions .function .body {display: none;}
 
 
 /* FUNCTIONS */
-#content .functions {}
-#content .functions .header {border-bottom: 1px solid #bbbbbb;}
-#content .functions .body {}
+.docs.docpage #content .functions {}
+.docs.docpage #content .functions .header {}
+.docs.docpage #content .functions .body {border-bottom: 1px solid #bbbbbb;}
 
 
-#content .functions .function {padding: 10px 0 20px; overflow: hidden; border-bottom: 1px solid #bbbbbb;}
-#content .functions .function .header {}
-#content .functions .function .body {}
+.docs.docpage #content .functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
+.docs.docpage #content .functions .function .header {}
+.docs.docpage #content .functions .function .body {padding: 20px 0 0; border: none;}
 
 
 
@@ -40,16 +95,38 @@
 #content .functions div.definition > dl {font-size: 0;}
 #content .functions div.definition > dl dt,
 #content .functions div.definition > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.definition > dl dt {width: 100px;}
-#content .functions div.definition > dl dd {width: 580px;}
+#content .functions div.definition > dl dt {width: 205px; padding-right: 15px; text-align: right;}
+#content .functions div.definition > dl dd {width: 700px;}
 
 #content .functions div.definition > dl dt.name,
-#content .functions div.definition > dl dd.name {background: #dddddd;}
+#content .functions div.definition > dl dd.name {}
 #content .functions div.definition > dl dd.name {font-weight: bold;}
 
 
 /* DESCRIPTION */
 #content .functions div.description {padding: 0 0 20px;}
+#content .functions div.description > dl {font-size: 0;}
+#content .functions div.description > dl dt,
+#content .functions div.description > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+#content .functions div.description > dl dt {width: 205px; padding-right: 15px; text-align: right;}
+#content .functions div.description > dl dd {width: 700px;}
+
+#content .functions div.callbacks > dl dt.name,
+#content .functions div.callbacks > dl dd.name {}
+#content .functions div.callbacks > dl dd.name {font-weight: bold;}
+
+
+/* CALLBACKS */
+#content .functions div.callbacks {padding: 0 0 20px;}
+#content .functions div.callbacks > dl {font-size: 0;}
+#content .functions div.callbacks > dl dt,
+#content .functions div.callbacks > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
+#content .functions div.callbacks > dl dt {width: 205px; padding-right: 15px; text-align: right;}
+#content .functions div.callbacks > dl dd {width: 700px;}
+
+#content .functions div.callbacks > dl dt.name,
+#content .functions div.callbacks > dl dd.name {}
+#content .functions div.callbacks > dl dd.name {font-weight: bold;}
 
 
 /* PARAMETERS */
@@ -57,12 +134,12 @@
 #content .functions div.parameters > dl {font-size: 0;}
 #content .functions div.parameters > dl dt,
 #content .functions div.parameters > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.parameters > dl dt {width: 100px;}
-#content .functions div.parameters > dl dd {width: 580px;}
+#content .functions div.parameters > dl dt {width: 205px; padding-right: 15px; text-align: right;}
+#content .functions div.parameters > dl dd {width: 700px;}
 
 #content .functions div.parameters > dl dd .summary {padding: 0 0 5px;}
 
-#content .functions div.parameters > dl dd .details {padding: 0 0 10px; margin: 0 0 0 -80px;}
+#content .functions div.parameters > dl dd .details {padding: 10px 0 10px; /*margin: 0 0 0 -80px;*/}
 #content .functions div.parameters > dl dd .details h5 {padding: 0 0 5px;}
 
 
@@ -102,9 +179,9 @@
 #content .segments .body > dl dt,
 #content .segments .body > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
 
-#content .segments .body > dl dt {width: 200px;}
-#content .segments .body > dl dd {width: 480px;}
-
+#content .segments .body > dl dt {width: 205px; text-align: right; padding-right: 15px; font-weight: bold;}
+#content .segments .body > dl dd {width: 700px;}
+#content .segments .body > dl dd span.file {white-space: nowrap;}
 
 
 

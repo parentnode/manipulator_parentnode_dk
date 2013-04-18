@@ -1,3 +1,5 @@
+<? $page_title = "Help" ?>
+<? $body_class = "help" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene">

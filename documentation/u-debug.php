@@ -1,3 +1,5 @@
+<? $page_title = "Debug documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -172,23 +174,34 @@
 							Simple development debugging function which outputs message to screen in overlay attached to a 
 							browser corner. Also outputs messages to console.log when available.
 						</p>
+
+						<h5>u.bug_force</h5>
 						<p>
 							Overlay is only injected in page if u.debugURL returns true. This can
-							be overridden by setting u.bug_force = <span class="value">true</span> in your script.</p>
-						<p>
-							It uses floating parameters, to provide easy and flexible use. 
-							It means you can state parameters in a couple of different ways.
+							be overridden by setting u.bug_force = <span class="value">true</span> in your script.
 						</p>
+
+						<h5>u.bug_console_only</h5>
+						<p>
+							Overlay is injected in page as default. This can
+							be overridden by setting u.bug_console_only = <span class="value">true</span> in your script.
+						</p>
+
+						<h5>u.bug_position</h5>
 						<p>
 							Default positioning of bug-message is <span class="value">absolute</span>. This can
 							be overridden by setting u.bug_position = <span class="value">fixed|relative|static</span>
 							in your script.
 						</p>
+
+						<h5>u.bug_bg</h5>
 						<p>
 							Default background color of bug-message is <span class="value">white</span>. This can
 							be overridden by setting u.bug_bg = <span class="value">#ff0000</span> (specifying whatever color want)
 							in your script.
 						</p>
+
+						<h5>u.bug_max_width</h5>
 						<p>
 							Default width of bug-message is <span class="value">auto</span>. This can
 							be overridden by setting u.bug_max_width = <span class="value">123</span> (px will be added by u.bug)

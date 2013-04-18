@@ -11,36 +11,8 @@
 <script type="text/javascript">
 
 	var text = "";
-	var dom_time = "";
+	var dom_time = 0;
 	var time = 0;
-
-
-	// Mozilla, Opera and webkit nightlies currently support this event
-    if(document.addEventListener ) {
-        // Use the handy event callback
-        document.addEventListener( "DOMContentLoaded", function(){
-                document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-
-				dom_time = new Date().getTime();
-				text += "#DOMContentLoaded ("+(dom_time - time)+")<br>"+ document.body + "<br>" + document.readyState + "<br>";
-        }, false );
-
-    }
-	// If IE event model is used
-	else if ( document.attachEvent ) {
-        // ensure firing before onload,
-        // maybe late but safe also for iframes
-        document.attachEvent("onreadystatechange", function(){
-                if(document.readyState === "complete" ) {
-                        document.detachEvent( "onreadystatechange", arguments.callee );
-						dom_time = new Date().getTime();
-						text += "#complete ("+(dom_time - time)+")<br>"+ document.body + "<br>" + document.readyState + "<br>";
-                }
-        });
-	}
-
-
-
 
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
@@ -63,10 +35,11 @@
 
 	}
 
+	
 </script>
 
 <div class="scene i:test">
-	<h2>Init</h2>
+	<h1>Init</h1>
 
 	<div class="init">Waiting for initialization</div>
 

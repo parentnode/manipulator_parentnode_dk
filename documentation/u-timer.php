@@ -1,3 +1,5 @@
+<? $page_title = "Timer documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -192,7 +194,7 @@
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>none</p>
+						<p>No parameters</p>
 					</div>
 
 					<div class="return">
@@ -409,7 +411,7 @@
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>none</p>
+						<p>No parameters</p>
 					</div>
 
 					<div class="return">

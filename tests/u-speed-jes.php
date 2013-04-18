@@ -12,6 +12,15 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<script type="text/javascript" src="/bundles/full/seg_desktop.js"></script>
 	<script type="text/javascript">
+	
+		// if(document.addEventListener) {
+		// 	document.addEventListener("DOMContentLoaded", 
+		// 		function(event) {
+		// 			document.removeEventListener("DOMContentLoaded", arguments.callee, false);
+		// 			test();
+		//     	}
+		// 	, false);
+		// }
 
 		window.onload = test;
 
@@ -37,6 +46,58 @@
 
 			var mid1_time = new Date().getTime();
 			node = u.ae(u.qs(".n1 .m"), "div", {"class":"status", "html":mid1_time-start_time});
+
+
+// 			var parent = u.qs(".n2 .m");
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.ae(parent, "div", {"class":"start box"+i});
+// 			}
+// 
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.qs(".box"+i, parent);
+// 
+// 				u.e.click(node);
+// 				node.clicked = function() {
+// 					u.rc(this, "start");
+// 					u.ac(this, "done");
+// 				}
+// 			}
+// 
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.qs(".box"+i, parent);
+// 				node.clicked();
+// 			}
+// 
+// 
+// 			var mid2_time = new Date().getTime();
+// 			node = u.ae(u.qs(".n2 .m"), "div", {"class":"status", "html":mid2_time-mid1_time});
+// 
+// 
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.ae(u.qs(".n3 .m"), "div", {"class":"start box"+i});
+// 			}
+// 
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.qs(".n3 .m .box"+i);
+// 
+// 				u.e.click(node);
+// 				node.clicked = function() {
+// 					u.rc(this, "start");
+// 					u.ac(this, "done");
+// 				}
+// 			}
+// 
+// 			for(i = 0; i < test_count; i++) {
+// 				node = u.qs(".n3 .m .box"+i);
+// 				node.clicked();
+// 			}
+// 
+// //			alert("test")
+// 			var end_time = new Date().getTime();
+// 
+// 			node = u.ae(u.qs(".n3 .m"), "div", {"class":"status", "html":end_time-mid2_time});
+
+//			alert(end_time-start_time);
 		}
 
 	

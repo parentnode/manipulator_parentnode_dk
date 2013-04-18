@@ -1,3 +1,5 @@
+<? $page_title = "Events documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -216,7 +218,7 @@ node.clicked = function(event) {
 						<p>Add a dblclick event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.dblclicked when dblclick event occurs, if node.dblclicked exists.</p>
 						<p>If your scripts are using the JES Google Analytics module, the dblclick-event will be registered automatically.</p>
-						<p>As of now, the dblclick-event does not work in IE8 and older.</p>
+						<p>As of now, the dblclick-event does not work in IE8 and older because they require a specific dblclick event.</p>
 					</div>
 
 					<div class="parameters">
@@ -1312,7 +1314,7 @@ node.dblclicked = function(event) {
 
 				<dt>desktop_light</dt>
 				<dd>
-					<span class="file">u-events.js</span> + 
+					<span class="file">u-events.js</span> +
 					<span class="file">u-events-desktop_light.js</span> +
 					<span class="file">u-timer.js</span> +
 					<span class="file">u-dom.js</span> +

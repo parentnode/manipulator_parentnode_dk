@@ -1,3 +1,5 @@
+<? $page_title = "DOM documentation" ?>
+<? $body_class = "docs docpage" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
 <div class="scene i:docpage">
@@ -1186,6 +1188,92 @@ u.querySelector(".link", content_node);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.textContent">
+				<div class="header">
+					<h3>Util.textContent</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.textContent</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.text</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">String</span> = 
+								Util.textContent(
+									<span class="type">Node</span> <span class="var">node</span>
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Get textContent of Node, with fallback to innerText or regular expression.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> node to get textContent of
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							The textContent of the node - equivalent to node.textContent.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>&lt;div class=&quot;textcontent&quot;&gt;
+	&lt;!-- COMMENT --&gt;
+	&lt;span&gt;node.textContent&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var div = u.querySelector(".textcontent");
+	u.textContent(div).trim();
+&lt;/script&gt;</code>
+							<p>Returns <span class="value">node.textContent</span>.</p>
+						</div>
+
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>node.textContent</li>
+								<li>node.innerText</li>
+								<li>String.replace</li>
+							</ul>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<p>None</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 			<div class="function" id="Util.clickableElement">
 				<div class="header">
 					<h3>Util.clickableElement</h3>
@@ -2143,7 +2231,7 @@ u.querySelector(".link", content_node);</code>
 							<dt><span class="var">node</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> node to get property from
+									<span class="type">Node</span> node to get property from
 								</div>
 							</dd>
 
@@ -2201,8 +2289,82 @@ u.querySelector(".link", content_node);</code>
 				</div>
 			</div>
 
-		</div>
+			<div class="function" id="Util.hasFixedParent">
+				<div class="header">
+					<h3>Util.hasFixedParent</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.hasFixedParent</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.hfp</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Boolean</span> = 
+								Util.hasFixedParent(
+									<span class="type">Node</span> <span class="var">node</span>
+								)
+							</dd>
+						</dl>
+					</div>
 
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Check if <span class="var">node</span> has position: fixed parent. Fixed nodes needs to be 
+							handled differently when using drag'n'drop or other dynamic repositioning.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to get property from
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							True if <span class="var">node</span> has fixed parent - or false if not.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>document.parentNode</li>
+								<li>document.nodeName</li>
+							</ul>
+						</div>
+
+						<div class="jes">
+							<h5>JES</h5>
+							<ul>
+								<li>Util.getComputedStyle</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 	<div class="section files">

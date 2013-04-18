@@ -68,7 +68,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Events</h2>
+	<h1>Events</h1>
 
 	<div class="level1">click
 		<div class="level2">click, hold, dblclick

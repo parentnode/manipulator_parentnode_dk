@@ -23,7 +23,7 @@
 </script>
 
 <div class="scene i:test">
-	<h2>Hashchanged</h2>
+	<h1>Hashchanged</h1>
 
 	<div><a href="#test1">#test1</a></div>
 	<div><a href="#test2">#test2</a></div>
