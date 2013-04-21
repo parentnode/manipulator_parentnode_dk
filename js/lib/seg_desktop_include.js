@@ -33,7 +33,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></scr
 
 document.write('<script type="text/javascript" src="/js/lib/i-page.js"></script>');
 document.write('<script type="text/javascript" src="/js/lib/i-docpage.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/i-library.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/i-documentation.js"></script>');
 
 //document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
 //document.write('<script type="text/javascript" src="/js/jes/src/u-googleanalytics.js"></script>');

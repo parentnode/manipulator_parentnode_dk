@@ -2,7 +2,7 @@
 <? $body_class = "docs" ?>
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
 
-<div class="scene i:library">
+<div class="scene i:docsindex">
 
 	<div class="c">
 		<div class="c300">

@@ -25,4 +25,5 @@ Util.Objects["page"] = new function() {
 	}
 }
 
+//u.e.addOnloadEvent(u.init);
 u.e.addDOMReadyEvent(u.init);

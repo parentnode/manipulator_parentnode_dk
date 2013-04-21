@@ -92,7 +92,13 @@
 										<dt><span class="value">async</span></dt>
 										<dd>Send async - default false. Does not apply to SCRIPT injection.</dd>
 										<dt><span class="value">headers</span></dt>
-										<dd>JSON object containing additional headers to include in request. Does not apply to SCRIPT injection.</dd>
+										<dd>
+											JSON object containing additional headers to include in request.<br />Note: Safari 4 converts all 
+											custom header names to Propercase, turning "test" into "Test" and "content-text" into "Content-Text". IE 6-8 
+											lowercases them. This cannot be altered and receiving scripts should be aware of this difference
+											if depending on custom headers.<br />
+											Headers cannot be used with SCRIPT injection.
+										</dd>
 									</dl>
 								</div>
 							</dd>

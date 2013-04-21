@@ -5,10 +5,10 @@
 <div class="scene">
 	
 	<h1>Hallelujavascript! JES has arrived</h1>
-	<h2>JES = JavaScript er sjovt. Translates to: Who cares. It's just JavaScript.</h2>
 
 	<div class="c section">
 		<div class="c200">
+			<h2>JES = JavaScript er sjovt. Translates to: Who cares. It's just JavaScript.</h2>
 			<p>
 				JES is an extremely flexible, performance optimized JavaScript 
 				library with a slightly neurotic focus on details.

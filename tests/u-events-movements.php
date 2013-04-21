@@ -4,18 +4,18 @@
 
 <style type="text/css">
 
-	div.drag {position: relative;}
+	div.drag {position: relative; z-index: 1;}
 	ul.info {padding: 0; margin: 20px 0;}
 	ul.info li {padding: 3px;}
 
 
 	/* FIXED */
-	div.fixed {width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
+	div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
 	div.fixed div.handle {width: 50px; height: 50px; background: green;}
 
 
 	/* MIXED */
-	div.level1 {width: 720px; height: 500px; position: relative; background: red;}
+	div.level1 {z-index: 1; width: 720px; height: 500px; position: relative; background: red;}
 	div.level2 {width: 400px; height: 400px; position: absolute; left: 60px; top: 50px; padding: 0px 100px; background: green;}
 	div.level3 {width: 50px; height: 50px; padding: 175px 175px; background: blue; position: relative;}
 	div.level4 {width: 50px; height: 50px; background: yellow;}
@@ -65,7 +65,7 @@
 
 
 	/* LINKS */
-	div.links {position: relative; height: 50px; background: PapayaWhip;}
+	div.links {position: relative; height: 50px; background: PapayaWhip; z-index: 1; }
 
 	div.link1 {width: 50px; height: 50px; background: pink; position: absolute; left: 0; top: 0;}
 	div.link1 a {height: 50px; display: block; text-indent: -9999px;}

@@ -1,4 +1,4 @@
-Util.Objects["library"] = new function() {
+Util.Objects["docsindex"] = new function() {
 	this.init = function(scene) {
 		var i, file;
 
@@ -42,7 +42,7 @@ Util.Objects["search"] = new function() {
 		u.ac(div, "search");
 		div.h2 = u.ae(div, "h2", {"html":"Search documentation"});
 		div.field = u.ae(div, "div", {"class":"field text"});
-		div.iN = u.ae(div.field, "input", {"type":"input", "class":"text"});
+		div.iN = u.ae(div.field, "input", {"type":"text", "class":"text"});
 
 		div.iN._default_value = "search term of minimum 3 chars";
 		div.iN.value = div.iN._default_value;

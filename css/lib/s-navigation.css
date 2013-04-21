@@ -15,4 +15,4 @@
 body.download #navigation li.download,
 body.docs #navigation li.docs,
 body.tests #navigation li.tests,
-body.demo #navigation li.demo {background: black; color: white; border-color: black;}
+body.demo #navigation li.demo {background: #000000; color: #ffffff; border-color: #000000;}

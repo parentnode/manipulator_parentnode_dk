@@ -48,7 +48,7 @@
 
 
 			var method = u.cv(node, "method");
-			var params = u.f.getParams(node, (u.cv(node, "send") ? ({"type":u.cv(node, "send")}) : ""));
+			var params = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
 			var async = u.cv(node, "async");
 			var headers = u.cv(node, "headers");
 
@@ -77,6 +77,136 @@
 
 	}
 
+	Util.Objects["special"] = new function() {
+		this.init = function(node) {
+
+
+			node._span = u.qs("span", node);
+
+			node.Response = function(response) {
+				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = u.qs(".test", response).innerHTML
+				}
+				else if(response.isJSON && this.request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = response.test;
+				}
+				else {
+
+					u.bug("error:" + response.isJSON + ":" + this.request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+
+					u.ac(this, "error");
+					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
+				}
+			}
+			node.ResponseError = function(response) {
+				u.ac(this, "correct");
+
+				if(response.exception) {
+					this.innerHTML += " EXCEPTION: " + response.exception;
+				}
+				else {
+					this.innerHTML += "This request is supposed to fail, XMLHTTPRequest outside domain";
+				}
+			}
+
+
+			var method = u.cv(node, "method");
+			var params = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
+			var async = u.cv(node, "async");
+			var headers = u.cv(node, "headers");
+
+			var settings = {};
+			if(method) {
+				settings.method = method;
+			}
+			if(params) {
+				settings.params = params;
+			}
+			if(async) {
+				settings.async = async;
+			}
+			if(headers) {
+				var h = headers.split(":");
+				if(h.length > 1) {
+					settings.headers = {};
+					settings.headers[h[0]] = h[1];
+				}
+			}
+
+			u.Request(node, node._span.innerHTML, settings);
+
+
+		}
+
+	}
+
+
+	Util.Objects["headers"] = new function() {
+		this.init = function(node) {
+
+
+			node._span = u.qs("span", node);
+
+			node.Response = function(response) {
+				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = u.qs(".test", response).innerHTML
+				}
+				else if(response.isJSON && this.request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
+					u.ac(this, "correct");
+					this.innerHTML = response.test;
+				}
+				else {
+
+					u.bug("error:" + response.isJSON + ":" + this.request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+
+					u.ac(this, "error");
+					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
+				}
+			}
+			node.ResponseError = function(response) {
+				u.ac(this, "correct");
+
+				if(response.exception) {
+					this.innerHTML += " EXCEPTION: " + response.exception;
+				}
+				else {
+					this.innerHTML += "This request is supposed to fail, XMLHTTPRequest outside domain";
+				}
+			}
+
+
+			var method = u.cv(node, "method");
+			var params = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
+			var async = u.cv(node, "async");
+			var headers = u.cv(node, "headers");
+
+			var settings = {};
+			if(method) {
+				settings.method = method;
+			}
+			if(params) {
+				settings.params = params;
+			}
+			if(async) {
+				settings.async = async;
+			}
+			if(headers) {
+				var h = headers.split(":");
+				if(h.length > 1) {
+					settings.headers = {};
+					settings.headers[h[0]] = h[1];
+				}
+			}
+
+			u.Request(node, node._span.innerHTML, settings);
+
+
+		}
+
+	}
 </script>
 
 <div class="scene">
@@ -102,8 +232,9 @@
 			<span>ajax/post.php</span>
 		</div>
 
-		<div class="i:test method:post async:true headers:test:value">
+		<div class="i:test method:post async:true headers:TeSt:Value">
 			<input type="hidden" name="test" value="POST, to HTML, async, headers: correct" />
+			<input type="hidden" name="headers" value="TeSt,Value" />
 			<span>ajax/post_headers.php</span>
 		</div>
 
@@ -121,8 +252,9 @@
 			<span>ajax/get.json.php</span>
 		</div>
 
-		<div class="i:test method:get async:true headers:test:value">
+		<div class="i:test method:get async:true headers:Content:valuE">
 			<input type="hidden" name="test" value="GET, to JSON, async, headers: correct" />
+			<input type="hidden" name="headers" value="Content,valuE" />
 			<span>ajax/get_headers.json.php</span>
 		</div>
 
@@ -148,16 +280,15 @@
 		</div>
 
 
-		<div class="i:test method:post">
+		<div class="i:special method:post">
 			<input type="hidden" name="test" value="POST, outside domain: correct" />
-			<span>http://jes.wires.dk/documentation/tests/ajax/post.php - EXCEPTION</span>
+			<span>http://test.whattheframework.org/documentation/tests/ajax/post.php</span>
 		</div>
 
 	</form>
 </div>
 
 <div class="comments">
-	Errors seen in Safari 4 + safari 4 iOS
 </div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>

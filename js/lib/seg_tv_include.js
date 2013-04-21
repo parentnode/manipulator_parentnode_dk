@@ -37,12 +37,14 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-image-desktop_
 document.write('<script type="text/javascript" src="/js/jes/src/u-json-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-request-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-string-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-video-desktop_light.js"></script>');
 
 
 document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/lib/i-page.js"></script>');
 document.write('<script type="text/javascript" src="/js/lib/i-docpage.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/i-documentation.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
-document.write('<script type="text/javascript" src="/js/jes/src/u-googleanalytics.js"></script>');
+// document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
+// document.write('<script type="text/javascript" src="/js/jes/src/u-googleanalytics.js"></script>');

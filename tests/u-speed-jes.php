@@ -35,6 +35,7 @@
 			for(i = 0; i < test_count; i++) {
 				node = u.ae(u.qs(".n1 .m"), "div", {"class":"start box"+i});
 				u.e.click(node);
+
 				node.clicked = function() {
 					u.tc(this, "start", "done", false);
 //					u.rc(this, "start", false);

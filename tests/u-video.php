@@ -5,7 +5,8 @@
 <style type="text/css">
 	.scene {width: 960px; height: 540px;}
 	.videoplayer {padding-top: 30px; position: relative;}
-	.videoplayer video {width: 720px; height: 360px;}
+	.videoplayer video,
+	.videoplayer object {width: 720px; height: 360px; background: red;}
 
 	.videos li {display: inline;}
 
@@ -75,6 +76,10 @@
 			var playback_info = u.ae(scene.player.controls, "a", {"class":"playback_info"});
 			playback_info.player = scene.player;
 			playback_info.player.playback_info = playback_info;
+			scene.player.playing = function(event) {
+				u.bug("src:" + this.video.src);
+			}
+
 			scene.player.timeupdate = function(event) {
 				if(this.currentTime) {
 					this.playback_info.innerHTML = u.period("m:s.u", {"seconds":this.currentTime}) + "/" + u.period("m:s.u", {"seconds":this.duration});
@@ -146,6 +151,6 @@
 	</ul>
 </div>
 
-<div class="comments"></div>
+<div class="comments">Not working in IE 6</div>
 
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
