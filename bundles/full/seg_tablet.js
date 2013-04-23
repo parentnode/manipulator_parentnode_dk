@@ -1,6 +1,6 @@
 /*
 JES v0.7-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2013-04-18 08:58:32
+wtf-js-merged @ 2013-04-23 11:36:03
 */
 
 /*u.js*/
@@ -1391,9 +1391,7 @@ Util.Form = u.f = new function() {
 			this.value = value;
 			u.f.validate(this);
 		}
-		else {
-			return this.value;
-		}
+		return this.value;
 	}
 	this._value_radio = function(value) {
 		if(value) {
@@ -1872,7 +1870,7 @@ Util.Form = u.f = new function() {
 	}
 }
 u.f.convertNamesToJsonObject = function(params) {
- 	var indexes, root, indexes_exsists;
+ 	var indexes, root, indexes_exsists, param;
 	var object = new Object();
 	for(param in params) {
 	 	indexes_exsists = param.match(/\[/);

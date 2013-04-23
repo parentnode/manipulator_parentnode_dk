@@ -4,7 +4,7 @@
 
 <div class="scene">
 	
-	<h1>Hallelujavascript! JES has arrived</h1>
+	<h1>Hallelujavascript! JES 0.7 has arrived</h1>
 
 	<div class="c section">
 		<div class="c200">
