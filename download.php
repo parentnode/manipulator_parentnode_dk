@@ -18,7 +18,12 @@
 			<p>
 				The bundles are NOT minified. Minification saves some few bytes, but renders code unreadable.
 				Using fewer includes, optimizing your HTML or simply writing better JavaScript is a much more more efficient way 
-				of enhancing performance.
+				of enhancing performance. If you really want it - use your own tool.
+			</p>
+			<p>
+				Without further compression the full JES include for a desktop computer is 79Kb.
+				If you are using Webserver compression on JavaScript servings, the full JES footprint for a desktop computer is reduced
+				to about 25kb,
 			</p>
 		</div>
 
@@ -106,7 +111,7 @@
 				</p>
 
 				<ul class="actions">
-					<li><a href="/bundles/jes_medium_v0.7.zip" class="button primary">Download medium</a></li>
+					<li><a href="/bundles/jes_medium_v0_7.zip" class="button primary">Download medium</a></li>
 				</ul>
 			</div>
 
