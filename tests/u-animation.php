@@ -1,6 +1,6 @@
 <? $page_title = "Animation tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 	.scene {position: relative; /*height: 400px;*/}
@@ -152,4 +152,4 @@
 	
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

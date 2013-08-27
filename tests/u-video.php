@@ -1,6 +1,6 @@
 <? $page_title = "Video tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 	.scene {width: 960px; height: 540px;}
@@ -153,4 +153,4 @@
 
 <div class="comments">Not working in IE 6</div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

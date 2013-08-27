@@ -1,6 +1,6 @@
 <? $page_title = "Pushstate/Hashchange tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 
@@ -38,4 +38,4 @@
 	<p>Should separate timerbased function into desktop_light/ie file - IE7 needs to go into the IE segment maybe?</p>
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

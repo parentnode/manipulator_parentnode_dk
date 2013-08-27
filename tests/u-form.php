@@ -1,6 +1,6 @@
 <? $page_title = "Forms tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 	form.test1 {border: 1px solid red; margin-bottom: 20px;}
@@ -654,4 +654,4 @@
 
 <div class="comments"></div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

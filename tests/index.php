@@ -1,10 +1,10 @@
 <? $page_title = "Tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <div class="scene">
 	<h1>Tests</h1>
-
+	<p>Tests for JES library</p>
 	<ul>
 		<li><a href="u-animation">Animation (started)</a></li>
 		<li><a href="u-array">Array</a></li>
@@ -41,4 +41,4 @@
 
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,6 +1,6 @@
 <? $page_title = "Sortable tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 	.sortable {list-style: none;}
@@ -14,9 +14,9 @@
 			var list = u.qs(".sortable", scene);
 			u.s.sortable(list);
 
-			e.picked = function(event) {}
-			e.moved = function(event) {}
-			e.dropped = function(event) {}
+			list.picked = function(event) {}
+			list.moved = function(event) {}
+			list.dropped = function(event) {}
 
 		}
 
@@ -40,4 +40,4 @@
 	
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

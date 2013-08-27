@@ -1,6 +1,6 @@
 <? $page_title = "DOM tests" ?>
 <? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
 	.scene > div {margin: 0 0 5px;}
@@ -16,7 +16,7 @@
 
 			// querySelector
 			if(u.qs("#qstest > h3 span").innerHTML == "querySelector") {
-				u.qs("#qstest", scene).innerHTML = "querySelector: correct";
+				u.qs("#qstest").innerHTML = "querySelector: correct";
 			}
 			// querySelectorAll
 			if(u.qsa("#content #qstest, #content .qsatest").length == 2) {
@@ -235,4 +235,4 @@
 	<p>u.gcs: Firefox+webkit will return bg-color as rgb(), regardless of how it is specified.</p>
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

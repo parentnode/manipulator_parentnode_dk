@@ -1,12 +1,12 @@
 /*
 JES v0.7-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2013-04-23 11:36:04
+wtf-js-merged @ 2013-06-26 04:12:53
 */
 
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {}
-	u.version = 0.7;
+	u.version = 0.8;
 	u.bug = function() {}
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){}}
 }
@@ -881,10 +881,12 @@ u.e.drag = function(node, boundaries, settings) {
 		var argument;
 		for(argument in settings) {
 			switch(argument) {
-				case "strict"		: node.drag_strict		= settings[argument]; break;
-				case "elastica"		: node.drag_elastica	= Number(settings[argument]); break;
-				case "dropout"		: node.drag_dropout		= settings[argument]; break;
-				case "show_bounds"	: node.show_bounds		= settings[argument]; break; // NEEDS HELP
+				case "strict"			: node.drag_strict			= settings[argument]; break;
+				case "elastica"			: node.drag_elastica		= Number(settings[argument]); break;
+				case "dropout"			: node.drag_dropout			= settings[argument]; break;
+				case "show_bounds"		: node.show_bounds			= settings[argument]; break; // NEEDS HELP
+				case "vertical_lock"	: node.vertical_lock		= settings[argument]; break;
+				case "horizontal_lock"	: node.horizontal_lock		= settings[argument]; break;
 			}
 		}
 	}
@@ -920,16 +922,18 @@ u.e.drag = function(node, boundaries, settings) {
 	node._x = node._x ? node._x : 0;
 	node._y = node._y ? node._y : 0;
 	node.locked = ((node.end_drag_x - node.start_drag_x == node.offsetWidth) && (node.end_drag_y - node.start_drag_y == node.offsetHeight));
-	node.only_vertical = (!node.locked && node.end_drag_x - node.start_drag_x == node.offsetWidth);
-	node.only_horisontal = (!node.locked && node.end_drag_y - node.start_drag_y == node.offsetHeight);
+	node.only_vertical = (node.vertical_lock || (!node.locked && node.end_drag_x - node.start_drag_x == node.offsetWidth));
+	node.only_horizontal = (node.horizontal_lock || (!node.locked && node.end_drag_y - node.start_drag_y == node.offsetHeight));
 	u.e.addStartEvent(node, this._inputStart);
 }
 u.e._pick = function(event) {
+	u.bug("_pick:" + u.nodeId(this) + ":" + this._x + " x " + this._y);
 	var init_speed_x = Math.abs(this.start_event_x - u.eventX(event));
 	var init_speed_y = Math.abs(this.start_event_y - u.eventY(event));
-	if(init_speed_x > init_speed_y && this.only_horisontal || 
-	   init_speed_x < init_speed_y && this.only_vertical ||
-	   !this.only_vertical && !this.only_horisontal) {
+	u.bug("initial speed:" + init_speed_x + "/" + init_speed_y + ", vert:" + this.only_vertical + ", hori:" + this.only_horizontal);
+	if((init_speed_x > init_speed_y && this.only_horizontal) || 
+	   (init_speed_x < init_speed_y && this.only_vertical) ||
+	   (!this.only_vertical && !this.only_horizontal)) {
 		u.e.resetNestedEvents(this);
 	    u.e.kill(event);
 		this.move_timestamp = event.timeStamp;
@@ -970,10 +974,10 @@ u.e._drag = function(event) {
 	this.move_timestamp = event.timeStamp;
 	this.move_last_x = this.current_x;
 	this.move_last_y = this.current_y;
-	if(this.only_vertical) {
+	if(!this.locked && this.only_vertical) {
 		this._y = this.current_y;
 	}
-	else if(this.only_horisontal) {
+	else if(!this.locked && this.only_horizontal) {
 		this._x = this.current_x;
 	}
 	else if(!this.locked) {
@@ -981,7 +985,7 @@ u.e._drag = function(event) {
 		this._y = this.current_y;
 	}
 	if(this.e_swipe) {
-		if(this.current_xps && (Math.abs(this.current_xps) > Math.abs(this.current_yps) || this.only_horisontal)) {
+		if(this.current_xps && (Math.abs(this.current_xps) > Math.abs(this.current_yps) || this.only_horizontal)) {
 			if(this.current_xps < 0) {
 				this.swiped = "left";
 			}
@@ -1020,12 +1024,12 @@ u.e._drag = function(event) {
 			else {
 				this.current_x = this._x;
 			}
-			if(!this.only_horisontal && this._y < this.start_drag_y) {
+			if(!this.only_horizontal && this._y < this.start_drag_y) {
 				offset = this._y < this.start_drag_y - this.drag_elastica ? - this.drag_elastica : this._y - this.start_drag_y;
 				this._y = this.start_drag_y;
 				this.current_y = this._y + offset + (Math.round(Math.pow(offset, 2)/this.drag_elastica));
 			}
-			else if(!this.horisontal && this._y + this.offsetHeight > this.end_drag_y) {
+			else if(!this.horizontal && this._y + this.offsetHeight > this.end_drag_y) {
 				offset = (this._y + this.offsetHeight > this.end_drag_y + this.drag_elastica) ? this.drag_elastica : (this._y + this.offsetHeight - this.end_drag_y);
 				this._y = this.end_drag_y - this.offsetHeight;
 				this.current_y = this._y + offset - (Math.round(Math.pow(offset, 2)/this.drag_elastica));
@@ -1085,7 +1089,7 @@ u.e._drop = function(event) {
 		else if(this.current_x + this.offsetWidth > this.end_drag_x) {
 			this.current_x = this.end_drag_x - this.offsetWidth;
 		}
-		if(this.only_horisontal || this.current_y < this.start_drag_y) {
+		if(this.only_horizontal || this.current_y < this.start_drag_y) {
 			this.current_y = this.start_drag_y;
 		}
 		else if(this.current_y + this.offsetHeight > this.end_drag_y) {
@@ -2018,7 +2022,7 @@ Util.Hash = u.h = new function() {
 		}
 	}
 	this.getCleanUrl = function(string, levels) {
-		string = string.split("#")[0].replace(location.protocol+"//"+document.domain, "");
+		string = string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0];
 		if(!levels) {
 			return string;
 		}
@@ -2296,7 +2300,7 @@ Util.isStringHTML = function(string) {
 			var test = document.createElement("div");
 			test.innerHTML = string;
 			if(test.childNodes.length) {
-				var body_class = string.match(/<body class="([a-z0-9A-Z_ ]+)"/);
+				var body_class = string.match(/<body class="([a-z0-9A-Z_: ]+)"/);
 				test.body_class = body_class ? body_class[1] : "";
 				var head_title = string.match(/<title>([^$]+)<\/title>/);
 				test.head_title = head_title ? head_title[1] : "";

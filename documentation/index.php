@@ -1,6 +1,6 @@
 <? $page_title = "Documentation" ?>
 <? $body_class = "docs" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <div class="scene i:docsindex">
 
@@ -15,6 +15,21 @@
 
 			<div class="promotion i:search"></div>
 
+			<div class="promotion browsersupport">
+				<h2>Browser support</h2>
+				<p>JES supports the following browsers and more:</p>
+				<ul>
+					<li>Chrome 1+</li>
+					<li>Safari 1+</li>
+					<li>Firefox 1+</li>
+					<li>Firefox Mobile 1+</li>
+					<li>Mobile WebKit (iPad 1+, iPhone 1+, Android 1+, Blackberry 7+, Symbian 9+)</li>
+					<li>Internet Explorer 6+</li>
+					<li>Webkit 413+</li>
+					<li>Mobile Internet Explorer 7+</li>
+					<li>Opera 8+</li>
+			</div>
+
 			<div class="promotion">
 				<h3><a href="/tests/">Tests</a></h3>
 				<p>If you want to test any of the library component in you current browser, you can use the internal test documents to do so.</p>
@@ -25,139 +40,14 @@
 				<h3>Notes</h3>
 				<p>Align function names - and figure out whether to use sub-objects or not. Form and some other "objects" might be modules in stead?</p>
 
-				<p>
-					Util.saveCookie<br />
-					Util.getCookie<br />
-					Util.deleteCookie<br />
-					Util.saveNodeCookie<br />
-					Util.getNodeCookie<br />
-					Util.deleteNodeCookie<br />
+				<p>In consideration:<br />
 
+					Util.appendElement - u.ae -> Util.appendNode - u.an<br />
+					Util.insertElement - u.ie -> Util.insertNode - u.in<br />
+					Util.wrapElement - u.we -> Util.wrapNode - u.wn<br />
 
-					Util.date<br />
+					Util.clickableElement - u.ce -> Util.clickableNode - u.cn<br />
 
-					Util.debugURL<br />
-					Util.nodeId<br />
-					Util.bug<br />
-					Util.xInObject<br />
-
-					Util.querySelector - u.qs<br />
-					Util.querySelectorAll - u.qsa<br />
-					Util.getElement - u.ge<br />
-					Util.getElements - u.ges<br />
-					Util.parentNode - u.pn<br />
-					Util.previousSibling - u.ps<br />
-					Util.nextSibling - u.ns<br />
-					Util.childNodes - u.cn<br />
-					Util.appendElement - u.ae<br />
-					Util.insertElement - u.ie<br />
-					Util.wrapElement - u.we<br />
-					Util.textContent - u.text<br />
-
-					Util.clickableElement - u.ce (Util.link)<br />
-
-					Util.classVar - u.cv (Util.getIJ)<br />
-
-					Util.setClass - u.sc<br />
-					Util.addClass - u.ac<br />
-					Util.removeClass - u.rc<br />
-					Util.toggleClass - u.tc<br />
-					Util.hasClass - u.hc<br />
-					Util.applyStyle - u.as<br />
-					Util.getComputedStyle - u.gcs<br />
-
-
-					Util.flashDetection<br />
-					Util.flash<br />
-
-
-					Util.absoluteX - u.absX<br />
-					Util.absoluteY - u.absY<br />
-					Util.relativeX - u.relX<br />
-					Util.relativeY - u.relY<br />
-					Util.actualWidth - u.actualW<br />
-					Util.actualHeight - u.actualH<br />
-					Util.eventX<br />
-					Util.eventY<br />
-					Util.browserWidth - u.browserW<br />
-					Util.browserHeight - u.browserH<br />
-					Util.htmlWidth = u.htmlW<br />
-					Util.htmlHeight = u.htmlH<br />
-					Util.pageScrollX = u.scrollX<br />
-					Util.pageScrollY = u.scrollY<br />
-
-
-					Util.init<br />
-
-
-					Util.popup<br />
-
-
-					Util.Request<br />
-					Util.isStringJSON<br />
-					Util.isStringHTML<br />
-
-
-					Util.cutString<br />
-					Util.random<br />
-					Util.randomString<br />
-					Util.uuid<br />
-					Util.stringOr<br />
-
-
-					Util.browser<br />
-					Util.system<br />
-					Util.support<br />
-
-
-					Util.getVar<br />
-
-
-					Util.Animation.support<br />
-					Util.Animation.support3d<br />
-					Util.Animation.variant<br />
-					Util.Animation.transition<br />
-					Util.Animation.translate<br />
-					Util.Animation.rotate<br />
-					Util.Animation.scale<br />
-					Util.Animation.setOpacity<br />
-					Util.Animation.setWidth<br />
-					Util.Animation.setHeight<br />
-					Util.Animation.setBgPos<br />
-					Util.Animation.setBgColor<br />
-
-
-					Util.Events.kill<br />
-
-					Util.Events.addStartEvent<br />
-					Util.Events.removeStartEvent<br />
-					Util.Events.addMoveEvent<br />
-					Util.Events.removeMoveEvent<br />
-					Util.Events.addEndEvent<br />
-					Util.Events.removeEndEvent<br />
-
-					Util.Events.resetClickEvents<br />
-					Util.Events.resetEvents<br />
-					Util.Events.resetNestedEvents<br />
-
-					Util.Events.hold<br />
-					Util.Events.click<br />
-					Util.Events.dblclick<br />
-
-
-					Util.Events.resetDragEvents<br />
-					Util.Events.overlap<br />
-					Util.Events.drag<br />
-					Util.Events.swipe<br />
-
-
-					Util.Form.init<br />
-					Util.Form.validate<br />
-					Util.Form.activate<br />
-					Util.Form.isDefault<br />
-					Util.Form.fieldCorrect<br />
-					Util.Form.fieldError<br />
-					Util.Form.getParams<br />
 
 				</p>
 
@@ -274,4 +164,4 @@
 	</div>
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

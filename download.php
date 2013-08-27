@@ -1,36 +1,43 @@
 <? $page_title = "Download bundles" ?>
 <? $body_class = "download" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <div class="scene">
 
 	<h1>Downloads</h1>
+
 	<div class="c">
+		<h2>Github</h2>
+		<p><a href="http://github.com/hvadhedderde/jes">JES is public on GitHub</a>.</p>
+	</div>
+
+	<div class="c">
+		<h2>Bundles</h2>
 		<div class="c200">
 			<p>Precompiled bundles of the JES JavaScript library.</p>
 
-			<h2>About the bundles</h2>
+			<h3>About the bundles</h3>
 			<p>
 				The JES library is based on segments. This means the library contains variations depending on which segment(s) 
 				you are building for. In each bundle you will find 9 include files. See <a href="http://whattheframework.org">WhatTheFramework.org</a>
 				for details on how <a href="http://whattheframework.org/segments">Segments</a> work.
 			</p>
 			<p>
-				The bundles are NOT minified. Minification saves some few bytes, but renders code unreadable.
-				Using fewer includes, optimizing your HTML or simply writing better JavaScript is a much more more efficient way 
-				of enhancing performance. If you really want it - use your own tool.
+				The bundles are NOT minified. Minification saves some bytes, but renders code unreadable.
+				Using fewer includes, optimizing your HTML or simply writing better JavaScript are much more efficient ways 
+				of enhancing performance. If you really want it - use your own tool to minify.
 			</p>
 			<p>
-				Without further compression the full JES include for a desktop computer is 79Kb.
+				Without further compression the full JES library for a desktop computer is 79Kb.
 				If you are using Webserver compression on JavaScript servings, the full JES footprint for a desktop computer is reduced
-				to about 25kb,
+				to about 25kb.
 			</p>
 		</div>
 
 		<div class="c200">
 
 			<div class="promotion">
-				<h2>Light bundle</h2>
+				<h3>Light bundle</h3>
 				<p>For the simple site. Only the most basic tools. Includes 
 					<?php
 						// list of includes files for each segment
@@ -75,7 +82,7 @@
 
 
 			<div class="promotion">
-				<h2>Medium bundle</h2>
+				<h3>Medium bundle</h3>
 				<p>For most sites without being bloathed. Includes 
 					<?php
 						// list of includes files for each segment
@@ -116,7 +123,7 @@
 			</div>
 
 			<div class="promotion">
-				<h2>Full bundle</h2>
+				<h3>Full bundle</h3>
 				<p>Everything if you need it - but ask yourself if you really do. Includes 
 
 					<?php
@@ -162,4 +169,4 @@
 	</div>
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

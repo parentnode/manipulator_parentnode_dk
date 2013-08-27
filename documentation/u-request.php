@@ -1,6 +1,6 @@
 <? $page_title = "Request documentation" ?>
 <? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/header.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <div class="scene i:docpage">
 	<h1>Request</h1>
@@ -448,4 +448,4 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 	</div>
 </div>
 
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/footer.php") ?>
+<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>
