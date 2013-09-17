@@ -14,7 +14,6 @@ Util.Objects["page"] = new function() {
 		// navigation element
 		page.nN = u.qs("#navigation", page);
 		if(page.nN) {
-			// move navigation in front of content node in the DOM
 			page.nN = page.hN.appendChild(page.nN);
 			page.nN.page = page;
 		}
