@@ -48,11 +48,11 @@
 			}
 
 			// u.stringOr
-			if(u.stringOr(0, "zero") == 0 && u.stringOr(null, "zero") == "zero") {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "stringOr: correct";
+			if(u.eitherOr(0, "zero") == 0 && u.eitherOr(null, "zero") == "zero") {
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "eitherOr: correct";
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "stringOr: error";
+				u.ae(scene, "div", ({"class":"error"})).innerHTML = "eitherOr: error";
 			}
 
 

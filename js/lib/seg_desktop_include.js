@@ -27,6 +27,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/beta-u-video.js"
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-devices.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-sortable.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-scrollto.js"></script>');
 
 
 document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');

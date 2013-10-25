@@ -26,6 +26,7 @@
 		<li><a href="u-preloader">Preloader (started)</a></li>
 		<li><a href="u-pushstate-hash">PushState/HashChanged (only hash changed - IE7 error)</a></li>
 		<li><a href="u-request">Request</a></li>
+		<li><a href="u-scrollto">ScrollTo (started)</a></li>
 		<li><a href="u-segment">Segment test (started)</a></li>
 		<li><a href="u-sortable">Sortable</a></li>
 		<li><a href="u-speed-functions">Speed test, functions</a></li>

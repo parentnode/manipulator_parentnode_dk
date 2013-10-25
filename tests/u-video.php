@@ -3,28 +3,50 @@
 <? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
 
 <style type="text/css">
-	.scene {width: 960px; height: 540px;}
-	.videoplayer {padding-top: 30px; position: relative;}
-	.videoplayer video,
-	.videoplayer object {width: 720px; height: 360px; background: red;}
+	.scene {width: 960px;}
 
-	.videos li {display: inline;}
+	.videos li {font-size: 13px; display: block;}
 
-	.controls {position: absolute; left: 0; top: 0;}
-	.controls a {height: 20px; width: 100px; text-align: center; display: inline-block;}
-	.controls .playpause {background: green;}
-	.playing .controls .playpause {background: red;}
-	.controls .ff {background: blue;}
-	.controls .rw {background: yellow;}
+	.test1 .videoplayer {padding-top: 30px; position: relative;}
+	.test1 .videoplayer video,
+	.test1 .videoplayer object {width: 720px; height: 360px; background: red;}
 
-	.controls .playpause:before {content: "play";}
-	.controls .ff:before {content: "ff";}
-	.controls .rw:before {content: "rw";}
-	.playing .controls .playpause:before {content: "pause";}
+
+	.test1 .controls {position: absolute; left: 0; top: 0;}
+	.test1 .controls a {height: 20px; width: 100px; text-align: center; display: inline-block;}
+	.test1 .controls .playpause {background: green;}
+	.test1 .playing .controls .playpause {background: red;}
+	.test1 .controls .ff {background: blue;}
+	.test1 .controls .rw {background: yellow;}
+
+	.test1 .controls .playpause:before {content: "play";}
+	.test1 .controls .ff:before {content: "ff";}
+	.test1 .controls .rw:before {content: "rw";}
+	.test1 .playing .controls .playpause:before {content: "pause";}
+
+
+
+	.test2 {margin-top: 30px; border-top: 2px solid black; padding-top: 20px;}
+
+	.test2 .videoplayer {padding-top: 30px; position: relative;}
+	.test2 .videoplayer video,
+	.test2 .videoplayer object {width: 720px; height: 360px; background: red;}
+
+	.test2 .controls {position: absolute; left: 0; top: 0;}
+	.test2 .controls a {height: 20px; width: 100px; text-align: center; display: inline-block;}
+	.test2 .controls .playpause {background: green;}
+	.test2 .playing .controls .playpause {background: red;}
+	.test2 .controls .ff {background: blue;}
+	.test2 .controls .rw {background: yellow;}
+
+	.test2 .controls .playpause:before {content: "play";}
+	.test2 .controls .ff:before {content: "ff";}
+	.test2 .controls .rw:before {content: "rw";}
+	.test2 .playing .controls .playpause:before {content: "pause";}
 </style>
 
 <script type="text/javascript">
-	Util.Objects["test"] = new function() {
+	Util.Objects["test1"] = new function() {
 		this.init = function(scene) {
 
 			scene.player = u.videoPlayer(scene);
@@ -137,6 +159,37 @@
 	}
 
 
+
+	// testing extended controls setup
+	Util.Objects["test2"] = new function() {
+		this.init = function(div) {
+
+			div.player = u.videoPlayer(div, {"playpause":true});
+
+
+
+
+			div.playlist = u.qsa(".videos li", div);
+			for(i = 0; video = div.playlist[i]; i++) {
+				video.player = div.player;
+				u.link(video);
+				if(i%2) {
+					video.clicked = function() {
+						this.player.loadAndPlay(this.url);
+					}
+				}
+				else {
+					video.clicked = function() {
+						this.player.loadAndPlay(this.url, {"playpause":false});
+					}
+				}
+			}
+
+			div.playlist[0].clicked();
+		}
+
+	}
+
 //	var obj = u.flash(document.createElement("div"), "/documentation/media/flash/videoplayer.swf")	
 	
 </script>
@@ -144,11 +197,21 @@
 <div class="scene i:test">
 	<h1>Video</h1>
 	<p>Videotest requires interaction and observation :)</p>
-	
-	<ul class="videos">
-		<li><a href="/media/video/video_1.mp4">Video 1</a></li>
-		<li><a href="/media/video/video_2.mp4">Video 2</a></li>
-	</ul>
+
+	<div class="test1 i:test1">
+		<ul class="videos">
+			<li><a href="/media/video/video_1.mp4">Video 1</a></li>
+			<li><a href="/media/video/video_2.mp4">Video 2</a></li>
+		</ul>
+	</div>
+
+	<div class="test2 i:test2">
+		<ul class="videos">
+			<li><a href="/media/video/video_1.mp4">Video 1</a></li>
+			<li><a href="/media/video/video_2.mp4">Video 2</a></li>
+		</ul>
+	</div>
+
 </div>
 
 <div class="comments">Not working in IE 6</div>

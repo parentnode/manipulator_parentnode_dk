@@ -333,23 +333,23 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
-			<div class="function" id="Util.stringOr">
+			<div class="function" id="Util.eitherOr">
 				<div class="header">
-					<h3>Util.stringOr</h3>
+					<h3>Util.eitherOr</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.stringOr</dd>
+							<dd class="name">Util.eitherOr</dd>
 							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.stringOr</dd>
+							<dd class="shorthand">u.eitherOr</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
-								Util.stringOr(
-									<span class="type">String</span> <span class="var">string</span>,
-									<span class="type">String</span> <span class="var">replacement</span>
+								Util.eitherOr(
+									<span class="type">Mixed</span> <span class="var">either</span>,
+									<span class="type">Mixed</span> <span class="var">or</span>
 								);
 							</dd>
 						</dl>
@@ -358,23 +358,23 @@ u.cutString(string, 10);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Checks if string is not <span class="value">undefined</span> or <span class="value">null</span>. If string is valid, returns it. If not, returns replacement instead of string.
+							Checks if <span class="var">either</span> is not <span class="value">undefined</span> or <span class="value">null</span>. If <span class="var">either</span> is valid, return it. If not, returns <span class="var">or</span> instead.
 						</p>
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
 						<dl class="parameters">
-							<dt><span class="var">string</span></dt>
+							<dt><span class="var">either</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> String to check value of
+									<span class="type">Mixed</span> Object/String to check
 								</div>
 							</dd>
-							<dt><span class="var">replacement</span></dt>
+							<dt><span class="var">or</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> String to return if value is not valid
+									<span class="type">Mixed</span> Object/String to return if <span class="var">either</span> is not valid
 								</div>
 							</dd>
 						</dl>
@@ -382,19 +382,19 @@ u.cutString(string, 10);</code>
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p>Either string (if not undefined or null) or replacement</p>
+						<p>Either <span class="var">either</span> (if not undefined or null) or <span class="var">or</span></p>
 					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>
 
 						<div class="example">
-							<code>u.stringOr(0, "zero");</code>
+							<code>u.eitherOr(0, "zero");</code>
 	
 							<p>returns 0</p>
 						</div>
 						<div class="example">
-							<code>u.stringOr(, "zero");</code>
+							<code>u.eitherOr(, "zero");</code>
 	
 							<p>returns zero</p>
 						</div>
