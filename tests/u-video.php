@@ -49,7 +49,8 @@
 	Util.Objects["test1"] = new function() {
 		this.init = function(scene) {
 
-			scene.player = u.videoPlayer(scene);
+			scene.player = u.videoPlayer();
+			u.ae(scene, scene.player);
 
 
 			// player controls
@@ -164,9 +165,9 @@
 	Util.Objects["test2"] = new function() {
 		this.init = function(div) {
 
-			div.player = u.videoPlayer(div, {"playpause":true});
+			div.player = u.videoPlayer({"playpause":true});
 
-
+			div.player = u.ae(div, div.player);
 
 
 			div.playlist = u.qsa(".videos li", div);
