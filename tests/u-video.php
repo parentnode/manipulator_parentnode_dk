@@ -201,7 +201,7 @@
 
 	<div class="test1 i:test1">
 		<ul class="videos">
-			<li><a href="/media/video/video_1.mp4">Video 1</a></li>
+			<li><a href="/media/video/video_1.mp4?fisk">Video 1</a></li>
 			<li><a href="/media/video/video_2.mp4">Video 2</a></li>
 		</ul>
 	</div>

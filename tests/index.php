@@ -19,6 +19,7 @@
 		<li><a href="u-flash">Flash</a></li>
 		<li><a href="u-form">Form (started)</a></li>
 		<li><a href="u-geometry">Geometry</a></li>
+		<li><a href="u-gridmaster">Gridmaster (not started)</a></li>
 		<li><a href="u-init">Init (started)</a></li>
 		<li><a href="u-math">Math</a></li>
 		<li><a href="u-period">Period</a></li>
@@ -28,7 +29,8 @@
 		<li><a href="u-request">Request</a></li>
 		<li><a href="u-scrollto">ScrollTo (started)</a></li>
 		<li><a href="u-segment">Segment test (started)</a></li>
-		<li><a href="u-sortable">Sortable</a></li>
+		<li><a href="u-sequence">Sequence (not started)</a></li>
+		<li><a href="u-sortable">Sortable (started)</a></li>
 		<li><a href="u-speed-functions">Speed test, functions</a></li>
 		<li><a href="u-speed-jes">Speed test, JES</a></li>
 		<li><a href="u-speed-jquery">Speed test, jQuery</a></li>
@@ -36,8 +38,10 @@
 		<li><a href="u-string">String</a></li>
 		<li><a href="u-system">System</a></li>
 		<li><a href="u-timer">Timer</a></li>
+		<li><a href="u-template">Template (started)</a></li>
+		<li><a href="u-textscaler">Textscaler (not started)</a></li>
 		<li><a href="u-url">URL</a></li>
-		<li><a href="u-video">Video (not done)</a></li>
+		<li><a href="u-video">Video (started)</a></li>
 	</ul>
 
 </div>
