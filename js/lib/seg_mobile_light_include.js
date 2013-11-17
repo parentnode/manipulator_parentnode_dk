@@ -24,8 +24,14 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-system.js"></s
 document.write('<script type="text/javascript" src="/js/jes/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-url.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-video.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-devices.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/beta-u-sortable.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-sequence.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-scrollto.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-gridmaster.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-template.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/beta-u-textscaler.js"></script>');
 
 
 document.write('<script type="text/javascript" src="/js/jes/src/u-animation-desktop_light.js"></script>');
