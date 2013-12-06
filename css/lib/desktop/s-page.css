@@ -3,11 +3,11 @@
 }
 
 html {height: 100%;}
-body {background: #ffffff; margin: 0; min-height: 100%; overflow-y: scroll; background-color: #f5f7f8;}
+body {background: #fcfee6; margin: 0; min-height: 100%; overflow-y: scroll;}
 
 
 /* BASE */
-h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {color: #313942; padding: 0; margin: 0;}
+h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {color: #00065a; padding: 0; margin: 0;}
 h1, h2, h3, h4, h5, h6, p, li, span, a, form, dd, dt {line-height: 1em; font-weight: normal;}
 
 ul {list-style: none;}
@@ -55,4 +55,4 @@ dt {color: #7d848c; display: inline-block; vertical-align: top;}
 
 
 
-#page {position: relative; margin-left: 230px;}
+#page {position: relative; margin-top: 50px;}

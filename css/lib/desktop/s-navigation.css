@@ -1,4 +1,16 @@
+#navigation {}
+#navigation ul {}
+#navigation ul li {border-bottom: 1px solid #404a56; display: inline-block; text-transform: uppercase;}
+#navigation ul li:hover {text-decoration: underline;}
+#navigation ul li a {display: block;  padding: 14px 20px 15px;}
+
+#navigation ul li.selected {
+	
+	
+}
+
+
 body.download #navigation li.download,
 body.docs #navigation li.docs,
 body.blog #navigation li.blog,
-body.demo #navigation li.demo {background: #000000; color: #ffffff; border-color: #000000;}
+body.demo #navigation li.demo {}
