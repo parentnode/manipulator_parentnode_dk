@@ -12,7 +12,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-flash.js"></sc
 document.write('<script type="text/javascript" src="/js/jes/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-hash.js"></script>');
-document.write('<script type="text/javascript" src="/js/jes/src/u-image.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-period.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-popup.js"></script>');

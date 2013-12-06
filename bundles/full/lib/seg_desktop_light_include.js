@@ -12,7 +12,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-flash.js"></sc
 document.write('<script type="text/javascript" src="/js/jes/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-hash.js"></script>');
-document.write('<script type="text/javascript" src="/js/jes/src/u-image.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-period.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-popup.js"></script>');
@@ -27,7 +27,6 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-animation-desk
 document.write('<script type="text/javascript" src="/js/jes/src/u-dom-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-events-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-geometry-desktop_light.js"></script>');
-document.write('<script type="text/javascript" src="/js/jes/src/u-image-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-json-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-request-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-string-desktop_light.js"></script>');
