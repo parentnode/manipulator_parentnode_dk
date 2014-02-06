@@ -73,9 +73,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -145,9 +145,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -222,9 +222,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -301,9 +301,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -374,9 +374,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -447,9 +447,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -523,9 +523,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -597,9 +597,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -658,9 +658,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -719,9 +719,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -781,9 +781,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -845,9 +845,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>
@@ -912,9 +912,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -974,9 +974,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 

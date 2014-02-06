@@ -145,8 +145,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 

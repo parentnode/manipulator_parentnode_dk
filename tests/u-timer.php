@@ -12,6 +12,11 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+			
+
+
+
+
 			// test resetAllTimers
 			scene.test_resetalltimers = function() {
 				u.sc(this.div_test_resetalltimers, "error");
@@ -99,12 +104,22 @@
 			}
 			remaining.interval = u.t.setInterval(remaining, remaining.update, 1000);
 
+
+			var node = u.qs("#node");
+			node.intervalDone = function() {
+				// timer done
+				u.bug("intervalDone");
+			}
+			var interval_id = u.t.setInterval(node, node.intervalDone, 500);
+			u.t.resetInterval(interval_id);
+
 		}
 
 	}
 </script>
 
 <div class="scene i:test">
+	<div id="node"></div>
 	<h1>Timer</h1>
 	<p>This test will cause the page to be changed after load, as the timers needs to finish to perform test. Wait for it to finish - <span class="remaining">2 seconds</span></p>
 

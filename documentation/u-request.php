@@ -165,9 +165,9 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.querySelector</li>
 								<li>Util.appendElement</li>
@@ -254,9 +254,9 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -313,8 +313,8 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<div class="examples">
 						<h4>Examples</h4>
 
-						<div class="example">
-							<code>Util.isStringHTML('<div class="scene">jes</div>');</code>
+						<div class="example">					
+							<code>Util.isStringHTML('&lt;div class=&quot;scene&quot;&gt;jes&lt;/div&gt;');</code>
 							<p>Returns HTML object.</p>
 						</div>
 
@@ -340,9 +340,9 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 

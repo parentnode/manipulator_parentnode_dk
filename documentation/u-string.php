@@ -87,8 +87,8 @@ u.cutString(string, 10);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -162,8 +162,8 @@ u.cutString(string, 10);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>u.random</li>
 							</ul>
@@ -231,8 +231,8 @@ u.cutString(string, 10);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -324,8 +324,8 @@ u.cutString(string, 10);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -408,8 +408,8 @@ u.cutString(string, 10);</code>
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -473,8 +473,8 @@ u.cutString(string, 10);</code>
 							<p>String.replace</p>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -554,8 +554,8 @@ u.cutString(string, 10);</code>
 							<p>String.substring</p>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -629,8 +629,8 @@ u.cutString(string, 10);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>u.random</li>
 							</ul>

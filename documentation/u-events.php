@@ -5,22 +5,22 @@
 <div class="scene i:docpage">
 	<h1>Events</h1>
 	<p>
-		The JES-event model, has been designed to be as close to regular JavaScript event-handling as possible. Keeping close to
+		The Manipulator-event model, has been designed to be as close to regular JavaScript event-handling as possible. Keeping close to
 		the actual standard (JavaScript), you can easily make your own adjustments and/or detours. So why not just use
 		regular JavaScript events? Well, because we still need to be able to support older browsers seamlessly, and when it comes to advanced
 		event handling, with possibly many different event listeners on the same node, it makes sense to encapsulate some
 		functionality in a shorthand function.
 	</p>
 	<p>
-		JES only adds the event listeners it requires at any given time. IE, to catch a click-event, it only applies a mousedown-event
+		Manipulator only adds the event listeners it requires at any given time. IE, to catch a click-event, it only applies a mousedown-event
 		to the node. When the mousedown event occurs, it adds the mouseup event. When the mouseup event occurs, it resets the applied 
 		listeners. This way you always have as few event listeners as possible applied at any given time.
 	</p>
 	<p>
-		JES automatically detects touch-event support and applies events appropriately.
+		Manipulator automatically detects touch-event support and applies events appropriately.
 	</p>
 	<p>
-		JES has seamless fallback to browsers using attachEvent.
+		Manipulator has seamless fallback to browsers using attachEvent.
 	</p>
 
 	<div class="section functions">
@@ -53,7 +53,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Add hold event listener to node. Declare node.held function to receive callback on Event occurrence. A hold-event occurs after 750ms.</p>
-						<p>If your scripts are using the JES Google Analytics module, the hold-event will be registered automatically.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the hold-event will be registered automatically.</p>
 					</div>
 
 					<div class="parameters">
@@ -96,9 +96,9 @@ node.held = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addStartEvent</li>
 								<li>Util.Events.resetNestedEvents</li>
@@ -135,7 +135,7 @@ node.held = function(event) {
 						<h4>Description</h4>
 						<p>Add a click event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.clicked when click event occurs, if node.clicked exists.</p>
-						<p>If your scripts are using the JES Google Analytics module, the click-event will be registered automatically.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the click-event will be registered automatically.</p>
 					</div>
 
 					<div class="parameters">
@@ -178,9 +178,9 @@ node.clicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addStartEvent</li>
 								<li>Util.Events.resetNestedEvents</li>
@@ -217,7 +217,7 @@ node.clicked = function(event) {
 						<h4>Description</h4>
 						<p>Add a dblclick event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.dblclicked when dblclick event occurs, if node.dblclicked exists.</p>
-						<p>If your scripts are using the JES Google Analytics module, the dblclick-event will be registered automatically.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the dblclick-event will be registered automatically.</p>
 						<p>As of now, the dblclick-event does not work in IE8 and older because they require a specific dblclick event.</p>
 					</div>
 
@@ -261,9 +261,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addStartEvent</li>
 								<li>Util.Events.resetNestedEvents</li>
@@ -338,9 +338,9 @@ node.dblclicked = function(event) {
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -439,9 +439,9 @@ node.dblclicked = function(event) {
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -538,9 +538,9 @@ node.dblclicked = function(event) {
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -628,9 +628,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
 							</ul>
@@ -706,9 +706,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
 							</ul>
@@ -785,9 +785,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
 							</ul>
@@ -863,9 +863,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
 							</ul>
@@ -942,9 +942,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
 							</ul>
@@ -1020,9 +1020,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
 							</ul>
@@ -1094,9 +1094,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.timer.resetTimer</li>
 								<li>Util.Events.removeEvent</li>
@@ -1169,9 +1169,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.resetClickEvents</li>
 								<li>Util.Events.resetDragEvents</li>
@@ -1250,9 +1250,9 @@ node.dblclicked = function(event) {
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.resetEvents</li>
 							</ul>

@@ -75,7 +75,7 @@
 							<dt>input.val(optional value)</dt>
 							<dd>
 								Function to get/set input value. Works with all types of fields. If value 
-								is passed, value will be sat. If no value is passed, current value will be 
+								is passed, value will be set. If no value is passed, current value will be 
 								returned.
 							</dd>
 						</dl>
@@ -254,9 +254,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.browser</li>
 								<li>Util.querySelector</li>
@@ -356,9 +356,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>_function_</li>
 							</ul>

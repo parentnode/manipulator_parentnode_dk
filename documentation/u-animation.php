@@ -7,7 +7,7 @@
 	<p>
 		Using CSS3 transitions to do your animation is by far the best way, - you get better performance and less code. However
 		the lack of support in older browsers makes the decision to use transitions less obvious. That is why the animation
-		model of JES is made to mimic the CSS3 transitions syntax, while providing fallback for older browsers.
+		model of Manipulator is made to mimic the CSS3 transitions syntax, while providing fallback for older browsers.
 	</p>
 	<p>
 		Just add your transition, using the shorthand function and state your change. Declare a callback function to be notified when
@@ -112,9 +112,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 								<li>Util.Events.addEvent</li>
@@ -218,9 +218,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 								<li>Util.Animation.support3d</li>
@@ -317,9 +317,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -425,9 +425,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -520,9 +520,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -555,16 +555,15 @@
 						</dl>
 					</div>
 
+					
 					<div class="description">
 						<h4>Description</h4>
-						<div class="description">
-							<h4>Description</h4>
-							<p>Set width of node, and handle fallback timer-based transition if required.</p>
-							<p>
-								Stores its latest width set via this function in node._width.
-							</p>
-						</div>
+						<p>Set width of node, and handle fallback timer-based transition if required.</p>
+						<p>
+							Stores its latest width set via this function in node._width.
+						</p>
 					</div>
+					
 
 					<div class="parameters">
 						<h4>Parameters</h4>
@@ -613,9 +612,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -703,9 +702,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -800,9 +799,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -890,9 +889,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -958,9 +957,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.variant</li>
 							</ul>
@@ -1019,9 +1018,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 

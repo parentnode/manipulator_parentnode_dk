@@ -6,7 +6,7 @@
 	<h1>Cookie</h1>
 	<p>Basic cookie functions. Get, save, eat.</p>
 	<p>
-		In addition to regular cookies, JES includes a simple way of mapping a cookie to a DOM node, allowing you to
+		In addition to regular cookies, Manipulator includes a simple way of mapping a cookie to a DOM node, allowing you to
 		create a sort of Node memory, ie. if you want to remember the state of a node (open, closed, selected, entered text).
 		These cookies are called nodeCookies.
 	</p>
@@ -114,8 +114,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 
@@ -188,9 +188,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 
@@ -278,9 +278,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 
@@ -363,8 +363,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.cookieReference</li>
 								<li>Util.saveCookie</li>
@@ -443,8 +443,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.cookieReference</li>
 								<li>Util.getCookie</li>
@@ -522,8 +522,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.cookieReference</li>
 								<li>Util.getCookie</li>

@@ -4,7 +4,7 @@
 
 <div class="scene">
 
-	<h1>JES sense and nonsense</h1>
+	<h1>Manipulator - sense and nonsense</h1>
 
 	<div class="article">
 		<h2>Why use a library/framework?</h2>

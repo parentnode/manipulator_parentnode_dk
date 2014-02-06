@@ -11,13 +11,13 @@
 			<ul class="tools">
 				<li><a class="nofollow" href="#library_files" rel="nofollow">Goto files</a></li>
 			</ul>
-			<p>Documentation of utilities and tools in the JES JavaScript library.</p>
+			<p>Documentation of utilities and tools in the Manipulator JavaScript library.</p>
 
 			<div class="promotion i:search"></div>
 
 			<div class="promotion browsersupport">
 				<h2>Browser support</h2>
-				<p>JES supports the following browsers and more:</p>
+				<p>Manipulator supports the following browsers and more:</p>
 				<ul>
 					<li>Chrome 1+</li>
 					<li>Safari 1+</li>
@@ -116,7 +116,7 @@
 				</li>
 				<li>
 					<h3><a href="u-init">Init</a></h3>
-					<p>JES module initializer</p>
+					<p>Manipulator module initializer</p>
 				</li>
 				<li>
 					<h3><a href="u-math">Math</a></h3>

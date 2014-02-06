@@ -5,13 +5,13 @@
 <div class="scene i:docpage">
 	<h1>Init</h1>
 	<p>
-		JES is designed to utilize the object nature of the DOM. Your HTML-page is already a wellformed
+		Manipulator is designed to utilize the object nature of the DOM. Your HTML-page is already a wellformed
 		object, and Util.init provides a simple way of extending the relevant nodes, using 
-		<a href="/documentation/modules">JES modules</a>, when needed.
+		<a href="/documentation/modules">Manipulator modules</a>, when needed.
 	</p>
 	<p>
 		By adding initializer-classes to appropriate nodes, those nodes will be extended, if your current segment code
-		contains an matching JES-module. Otherwise it will be ignored. This behavior allows you to seamlessly apply 
+		contains an matching Manipulator-module. Otherwise it will be ignored. This behavior allows you to seamlessly apply 
 		different interfaces and functionality for different segments - IE. a
 		desktop segment may look and work different than a mobile segment.
 	</p>
@@ -52,7 +52,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							JES object initializer. Finds all nodes in scope, with classname <span class="value">i:[objectname]</span> 
+							Manipulator object initializer. Finds all nodes in scope, with classname <span class="value">i:[objectname]</span> 
 							and invokes Util.Objects[objectname].init(node) if available.
 						</p>
 					</div>
@@ -103,9 +103,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getElements</li>
 								<li>Util.classVar</li>

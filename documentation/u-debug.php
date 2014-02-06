@@ -59,9 +59,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 
@@ -137,8 +137,8 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>Nothing</p>
 						</div>
 
@@ -281,9 +281,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.querySelector</li>
 								<li>Util.debugURL</li>
@@ -354,9 +354,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.debugURL</li>
 								<li>Util.nodeId</li>

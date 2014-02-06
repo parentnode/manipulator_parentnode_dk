@@ -72,7 +72,14 @@
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+						<div class="example">
+							<code>var node = u.qs("#node");
+node.timerDone = function() {
+	// timer done
+}
+u.t.setTimer(node, node.timerDone, 500);</code>
+							<p>Returns timer_id.</p>
+						</div>
 					</div>
 
 					<div class="uses">
@@ -86,9 +93,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -143,7 +150,11 @@
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+						<div class="example">
+							<code>node.timer_id = u.t.setTimer(node, callbackFunction, 500);
+u.t.resetTimer(node.timer_id);</code>
+							<p>Timer never fires because of timer reset.</p>
+						</div>
 					</div>
 
 					<div class="uses">
@@ -157,9 +168,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -204,7 +215,13 @@
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+						
+						<div class="example">
+							<code>node.timer_id = u.t.setTimer(node, callbackFunction, 500);
+u.t.resetTimer(node.timer_id);</code>
+							<p>Timer never fires because of timer reset.</p>
+						</div>
+
 					</div>
 
 					<div class="uses">
@@ -216,9 +233,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Timer.resetTimer</li>
 							</ul>
@@ -289,7 +306,14 @@
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+						<div class="example">
+							<code>var node = u.qs("#node");
+node.intervalDone = function() {
+	// done, again and again...
+}
+u.t.setInterval(node, node.intervalDone, 500);</code>
+							<p>Returns interval_id.</p>
+						</div>
 					</div>
 
 					<div class="uses">
@@ -303,9 +327,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -360,7 +384,9 @@
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+						<code>var interval_id = u.t.setInterval(node, callbackFunction, 500);
+u.t.resetInterval(interval_id);</code>
+						<p>callbackFunction never trigered, we reset interval.</p>
 					</div>
 
 					<div class="uses">
@@ -374,9 +400,9 @@
 							</ul>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
 
@@ -433,9 +459,9 @@
 							<p>none</p>
 						</div>
 
-						<div class="jes">
-							<!-- list JES functions used by function -->
-							<h5>JES</h5>
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Timer.resetInterval</li>
 							</ul>

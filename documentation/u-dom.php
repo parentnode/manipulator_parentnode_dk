@@ -97,8 +97,8 @@ u.querySelector(".link", content_node);</code>
 								<li>document.querySelector</li>
 							</ul>
 						</div>
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>none</li>
 							</ul>
@@ -171,6 +171,12 @@ u.querySelector(".link", content_node);</code>
 							<code>u.querySelectorAll("#content .test");</code>
 							<p>returns <span class="type">NodeList</span> containing all nodes with classnames=test</p>
 						</div>
+
+						<div class="example">
+							<code>var list_node = u.querySelector("ul.list");
+u.querySelectorAll("li.item", list_node);</code>
+							<p>returns <span class="type">NodeList</span> containing all nodes with classnames=item</p>
+						</div>
 					</div>
 				
 					<div class="uses">
@@ -183,8 +189,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>none</li>
 							</ul>
@@ -303,8 +309,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -397,8 +403,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -486,8 +492,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -591,8 +597,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -695,8 +701,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -787,8 +793,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -905,6 +911,14 @@ u.querySelector(".link", content_node);</code>
 	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code>
 						</div>
+
+						<div class="example">
+							<p>A node can only have one parent. Therefore appendElement can also be used to restructure html.</p>
+							<code>var header = u.querySelector("#header");
+var nav = u.querySelector("#navigation");
+u.ae(header, nav);</code>
+							<p>moves #navigation into #header. #navigation will be added as last child of #header</p>
+						</div>
 					</div>
 				
 					<div class="uses">
@@ -920,8 +934,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1037,6 +1051,14 @@ u.querySelector(".link", content_node);</code>
 	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code>
 						</div>
+
+						<div class="example">
+							<p>A node can only have one parent. Therefore insertElement can also be used to restructure html.</p>
+							<code>var header = u.querySelector("#header");
+var nav = u.querySelector("#navigation");
+u.ie(header, nav);</code>
+							<p>moves #navigation into #header. #navigation will be added as first child of #header</p>
+						</div>
 					</div>
 				
 					<div class="uses">
@@ -1052,8 +1074,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1179,8 +1201,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1265,8 +1287,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1339,7 +1361,7 @@ u.querySelector(".link", content_node);</code>
 
 &lt;script&gt;
 	var header = u.querySelector(".header");
-	u.clickable(header);
+	u.clickableElement(header);
 &lt;/script&gt;</code>
 
 							<p>
@@ -1366,8 +1388,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.querySelector</li>
 								<li>Util.addClass</li>
@@ -1469,8 +1491,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1562,8 +1584,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1680,8 +1702,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1787,8 +1809,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -1912,8 +1934,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -2062,8 +2084,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.addClass</li>
 								<li>Util.removeClass</li>
@@ -2183,8 +2205,8 @@ u.querySelector(".link", content_node);</code>
 							<p>None</p>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -2280,8 +2302,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
 
@@ -2353,8 +2375,8 @@ u.querySelector(".link", content_node);</code>
 							</ul>
 						</div>
 
-						<div class="jes">
-							<h5>JES</h5>
+						<div class="manipulator">
+							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
 							</ul>

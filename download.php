@@ -8,17 +8,17 @@
 
 	<div class="c">
 		<h2>Github</h2>
-		<p><a href="http://github.com/hvadhedderde/jes">JES is public on GitHub</a>.</p>
+		<p><a href="http://github.com/hvadhedderde/jes">Manipulator is public on GitHub</a>.</p>
 	</div>
 
 	<div class="c">
 		<h2>Bundles</h2>
 		<div class="c200">
-			<p>Precompiled bundles of the JES JavaScript library.</p>
+			<p>Precompiled bundles of the Manipulator JavaScript library.</p>
 
 			<h3>About the bundles</h3>
 			<p>
-				The JES library is based on segments. This means the library contains variations depending on which segment(s) 
+				The Manipulator library is based on segments. This means the library contains variations depending on which segment(s) 
 				you are building for. In each bundle you will find 9 include files. See <a href="http://whattheframework.org">WhatTheFramework.org</a>
 				for details on how <a href="http://whattheframework.org/segments">Segments</a> work.
 			</p>
@@ -28,8 +28,8 @@
 				of enhancing performance. If you really want it - use your own tool to minify.
 			</p>
 			<p>
-				Without further compression the full JES library for a desktop computer is 79Kb.
-				If you are using Webserver compression on JavaScript servings, the full JES footprint for a desktop computer is reduced
+				Without further compression the full Manipulator library for a desktop computer is 79Kb.
+				If you are using Webserver compression on JavaScript servings, the full Manipulator footprint for a desktop computer is reduced
 				to about 25kb.
 			</p>
 		</div>
