@@ -1,0 +1,239 @@
+#content {margin-bottom: 50px;}
+#content a {text-decoration: underline;}
+
+
+#content .scene {position: relative; min-height: 200px;}
+#content .scene > h1 {height: 46px; padding-bottom: 0;}
+#content .scene h1 + ul.actions {border-bottom: 1px solid #dedede; padding: 25px 30px 0; height: 49px; background: #ffffff;}
+#content .scene h1 + ul.actions li {padding-bottom: 0;}
+#content .scene h2 {padding: 10px 30px 11px;}
+
+
+#content .scene.front h1 {padding-bottom: 74px; border-bottom: 1px solid #dedede;}
+
+
+#content ul.list {padding: 21px 30px;}
+#content ul.list li {display: block;}
+
+#content dl.list {padding: 21px 30px; width: 600px;}
+
+#content dl.list dt,
+#content dl.list dd {padding: 5px 0; border-bottom: 1px solid #dbdfe5; height: 14px;}
+#content dl.list dt {width: 100px;}
+#content dl.list dt:after {content: ":";}
+#content dl.list dd {width: 170px; margin: 0 30px 0 0;}
+
+#content .scene > ul.actions {padding-bottom: 20px; padding-top: 20px; text-align: left;}
+#content .scene > ul.actions li {padding: 0 10px 10px 0;}
+
+
+
+
+
+/* DEFAULT FORM SETUP */
+
+/* LIST VIEWS */
+#content .defaultList .all_items > h2,
+#content .defaultList .enabled_items > h2,
+#content .defaultList .disabled_items > h2 {padding: 10px 30px 11px;}
+
+#content .defaultList .all_items > p,
+#content .defaultList .enabled_items > p,
+#content .defaultList .disabled_items > p {padding: 10px 30px 11px;}
+
+
+/* LIST */
+#content .defaultList ul.items > li {display: block; position: relative; border-bottom: 1px solid #dedede;}
+#content .defaultList ul.items > li:hover {background-color: #edf0f2;}
+#content .defaultList ul.items > li h3 {padding: 16px 30px 0px 30px;}
+#content .defaultList ul.items > li .description {display: none;}
+
+#content .defaultList ul.items > li .actions {position: absolute; top: 0px; padding: 0; right: 20px;}
+#content .defaultList ul.items > li .actions li {padding: 10px 0 10px 10px;}
+
+
+#content .defaultList ul.items > li ul.tags {padding: 10px 125px 16px 25px;}
+#content .defaultList ul.items > li ul.tags li {display: inline-block; vertical-align: top; margin: 3px; border-radius: 13px; background-color: #313942; padding: 7px 10px; color: #ffffff; font-size: 0;}
+#content .defaultList ul.items > li ul.tags li.add {padding: 7px; cursor: pointer; width: 10px; text-align: center;}
+#content .defaultList ul.items > li ul.tags li.add:hover {background-color: #64ad8e;}
+#content .defaultList ul.items > li ul.tags li span.context {text-transform: uppercase;}
+#content .defaultList ul.items > li ul.tags li span.context:after {content: ":";}
+#content .defaultList ul.items > li ul.tags li span.value {}
+
+
+/* TAGGABLE */
+/* ADD TAGS ACTIVE */
+#content .defaultList ul.taggable > li.addTags ul.tags li {cursor: pointer;}
+#content .defaultList ul.taggable > li.addTags ul.tags li:hover,
+#content .defaultList ul.taggable > li.addTags ul.tags li.add:hover {background-color: #df0000;}
+#content .defaultList ul.taggable > li.addTags ul.tags li.add {padding: 6px 7px 8px;}
+
+#content .defaultList ul.taggable > li.addTags ul.taglist {display: block;}
+
+/* ADD TAGS LIST */
+#content .defaultList ul.taggable > li ul.taglist {padding: 0 125px 16px 25px; margin-top: -16px; display: none;}
+#content .defaultList ul.taggable > li ul.taglist li {display: inline-block; vertical-align: top; margin: 3px; border-radius: 13px; background-color: #dedede; padding: 7px 10px; color: #ffffff; cursor: pointer; font-size: 0;}
+#content .defaultList ul.taggable > li ul.taglist li:hover {background-color: #64ad8e;}
+#content .defaultList ul.taggable > li ul.taglist li.selected {background-color: #313942;}
+#content .defaultList ul.taggable > li ul.taglist li.selected:hover {background-color: #df0000;}
+
+#content .defaultList ul.taggable > li ul.taglist li span.context {text-transform: uppercase;}
+#content .defaultList ul.taggable > li ul.taglist li span.context:after {content: ":";}
+#content .defaultList ul.taggable > li ul.taglist li span.value {}
+
+
+/* SORTABLE */
+#content .defaultList ul.sortable > li.item h2 {padding-left: 60px;}
+#content .defaultList ul.sortable > li.item div.drag {width: 30px; height: 30px; position: absolute; top: 8px; left: 20px; background: transparent url(/css/dearcss/src/img/bg_icons2.png) no-repeat 10px -445px; cursor: move;}
+
+
+
+
+/* GRID */
+#content .defaultList ul.items.grid > li {width: 33.3333%; height: 48px; position: relative; border-right: 1px solid #dedede; margin-right: -1px; border-bottom: 1px solid #dedede; margin-bottom: -1px;}
+@media (max-width: 1000px) {#content .defaultList ul.items.grid > li {width: 50%;}}
+@media (min-width: 1500px) {#content .defaultList ul.items.grid > li {width: 25%;}}
+
+#content .defaultList ul.items.grid > li h3 {padding-top: 20px;}
+
+/* FLOATING ACTIONS */
+#content .defaultList ul.items.grid > li .actions {background-color: rgba(220,220,220,0.7); opacity: 0; position: absolute; top: 0px; width: 100%; padding: 0; right: 0;}
+#content .defaultList ul.items.grid > li:hover .actions {opacity: 1;}
+#content .defaultList ul.items.grid > li .actions li {padding: 10px 10px 10px 0;}
+
+/* ENABLED AND DISABLED GROUPS */
+#content .defaultList .enabled_items,
+#content .defaultList .disabled_items {border-bottom: 1px solid #dedede; margin-bottom: 20px;}
+#content .defaultList .enabled_items > p,
+#content .defaultList .disabled_items > p {padding-top: 20px;}
+
+#content .defaultList ul.items.grid > li .prices {text-align: right; position: absolute; bottom: 20px; right: 0;}
+#content .defaultList ul.items.grid > li .prices li {padding: 0 20px; line-height: 1.2em;}
+
+
+
+
+
+/* NEW VIEW */
+#content .scene.defaultNew > form {padding-top: 20px; 
+	/*
+	margin: 0 auto; width: 400px;
+	*/
+}
+#content .scene.defaultNew > form .actions {text-align: left;
+	/* text-align: center; */
+}
+#content .scene.defaultNew > form .actions li {padding: 0 5px 10px;}
+
+
+
+
+/* EDIT VIEW - ITEM */
+#content .scene.defaultEdit > div.item {padding: 20px 0;}
+#content .scene.defaultEdit > div.item .actions {text-align: left;}
+#content .scene.defaultEdit > div.item .actions li {padding: 0 5px 10px;}
+
+
+/* EDIT, PRICES */
+#content .scene.defaultEdit > div.prices {padding: 20px 0;}
+#content .scene.defaultEdit > div.prices .field input[type=text] {width: 262px;}
+#content .scene.defaultEdit > div.prices .field .actions {display: inline-block; padding: 0;}
+#content .scene.defaultEdit > div.prices .field .actions li {padding-bottom: 0;}
+#content .scene.defaultEdit > div.prices .field .actions li.save input {width: 90px;}
+#content .scene.defaultEdit > div.prices .field.focus .actions li.save input,
+#content .scene.defaultEdit > div.prices .field.error .actions li.save input {margin: 2px;}
+
+#content .scene.defaultEdit > div.prices ul.prices {margin: 0 auto; width: 380px; padding: 0 10px;}
+#content .scene.defaultEdit > div.prices ul.prices li {font-size: 0; display: block; padding-bottom: 3px;}
+#content .scene.defaultEdit > div.prices ul.prices li h3 {display: inline-block; vertical-align: top; padding: 0 5px 0 0; line-height: 20px;}
+#content .scene.defaultEdit > div.prices ul.prices li form {display: inline-block; vertical-align: top;}
+#content .scene.defaultEdit > div.prices ul.prices li input.delete {padding: 0; margin: 0; line-height: 20px; cursor: pointer; color: #999999; text-decoration: underline; box-shadow: none; text-shadow: none; border: none; background: none; border-radius: 0;}
+#content .scene.defaultEdit > div.prices ul.prices li input.delete:hover {color: #000000;}
+
+
+/* EDIT, ADD TAGS - SIMPLE */
+#content .scene.defaultEdit > div.tags {padding: 20px 0;}
+#content .scene.defaultEdit > div.tags .field input[type=text] {width: 262px;}
+#content .scene.defaultEdit > div.tags .field .actions {display: inline-block; padding: 0;}
+#content .scene.defaultEdit > div.tags .field .actions li {padding-bottom: 0;}
+#content .scene.defaultEdit > div.tags .field .actions li.save input {width: 90px; box-shadow: none; margin: 4px 0;}
+#content .scene.defaultEdit > div.tags .field.focus .actions li.save input,
+#content .scene.defaultEdit > div.tags .field.error .actions li.save input {margin: 2px;}
+
+/* EDIT, TAGSLIST + DELETE - SIMPLE */
+#content .scene.defaultEdit > div.tags ul.tags {display: block; padding: 0px 30px;}
+#content .scene.defaultEdit > div.tags ul.tags li {width: 40%; padding: 3px 0px 2px; font-size: 0;}
+#content .scene.defaultEdit > div.tags ul.tags li h3 {font-size: 0; display: inline-block; vertical-align: top; padding: 0 5px 0 0;}
+#content .scene.defaultEdit > div.tags ul.tags li h3 span {display: inline-block; line-height: 20px;}
+#content .scene.defaultEdit > div.tags ul.tags li h3 span.context {text-transform: uppercase;}
+#content .scene.defaultEdit > div.tags ul.tags li h3 span.context:after {content: ":";}
+#content .scene.defaultEdit > div.tags ul.tags li h3 span.value {}
+#content .scene.defaultEdit > div.tags ul.tags li form {display: inline-block; vertical-align: top;}
+#content .scene.defaultEdit > div.tags ul.tags li input.delete {padding: 0; margin: 0; line-height: 20px; cursor: pointer; color: #999999; text-decoration: underline; box-shadow: none; text-shadow: none; border: none; background: none; border-radius: 0;}
+#content .scene.defaultEdit > div.tags ul.tags li input.delete:hover {color: #000000;}
+
+/* EDIT, TAGSLIST - EXTENDED */
+#content .scene.defaultEdit > div.tags ul.taglist {padding: 0 30px 20px;}
+#content .scene.defaultEdit > div.tags ul.taglist li {display: inline-block; vertical-align: top; margin: 3px; border-radius: 13px; background-color: #dedede; padding: 7px 10px; color: #ffffff; cursor: pointer;}
+#content .scene.defaultEdit > div.tags ul.taglist li:hover {background-color: #64ad8e;}
+#content .scene.defaultEdit > div.tags ul.taglist li.selected {background-color: #313942;}
+#content .scene.defaultEdit > div.tags ul.taglist li.selected:hover {background-color: #df0000;}
+#content .scene.defaultEdit > div.tags ul.taglist li span.context {text-transform: uppercase;}
+#content .scene.defaultEdit > div.tags ul.taglist li span.context:after {content: ":";}
+#content .scene.defaultEdit > div.tags ul.taglist li span.value {}
+#content .scene.defaultEdit > div.tags.controlledTags ul.tags {display: none;}
+
+/* EDIT MEDIA */
+#content .scene.defaultEdit > div.media {padding: 20px 0;}
+#content .scene.defaultEdit > div.media > p {margin-top: -20px;}
+#content .scene.defaultEdit > div.media form {padding: 0 30px; text-align: left;}
+#content .scene.defaultEdit > div.media .field {border: 3px dashed #dedede; display: inline-block; width: 390px; border-radius: 5px; position: relative; padding: 0;}
+#content .scene.defaultEdit > div.media .field input {opacity: 0;}
+#content .scene.defaultEdit > div.media .field label {display: block; color: #aaaaaa; position: absolute; width: 100%; padding-top: 8px; text-align: center;}
+#content .scene.defaultEdit > div.media .actions {display: none;}
+#content .scene.defaultEdit > div.media ul.media {padding: 20px; text-align: left;}
+#content .scene.defaultEdit > div.media ul.media li {margin: 0 10px; position: relative; text-align: center;}
+#content .scene.defaultEdit > div.media ul.media li h4 {padding: 0 0 5px;}
+
+/* EDIT IMAGE */
+#content .scene.defaultEdit > div.media ul.media li.image {}
+
+/* EDIT AUDIO */
+#content .scene.defaultEdit > div.media ul.media li.audio {width: 50px; height: 70px; background: transparent url(/css/dearcss/src/img/bg_bn_play_medium.png) no-repeat 0px 20px;}
+#content .scene.defaultEdit > div.media ul.media li.audio.playing {background-position: 0 -80px;}
+#content .scene.defaultEdit > div.media ul.media li.audio a {display: block; text-indent: -9999px;}
+
+/* EDIT VIDEO */
+#content .scene.defaultEdit > div.media ul.media li.video {background: transparent url(/css/dearcss/src/img/bg_bn_play_medium.png) no-repeat center 40px;}
+#content .scene.defaultEdit > div.media ul.media li.video a {display: none;}
+
+
+/* TAG MAINTENANCE */
+#content .scene.tagList h1 {border-bottom: 1px solid #dedede; padding-bottom: 74px;}
+#content .scene.tagList h1 + p {padding-top: 16px;}
+#content .scene.tagList ul.items > li h3 {padding: 16px 30px;}
+#content .scene.tagEdit ul.tag_items {padding: 16px 30px;}
+#content .scene.tagEdit ul.tag_items li {display: block; padding: 2px 0;}
+#content .scene.tagEdit ul.tag_items dt {display: none;}
+#content .scene.tagEdit ul.tag_items dd.name {font-weight: bold; padding: 0 15px 0 0;}
+#content .scene.tagEdit ul.tag_items dd.itemtype:after {content: "/";}
+
+
+/* NOTIFICATIONS */
+#notifications {z-index: 1001; position: fixed; right: 0; top: 0; text-align: center;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D7D7D7), to(#B0B0B0));
+	background: -webkit-linear-gradient(top, #D7D7D7, #B0B0B0);
+	background: -moz-linear-gradient(top, #D7D7D7, #B0B0B0);
+}
+#notifications div {padding: 10px 25px; text-decoration: none; width: auto; display: block; height: auto; cursor: pointer;}
+#notifications .notice {color: #333333; font-weight: bold; text-shadow: -1px 1px 1px #dedede; box-shadow: 1px 1px 3px #dedede; border-left: 1px solid #dedede; border-bottom: 1px solid #dedede; border-right: 1px solid #dedede;
+}
+
+#notifications .error {color: #df0000;}
+
+#content .link {cursor: pointer;}
+
+#content .error * {color: red;}
+
+
+

@@ -1,0 +1,11 @@
+body {overflow-y: auto;}
+#navigation ul li {display: inline;}
+
+body.download #navigation li.download a,
+body.docs #navigation li.docs a,
+body.tests #navigation li.tests a,
+body.demo #navigation li.demo a {color: #ffffff;}
+
+.c400, .c300, .c200, .c100, .c50 {*display: inline; *zoom: 1;}
+
+#content ul.actions li a.button {*display: inline;}

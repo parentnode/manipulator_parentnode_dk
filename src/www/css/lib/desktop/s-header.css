@@ -1,0 +1,5 @@
+#header {position: fixed; top: 0; left: 0; width: 100%; height: 50px;}
+#header .servicenavigation {display: none; height: 80px; padding: 30px 10px;}
+#header .servicenavigation li.front {display: inline-block; vertical-align: top; padding: 0 10px;}
+#header .servicenavigation li.navigation {display: none;}
+#header .servicenavigation li.help {display: none;}
