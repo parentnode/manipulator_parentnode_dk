@@ -1,7 +1,3 @@
-<? $page_title = "Init documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Init</h1>
 	<p>
@@ -202,5 +198,3 @@
 		</div>
 	</div>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

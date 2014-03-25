@@ -216,5 +216,3 @@
 </div>
 
 <div class="comments">Not working in IE 6</div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,7 +1,3 @@
-<? $page_title = "Geometry documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Geometry</h1>
 	<p>Positions, sizes and offsets.</p>
@@ -1058,5 +1054,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

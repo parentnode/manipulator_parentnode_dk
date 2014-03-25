@@ -1,7 +1,3 @@
-<? $page_title = "Cookie documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Cookie</h1>
 	<p>Basic cookie functions. Get, save, eat.</p>
@@ -608,5 +604,3 @@
 	
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -37,5 +37,3 @@
 	<p>Detection error in IE 7</p>
 	<p>Should separate timerbased function into desktop_light/ie file - IE7 needs to go into the IE segment maybe?</p>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

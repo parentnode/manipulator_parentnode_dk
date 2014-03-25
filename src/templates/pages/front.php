@@ -1,7 +1,3 @@
-<? $page_title = "It's just JavaScript" ?>
-<? $body_class = "front" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene">
 	
 	<h1>Hallelujavascript! JES 0.7.5 has arrived</h1>
@@ -71,5 +67,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

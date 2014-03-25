@@ -1,7 +1,3 @@
-<? $page_title = "Flash documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Flash</h1>
 
@@ -334,5 +330,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

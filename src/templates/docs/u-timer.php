@@ -1,7 +1,3 @@
-<? $page_title = "Timer documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Timer</h1>
 	<p>Timers and intervals. Easy.</p>
@@ -539,5 +535,3 @@ u.t.resetInterval(interval_id);</code>
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

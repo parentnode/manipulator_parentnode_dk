@@ -1,7 +1,3 @@
-<? $page_title = "DOM documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>DOM</h1>
 	<p>DOM query and manipulation tools.</p>
@@ -2455,5 +2451,3 @@ u.ie(header, nav);</code>
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

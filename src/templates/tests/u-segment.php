@@ -109,5 +109,3 @@
 <div class="comments">
 	
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

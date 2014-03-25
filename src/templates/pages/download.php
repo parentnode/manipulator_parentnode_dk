@@ -1,7 +1,3 @@
-<? $page_title = "Download bundles" ?>
-<? $body_class = "download" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene">
 
 	<h1>Downloads</h1>
@@ -168,5 +164,3 @@
 		</div>
 	</div>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

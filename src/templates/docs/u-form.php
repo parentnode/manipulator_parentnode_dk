@@ -1,7 +1,3 @@
-<? $page_title = "Form documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Form</h1>
 	<p>Advanced form controller. Validation, event callbacks and helper methods to customize form design and interaction.</p>
@@ -436,5 +432,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

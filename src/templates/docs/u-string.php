@@ -1,7 +1,3 @@
-<? $page_title = "String documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>String</h1>
 	<p>String manipulation and unique key generation.</p>
@@ -709,5 +705,3 @@ u.cutString(string, 10);</code>
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,7 +1,3 @@
-<? $page_title = "Demo" ?>
-<? $body_class = "demo" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene">
 
 	<h1>Demo</h1>
@@ -45,5 +41,3 @@
 		</ul>
 	</div>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,7 +1,3 @@
-<? $page_title = "It's just improvements" ?>
-<? $body_class = "changelog" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene">
 	
 	<h1>Change log</h1>
@@ -17,5 +13,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

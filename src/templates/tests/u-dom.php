@@ -234,5 +234,3 @@
 	<p>u.gcs: Firefox+webkit will return the computed value in px, regardless of how it is specified.</p>
 	<p>u.gcs: Firefox+webkit will return bg-color as rgb(), regardless of how it is specified.</p>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

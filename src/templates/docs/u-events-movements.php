@@ -1,7 +1,3 @@
-<? $page_title = "Movement Events documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Movements</h1>
 	<p>Advanced events for drag and swipe handling. Includes overlap detection.</p>
@@ -581,5 +577,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

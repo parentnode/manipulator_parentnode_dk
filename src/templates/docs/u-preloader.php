@@ -1,7 +1,3 @@
-<? $page_title = "Preloader documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Image - maybe renamed to preloader, since it is basically just an image-preloader</h1>
 
@@ -171,5 +167,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

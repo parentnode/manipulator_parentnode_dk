@@ -1,7 +1,3 @@
-<? $page_title = "Events documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Events</h1>
 	<p>
@@ -1361,5 +1357,3 @@ node.dblclicked = function(event) {
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

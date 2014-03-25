@@ -11,7 +11,7 @@ $action = $page->actions();
 
 
 $page->bodyClass("front");
-$page->pageTitle("Getting lost without loosing my way");
+$page->pageTitle("Don't be scared - It's just JavaScript");
 
 $page->header();
 $page->template("pages/front.php");

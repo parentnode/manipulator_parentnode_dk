@@ -28,5 +28,3 @@
 	<a onclick="play('/media/audio/audio_1.mp3');">load and play 1</a><br />
 	<a onclick="play('/media/audio/audio_2.mp3');">load and play 2</a><br />
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

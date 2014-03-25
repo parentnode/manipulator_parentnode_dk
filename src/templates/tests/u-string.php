@@ -92,5 +92,3 @@
 		string to just one char. Something to consider.
 	</p>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,7 +1,3 @@
-<? $page_title = "Array documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Array</h1>
 	<p>Filling out the gap in older Array implementations.</p>
@@ -440,5 +436,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

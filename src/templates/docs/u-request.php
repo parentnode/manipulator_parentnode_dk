@@ -1,7 +1,3 @@
-<? $page_title = "Request documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Request</h1>
 	<p>XMLHTTPRequest with appropriate fallback, response validation and callback.</p>
@@ -447,5 +443,3 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 		</div>
 	</div>
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

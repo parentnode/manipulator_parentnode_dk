@@ -1,7 +1,3 @@
-<? $page_title = "Debug documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Debugging</h1>
 	<p>One hardly ever gets it right the first time.</p>
@@ -431,5 +427,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

@@ -1,7 +1,3 @@
-<? $page_title = "Browser Events documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Browser events</h1>
 	<h2>Notes on DOMReady</h2>
@@ -259,5 +255,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>

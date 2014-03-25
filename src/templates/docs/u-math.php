@@ -1,7 +1,3 @@
-<? $page_title = "Math documentation" ?>
-<? $body_class = "docs docpage" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <div class="scene i:docpage">
 	<h1>Math</h1>
 	<p>Math related functions and extended versions of normal Math functions.</p>
@@ -319,5 +315,3 @@
 	</div>
 
 </div>
-
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.footer.php") ?>
