@@ -1,7 +1,3 @@
-<? $page_title = "tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 	.correct {background: green;}
 	.error {background: red;}

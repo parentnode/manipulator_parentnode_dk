@@ -1,7 +1,3 @@
-<? $page_title = "Audio tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css"></style>
 
 <script type="text/javascript">

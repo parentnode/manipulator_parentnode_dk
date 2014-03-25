@@ -1,7 +1,3 @@
-<? $page_title = "Popup tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 	.scene div {margin: 0 0 5px;}
 	.correct {background: green;}

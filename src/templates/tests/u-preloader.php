@@ -1,7 +1,3 @@
-<? $page_title = "Preloader tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 	.scene ul {}
 	.scene li {height: 10px; margin: 5px; background: gray;}

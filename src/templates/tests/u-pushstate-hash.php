@@ -1,11 +1,4 @@
-<? $page_title = "Pushstate/Hashchange tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
-<style type="text/css">
-
-
-</style>
+<style type="text/css"></style>
 
 <script type="text/javascript">
 	Util.Objects["test"] = new function() {

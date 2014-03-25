@@ -1,48 +1,5 @@
-<!--? $page_title = "Animation tests" ?-->
-<!--? $body_class = "tests" ?-->
-<!--? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?-->
 
-<!-- Pasted header start. We can now load Sylvester.js -->
-<? include_once($_SERVER["FRAMEWORK_PATH"]."/include/segment.php") ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<!-- (c) & (p) whattheframework.org 2009-2013 -->
-	<!-- Common Public Attribution License Version 1.0 (CPAL-1.0), http://whattheframework.org/legal -->
-	<title>Manipulator<?= isset($page_title) ? " - ".$page_title : "" ?></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="keywords" content="HTML, JavaScript, CSS, framework, SEO" />
-	<meta name="description" content="Details DO matter. The frontend framework." />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<script type="text/javascript" src="/js/externals/sylvester.js"></script>
-	<? if($_SESSION["dev"]) { ?>
-		<link type="text/css" rel="stylesheet" media="all" href="/css/lib/seg_<?= $_SESSION["segment"] ?>_include.css" />
-		<script type="text/javascript" src="/js/lib/seg_<?= $_SESSION["segment"] ?>_include.js"></script>
-	<? } else { ?>
-		<link type="text/css" rel="stylesheet" media="all" href="/css/seg_<?= $_SESSION["segment"] ?>.css" />
-		<script type="text/javascript" src="/js/seg_<?= $_SESSION["segment"] ?>.js"></script>
-	<? } ?>
-</head>
-
-<body<?= isset($body_class) ? ' class="'.$body_class.'"' : '' ?>>
-
-<div id="page" class="i:page">
-
-	<div id="header">
-		<ul class="servicenavigation">
-			<li class="keynav front"><a href="/">Manipulator - It's just JavaScript</a></li>
-			<li class="keynav help"><a href="/help">Help</a></li>
-			<li class="keynav navigation nofollow"><a href="#navigation" rel="nofollow">Navigation</a></li>
-		</ul>
-	</div>
-
-	<div id="content">
-
-<!-- Pasted Header Ends -->
-
-
+<script type="text/javascript" src="/js/externals/sylvester.js"></script>
 <style type="text/css">
 	.scene {position: relative; height: 1000px;}
 	.scene .block {margin: 0 0 5px;}

@@ -1,7 +1,3 @@
-<? $page_title = "Sortable tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 	.simple {padding: 0 0 30px; border-bottom: 1px solid #000000; margin: 0 0 30px;}
 	.sortable {list-style: none;}

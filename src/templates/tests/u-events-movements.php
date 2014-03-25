@@ -1,7 +1,3 @@
-<? $page_title = "Events, movements tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 
 	div.drag {position: relative; z-index: 1;}

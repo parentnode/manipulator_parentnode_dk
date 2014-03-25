@@ -1,7 +1,3 @@
-<? $page_title = "Events tests" ?>
-<? $body_class = "tests" ?>
-<? include_once($_SERVER["LOCAL_PATH"]."/templates/shell.header.php") ?>
-
 <style type="text/css">
 	.level1 {width: 720px; height: 450px; position: relative; background: red;}
 	.level2 {width: 420px; height: 230px; position: absolute; left: 100px; top: 50px; padding: 50px 50px; background: green;}
