@@ -1,46 +1,45 @@
 <div class="scene">
 	
-	<h1>Hallelujavascript! JES 0.7.5 has arrived</h1>
+	<h1>Manipulator 0.8 arriving soon</h1>
+	<p>
+		Manipulator is an extremely flexible, performance optimized JavaScript
+		library with a slightly neurotic focus on details.
+	</p>
+	<p>
+		It is designed to mimic regular JavaScript, and utilize the DOM objects instead of inventing new ones. 
+		Work WITH the DOM and take back control of your interface.
+	</p>
+	<p>
+		The JavaScript library provides an extensive set of namespaced cross-device shorthand functions. These functions
+		have been written to utilize the the best performance option available - without inventing new concepts or abiding
+		old implementation flaws.
+	</p>
+	<p>
+		Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it, with IE6 support.
+	</p>
 
-	<div class="c section">
-		<div class="c200">
-			<h2>JES = JavaScript er sjovt. Translates to: Who cares. It's JavaScript.</h2>
-			<p>
-				JES is an extremely flexible, performance optimized JavaScript
-				library with a slightly neurotic focus on details.
-			</p>
-			<p>
-				It is designed to mimic regular JavaScript, and utilize the DOM objects instead of inventing new ones. 
-				Work WITH the DOM and take back control of your interface.
-			</p>
-			<p>
-				The JavaScript library provides an extensive set of namespaced cross-device shorthand functions. These functions
-				have been written to utilize the the best performance option available - without inventing new concepts or abiding
-				old implementation flaws.
-			</p>
-			<p>
-				Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it, with IE6 support.
-			</p>
+	<h2>The goal behind designing Manipulator is:</h2>
+	<ul class="goal">
+		<li>Using the newest standards.</li>
+		<li>Support for all devices.</li>
+		<li>Leveraging standard JavaScript knowledge - not changing the way you write JavaScript.</li>
+		<li>Providing a solution to common cross-device/cross-browser problems.</li>
+		<li>Simplifying implementation and backend development.</li>
+		<li>Fast, compatible and reliable.</li>
+		<li>Completely modular.</li>
+		<!--li>Optimized for <a href="http://whattheframework.org/segments">Segments</a></li-->
+	</ul>
 
-			<h2>The goal behind designing JES is:</h2>
-			<ul class="jesgoal">
-				<li>Using the newest standards.</li>
-				<li>Support for all devices.</li>
-				<li>Leveraging standard JavaScript knowledge - not changing the way you write JavaScript.</li>
-				<li>Providing a solution to common cross-device/cross-browser problems.</li>
-				<li>Simplifying implementation and backend development.</li>
-				<li>Fast, compatible and reliable.</li>
-				<li>Completely modular.</li>
-				<li>Optimized for <a href="http://whattheframework.org/segments">Segments</a></li>
-			</ul>
-		</div>
+
+	<h2>Want to contribute?</h2>
+	<p>
+		We always need help. Send an email to 
+		<a href="mailto:contribute@parentnode.dk">contribute@parentnode.dk</a> to join the team.
+	</p>
+
+		<!--/div>
 		<div class="c200">
 			<div class="promotion">
-				<h3>Want to contribute?</h3>
-				<p>
-					We always need help working on WTF. Send an email to 
-					<a href="mailto:contribute@whattheframework.org">contribute@whattheframework.org</a> to join the team.
-				</p>
 			</div>
 
 			<div class="promotion">
@@ -64,6 +63,6 @@
 			</div>
 		</div>
 
-	</div>
+	</div-->
 
 </div>

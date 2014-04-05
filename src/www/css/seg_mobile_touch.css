@@ -1,369 +1,224 @@
 
+/*seg_mobile_touch_include.css*/
+
 /*s-fonts.css*/
 @font-face {
-	font-family: 'PetronaRegular';
-	src: url('/css/dearcss/src/fonts/petrona-regular-webfont.woff') format('woff'),
-		 url('/css/dearcss/src/fonts/petrona-regular-webfont.ttf') format('truetype'),
-		 url('/css/dearcss/src/fonts/petrona-regular-webfont.svg#PetronaRegular') format('svg');
+	font-family: 'OpenSans';
+	src: url('/css/fonts/opensans-regular-webfont.woff') format('woff'),
+		 url('/css/fonts/opensans-regular-webfont.ttf') format('truetype'),
+		 url('/css/fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'OpenSansRegular';
-	src: url('/css/dearcss/src/fonts/opensans-regular-webfont.woff') format('woff'),
-		 url('/css/dearcss/src/fonts/opensans-regular-webfont.ttf') format('truetype'),
-		 url('/css/dearcss/src/fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
-	font-weight: normal;
+	font-family: 'OpenSans';
+	src: url('/css/fonts/opensans-bold-webfont.woff') format('woff'),
+		 url('/css/fonts/opensans-bold-webfont.ttf') format('truetype'),
+		 url('/css/fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+	font-weight: bold;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'BrandonGrotesqueBlackRegular';
-	src: url('/css/dearcss/src/fonts/brandon_blk-webfont.woff') format('woff'),
-		 url('/css/dearcss/src/fonts/brandon_blk-webfont.ttf') format('truetype'),
-		 url('/css/dearcss/src/fonts/brandon_blk-webfont.svg#BrandonGrotesqueBlackRegular') format('svg');
+	font-family: 'OpenSans';
+	src: url('/css/fonts/opensans-italic-webfont.woff') format('woff'),
+		 url('/css/fonts/opensans-italic-webfont.ttf') format('truetype'),
+		 url('/css/fonts/opensans-italic-webfont.svg#open_sansitalic') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'PT Serif';
+	src: url('/css/fonts/pt_serif-regular-webfont.woff') format('woff'),
+		 url('/css/fonts/pt_serif-regular-webfont.ttf') format('truetype'),
+		 url('/css/fonts/pt_serif-regular-webfont.svg#pt_serifregular') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-/*s-page.css*/
-* {font-family: "OpenSansRegular", Georgia, Times, serif; font-size: 14px; color: #000000; font-weight: normal;}
-html {height: 100%;}
-body {background: #ffffff; margin: 0; overflow-y : scroll;}
-h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt, address {padding: 0; margin: 0;}
+
+/*s-page-mobile_touch.css*/
+* {font-family: "OpenSans", Verdana, Arial, sans-serif; color: #cccccc;
+	-webkit-text-size-adjust: none;
+	-webkit-font-smoothing: antialiased;
+}
+html {min-height: 100%;}
+body {background: #333333; margin: 0; overflow-y: scroll; overflow-x: hidden;}
+h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {padding: 0; margin: 0;}
+h1, h2, h3, h4, h5, h6, p, li, dd, dt, span, a {line-height: 1em; font-weight: normal;}
 ul {list-style: none;}
-a {text-decoration: none; cursor: pointer;}
-a:hover {text-decoration: underline; color: black;}
+a {text-decoration: none; cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
 img {border: 0; display: block;}
 form, fieldset, label, input, select, textarea {padding: 0; margin: 0; font-weight: normal;}
 fieldset {border: none;}
 input, select, textarea {font-size: 14px;}
 input, textarea {outline: none;}
-#page {position: relative; text-align: left; margin: 0 auto; width: 960px; overflow: hidden;}
-#page {font-size: 0;}
-
-/*s-content.css*/
-#content {margin: 20px 0 0; display: inline-block; vertical-align: top; width: 720px;}
-#content .scene {position: relative;}
-#content h1 {padding: 0 20px 25px; font-size: 30px; line-height: 1.5em;}
-#content h2 {padding: 0 20px 20px; font-size: 24px; line-height: 1.2em;}
-#content h3 {padding: 0 20px 15px; font-size: 18px; line-height: 1.1em;}
-#content h4 {padding: 0 20px 10px; font-size: 16px; line-height: 1em;}
-#content h5 {padding: 0 20px 5px; font-size: 14px; line-height: 1em;}
-#content p {padding: 0 20px 15px; line-height: 1.5em;}
-#content h1 a,
-#content h1 span,
-#content h2 a,
-#content h2 span,
-#content h3 a,
-#content h3 span,
-#content h4 a,
-#content h4 span,
-#content h5 a,
-#content h5 span,
-#content p a,
-#content p span {font-size: inherit; color: inherit; line-height: inherit;}
-#content ul {padding: 0 20px 15px;}
-#content dl {padding: 0 20px 15px;}
-#content ul li,
-#content dl dt,
-#content dl dd {font-size: 14px;}
-#content .notification {position: absolute; left: 50%; margin-left: -150px; width: 300px; top: 0; text-align: center;
-	-webkit-transition: all 1s ease-out;
-	-webkit-transition-delay: 3s;
-	-moz-transition: all 1s ease-out;
-	-moz-transition-delay: 3s;
+a, span {font-size: inherit; font-family: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; color: inherit; text-transform: inherit;}
+h1 {padding: 0 20px 24px; font-size: 34px; line-height: 1.05em;
+	font-family: "PT Serif", Times, serif;
 }
-#content .notification div {padding: 10px 25px 7px; text-decoration: none; width: auto; display: inline-block; height: auto; cursor: pointer;}
-#content .notification .notice {color: #333333; font-weight: bold; text-shadow: -1px 1px 1px #dedede; box-shadow: 1px 1px 3px #dedede; border-left: 1px solid #dedede; border-bottom: 1px solid #dedede; border-right: 1px solid #dedede;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D7D7D7), to(#B0B0B0));
-	background: -webkit-linear-gradient(top, #D7D7D7, #B0B0B0);
-	background: -moz-linear-gradient(top, #D7D7D7, #B0B0B0);
+h2 {padding: 0 20px 24px; font-size: 26px; line-height: 1.1em;
+	font-family: "PT Serif", Times, serif;
 }
-#content .link {cursor: pointer;}
-#content .error * {color: red;}
-
-/*s-footer.css*/
+h3 {padding: 0 20px 10px; font-size: 18px; line-height: 1.25em;}
+h4 {padding: 0 20px 5px; font-size: 13px; line-height: 1em; font-weight: bold;}
+h5 {padding: 0 20px 2px; font-size: 13px; line-height: 1em; font-weight: bold;}
+h6 {padding: 0 20px 2px; font-size: 13px; line-height: 1em; font-weight: bold;}
+p {padding: 0 20px 18px; font-size: 13px; line-height: 1.38em;} 
+ul {font-size: 0;}
+li {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
+dl {font-size: 0;} 
+dt, 
+dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
+.c {clear: both; font-size: 0;}
+.c400, .c300, .c266, .c200, .c150, .c133, .c100, .c75, .c50 {display: inline-block; min-height: 10px; vertical-align: top;}
+.c400 {width: 100%;}
+.c300 {width: 75%;}
+.c266 {width: 66%;}
+.c200 {width: 50%;}
+.c133 {width: 34%;}
+.c100 {width: 25%;}
+#page {position: relative;}
+.terms_notification {padding: 15px 20px 20px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;}
+.terms_notification h3 {padding: 0 0 15px; font-size: 13px;}
+.terms_notification .accept,
+.terms_notification .details {padding: 0; font-size: 16px; display: inline-block; vertical-align: bottom; padding: 0;}
+.terms_notification .details {float: right;}
 
 
-/*s-form.css*/
-#content form {}
-#content fieldset {border: none; overflow: hidden; display: block;}
-#content fieldset .field {padding: 0 0 15px; position: relative; font-size: 0;}
-#content label {width: 210px; display: inline-block; vertical-align: top; text-align: right; color: #666666; padding: 9px 8px 0 20px;}
-#content label abbr {display: none;}
-#content label:after {content: ":";}
-#content .field input,
-#content .field select,
-#content .field textarea {color: #333333; box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; display: inline-block; vertical-align: top; border-radius: 3px; margin: 2px; outline: none;}
-#content .field input {width: 347px; height: 24px; padding: 2px 25px 2px 6px;}
-#content .field select {width: 381px; height: 33px; color: #333333; padding: 5px 3px 2px 2px;
-	-webkit-appearance: none;
+/*s-header-mobile_touch.css*/
+#header {position: fixed; height: 60px; width: 100%; top: 0; left: 0;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
-#content .field select option {padding: 5px 3px 2px 6px;}
-#content .field textarea {width: 372px; height: 200px; overflow: auto; padding: 6px 0 2px 6px; }
-#content .field textarea.autoexpand {width: 347px; padding: 6px 25px 2px 6px; overflow: hidden;}
-#content .field.radio_buttons,
-#content .field.boolean {}
-#content .field.radio_buttons div.item,
-#content .field.boolean input {display: inline-block; vertical-align: top;}
-#content .field.radio_buttons div.item input,
-#content .field.boolean input {width: auto; height: auto; padding: 0; margin: 11px 10px 0 0; border: 0;}
-#content .field.radio_buttons label,
-#content .field.boolean label {}
-#content .field.radio_buttons div.item label,
-#content .field.boolean label {text-align: left; width: auto; padding-right: 20px; padding-left: 0;}
-#content .field.radio_buttons div.item label:after,
-#content .field.boolean label:after {content: "";}
-#content .field input[type="number"]::-webkit-inner-spin-button,
-#content .field input[type="number"]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+#header .logo {font-size: 30px; padding: 10px 20px; color: #888888; cursor: pointer; display: inline-block;
+	font-family: "PT Serif", Times, serif;
 }
-#content .field.focus input,
-#content .field.focus textarea {margin: 0;}
-#content .field.focus select {padding: 3px 3px 2px 0px;}
-@media all and (-webkit-min-device-pixel-ratio:0) {#content .field.focus select {padding: 5px 3px 3px 0px;}}
-#content .field.focus input,
-#content .field.focus select,
-#content .field.focus textarea {border: 3px solid #5c5c5c;}
-#content .field.radio_buttons.focus input,
-#content .field.boolean.focus input {}
-#content .field.required input,
-#content .field.required select,
-#content .field.required textarea {background: #ffffff url(/css/dearcss/src/img/bg_icons.png) no-repeat 359px -340px;}
-#content .field.required input {background-position: 359px -340px;}
-#content .field.required select {background-position: 345px -340px;}
-#content .field.required.focus select {background-position: 343px -342px;}
-#content .field.required textarea {background-position: 359px -340px;}
-#content .field.radio_buttons.required input,
-#content .field.boolean.required input {}
-#content .field.correct input,
-#content .field.correct textarea {background-position: -100px 0;}
-#content .field.correct select {background-position: 463px -978px;}
-#content .field.correct.focus select {background-position: 461px -980px;}
-#content .field.radio_buttons.correct input,
-#content .field.boolean.correct input {}
-#content .field.error input,
-#content .field.error textarea {margin: 0;}
-#content .field.error select {padding: 3px 3px 2px 0px;}
-#content .field.error input,
-#content .field.error select,
-#content .field.error textarea {border: 3px solid #f8c9bb;}
-#content .field.radio_buttons.error input,
-#content .field.boolean.error input {}
-#content form ul.actions {padding: 0 0 0 240px;}
-#content ul.actions {padding: 0; font-size: 0;}
-#content ul.actions li {width: auto; height: auto; display: inline-block; padding: 0 10px 10px 0px; vertical-align: top;}
-#content ul.actions li a {line-height: 1.2em; font-size: 13px; font-weight: normal; display: inline-block; vertical-align: top;}
-#content ul.actions input.button {width: auto; height: auto; padding: 3px 12px; line-height: 1.2em;}
-@media all and (-webkit-min-device-pixel-ratio:0) {#content ul.actions input.button {padding-bottom: 5px;}}
-#content ul.actions a.button {display: block; text-decoration: none; height: 14px; padding: 4px 12px 8px; line-height: 1.2em;}
-#content ul.actions input.button,
-#content ul.actions a.button {box-shadow: 1px 1px 3px #dedede; font-size: 13px; font-weight: normal; cursor: pointer; border-radius: 3px; 
-	background-repeat: no-repeat;
-	background-position: 10px 100px, top left;
-	border: 1px solid #cdcdcd; color: #666666; text-shadow: -1px 1px 1px #dedede; background-color: #eeeeee;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#dddddd));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #f0f0f0, #dddddd);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #f0f0f0, #dddddd);
-}
-#content ul.actions input.button:hover,
-#content ul.actions a.button:hover {
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dddddd), to(#f0f0f0));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #dddddd, #f0f0f0);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(center top , #dddddd, #f0f0f0);
-}
-#content ul.actions input.button.primary,
-#content ul.actions a.button.primary {
-	border: 1px solid #a7c15c; color: #5D7731; text-shadow: -1px 1px 1px #dedede; background-color: #b6d770;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c8e183), to(#a3cd5b));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #c8e183, #a3cd5b);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #c8e183, #a3cd5b);
-}
-#content ul.actions input.button.primary:hover,
-#content ul.actions a.button.primary:hover {
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a3cd5b), to(#c8e183));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #a3cd5b, #c8e183);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #a3cd5b, #c8e183);
-}
-#content ul.actions input.button.secondary,
-#content ul.actions a.button.secondary {
-	border: 1px solid #e9ac26; color: #9f742c; text-shadow: -1px 1px 1px #dedede; background-color: #fecd60;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fed76e), to(#fdc04f));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #fed76e, #fdc04f);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #fed76e, #fdc04f);
-}
-#content ul.actions input.button.secondary:hover,
-#content ul.actions a.button.secondary:hover {
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fdc04f), to(#fed76e));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #fdc04f, #fed76e);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #fdc04f, #fed76e);
-}
-#content form input.button.delete.confirm {
-	border: 1px solid #a7c15c; color: #ffffff; text-shadow: -1px 1px 1px #dedede; background-color: #fd0000;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc7777), to(#ff0000));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #fc7777, #ff0000);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #fc7777, #ff0000);
-}
-#content form input.button.delete.confirm:hover {
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff0000), to(#fc7777));
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #ff0000, #fc7777);
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #ff0000, #fc7777);
-}
-#content form input.button.disabled,
-#content form input.button.disabled:hover {
-	cursor: default !important;
-	border: 1px solid #cdcdcd !important; color: #aaaaaa !important; text-shadow: -1px 1px 1px #dedede !important; background-color: #eeeeee !important;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#dddddd)) !important;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -webkit-linear-gradient(top, #f0f0f0, #dddddd) !important;
-	background-image: url(/css/dearcss/src/img/bg_icons.png), -moz-linear-gradient(top, #f0f0f0, #dddddd) !important;
-}
-#content .field div.error {color: red; padding: 0 0 0 240px;}
-
-
-/*s-header.css*/
-#header {border-bottom: 1px solid #cccccc; height: 80px; position: relative;}
-#header .servicenavigation {display: block; text-align: right; padding: 3px 0; font-size: 0;}
-#header .servicenavigation li {display: inline-block;}
-#header .servicenavigation li a {text-decoration: underline;}
-#header .servicenavigation li a:hover {color: #000000;}
-#header .servicenavigation li.front {position: absolute; top: 25px; left: 20px;}
-#header .servicenavigation li.front a {font-size: 36px; text-decoration: none; color: #000000;}
-#header .servicenavigation li.navigation {display: none;}
-#header .servicenavigation li.help {display: none;}
-
-/*s-navigation.css*/
-#navigation {position: absolute; bottom: 0; right: 20px;}
+#header .servicenavigation li.navigation {position: absolute; right: 0; top: 0; width: 30px; height: 39px; padding: 21px 15px 0;}
+#header .servicenavigation li.navigation div {border-radius: 1px; height: 3px; margin: 0 0 5px; background: #888888;}
+#header .servicenavigation li.navigation.open div {background: #cccccc;}
+#header .servicenavigation li.navigation a {display: none;}
+#navigation {position: absolute; width: 100%; top: 75px; display: none;}
 #navigation ul {}
-#navigation ul li {display: inline-block; vertical-align: top; 
-	padding: 5px 10px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border: 1px solid #dedede;
-	border-bottom: none;
+#navigation ul li {padding: 20px 20px 0 20px; font-size: 20px; color: #888888; display: block; text-align: center;
+	font-family: "PT Serif", Times, serif;
 }
-#navigation a {color: inherit; font-size: inherit;}
-body.download #navigation li.download,
-body.docs #navigation li.docs,
-body.tests #navigation li.tests,
-body.demo #navigation li.demo {background: #000000; color: #ffffff; border-color: #000000;}
+#navigation ul li.front {display: none;}
 
-/*s-documentation.css*/
-.c {font-size: 0;}
-.c400, .c300, .c200, .c100, .c50 {display: inline-block; vertical-align: top; font-size: 0; min-height: 10px;}
-.c400 {width: 960px;}
-.c300 {width: 720px;}
-.c200 {width: 480px;}
-.c100 {width: 240px;}
-.c50 {width: 120px;}
-#content .section {padding: 0 0 20px;}
-#content .section .body {}
-#content {display: block; width: auto;}
-#content h1 {padding-top: 30px;}
-#content span.var {font-style: italic; color: #880088; font-weight: bold;}
-#content span.value {font-style: italic; color: #880088;}
-#content span.domnode {font-style: italic; color: #880088;}
-#content span.attribute {font-style: italic; color: #880088;}
-#content span.type {font-style: italic; font-weight: bold; color: pink;}
-#content span.file {font-style: italic;}
-#content .todo {color: red;}
-#content .promotion {margin: 0 20px 20px; padding: 20px 0 10px; border-radius: 5px; border: 1px solid #dedede}
-#content .promotion .actions {text-align: right; margin-right: 10px;}
-.front #content ul.jesgoal {margin: 0 0 0 20px; padding: 0 0 0 20px; list-style: disc;}
-.front #content ul.jesgoal li {padding-bottom: 10px;}
-.docs #content #library_files {padding-top: 30px;}
-.docs #content #library_files li {position: relative; z-index: 40;}
-.docs #content #library_files li.hover {background: #dedede;}
-.docs #content #library_files h2 {line-height: 53px; font-size: 20px; padding-bottom: 10px;}
-.docs #content #library_files h3 {font-size: 16px; padding: 5px 20px;}
-.docs #content #library_files h3 a {text-decoration: none;}
-.docs #content #library_files p {display: none; position: absolute; top: 0; left: 0; padding: 10px; border: 1px solid #dedede; background: #ffffff; box-shadow: 1px 1px 3px #dedede;}
-.docs #content .search {padding-bottom: 0px;}
-.docs #content .search.loading {background: transparent url(/img/gx_loader.gif) no-repeat 410px 68px;}
-.docs #content .search h2 {font-size: 20px;}
-.docs #content .search .field {padding: 0 18px 20px;}
-.docs #content .search .field input.default {color: #bcbcbc;}
-.docs #content .search .results .function {padding: 15px 0 0; border-top: 1px solid #dedede;}
-.docs #content .search .results .function .header h3 {padding-bottom: 5px;}
-.docs #content .search .results .function .parameters,
-.docs #content .search .results .function .examples,
-.docs #content .search .results .function .return,
-.docs #content .search .results .function .uses,
-.docs #content .search .results .function .description,
-.docs #content .search .results .function .definition h4,
-.docs #content .search .results .function .definition .name,
-.docs #content .search .results .function .definition .shorthand,
-.docs #content .search .results .function .definition dt {display: none;}
-.docs #content .search .results .function.hover {background: #dedede;}
-.docs #content .notes p {display: none;}
-.docs #content ul.tools {display: none;}
-.docs.docpage #content .functions .function .body {display: none;}
-.docs.docpage #content .functions {}
-.docs.docpage #content .functions .header {}
-.docs.docpage #content .functions .body {border-bottom: 1px solid #bbbbbb;}
-.docs.docpage #content .functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
-.docs.docpage #content .functions .function .header {}
-.docs.docpage #content .functions .function .body {padding: 20px 0 0; border: none;}
-#content .functions div.definition {padding: 0 0 20px;}
-#content .functions div.definition > dl {font-size: 0;}
-#content .functions div.definition > dl dt,
-#content .functions div.definition > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.definition > dl dt {width: 205px; padding-right: 15px; text-align: right;}
-#content .functions div.definition > dl dd {width: 700px;}
-#content .functions div.definition > dl dt.name,
-#content .functions div.definition > dl dd.name {}
-#content .functions div.definition > dl dd.name {font-weight: bold;}
-#content .functions div.description {padding: 0 0 20px;}
-#content .functions div.description > dl {font-size: 0;}
-#content .functions div.description > dl dt,
-#content .functions div.description > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.description > dl dt {width: 205px; padding-right: 15px; text-align: right;}
-#content .functions div.description > dl dd {width: 700px;}
-#content .functions div.callbacks > dl dt.name,
-#content .functions div.callbacks > dl dd.name {}
-#content .functions div.callbacks > dl dd.name {font-weight: bold;}
-#content .functions div.callbacks {padding: 0 0 20px;}
-#content .functions div.callbacks > dl {font-size: 0;}
-#content .functions div.callbacks > dl dt,
-#content .functions div.callbacks > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.callbacks > dl dt {width: 205px; padding-right: 15px; text-align: right;}
-#content .functions div.callbacks > dl dd {width: 700px;}
-#content .functions div.callbacks > dl dt.name,
-#content .functions div.callbacks > dl dd.name {}
-#content .functions div.callbacks > dl dd.name {font-weight: bold;}
-#content .functions div.parameters {padding: 0 0 20px;}
-#content .functions div.parameters > dl {font-size: 0;}
-#content .functions div.parameters > dl dt,
-#content .functions div.parameters > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.parameters > dl dt {width: 205px; padding-right: 15px; text-align: right;}
-#content .functions div.parameters > dl dd {width: 700px;}
-#content .functions div.parameters > dl dd .summary {padding: 0 0 5px;}
-#content .functions div.parameters > dl dd .details {padding: 10px 0 10px; }
-#content .functions div.parameters > dl dd .details h5 {padding: 0 0 5px;}
-#content .functions div.parameters > dl dd .details dl.options {font-size: 0; padding: 0;}
-#content .functions div.parameters > dl dd .details dl.options dt,
-#content .functions div.parameters > dl dd .details dl.options dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .functions div.parameters > dl dd .details dl.options dt {width: 90px; padding: 0 10px 0 0; text-align: right;}
-#content .functions div.parameters > dl dd .details dl.options dd {width: 560px;}
-#content .function .return {padding: 0 0 20px;}
-#content .function .examples {padding: 0 0 20px;}
-#content .function .examples .example {padding: 0 20px 10px;}
-#content .function .uses {padding: 0 0 20px;}
-#content .function .uses ul {padding-left: 40px;}
-#content .files {}
-#content .files .header {}
-#content .files .body {}
-#content .files .body ul {padding-left: 40px;}
-#content .segments {}
-#content .segments .header {}
-#content .segments .body {}
-#content .segments .body > dl {font-size: 0;}
-#content .segments .body > dl dt,
-#content .segments .body > dl dd {padding: 0 0 5px; display: inline-block; vertical-align: top;}
-#content .segments .body > dl dt {width: 205px; text-align: right; padding-right: 15px; font-weight: bold;}
-#content .segments .body > dl dd {width: 700px;}
-#content .segments .body > dl dd span.file {white-space: nowrap;}
-code {
-	-moz-tab-size: 4; background: none repeat scroll 0 0 #F7F7F5; display: block; font-family: monaco, courier, sans-serif; font-size: 12px; padding: 20px; white-space: pre;
+/*s-footer-mobile_touch.css*/
+#footer {text-align: center; border-top: 1px solid #888888; margin: 0;}
+#footer p {padding: 10px; cursor: pointer;}
+
+/*s-content-mobile_touch.css*/
+#content {position: relative; padding-top: 60px;}
+#content .scene {position: relative; padding: 50px 0 30px;}
+#content .scene .link {cursor: pointer;}
+#content .scene a {color: #888888;}
+#content .scene h1,
+#content .scene h2,
+#content .scene h3,
+#content .scene h4,
+#content .scene h5,
+#content .scene h6,
+#content .scene p {}
+#content .scene hr {border: none; border-top: 1px solid #888888; margin: 15px 15px 20px; padding: 0;}
+#content .scene p.note {font-style: italic;}
+#content .scene p+h2,
+#content .scene ul+h2,
+#content .scene dl+h2,
+#content .scene code+h2 {padding-top: 20px;}
+#content .scene ul {padding: 0 20px 15px;}
+#content .scene li {display: block; padding: 0 0 5px;}
+#content .scene li h3,
+#content .scene li p,
+#content .scene li dl {padding-left: 0; padding-right: 0;}
+#content .scene dl {padding: 0 20px 15px; overflow: hidden;}
+#content .scene dt {padding: 0 0 2px 0; color: #999999;} 
+#content .scene dt:after {content: "=";}
+#content .scene dd {padding: 0 0 12px 20px;}
+#content .scene dt span {text-transform: none;}
+#content .scene dl dl {padding: 0 0 10px;}
+#content .scene dl dl dt {}
+#content .scene dl dl dd {}
+#content .scene dl h3,
+#content .scene dl h4,
+#content .scene dl h5,
+#content .scene dl h6 {padding-left: 0; padding-right: 0; padding-top: 10px;}
+#content .scene div.image {margin: 0 30px; max-width: 540px; padding: 0 0 30px; cursor: zoom-in;}
+#content .scene div.image img {width: 100%;}
+#content .scene div.image a {padding: 0 20px; font-size: 13px; font-style: italic; display: block; color: #cccccc;}
+#content .scene div.image.fullsize {margin: 0; max-width: 100%; cursor: zoom-out;}
+#content .scene div.image.fullsize a {padding: 0 50px;}
+#content .scene code {padding: 10px 10px; margin: 0 20px 5px; position: relative; top: -13px; background-color: #ededed; font-size: 11px; display: block; 
+	overflow: hidden;
+	white-space: pre-wrap;
+	font-family: "Monaco", "Courier New", "Courier";
 }
+#content .scene span.type,
+#content .scene span.var,
+#content .scene span.value,
+#content .scene span.file,
+#content .scene span.htmltag,
+#content .scene span.command {
+	font-family: "Monaco", "Courier New", "Courier"; font-size: 12px;
+}
+#content .scene span.type {color: #a67800;}
+#content .scene span.var {color: #007633;}
+#content .scene span.value {color: #a65900; font-style: italic;}
+#content .scene span.file {color: #a62300;}
+#content .scene span.htmltag {text-transform: uppercase;}
+#content .scene span.command {color: #4b5cd7;}
+
+
+/*s-pages-mobile_touch.css*/
+#content .scene.segments dt {color: #cccccc; width: auto; text-align: left; padding: 0 0 5px 0; display: block; font-size: 16px;} 
+#content .scene.segments dt:after {content: ":";}
+#content .scene.segments dd {padding: 0 0 25px 20px; width: auto; display: block;}
+#content .scene.pricing div.sponsor,
+#content .scene.pricing div.corporate,
+#content .scene.pricing div.business,
+#content .scene.pricing div.free {padding: 0 0 20px;}
+#content .scene.pricing dl.price {}
+#content .scene.pricing dl.price dt,
+#content .scene.pricing dl.price dd {width: auto; display: inline-block;}
+#content .scene.pricing dl.price dd {padding-left: 5px;}
+#content .scene.pricing dt:after {content: ":";}
+#content .scene div.vcard {padding: 25px 20px;}
+#content .scene div.vcard .name {padding: 0 0 15px;}
+#content .scene div.vcard .tel,
+#content .scene div.vcard .email {font-size: 13px;}
+
+/*s-active-mobile_touch.css*/
+#header .logo:active,
+#navigation ul li:active {text-decoration: none;}
+#content .scene a:active {text-decoration: underline;}
+.terms_notification .accept:active,
+.terms_notification .details:active {text-decoration: underline;}
+
+/*s-colorscheme-mobile_touch.css*/
+* {color: #ff7c00;}
+body {background: #ffffff;}
+#header {background: #ffffff; z-index: 100;}
+#header .logo {color: #04859d;}
+#navigation ul li {color: #04859d;}
+#header .servicenavigation li.navigation div {background: #ff7c00;}
+#header .servicenavigation li.navigation.open div {background: #04859d;}
+#content .scene a {color: #04859d;}
+#content .scene hr {border-color: #ffb773;}
+#content .scene code {color: #333333;}
+#footer {border-color: #ffb773;}
+#footer p {color: #ff7c00;}
+.front #header .logo,
+.segments #navigation ul li.segments,
+.about #navigation ul li.about,
+.apis #navigation ul li.apis,
+.pricing #navigation ul li.pricing {color: #ff7c00;}
+.terms_notification {background: #ffffff;}
+.terms_notification .accept,
+.terms_notification .details {color: #04859d;}
+.terms_notification {border-color: #ff7c00;}
 
