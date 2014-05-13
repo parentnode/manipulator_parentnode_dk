@@ -1,5 +1,5 @@
-<div class="scene i:docpage">
-	<h1>Image - maybe renamed to preloader, since it is basically just an image-preloader</h1>
+<div class="scene docpage i:docpage">
+	<h1>Preloader</h1>
 
 	<div class="section functions">
 		<div class="header">
@@ -9,7 +9,7 @@
 
 			<div class="function">
 				<div class="header">
-					<h3>Util.Image.load</h3>
+					<h3>Util.preloader</h3>
 				</div>
 				<div class="body">
 					<div class="definition">

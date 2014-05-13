@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Movements</h1>
 	<p>Advanced events for drag and swipe handling. Includes overlap detection.</p>
 

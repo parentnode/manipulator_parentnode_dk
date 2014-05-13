@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Browser events</h1>
 	<h2>Notes on DOMReady</h2>
 	<p>

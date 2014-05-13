@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>String</h1>
 	<p>String manipulation and unique key generation.</p>
 

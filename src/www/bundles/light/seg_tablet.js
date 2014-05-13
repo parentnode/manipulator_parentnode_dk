@@ -1,7 +1,9 @@
 /*
-JES v0.7.5-light Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2013-12-06 10:05:03
+Manipulator v0.8-light Copyright 2014 http://manipulator.parentnode.dk
+wtf-js-merged @ 2014-05-13 10:17:09
 */
+
+/*seg_tablet_include.js*/
 
 /*u.js*/
 if(!u || !Util) {
@@ -11,6 +13,7 @@ if(!u || !Util) {
 	u.nodeId = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
+
 
 /*u-dom.js*/
 Util.querySelector = u.qs = function(query, scope) {
@@ -160,7 +163,7 @@ Util.wrapElement = u.we = function(node, node_type, attributes) {
 Util.textContent = u.text = function(node) {
 	return node.textContent;
 }
-Util.clickableElement = u.ce = function(node) {
+Util.clickableElement = u.ce = function(node, options) {
 	var a = (node.nodeName.toLowerCase() == "a" ? node : u.qs("a", node));
 	if(a) {
 		u.ac(node, "link");
@@ -169,8 +172,35 @@ Util.clickableElement = u.ce = function(node) {
 			a.removeAttribute("href");
 		}
 	}
+	else {
+		u.ac(node, "clickable");
+	}
 	if(typeof(u.e.click) == "function") {
 		u.e.click(node);
+		if(typeof(options) == "object") {
+			var argument;
+			for(argument in options) {
+				switch(argument) {
+					case "type"			: node._click_type		= options[argument]; break;
+					case "method"		: node._click_method	= options[argument]; break;
+				}
+			}
+			if(node._click_type == "link") {
+				node.clicked = function(event) {
+					if(event.metaKey || event.ctrlKey) {
+						window.open(this.url);
+					}
+					else {
+						if(this._click_method == "hash") {
+							location.hash = this.url;
+						}
+						else {
+							location.href = this.url;
+						}
+					}
+				}
+			}
+		}
 	}
 	return node;
 }
@@ -292,6 +322,7 @@ Util.hasFixedParent = u.hfp = function(node) {
 	}
 	return false;
 }
+
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
@@ -468,6 +499,7 @@ Util.Events = u.e = new function() {
 	}
 }
 
+
 /*u-events-browser.js*/
 u.e.addDOMReadyEvent = function(action) {
 	if(document.readyState && document.addEventListener) {
@@ -504,6 +536,7 @@ u.e.addScrollEvent = function(node, action) {
 }
 u.e.removeScrollEvent = function(node, action) {
 }
+
 
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
@@ -561,6 +594,7 @@ Util.pageScrollY = u.scrollY = function() {
 	return window.pageYOffset;
 }
 
+
 /*u-init.js*/
 Util.Objects = u.o = new Object();
 Util.init = function(scope) {
@@ -577,103 +611,109 @@ Util.init = function(scope) {
 	}
 }
 
+
 /*u-request.js*/
 Util.createRequestObject = u.createRequestObject = function() {
 	return new XMLHttpRequest();
 }
-Util.Request = u.request = function(node, url, settings) {
-	node.request_url = url;
-	node.request_method = "GET";
-	node.request_async = true;
-	node.request_params = "";
-	node.request_headers = false;
-	node.response_callback = "response";
+Util.request = u.request = function(node, url, settings) {
+	var request_id = u.randomString(6);
+	node[request_id] = {};
+	node[request_id].request_url = url;
+	node[request_id].request_method = "GET";
+	node[request_id].request_async = true;
+	node[request_id].request_params = "";
+	node[request_id].request_headers = false;
+	node[request_id].response_callback = "response";
 	if(typeof(settings) == "object") {
 		var argument;
 		for(argument in settings) {
 			switch(argument) {
-				case "method"		: node.request_method		= settings[argument]; break;
-				case "params"		: node.request_params		= settings[argument]; break;
-				case "async"		: node.request_async		= settings[argument]; break;
-				case "headers"		: node.request_headers		= settings[argument]; break;
-				case "callback"		: node.response_callback	= settings[argument]; break;
+				case "method"		: node[request_id].request_method		= settings[argument]; break;
+				case "params"		: node[request_id].request_params		= settings[argument]; break;
+				case "async"		: node[request_id].request_async		= settings[argument]; break;
+				case "headers"		: node[request_id].request_headers		= settings[argument]; break;
+				case "callback"		: node[request_id].response_callback	= settings[argument]; break;
 			}
 		}
 	}
-	if(node.request_method.match(/GET|POST|PUT|PATCH/i)) {
-		node.HTTPRequest = this.createRequestObject();
-		node.HTTPRequest.node = node;
-		if(node.request_async) {
-			node.HTTPRequest.onreadystatechange = function() {
+	if(node[request_id].request_method.match(/GET|POST|PUT|PATCH/i)) {
+		node[request_id].HTTPRequest = this.createRequestObject();
+		node[request_id].HTTPRequest.node = node;
+		node[request_id].HTTPRequest.request_id = request_id;
+		if(node[request_id].request_async) {
+			node[request_id].HTTPRequest.onreadystatechange = function() {
 				if(this.readyState == 4) {
 					u.validateResponse(this);
 				}
 			}
 		}
 		try {
-			if(node.request_method.match(/GET/i)) {
-				var params = u.JSONtoParams(node.request_params);
-				node.request_url += params ? ((!node.request_url.match(/\?/g) ? "?" : "&") + params) : "";
-				node.HTTPRequest.open(node.request_method, node.request_url, node.request_async);
-				node.HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			if(node[request_id].request_method.match(/GET/i)) {
+				var params = u.JSONtoParams(node[request_id].request_params);
+				node[request_id].request_url += params ? ((!node[request_id].request_url.match(/\?/g) ? "?" : "&") + params) : "";
+				node[request_id].HTTPRequest.open(node[request_id].request_method, node[request_id].request_url, node[request_id].request_async);
+				node[request_id].HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				var csfr_field = u.qs('meta[name="csrf-token"]');
 				if(csfr_field && csfr_field.content) {
-					node.HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
+					node[request_id].HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
 				}
-				if(typeof(node.request_headers) == "object") {
+				if(typeof(node[request_id].request_headers) == "object") {
 					var header;
-					for(header in node.request_headers) {
-						node.HTTPRequest.setRequestHeader(header, node.request_headers[header]);
+					for(header in node[request_id].request_headers) {
+						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
-				node.HTTPRequest.send("");
+				node[request_id].HTTPRequest.send("");
 			}
-			else if(node.request_method.match(/POST|PUT|PATCH/i)) {
+			else if(node[request_id].request_method.match(/POST|PUT|PATCH/i)) {
 				var params;
-				if(typeof(node.request_params) == "object" && !node.request_params.constructor.toString().match(/FormData/i)) {
-					params = JSON.stringify(node.request_params);
+				if(typeof(node[request_id].request_params) == "object" && !node[request_id].request_params.constructor.toString().match(/FormData/i)) {
+					params = JSON.stringify(node[request_id].request_params);
 				}
 				else {
-					params = node.request_params;
+					params = node[request_id].request_params;
 				}
-				node.HTTPRequest.open(node.request_method, node.request_url, node.request_async);
-				node.HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				node[request_id].HTTPRequest.open(node[request_id].request_method, node[request_id].request_url, node[request_id].request_async);
+				node[request_id].HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				var csfr_field = u.qs('meta[name="csrf-token"]');
 				if(csfr_field && csfr_field.content) {
-					node.HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
+					node[request_id].HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
 				}
-				if(typeof(node.request_headers) == "object") {
+				if(typeof(node[request_id].request_headers) == "object") {
 					var header;
-					for(header in node.request_headers) {
-						node.HTTPRequest.setRequestHeader(header, node.request_headers[header]);
+					for(header in node[request_id].request_headers) {
+						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
-				node.HTTPRequest.send(params);
+				node[request_id].HTTPRequest.send(params);
 			}
 		}
 		catch(exception) {
-			node.HTTPRequest.exception = exception;
-			u.validateResponse(node.HTTPRequest);
+			node[request_id].HTTPRequest.exception = exception;
+			u.validateResponse(node[request_id].HTTPRequest);
 			return;
 		}
-		if(!node.request_async) {
-			u.validateResponse(node.HTTPRequest);
+		if(!node[request_id].request_async) {
+			u.validateResponse(node[request_id].HTTPRequest);
 		}
 	}
-	else if(node.request_method.match(/SCRIPT/i)) {
+	else if(node[request_id].request_method.match(/SCRIPT/i)) {
 		var key = u.randomString();
 		document[key] = new Object();
 		document[key].node = node;
+		document[key].request_id = request_id;
 		document[key].responder = function(response) {
 			var response_object = new Object();
 			response_object.node = this.node;
+			response_object.request_id = this.request_id;
 			response_object.responseText = response;
 			u.validateResponse(response_object);
 		}
-		var params = u.JSONtoParams(node.request_params);
-		node.request_url += params ? ((!node.request_url.match(/\?/g) ? "?" : "&") + params) : "";
-		node.request_url += (!node.request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
-		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node.request_url}));
+		var params = u.JSONtoParams(node[request_id].request_params);
+		node[request_id].request_url += params ? ((!node[request_id].request_url.match(/\?/g) ? "?" : "&") + params) : "";
+		node[request_id].request_url += (!node[request_id].request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
+		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node[request_id].request_url}));
 	}
 }
 Util.JSONtoParams = function(json) {
@@ -762,9 +802,10 @@ Util.validateResponse = function(response){
 		}
 	}
 	if(object) {
-		if(typeof(response.node[response.node.response_callback]) == "function") {
-			response.node[response.node.response_callback](object);
+		if(typeof(response.node[response.node[response.request_id].response_callback]) == "function") {
+			response.node[response.node[response.request_id].response_callback](object);
 		}
+		// 
 	}
 	else {
 		if(typeof(response.node.ResponseError) == "function") {
@@ -775,6 +816,7 @@ Util.validateResponse = function(response){
 		}
 	}
 }
+
 
 /*u-string.js*/
 Util.cutString = function(string, length) {
@@ -833,6 +875,7 @@ Util.stringOr = u.eitherOr = function(value, replacement) {
 		return replacement ? replacement : "";
 	}	
 }
+
 /*u-timer.js*/
 Util.Timer = u.t = new function() {
 	this._timers = new Array();
@@ -891,3 +934,4 @@ Util.Timer = u.t = new function() {
 		}
 	}
 }
+

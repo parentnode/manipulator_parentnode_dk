@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Date</h1>
 	<p>Format your dates easily.</p>
 

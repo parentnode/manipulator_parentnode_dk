@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Animation</h1>
 	<p>
 		Using CSS3 transitions to do your animation is by far the best way, - you get better performance and less code. However
@@ -571,7 +571,7 @@
 									<span class="type">Node</span> node to set width on.
 								</div>
 							</dd>
-							<dt><span class="var">x</span></dt>
+							<dt><span class="var">width</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">Integer</span> new width of node.

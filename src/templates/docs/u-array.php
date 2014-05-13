@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Array</h1>
 	<p>Filling out the gap in older Array implementations.</p>
 

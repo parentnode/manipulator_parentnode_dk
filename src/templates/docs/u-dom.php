@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>DOM</h1>
 	<p>DOM query and manipulation tools.</p>
 

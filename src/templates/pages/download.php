@@ -36,7 +36,7 @@ function findModules($file) {
 	return $_;
 }
 ?>
-<div class="scene">
+<div class="scene download">
 
 	<h1>Downloads</h1>
 
@@ -46,7 +46,10 @@ function findModules($file) {
 	<h2>Bundles</h2>
 	<p>Precompiled bundles of the Manipulator JavaScript library.</p>
 
-	<h3>About the bundles</h3>
+	<h3>About the bundle</h3>
+	<p>
+		The download package contains three bundles, customized for different needs - light, medium and full.
+	</p>
 	<p>
 		The Manipulator library is based on segments. This means the library contains variations depending on which segment(s) 
 		you are building for. In each bundle you will find 9 include files. For more information about <a href="http://detector.parentnode.dk/segments">segments</a>
@@ -64,16 +67,17 @@ function findModules($file) {
 	</p>
 
 
+	<ul class="actions">
+		<li><a href="/bundles/archive/v0_8.zip" class="button primary">Download</a></li>
+	</ul>
+
+
 	<div class="bundle light">
-		<h3>Light bundle</h3>
+		<h3>Light</h3>
 		<p>
 			For the simple site. Only the most basic tools. Includes 
 			<?= findModules(LOCAL_PATH."/www/bundles/light/lib/seg_desktop_include.js") ?>.
 		</p>
-
-		<ul class="actions">
-			<li><a href="/bundles/manipulator_light_v0_8.zip" class="button primary">Download light</a></li>
-		</ul>
 	</div>
 
 
@@ -83,10 +87,6 @@ function findModules($file) {
 			For most sites without being bloathed. Includes 
 			<?= findModules(LOCAL_PATH."/www/bundles/medium/lib/seg_desktop_include.js") ?>.
 		</p>
-
-		<ul class="actions">
-			<li><a href="/bundles/manipulator_medium_v0_8.zip" class="button primary">Download medium</a></li>
-		</ul>
 	</div>
 
 
@@ -96,10 +96,6 @@ function findModules($file) {
 			Everything if you need it - but ask yourself if you really do. Includes 
 			<?= findModules(LOCAL_PATH."/www/bundles/full/lib/seg_desktop_include.js") ?>.
 		</p>
-
-		<ul class="actions">
-			<li><a href="/bundles/manipulator_full_v0_8.zip" class="button primary">Download full</a></li>
-		</ul>
 	</div>
 
 </div>

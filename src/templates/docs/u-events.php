@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Events</h1>
 	<p>
 		The Manipulator-event model, has been designed to be as close to regular JavaScript event-handling as possible. Keeping close to

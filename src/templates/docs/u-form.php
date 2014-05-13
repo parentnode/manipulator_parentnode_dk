@@ -1,6 +1,9 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Form</h1>
-	<p>Advanced form controller. Validation, event callbacks and helper methods to customize form design and interaction.</p>
+	<p>
+		Advanced form controller. Validation, event callbacks and helper methods to customize form design 
+		and interaction.
+	</p>
 	<p>
 		Util.Form is based on a simple HTML syntax, providing full HTML fallback when required. To learn more about 
 		the form-HTML syntax, see <a href="/documentation/markup/form">HTML/Form</a>.
@@ -54,8 +57,6 @@
 
 						<h5>Field</h5>
 						<dl>
-							<dt>field._label</dt>
-							<dd>Reference to field label</dd>
 							<dt>field._input</dt>
 							<dd>Reference to field input/inputs</dd>
 							<dt>field._hint</dt>
@@ -66,6 +67,8 @@
 
 						<h5>Input</h5>
 						<dl>
+							<dt>input._label</dt>
+							<dd>Reference to input label</dd>
 							<dt>input.field</dt>
 							<dd>Reference to input field</dd>
 							<dt>input.val(optional value)</dt>
@@ -109,7 +112,7 @@
 							<dt>text</dt>
 							<dd>Textarea. Must be string. Optional min:length and max:length classes to specify min and max length of string. Optional autoexpand class to make textarea expand to content.</dd>
 
-							<dt>checkbox/boolean</dt>
+							<dt>checkbox</dt>
 							<dd>Input type="checkbox".</dd>
 
 							<dt>radio_buttons</dt>

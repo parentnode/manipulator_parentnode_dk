@@ -10,7 +10,7 @@ include_once($_SERVER["FRAMEWORK_PATH"]."/config/init.php");
 $action = $page->actions();
 
 
-$page->bodyClass("Tests");
+$page->bodyClass("tests");
 $page->pageTitle("Every good function deserves a test");
 
 

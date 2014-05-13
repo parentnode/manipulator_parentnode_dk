@@ -1,7 +1,9 @@
 /*
-JES v0.7.5-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2013-12-06 10:05:13
+Manipulator v0.8-full Copyright 2014 http://manipulator.parentnode.dk
+wtf-js-merged @ 2014-05-13 10:17:17
 */
+
+/*seg_mobile_touch_include.js*/
 
 /*u.js*/
 if(!u || !Util) {
@@ -11,6 +13,7 @@ if(!u || !Util) {
 	u.nodeId = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
+
 
 /*u-debug.js*/
 Util.debugURL = function(url) {
@@ -45,7 +48,7 @@ Util.bug = function(message, corner, color) {
 				color = "black";
 			}
 			option = options[corner];
-			if(!u.qs("#debug_id_"+corner)) {
+			if(!document.getElementById("#debug_id_"+corner)) {
 				var d_target = u.ae(document.body, "div", {"class":"debug_"+corner, "id":"debug_id_"+corner});
 				d_target.style.position = u.bug_position ? u.bug_position : "absolute";
 				d_target.style.zIndex = 16000;
@@ -64,7 +67,7 @@ Util.bug = function(message, corner, color) {
 			if(typeof(message) != "string") {
 				message = message.toString();
 			}
-			u.ae(u.qs("#debug_id_"+corner), "div", ({"style":"color: " + color})).innerHTML = message ? message.replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
+			u.ae(document.getElementById("#debug_id_"+corner), "div", ({"style":"color: " + color})).innerHTML = message ? message.replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
 		}
 		if(typeof(console) == "object") {
 			console.log(message);
@@ -90,8 +93,10 @@ Util.xInObject = function(object) {
 	}
 }
 
+
 /*u-animation.js*/
 Util.Animation = u.a = new function() {
+	// 	
 	this.support3d = function() {
 		if(this._support3d === undefined) {
 			var node = document.createElement("div");
@@ -214,7 +219,27 @@ Util.Animation = u.a = new function() {
 		node._bg_color = color;
 		node.offsetHeight;
 	}
+	this.rotateScale = function(node, deg, scale) {
+		node.style[this.variant() + "Transform"] = "rotate("+deg+"deg) scale("+scale+")";
+		node._rotation = deg;
+		node._scale = scale;
+		node.offsetHeight;
+	}
+	this.scaleRotateTranslate = function(node, scale, deg, x, y) {
+		if(this.support3d()) {
+			node.style[this.variant() + "Transform"] = "scale("+scale+") rotate("+deg+"deg) translate3d("+x+"px, "+y+"px, 0)";
+		}
+		else {
+			node.style[this.variant() + "Transform"] = "scale("+scale+") rotate("+deg+"deg) translate("+x+"px, "+y+"px)";
+		}
+		node._rotation = deg;
+		node._scale = scale;
+		node._x = x;
+		node._y = y;
+		node.offsetHeight;
+	}
 }
+
 
 /*u-cookie.js*/
 Util.saveCookie = function(name, value, options) {
@@ -302,6 +327,7 @@ Util.cookieReference = function(node) {
 	return ref;
 }
 
+
 /*u-date.js*/
 Util.date = function(format, timestamp, months) {
 	var date = timestamp ? new Date(timestamp) : new Date();
@@ -333,6 +359,7 @@ Util.date = function(format, timestamp, months) {
 		return _ in chars ? chars[_] : _.slice(1, _.length - 1);
 	});
 };
+
 
 /*u-dom.js*/
 Util.querySelector = u.qs = function(query, scope) {
@@ -482,7 +509,7 @@ Util.wrapElement = u.we = function(node, node_type, attributes) {
 Util.textContent = u.text = function(node) {
 	return node.textContent;
 }
-Util.clickableElement = u.ce = function(node) {
+Util.clickableElement = u.ce = function(node, options) {
 	var a = (node.nodeName.toLowerCase() == "a" ? node : u.qs("a", node));
 	if(a) {
 		u.ac(node, "link");
@@ -491,8 +518,35 @@ Util.clickableElement = u.ce = function(node) {
 			a.removeAttribute("href");
 		}
 	}
+	else {
+		u.ac(node, "clickable");
+	}
 	if(typeof(u.e.click) == "function") {
 		u.e.click(node);
+		if(typeof(options) == "object") {
+			var argument;
+			for(argument in options) {
+				switch(argument) {
+					case "type"			: node._click_type		= options[argument]; break;
+					case "method"		: node._click_method	= options[argument]; break;
+				}
+			}
+			if(node._click_type == "link") {
+				node.clicked = function(event) {
+					if(event.metaKey || event.ctrlKey) {
+						window.open(this.url);
+					}
+					else {
+						if(this._click_method == "hash") {
+							location.hash = this.url;
+						}
+						else {
+							location.href = this.url;
+						}
+					}
+				}
+			}
+		}
 	}
 	return node;
 }
@@ -614,6 +668,7 @@ Util.hasFixedParent = u.hfp = function(node) {
 	}
 	return false;
 }
+
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
@@ -790,6 +845,7 @@ Util.Events = u.e = new function() {
 	}
 }
 
+
 /*u-events-browser.js*/
 u.e.addDOMReadyEvent = function(action) {
 	if(document.readyState && document.addEventListener) {
@@ -826,6 +882,7 @@ u.e.addScrollEvent = function(node, action) {
 }
 u.e.removeScrollEvent = function(node, action) {
 }
+
 
 /*u-events-movements.js*/
 u.e.resetDragEvents = function(node) {
@@ -892,7 +949,7 @@ u.e.drag = function(node, boundaries, settings) {
 				case "strict"			: node.drag_strict			= settings[argument]; break;
 				case "elastica"			: node.drag_elastica		= Number(settings[argument]); break;
 				case "dropout"			: node.drag_dropout			= settings[argument]; break;
-				case "show_bounds"		: node.show_bounds			= settings[argument]; break; // NEEDS HELP
+				case "show_bounds"		: node.show_bounds			= settings[argument]; break; 
 				case "vertical_lock"	: node.vertical_lock		= settings[argument]; break;
 				case "horizontal_lock"	: node.horizontal_lock		= settings[argument]; break;
 				case "callback_picked"	: node.callback_picked		= settings[argument]; break;
@@ -912,6 +969,13 @@ u.e.drag = function(node, boundaries, settings) {
 		node.start_drag_y = u.absY(boundaries) - u.absY(node);
 		node.end_drag_x = node.start_drag_x + boundaries.offsetWidth;
 		node.end_drag_y = node.start_drag_y + boundaries.offsetHeight;
+		// 	
+		// 	
+		// 	
+		// 	
+		// 	
+		// 	
+		// 	
 	}
 	if(node.show_bounds) {
 		var debug_bounds = u.ae(document.body, "div", {"class":"debug_bounds"})
@@ -1188,6 +1252,7 @@ u.e._beforeScroll = function(event) {
 	}
 }
 
+
 /*u-flash.js*/
 Util.flashDetection = function(version) {
 	var flash_version = false;
@@ -1282,6 +1347,7 @@ Util.flash = function(node, url, settings) {
 	return flash_object;
 }
 
+
 /*u-form.js*/
 Util.Form = u.f = new function() {
 	this.customInit = {};
@@ -1317,7 +1383,8 @@ Util.Form = u.f = new function() {
 				u.ae(field, "div", {"class":"error", "html":error_message})
 			}
 			field._indicator = u.ae(field, "div", {"class":"indicator"});
-			field._label = u.qs("label", field);
+			// 
+			field._help = u.qs(".help", field);
 			field._hint = u.qs(".hint", field);
 			field._error = u.qs(".error", field);
 			var not_initialized = true;
@@ -1332,27 +1399,35 @@ Util.Form = u.f = new function() {
 				if(u.hc(field, "string|email|tel|number|integer|password")) {
 					field._input = u.qs("input", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
 				}
 				else if(u.hc(field, "text")) {
 					field._input = u.qs("textarea", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
+					if(u.hc(field, "autoexpand")) {
+						this.autoExpand(field._input)
+					}
 				}
 				else if(u.hc(field, "select")) {
 					field._input = u.qs("select", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
 				}
 				else if(u.hc(field, "checkbox|boolean")) {
 					field._input = u.qs("input[type=checkbox]", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
 				}
 				else if(u.hc(field, "radio|radio_buttons")) {
 					field._input = u.qsa("input", field);
 					for(j = 0; input = field._input[j]; j++) {
 						input.field = field;
+						input._label = u.qs("label[for="+input.id+"]", field);
 						this.formIndex(form, input);
 					}
 				}
@@ -1360,23 +1435,38 @@ Util.Form = u.f = new function() {
 					field._input = u.qsa("select,input", field);
 					for(j = 0; input = field._input[j]; j++) {
 						input.field = field;
+						input._label = u.qs("label[for="+input.id+"]", field);
 						this.formIndex(form, input);
 					}
 				}
 				else if(u.hc(field, "tags")) {
 					field._input = u.qs("input", field);
 					field._input.field = field;
+					field._input._label = u.qs("label\[for\="+field._input.id+"\]", field);
 					this.formIndex(form, field._input);
 				}
 				else if(u.hc(field, "prices")) {
 					field._input = u.qs("input", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
 				}
 				else if(u.hc(field, "files")) {
 					field._input = u.qs("input", field);
 					field._input.field = field;
+					field._input._label = u.qs("label[for="+field._input.id+"]", field);
 					this.formIndex(form, field._input);
+				}
+				else if(u.hc(field, "location")) {
+					field._input = u.qsa("input", field);
+					for(j = 0; input = field._input[j]; j++) {
+						input.field = field;
+						input._label = u.qs("label[for="+input.id+"]", field);
+						this.formIndex(form, input);
+					}
+					if(navigator.geolocation) {
+						this.geoLocation(field);
+					}
 				}
 			}
 		}
@@ -1387,7 +1477,7 @@ Util.Form = u.f = new function() {
 				hidden_field.val = this._value;
 			}
 		}
-		var actions = u.qsa(".actions li", form);
+		var actions = u.qsa(".actions li, .actions", form);
 		for(i = 0; action = actions[i]; i++) {
 			action._input = u.qs("input,a", action);
 			if(action._input.type && action._input.type == "submit") {
@@ -1412,6 +1502,37 @@ Util.Form = u.f = new function() {
 				form.actions[action_name] = action._input;
 			if(typeof(u.k) == "object" && u.hc(action._input, "key:[a-z0-9]+")) {
 				u.k.addKey(u.cv(action._input, "key"), action._input);
+			}
+		}
+		if(!actions.length) {
+			var p_ul = u.pn(form, "ul");
+			if(u.hc(p_ul, "actions")) {
+				u.bug("valid pure button form found")
+				var input = u.qs("input,a", form);
+				if(input.type && input.type == "submit") {
+					input.onclick = function(event) {
+						u.e.kill(event ? event : window.event);
+					}
+				}
+				u.ce(input);
+				input.clicked = function(event) {
+					u.e.kill(event);
+					if(!u.hc(this, "disabled")) {
+						if(this.type && this.type.match(/submit/i)) {
+							this.form._submit_button = this;
+							this.form._submit_input = false;
+							this.form._submit(event, this);
+						}
+					}
+				}
+				this.buttonOnEnter(input);
+				this.activateButton(input);
+				if(input.name) {
+					form.actions[input.name] = input;
+				}
+				if(typeof(u.k) == "object" && u.hc(input, "key:[a-z0-9]+")) {
+					u.k.addKey(u.cv(input, "key"), input);
+				}
 			}
 		}
 	}
@@ -1487,6 +1608,7 @@ Util.Form = u.f = new function() {
 			}
 			else if(event.keyCode == 13 && !this._submit_disabled) {
 				u.e.kill(event);
+				this.blur();
 				this.form.submitInput = this;
 				this.form.submitButton = false;
 				this.form._submit(event, this);
@@ -1520,40 +1642,6 @@ Util.Form = u.f = new function() {
 				iN.val = this._value;
 				u.e.addEvent(iN, "keyup", this._updated);
 				u.e.addEvent(iN, "change", this._changed);
-				if(u.hc(iN.field, "autoexpand")) {
-					var current_height = parseInt(u.gcs(iN, "height"));
-					u.bug(current_height + "," + iN.scrollHeight);
-					var current_value = iN.val();
-					iN.val("");
-					u.bug(current_height + "," + iN.scrollHeight);
-					u.as(iN, "overflow", "hidden");
-					u.bug(current_height + "," + iN.scrollHeight);
-					iN.autoexpand_offset = 0;
-					if(parseInt(u.gcs(iN, "height")) != iN.scrollHeight) {
-						iN.autoexpand_offset = iN.scrollHeight - parseInt(u.gcs(iN, "height"));
-					}
-					iN.val(current_value);
-					iN.setHeight = function() {
-						var textarea_height = parseInt(u.gcs(this, "height"));
-						if(this.val()) {
-							if(u.browser("webkit")) {
-								if(this.scrollHeight - this.autoexpand_offset > textarea_height) {
-									u.a.setHeight(this, this.scrollHeight);
-								}
-							}
-							else if(u.browser("opera") || u.browser("explorer")) {
-								if(this.scrollHeight > textarea_height) {
-									u.a.setHeight(this, this.scrollHeight);
-								}
-							}
-							else {
-								u.a.setHeight(this, this.scrollHeight);
-							}
-						}
-					}
-					u.e.addEvent(iN, "keyup", iN.setHeight);
-					iN.setHeight();
-				}
 			}
 			else if(iN.nodeName.match(/select/i)) {
 				iN.val = this._value_select;
@@ -1676,6 +1764,14 @@ Util.Form = u.f = new function() {
 		this.field.focused = true;
 		u.ac(this.field, "focus");
 		u.ac(this, "focus");
+		u.as(this.field, "zIndex", 99);
+		if(this.field._help) {
+			var f_h =  this.field.offsetHeight;
+			var f_p_t = parseInt(u.gcs(this.field, "padding-top"));
+			var f_p_b = parseInt(u.gcs(this.field, "padding-bottom"));
+			var f_h_h = this.field._help.offsetHeight;
+			u.as(this.field._help, "top", (((f_h - (f_p_t + f_p_b)) / 2) + 2) - (f_h_h / 2) + "px");
+		}
 		if(typeof(this.focused) == "function") {
 			this.focused();
 		}
@@ -1687,6 +1783,10 @@ Util.Form = u.f = new function() {
 		this.field.focused = false;
 		u.rc(this.field, "focus");
 		u.rc(this, "focus");
+		u.as(this.field, "zIndex", 90);
+		if(this.field._help) {
+			u.as(this.field._help, "top", ((this.offsetTop + this.offsetHeight/2 + 2) - (this.field._help.offsetHeight/2)) + "px")
+		}
 		this.used = true;
 		if(typeof(this.blurred) == "function") {
 			this.blurred();
@@ -1732,7 +1832,7 @@ Util.Form = u.f = new function() {
 		if(iN.form.labelstyle || u.hc(iN.form, "labelstyle:[a-z]+")) {
 			iN.form.labelstyle = iN.form.labelstyle ? iN.form.labelstyle : u.cv(iN.form, "labelstyle");
 			if(iN.form.labelstyle == "inject" && (!iN.type || !iN.type.match(/file|radio|checkbox/))) {
-				iN.default_value = iN.field._label.innerHTML;
+				iN.default_value = iN._label.innerHTML;
 				u.e.addEvent(iN, "focus", this._default_value_focus);
 				u.e.addEvent(iN, "blur", this._default_value_blur);
 				if(iN.val() == "") {
@@ -1758,6 +1858,9 @@ Util.Form = u.f = new function() {
 		if(iN.used || !this.isDefault(iN) && iN.val()) {
 			u.ac(iN, "error");
 			u.ac(iN.field, "error");
+			if(iN.field._help) {
+				u.as(iN.field._help, "top", ((iN.offsetTop + iN.offsetHeight/2 + 2) - (iN.field._help.offsetHeight/2)) + "px")
+			}
 			if(typeof(iN.validationFailed) == "function") {
 				iN.validationFailed();
 			}
@@ -1775,6 +1878,64 @@ Util.Form = u.f = new function() {
 			u.rc(iN.field, "correct");
 			u.rc(iN, "error");
 			u.rc(iN.field, "error");
+		}
+	}
+	this.autoExpand = function(iN) {
+		var current_height = parseInt(u.gcs(iN, "height"));
+		u.bug("AE:" + current_height + "," + iN.scrollHeight);
+		var current_value = iN.val();
+		iN.val("");
+		u.bug(current_height + "," + iN.scrollHeight);
+		u.as(iN, "overflow", "hidden");
+		u.bug(current_height + "," + iN.scrollHeight);
+		iN.autoexpand_offset = 0;
+		if(parseInt(u.gcs(iN, "height")) != iN.scrollHeight) {
+			iN.autoexpand_offset = iN.scrollHeight - parseInt(u.gcs(iN, "height"));
+		}
+		iN.val(current_value);
+		iN.setHeight = function() {
+			u.bug("iN.setHeight:" + u.nodeId(this));
+			var textarea_height = parseInt(u.gcs(this, "height"));
+			if(this.val()) {
+				if(u.browser("webkit")) {
+					if(this.scrollHeight - this.autoexpand_offset > textarea_height) {
+						u.a.setHeight(this, this.scrollHeight);
+					}
+				}
+				else if(u.browser("opera") || u.browser("explorer")) {
+					if(this.scrollHeight > textarea_height) {
+						u.a.setHeight(this, this.scrollHeight);
+					}
+				}
+				else {
+					u.a.setHeight(this, this.scrollHeight);
+				}
+			}
+		}
+		u.e.addEvent(iN, "keyup", iN.setHeight);
+		iN.setHeight();
+	}
+	this.geoLocation = function(field) {
+		u.ac(field, "geolocation");
+		var bn_geolocation = u.ae(field, "div", {"class":"geolocation"});
+		bn_geolocation.field = field;
+		u.ce(bn_geolocation);
+		bn_geolocation.clicked = function() {
+			window._geoLocationField = this.field;
+			window._foundLocation = function(position) {
+				var lat = position.coords.latitude;
+				var lon = position.coords.longitude;
+				var lat_input = u.qs("div.latitude input", window._geolocationField);
+				var lon_input = u.qs("div.longitude input", window._geolocationField);
+				lat_input.val(lat);
+				lat_input.focus();
+				lon_input.val(lon);
+				lon_input.focus();
+			}
+			window._noLocation = function() {
+				alert('Could not find location');
+			}
+			navigator.geolocation.getCurrentPosition(window._foundLocation, window._noLocation);
 		}
 	}
 	this.validate = function(iN) {
@@ -1968,7 +2129,55 @@ Util.Form = u.f = new function() {
 					this.fieldError(iN);
 				}
 			}
+			else if(u.hc(iN.field, "location")) {
+				if(u.hc(iN, "location")) {
+					min = min ? min : 1;
+					max = max ? max : 255;
+					if(
+						iN.val().length >= min &&
+						iN.val().length <= max
+					) {
+						this.fieldCorrect(iN);
+					}
+					else {
+						this.fieldError(iN);
+					}
+				}
+				if(u.hc(iN, "latitude")) {
+					min = min ? min : -90;
+					max = max ? max : 90;
+					if(
+						!isNaN(iN.val()) && 
+						iN.val() >= min && 
+						iN.val() <= max
+					) {
+						this.fieldCorrect(iN);
+					}
+					else {
+						this.fieldError(iN);
+					}
+				}
+				if(u.hc(iN, "longitude")) {
+					min = min ? min : -180;
+					max = max ? max : 180;
+					if(
+						!isNaN(iN.val()) && 
+						iN.val() >= min && 
+						iN.val() <= max
+					) {
+						this.fieldCorrect(iN);
+					}
+					else {
+						this.fieldError(iN);
+					}
+				}
+				if(u.qsa(".correct", iN.field).length != 3) {
+					u.rc(iN.field, "correct");
+					u.ac(iN.field, "error");
+				}
+			}
 			else if(u.hc(iN.field, "files")) {
+				u.bug("files:" + iN.files.length);
 				if(
 					1
 				) {
@@ -2022,6 +2231,9 @@ Util.Form = u.f = new function() {
 					if(!this.isDefault(input)) {
 						params[input.name] = input.value;
 					}
+					else {
+						params[input.name] = "";
+					}
 				}
 			}
 		}
@@ -2036,6 +2248,9 @@ Util.Form = u.f = new function() {
 			if(!u.hc(textarea, ignore_inputs)) {
 				if(!this.isDefault(textarea)) {
 					params[textarea.name] = textarea.value;
+				}
+				else {
+					params[textarea.name] = "";
 				}
 			}
 		}
@@ -2112,6 +2327,96 @@ u.f.recurseName = function(object, indexes, value) {
 	}
 	return object;
 }
+u.f.addForm = function(node, settings) {
+	var form_name = "js_form";
+	var form_action = "#";
+	var form_method = "post";
+	var form_class = "";
+	if(typeof(settings) == "object") {
+		var argument;
+		for(argument in settings) {
+			switch(argument) {
+				case "name"			: form_name				= settings[argument]; break;
+				case "action"		: form_action			= settings[argument]; break;
+				case "method"		: form_method			= settings[argument]; break;
+				case "class"		: form_class			= settings[argument]; break;
+			}
+		}
+	}
+	var form = u.ae(node, "form", {"class":form_class, "name": form_name, "action":form_action, "method":form_method});
+	return form;
+}
+u.f.addFieldset = function(node) {
+	return u.ae(node, "fieldset");
+}
+u.f.addField = function(node, settings) {
+	var field_type = "string";
+	var field_label = "Value";
+	var field_name = "js_name";
+	var field_value = "";
+	var field_class = "";
+	if(typeof(settings) == "object") {
+		var argument;
+		for(argument in settings) {
+			switch(argument) {
+				case "type"			: field_type			= settings[argument]; break;
+				case "label"		: field_label			= settings[argument]; break;
+				case "name"			: field_name			= settings[argument]; break;
+				case "value"		: field_value			= settings[argument]; break;
+				case "class"		: field_class			= settings[argument]; break;
+			}
+		}
+	}
+	var input_id = "input_"+field_type+"_"+field_name;
+	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
+	if(field_type == "string") {
+		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
+		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":"text"});
+	}
+	else if(field_type == "email" || field_type == "number" || field_type == "tel") {
+		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
+		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":field_type});
+	}
+	else if(field_type == "select") {
+		u.bug("Select not implemented yet")
+	}
+	else {
+		u.bug("input type not implemented yet")
+	}
+	return field;
+}
+u.f.addAction = function(node, settings) {
+	var action_type = "submit";
+	var action_name = "js_name";
+	var action_value = "";
+	var action_class = "";
+	if(typeof(settings) == "object") {
+		var argument;
+		for(argument in settings) {
+			switch(argument) {
+				case "type"			: action_type			= settings[argument]; break;
+				case "name"			: action_name			= settings[argument]; break;
+				case "value"		: action_value			= settings[argument]; break;
+				case "class"		: action_class			= settings[argument]; break;
+			}
+		}
+	}
+	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, "ul");
+	if(!u.hc(p_ul, "actions")) {
+		p_ul = u.ae(node, "ul", {"class":"actions"});
+	}
+	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, "li");
+	if(p_ul != p_li.parentNode) {
+		p_li = u.ae(p_ul, "li", {"class":action_name});
+	}
+	else {
+		p_li = node;
+	}
+	var action = u.ae(p_li, "input", {"type":action_type, "class":action_class, "value":action_value, "name":action_name})
+	return action;
+}
+
+
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
@@ -2168,15 +2473,29 @@ Util.pageScrollY = u.scrollY = function() {
 	return window.pageYOffset;
 }
 
-/*u-hash.js*/
-Util.Hash = u.h = new function() {
+
+/*u-history.js*/
+Util.History = u.h = new function() {
+	this.popstate = ("onpopstate" in window);
 	this.catchEvent = function(callback, node) {
 		this.node = node;
 		this.node.callback = callback;
-		hashChanged = function(event) {
-			u.h.node.callback();
+		var hashChanged = function(event) {
+			if(!location.hash || !location.hash.match(/^#\//)) {
+				location.hash = "#/"
+				return;
+			}
+			var url = u.h.getCleanHash(location.hash);
+			u.h.node.callback(url);
 		}
-		if("onhashchange" in window && !u.browser("explorer", "<=7")) {
+		var urlChanged = function(event) {
+			var url = u.h.getCleanUrl(location.href);
+			u.h.node.callback(url);
+		}
+		if(this.popstate) {
+			window.onpopstate = urlChanged;
+		}
+		else if("onhashchange" in window && !u.browser("explorer", "<=7")) {
 			window.onhashchange = hashChanged;
 		}
 		else {
@@ -2190,19 +2509,6 @@ Util.Hash = u.h = new function() {
 					}
 				}, 200
 			);
-		}
-	}
-	this.cleanHash = function(string, levels) {
-		if(!levels) {
-			return string.replace(location.protocol+"//"+document.domain, "");
-		}
-		else {
-			var i, return_string = "";
-			var hash = string.replace(location.protocol+"//"+document.domain, "").split("/");
-			for(i = 1; i <= levels; i++) {
-				return_string += "/" + hash[i];
-			}
-			return return_string;
 		}
 	}
 	this.getCleanUrl = function(string, levels) {
@@ -2237,6 +2543,7 @@ Util.Hash = u.h = new function() {
 	}
 }
 
+
 /*u-init.js*/
 Util.Objects = u.o = new Object();
 Util.init = function(scope) {
@@ -2253,6 +2560,7 @@ Util.init = function(scope) {
 	}
 }
 
+
 /*u-math.js*/
 Util.random = function(min, max) {
 	return Math.round((Math.random() * (max - min)) + min);
@@ -2267,6 +2575,7 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
+
 /*u-period.js*/
 Util.period = function(format, time) {
 	var seconds = 0;
@@ -2286,15 +2595,15 @@ Util.period = function(format, time) {
 	}
 	var tokens = /y|n|o|O|w|W|c|d|e|D|g|h|H|l|m|M|r|s|S|t|T|u|U/g;
 	var chars = new Object();
-	chars.y = 0; // TODO
-	chars.n = 0; // TODO 
-	chars.o = (chars.n > 9 ? "" : "0") + chars.n; // TODO
-	chars.O = 0; // TODO
-	chars.w = 0; // TODO
-	chars.W = 0; // TODO
-	chars.c = 0; // TODO
-	chars.d = 0; // TODO
-	chars.e = 0; // TODO
+	chars.y = 0; 
+	chars.n = 0; 
+	chars.o = (chars.n > 9 ? "" : "0") + chars.n; 
+	chars.O = 0; 
+	chars.w = 0; 
+	chars.W = 0; 
+	chars.c = 0; 
+	chars.d = 0; 
+	chars.e = 0; 
 	chars.D = Math.floor(((seconds/60)/60)/24);
 	chars.g = Math.floor((seconds/60)/60)%24;
 	chars.h = (chars.g > 9 ? "" : "0") + chars.g;
@@ -2316,103 +2625,109 @@ Util.period = function(format, time) {
 	});
 };
 
+
 /*u-request.js*/
 Util.createRequestObject = u.createRequestObject = function() {
 	return new XMLHttpRequest();
 }
-Util.Request = u.request = function(node, url, settings) {
-	node.request_url = url;
-	node.request_method = "GET";
-	node.request_async = true;
-	node.request_params = "";
-	node.request_headers = false;
-	node.response_callback = "response";
+Util.request = u.request = function(node, url, settings) {
+	var request_id = u.randomString(6);
+	node[request_id] = {};
+	node[request_id].request_url = url;
+	node[request_id].request_method = "GET";
+	node[request_id].request_async = true;
+	node[request_id].request_params = "";
+	node[request_id].request_headers = false;
+	node[request_id].response_callback = "response";
 	if(typeof(settings) == "object") {
 		var argument;
 		for(argument in settings) {
 			switch(argument) {
-				case "method"		: node.request_method		= settings[argument]; break;
-				case "params"		: node.request_params		= settings[argument]; break;
-				case "async"		: node.request_async		= settings[argument]; break;
-				case "headers"		: node.request_headers		= settings[argument]; break;
-				case "callback"		: node.response_callback	= settings[argument]; break;
+				case "method"		: node[request_id].request_method		= settings[argument]; break;
+				case "params"		: node[request_id].request_params		= settings[argument]; break;
+				case "async"		: node[request_id].request_async		= settings[argument]; break;
+				case "headers"		: node[request_id].request_headers		= settings[argument]; break;
+				case "callback"		: node[request_id].response_callback	= settings[argument]; break;
 			}
 		}
 	}
-	if(node.request_method.match(/GET|POST|PUT|PATCH/i)) {
-		node.HTTPRequest = this.createRequestObject();
-		node.HTTPRequest.node = node;
-		if(node.request_async) {
-			node.HTTPRequest.onreadystatechange = function() {
+	if(node[request_id].request_method.match(/GET|POST|PUT|PATCH/i)) {
+		node[request_id].HTTPRequest = this.createRequestObject();
+		node[request_id].HTTPRequest.node = node;
+		node[request_id].HTTPRequest.request_id = request_id;
+		if(node[request_id].request_async) {
+			node[request_id].HTTPRequest.onreadystatechange = function() {
 				if(this.readyState == 4) {
 					u.validateResponse(this);
 				}
 			}
 		}
 		try {
-			if(node.request_method.match(/GET/i)) {
-				var params = u.JSONtoParams(node.request_params);
-				node.request_url += params ? ((!node.request_url.match(/\?/g) ? "?" : "&") + params) : "";
-				node.HTTPRequest.open(node.request_method, node.request_url, node.request_async);
-				node.HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			if(node[request_id].request_method.match(/GET/i)) {
+				var params = u.JSONtoParams(node[request_id].request_params);
+				node[request_id].request_url += params ? ((!node[request_id].request_url.match(/\?/g) ? "?" : "&") + params) : "";
+				node[request_id].HTTPRequest.open(node[request_id].request_method, node[request_id].request_url, node[request_id].request_async);
+				node[request_id].HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				var csfr_field = u.qs('meta[name="csrf-token"]');
 				if(csfr_field && csfr_field.content) {
-					node.HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
+					node[request_id].HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
 				}
-				if(typeof(node.request_headers) == "object") {
+				if(typeof(node[request_id].request_headers) == "object") {
 					var header;
-					for(header in node.request_headers) {
-						node.HTTPRequest.setRequestHeader(header, node.request_headers[header]);
+					for(header in node[request_id].request_headers) {
+						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
-				node.HTTPRequest.send("");
+				node[request_id].HTTPRequest.send("");
 			}
-			else if(node.request_method.match(/POST|PUT|PATCH/i)) {
+			else if(node[request_id].request_method.match(/POST|PUT|PATCH/i)) {
 				var params;
-				if(typeof(node.request_params) == "object" && !node.request_params.constructor.toString().match(/FormData/i)) {
-					params = JSON.stringify(node.request_params);
+				if(typeof(node[request_id].request_params) == "object" && !node[request_id].request_params.constructor.toString().match(/FormData/i)) {
+					params = JSON.stringify(node[request_id].request_params);
 				}
 				else {
-					params = node.request_params;
+					params = node[request_id].request_params;
 				}
-				node.HTTPRequest.open(node.request_method, node.request_url, node.request_async);
-				node.HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				node[request_id].HTTPRequest.open(node[request_id].request_method, node[request_id].request_url, node[request_id].request_async);
+				node[request_id].HTTPRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				var csfr_field = u.qs('meta[name="csrf-token"]');
 				if(csfr_field && csfr_field.content) {
-					node.HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
+					node[request_id].HTTPRequest.setRequestHeader("X-CSRF-Token", csfr_field.content);
 				}
-				if(typeof(node.request_headers) == "object") {
+				if(typeof(node[request_id].request_headers) == "object") {
 					var header;
-					for(header in node.request_headers) {
-						node.HTTPRequest.setRequestHeader(header, node.request_headers[header]);
+					for(header in node[request_id].request_headers) {
+						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
-				node.HTTPRequest.send(params);
+				node[request_id].HTTPRequest.send(params);
 			}
 		}
 		catch(exception) {
-			node.HTTPRequest.exception = exception;
-			u.validateResponse(node.HTTPRequest);
+			node[request_id].HTTPRequest.exception = exception;
+			u.validateResponse(node[request_id].HTTPRequest);
 			return;
 		}
-		if(!node.request_async) {
-			u.validateResponse(node.HTTPRequest);
+		if(!node[request_id].request_async) {
+			u.validateResponse(node[request_id].HTTPRequest);
 		}
 	}
-	else if(node.request_method.match(/SCRIPT/i)) {
+	else if(node[request_id].request_method.match(/SCRIPT/i)) {
 		var key = u.randomString();
 		document[key] = new Object();
 		document[key].node = node;
+		document[key].request_id = request_id;
 		document[key].responder = function(response) {
 			var response_object = new Object();
 			response_object.node = this.node;
+			response_object.request_id = this.request_id;
 			response_object.responseText = response;
 			u.validateResponse(response_object);
 		}
-		var params = u.JSONtoParams(node.request_params);
-		node.request_url += params ? ((!node.request_url.match(/\?/g) ? "?" : "&") + params) : "";
-		node.request_url += (!node.request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
-		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node.request_url}));
+		var params = u.JSONtoParams(node[request_id].request_params);
+		node[request_id].request_url += params ? ((!node[request_id].request_url.match(/\?/g) ? "?" : "&") + params) : "";
+		node[request_id].request_url += (!node[request_id].request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
+		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node[request_id].request_url}));
 	}
 }
 Util.JSONtoParams = function(json) {
@@ -2501,9 +2816,10 @@ Util.validateResponse = function(response){
 		}
 	}
 	if(object) {
-		if(typeof(response.node[response.node.response_callback]) == "function") {
-			response.node[response.node.response_callback](object);
+		if(typeof(response.node[response.node[response.request_id].response_callback]) == "function") {
+			response.node[response.node[response.request_id].response_callback](object);
 		}
+		// 
 	}
 	else {
 		if(typeof(response.node.ResponseError) == "function") {
@@ -2514,6 +2830,7 @@ Util.validateResponse = function(response){
 		}
 	}
 }
+
 
 /*u-string.js*/
 Util.cutString = function(string, length) {
@@ -2572,6 +2889,7 @@ Util.stringOr = u.eitherOr = function(value, replacement) {
 		return replacement ? replacement : "";
 	}	
 }
+
 /*u-system.js*/
 Util.browser = function(model, version) {
 	var current_version = false;
@@ -2659,6 +2977,7 @@ Util.osx = function() {
 	return (navigator.userAgent.indexOf("OS X") >= 0) ? true : false;
 }
 
+
 /*u-timer.js*/
 Util.Timer = u.t = new function() {
 	this._timers = new Array();
@@ -2718,6 +3037,7 @@ Util.Timer = u.t = new function() {
 	}
 }
 
+
 /*u-url.js*/
 Util.getVar = function(param, url) {
 	var string = url ? url.split("#")[0] : location.search;
@@ -2730,3 +3050,4 @@ Util.getVar = function(param, url) {
 		return "";
 	}
 }
+

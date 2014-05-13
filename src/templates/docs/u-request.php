@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Request</h1>
 	<p>XMLHTTPRequest with appropriate fallback, response validation and callback.</p>
 

@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>System</h1>
 	<p>Browser information for now.</p>
 	<p>
@@ -48,7 +48,7 @@
 							<dt><span class="var">model</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> name of browser to check for
+									<span class="type">String</span> Name of browser to check for
 								</div>
 								<!-- optional details -->
 								<div class="details">
@@ -79,7 +79,7 @@
 							<dt><span class="var">version</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Mixed</span>Optional. Version number or scope as <span class="value">6</span>, <span class="value">&lt;6</span>, <span class="value">&gt;12</span> etc.
+									<span class="type">Mixed</span> Optional. Version number or scope as <span class="value">6</span>, <span class="value">&lt;6</span>, <span class="value">&gt;12</span> etc.
 								</div>
 							</dd>
 						</dl>

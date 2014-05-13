@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Debugging</h1>
 	<p>One hardly ever gets it right the first time.</p>
 

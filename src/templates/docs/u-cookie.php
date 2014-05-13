@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Cookie</h1>
 	<p>Basic cookie functions. Get, save, eat.</p>
 	<p>

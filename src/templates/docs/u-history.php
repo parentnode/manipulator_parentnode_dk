@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>History</h1>
 	<p>
 		Browser history manipulation for Ajax based navigation. Using navigator.History object with pushState 

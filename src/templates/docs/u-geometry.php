@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Geometry</h1>
 	<p>Positions, sizes and offsets.</p>
 

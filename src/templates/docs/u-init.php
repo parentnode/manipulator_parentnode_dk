@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Init</h1>
 	<p>
 		Manipulator is designed to utilize the object nature of the DOM. Your HTML-page is already a wellformed

@@ -1,4 +1,4 @@
-<div class="scene i:docpage">
+<div class="scene docpage i:docpage">
 	<h1>Timer</h1>
 	<p>Timers and intervals. Easy.</p>
 
