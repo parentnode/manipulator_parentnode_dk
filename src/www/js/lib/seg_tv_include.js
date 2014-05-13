@@ -48,9 +48,8 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-v
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/lib/i-page.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/i-docpage.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/i-documentation.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/desktop/i-page-desktop.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/desktop/i-documentation-desktop.js"></script>');
 
-// document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
+document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');

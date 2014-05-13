@@ -1,12 +1,9 @@
-@import url(/css/dearcss/src/css/s-fonts.css);
-
-@import url(/css/dearcss/src/css/s-page.css);
-@import url(/css/dearcss/src/css/s-content.css);
-@import url(/css/dearcss/src/css/s-footer.css);
-
-@import url(/css/dearcss/src/css/s-form.css);
+@import url(/css/lib/s-fonts-desktop_light.css);
 
 
-@import url(/css/lib/s-header.css);
-@import url(/css/lib/s-navigation.css);
-@import url(/css/lib/s-documentation.css);
+@import url(/css/lib/mobile/s-page-mobile.css);
+@import url(/css/lib/mobile/s-header-mobile.css);
+@import url(/css/lib/mobile/s-footer-mobile.css);
+@import url(/css/lib/mobile/s-content-mobile.css);
+@import url(/css/lib/mobile/s-pages-mobile.css);
+@import url(/css/lib/mobile/s-colorscheme-mobile.css);
