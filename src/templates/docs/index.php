@@ -115,6 +115,10 @@
 					<p>Manipulator module initializer</p>
 				</li>
 				<li>
+					<h3><a href="/docs/u-history">History</a></h3>
+					<p>Browser history for Ajax based navigation</p>
+				</li>
+				<li>
 					<h3><a href="/docs/u-math">Math</a></h3>
 					<p>Math based functions</p>
 				</li>

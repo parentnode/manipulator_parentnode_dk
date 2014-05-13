@@ -11,7 +11,7 @@ document.write('<script type="text/javascript" src="/js/jes/src/u-events-movemen
 document.write('<script type="text/javascript" src="/js/jes/src/u-flash.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-geometry.js"></script>');
-document.write('<script type="text/javascript" src="/js/jes/src/u-hash.js"></script>');
+document.write('<script type="text/javascript" src="/js/jes/src/u-history.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/jes/src/u-period.js"></script>');

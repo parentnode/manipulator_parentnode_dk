@@ -14,7 +14,7 @@
 
 			node._span = u.qs("span", node);
 
-			node.Response = function(response) {
+			node.response = function(response) {
 				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = u.qs(".test", response).innerHTML
@@ -31,7 +31,7 @@
 					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
 				}
 			}
-			node.ResponseError = function(response) {
+			node.responseError = function(response) {
 				u.ac(this, "error");
 
 				if(response.exception) {
@@ -66,7 +66,7 @@
 				}
 			}
 
-			u.Request(node, node._span.innerHTML, settings);
+			u.request(node, node._span.innerHTML, settings);
 
 
 		}
@@ -79,7 +79,7 @@
 
 			node._span = u.qs("span", node);
 
-			node.Response = function(response) {
+			node.response = function(response) {
 				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = u.qs(".test", response).innerHTML
@@ -96,7 +96,7 @@
 					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
 				}
 			}
-			node.ResponseError = function(response) {
+			node.responseError = function(response) {
 				u.ac(this, "correct");
 
 				if(response.exception) {
@@ -131,7 +131,7 @@
 				}
 			}
 
-			u.Request(node, node._span.innerHTML, settings);
+			u.request(node, node._span.innerHTML, settings);
 
 
 		}
@@ -145,7 +145,7 @@
 
 			node._span = u.qs("span", node);
 
-			node.Response = function(response) {
+			node.response = function(response) {
 				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = u.qs(".test", response).innerHTML
@@ -162,7 +162,7 @@
 					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
 				}
 			}
-			node.ResponseError = function(response) {
+			node.responseError = function(response) {
 				u.ac(this, "correct");
 
 				if(response.exception) {
@@ -197,7 +197,7 @@
 				}
 			}
 
-			u.Request(node, node._span.innerHTML, settings);
+			u.request(node, node._span.innerHTML, settings);
 
 
 		}
@@ -212,71 +212,71 @@
 
 		<div class="i:test method:post">
 			<input type="hidden" name="test" value="POST, to HTML: correct" />
-			<span>ajax/post.php</span>
+			<span>/ajax/post.php</span>
 		</div>
 		<div class="i:test method:post send:json">
 			<input type="hidden" name="test" value="POST, to JSON, send JSON: correct" />
-			<span>ajax/post_json.json.php</span>
+			<span>/ajax/post_json.json.php</span>
 		</div>
 
 		<div class="i:test method:post async:true">
 			<input type="hidden" name="test" value="POST, to JSON, async: correct" />
-			<span>ajax/post.json.php</span>
+			<span>/ajax/post.json.php</span>
 		</div>
 		<div class="i:test method:post async:true">
 			<input type="hidden" name="test" value="POST, to HTML, async: correct" />
-			<span>ajax/post.php</span>
+			<span>/ajax/post.php</span>
 		</div>
 
 		<div class="i:test method:post async:true headers:TeSt:Value">
 			<input type="hidden" name="test" value="POST, to HTML, async, headers: correct" />
 			<input type="hidden" name="headers" value="TeSt,Value" />
-			<span>ajax/post_headers.php</span>
+			<span>/ajax/post_headers.php</span>
 		</div>
 
 
 		<div class="i:test method:get">
 			<input type="hidden" name="test" value="GET, to JSON: correct" />
-			<span>ajax/get.json.php?test=error</span>
+			<span>/ajax/get.json.php?test=error</span>
 		</div>
 		<div class="i:test method:get">
 			<input type="hidden" name="test" value="GET, to HTML: correct" />
-			<span>ajax/get.php</span>
+			<span>/ajax/get.php</span>
 		</div>
 		<div class="i:test method:get async:true">
 			<input type="hidden" name="test" value="GET, to JSON, async: correct" />
-			<span>ajax/get.json.php</span>
+			<span>/ajax/get.json.php</span>
 		</div>
 
 		<div class="i:test method:get async:true headers:Content:valuE">
 			<input type="hidden" name="test" value="GET, to JSON, async, headers: correct" />
 			<input type="hidden" name="headers" value="Content,valuE" />
-			<span>ajax/get_headers.json.php</span>
+			<span>/ajax/get_headers.json.php</span>
 		</div>
 
 
 		<div class="i:test method:script">
 			<input type="hidden" name="test" value="SCRIPT, to JSONP" />
-			<span>ajax/script.jsonp.php</span>
+			<span>/ajax/script.jsonp.php</span>
 		</div>
 
 		<div class="i:test method:script">
 			<input type="hidden" name="test" value="SCRIPT, param URL, to JSONP" />
-			<span>ajax/script.jsonp.php?test=error</span>
+			<span>/ajax/script.jsonp.php?test=error</span>
 		</div>
 
 		<div class="i:test method:script send:json">
 			<input type="hidden" name="test" value="SCRIPT, param URL, send JSON, to JSONP" />
-			<span>ajax/script.jsonp.php?test=error</span>
+			<span>/ajax/script.jsonp.php?test=error</span>
 		</div>
 
-		<div class="i:test method:script">
+		<div class="i:-test method:script">
 			<input type="hidden" name="test" value="SCRIPT, to JSONP outside domain: correct" />
 			<span>http://jes.wires.dk/documentation/tests/ajax/script.jsonp.php</span>
 		</div>
 
 
-		<div class="i:special method:post">
+		<div class="i:-special method:post">
 			<input type="hidden" name="test" value="POST, outside domain: correct" />
 			<span>http://test.whattheframework.org/documentation/tests/ajax/post.php</span>
 		</div>

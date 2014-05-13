@@ -23,7 +23,7 @@
 		<li><a href="/tests/u-period">Period</a></li>
 		<li><a href="/tests/u-popup">Popup</a></li>
 		<li><a href="/tests/u-preloader">Preloader (started)</a></li>
-		<li><a href="/tests/u-pushstate-hash">PushState/HashChanged (only hash changed - IE7 error)</a></li>
+		<li><a href="/tests/u-history">History (started)</a></li>
 		<li><a href="/tests/u-request">Request</a></li>
 		<li><a href="/tests/u-scrollto">ScrollTo (started)</a></li>
 		<li><a href="/tests/u-segment">Segment test (started)</a></li>

@@ -1,6 +1,9 @@
 <div class="scene">
 	
-	<h1>Manipulator 0.8 arriving soon</h1>
+	<h1>If manipulation is required ...</h1>
+	<p>
+		Manipulator 0.8 is now available for <a href="/download">download</a>.
+	</p>
 	<p>
 		Manipulator is an extremely flexible, performance optimized JavaScript
 		library with a slightly neurotic focus on details.
@@ -18,16 +21,19 @@
 		Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it, with IE6 support.
 	</p>
 
-	<h2>The goal behind designing Manipulator is:</h2>
+	<h2>The goal behind designing the Manipulator library</h2>
+	<p>
+		The Manipulator library has be developed with the following priorities:
+	</p>
 	<ul class="goal">
-		<li>Using the newest standards.</li>
-		<li>Support for all devices.</li>
-		<li>Leveraging standard JavaScript knowledge - not changing the way you write JavaScript.</li>
-		<li>Providing a solution to common cross-device/cross-browser problems.</li>
-		<li>Simplifying implementation and backend development.</li>
-		<li>Fast, compatible and reliable.</li>
-		<li>Completely modular.</li>
-		<!--li>Optimized for <a href="http://whattheframework.org/segments">Segments</a></li-->
+		<li>Using the newest standards</li>
+		<li>Support for all devices</li>
+		<li>Performance optimized in all possible ways</li>
+		<li>Leveraging standard JavaScript knowledge - not changing the way you write JavaScript</li>
+		<li>Providing a solution to common cross-device/cross-browser problems</li>
+		<li>Simplifying implementation and backend development</li>
+		<li>Fast, compatible and reliable</li>
+		<li>Completely modular with no unnecessary overhead</li>
 	</ul>
 
 
@@ -36,33 +42,5 @@
 		We always need help. Send an email to 
 		<a href="mailto:contribute@parentnode.dk">contribute@parentnode.dk</a> to join the team.
 	</p>
-
-		<!--/div>
-		<div class="c200">
-			<div class="promotion">
-			</div>
-
-			<div class="promotion">
-				<h3>Download</h3>
-				<p>
-					Download bundles for your needs.
-				</p>
-				<ul class="actions">
-					<li class="download"><a href="/download" class="button primary">DOWNLOAD JES</a></li>
-				</ul>
-			</div>
-
-			<div class="promotion">
-				<h3>DEMO</h3>
-				<p>
-					Seeing is believing - are you ready for a DEMO?
-				</p>
-				<ul class="actions">
-					<li class="demo"><a href="/demo" class="button primary">DEMO of JES</a></li>
-				</ul>
-			</div>
-		</div>
-
-	</div-->
 
 </div>
