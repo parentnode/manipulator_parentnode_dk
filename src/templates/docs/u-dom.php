@@ -77,8 +77,9 @@
 							<code>var content_node = u.querySelector("#content");
 u.querySelector(".link", content_node);</code>
 							<p>
-								returns <span class="type">Node</span> with classname=link, within content_node, but
-								using scope on repeated queries will make the query faster, as you limit the required DOM-traversing.
+								returns <span class="type">Node</span> with classname=link, within content_node. 
+								Using scope on repeated queries will make the query faster, as you limit the required 
+								DOM-traversing.
 							</p>
 						</div>
 
@@ -130,7 +131,7 @@ u.querySelector(".link", content_node);</code>
 						<h4>Description</h4>
 						<p>Shorthand for document.querySelectorAll.</p>
 						<p>
-							Returns a list of the elements within the document that match the specified group of selectors. 
+							Returns a list of the elements within the document which match the specified group of selectors. 
 							The object returned is a <span class="type">NodeList</span>. 
 							Returns an empty <span class="type">NodeList</span> if no matches are found.
 						</p>
@@ -211,7 +212,7 @@ u.querySelectorAll("li.item", list_node);</code>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.getElement(
-									<span class="type">String</span> <span class="var">id</span> 
+									<span class="type">String</span> <span class="var">identifier</span> 
 									[, <span class="type">Node</span> <span class="var">scope</span>]
 								)
 							</dd>
@@ -433,7 +434,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get first parentNode of node matching node_type.
+							Get first parentNode of node or first matching parent of <span class="var">node_type</span>.
 						</p>
 					</div>
 
@@ -909,11 +910,11 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 
 						<div class="example">
-							<p>A node can only have one parent. Therefore appendElement can also be used to restructure html.</p>
+							<p>Can also be used to restructure html.</p>
 							<code>var header = u.querySelector("#header");
 var nav = u.querySelector("#navigation");
 u.ae(header, nav);</code>
-							<p>moves #navigation into #header. #navigation will be added as last child of #header</p>
+							<p>This moves #navigation into #header. #navigation will be added as last child of #header</p>
 						</div>
 					</div>
 				
@@ -1049,11 +1050,11 @@ u.ae(header, nav);</code>
 						</div>
 
 						<div class="example">
-							<p>A node can only have one parent. Therefore insertElement can also be used to restructure html.</p>
+							<p>Can also be used to restructure html.</p>
 							<code>var header = u.querySelector("#header");
 var nav = u.querySelector("#navigation");
 u.ie(header, nav);</code>
-							<p>moves #navigation into #header. #navigation will be added as first child of #header</p>
+							<p>This moves #navigation into #header. #navigation will be added as first child of #header</p>
 						</div>
 					</div>
 				
@@ -1078,7 +1079,7 @@ u.ie(header, nav);</code>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="function" id="Util.wrapElement">
 				<div class="header">
 					<h3>Util.wrapElement</h3>
@@ -1115,7 +1116,7 @@ u.ie(header, nav);</code>
 							<dt><span class="var">node</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Node</span> node
+									<span class="type">Node</span> node to wrap
 								</div>
 							</dd>
 
@@ -1180,7 +1181,7 @@ u.ie(header, nav);</code>
 		&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
 	&lt;/div&gt;
 	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
-	&lt;/div&gt;</code>
+&lt;/div&gt;</code>
 						</div>
 					</div>
 
@@ -1192,6 +1193,132 @@ u.ie(header, nav);</code>
 							<ul>
 								<li>document.createElement</li>
 								<li>document.insertBefore</li>
+								<li>document.appendBefore</li>
+								<li>Node.setAttribute</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>None</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.wrapContent">
+				<div class="header">
+					<h3>Util.wrapContent</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.wrapContent</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.wc</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Node</span> = 
+								Util.wrapContent(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">String</span> <span class="var">node_type</span> 
+									[, <span class="type">JSON</span> <span class="var">attributes</span>]
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Wrap content of <span class="var">node</span> in <span class="var">node_type</span>
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to wrap content of
+								</div>
+							</dd>
+
+							<dt><span class="var">node_type</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> <span class="var">node_type</span> of wrapping <span class="type">Node</span>
+								</div>
+							</dd>
+
+							<dt><span class="var">attributes</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional, JSON object with attributes like target, class, id etc. to be added to new node.
+								</div>
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">class</span></dt>
+										<dd>Add className to wrapping node</dd>
+										<dt><span class="value">id</span></dt>
+										<dd>Add id to wrapping node</dd>
+										<dt><span class="value">href</span></dt>
+										<dd>Add href to wrapping node</dd>
+										<dt><span class="value">target</span></dt>
+										<dd>Add target to wrapping node</dd>
+										<dt><span class="value">title</span></dt>
+										<dd>Add title to wrapping node</dd>
+									</dl>
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							The wrapping <span class="type">Node</span>
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var scene = u.querySelector(".scene");
+	u.wrapContent(scene, "div", ({"class":"wrapper"}));
+&lt;/script&gt;</code>
+
+							<p>returns <span class="type">Node</span> div.wrapper in the following structure</p>
+
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;wrapper&quot;&gt;
+		&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>document.createElement</li>
 								<li>document.appendBefore</li>
 								<li>Node.setAttribute</li>
 							</ul>
@@ -1230,7 +1357,7 @@ u.ie(header, nav);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get textContent of Node, with fallback to innerText or regular expression.
+							Get textContent of Node, with fallback to innerText or regular expression in older browsers.
 						</p>
 					</div>
 
@@ -1307,7 +1434,8 @@ u.ie(header, nav);</code>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.clickableElement(
-									<span class="type">Node</span> <span class="var">node</span>
+									<span class="type">Node</span> <span class="var">node</span>,
+									[, <span class="type">JSON</span> <span class="var">options</span>]
 								)
 							</dd>
 						</dl>
@@ -1318,14 +1446,16 @@ u.ie(header, nav);</code>
 						<p>
 							Make <span class="type">node</span> clickable - adding click event (if Events module is included), and removing href 
 							from first <span class="domnode">a</span> found within <span class="type">node</span>. Value of <span class="attribute">href</span> is stored in 
-							node.url. It also applies "link" class to node.
+							node.url. It applies <span class="value">link</span> class to node if it contains <span class="domnode">a</span> otherwise 
+							<span class="value">clickable</span> class is added.
 						</p>
 						<p>
 							You would typically use this to expand the clickable area in a list, where the actual link is nested
 							within the <span class="domnode">li</span>, but you want the entire <span class="domnode">li</span> to be clickable.
 						</p>
 						<p>
-							This function will not handle the click - just catch it and make callback to node.clicked.
+							You can automate click handling by defining a <span class="var">type</span> in the 
+							<span class="var">options</span> parameter. Default is to not handle the click event.
 						</p>
 					</div>
 
@@ -1336,6 +1466,21 @@ u.ie(header, nav);</code>
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> node to make clickable.
+								</div>
+							</dd>
+							<dt><span class="var">options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional, JSON object with options for click handling.
+								</div>
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">type</span></dt>
+										<dd>Add className to wrapping node</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>

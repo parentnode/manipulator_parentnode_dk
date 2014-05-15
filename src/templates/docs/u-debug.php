@@ -25,8 +25,11 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Is the current url a test-url? Does it run on .local. The following functions functions only output to screen or console if site is running on valid test-urls.</p>
-						<p>To override the domain detection, set u.bug_force = true in your script</p>
+						<p>
+							Is the current url a test-url? Does it run on .local. The following functions only output 
+							to screen or console if site is running on valid test-urls.
+						</p>
+						<p>To override the domain detection in other debugging functions, set <span class="var">u.bug_force = true;</span> in your script</p>
 					</div>
 
 					<div class="parameters">
@@ -174,13 +177,13 @@
 						<h5>u.bug_force</h5>
 						<p>
 							Overlay is only injected in page if u.debugURL returns true. This can
-							be overridden by setting u.bug_force = <span class="value">true</span> in your script.
+							be overridden by setting <span class="var">u.bug_force = true;</span> in your script.
 						</p>
 
 						<h5>u.bug_console_only</h5>
 						<p>
 							Overlay is injected in page as default. This can
-							be overridden by setting u.bug_console_only = <span class="value">true</span> in your script.
+							be overridden by setting <span class="var">u.bug_console_only = true;</span> in your script.
 						</p>
 
 						<h5>u.bug_position</h5>
@@ -193,14 +196,14 @@
 						<h5>u.bug_bg</h5>
 						<p>
 							Default background color of bug-message is <span class="value">white</span>. This can
-							be overridden by setting u.bug_bg = <span class="value">#ff0000</span> (specifying whatever color want)
+							be overridden by setting <span class="var">u.bug_bg = #ff0000;</span> (specifying whatever color you want)
 							in your script.
 						</p>
 
 						<h5>u.bug_max_width</h5>
 						<p>
 							Default width of bug-message is <span class="value">auto</span>. This can
-							be overridden by setting u.bug_max_width = <span class="value">123</span> (px will be added by u.bug)
+							be overridden by setting <span class="var">u.bug_max_width = 123;</span> (px will be added by u.bug)
 							in your script.
 						</p>
 					</div>

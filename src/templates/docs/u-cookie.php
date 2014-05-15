@@ -56,7 +56,7 @@
 									<span class="type">String</span> Cookie value
 								</div>
 							</dd>
-							<dt><span class="var">option</span></dt>
+							<dt><span class="var">options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Additional cookie options
@@ -168,7 +168,7 @@
 
 						<div class="example">
 							<code>u.getCookie("cookie");</code>
-							<p>Returns value for "cookie".</p>
+							<p>Returns value for cookie named "cookie".</p>
 						</div>
 					</div>
 
@@ -231,7 +231,7 @@
 									<span class="type">String</span> Cookie name
 								</div>
 							</dd>
-							<dt><span class="var">option</span></dt>
+							<dt><span class="var">options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Additional cookie options

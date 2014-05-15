@@ -538,9 +538,9 @@
 <div class="scene i:test">
 	<h1>Animation</h1>
 
-	<div class="death_star">
+	<!--div class="death_star">
 		<div id="darth_vader"></div>
-	</div>
+	</div-->
 	<div class="border">
 		<span class="one"></span>
 		<span class="three"></span>

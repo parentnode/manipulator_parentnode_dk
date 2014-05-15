@@ -66,12 +66,6 @@ function findModules($file) {
 		for a desktop computer is reduced to about 25kb.
 	</p>
 
-
-	<ul class="actions">
-		<li><a href="/bundles/archive/v0_8.zip" class="button primary">Download</a></li>
-	</ul>
-
-
 	<div class="bundle light">
 		<h3>Light</h3>
 		<p>
@@ -97,5 +91,11 @@ function findModules($file) {
 			<?= findModules(LOCAL_PATH."/www/bundles/full/lib/seg_desktop_include.js") ?>.
 		</p>
 	</div>
+
+
+	<ul class="actions">
+		<li><a href="/bundles/archive/v0_8.zip" class="button primary">Download ZIP</a></li>
+	</ul>
+
 
 </div>

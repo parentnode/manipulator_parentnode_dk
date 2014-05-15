@@ -9,7 +9,7 @@
 		<li><a href="/tests/u-audio">Audio (not done)</a></li>
 		<li><a href="/tests/u-cookie">Cookie</a></li>
 		<li><a href="/tests/u-date">Date</a></li>
-		<li><a href="/tests/u-debug">Debug (started)</a></li>
+		<li><a href="/tests/u-debug">Debug</a></li>
 		<li><a href="/tests/u-dom">DOM</a></li>
 		<li><a href="/tests/u-events">Events</a></li>
 		<li><a href="/tests/u-events-movements">Movements events (drag, swipe, scrolling)</a></li>

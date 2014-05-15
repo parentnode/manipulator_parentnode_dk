@@ -62,6 +62,18 @@
 #content .scene.docpage .section.functions .function .header {}
 #content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
 
+
+#content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
+
+#content .scene.docpage .section.functions .function .body .example {padding: 0 0 20px;}
+#content .scene.docpage .section.functions .function .body .example p {padding-bottom: 5px;}
+
+
+#content .scene.docpage .section.functions .function .body .uses .javascript {padding: 5px 0 0 20px;}
+#content .scene.docpage .section.functions .function .body .uses .manipulator {padding: 5px 0 0 20px;}
+
+
+
 #content .scene.docpage .section.files {padding-top: 25px;}
 #content .scene.docpage .section.segments {padding-top: 15px;}
 

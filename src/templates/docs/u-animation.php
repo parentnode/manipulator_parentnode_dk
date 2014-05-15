@@ -89,7 +89,7 @@
 	u.a.translate(scene, 100, 100);
 &lt;/script&gt;</code>
 							<p>
-								Set a "all 1s ease-in"-transition on div.scene and then moving it 100px down and 100px down. When transition is done 
+								Set a "all 1s ease-in"-transition on div.scene and then moving it 100px down and 100px right. When transition is done 
 								the optional node.transitioned function is invoked.
 							</p>
 						</div>
@@ -149,15 +149,15 @@
 						<h4>Description</h4>
 						<p>CSS3 translate node to new coordinates x,y.</p>
 						<p>
-							Uses translate3d if browser supports it, because it is hardware accelerated by more browsers.
-						</p>
-						<p>
 							Translation of nodes will be done with CSS3 when supported by browser, and fall back to
 							absolute positioning. When using absolute positioning values will automatically be corrected to 
 							work on already absolute positioned nodes.
 						</p>
 						<p>
-							A translated node, stores its translate values in node._x and node._y.
+							Uses translate3d if browser supports it, because it is hardware accelerated by more browsers.
+						</p>
+						<p>
+							A translated node stores its translate values in node._x and node._y.
 						</p>
 					</div>
 
@@ -201,7 +201,7 @@
 	var scene = u.querySelector(".scene");
 	u.a.translate(scene, 0, 100);
 &lt;/script&gt;</code>
-							<p>Translate div.scene to new coords, (0px, 100px).</p>
+							<p>Translate div.scene to new coordinates, x=0px and y=100px.</p>
 						</div>
 					</div>
 
@@ -556,7 +556,7 @@
 						<h4>Description</h4>
 						<p>Set width of node, and handle fallback timer-based transition if required.</p>
 						<p>
-							Stores its latest width set via this function in node._width.
+							Stores latest width in node._width.
 						</p>
 					</div>
 					
@@ -647,7 +647,7 @@
 						<h4>Description</h4>
 						<p>Set height of node, and handle fallback timer-based transition if required.</p>
 						<p>
-							Stores its latest height set via this function in node._height.
+							Stores latest height in node._height.
 						</p>
 					</div>
 
@@ -661,7 +661,7 @@
 									<span class="type">Node</span> node to set height on
 								</div>
 							</dd>
-							<dt><span class="var">x</span></dt>
+							<dt><span class="var">height</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">Integer</span> new height of node.
@@ -738,7 +738,7 @@
 						<h4>Description</h4>
 						<p>Set background-position of node, and handle fallback timer-based transition if required.</p>
 						<p>
-							Stores its latest background-position set via this function in node._bg_x and node._bg_y.
+							Stores latest background-position in node._bg_x and node._bg_y.
 						</p>
 					</div>
 
@@ -834,7 +834,7 @@
 						<h4>Description</h4>
 						<p>Set background-color of node, and handle fallback timer-based transition if required.</p>
 						<p>
-							Stores its latest background-color set via this function in node._bg_color.
+							Stores latest background-color in node._bg_color.
 						</p>
 					</div>
 

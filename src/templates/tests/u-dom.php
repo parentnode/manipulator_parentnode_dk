@@ -63,8 +63,13 @@
 			}
 
 			// wrap element
-			node = u.ae(scene, "div", ({"class":"error", "html":"wrap error"}));
+			node = u.ae(scene, "div", ({"class":"error", "html":"wrapElement error"}));
 			u.we(node, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
+
+
+			// wrap content
+			node = u.ae(scene, "div", ({"class":"error", "html":"wrapContent error"}));
+			u.wc(node, "div", ({"class":"correct"})).innerHTML = "wrapContent: correct";
 
 
 			// node.textContent
@@ -154,7 +159,7 @@
 
 
 
-			//as & gcs
+			//as, ass & gcs
 			// applyStyle
 			var org_display = u.qs("h1", scene).style.display;
 			u.qs("h1", scene).style.display == "block";
@@ -165,6 +170,18 @@
 			}
 			else {
 				u.ae(scene, "div", ({"class":"error", "html":"addStyle: error"}));
+			}
+
+
+			var org_display = u.qs("h1", scene).style.display;
+			u.qs("h1", scene).style.display == "block";
+			u.ass(u.qs("h1", scene), {"display":"inline", "width":"100px"});
+			if(u.qs("h1", scene).style.display == "inline" && u.qs("h1", scene).style.width == "100px") {
+				u.ass(u.qs("h1", scene), {"display":"block", "width":"auto"});
+				u.ae(scene, "div", ({"class":"correct", "html":"addStyles: correct"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"addStyles: error"}));
 			}
 
 

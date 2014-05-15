@@ -13,7 +13,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-hash.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-image.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');

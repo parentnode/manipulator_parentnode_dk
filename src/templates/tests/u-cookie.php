@@ -49,7 +49,7 @@
 			u.saveNodeCookie(scene, "test2", "s-value2");
 			u.saveNodeCookie(footer, "test2", "f-value2");
 			// u.bug(u.getCookie("jes_mem"));
-			if(u.getCookie("jes_mem") == '{"DIV#content DIV.scene":{"test1":"s-value1","test2":"s-value2"},"DIV#footer":{"test2":"f-value2"}}') {
+			if(u.getCookie("man_mem") == '{"DIV#content DIV.scene":{"test1":"s-value1","test2":"s-value2"},"DIV#footer":{"test2":"f-value2"}}') {
 				u.ae(scene, "div", ({"class":"correct", "html":"u.saveNodeCookie: correct"}));
 			}
 			else {

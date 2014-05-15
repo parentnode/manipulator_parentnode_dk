@@ -8,6 +8,9 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+			u.bug_console_only = false;
+			u.bug_force = true;
+
 			u.bug(scene.innerHTML)
 
 			u.bug(u.nodeId(scene, 1), 1, "green");
