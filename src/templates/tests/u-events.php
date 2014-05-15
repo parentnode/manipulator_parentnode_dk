@@ -3,8 +3,8 @@
 	.level2 {width: 420px; height: 230px; position: absolute; left: 100px; top: 50px; padding: 50px 50px; background: green;}
 	.level3 {width: 220px; height: 120px; padding: 50px 100px; background: blue;}
 	.level4 {width: 120px; height: 30px; padding: 30px 50px; background: yellow;}
-	.link {width: 100px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
-	.link a {height: 50px; display: block; text-indent: -9999px;}
+	.testlink {width: 100px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
+	.testlink a {height: 50px; display: block; text-indent: -9999px;}
 </style>
 
 <script type="text/javascript">
@@ -17,10 +17,10 @@
 			var level3 = u.qs(".level3");
 			var level4 = u.qs(".level4");
 
-			var link = u.qs(".link");
+			var link = u.qs(".testlink");
 
 
-			u.link(link);
+			u.ce(link);
 			link.clicked = function(event) {
 				u.bug("link clicked");
 			}
@@ -74,7 +74,7 @@
 		</div>
 	</div>
 
-	<div class="link">
+	<div class="testlink">
 		<a href="#">link</a>
 	</div>
 
