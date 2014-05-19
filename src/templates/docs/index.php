@@ -7,10 +7,6 @@
 	<p>
 		Documentation of utilities and tools in the Manipulator JavaScript library.
 	</p>
-	<p class="note">
-		We are currently in the process of updating documentation to version 0.8. Some
-		elements will be outdated while this process is going on.
-	</p>
 
 	<div class="search"></div>
 
@@ -71,20 +67,24 @@
 				<p>Positioning, sizes and offsets</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-googleanalytics">Google Analytics - BETA</a></h3>
+				<h3><a href="/docs/u-googleanalytics">Google Analytics</a></h3>
 				<p>In progress: Built-in Google Analytics tracking</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-init">Init</a></h3>
-				<p>Manipulator module initializer</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-history">History</a></h3>
 				<p>Browser history for Ajax based navigation</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-init">Init</a></h3>
+				<p>Manipulator module initializer</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-math">Math</a></h3>
 				<p>Math based functions</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-navigation">Navigation</a></h3>
+				<p>Ajax navigation controller</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-period">Period</a></h3>
@@ -95,8 +95,8 @@
 				<p>Oldschool popups, for oldschool websites.</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-preloader">Preloader - BETA</a></h3>
-				<p>In progress: formerly known as Image - image loader</p>
+				<h3><a href="/docs/u-preloader">Preloader</a></h3>
+				<p>Loadbalanced image preloader</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-request">Request</a></h3>

@@ -65,6 +65,11 @@
 
 #content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
 
+
+#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
+#content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
+
+
 #content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
 #content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}

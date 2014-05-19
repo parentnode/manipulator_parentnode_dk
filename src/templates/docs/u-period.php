@@ -1,5 +1,8 @@
 <div class="scene docpage i:docpage">
-	<h1>Precision time</h1>
+	<h1>Period</h1>
+	<p>
+		Somewhat of an odd feature. Converting a timespan into chunks.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
