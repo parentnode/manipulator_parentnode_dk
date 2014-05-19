@@ -18,8 +18,6 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.cutString</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.cutString</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String = 
 								Util.cutString(
@@ -102,8 +100,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.randomString</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.randomString</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								Util.randomString(
@@ -179,8 +175,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.uuid</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.uuid</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								Util.uuid();
@@ -246,8 +240,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.prefix</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.prefix</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								Util.prefix(
@@ -339,8 +331,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.eitherOr</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.eitherOr</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								Util.eitherOr(
@@ -413,7 +403,90 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
+			<!--div class="function" id="Util.stringOr">
+				<div class="header">
+					<h3>Util.stringOr</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.stringOr</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.stringOr(
+									<span class="type">Mixed</span> <span class="var">string</span>,
+									<span class="type">Mixed</span> <span class="var">or</span>
+								);
+							</dd>
+						</dl>
+					</div>
 
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Checks if <span class="var">string</span> is not <span class="value">undefined</span>, 
+							<span class="value">null</span> or <span class="value">false</span>. If 
+							<span class="var">string</span> is valid, return it. If not, returns 
+							<span class="var">or</span> instead.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Object/String to check
+								</div>
+							</dd>
+							<dt><span class="var">or</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Object/String to return if <span class="var">string</span> is not valid
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>Either <span class="var">string</span> or <span class="var">or</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.stringOr(0, "zero");</code>
+	
+							<p>returns 0</p>
+						</div>
+						<div class="example">
+							<code>u.stringOr(, "zero");</code>
+	
+							<p>returns zero</p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div-->
 
 			<div class="function" id="String.trim">
 				<div class="header">
@@ -425,8 +498,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">String.trim</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">none</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								String.trim();
@@ -488,8 +559,6 @@ u.cutString(string, 10);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">String.substr</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">none</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">String =
 								String.substr(from, length);
@@ -553,83 +622,6 @@ u.cutString(string, 10);</code>
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<p>none</p>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="function" id="Util.randomKey">
-				<div class="header">
-					<h3>Util.randomKey - DEPRECATED - use Util.randomString</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.randomKey</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.randomKey</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax">String =
-								Util.randomKey(
-									[<span class="type">Number</span> <span class="var">length</span>]
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>
-							Will return a random key consisting of lowercase letters and/or numbers. If no length is specified, 8 is the default length.
-						</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-						<dl class="parameters">
-							<dt><span class="var">length</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">String</span> Optional. The length of the random key.
-								</div>
-							</dd>
-			
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p>A random key consisting of lowercase letters and/or numbers</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-
-						<div class="example">
-							<code>u.randomKey(10);</code>
-	
-							<p>returns <span class="type">String</span> like cc65epfpsq</p>
-						</div>
-					</div>
-				
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>String.split</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<h5>Manipulator</h5>
-							<ul>
-								<li>u.random</li>
-							</ul>
 						</div>
 
 					</div>

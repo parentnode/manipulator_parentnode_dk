@@ -43,14 +43,21 @@
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "uuid: error";
 			}
 
-			// u.stringOr
-			if(u.eitherOr(0, "zero") == 0 && u.eitherOr(null, "zero") == "zero") {
+			// u.eitherOr
+			if(u.eitherOr(0, "zero") == 0 && u.eitherOr(null, "zero") == "zero" && u.eitherOr("", "zero") == "" && u.eitherOr(undefined, "zero") == "zero" && u.eitherOr("test", "zero") == "test" && u.eitherOr({}, "zero") != "zero") {
 				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "eitherOr: correct";
 			}
 			else {
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "eitherOr: error";
 			}
 
+			// u.stringOr
+			// if(u.stringOr("", "zero") == "" && u.stringOr(0, "zero") == 0 && u.stringOr(null, "zero") == "zero" && u.stringOr(undefined, "zero") == "zero") {
+			// 	u.ae(scene, "div", ({"class":"correct"})).innerHTML = "stringOr: correct";
+			// }
+			// else {
+			// 	u.ae(scene, "div", ({"class":"error"})).innerHTML = "stringOr: error";
+			// }
 
 
 			// trim
