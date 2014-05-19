@@ -43,9 +43,9 @@
 			u.ae(preloader, "h2", {"html":"Image with size"});
 			var node = u.ae(preloader, "div", {"class":"background"});
 			node.loaded = function(queue) {
-				u.as(this, "width", queue[0]._image.width+"px");
-				u.as(this, "height", queue[0]._image.height+"px");
-				u.as(this, "backgroundImage", "url("+ queue[0]._image.src+")");
+				u.as(this, "width", queue[0].image.width+"px");
+				u.as(this, "height", queue[0].image.height+"px");
+				u.as(this, "backgroundImage", "url("+ queue[0].image.src+")");
 
 				u.ac(queue[0]._queue, "correct");
 			}
