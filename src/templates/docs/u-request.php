@@ -37,7 +37,7 @@
 						<p>Make a server request using XMLHttpRequest with GET, POST, PUT or PATCH or &lt;script&gt; injection in &lt;head&gt;.</p>
 						<p>Responses are validated using Util.isStringJSON and Util.isStringHTML before being returned to callback function.</p>
 						<p>
-							Makes callback to node.response(response) when valid response is received. Declare this function
+							Makes callback to node.response(response, [request_id]) when valid response is received. Declare this function
 							on <span class="var">node</span> to receive callback. <span class="var">response</span> parameter will
 							be DOM- or JSON-object, or text-string. DOM-object has response.isHTML variable declared. JSON-object has
 							response.isJSON variable declared.
@@ -95,6 +95,8 @@
 											if depending on custom headers.<br />
 											Headers cannot be used with SCRIPT injection.
 										</dd>
+										<dt><span class="value">callback</span></dt>
+										<dd>Response custom callback function name</dd>
 									</dl>
 								</div>
 							</dd>
@@ -104,8 +106,16 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callback to node.response or node.responseError.</p>
 					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl>
+							<dt>node.response(response [, request_id])</dt>
+							<dd>when response is received</dd>
+							<dt>node.responseError(response)</dt>
+							<dd>if request fails</dd>
+						</dl>
 
 					<div class="examples">
 						<h4>Examples</h4>

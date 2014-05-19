@@ -14,12 +14,12 @@
 
 			node._span = u.qs("span", node);
 
-			node.response = function(response) {
-				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+			node.response = function(response, request_id) {
+				if(response.isHTML && !this[request_id].request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = u.qs(".test", response).innerHTML
 				}
-				else if(response.isJSON && this.request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
+				else if(response.isJSON && this[request_id].request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = response.test;
 				}
@@ -79,18 +79,18 @@
 
 			node._span = u.qs("span", node);
 
-			node.response = function(response) {
-				if(response.isHTML && !this.request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+			node.response = function(response, request_id) {
+				if(response.isHTML && !this[request_id].request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = u.qs(".test", response).innerHTML
 				}
-				else if(response.isJSON && this.request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
+				else if(response.isJSON && this[request_id].request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
 					u.ac(this, "correct");
 					this.innerHTML = response.test;
 				}
 				else {
 
-					u.bug("error:" + response.isJSON + ":" + this.request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+					u.bug("error:" + response.isJSON + ":" + this[request_id].request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
 
 					u.ac(this, "error");
 					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
@@ -270,15 +270,15 @@
 			<span>/ajax/script.jsonp.php?test=error</span>
 		</div>
 
-		<div class="i:-test method:script">
+		<div class="i:test method:script">
 			<input type="hidden" name="test" value="SCRIPT, to JSONP outside domain: correct" />
-			<span>http://jes.wires.dk/documentation/tests/ajax/script.jsonp.php</span>
+			<span>http://manipulator.parentnode.dk/ajax/script.jsonp.php</span>
 		</div>
 
 
-		<div class="i:-special method:post">
+		<div class="i:special method:post">
 			<input type="hidden" name="test" value="POST, outside domain: correct" />
-			<span>http://test.whattheframework.org/documentation/tests/ajax/post.php</span>
+			<span>http://manipulator.parentnode.dk/ajax/post.php</span>
 		</div>
 
 	</form>
