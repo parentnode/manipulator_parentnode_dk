@@ -1,6 +1,6 @@
 <div class="scene docpage i:docpage">
 	<h1>System</h1>
-	<p>Browser information for now.</p>
+	<p>Browser version and browser support information.</p>
 	<p>
 		Preferably the detection is based purely on features specific to certain browsers and versions, to avoid unintended results
 		with user-spoofed useragents. However, collecting this information is very time consuming and the ability to detect in spite of
@@ -204,7 +204,7 @@
 				</div>
 			</div>
 
-			<div class="function">
+			<!--div class="function">
 				<div class="header">
 					<h3>Util.system - To be implemented</h3>
 				</div>
@@ -258,7 +258,7 @@
 
 					</div>
 				</div>
-			</div>
+			</div-->
 
 		</div>
 	</div>
