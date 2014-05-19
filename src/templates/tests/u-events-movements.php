@@ -1,11 +1,18 @@
 <style type="text/css">
 
+	* {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+
 	div.drag {position: relative; z-index: 1;}
 	ul.info {padding: 0; margin: 20px 0;}
 	ul.info li {padding: 3px;}
 
 
 	/* FIXED */
+	div.drag_fixed {z-index: 100;}
 	div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
 	div.fixed div.handle {width: 50px; height: 50px; background: green;}
 
@@ -114,7 +121,10 @@
 <script type="text/javascript">
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
-//			u.bug_position = "fixed";
+
+			u.bug_position = "fixed";
+			u.bug_force = true;
+			u.bug_console_only = false;
 
 			var drag = u.qs("div.drag", scene);
 
@@ -278,7 +288,7 @@
 			var link1 = u.qs("div.link1", scene);
 			var link2 = u.qs("div.link2", scene);
 
-			u.link(link1);
+			u.ce(link1);
 			link1.clicked = function(event) {
 				u.bug("link1 clicked")
 			}
@@ -293,7 +303,7 @@
 //				u.bug("link1 dropped")
 			}
 
-			u.link(link2);
+			u.ce(link2);
 			link2.clicked = function(event) {
 				u.bug("link2 clicked")
 			}
@@ -543,7 +553,7 @@
 <div class="scene i:test">
 	<h1>Events, movements</h1>
 
-	<div class="drag">
+	<div class="drag drag_fixed">
 		<h3>Fixed node with drag</h3>
 
 		<div class="fixed">
