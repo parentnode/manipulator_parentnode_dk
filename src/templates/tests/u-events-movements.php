@@ -16,6 +16,7 @@
 	div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
 	div.fixed div.handle {width: 50px; height: 50px; background: green;}
 
+	div.drag_fixed li.handle {background: green; color: white;} 
 
 	/* MIXED */
 	div.level1 {z-index: 1; width: 720px; height: 500px; position: relative; background: red;}
@@ -561,9 +562,11 @@
 		</div>
 
 		<ul class="info">
-			<li class="handle">handle: to be dragged inside fixed element</li>
+			<li class="handle">Green box on the right to be dragged inside fixed yellow element</li>
 		</ul>
 	</div>
+
+	<hr />
 
 	<div class="drag">
 		<h3>Mixed and Nested drag variations, with different positioning</h3>
@@ -583,6 +586,8 @@
 		</ul>
 
 	</div>
+
+	<hr />
 
 	<div class="drag">
 		<h3>Nested drags, horizontal inside vertical</h3>

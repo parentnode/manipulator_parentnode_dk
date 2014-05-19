@@ -82,6 +82,12 @@
 										<dd>Drop node if mouseout event occurs while dragging</dd>
 										<dt><span class="value">show_bounds</span></dt>
 										<dd>Show boundaries - for debugging your boundaries</dd>
+										<dt><span class="value">picked</span></dt>
+										<dd>picked event custom callback function name</dd>
+										<dt><span class="value">moved</span></dt>
+										<dd>moved event custom callback function name</dd>
+										<dt><span class="value">dropped</span></dt>
+										<dd>dropped event custom callback function name</dd>
 									</dl>
 								</div>
 							</dd>
@@ -91,7 +97,22 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callbacks to node.picked, node.moved, node.dropped and node.projected.</p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.picked(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.moved(event)</dt>
+							<dd>when movement occurs after mousedown or touchstart</dd>
+							<dt>node.dropped(event)</dt>
+							<dd>when node is dropped</dd>
+							<dt>node.inputStarted(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.clickCancelled(event)</dt>
+							<dd>when event is cancelled automatically</dd>
+						</dl>
 					</div>
 
 					<div class="examples">
@@ -126,7 +147,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>switch ... case</li>
@@ -140,7 +160,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.absoluteX</li>
@@ -236,6 +255,12 @@
 										<dd>Drop node if mouseout event occurs while dragging</dd>
 										<dt><span class="value">show_bounds</span></dt>
 										<dd>Show boundaries - for debugging your boundaries</dd>
+										<dt><span class="value">picked</span></dt>
+										<dd>picked event custom callback function name</dd>
+										<dt><span class="value">moved</span></dt>
+										<dd>moved event custom callback function name</dd>
+										<dt><span class="value">dropped</span></dt>
+										<dd>dropped event custom callback function name</dd>
 									</dl>
 								</div>
 							</dd>
@@ -245,7 +270,30 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callbacks to node.picked, node.moved, node.dropped, node.swipedUp, node.swipedDown, node.swipedRight and node.swipedLeft.</p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.picked(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.moved(event)</dt>
+							<dd>when movement occurs after mousedown or touchstart</dd>
+							<dt>node.dropped(event)</dt>
+							<dd>when node is dropped</dd>
+							<dt>node.swipedUp(event)</dt>
+							<dd>when node is swiped up</dd>
+							<dt>node.swipedDown(event)</dt>
+							<dd>when node is swiped down</dd>
+							<dt>node.swipedLeft(event)</dt>
+							<dd>when node is swiped left</dd>
+							<dt>node.swipedRight(event)</dt>
+							<dd>when node is swiped right</dd>
+							<dt>node.inputStarted(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.clickCancelled(event)</dt>
+							<dd>when event is cancelled automatically</dd>
+						</dl>
 					</div>
 
 					<div class="examples">
@@ -277,13 +325,11 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.drag</li>
@@ -318,7 +364,14 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>_description_</p>
+						<p>
+							Reset all drag-related events on node, returning them to their initial state. You can use this on nodes
+							with multiple drag-handlers if you need an advanced level of event handling.
+						</p>
+						<p>
+							Most basic event handling and cancellation is automatically handled by the existing functions - this 
+							function is only relevant in edge case scenarios.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -425,7 +478,7 @@
 							<dt><span class="var">strict</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Boolean</span> Optional true to detect complete overlap only. Default is false, detection partial overlap.
+									<span class="type">Boolean</span> Optional true to detect complete overlap only. Default is false, detecting partial overlap.
 								</div>
 							</dd>
 						</dl>
@@ -445,7 +498,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.constructor</li>
@@ -455,7 +507,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
