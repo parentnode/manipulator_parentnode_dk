@@ -6,22 +6,20 @@
 
 <script type="text/javascript">
 
-	var text = "";
-	var dom_time = 0;
-	var time = 0;
+	var time = new Date().getTime();
 
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 			load_time = new Date().getTime();
-			text += "#onload ("+(load_time - dom_time)+")<br>" + document.body + "<br>" + document.readyState + "<br>";
+//			text += "#onload ("+(load_time - time)+")<br>" + document.body + "<br>" + document.readyState + "<br>";
 
-			u.bug(text);
+//			u.bug(text);
 			if(!scene.initialized) {
 				scene.initialized = true;
 				var init_div = u.qs(".init", scene)
 				init_div.parentNode.removeChild(init_div);
 
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "Initialized";
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "Initialized: "+(load_time - time);
 			}
 			else {
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "Multiple initializations";
