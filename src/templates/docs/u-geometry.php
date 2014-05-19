@@ -61,7 +61,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.offsetParent</li>
@@ -70,7 +69,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -133,7 +131,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.offsetParent</li>
@@ -142,7 +139,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -209,7 +205,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.offsetParent</li>
@@ -219,7 +214,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -288,7 +282,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.offsetParent</li>
@@ -298,7 +291,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -363,7 +355,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>parseInt</li>
@@ -371,7 +362,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -436,7 +426,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>parseInt</li>
@@ -444,7 +433,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -509,7 +497,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>event.targetTouches</li>
@@ -520,7 +507,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -583,7 +569,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>event.targetTouches</li>
@@ -594,7 +579,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -647,7 +631,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.documentElement.clientWidth</li>
@@ -655,7 +638,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -708,7 +690,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.documentElement.clientHeight</li>
@@ -716,7 +697,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -769,7 +749,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>parseInt</li>
@@ -778,7 +757,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -833,7 +811,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>parseInt</li>
@@ -842,7 +819,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.getComputedStyle</li>
@@ -900,7 +876,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>window.pageYOffset</li>
@@ -909,7 +884,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>
@@ -962,7 +936,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>window.pageYOffset</li>
@@ -971,7 +944,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>none</p>
 						</div>

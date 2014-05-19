@@ -101,25 +101,25 @@
 			}
 
 
-			var browser = u.ae(scene, "div", {"class":"browser", "html":"Click to get browser size"});
-			u.ce(browser);
-			browser.clicked = function() {
+			var _browser = u.ae(scene, "div", {"class":"browser", "html":"Click to get browser size"});
+			u.ce(_browser);
+			_browser.clicked = function() {
 				this.innerHTML = "browserWidth x browserHeight: " + u.browserW() + " x " + u.browserH();
 			}
 
-			var html = u.ae(scene, "div", {"class":"html", "html":"Click to get HTML size"});
-			u.ce(html);
-			html.clicked = function() {
+			var _html = u.ae(scene, "div", {"class":"html", "html":"Click to get HTML size"});
+			u.ce(_html);
+			_html.clicked = function() {
 				this.innerHTML = "htmlWidth x htmlHeight: " + u.htmlW() + " x " + u.htmlH();
 			}
 
-			var scroll = u.ae(scene, "div", {"class":"scroll", "html":"Click to get scroll offset"});
-			u.ce(scroll);
-			scroll.clicked = function() {
+			var _scroll = u.ae(scene, "div", {"class":"scroll", "html":"Click to get scroll offset"});
+			u.ce(_scroll);
+			_scroll.clicked = function() {
 				this.innerHTML = "scrollX x scrollY: " + u.scrollX() + " x " + u.scrollY();
 			}
 
-
+			page.resized();
 		}
 	}
 </script>
