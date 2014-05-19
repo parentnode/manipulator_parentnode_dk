@@ -5,8 +5,8 @@
 		and interaction.
 	</p>
 	<p>
-		Util.Form is based on a simple HTML syntax, providing full HTML fallback when required. To learn more about 
-		the form-HTML syntax, see <a href="/documentation/markup/form">HTML/Form</a>.
+		Util.Form is based on the <a href="http://modulator.parentnode.dk" target="_blank">modulator HTML Form syntax</a>, 
+		ensuring full HTML fallback when no JavaScript is available.
 	</p>
 
 	<div class="section functions">
@@ -44,7 +44,7 @@
 							and provides some collections to help you access any form component with ease.
 						</p>
 						<p>
-							"focus", "error" and "correct" classes are added/removed from field when state changes.
+							"focus", "error" and "correct" classes are added/removed from field and input when state changes.
 						</p>
 
 						<h5>Form</h5>
@@ -89,28 +89,28 @@
 						<p>Util.Form comes with a range of default field types:</p>
 						<dl>
 							<dt>string</dt>
-							<dd>Input type="text". Must be string. Optional min:length and max:length classes to specify min and max length of string.</dd>
+							<dd>Input type="text". Must be string. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
+
+							<dt>text</dt>
+							<dd>Textarea. Must be string. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
 
 							<dt>email</dt>
-							<dd>Input type="email". Must be email.</dd>
+							<dd>Input type="email". Must be valid email syntax.</dd>
 
 							<dt>password</dt>
-							<dd>Input type="password". Must be between 8 and 20 chars. Optional min:length and max:length classes to specify min and max length of string.</dd>
+							<dd>Input type="password". Must be between 8 and 20 chars. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
 
 							<dt>numeric</dt>
-							<dd>Input type="number". Must be numeric. Optional min:length and max:length classes to specify min and max length of string.</dd>
+							<dd>Input type="number". Must be numeric. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
 
 							<dt>integer</dt>
-							<dd>Input type="number". Must be integer. Optional min:length and max:length classes to specify min and max length of string.</dd>
+							<dd>Input type="number". Must be integer. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
 
 							<dt>tel</dt>
 							<dd>Input type="number". Must be telephone (.-+ 0-9) and between 5 and 16 chars.</dd>
 
 							<dt>select</dt>
-							<dd>Select</dd>
-
-							<dt>text</dt>
-							<dd>Textarea. Must be string. Optional min:length and max:length classes to specify min and max length of string. Optional autoexpand class to make textarea expand to content.</dd>
+							<dd>Select field with options.</dd>
 
 							<dt>checkbox</dt>
 							<dd>Input type="checkbox".</dd>
@@ -231,7 +231,6 @@
 	}
 
 &lt;/script&gt;</code>
-							<p>Returns the CSS display property of div.header.</p>
 						</div>
 					</div>
 
@@ -300,33 +299,33 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>_description_</p>
+						<p>Get name/value pairs from all inputs in <span class="var">form</span>.</p>
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
 
 						<dl class="parameters">
-							<dt><span class="var">_var_</span></dt>
+							<dt><span class="var">form</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">_type_</span> _summary_
-								</div>
-								<!-- optional details -->
-								<div class="details">
-									<!-- write parameter details -->
-									<h5>Options</h5>
-									<dl class="options">
-										<!-- specific options -->
-										<dt><span class="value">_value_</span></dt>
-										<dd>_description_</dd>
-									</dl>
+									<span class="type">Node</span> node to use as form scope. Can be form or just plain HTML node.
 								</div>
 							</dd>
-							<dt><span class="var">identifier</span></dt>
+							<dt><span class="var">settings</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">_type_</span> _summary_
+									<span class="type">JSON</span> Optional, JSON settings
+								</div>
+
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">send_as</span></dt>
+										<dd>Define type of returned object. Default to regular GET string. Optional JSON, Object or custom type offered through u.f.customSend[send_as].</dd>
+										<dt><span class="value">ignore_inputs</span></dt>
+										<dd>Input classes to be ignored when collecting data</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -334,13 +333,34 @@
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p><span class="type">_type_</span> _returnsummary_</p>
+						<p><span class="type">Mixed</span> Default GET string, otherwise object as specified in send_as setting.</p>
 					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>
 
 						<div class="example">
+							<code>&lt;form name=&quot;test_form&quot; action=&quot;action&quot; method=&quot;get&quot;&gt;
+	&lt;fieldset&gt;
+
+		&lt;div class=&quot;field string required&quot;&gt;
+			&lt;label for=&quot;input1_id&quot;&gt;String, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;string_required&quot; id=&quot;input1_id&quot; value=&quot;test1&quot; /&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;field string required&quot;&gt;
+			&lt;label for=&quot;input2_id&quot;&gt;String, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;string_not_required&quot; id=&quot;input2_id&quot; value=&quot;test2&quot; /&gt;
+		&lt;/div&gt;
+
+	&lt;/fieldset&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+	var form = u.querySelector("form");
+	u.f.getParams(form);
+&lt;/script&gt;</code>
+							<p>Returns string_required=test1&amp;string_not_required=test2
+
 						</div>
 					</div>
 
@@ -348,18 +368,19 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>typeof</li>
+								<li>Switch ... case</li>
+								<li>encodeURIComponent</li>
 							</ul>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>Util.querySelectorAll</li>
+								<li>Util.hasClass</li>
 							</ul>
 						</div>
 
