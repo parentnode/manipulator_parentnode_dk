@@ -1479,7 +1479,12 @@ u.ie(header, nav);</code>
 									<dl class="options">
 										<!-- specific options -->
 										<dt><span class="value">type</span></dt>
-										<dd>Add className to wrapping node</dd>
+										<dd>
+											<span class="value">link</span><br />
+											Add click handler to redirect to url.
+											Detects CMD/CTRL key, sending url to new tab/window. Detects page.navigate
+											function to redirect url to ajax navigation controller.
+										</dd>
 									</dl>
 								</div>
 							</dd>
@@ -1506,7 +1511,7 @@ u.ie(header, nav);</code>
 &lt;/script&gt;</code>
 
 							<p>
-								returns <span class="type">node</span> where node.url = "index", applied click event listener, 
+								returns <span class="type">node</span> where node.url = "index", with applied click event listener, 
 								in the following structure:
 							</p>
 
@@ -1830,6 +1835,18 @@ u.ie(header, nav);</code>
 &lt;/script&gt;</code>
 							<p>Returns true</p>
 						</div>
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;header type1&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var header = u.querySelector(".header");
+	u.hasClass(header, "type2|type3");
+&lt;/script&gt;</code>
+							<p>Returns false</p>
+						</div>
 					</div>
 
 					<div class="uses">
@@ -1883,7 +1900,7 @@ u.ie(header, nav);</code>
 						<p>
 							DOM is automatically updated as default, because that is the only way to ensure the effects 
 							will be seen instantaneous.
-							Use dom_update=true if DOM does not need to be 
+							Set <span class="var">dom_update</span> to <span class="value">false</span> if DOM does not need to be 
 							updated after adding class - ie. if you add classes to many nodes at the same time and DOM only 
 							needs to be updated in the end. This increased speed manyfold.
 						</p>
@@ -1915,7 +1932,7 @@ u.ie(header, nav);</code>
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p>node className after new class has been added</p>
+						<p>node className after new <span class="var">classame</span> has been added</p>
 					</div>
 
 					<div class="examples">
@@ -1989,7 +2006,7 @@ u.ie(header, nav);</code>
 						</p>
 						<p>
 							DOM is automatically updated as default, because that is the only way to ensure the effects will be seen instantaneous.
-							Use dom_update=false if DOM does not need to be 
+							Set <span class="var">dom_update</span> to <span class="value">false</span> if DOM does not need to be 
 							updated after removing class - ie. if you remove classes from many nodes at the same time and DOM only 
 							needs to be updated in the end. This increased speed manyfold.
 						</p>
@@ -2021,7 +2038,7 @@ u.ie(header, nav);</code>
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p>The new className of node, after classname has been removed</p>
+						<p>The new className of node, after <span class="var">classame</span> has been removed</p>
 					</div>
 
 					<div class="examples">
@@ -2111,14 +2128,15 @@ u.ie(header, nav);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Toggles classname on node. If classname exists, it will be removed. If classname does not exist, it will be added. 
-							If _classname is given, the function will toggle the two classnames, adding/removing based on existence of
-							classname/_classname.
+							Toggles <span class="var">classame</span> on node. If <span class="var">classame</span> exists, 
+							it will be removed. If <span class="var">classame</span> does not exist, it will be added. 
+							If <span class="var">_classame</span> is given, the function will toggle the two classnames, 
+							adding/removing based on existence of <span class="var">classame</span>/<span class="var">_classame</span>.
 						</p>
 						<p>
 							DOM is automatically updated as default, when classes have been toggled, because that is the only way 
 							to ensure the effects will be seen instantaneous.
-							Use dom_update=false if DOM does not need to be 
+							Set <span class="var">dom_update</span> to <span class="value">false</span> if DOM does not need to be 
 							updated after toggling class - ie. if you toggle classes on many nodes at the same time and DOM only 
 							needs to be updated in the end. This increased speed manyfold.
 						</p>
@@ -2270,7 +2288,7 @@ u.ie(header, nav);</code>
 						<p>
 							DOM is automatically updated as default, because that is the only way 
 							to ensure the effects will be seen instantaneous.
-							Use dom_update=false if DOM does not need to be 
+							Set <span class="var">dom_update</span> to <span class="value">false</span> if DOM does not need to be 
 							updated after applying style property - ie. if you apply style properties on many nodes at the same time and DOM only 
 							needs to be updated in the end. This increased speed manyfold.
 						</p>
@@ -2335,6 +2353,117 @@ u.ie(header, nav);</code>
 	u.applyStyle(header, "display", "none");
 &lt;/script&gt;</code>
 							<p>Adds style attribute, style=&quot;display: none;&quot; to div.header, thus hiding it.</p>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>None</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>None</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.applyStyles">
+				<div class="header">
+					<h3>Util.applyStyles</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.applyStyles</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.ass</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.applyStyles(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">JSON</span> <span class="var">styles</span>, 
+									[, <span class="type">Boolean</span> <span class="var">dom_update</span>]
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Adds style <span class="var">properties</span> to <span class="var">node</span>. Basically this is just 
+							a shorthand for setting multiple node.style.property = value at once, but it also, as default, updates the DOM.
+						</p>
+						<p>
+							DOM is automatically updated as default, because that is the only way 
+							to ensure the effects will be seen instantaneous.
+							Set <span class="var">dom_update</span> to <span class="value">false</span> if DOM does not need to be 
+							updated after applying style property - ie. if you apply style properties on many nodes at the same time and DOM only 
+							needs to be updated in the end. This increased speed manyfold.
+						</p>
+						<p>
+							If you need to animate style property, use Util.Animation equivalent, which can translate
+							applied transition to timed execution for fallback.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to apply style property to
+								</div>
+							</dd>
+
+							<dt><span class="var">styles</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Object containing proporty:value pairs to be applied to node
+								</div>
+							</dd>
+
+							<dt><span class="var">dom_update</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Boolean</span> Optional DOM update, Default true.
+								</div>
+							</dd>
+
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							Void - does not return anything, because it is impossible to tell if browser supports the given 
+							styles.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var header = u.querySelector(".header");
+	u.applyStyle(header, {"display":"inlin", "color":"red"});
+&lt;/script&gt;</code>
+							<p>Adds style attribute, style=&quot;inline: none; color: red;&quot; to div.header.</p>
 						</div>
 					</div>
 

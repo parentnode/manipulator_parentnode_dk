@@ -112,6 +112,7 @@
 			if(
 				u.hc(u.qs("h1", scene), "headline") == false && 
 				u.hc(u.qs("h1", scene), "test|headline") == false && 
+				u.hc(u.qs("h1", scene), "test_headline|fisk") == true && 
 				u.hc(u.qs("h1", scene), "test_headline") == true && 
 				u.hc(u.qs("h1", scene), "test_headline2") == false && 
 				u.hc(u.qs("h1", scene), "2test_headline") == false && 
