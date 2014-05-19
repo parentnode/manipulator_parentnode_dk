@@ -2,7 +2,7 @@
 	<h1>Events</h1>
 	<p>
 		The Manipulator-event model, has been designed to be as close to regular JavaScript event-handling as possible. Keeping close to
-		the actual standard (JavaScript), you can easily make your own adjustments and/or detours. So why not just use
+		the actual standard (JavaScript), you can easily make your own adjustments and/or detours, without inventing new events. So why not just use
 		regular JavaScript events? Well, because we still need to be able to support older browsers seamlessly, and when it comes to advanced
 		event handling, with possibly many different event listeners on the same node, it makes sense to encapsulate some
 		functionality in a shorthand function.
@@ -49,7 +49,11 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Add hold event listener to node. Declare node.held function to receive callback on Event occurrence. A hold-event occurs after 750ms.</p>
-						<p>If your scripts are using the Manipulator Google Analytics module, the hold-event will be registered automatically.</p>
+						<p>
+							If your scripts are using the Manipulator Google Analytics module, the hold-event will be registered automatically. On
+							touch capable devices drag/move will always cancel click because it is considered scrolling.
+							On mouse capable devices mouseout will cancel the click.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -68,7 +72,20 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callback to node.held.</p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.held(event)</dt>
+							<dd>when held event occurs</dd>
+							<dt>node.inputStarted(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.moved(event)</dt>
+							<dd>when movement occurs after mousedown or touchstart</dd>
+							<dt>node.clickCancelled(event)</dt>
+							<dd>when dblclick event listener is cancelled</dd>
+						</dl>
 					</div>
 
 					<div class="examples">
@@ -132,6 +149,11 @@ node.held = function(event) {
 						<p>Add a click event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.clicked when click event occurs, if node.clicked exists.</p>
 						<p>If your scripts are using the Manipulator Google Analytics module, the click-event will be registered automatically.</p>
+						<p>
+							If your clickable node is inside a draggable node, dragging the node will prevent the node.clicked callback. On
+							touch capable devices drag/move will always cancel click because it is considered scrolling.
+							On mouse capable devices mouseout will cancel the click.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -150,7 +172,20 @@ node.held = function(event) {
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callback to node.clicked.</p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.clicked(event)</dt>
+							<dd>when click event occurs</dd>
+							<dt>node.inputStarted(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.moved(event)</dt>
+							<dd>when movement occurs after mousedown or touchstart</dd>
+							<dt>node.clickCancelled(event)</dt>
+							<dd>when dblclick event listener is cancelled</dd>
+						</dl>
 					</div>
 
 					<div class="examples">
@@ -214,7 +249,12 @@ node.clicked = function(event) {
 						<p>Add a dblclick event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.dblclicked when dblclick event occurs, if node.dblclicked exists.</p>
 						<p>If your scripts are using the Manipulator Google Analytics module, the dblclick-event will be registered automatically.</p>
-						<p>As of now, the dblclick-event does not work in IE8 and older because they require a specific dblclick event.</p>
+						<p>
+							If your clickable node is inside a draggable node, dragging the node will prevent the 
+							node.dblclicked callback. On touch capable devices drag/move will always cancel click 
+							because it is considered scrolling. On mouse capable devices mouseout will cancel the dblclick.
+						</p>
+						<p class="note">As of now, the dblclick-event does not work in IE8 and older because they require a specific dblclick event.</p>
 					</div>
 
 					<div class="parameters">
@@ -233,7 +273,20 @@ node.clicked = function(event) {
 					<div class="return">
 						<h4>Returns</h4>
 						<p><span class="type">Void</span></p>
-						<p>Event callback to node.dblclicked.</p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.dblclicked(event)</dt>
+							<dd>when doubleclick event occurs</dd>
+							<dt>node.inputStarted(event)</dt>
+							<dd>when mousedown or touchstart event occurs</dd>
+							<dt>node.moved(event)</dt>
+							<dd>when movement occurs after mousedown or touchstart</dd>
+							<dt>node.clickCancelled(event)</dt>
+							<dd>when dblclick event listener is cancelled</dd>
+						</dl>
 					</div>
 
 					<div class="examples">
@@ -319,7 +372,13 @@ node.dblclicked = function(event) {
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples</p>
+
+						<div class="example">
+							<code>node.clicked = function(event) {
+	u.e.kill(event);
+}</code>
+						<p>Stops event from bubbling to parent elements.</p>
+						</div>
 					</div>
 
 					<div class="uses">
@@ -371,7 +430,7 @@ node.dblclicked = function(event) {
 					<div class="description">
 						<h4>Description</h4>
 						<p>Add eventlistener for <span class="var">type</span>-event to <span class="var">node</span>, and apply <span class="var">action</span> as event handler.</p>
-						<p>Action will be executed on node.</p>
+						<p>Action will be executed on <span class="var">node</span>.</p>
 					</div>
 
 					<div class="parameters">
@@ -570,7 +629,7 @@ node.dblclicked = function(event) {
 					<div class="description">
 						<h4>Description</h4>
 						<p>Cross-input listener for start event, adding start eventlistener (mousedown or touchstart).</p>
-						<p>Action will be executed on node.</p>
+						<p>Action will be executed on <span class="var">node</span>.</p>
 					</div>
 
 					<div class="parameters">
@@ -619,13 +678,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
@@ -697,13 +754,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
@@ -740,7 +795,7 @@ node.dblclicked = function(event) {
 					<div class="description">
 						<h4>Description</h4>
 						<p>Cross-input listener for move event, adding move eventlistener (mousemove or touchmove).</p>
-						<p>Action will be executed on node.</p>
+						<p>Action will be executed on <span class="var">node</span>.</p>
 					</div>
 
 					<div class="parameters">
@@ -776,13 +831,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
@@ -854,13 +907,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
@@ -897,7 +948,11 @@ node.dblclicked = function(event) {
 					<div class="description">
 						<h4>Description</h4>
 						<p>Cross-input listener for end event, adding end eventlistener (mouseup or touchend).</p>
-						<p>Action will be executed on node.</p>
+						<p>Action will be executed on <span class="var">node</span>.</p>
+						<p>
+							If mouse capable device and node.snapback function is declared, node.snapback will be
+							called on mouseout.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -933,13 +988,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
@@ -1011,13 +1064,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.removeEvent</li>
@@ -1054,7 +1105,11 @@ node.dblclicked = function(event) {
 						<h4>Description</h4>
 						<p>
 							Reset all click-related events on node, returning them to their initial state. You can use this on nodes
-							with multiple click-handlers.
+							with multiple click-handlers if you need an advanced level of event handling.
+						</p>
+						<p>
+							Most basic event handling and cancellation is automatically handled by the existing functions - this 
+							function is only relevant in edge case scenarios.
 						</p>
 					</div>
 
@@ -1085,13 +1140,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.timer.resetTimer</li>
@@ -1129,7 +1182,11 @@ node.dblclicked = function(event) {
 						<h4>Description</h4>
 						<p>
 							Reset all events on node, returning them to their initial state. You can use this on nodes
-							with multiple event-handlers.
+							with multiple event-handler if you need an advanced level of event handling
+						</p>
+						<p>
+							Most basic event handling and cancellation is automatically handled by the existing functions - this 
+							function is only relevant in edge case scenarios.
 						</p>
 					</div>
 
@@ -1160,13 +1217,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.resetClickEvents</li>
@@ -1207,7 +1262,11 @@ node.dblclicked = function(event) {
 							with multiple nested event-handlers, to make sure only the correct event surfaces.
 						</p>
 						<p>
-							IE, you have a list, with draggable nodes, and inside each node is a clickable 
+							Most basic event handling and cancellation is automatically handled by the existing functions - this 
+							function is only relevant in edge case scenarios.
+						</p>
+						<p>
+							For example, if you have a list, with draggable nodes, and inside each node is a clickable 
 							child. If a mousedown occurs, it can be the start of either a click or a drag. If a mousemove event
 							occurs before a mouseup, you want to reset the click listener, to avoid a click from happening
 							when the mouseup occurs.
@@ -1241,13 +1300,11 @@ node.dblclicked = function(event) {
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.resetEvents</li>

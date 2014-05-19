@@ -12,6 +12,9 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+			u.bug_force = true;
+			u.bug_console_only = false;
+
 			var level1 = u.qs(".level1");
 			var level2 = u.qs(".level2");
 			var level3 = u.qs(".level3");
@@ -65,11 +68,17 @@
 
 <div class="scene i:test">
 	<h1>Events</h1>
+	<p>
+		Test is based on a set of nested divs, each with it's own click event. 
+		Click on each div and track the events outputted to the screen. No click, hold or dblclick
+		should envoke anything except the exact action. No bubbling can occur.
+	</p>
 
-	<div class="level1">click
-		<div class="level2">click, hold, dblclick
-			<div class="level3">click
-				<div class="level4">click</div>
+
+	<div class="level1">Level 1, click-event
+		<div class="level2">Level 2, click-, hold-, dblclick-event
+			<div class="level3">Level 3, click-even
+				<div class="level4">Level 4, click-event</div>
 			</div>
 		</div>
 	</div>
