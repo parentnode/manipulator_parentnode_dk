@@ -1,11 +1,5 @@
 <div class="scene docpage i:docpage">
 	<h1>Browser events</h1>
-	<h2>Notes on DOMReady</h2>
-	<p>
-		When using dom-ready with webfonts - the line-height will update after dom-ready (when the fonts load) and
-		this my have an impact on absolute positioning. This can be partly minimized by always stating line-heights in the CSS- but rendering widths may still change
-		paragraph heights.
-	</p>
 
 
 	<div class="section functions">
@@ -35,7 +29,15 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Add DOM Ready event. Uses DOMContentLoaded if supported by browser, or falls back to regular document.onload event.</p>
+						<p>
+							Add DOM Ready event. Uses DOMContentLoaded if supported by browser, or falls back to 
+							regular document.onload event. <span class="var">action</span> is executed on window object.
+						</p>
+						<p class="note">
+							When using dom-ready with webfonts - the line-height will update after dom-ready (when the fonts load) and
+							this my have an impact on absolute positioning. This can be partly minimized by always stating line-heights in the CSS- but rendering widths may still change
+							paragraph heights.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -45,7 +47,7 @@
 							<dt><span class="var">action</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Function</span> function execute on event
+									<span class="type">Function</span> function to execute on event
 								</div>
 							</dd>
 						</dl>
@@ -65,7 +67,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>eval</li>
@@ -73,7 +74,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
@@ -108,7 +108,7 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Add document.onload event handler.</p>
+						<p>Add document.onload event handler. <span class="var">action</span> is executed on window object.</p>
 					</div>
 
 					<div class="parameters">
@@ -118,7 +118,7 @@
 							<dt><span class="var">action</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Function</span> function execute on event
+									<span class="type">Function</span> function to execute on event
 								</div>
 							</dd>
 						</dl>
@@ -138,7 +138,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>eval</li>
@@ -146,7 +145,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Events.addEvent</li>
