@@ -35,6 +35,14 @@
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "hexToNum: error";
 			}
 
+			// u.round
+			if(u.round(0.123456, 2) == 0.12 && u.round(0.1234567, 5) == 0.12346) {
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "round: correct";
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error"})).innerHTML = "round: error";
+			}
+
 
 		}
 

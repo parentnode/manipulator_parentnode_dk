@@ -90,6 +90,80 @@
 				</div>
 			</div>
 
+			<div class="function" id="Util.round">
+				<div class="header">
+					<h3>Util.round</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.round</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Number</span> = 
+								Util.round(
+									<span class="type">Number</span> <span class="var">number</span>, 
+									<span class="type">Integer</span> <span class="var">decimals</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Round <span class="var">number</span> to <span class="var">decimals</span></p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">number</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Number</span> number to round
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Number</span> rounded number</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>Util.round(0.1234567, 5);</code>
+	
+							<p>returns <span class="type">Number</span> 0.12346</p>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>Math.pow</li>
+								<li>Math.round</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>None</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
 			<div class="function" id="Util.numToHex">
 				<div class="header">
 					<h3>Util.numToHex</h3>
