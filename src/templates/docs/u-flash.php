@@ -178,8 +178,8 @@
 										<dd>height attribute of flash object - default <span class="value">100%</span></dd>
 										<dt><span class="value">background</span></dt>
 										<dd>background attribute of flash object - default <span class="value">transparent</span></dd>
-										<dt><span class="value">allowScriptAccess</span></dt>
-										<dd>allowScriptAccess attribute of flash object - default <span class="value">always</span></dd>
+										<dt><span class="value">allow&shy;Script&shy;Access</span></dt>
+										<dd>allow&shy;Script&shy;Access attribute of flash object - default <span class="value">always</span></dd>
 										<dt><span class="value">menu</span></dt>
 										<dd>menu attribute of flash object - default <span class="value">false</span></dd>
 										<dt><span class="value">scale</span></dt>
