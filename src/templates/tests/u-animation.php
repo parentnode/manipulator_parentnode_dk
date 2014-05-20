@@ -195,7 +195,7 @@
 				// show button content, h1
 				u.as(div_border.h1, "display", "block", true);
 				u.a.transition(div_border.h1, "all 300ms ease-in-out");
-				u.as(div_border.h1, "padding-top", "10px", true);
+				u.as(div_border.h1, "paddingTop", "10px", true);
 			}
 			
 			// initial line
