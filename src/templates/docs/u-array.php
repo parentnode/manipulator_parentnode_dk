@@ -409,7 +409,7 @@
 				<dd>No include required</dd>
 
 				<dt>desktop_ie</dt>
-				<dd><span class="file">No include required</span></dd>
+				<dd>No include required</dd>
 
 				<dt>desktop_light</dt>
 				<dd><span class="file">u-array-desktop_light.js</span></dd>

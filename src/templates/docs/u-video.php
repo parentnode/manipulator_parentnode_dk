@@ -1,6 +1,8 @@
 <div class="scene docpage i:docpage">
 	<h1>Video</h1>
-
+	<p class="note">
+		Development and documentation in progress. This feature is expected to be fully implemented in v0.9.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
@@ -111,7 +113,7 @@
 				<h3>Main file</h3>
 				<ul>
 					<!-- specify main js file (like: u-dom.js) -->
-					<li>u-.js</li>
+					<li>beta-u-video.js</li>
 				</ul>
 			</div>
 

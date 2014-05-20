@@ -1,5 +1,8 @@
 <div class="scene docpage i:docpage">
 	<h1>Audio</h1>
+	<p class="note">
+		Development and documentation in progress. This feature is expected to be fully implemented in v0.9.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
