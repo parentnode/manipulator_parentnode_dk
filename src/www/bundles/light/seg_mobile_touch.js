@@ -1,6 +1,6 @@
 /*
 Manipulator v0.8-light Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-05-13 10:17:09
+wtf-js-merged @ 2014-05-20 01:37:41
 */
 
 /*seg_mobile_touch_include.js*/
@@ -101,7 +101,7 @@ Util.appendElement = u.ae = function(parent, node_type, attributes) {
 			var attribute;
 			for(attribute in attributes) {
 				if(attribute == "html") {
-					node.innerHTML = attributes[attribute]
+					node.innerHTML = attributes[attribute];
 				}
 				else {
 					node.setAttribute(attribute, attributes[attribute]);
@@ -160,6 +160,28 @@ Util.wrapElement = u.we = function(node, node_type, attributes) {
 	}
 	return false;
 }
+Util.wrapContent = u.wc = function(node, node_type, attributes) {
+	try {
+		var wrapper_node = document.createElement(node_type);
+		if(attributes) {
+			var attribute;
+			for(attribute in attributes) {
+				wrapper_node.setAttribute(attribute, attributes[attribute]);
+			}
+		}	
+		while(node.childNodes.length) {
+			wrapper_node.appendChild(node.childNodes[0]);
+		}
+		node.appendChild(wrapper_node);
+		return wrapper_node;
+	}
+	catch(exception) {
+		u.bug("Exception ("+exception+") in u.wc, called from: "+arguments.callee.caller);
+		u.bug("node:" + u.nodeId(node, 1));
+		u.xInObject(attributes);
+	}
+	return false;
+}
 Util.textContent = u.text = function(node) {
 	return node.textContent;
 }
@@ -191,8 +213,8 @@ Util.clickableElement = u.ce = function(node, options) {
 						window.open(this.url);
 					}
 					else {
-						if(this._click_method == "hash") {
-							location.hash = this.url;
+						if(typeof(page.navigate) == "function") {
+							page.navigate(this.url);
 						}
 						else {
 							location.href = this.url;
@@ -204,7 +226,6 @@ Util.clickableElement = u.ce = function(node, options) {
 	}
 	return node;
 }
-u.link = u.ce;
 Util.classVar = u.cv = function(node, var_name) {
 	try {
 		var regexp = new RegExp(var_name + ":[?=\\w/\\#~:.?+=?&%@!\\-]*");
@@ -298,13 +319,17 @@ Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
 	return false;
 }
 Util.applyStyle = u.as = function(node, property, value, dom_update) {
-	try {
-		node.style[property] = value;
-		dom_update === false ? false : node.offsetTop;
+	node.style[property] = value;
+	dom_update === false ? false : node.offsetTop;
+}
+Util.applyStyles = u.ass = function(node, styles, dom_update) {
+	if(styles) {
+		var style;
+		for(style in styles) {
+			node.style[style] = styles[style];
+		}
 	}
-	catch(exception) {
-		u.bug("Exception ("+exception+") in u.applyStyle("+u.nodeId(node)+", "+property+", "+value+") called from: "+arguments.callee.caller);
-	}
+	dom_update === false ? false : node.offsetTop;
 }
 Util.getComputedStyle = u.gcs = function(node, property) {
 	node.offsetHeight;
@@ -715,6 +740,7 @@ Util.request = u.request = function(node, url, settings) {
 		node[request_id].request_url += (!node[request_id].request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
 		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node[request_id].request_url}));
 	}
+	return request_id;
 }
 Util.JSONtoParams = function(json) {
 	if(typeof(json) == "object") {
@@ -803,7 +829,7 @@ Util.validateResponse = function(response){
 	}
 	if(object) {
 		if(typeof(response.node[response.node[response.request_id].response_callback]) == "function") {
-			response.node[response.node[response.request_id].response_callback](object);
+			response.node[response.node[response.request_id].response_callback](object, response.request_id);
 		}
 		// 
 	}

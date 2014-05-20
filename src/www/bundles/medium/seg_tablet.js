@@ -1,6 +1,6 @@
 /*
 Manipulator v0.8-medium Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-05-13 10:17:13
+wtf-js-merged @ 2014-05-20 01:37:32
 */
 
 /*seg_tablet_include.js*/
@@ -48,7 +48,7 @@ Util.bug = function(message, corner, color) {
 				color = "black";
 			}
 			option = options[corner];
-			if(!document.getElementById("#debug_id_"+corner)) {
+			if(!document.getElementById("debug_id_"+corner)) {
 				var d_target = u.ae(document.body, "div", {"class":"debug_"+corner, "id":"debug_id_"+corner});
 				d_target.style.position = u.bug_position ? u.bug_position : "absolute";
 				d_target.style.zIndex = 16000;
@@ -67,7 +67,9 @@ Util.bug = function(message, corner, color) {
 			if(typeof(message) != "string") {
 				message = message.toString();
 			}
-			u.ae(document.getElementById("#debug_id_"+corner), "div", ({"style":"color: " + color})).innerHTML = message ? message.replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
+			var debug_div = document.getElementById("debug_id_"+corner);
+			message = message ? message.replace(/\>/g, "&gt;").replace(/\</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
+			u.ae(debug_div, "div", {"style":"color: " + color, "html": message});
 		}
 		if(typeof(console) == "object") {
 			console.log(message);
@@ -274,7 +276,7 @@ Util.deleteCookie = function(name, options) {
 }
 Util.saveNodeCookie = function(node, name, value) {
 	var ref = u.cookieReference(node);
-	var mem = JSON.parse(u.getCookie("jes_mem"));
+	var mem = JSON.parse(u.getCookie("man_mem"));
 	if(!mem) {
 		mem = {};
 	}
@@ -282,11 +284,11 @@ Util.saveNodeCookie = function(node, name, value) {
 		mem[ref] = {};
 	}
 	mem[ref][name] = (value !== false && value !== undefined) ? value : "";
-	u.saveCookie("jes_mem", JSON.stringify(mem), {"path":"/"});
+	u.saveCookie("man_mem", JSON.stringify(mem), {"path":"/"});
 }
 Util.getNodeCookie = function(node, name) {
 	var ref = u.cookieReference(node);
-	var mem = JSON.parse(u.getCookie("jes_mem"));
+	var mem = JSON.parse(u.getCookie("man_mem"));
 	if(mem && mem[ref]) {
 		if(name) {
 			return mem[ref][name] ? mem[ref][name] : "";
@@ -299,7 +301,7 @@ Util.getNodeCookie = function(node, name) {
 }
 Util.deleteNodeCookie = function(node, name) {
 	var ref = u.cookieReference(node);
-	var mem = JSON.parse(u.getCookie("jes_mem"));
+	var mem = JSON.parse(u.getCookie("man_mem"));
 	if(mem && mem[ref]) {
 		if(name) {
 			delete mem[ref][name];
@@ -308,7 +310,7 @@ Util.deleteNodeCookie = function(node, name) {
 			delete mem[ref];
 		}
 	}
-	u.saveCookie("jes_mem", JSON.stringify(mem), {"path":"/"});
+	u.saveCookie("man_mem", JSON.stringify(mem), {"path":"/"});
 }
 Util.cookieReference = function(node) {
 	var ref;
@@ -414,7 +416,7 @@ Util.appendElement = u.ae = function(parent, node_type, attributes) {
 			var attribute;
 			for(attribute in attributes) {
 				if(attribute == "html") {
-					node.innerHTML = attributes[attribute]
+					node.innerHTML = attributes[attribute];
 				}
 				else {
 					node.setAttribute(attribute, attributes[attribute]);
@@ -473,6 +475,28 @@ Util.wrapElement = u.we = function(node, node_type, attributes) {
 	}
 	return false;
 }
+Util.wrapContent = u.wc = function(node, node_type, attributes) {
+	try {
+		var wrapper_node = document.createElement(node_type);
+		if(attributes) {
+			var attribute;
+			for(attribute in attributes) {
+				wrapper_node.setAttribute(attribute, attributes[attribute]);
+			}
+		}	
+		while(node.childNodes.length) {
+			wrapper_node.appendChild(node.childNodes[0]);
+		}
+		node.appendChild(wrapper_node);
+		return wrapper_node;
+	}
+	catch(exception) {
+		u.bug("Exception ("+exception+") in u.wc, called from: "+arguments.callee.caller);
+		u.bug("node:" + u.nodeId(node, 1));
+		u.xInObject(attributes);
+	}
+	return false;
+}
 Util.textContent = u.text = function(node) {
 	return node.textContent;
 }
@@ -504,8 +528,8 @@ Util.clickableElement = u.ce = function(node, options) {
 						window.open(this.url);
 					}
 					else {
-						if(this._click_method == "hash") {
-							location.hash = this.url;
+						if(typeof(page.navigate) == "function") {
+							page.navigate(this.url);
 						}
 						else {
 							location.href = this.url;
@@ -517,7 +541,6 @@ Util.clickableElement = u.ce = function(node, options) {
 	}
 	return node;
 }
-u.link = u.ce;
 Util.classVar = u.cv = function(node, var_name) {
 	try {
 		var regexp = new RegExp(var_name + ":[?=\\w/\\#~:.?+=?&%@!\\-]*");
@@ -611,13 +634,17 @@ Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
 	return false;
 }
 Util.applyStyle = u.as = function(node, property, value, dom_update) {
-	try {
-		node.style[property] = value;
-		dom_update === false ? false : node.offsetTop;
+	node.style[property] = value;
+	dom_update === false ? false : node.offsetTop;
+}
+Util.applyStyles = u.ass = function(node, styles, dom_update) {
+	if(styles) {
+		var style;
+		for(style in styles) {
+			node.style[style] = styles[style];
+		}
 	}
-	catch(exception) {
-		u.bug("Exception ("+exception+") in u.applyStyle("+u.nodeId(node)+", "+property+", "+value+") called from: "+arguments.callee.caller);
-	}
+	dom_update === false ? false : node.offsetTop;
 }
 Util.getComputedStyle = u.gcs = function(node, property) {
 	node.offsetHeight;
@@ -2112,6 +2139,7 @@ Util.request = u.request = function(node, url, settings) {
 		node[request_id].request_url += (!node[request_id].request_url.match(/\?/g) ? "?" : "&") + "callback=document."+key+".responder";
 		u.ae(u.qs("head"), "script", ({"type":"text/javascript", "src":node[request_id].request_url}));
 	}
+	return request_id;
 }
 Util.JSONtoParams = function(json) {
 	if(typeof(json) == "object") {
@@ -2200,7 +2228,7 @@ Util.validateResponse = function(response){
 	}
 	if(object) {
 		if(typeof(response.node[response.node[response.request_id].response_callback]) == "function") {
-			response.node[response.node[response.request_id].response_callback](object);
+			response.node[response.node[response.request_id].response_callback](object, response.request_id);
 		}
 		// 
 	}
