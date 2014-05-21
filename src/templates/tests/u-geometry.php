@@ -119,7 +119,9 @@
 				this.innerHTML = "scrollX x scrollY: " + u.scrollX() + " x " + u.scrollY();
 			}
 
-			page.resized();
+			if(typeof(page.resized) == "function") {
+				page.resized();
+			}
 		}
 	}
 </script>

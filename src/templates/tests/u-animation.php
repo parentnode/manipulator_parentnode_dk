@@ -92,7 +92,7 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
-		alert("segment:" + u.segment());
+//		alert("segment:" + u.segment());
 //			alert("test")
 			var div;
 
