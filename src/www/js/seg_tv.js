@@ -1,6 +1,6 @@
 /*
 JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-20 02:14:05
+wtf-js-merged @ 2014-05-21 01:57:59
 */
 
 /*seg_tv_include.js*/
@@ -3243,7 +3243,7 @@ Util.browser = function(model, version) {
 				current_version = navigator.userAgent.match(/(Version\/)(\d+)(.\d)/i)[2];
 			}
 			else {
-				current_version = navigator.userAgent.match(/(Opera\/)(\d+)(.\d)/i)[2];
+				current_version = navigator.userAgent.match(/(Opera[\/ ]{1})(\d+)(.\d)/i)[2];
 			}
 		}
 	}
@@ -6410,7 +6410,7 @@ if(document.all) {
 /*u-geometry-desktop_light.js*/
 Util.actualWidth = u.actualW = function(node) {
 	var width = parseInt(u.gcs(node, "width"));
-	if(isNaN(width)) {
+	if(isNaN(width) || u.browser("opera", "<=9")) {
 		return node.offsetWidth - parseInt(u.gcs(node, "padding-left")) - parseInt(u.gcs(node, "padding-right"));
 	}
 	else {
@@ -6419,7 +6419,7 @@ Util.actualWidth = u.actualW = function(node) {
 }
 Util.actualHeight = u.actualH = function(node) {
 	var height = parseInt(u.gcs(node, "height"));
-	if(isNaN(height)) {
+	if(isNaN(height) || u.browser("opera", "<=9")) {
 		return node.offsetHeight - parseInt(u.gcs(node, "padding-top")) - parseInt(u.gcs(node, "padding-bottom"));
 	}
 	else {
@@ -6455,8 +6455,8 @@ Util.eventY = function(event){
 	}
 }
 Util.pageScrollX = u.scrollX = function() {
-	if(window.pageYOffset != undefined) {
-		return window.pageYOffset;
+	if(window.pageXOffset != undefined) {
+		return window.pageXOffset;
 	}
 	else if(document.documentElement.scrollLeft != undefined) {
 		return document.documentElement.scrollLeft;

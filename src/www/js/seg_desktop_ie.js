@@ -1,6 +1,6 @@
 /*
 JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-20 02:14:05
+wtf-js-merged @ 2014-05-21 01:57:59
 */
 
 /*seg_desktop_ie_include.js*/
@@ -3243,7 +3243,7 @@ Util.browser = function(model, version) {
 				current_version = navigator.userAgent.match(/(Version\/)(\d+)(.\d)/i)[2];
 			}
 			else {
-				current_version = navigator.userAgent.match(/(Opera\/)(\d+)(.\d)/i)[2];
+				current_version = navigator.userAgent.match(/(Opera[\/ ]{1})(\d+)(.\d)/i)[2];
 			}
 		}
 	}
