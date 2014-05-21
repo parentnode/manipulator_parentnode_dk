@@ -12,7 +12,7 @@ $url = isset($_SERVER["HTTPS"]) ? "https" : "http" . "://" . $_SERVER["SERVER_NA
 	Util.Objects["scene"] = new function() {
 		this.init = function(scene) {
 
-			u.navigation(page);
+			u.navigation();
 
 			page.cN.scene = scene;
 

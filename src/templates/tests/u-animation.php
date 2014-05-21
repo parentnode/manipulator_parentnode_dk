@@ -92,6 +92,7 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+		alert("segment:" + u.segment());
 //			alert("test")
 			var div;
 
@@ -170,7 +171,7 @@
 				u.a.transition(this, "none");
 				
 				u.bug("new height");
-				u.as(div_border.span3, "display", "block");				
+				u.as(div_border.span3, "display", "block");
 				u.a.transition(div_border.span3, "all 350ms ease-out");
 				u.a.setWidth(div_border.span3, 100);
 			

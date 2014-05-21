@@ -18,7 +18,7 @@
 				// popstate handling
 				if(u.h.popstate) {
 					history.pushState({}, url, url);
-					scene.updated(url);
+					scene.updated(u.h.getCleanUrl(url));
 				}
 				// hash handling
 				else {
@@ -34,7 +34,7 @@
 
 			}
 
-			u.h.catchEvent(scene.updated, scene);
+			u.h.catchEvent(scene, scene.updated);
 
 
 			var links = u.qsa("ul.links li", scene);

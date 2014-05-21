@@ -6,32 +6,32 @@
 		-ms-user-select: none;
 	}
 
-	div.drag {position: relative; z-index: 1;}
-	ul.info {padding: 0; margin: 20px 0;}
-	ul.info li {padding: 3px;}
+	#content div.drag {position: relative; z-index: 1;}
+	#content ul.info {padding: 0; margin: 20px 0;}
+	#content ul.info li {padding: 3px;}
 
 
 	/* FIXED */
-	div.drag_fixed {z-index: 100;}
-	div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
-	div.fixed div.handle {width: 50px; height: 50px; background: green;}
+	#content div.drag_fixed {z-index: 100;}
+	#content div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; left: 50%; margin-left: 400px;}
+	#content div.fixed div.handle {width: 50px; height: 50px; background: green;}
 
-	div.drag_fixed li.handle {background: green; color: white;} 
+	#content div.drag_fixed li.handle {background: green; color: white;} 
 
 	/* MIXED */
-	div.level1 {z-index: 1; width: 720px; height: 500px; position: relative; background: red;}
-	div.level2 {width: 400px; height: 400px; position: absolute; left: 60px; top: 50px; padding: 0px 100px; background: green;}
-	div.level3 {width: 50px; height: 50px; padding: 175px 175px; background: blue; position: relative;}
-	div.level4 {width: 50px; height: 50px; background: yellow;}
+	#content div.level1 {z-index: 1; width: 720px; height: 500px; position: relative; background: red;}
+	#content div.level2 {width: 400px; height: 400px; position: absolute; left: 60px; top: 50px; padding: 0px 100px; background: green;}
+	#content div.level3 {width: 50px; height: 50px; padding: 175px 175px; background: blue; position: relative;}
+	#content div.level4 {width: 50px; height: 50px; background: yellow;}
 
-	ul.info li.level1 {background: red; color: white;}
-	ul.info li.level2 {background: green; color: white;}
-	ul.info li.level3 {background: blue; color: white;}
-	ul.info li.level4 {background: yellow;}
+	#content ul.info li.level1 {background: red; color: white;}
+	#content ul.info li.level2 {background: green; color: white;}
+	#content ul.info li.level3 {background: blue; color: white;}
+	#content ul.info li.level4 {background: yellow;}
 
 
 	/* NESTED */
-	#content div.nested_view {width: 200px; height: 200px; overflow: hidden;
+	#content div.nested_view {width: 200px; height: 200px; overflow: hidden; position: relative;
 		background: LawnGreen;
 		-moz-user-select: none;
 		-webkit-user-select: none;
@@ -42,6 +42,7 @@
 		background: Purple; 
 	}
 	#content div.nested_view ul li {width: 200px; height: 200px; display: inline-block; vertical-align: top; overflow: hidden;
+		position: relative;
 		border-radius: 50px;
 	}
 	#content div.nested_view ul ul {height: 600px; width: 200px;}
@@ -69,53 +70,56 @@
 
 
 	/* LINKS */
-	div.links {position: relative; height: 50px; background: PapayaWhip; z-index: 1; }
+	#content div.links {position: relative; height: 50px; background: PapayaWhip; z-index: 1; }
+	#content div.links a {
+		-moz-user-select: element;
+	}
 
-	div.link1 {width: 50px; height: 50px; background: pink; position: absolute; left: 0; top: 0;}
-	div.link1 a {height: 50px; display: block; text-indent: -9999px;}
-	div.link2 {width: 50px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
-	div.link2 a {height: 50px; display: block;}
+	#content div.link1 {width: 50px; height: 50px; background: pink; position: absolute; left: 0; top: 0;}
+	#content div.link1 a {height: 50px; display: block; text-indent: -9999px;}
+	#content div.link2 {width: 50px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
+	#content div.link2 a {height: 50px; display: block;}
 
-	ul.info li.links {background: PapayaWhip;}
-	ul.info li.link1 {background: pink;}
-	ul.info li.link2 {background: orange;}
+	#content ul.info li.links {background: PapayaWhip;}
+	#content ul.info li.link1 {background: pink;}
+	#content ul.info li.link2 {background: orange;}
 
 
 	/* NODEBOUNDARIES */
-	div.nodeboundaries {position: relative; height: 300px; background: Gainsboro;}
-	div.drag_a1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: ForestGreen;}
-	div.drag_a2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: LawnGreen;}
-	div.drag_a3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: FireBrick;}
-	div.drag_a4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: SkyBlue;}
+	#content div.nodeboundaries {position: relative; height: 300px; background: Gainsboro;}
+	#content div.drag_a1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: ForestGreen;}
+	#content div.drag_a2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: LawnGreen;}
+	#content div.drag_a3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: FireBrick;}
+	#content div.drag_a4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: SkyBlue;}
 
-	ul.info li.drag_a1 {background: ForestGreen; color: white;}
-	ul.info li.drag_a2 {background: LawnGreen;}
-	ul.info li.drag_a3 {background: FireBrick; color: white;}
-	ul.info li.drag_a4 {background: SkyBlue;}
+	#content ul.info li.drag_a1 {background: ForestGreen; color: white;}
+	#content ul.info li.drag_a2 {background: LawnGreen;}
+	#content ul.info li.drag_a3 {background: FireBrick; color: white;}
+	#content ul.info li.drag_a4 {background: SkyBlue;}
 
 
 	/* ARRAYBOUNDARIES */
-	div.arrayboundaries {position: relative; height: 300px; background: Bisque;}
-	div.drag_b1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: DarkGoldenRod;}
-	div.drag_b2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: Aqua;}
-	div.drag_b3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: DarkSalmon;}
-	div.drag_b4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: MidnightBlue;}
+	#content div.arrayboundaries {position: relative; height: 300px; background: Bisque;}
+	#content div.drag_b1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: DarkGoldenRod;}
+	#content div.drag_b2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: Aqua;}
+	#content div.drag_b3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: DarkSalmon;}
+	#content div.drag_b4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: MidnightBlue;}
 
-	ul.info li.drag_b1 {background: DarkGoldenRod; color: white;}
-	ul.info li.drag_b2 {background: Aqua;}
-	ul.info li.drag_b3 {background: DarkSalmon;}
-	ul.info li.drag_b4 {background: MidnightBlue; color: white;}
+	#content ul.info li.drag_b1 {background: DarkGoldenRod; color: white;}
+	#content ul.info li.drag_b2 {background: Aqua;}
+	#content ul.info li.drag_b3 {background: DarkSalmon;}
+	#content ul.info li.drag_b4 {background: MidnightBlue; color: white;}
 
 
-	div.images {height: 300px;}
+	#content div.images {height: 300px;}
 
 	/* SWIPE ON UL */
-	ul.imagesul {width: 400px; height: 200px; position: relative; margin: 0 auto;}
-	ul.imagesul li {position: absolute; top: 0; left: 0; width: 400px; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
+	#content ul.imagesul {width: 400px; height: 200px; position: relative; margin: 0 auto;}
+	#content ul.imagesul li {position: absolute; top: 0; left: 0; width: 400px; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
 
 	/* SWIPE ON LI */
-	ul.imagesli {width: 400px; height: 200px; position: relative; margin: 0 auto;}
-	ul.imagesli li {position: absolute; top: 0; left: 0; width: 400px; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
+	#content ul.imagesli {width: 400px; height: 200px; position: relative; margin: 0 auto;}
+	#content ul.imagesli li {position: absolute; top: 0; left: 0; width: 400px; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
 
 	/*.scene h2 {line-height: 1em;}*/
 </style>
