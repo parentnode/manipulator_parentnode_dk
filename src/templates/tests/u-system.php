@@ -8,6 +8,9 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+			u.bug_force = true;
+			u.bug_console_only = false;
+
 			// ie
 			// u.bug("IE<10:" + u.browser("ie"));
 			if(u.browser("ie")) {
@@ -15,6 +18,15 @@
 			}
 			else {
 				u.ae(scene, "div", ({"class":"error", "html":"IE: error ("+u.browser("ie")+")"}));
+			}
+
+			// ie >= 11
+			// u.bug("IE>11:" + u.browser("ie", ">=11"));
+			if(u.browser("ie", ">=11")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"IE>=11: correct ("+u.browser("ie", ">=11")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"IE>=11: error ("+u.browser("ie", ">=11")+")"}));
 			}
 
 			// ie < 10
