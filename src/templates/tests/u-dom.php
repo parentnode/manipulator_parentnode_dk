@@ -1,7 +1,8 @@
 <style type="text/css">
 	.scene > div {margin: 0 0 5px;}
-	.correct {background: green;}
 	.error {background: red;}
+	.correct {background: green;}
+	div.wc div.correct {color: yellow;} 
 </style>
 
 <script type="text/javascript">
@@ -68,8 +69,9 @@
 
 
 			// wrap content
-			node = u.ae(scene, "div", ({"class":"error", "html":"wrapContent error"}));
-			u.wc(node, "div", ({"class":"correct"})).innerHTML = "wrapContent: correct";
+			node = u.ae(scene, "div", {"class":"wc correct"});
+			u.ae(node, "div", {"class":"error", "html":"wrapContent error"});
+			u.wc(node, "div", {"class":"correct"}).innerHTML = "wrapContent: correct";
 
 
 			// node.textContent
