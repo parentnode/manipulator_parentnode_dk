@@ -36,11 +36,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-t
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-textscaler.js"></script>');
 
 
-
-
-// document.write('<script type="text/javascript" src="/js/lib/mobile_touch/i-page-mobile_touch.js"></script>');
-// document.write('<script type="text/javascript" src="/js/lib/mobile_touch/i-documentation-mobile_touch.js"></script>');
-
 document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
 

@@ -45,9 +45,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-geomet
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string-desktop_light.js"></script>');
 
 
-document.write('<script type="text/javascript" src="/js/lib/desktop/i-page-desktop.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/desktop/i-documentation-desktop.js"></script>');
-
 document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
 

@@ -1,6 +1,6 @@
 /*
 JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-21 01:57:58
+wtf-js-merged @ 2014-05-23 06:24:15
 */
 
 /*seg_desktop_light_include.js*/
@@ -794,7 +794,7 @@ Util.hasFixedParent = u.hfp = function(node) {
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
-	this.event_pref = typeof(document.ontouchmove) == "undefined" ? "mouse" : "touch";
+	this.event_pref = typeof(document.ontouchmove) == "undefined" || navigator.maxTouchPoints > 1 ? "mouse" : "touch";
 	this.kill = function(event) {
 		if(event) {
 			event.preventDefault();
@@ -846,8 +846,9 @@ Util.Events = u.e = new function() {
 		u.t.resetTimer(node.t_clicked);
 		this.removeEvent(node, "mouseup", this._dblclicked);
 		this.removeEvent(node, "touchend", this._dblclicked);
-		this.removeEvent(node, "mousemove", this._clickCancel);
-		this.removeEvent(node, "touchmove", this._clickCancel);
+		this.removeEvent(node, "mousemove", this._cancelClick);
+		this.removeEvent(node, "touchmove", this._cancelClick);
+		this.removeEvent(node, "mouseout", this._cancelClick);
 		this.removeEvent(node, "mousemove", this._move);
 		this.removeEvent(node, "touchmove", this._move);
 	}
@@ -3213,8 +3214,11 @@ Util.stringOr = u.eitherOr = function(value, replacement) {
 Util.browser = function(model, version) {
 	var current_version = false;
 	if(model.match(/\bexplorer\b|\bie\b/i)) {
-		if(window.ActiveXObject) {
+		if(window.ActiveXObject && navigator.userAgent.match(/(MSIE )(\d+.\d)/i)) {
 			current_version = navigator.userAgent.match(/(MSIE )(\d+.\d)/i)[2];
+		}
+		else if(navigator.userAgent.match(/Trident\/[\d+]\.\d[^$]+rv:(\d+.\d)/i)) {
+			current_version = navigator.userAgent.match(/Trident\/[\d+]\.\d[^$]+rv:(\d+.\d)/i)[1];
 		}
 	}
 	else if(model.match(/\bfirefox\b|\bgecko\b/i)) {

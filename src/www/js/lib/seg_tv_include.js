@@ -35,7 +35,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-g
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-template.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-textscaler.js"></script>');
 
-
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-array-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_light.js"></script>');
@@ -48,8 +47,11 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-string
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-video-desktop_light.js"></script>');
 
 
-document.write('<script type="text/javascript" src="/js/lib/desktop/i-page-desktop.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/desktop/i-documentation-desktop.js"></script>');
-
+document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
 document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
+
+
+document.write('<script type="text/javascript" src="http://parentnode.local/js/lib/desktop_light/i-page-desktop_light.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/lib/desktop_light/i-documentation-desktop_light.js"></script>');
