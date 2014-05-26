@@ -42,13 +42,13 @@
 
 			// node cookies
 			var footer = u.qs("#footer");
-			u.deleteCookie("jes_mem", {"path":"/"});
+			u.deleteCookie("man_mem", {"path":"/"});
 
 			// saveNodeCookie
 			u.saveNodeCookie(scene, "test1", "s-value1");
 			u.saveNodeCookie(scene, "test2", "s-value2");
 			u.saveNodeCookie(footer, "test2", "f-value2");
-			// u.bug(u.getCookie("jes_mem"));
+			// u.bug(u.getCookie("man_mem"));
 			if(u.getCookie("man_mem") == '{"DIV#content DIV.scene":{"test1":"s-value1","test2":"s-value2"},"DIV#footer":{"test2":"f-value2"}}') {
 				u.ae(scene, "div", ({"class":"correct", "html":"u.saveNodeCookie: correct"}));
 			}
@@ -74,7 +74,7 @@
 			// u.bug("get scene test1:" + u.getNodeCookie(scene, "test1"));
 			// u.bug("get scene test2:" + u.getNodeCookie(scene, "test2"));
 			// u.bug("get footer:" + u.getNodeCookie(footer));
-			// u.bug(u.getCookie("jes_mem"));
+			// u.bug(u.getCookie("man_mem"));
 			if(!u.getNodeCookie(scene, "test2") && !u.getNodeCookie(footer) && u.getNodeCookie(scene, "test1") == "s-value1") {
 				u.ae(scene, "div", ({"class":"correct", "html":"u.deleteNodeCookie: correct"}));
 			}

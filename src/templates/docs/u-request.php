@@ -234,12 +234,12 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 						<h4>Examples</h4>
 
 						<div class="example">
-							<code>Util.isStringJSON('{"name":"jes"}');</code>
+							<code>Util.isStringJSON('{"name":"manipulator"}');</code>
 							<p>Returns JSON object.</p>
 						</div>
 
 						<div class="example">
-							<code>Util.isStringJSON('jes');</code>
+							<code>Util.isStringJSON('manipulator');</code>
 							<p>Returns <span class="value">false</span>.</p>
 						</div>
 
@@ -320,12 +320,12 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 						<h4>Examples</h4>
 
 						<div class="example">					
-							<code>Util.isStringHTML('&lt;div class=&quot;scene&quot;&gt;jes&lt;/div&gt;');</code>
+							<code>Util.isStringHTML('&lt;div class=&quot;scene&quot;&gt;manipulator&lt;/div&gt;');</code>
 							<p>Returns HTML object.</p>
 						</div>
 
 						<div class="example">
-							<code>Util.isStringHTML('{"name":"jes"}');</code>
+							<code>Util.isStringHTML('{"name":"manipulator"}');</code>
 							<p>Returns <span class="value">false</span>.</p>
 						</div>
 					</div>

@@ -43,10 +43,13 @@ function findModules($file) {
 	<h2>Github</h2>
 	<p><a href="http://github.com/parentnode/manipulator" target="_blank">Manipulator is public on GitHub</a>.</p>
 
-	<h2>Bundles</h2>
-	<p>Precompiled bundles of the Manipulator JavaScript library.</p>
+	<h2>Bundles and source</h2>
+	<p>
+		The package available for download contains the complete source and precompiled bundles of the Manipulator 
+		JavaScript library matching most website needs.
+	</p>
 
-	<h3>About the bundle</h3>
+	<h3>About the bundles</h3>
 	<p>
 		The download package contains three bundles, customized for different needs - light, medium and full.
 	</p>
