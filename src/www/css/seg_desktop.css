@@ -319,7 +319,7 @@ dd {display: inline-block; vertical-align: top; font-size: 14px; line-height: 1.
 #content .scene.docpage .section.functions .function .header {}
 #content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
 #content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
+#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 375px;}
 #content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
 #content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
