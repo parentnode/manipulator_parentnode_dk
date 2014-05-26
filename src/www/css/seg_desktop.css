@@ -321,7 +321,7 @@ dd {display: inline-block; vertical-align: top; font-size: 14px; line-height: 1.
 #content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
 #content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
 #content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;background: green;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dd {background: red; width: 339px;}
+#content .scene.docpage .section.functions .function .body .parameters dl.options dd {background: red; width: 340px;}
 #content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
 #content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
