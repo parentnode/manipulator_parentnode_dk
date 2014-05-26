@@ -132,11 +132,11 @@ dd {display: inline-block; vertical-align: top; font-size: 14px; line-height: 1.
 #content .scene dl {padding: 0 50px 15px; width: 500px;}
 #content .scene dt {width: 100px; text-align: right; padding: 0 5px 0 0; color: #999999;} 
 #content .scene dt:after {content: ":";}
-#content .scene dd {padding: 0 0 12px; width: 395px;}
+#content .scene dd {padding: 0 0 12px; width: 394px;}
 #content .scene dt span {text-transform: none;}
 #content .scene dl dl {padding: 0 0 10px; margin-left: -30px; width: 425px;}
 #content .scene dl dl dt {width: 80px;}
-#content .scene dl dl dd {width: 340px;}
+#content .scene dl dl dd {width: 339px;}
 #content .scene dl h3,
 #content .scene dl h4,
 #content .scene dl h5,
@@ -321,7 +321,6 @@ dd {display: inline-block; vertical-align: top; font-size: 14px; line-height: 1.
 #content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
 #content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
 #content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dd {width: 339px;}
 #content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
 #content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
