@@ -1,6 +1,6 @@
 /*
 JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-23 06:24:13
+wtf-js-merged @ 2014-05-26 10:07:38
 */
 
 /*seg_mobile_include.js*/
@@ -2509,8 +2509,10 @@ Util.Form.customValidate["customfield"] = function(input) {
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
+		u.bug("node.offsetParent, node.offsetLeft + u.absX(node.offsetParent):" + node.offsetLeft + ", " + u.nodeId(node.offsetParent))
 		return node.offsetLeft + u.absX(node.offsetParent);
 	}
+	u.bug("node.offsetLeft:" + node.offsetLeft)
 	return node.offsetLeft;
 }
 Util.absoluteY = u.absY = function(node) {

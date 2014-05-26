@@ -14,7 +14,7 @@
 /* FILES */
 #content .scene.docsindex .files {padding-top: 25px;}
 #content .scene.docsindex .files h2 {padding-bottom: 15px;}
-#content .scene.docsindex .files ul {max-width: 500px;}
+#content .scene.docsindex .files ul {}
 
 #content .scene.docsindex .files li {position: relative;}
 #content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
@@ -63,14 +63,16 @@
 #content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
 
 
-#content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
+#content .scene.docpage .section.functions .function .body .definition dd {
+/*	white-space: nowrap;*/
+}
 
 
-#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
+#content .scene.docpage .section.functions .function .body .parameters dl.options {}
+#content .scene.docpage .section.functions .function .body .parameters dl.options dt {}
 
 
-#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
+#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 30px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
 #content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
 

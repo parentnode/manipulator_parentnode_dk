@@ -1,6 +1,6 @@
 /*
 JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-23 06:24:12
+wtf-js-merged @ 2014-05-26 10:07:38
 */
 
 /*seg_mobile_light_include.js*/
@@ -2509,8 +2509,10 @@ Util.Form.customValidate["customfield"] = function(input) {
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
+		u.bug("node.offsetParent, node.offsetLeft + u.absX(node.offsetParent):" + node.offsetLeft + ", " + u.nodeId(node.offsetParent))
 		return node.offsetLeft + u.absX(node.offsetParent);
 	}
+	u.bug("node.offsetLeft:" + node.offsetLeft)
 	return node.offsetLeft;
 }
 Util.absoluteY = u.absY = function(node) {
@@ -6514,225 +6516,6 @@ if(String.prototype.substr == undefined || "ABC".substr(-1,1) == "A") {
 	};
 }
 
-
-/*i-page-desktop.js*/
-u.bug_console_only = true;
-Util.Objects["page"] = new function() {
-	this.init = function(page) {
-			page.hN = u.qs("#header");
-			page.hN.service = u.qs(".servicenavigation", page.hN);
-			page.logo = u.ie(page.hN, "a", {"class":"logo", "html":"Manipulator"});
-			page.logo.url = '/';
-			page.cN = u.qs("#content", page);
-			page.nN = u.qs("#navigation", page);
-			page.nN.list = u.qs("ul", page.nN);
-			page.nN = u.ie(page.hN, page.nN);
-			page.fN = u.qs("#footer");
-			page.fN.service = u.qs(".servicenavigation", page.fN);
-			page.fN.slogan = u.qs("p", page.fN);
-			u.ce(page.fN.slogan);
-			page.fN.slogan.clicked = function(event) {
-				window.open("http://parentnode.dk");
-			}
-			page.resized = function() {
-				this.calc_height = u.browserH();
-				this.calc_width = u.browserW();
-				this.available_height = this.calc_height - page.hN.offsetHeight - page.fN.offsetHeight;
-				u.as(page.cN, "height", "auto", false);
-				if(this.available_height >= page.cN.offsetHeight) {
-					u.as(page.cN, "height", this.available_height+"px", false);
-				}
-				if(this.calc_width > 1300) {
-					u.ac(page, "fixed");
-				}
-				else {
-					u.rc(page, "fixed");
-				}
-				if(page.cN && page.cN.scene) {
-					if(typeof(page.cN.scene.resized) == "function") {
-						page.cN.scene.resized();
-					}
-				}
-			}
-			page.scrolled = function() {
-				if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
-					page.cN.scene.scrolled();
-				}
-			}
-			page.ready = function() {
-				if(!u.hc(this, "ready")) {
-					u.addClass(this, "ready");
-					u.e.addEvent(window, "resize", page.resized);
-					u.e.addEvent(window, "scroll", page.scrolled);
-					this.initNavigation();
-					this.resized();
-					if(!u.getCookie("terms_v1")) {
-						var terms = u.ie(document.body, "div", {"class":"terms_notification"});
-						u.ae(terms, "h3", {"html":"We love <br />cookies and privacy"});
-						var bn_accept = u.ae(terms, "a", {"class":"accept", "html":"Accept"});
-						bn_accept.terms = terms;
-						u.ce(bn_accept);
-						bn_accept.clicked = function() {
-							this.terms.parentNode.removeChild(this.terms);
-							u.saveCookie("terms_v1", true, {"expiry":new Date(new Date().getTime()+(1000*60*60*24*365)).toGMTString()});
-						}
-						if(!location.href.match(/\/terms/)) {
-							var bn_details = u.ae(terms, "a", {"class":"details", "html":"Details"});
-							bn_details.url = "/terms";
-							u.ce(bn_details, {"type":"link"});
-						}
-					}
-				}
-			}
-			page.initNavigation = function() {
-				var i, node;
-				this.hN.nodes = u.qsa("#navigation li,.servicenavigation li,a.logo", page.hN);
-				for(i = 0; node = this.hN.nodes[i]; i++) {
-					u.ce(node, {"type":"link"});
-					node._mousedover = function() {
-						this.transitioned = function() {
-							this.transitioned = function() {
-								this.transitioned = function() {
-									u.a.transition(this, "none");
-								}
-								u.a.transition(this, "all 0.1s ease-in-out");
-								u.a.scale(this, 1.2);
-							}
-							u.a.transition(this, "all 0.1s ease-in-out");
-							u.a.scale(this, 1.15);
-						}
-						u.a.transition(this, "all 0.1s ease-in-out");
-						u.a.scale(this, 1.22);
-					}
-					node._mousedout = function() {
-						this.transitioned = function() {
-							this.transitioned = function() {
-								u.a.transition(this, "none");
-							}
-							u.a.transition(this, "all 0.1s ease-in");
-							u.a.scale(this, 1);
-						}
-						u.a.transition(this, "all 0.1s ease-in");
-						u.a.scale(this, 0.8);
-					}
-					if(u.e.event_pref == "mouse") {
-						u.e.addEvent(node, "mouseover", node._mousedover);
-						u.e.addEvent(node, "mouseout", node._mousedout);
-					}
-					else {
-						u.e.addStartEvent(node, node._mousedover);
-						u.e.addEndEvent(node, node._mousedout);
-					}
-				}
-			}
-			page.ready();
-	}
-}
-u.e.addDOMReadyEvent(u.init);
-
-
-/*i-documentation-desktop.js*/
-Util.Objects["docsindex"] = new function() {
-	this.init = function(scene) {
-		var files = u.qsa(".files li", scene);
-		var i, node;
-		scene.div_search = u.qs(".search", scene);
-		scene.div_search.h2 = u.ae(scene.div_search, "h2", {"html":"Search documentation"});
-		var form = u.f.addForm(scene.div_search, {"class":"labelstyle:inject"});
-		var fieldset = u.f.addFieldset(form);
-		var field = u.f.addField(fieldset, {"name":"search", "label":"Search term of minimum 3 chars"})
-		u.f.init(form);
-		field._input.div_search = scene.div_search;
-		field._input.results = u.ae(scene.div_search, "div", {"class":"results"});
-		for(i = 0; node = files[i]; i++) {
-			u.ce(node, {"type":"link"});
-			node.results = field._input.results;
-			node.response = function(response) {
-				var i, _function;
-				var functions = u.qsa(".functions .function", response);
-				for(i = 0; _function = functions[i]; i++) {
-					_function.file_node = this;
-					_function = this.results.appendChild(_function);
-					u.ce(_function, {"type":"link"});
-					_function.url = this.url+"#"+_function.id;
-					_function._definition = u.qs(".definition", _function);
-					_function._description = u.qs(".description", _function);
-					u.as(_function, "display", "none");
-				}
-			}
-			u.request(node, node.url);
-		}
-		field._input._autocomplete = function() {
-			var i, _function;
-			u.ac(this.div_search, "loading");
-			for(i = 0; _function = this.results.childNodes[i]; i++) {
-				if(
-					this.value.length > 2 && 
-					(
-						escape(u.text(_function._definition).toLowerCase()).match(escape(this.value.toLowerCase())) || 
-						escape(u.text(_function._description).toLowerCase()).match(escape(this.value.toLowerCase()))
-					)
-				) {
-					u.as(_function, "display", "block");
-				}
-				else {
-					u.as(_function, "display", "none");
-				}
-			}
-			u.rc(this.div_search, "loading");
-		}
-		field._input._keyup = function(event) {
-			u.t.resetTimer(this.t_autocomplete);
-			this.t_autocomplete = u.t.setTimer(this, this._autocomplete, 300);
-		}
-		field._input.focused = function() {
-			u.e.addEvent(this, "keyup", this._keyup)
-		}
-		field._input.blurred = function() {
-			u.t.resetTimer(this.t_autocomplete);
-			u.e.removeEvent(this, "keyup", this._keyup)
-		}
-	}
-}
-Util.Objects["docpage"] = new function() {
-	this.init = function(scene) {
-		var i, func;
-		var header, body;
-		var sections = u.qsa(".section", scene);
-		var functions = u.qsa(".function", scene);
-		for(i = 0; func = functions[i]; i++) {
-			func._header = u.qs(".header", func);
-			func._header._func = func;
-			func._body = u.qs(".body", func);
-			func._body._func = func;
-			u.e.click(func._header);
-			func._header.clicked = function(event) {
-				if(u.hc(this._func, "open")) {
-					u.deleteNodeCookie(this._func, "state");
-					u.as(this._func._body, "display", "none");
-					u.rc(this._func, "open");
-				}
-				else {
-					u.saveNodeCookie(this._func, "state", "open");
-					u.as(this._func._body, "display", "block");
-					u.ac(this._func, "open");
-				}
-			}
-			if(u.getNodeCookie(func, "state") == "open") {
-				func._header.clicked();
-			}
-		}
-		if(location.hash) {
-			var selected_function = u.ge(location.hash.replace("#", ""))
-			if(selected_function) {
-				if(!u.hc(selected_function, "open")) {
-					selected_function._header.clicked();
-				}
-				window.scrollTo(0, u.absY(selected_function));
-			}
-		}
-	}
-}
 
 /*ga.js*/
 u.ga_account = 'UA-49740096-1';

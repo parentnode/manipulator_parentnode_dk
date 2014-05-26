@@ -1,0 +1,12 @@
+TODO:
+
+finish event testing (only test new touch/mouse detection)
+
+add full source to bundle for easy local inclusion
+
+check tracking works with current implementation
+
+update licesens in js
+
+Final cross device CSS test
+

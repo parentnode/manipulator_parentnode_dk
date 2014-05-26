@@ -2,29 +2,34 @@
 	.scene div {margin: 0 0 5px;}
 	.correct {background: green;}
 	.error {background: red;}
-	.div_a {position: absolute; top: 300px; left: 250px; padding: 55px 50px;}
-	.div_b {padding: 10px; width: 100px; height: 50px;}
+	.div_a {position: absolute; top: 300px; left: 250px; padding: 55px 50px; border: none; z-index: 1000; background: orange;}
+	.div_b {padding: 10px; width: 100px; height: 50px; background: blue;}
 </style>
 
 <script type="text/javascript">
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
+			u.bug_force = true;
+			u.bug_console_only = false;
+
+
 			var div_a = u.ae(document.body, "div", {"class":"div_a"});
 			var div_b = u.ae(div_a, "div", {"class":"div_b"});
 
+			u.bug("absX (div_a):" + u.absX(div_a));
+			u.bug("absX (div_b):" + u.absX(div_b));
 
-			// u.bug("absX (div_a):" + u.absX(div_a));
-			// u.bug("absX (div_b):" + u.absX(div_b));
-			if(u.absX(div_b) == 300 && u.absX(div_a) == 250) {
-				u.ae(scene, "div", {"class":"correct", "html":"absX: correct"});
-			}
-			else {
-				u.ae(scene, "div", {"class":"error", "html":"absX: error"});
-			}
+			// if(u.absX(div_b) == 300 && u.absX(div_a) == 250) {
+			// 	u.ae(scene, "div", {"class":"correct", "html":"absX: correct"});
+			// }
+			// else {
+			// 	u.ae(scene, "div", {"class":"error", "html":"absX: error"});
+			// }
 
 			// u.bug("absY (div_a):" + u.absY(div_a));
 			// u.bug("absY (div_b):" + u.absY(div_b));
+
 			if(u.absY(div_b) == 355 && u.absY(div_a) == 300) {
 				u.ae(scene, "div", {"class":"correct", "html":"absY: correct"});
 			}
@@ -71,7 +76,7 @@
 			}
 
 			// remove test div
-			document.body.removeChild(div_a);
+//			document.body.removeChild(div_a);
 
 
 			var event_x = u.ae(scene, "div", {"class":"event", "html":"click to test eventX"});

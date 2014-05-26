@@ -95,13 +95,16 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 	-webkit-user-select: none;
 	user-select: none;
 }
-#header .logo {font-size: 30px; padding: 10px 20px; color: #888888; cursor: pointer; display: inline-block;
+#header .logo {font-size: 30px; padding: 10px 20px; color: #888888; cursor: pointer; display: inline-block; position: relative; z-index: 10;
 	font-family: "PT Serif", Times, serif;
 }
+#header .servicenavigation {position: absolute; top: 0; left: 0; z-index: 9; width: 100%; height: 60px;}
 #header .servicenavigation li.navigation {position: absolute; right: 0; top: 0; width: 30px; height: 39px; padding: 21px 15px 0;}
 #header .servicenavigation li.navigation div {border-radius: 1px; height: 3px; margin: 0 0 5px; background: #888888;}
 #header .servicenavigation li.navigation.open div {background: #cccccc;}
 #header .servicenavigation li.navigation a {display: none;}
+#header .servicenavigation li.user {display: none;}
+#header .servicenavigation li.admin {display: none;}
 #navigation {position: absolute; width: 100%; top: 75px; display: none;}
 #navigation ul {}
 #navigation ul li {padding: 20px 20px 0 20px; font-size: 20px; color: #888888; display: block; text-align: center;
@@ -153,9 +156,7 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 #content .scene div.image a {padding: 0 20px; font-size: 13px; font-style: italic; display: block; color: #cccccc;}
 #content .scene div.image.fullsize {margin: 0; max-width: 100%; cursor: zoom-out;}
 #content .scene div.image.fullsize a {padding: 0 50px;}
-#content .scene code {padding: 10px 10px; margin: 0 20px 5px; position: relative; top: -13px; background-color: #ededed; font-size: 11px; display: block; 
-	overflow: hidden;
-	white-space: pre-wrap;
+#content .scene code {padding: 10px 10px; margin: 0 20px 5px; position: relative; top: -13px; background-color: #ededed; font-size: 11px; display: block; overflow: hidden; white-space: pre-wrap;
 	font-family: "Monaco", "Courier New", "Courier";
 }
 #content .scene span.type,
@@ -291,7 +292,7 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 #content .scene.docsindex .tests {display: none;}
 #content .scene.docsindex .files {padding-top: 25px;}
 #content .scene.docsindex .files h2 {padding-bottom: 15px;}
-#content .scene.docsindex .files ul {max-width: 500px;}
+#content .scene.docsindex .files ul {}
 #content .scene.docsindex .files li {position: relative;}
 #content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
 #content .scene.docsindex .files li p {display: none;}
@@ -322,10 +323,11 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 #content .scene.docpage .section.functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
 #content .scene.docpage .section.functions .function .header {}
 #content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
-#content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
-#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
+#content .scene.docpage .section.functions .function .body .definition dd {
+}
+#content .scene.docpage .section.functions .function .body .parameters dl.options {}
+#content .scene.docpage .section.functions .function .body .parameters dl.options dt {}
+#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 30px;}
 #content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700; color: #034769;}
 #content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
 #content .scene.docpage .section.functions .function .body .example {padding: 0 0 20px;}
@@ -358,9 +360,4 @@ body {background: #ffffff;}
 .terms_notification .details {color: #63add0;}
 .terms_notification {border-color: #034769;}
 
-
-/*s-pages-active-mobile_touch.css*/
-#header .logo:active,
-#navigation ul li:active {text-decoration: none;}
-#content .scene a:active {text-decoration: underline;}
 

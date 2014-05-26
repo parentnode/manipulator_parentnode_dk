@@ -94,7 +94,9 @@ dd {display: block; font-size: 14px; line-height: 1.25em;}
 #header .logo {font-size: 30px; padding: 20px 50px 20px; color: #888888; cursor: pointer; display: block; width: 200px;
 	font-family: "PT Serif", Times, serif;
 }
+#header .servicenavigation {position: absolute; top: 5px; right: 50px;}
 #header .servicenavigation li.navigation {display: none;}
+#header .servicenavigation li.user {display: none;}
 #navigation {position: absolute; right: 50px; top: 75px;}
 #navigation ul {}
 #navigation ul li {padding: 0 0 0 20px; font-size: 20px; color: #888888;}
@@ -146,7 +148,8 @@ dd {display: block; font-size: 14px; line-height: 1.25em;}
 #content .scene div.image a {padding: 0 20px; font-size: 14px; font-style: italic; display: block; color: #cccccc;}
 #content .scene div.image.fullsize {margin: 0; max-width: 100%; cursor: zoom-out;}
 #content .scene div.image.fullsize a {padding: 0 50px;}
-#content .scene code {width: 480px; padding: 10px 10px; margin: 0 50px 5px; position: relative; top: -15px; background-color: #ededed; font-size: 12px; display: block; white-space: pre-wrap;
+#content .scene code {width: 480px; padding: 10px 10px; margin: 0 50px 5px; position: relative; top: -15px; background-color: #ededed; font-size: 12px; display: block;
+	white-space: pre; overflow: auto;
 	font-family: "Monaco", "Courier New", "Courier";
 }
 #content .scene span.type,
