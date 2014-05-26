@@ -1,6 +1,6 @@
 /*
-JES-DOCS v0.6-full Copyright 2013 http://whattheframework.org/jes/license
-wtf-js-merged @ 2014-05-26 10:07:44
+Manipulator v0.8 Copyright 2014 http://manipulator.parentnode.dk
+wtf-js-merged @ 2014-05-26 06:34:43
 */
 
 /*seg_tv_include.js*/
