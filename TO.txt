@@ -1,4 +1,15 @@
-TODO:
+TODO - v0.9:
 
-Final cross device CSS test
+Must:
+dom update on u.a.transition?
 
+text editor
+video+audio player
+template
+scrollTo
+
+
+Maybe:
+sequence player
+textscaler
+sortable
