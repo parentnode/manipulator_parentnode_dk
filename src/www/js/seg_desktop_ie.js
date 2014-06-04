@@ -1,6 +1,6 @@
 /*
 Manipulator v0.8 Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-05-28 09:40:18
+wtf-js-merged @ 2014-06-04 12:33:23
 */
 
 /*seg_desktop_ie_include.js*/
@@ -2506,10 +2506,8 @@ Util.Form.customValidate["customfield"] = function(input) {
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
-		u.bug("node.offsetParent, node.offsetLeft + u.absX(node.offsetParent):" + node.offsetLeft + ", " + u.nodeId(node.offsetParent))
 		return node.offsetLeft + u.absX(node.offsetParent);
 	}
-	u.bug("node.offsetLeft:" + node.offsetLeft)
 	return node.offsetLeft;
 }
 Util.absoluteY = u.absY = function(node) {

@@ -3,29 +3,56 @@ http://colorschemedesigner.com/#3s51Tw0w0w0w0
 
 #63add0 - PRIMARY LIGHT
 #034769 - PRIMARY DARK
+
+a61a00
+bf4630
+ffa240
+ff2800
+007929
+dd085f
+d8005f
+ff8973
+ff5d40
+
+mid
+ef002a
+
+dark
+9b001c
+
+light
+f73e5f
+f76f87
 */
 
 
-* {color: #034769;}
+* {color: #9b001c;}
 
 body {background: #ffffff;}
 
-#header .logo {color: #63add0;}
-#navigation ul li {color: #63add0;}
-#content .scene a {color: #63add0;}
+#header .logo {color: #ef002a;}
+#navigation ul li {color: #ef002a;}
+#content .scene a {color: #ef002a;}
 
 #content .scene hr {border-color: #cccccc;}
 #content .scene code {color: #333333;}
 
 #footer {border-color: #cccccc;}
-#footer p {color: #034769;}
+#footer p {color: #9b001c;}
+
+#content ul.actions input.button.primary,
+#content ul.actions a.button.primary {background-color: #9b001c;}
+#content ul.actions input.button.primary:hover,
+#content ul.actions a.button.primary:hover {background-color: #ef002a;}
+#content .scene.docpage .section.functions .function .body .callbacks dt {color: #9b001c;}
+
 
 .front #header .logo,
 .docs #navigation ul li.docs,
-.download #navigation ul li.download {color: #034769;}
+.download #navigation ul li.download {color: #9b001c;}
 
 
 .terms_notification {background: #ffffff;}
 .terms_notification .accept,
-.terms_notification .details {color: #63add0;}
-.terms_notification {border-color: #034769;}
+.terms_notification .details {color: #ef002a;}
+.terms_notification {border-color: #9b001c;}
