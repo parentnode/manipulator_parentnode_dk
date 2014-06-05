@@ -1,6 +1,6 @@
 /*
 Manipulator v0.8-medium Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-05-28 09:29:23
+wtf-js-merged @ 2014-06-05 03:47:14
 */
 
 /*seg_mobile_light_include.js*/
@@ -1948,10 +1948,8 @@ u.f.addAction = function(node, settings) {
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
-		u.bug("node.offsetParent, node.offsetLeft + u.absX(node.offsetParent):" + node.offsetLeft + ", " + u.nodeId(node.offsetParent))
 		return node.offsetLeft + u.absX(node.offsetParent);
 	}
-	u.bug("node.offsetLeft:" + node.offsetLeft)
 	return node.offsetLeft;
 }
 Util.absoluteY = u.absY = function(node) {
