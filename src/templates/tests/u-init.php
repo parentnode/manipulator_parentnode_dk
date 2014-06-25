@@ -19,10 +19,10 @@
 				var init_div = u.qs(".init", scene)
 				init_div.parentNode.removeChild(init_div);
 
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "Initialized: "+(load_time - time);
+				u.ae(scene, "div", {"class":"correct", "html":"Initialized: "+(load_time - time)});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "Multiple initializations";
+				u.ae(scene, "div", {"class":"error", "html":"Multiple initializations"});
 			}
 
 		}

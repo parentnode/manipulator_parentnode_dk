@@ -896,7 +896,7 @@ u.querySelectorAll("li.item", list_node);</code>
 
 &lt;script&gt;
 	var header = u.querySelector(".header");
-	u.appendElement(header, "div", ({"class":"new","html":"innerHTML"}));
+	u.appendElement(header, "div", {"class":"new","html":"innerHTML"});
 &lt;/script&gt;</code>
 	
 							<p>returns <span class="type">Node</span> div.new in the following structure</p>
@@ -1037,7 +1037,7 @@ u.ae(header, nav);</code>
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.insertElement(scene, "div", ({"class":"new","html":"innerHTML"}));
+	u.insertElement(scene, "div", {"class":"new","html":"innerHTML"});
 &lt;/script&gt;</code>
 
 							<p>returns <span class="type">Node</span> div.new in the following structure</p>
@@ -1171,7 +1171,7 @@ u.ie(header, nav);</code>
 
 &lt;script&gt;
 	var header = u.querySelector(".header");
-	u.wrapElement(header, "div", ({"class":"wrapper"}));
+	u.wrapElement(header, "div", {"class":"wrapper"});
 &lt;/script&gt;</code>
 
 							<p>returns <span class="type">Node</span> div.wrapper in the following structure</p>
@@ -1298,7 +1298,7 @@ u.ie(header, nav);</code>
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.wrapContent(scene, "div", ({"class":"wrapper"}));
+	u.wrapContent(scene, "div", {"class":"wrapper"});
 &lt;/script&gt;</code>
 
 							<p>returns <span class="type">Node</span> div.wrapper in the following structure</p>

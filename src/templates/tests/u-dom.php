@@ -55,17 +55,17 @@
 
 
 			// appendElement
-			u.ae(scene, "div", ({"class":"correct", "html":"append element: correct"}));
+			u.ae(scene, "div", {"class":"correct", "html":"append element: correct"});
 
 			// insertElement
-			node = u.ie(scene, "div", ({"class":"error", "html":"insert element"}));
+			node = u.ie(scene, "div", {"class":"error", "html":"insert element"});
 			if(node == u.qs("div", scene)) {
-				u.ae(scene, node, ({"class":"correct"}));
+				u.ae(scene, node, {"class":"correct"});
 			}
 
 			// wrap element
-			node = u.ae(scene, "div", ({"class":"error", "html":"wrapElement error"}));
-			u.we(node, "div", ({"class":"correct"})).innerHTML = "wrapElement: correct";
+			node = u.ae(scene, "div", {"class":"error", "html":"wrapElement error"});
+			u.we(node, "div", {"class":"correct"}).innerHTML = "wrapElement: correct";
 
 
 			// wrap content
@@ -77,7 +77,7 @@
 			// node.textContent
 			var text = u.text(u.qs(".textcontent", scene));
 			if(text.trim() == "node.textContent") {
-				u.ae(scene, u.qs(".textcontent", scene), ({"class":"correct", "html":"textContent correct"}))
+				u.ae(scene, u.qs(".textcontent", scene), {"class":"correct", "html":"textContent correct"})
 			}
 
 
@@ -91,10 +91,10 @@
 
 			// classVar
 			if(u.cv(u.qs("#qstest"), "type") == "cv") {
-				u.ae(scene, "div", ({"class":"correct", "html":"classVar: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"classVar: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"classVar: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"classVar: error"});
 			}
 
 
@@ -103,10 +103,10 @@
 			u.qs("h1", scene).className = "before";
 			var old_class = u.setClass(u.qs("h1", scene), "test_headline");
 			if(u.qs("h1", scene).className == "test_headline") {
-				u.ae(scene, "div", ({"class":"correct", "html":"setClass: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"setClass: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"setClass: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"setClass: error"});
 			}
 
 			// hasClass
@@ -120,10 +120,10 @@
 				u.hc(u.qs("h1", scene), "2test_headline") == false && 
 				u.hc(u.qs("h1", scene), "type[0-1]") == true
 				) {
-				u.ae(scene, "div", ({"class":"correct", "html":"hasClass: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"hasClass: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"hasClass: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"hasClass: error"});
 			}
 
 			// addClass
@@ -132,10 +132,10 @@
 			u.addClass(u.qs("h1", scene), "headline");
 			u.addClass(u.qs("h1", scene), "headline");
 			if(u.qs("h1", scene).className == "test_headline headline:example headline") {
-				u.ae(scene, "div", ({"class":"correct", "html":"addedClass: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"addedClass: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"addedClass: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"addedClass: error"});
 			}
 
 			// removeClass
@@ -144,20 +144,20 @@
 			u.removeClass(u.qs("h1", scene), "bye|farewell|later");
 			u.removeClass(u.qs("h1", scene), "test\:[0-2]+");
 			if(u.qs("h1", scene).className == "test_headline headline:example test:3") {
-				u.ae(scene, "div", ({"class":"correct", "html":"removeClass: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"removeClass: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"removeClass: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"removeClass: error"});
 			}
 
 			// toggleClass
 			u.qs("h1", scene).className = "test_headline";
 			u.toggleClass(u.qs("h1", scene), "test_headline", old_class);
 			if(u.qs("h1", scene).className == old_class) {
-				u.ae(scene, "div", ({"class":"correct", "html":"toggleClass: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"toggleClass: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"toggleClass: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"toggleClass: error"});
 			}
 
 
@@ -169,10 +169,10 @@
 			u.as(u.qs("h1", scene), "display", "none");
 			if(u.qs("h1", scene).style.display == "none") {
 				u.as(u.qs("h1", scene), "display", org_display);
-				u.ae(scene, "div", ({"class":"correct", "html":"addStyle: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"addStyle: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"addStyle: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"addStyle: error"});
 			}
 
 
@@ -181,10 +181,10 @@
 			u.ass(u.qs("h1", scene), {"display":"inline", "width":"100px"});
 			if(u.qs("h1", scene).style.display == "inline" && u.qs("h1", scene).style.width == "100px") {
 				u.ass(u.qs("h1", scene), {"display":"block", "width":"auto"});
-				u.ae(scene, "div", ({"class":"correct", "html":"addStyles: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"addStyles: correct"});
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"addStyles: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"addStyles: error"});
 			}
 
 
@@ -195,11 +195,11 @@
 			u.as(gcs_node, "height", "1px");
 			if(u.gcs(gcs_node, "background-color") == "#ff0000" || u.gcs(gcs_node, "background-color") == "rgb(255, 0, 0)" && u.gcs(gcs_node, "height") == "1px") {
 				gcs_node.parentNode.removeChild(gcs_node);
-				u.ae(scene, "div", ({"class":"correct", "html":"getComputedStyle: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"getComputedStyle: correct"});
 			}
 			else {
 				gcs_node.parentNode.removeChild(gcs_node);
-				u.ae(scene, "div", ({"class":"error", "html":"getComputedStyle: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"getComputedStyle: error"});
 			}
 
 
@@ -209,11 +209,11 @@
 			u.as(hfp_node, "position", "fixed");
 			if(u.hfp(hfp_child) && !u.hfp(hfp_node)) {
 				hfp_node.parentNode.removeChild(hfp_node);
-				u.ae(scene, "div", ({"class":"correct", "html":"hasFixedParent: correct"}));
+				u.ae(scene, "div", {"class":"correct", "html":"hasFixedParent: correct"});
 			}
 			else {
 				hfp_node.parentNode.removeChild(hfp_node);
-				u.ae(scene, "div", ({"class":"error", "html":"hasFixedParent: error"}));
+				u.ae(scene, "div", {"class":"error", "html":"hasFixedParent: error"});
 			}
 
 		}
