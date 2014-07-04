@@ -13,7 +13,7 @@
 		Work WITH the DOM and take back control of your interface.
 	</p>
 	<p>
-		The JavaScript library provides an extensive set of namespaced cross-device shorthand functions, written 
+		The JavaScript library provides an extensive set of name spaced cross-device shorthand functions, written 
 		to utilize the the best performance option available - without inventing new concepts or abiding
 		old implementation flaws.
 	</p>

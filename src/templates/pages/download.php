@@ -81,7 +81,7 @@ function findModules($file) {
 	<div class="bundle medium">
 		<h3>Medium bundle</h3>
 		<p>
-			For most sites without being bloathed. Includes 
+			For most sites without being bloated. Includes 
 			<?= findModules(LOCAL_PATH."/www/bundles/medium/lib/seg_desktop_include.js") ?>.
 		</p>
 	</div>

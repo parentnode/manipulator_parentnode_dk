@@ -8,6 +8,10 @@ video+audio player
 template
 scrollTo
 
+Preloader:
+max-processes parameter
+
+
 
 Maybe:
 sequence player
