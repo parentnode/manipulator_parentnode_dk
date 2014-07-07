@@ -5,20 +5,22 @@
 		Manipulator 0.8 is now available for <a href="/download">download</a>.
 	</p>
 	<p>
-		Manipulator is an extremely flexible, performance optimized JavaScript
-		library with a slightly neurotic focus on details.
+		Manipulator is an extremely flexible, performance optimized 
+		<a href="http://en.wikipedia.org/wiki/JavaScript_library" target="_blank">JavaScript library</a>
+		with a slightly neurotic focus on details.
 	</p>
 	<p>
-		It is designed to mimic regular JavaScript, and utilize the DOM objects instead of inventing new ones. 
-		Work WITH the DOM and take back control of your interface.
+		It is designed to mimic regular JavaScript, and utilize and extend the DOM objects instead of inventing new
+		objects. Work WITH the DOM and take back control of your interface. Keep it close to native JavaScript
+		to boost performance.
 	</p>
 	<p>
-		The JavaScript library provides an extensive set of name spaced cross-device shorthand functions, written 
+		The Manipulator library provides an extensive set of name spaced cross-device shorthand functions, written 
 		to utilize the the best performance option available - without inventing new concepts or abiding
 		old implementation flaws.
 	</p>
 	<p>
-		Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it, with IE6 support.
+		Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is very similar, with IE6 support.
 	</p>
 
 	<h2>The goal behind designing the Manipulator library</h2>
