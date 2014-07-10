@@ -35,8 +35,8 @@
 						</p>
 						<p class="note">
 							When using dom-ready with webfonts - the line-height will update after dom-ready (when the fonts load) and
-							this my have an impact on absolute positioning. This can be partly minimized by always stating line-heights in the CSS- but rendering widths may still change
-							paragraph heights.
+							this may have an impact on absolute positioning. This can be partly minimized by always stating line-heights in the CSS - but final rendering 
+							widths may still change paragraph heights because number of lines might change.
 						</p>
 					</div>
 

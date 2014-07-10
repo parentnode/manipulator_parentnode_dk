@@ -4,15 +4,20 @@
 	<ul class="actions">
 		<li><a class="nofollow" href="#library_files" rel="nofollow">Goto files</a></li>
 	</ul>
+
 	<p>
-		Documentation of utilities and tools in the Manipulator JavaScript library.
+		This documentation cover utilities and tools of the Manipulator JavaScript library as well as 
+		<a href="/docs/u-objects">Initializer Objects</a> for the 
+		<a href="http://modulator.parentnode.dk">Modulator markup model</a>. While utilities and tools are used 
+		to perform general JavaScript routines and HTML manipulation, the Initializer Objects cover HTML Node 
+		extenders, Page and flow controllers.
 	</p>
 
 	<div class="search"></div>
 
 	<div class="files">
 
-		<h2>Index</h2>
+		<h2>Library Index</h2>
 		<ul class="library">
 			<li>
 				<h3><a href="/docs/u-animation">Animation</a></h3>
@@ -77,6 +82,10 @@
 			<li>
 				<h3><a href="/docs/u-init">Init</a></h3>
 				<p>Manipulator module initializer</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-objects">Initializer Objects</a></h3>
+				<p>Manipulator HTML node extensions and flow controllers</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-math">Math</a></h3>

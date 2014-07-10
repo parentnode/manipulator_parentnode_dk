@@ -6,7 +6,7 @@ Util.Objects["docsindex"] = new function() {
 
 		// initialize search field
 		scene.div_search = u.qs(".search", scene);
-		scene.div_search.h2 = u.ae(scene.div_search, "h2", {"html":"Search documentation"});
+		scene.div_search.h2 = u.ae(scene.div_search, "h2", {"html":"Search utilities and tools"});
 
 		var form = u.f.addForm(scene.div_search, {"class":"labelstyle:inject"});
 		var fieldset = u.f.addFieldset(form);
