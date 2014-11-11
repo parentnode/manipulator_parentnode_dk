@@ -15,6 +15,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-c
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-keyboard.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');
@@ -25,6 +26,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-string
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
+
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-video.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-devices.js"></script>');

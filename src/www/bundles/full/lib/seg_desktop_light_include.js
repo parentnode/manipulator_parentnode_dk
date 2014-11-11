@@ -30,6 +30,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-de
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-json-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string-desktop_light.js"></script>');
 

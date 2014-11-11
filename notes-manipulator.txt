@@ -7,6 +7,8 @@ Change u-fullscreen to be independent of #page
 Util.Notification - global notification handler 
 Add u-fullscreen-overlay (as alternative to u-fullscreen (modal) 
 
+WTF-EVENTS - make initial speed calculation better - IE use two moveevents before calculation start speed
+
 
 u.e.scroll - finalize, document and test 
 u-form - add JSON parameters to init, to make initialization more flexible 
