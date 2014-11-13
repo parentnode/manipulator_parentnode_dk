@@ -1,3 +1,5 @@
 .DS_Store
 src/library/*
 src/config/connect_*.php
+*.sublime-project
+*.sublime-workspace
