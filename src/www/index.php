@@ -13,8 +13,10 @@ $action = $page->actions();
 $page->bodyClass("front");
 $page->pageTitle("Don't be scared - It's just JavaScript");
 
-$page->header();
-$page->template("pages/front.php");
-$page->footer();
+
+$page->page(array(
+	"templates" => "pages/front.php"
+));
+exit();
 
 ?>

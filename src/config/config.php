@@ -12,8 +12,8 @@ error_reporting(E_ALL);
 */
 define("SITE_UID", "MANI");
 define("SITE_NAME", "Manipulator");
-define("SITE_URL", "manipulator.parentnode.dk");
-define("SITE_EMAIL", "martin@kaestel.dk");
+define("SITE_URL", $_SERVER["SERVER_NAME"]);
+define("SITE_EMAIL", "info@parentnode.dk");
 
 /**
 * Optional constants
@@ -21,7 +21,6 @@ define("SITE_EMAIL", "martin@kaestel.dk");
 define("DEFAULT_PAGE_DESCRIPTION", "Manipulator is an extensive modular cross-device JavaScript manipulation library");
 define("DEFAULT_LANGUAGE_ISO", "EN");
 define("DEFAULT_COUNTRY_ISO", "DK");
-define("DEFAULT_CURRENCY_ISO", "DKK");
 
 
 // // Enable items model

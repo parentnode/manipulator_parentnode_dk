@@ -14,8 +14,9 @@ $page->bodyClass("download");
 $page->pageTitle("Download bundles");
 
 
-$page->header();
-$page->template("pages/download.php");
-$page->footer();
+$page->page(array(
+	"templates" => "pages/download.php"
+));
+exit();
 
 ?>

@@ -14,8 +14,9 @@ $page->bodyClass("changelog");
 $page->pageTitle("It's just improvements");
 
 
-$page->header();
-$page->template("pages/changelog.php");
-$page->footer();
+$page->page(array(
+	"templates" => "pages/changelog.php"
+));
+exit();
 
 ?>

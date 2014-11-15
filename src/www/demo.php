@@ -14,8 +14,9 @@ $page->bodyClass("demo");
 $page->pageTitle("Manipulator demonstration");
 
 
-$page->header();
-$page->template("pages/demo.php");
-$page->footer();
+$page->page(array(
+	"templates" => "pages/demo.php"
+));
+exit();
 
 ?>

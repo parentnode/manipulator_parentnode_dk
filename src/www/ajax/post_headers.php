@@ -1,4 +1,10 @@
 <?php 
+$access_item = false;
+if(isset($read_access) && $read_access) {
+	return;
+}
+
+
 // get headers
 $headers = apache_request_headers();
 $test = $_POST["test"];
