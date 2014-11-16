@@ -19,6 +19,7 @@ if(is_array($action) && count($action)) {
 	if(count($action) == 1) {
 
 		$page->page(array(
+			"type" => "dev",
 			"templates" => "tests/".$action[0].".php"
 		));
 		exit();
