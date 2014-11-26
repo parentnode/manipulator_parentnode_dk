@@ -1,3 +1,5 @@
+#content .scene.docsindex .search .results .function:hover {background: #ededed;}
+
 /* DOWNLOAD */
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}

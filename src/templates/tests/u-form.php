@@ -9,10 +9,13 @@
 
 	u.bug_position = "fixed";
 
-	Util.Objects["test1"] = new function() {
+	Util.Objects["_test1"] = new function() {
 		this.init = function(form) {
 
 			u.f.init(form);
+
+			// form.DOMsubmit();
+			// form.submit();
 
 			form.submitted = function(input) {
 				// save params for test
@@ -22,16 +25,16 @@
 			}
 
 			// form.changed = function(input) {
-			// 	u.bug("changed:" + u.nodeId(input) + ":" + input.val())
+			// 	u.bug("form changed:" + u.nodeId(input) + ":" + input.val())
 			// }
 			// form.updated = function(input) {
-			// 	u.bug("updated:" + u.nodeId(input) + ":" + input.val())
+			// 	u.bug("form updated:" + u.nodeId(input) + ":" + input.val())
 			// }
 			// form.focused = function(input) {
-			// 	u.bug("focused:" + u.nodeId(input))
+			// 	u.bug("form focused:" + u.nodeId(input))
 			// }
 			// form.blurred = function(input) {
-			// 	u.bug("blurred:" + u.nodeId(input))
+			// 	u.bug("form blurred:" + u.nodeId(input))
 			// }
 
 
@@ -41,44 +44,94 @@
 //				u.bug("validationFailed:" + u.nodeId(this));
 			}
 
-			// form.fields["string_required"].updated = function() {
-			// 	u.bug("string_required updated:" + this.val())
-			// }
-			// form.fields["string_required"].changed = function() {
-			// 	u.bug("string_required changed:" + this.val())
-			// }
-			// form.fields["string_required"].focused = function() {
-			// 	u.bug("string_required focused")
-			// }
-			// form.fields["string_required"].blurred = function() {
-			// 	u.bug("string_required blurred")
-			// }
-
-			form.fields["select_required"].updated = function() {
-				u.bug("select_required updated:" + this.val() + ", this.used:" + this.used)
+			form.fields["string_required"].val("");
+			form.fields["string_required"].updated = function() {
+				u.bug("string_required updated:" + this.val())
 			}
-			form.fields["select_required"].changed = function() {
-				u.bug("select_required changed:" + this.val())
+			form.fields["string_required"].changed = function() {
+				u.bug("string_required changed:" + this.val())
 			}
-			form.fields["select_required"].focused = function() {
-				u.bug("select_required focused:" + this.val())
+			form.fields["string_required"].focused = function() {
+				u.bug("string_required focused")
 			}
-			form.fields["select_required"].blurred = function() {
-				u.bug("select_required blurred:" + this.val())
+			form.fields["string_required"].blurred = function() {
+				u.bug("string_required blurred")
 			}
 
-			form.fields["customfield_required"].updated = function() {
-				u.bug("customfield_required updated:" + this.val() + ", this.used:" + this.used)
+
+			// Number
+			form.fields["number_required"].val(123);
+			form.fields["number_required"].updated = function() {
+				u.bug("number_required updated:" + this.val())
 			}
-			form.fields["customfield_required"].changed = function() {
-				u.bug("customfield_required changed:" + this.val())
+			form.fields["number_required"].changed = function() {
+				u.bug("number_required changed:" + this.val())
 			}
-			form.fields["customfield_required"].focused = function() {
-				u.bug("customfield_required focused:" + this.val())
+			form.fields["number_required"].focused = function() {
+				u.bug("number_required focused")
 			}
-			form.fields["customfield_required"].blurred = function() {
-				u.bug("customfield_required blurred:" + this.val())
+			form.fields["number_required"].blurred = function() {
+				u.bug("number_required blurred")
 			}
+
+
+			// CHECKBOX
+			// form.fields["checkbox_required"].val(true);
+			// form.fields["checkbox_required"].updated = function() {
+			// 	u.bug("checkbox_required updated:" + this.val())
+			// }
+			// form.fields["checkbox_required"].changed = function() {
+			// 	u.bug("checkbox_required changed:" + this.val())
+			// }
+			// form.fields["checkbox_required"].focused = function() {
+			// 	u.bug("checkbox_required focused")
+			// }
+			// form.fields["checkbox_required"].blurred = function() {
+			// 	u.bug("checkbox_required blurred")
+			// }
+
+
+			// RADIO BUTTON
+			form.fields["radio_required"].val();
+			form.fields["radio_required"].updated = function(input) {
+				u.bug("radio_required updated:" + this.val() + ", happeded on:" + u.nodeId(input) + ", this.used:" + this.used)
+			}
+			form.fields["radio_required"].changed = function(input) {
+				u.bug("radio_required changed:" + this.val() + ", happeded on:" + u.nodeId(input))
+			}
+			form.fields["radio_required"].focused = function(input) {
+				u.bug("radio_required focused:" + this.val() + ", happeded on:" + u.nodeId(input))
+			}
+			form.fields["radio_required"].blurred = function(input) {
+				u.bug("radio_required blurred:" + this.val() + ", happeded on:" + u.nodeId(input))
+			}
+
+
+			// form.fields["select_required"].updated = function() {
+			// 	u.bug("select_required updated:" + this.val() + ", this.used:" + this.used)
+			// }
+			// form.fields["select_required"].changed = function() {
+			// 	u.bug("select_required changed:" + this.val())
+			// }
+			// form.fields["select_required"].focused = function() {
+			// 	u.bug("select_required focused:" + this.val())
+			// }
+			// form.fields["select_required"].blurred = function() {
+			// 	u.bug("select_required blurred:" + this.val())
+			// }
+
+			// form.fields["customfield_required"].updated = function() {
+			// 	u.bug("customfield_required updated:" + this.val() + ", this.used:" + this.used)
+			// }
+			// form.fields["customfield_required"].changed = function() {
+			// 	u.bug("customfield_required changed:" + this.val())
+			// }
+			// form.fields["customfield_required"].focused = function() {
+			// 	u.bug("customfield_required focused:" + this.val())
+			// }
+			// form.fields["customfield_required"].blurred = function() {
+			// 	u.bug("customfield_required blurred:" + this.val())
+			// }
 
 			
 			form.actions["button_name"].clicked = function(event) {
@@ -89,46 +142,53 @@
 				this.form.fields["text_required"].val("auto complete text");
 				this.form.fields["select_required"].val("option_2");
 
-				this.form.fields["numeric_required"].val(123.5);
+				this.form.fields["number_required"].val(123.5);
 				this.form.fields["tel_required"].val("+45 123-456");
 				this.form.fields["integer_required"].val(123);
 				this.form.fields["password_required"].val("password");
 
 				this.form.fields["boolean_required"].val(true);
 				this.form.fields["checkbox_required"].val(true);
-				this.form.fields["radio_required"].val("true");
+				this.form.fields["radio_required"].val(true);
 
-				this.form.fields["customfield_required"].val("customfield");
+//				this.form.fields["customfield_required"].val("customfield");
+
+				var params = u.f.getParams(this.form);
+				u.request(this.form, "/ajax/showall.php", {"params":params, "method":"get"});
+				u.bug("params:" + params)
+				u.xInObject(params);
 
 			}
 
+			// var params = u.f.getParams(form);
+			// u.bug("params:" + params)
+			// u.xInObject(params);
 			// submit form - should cause form.validationFailed and have as many errors as required fields
-			form.actions["submit_name"].clicked();
-
-			if(u.qsa(".field.error", form).length == u.qsa(".field.required", form).length && form._test_validation_failed) {
-				u.bug("Test1 form - first submit passed", "green");
-			}
-			else {
-				u.bug("Test1 form - failed on first submit", "red");
-			}
+			//form.actions["submit_name"].clicked();
+			// if(u.qsa(".field.error", form).length == u.qsa(".field.required", form).length && form._test_validation_failed) {
+			// 	u.bug("Test1 form - first submit passed", "green");
+			// }
+			// else {
+			// 	u.bug("Test1 form - failed on first submit", "red");
+			// }
 
 
 			// autocomplete fields
-			form.actions["button_name"].clicked();
+			//form.actions["button_name"].clicked();
 			// submit again
-			form.actions["submit_name"].clicked();
-			if(u.qsa(".field.error", form).length == 0 && form._test_params) {
-				u.bug("Test1 form - second submit passed", "green");
-			}
-			else {
-				u.bug("Test1 form - failed on second submit", "red");
-			}
+			//form.actions["submit_name"].clicked();
+			// if(u.qsa(".field.error", form).length == 0 && form._test_params) {
+			// 	u.bug("Test1 form - second submit passed", "green");
+			// }
+			// else {
+			// 	u.bug("Test1 form - failed on second submit", "red");
+			// }
 
 		}
 
 	}
 
-	Util.Objects["test2"] = new function() {
+	Util.Objects["_test2"] = new function() {
 		this.init = function(form) {
 
 			u.f.init(form);
@@ -164,7 +224,7 @@
 		}
 	}
 
-	Util.Objects["test3"] = new function() {
+	Util.Objects["_test3"] = new function() {
 		this.init = function(form) {
 
 			u.f.init(form);
@@ -175,8 +235,7 @@
 		}
 	}
 
-
-	Util.Objects["test4"] = new function() {
+	Util.Objects["_test4"] = new function() {
 		this.init = function(form) {
 
 			u.f.init(form);
@@ -211,72 +270,17 @@
 
 		}
 	}
-	
-	
-				// var json_test = {"test_1":"fisk","object":{"test_2":"fisk2","test_3":"fisk6"}};
-				// u.bug(json_test.object.test_2)
-				// 
-				// var json_test = {
-				//   "navn" : "Test navn",
-				//   "apps" : [
-				//     {
-				//       "app1" : {
-				//         "id" : "1",
-				//         "navn" : "App 1"
-				//       }
-				//     },
-				//     {
-				//       "app2" : {
-				//         "id" : "2",
-				//         "navn" : "App 2"
-				//       }
-				//     }
-				//   ]
-				// };
-				// 
-				// u.bug(json_test.apps[0].app1.id)
-	// //				var json_test = {"test_1":"fisk","object":{"test_2":"fisk2","test_3":"fisk6"}};
-	// 				var json_test = new Object();
-	// 				json_test.test_1 = "fisk";
-	// 				json_test.array = new Object();
-	// 				json_test.array.test_2 = "fisk2";
-	// 				json_test.array.test_3 = "fisk6";
-	// 
-	// 				u.bug("1:object length:" + json_test.array.length);
-	// 
-	// 				u.bug("1:json_test##" + json_test.test_1 + "##" + json_test.array + "##" + json_test.array.test_2);
-	// 				var json_string = JSON.stringify(json_test);
-	// 				u.bug("1:json_string:" + json_string + ":" + json_string.array);
-	// 				var json_obj = eval("("+json_string+")");
-	// 				u.bug("1:json_obj:" + json_obj + ":" + json_obj.array + ":" + json_obj.array.test_2);
-	// 
-	// 				u.bug("------");
 
 
-	//			var json_test = {"test_1":"fisk","array":[{"test_2":"fisk2"},{"test_3":"fisk6"}]};
-				// var json_test = new Object();
-				// json_test["test_1"] = "fisk";
-				// json_test["apps"] = new Array();
-				// json_test["apps"][0] = new Object()
-				// json_test["apps"][0]["id"] = "fisk2";
-				// json_test["apps"][0]["name"] = "fisk2";
-				// json_test["apps"][15] = new Array()
-				// json_test["apps"][15][0] = new Object()
-				// 
-				// json_test["apps"][15][0]["id"] = "fisk6";
-				// json_test["apps"][15][0]["name"] = new Object()
-				// json_test["apps"][15][0]["name"]["fus"] = "fisk6";
+	Util.Objects["testInputType"] = new function() {
+		this.init = function(form) {
 
-	//			json_test.array["100"] = "fisk6";
+			u.f.init(form);
+			form.submitted = function(input) {
 
-	//			u.bug("2:array length:" + json_test.apps.length);
-
-	//			u.bug("2:json_test##" + json_test.test_1 + "##" + json_test.apps + "##" + json_test.apps["test_3"]);
-				// var json_string = JSON.stringify(json_test);
-				// u.bug("json_string:" + json_string);
-
-	//			var json_obj = eval("("+json_string+")");
-	//			u.bug("2:json_obj:" + json_obj + ":" + json_obj.apps + ":" + json_obj.apps["test_3"]);
+			}
+		}
+	}
 
 
 </script>
@@ -284,7 +288,31 @@
 <div class="scene">
 	<h1>Form</h1>
 
-	<form name="test1" action="#" method="get" class="i:test1 test1">
+
+	<form name="testText" action="#" method="get" class="i:testInputType text labelstyle:inject">
+
+		<fieldset>
+
+			<div class="field text required">
+				<label for="test1_text_required">Text, required</label>
+				<textarea name="text_required" id="test1_text_required"></textarea>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
+			</div>
+
+			<div class="field text autoexpand">
+				<label for="test1_text_optional">Text, optional, autoexpand</label>
+				<textarea name="text_optional" id="test1_text_optional"></textarea>
+			</div>
+
+		</fieldset>
+	</form>
+
+
+
+	<form name="test1" action="#" method="get" class="i:test1 test1 labelstyle:inject">
 		<h2>Test 1 - Basic</h2>
 		<p>Testing initialization, validation and callbacks.</p>
 
@@ -297,61 +325,121 @@
 			<div class="field string required">
 				<label for="test1_string_required">String, required</label>
 				<input type="text" name="string_required" id="test1_string_required" />
+				<div class="help">
+					<div class="hint">hint Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field string">
 				<label for="test1_string_optional">String, optional</label>
 				<input type="text" name="string_optional" id="test1_string_optional" />
 			</div>
 
+
 			<!-- EMAIL -->
 			<div class="field email required">
 				<label for="test1_email_required">Email, required</label>
 				<input type="email" name="email_required" id="test1_email_required" />
+				<div class="help">
+					<div class="hint">hint Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field email">
 				<label for="test1_email_optional">Email, optional</label>
 				<input type="email" name="email_optional" id="test1_email_optional" />
 			</div>
 
+
 			<!-- NUMERIC -->
-			<div class="field numeric required">
-				<label for="test1_numeric_required">Numeric, required</label>
-				<input type="number" name="numeric_required" id="test1_numeric_required" />
+			<div class="field number required">
+				<label for="test1_number_required">Number, required</label>
+				<input type="number" name="number_required" id="test1_number_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
-			<div class="field numeric">
-				<label for="test1_numeric_optional">Numeric, optional</label>
-				<input type="number" name="numeric_optional" id="test1_numeric_optional" />
+			<div class="field number">
+				<label for="test1_number_optional">Number, optional</label>
+				<input type="number" name="number_optional" id="test1_number_optional" />
 			</div>
+
 
 			<!-- TEL -->
 			<div class="field tel required">
 				<label for="test1_tel_required">Telephone, required</label>
-				<input type="number" name="tel_required" id="test1_tel_required" />
+				<input type="tel" name="tel_required" id="test1_tel_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field tel">
 				<label for="test1_tel_optional">Telephone, optional</label>
 				<input type="number" name="tel_optional" id="test1_tel_optional" />
 			</div>
 
+
 			<!-- INTEGER -->
 			<div class="field integer required">
 				<label for="test1_integer_required">Integer, required</label>
 				<input type="number" name="integer_required" id="test1_integer_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field integer">
 				<label for="test1_integer_optional">Integer, optional</label>
 				<input type="number" name="integer_optional" id="test1_integer_optional" />
 			</div>
 
+
 			<!-- PASSWORD -->
 			<div class="field password required">
 				<label for="test1_password_required">Password, required</label>
 				<input type="password" name="password_required" id="test1_password_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field password">
 				<label for="test1_password_optional">Password, optional</label>
 				<input type="password" name="password_optional" id="test1_password_optional" />
 			</div>
+
+
+			<!-- DATE -->
+			<div class="field date required">
+				<label for="test1_date_required">Date, required</label>
+				<input type="date" name="date_required" id="test1_date_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
+			</div>
+			<div class="field date">
+				<label for="test1_date_optional">Date, optional</label>
+				<input type="date" name="date_optional" id="test1_date_optional" />
+			</div>
+
+
+			<!-- DATETIME -->
+			<div class="field datetime required">
+				<label for="test1_datetime_required">Datetime, required</label>
+				<input type="datetime" name="datetime_required" id="test1_datetime_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
+			</div>
+			<div class="field datetime">
+				<label for="test1_datetime_optional">Datetime, optional</label>
+				<input type="datetime" name="datetime_optional" id="test1_datetime_optional" />
+			</div>
+
 
 			<!-- SELECT -->
 			<div class="field select required">
@@ -361,6 +449,10 @@
 					<option value="option_1">option 1</option>
 					<option value="option_2">option 2</option>
 				</select>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field select">
 				<label for="test1_select_optional">Select, optional</label>
@@ -370,35 +462,63 @@
 				</select>
 			</div>
 
+
 			<!-- TEXT -->
 			<div class="field text required">
 				<label for="test1_text_required">Text, required</label>
 				<textarea name="text_required" id="test1_text_required"></textarea>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field text autoexpand">
 				<label for="test1_text_optional">Text, optional, autoexpand</label>
 				<textarea name="text_optional" id="test1_text_optional"></textarea>
 			</div>
 
+
+			<!-- HTMLEDITOR -->
+			<div class="field html required tags:p,h1,h2,h3,h4,h5,h6,code,ol,ul,download">
+				<label for="test1_html_required">HTML, required</label>
+				<textarea name="html_required" id="test1_html_required"></textarea>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
+			</div>
+			<div class="field html tags:p,h1,h2,h3,h4,h5,h6,code">
+				<label for="test1_html_optional">HTML, optional</label>
+				<textarea name="html_optional" id="test1_html_optional"></textarea>
+			</div>
+
+
 			<!-- BOOLEAN (simple_form version of checkbox) -->
 			<div class="field boolean required">
-				<!-- ALWAYS SEND CHECKED STATE? -->
 				<input type="hidden" name="boolean_required" value="0" />
 				<input type="checkbox" name="boolean_required" id="test1_boolean_required" value="true" />
 				<label for="test1_boolean_required">Boolean, required</label>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field boolean">
-				<!-- ALWAYS SEND CHECKED STATE? -->
 				<input type="hidden" name="boolean_optional" value="0" />
 				<input type="checkbox" name="boolean_optional" id="test1_boolean_optional" value="true" />
 				<label for="test1_boolean_optional">Boolean, optional</label>
 			</div>
+
 
 			<!-- CHECKBOX -->
 			<div class="field checkbox required">
 				<input type="hidden" name="checkbox_required" value="0" />
 				<input type="checkbox" name="checkbox_required" id="test1_checkbox_required" value="true" />
 				<label for="test1_checkbox_required">Checkbox, required</label>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field checkbox">
 				<input type="hidden" name="checkbox_optional" value="0" />
@@ -406,39 +526,102 @@
 				<label for="test1_checkbox_optional">Checkbox, optional</label>
 			</div>
 
+
 			<!-- RADIO BUTTONS -->
-			<div class="field radio_buttons required">
-				<label class="radio_buttons">Radio buttons, required</label>
-				<div class="radio item">
-					<input type="radio" value="false" name="radio_required" id="test1_radio_a_required" />
-					<label for="test1_radio_a_required">False</label>
+			<div class="field radiobuttons required">
+				<label>Radio buttons, required</label>
+				<div class="item">
+					<input type="radio" value="true" name="radio_required" id="test1_radio_a_required" />
+					<label for="test1_radio_a_required">True</label>
 				</div>
-				<div class="radio item">
-					<input type="radio" value="true" name="radio_required" id="test1_radio_b_required" />
-					<label for="test1_radio_b_required">True</label>
+				<div class="item">
+					<input type="radio" value="false" name="radio_required" id="test1_radio_b_required" />
+					<label for="test1_radio_b_required">False</label>
+				</div>
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
 				</div>
 			</div>
-			<div class="field radio_buttons">
-				<label class="radio_buttons required">Radio buttons, optional</label>
-				<div class="radio item">
-					<input type="radio" value="false" name="radio_optional" id="test1_radio_a_optional" />
-					<label for="test1_radio_a_optional">False</label>
+			<div class="field radiobuttons">
+				<label class="buttons required">Radio buttons, optional</label>
+				<div class="item">
+					<input type="radio" value="true" name="radio_optional" id="test1_radio_a_optional" />
+					<label for="test1_radio_a_optional">True</label>
 				</div>
-				<div class="radio item">
-					<input type="radio" value="true" name="radio_optional" id="test1_radio_b_optional" />
-					<label for="test1_radio_b_optional">True</label>
+				<div class="item">
+					<input type="radio" value="false" name="radio_optional" id="test1_radio_b_optional" />
+					<label for="test1_radio_b_optional">False</label>
 				</div>
 			</div>
 
+
+			<!-- LOCATION -->
+			<div class="field location required">
+				<div class="location">
+					<label for="input_location_required">Location, required</label>
+					<input type="text" class="location" id="input_location_required" value="Ginestra" name="location_required" />
+				</div>
+				<div class="latitude">
+					<label for="input_latitude_required">Latitude</label>
+					<input type="text" class="latitude" id="input_latitude_required" value="41.2617" name="latitude_required" />
+				</div>
+				<div class="longitude">
+					<label for="input_longitude_required">Longitude</label>
+					<input type="text" class="longitude" id="input_longitude_required" value="" name="longitude_required" />
+				</div>
+				<div class="help">
+					<div class="hint">Name and Geo coordinates of location</div>
+					<div class="error">Name and Geo coordinates must be filled out</div>
+				</div>
+			</div>
+			<div class="field location">
+				<div class="location">
+					<label for="input_location_optional">Location, optional</label>
+					<input type="text" class="location" id="input_location_optional" value="Ginestra" name="location_required" />
+				</div>
+				<div class="latitude">
+					<label for="input_latitude_optional">Latitude</label>
+					<input type="text" class="latitude" id="input_latitude_optional" value="41.2617" name="latitude_required" />
+				</div>
+				<div class="longitude">
+					<label for="input_longitude_oprional">Longitude</label>
+					<input type="text" class="longitude" id="input_longitude_oprional" value="1.92333" name="longitude_required" />
+				</div>
+			</div>
+
+			<div class="field files required">
+				<label for="input_mediae_required">Files, required</label>
+				<input type="file" name="media_required[]" id="input_mediae_required" />
+				<div class="help">
+					<div class="hint">Add image here. Use png or jpg in any proportion.</div>
+					<div class="error">File does not fit requirements.</div>
+				</div>
+			</div>
+			<div class="field files">
+				<label for="input_media_optional">Files, optional</label>
+				<input type="file" name="media_optional[]" id="input_media_optional" />
+				<div class="help">
+					<div class="hint">Add image here. Use png or jpg in any proportion.</div>
+					<div class="error">File does not fit requirements.</div>
+				</div>
+			</div>
+
+
 			<!-- CUSTOM FIELD -->
-			<div class="field string customfield required">
+			<!-- TODO: implement -->
+			<!--div class="field string customfield required">
 				<label for="test1_customfield_required">Customfield, required</label>
 				<input type="text" name="customfield_required" id="test1_customfield_required" />
+				<div class="help">
+					<div class="hint">hint</div>
+					<div class="error">error</div>
+				</div>
 			</div>
 			<div class="field string customfield">
 				<label for="test1_customfield_optional">Customfield, optional</label>
 				<input type="text" name="customfield_optional" id="test1_customfield_optional" />
-			</div>
+			</div-->
 
 		</fieldset>
 
