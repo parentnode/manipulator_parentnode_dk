@@ -40,7 +40,7 @@
 			<ul class="goal">
 				<li>Using the newest standards</li>
 				<li>Support for all devices</li>
-				<li>Performance optimized in all possible ways</li>
+				<li><a href="/pages/speed-manipulator">Performance optimized</a> in all possible ways</li>
 				<li>Leveraging standard JavaScript knowledge - not changing the way you write JavaScript</li>
 				<li>Providing a solution to common cross-device/cross-browser problems</li>
 				<li>Simplifying implementation and backend development</li>

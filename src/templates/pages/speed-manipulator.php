@@ -7,8 +7,11 @@
 
 
 		function testNative() {
+
 			var start_time = new Date().getTime();
+
 			var wrapper = document.querySelector(".scene div.native");
+			wrapper.querySelector(".testzone").innerHTML = "";
 
 			var i, node;
 			for(i = 0; i < 5; i++) {
@@ -27,16 +30,20 @@
 				node.click();
 			}
 
-			var end_time = new Date().getTime();
-			node = wrapper.querySelector(".n4 .m").appendChild(document.createElement("div"));
+			node = wrapper.appendChild(document.createElement("div"));
 			node.className = "status";
-			node.innerHTML = "Native JS done: " + (end_time-start_time) + "ms";
+			node.innerHTML = "Native JS done: " + ((new Date().getTime())-start_time) + "ms";
+
+			// test ended
 		}
 
 
 		function testManipulator() {
+
 			var start_time = new Date().getTime();
+
 			var wrapper = u.qs(".scene div.manipulator");
+			u.qs(".testzone", wrapper).innerHTML = "";
 
 			var i, node;
 			for(i = 0; i < 5; i++) {
@@ -51,14 +58,18 @@
 				node.clicked();
 			}
 
-			var end_time = new Date().getTime();
-			node = u.ae(u.qs(".n4 .m", wrapper), "div", {"class":"status", "html":"Manipulator done: " + (end_time-start_time) + "ms"});
+			node = u.ae(wrapper, "div", {"class":"status", "html":"Manipulator done: " + ((new Date().getTime())-start_time) + "ms"});
+
+			// test ended
 		}
 
 
 		function testjQuery() {
+
 			var start_time = new Date().getTime();
+
 			var wrapper = $(".scene div.jquery");
+			$(".testzone", wrapper).html("");
 
 			var i, node;
 			for(i = 0; i < 5; i++) {
@@ -75,18 +86,21 @@
 				$(node).trigger("click");
 			}
 
-			var end_time = new Date().getTime();
 			node = document.createElement("div");
-			$(node).appendTo($(".n4 .m", wrapper)).addClass("status").html("jQuery done: " + (end_time-start_time) + "ms");
+			$(node).appendTo(wrapper).addClass("status").html("jQuery done: " + ((new Date().getTime())-start_time) + "ms");
+
+			// test ended
 		}
 	
 	</script>
 
 <style type="text/css">
+	.native, .manipulator, .jquery {padding-bottom: 30px;}
 	.m {overflow: hidden;}
-	.m .start {width: 10px; height: 12px; margin: 1px; float: left; background: red;}
-	.m .done {width: 10px; height: 12px; margin: 1px; float: left; background: green;}
-	.m .status {height: 12px; margin: 1px; float: left; background: blue; color: #ffffff; font-size: 10px; padding: 0 5px;}
+	.m .start {width: 10px; height: 10px; margin: 1px; float: left; background: red;}
+	.m .done {width: 10px; height: 10px; margin: 1px; float: left; background: green; border-radius: 5px;}
+	.status {margin: 5px 50px; background: blue; color: #ffffff; font-size: 13px; padding: 5px; border-radius: 5px;}
+	.testzone {padding: 0 50px 20px;}
 </style>
 	
 <div class="scene speed">
@@ -94,7 +108,7 @@
 	<h1>Speed and performance test, comparing Native JS, Manipulator and jQuery</h1>
 	<p>
 		This test injects 5 divs, <em>div.n1-5</em>, each containing one <em>div.m</em>.
-		The 1050 new divs are injected into <span class="htmltag">div.n1 div.m</span>, with two classes 
+		Then 1050 new divs are injected into <span class="htmltag">div.n1 div.m</span>, with two classes 
 		<em>start</em> and <em>box0-1049</em>, 
 		A click event is added and triggered, which then replaces class <em>start</em> with <em>done</em>.
 		Finally the processing time in milliseconds is injected into a new div in the end of the list.
@@ -107,22 +121,31 @@
 
 
 	<div class="native">
-		<h1>Native JS speed test</h1>
-		<div class="starttest" onclick="testNative()">Do test</div>
+		<h1>Native JavaScript</h1>
+
+		<ul class="actions">
+			<li class="starttest"><a class="button primary" onclick="testNative()">Do test</a></li>
+		</ul>
 
 		<div class="testzone"></div>
 	</div>
 
 	<div class="manipulator">
-		<h1>Manipulator speed test</h1>
-		<div class="starttest" onclick="testManipulator()">Do test</div>
+		<h1>Manipulator</h1>
+
+		<ul class="actions">
+			<li class="starttest"><a class="button primary" onclick="testManipulator()">Do test</a></li>
+		</ul>
 
 		<div class="testzone"></div>
 	</div>
 
 	<div class="jquery">
-		<h1>jQuery speed test</h1>
-		<div class="starttest" onclick="testjQuery()">Do test</div>
+		<h1>jQuery</h1>
+
+		<ul class="actions">
+			<li class="starttest"><a class="button primary" onclick="testjQuery()">Do test</a></li>
+		</ul>
 
 		<div class="testzone"></div>
 	</div>

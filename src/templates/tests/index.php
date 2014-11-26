@@ -43,9 +43,6 @@
 
 	<h2>Speed/performance</h2>
 	<ul>
-		<li><a href="/tests/u-speed-manipulator">Manipulator</a></li>
-		<li><a href="/tests/u-speed-jquery">jQuery</a></li>
-		<li><a href="/tests/u-speed-plain">Plain JavaScript</a></li>
 		<li><a href="/tests/u-speed-functions">function declarations</a></li>
 	</ul>
 
