@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 */
 define("SITE_UID", "MANI");
 define("SITE_NAME", "Manipulator");
-define("SITE_URL", $_SERVER["SERVER_NAME"]);
+define("SITE_URL", (isset($_SERVER["HTTPS"]) ? "https" : "http")."://".$_SERVER["SERVER_NAME"]);
 define("SITE_EMAIL", "info@parentnode.dk");
 
 /**
