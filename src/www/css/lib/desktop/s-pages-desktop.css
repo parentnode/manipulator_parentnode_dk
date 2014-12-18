@@ -1,6 +1,10 @@
 /* DOWNLOAD */
 #content .scene.download {}
-#content .scene.download .actions {padding-top: 20px;}
+#content .scene.download .actions {padding-top: 20px; border: none;}
+
+/* OLDER */
+#content .scene.older {}
+#content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
 
 
 /* DOCUMENTATION FRONTPAGE */
@@ -14,11 +18,11 @@
 /* FILES */
 #content .scene.docsindex .files {padding-top: 25px;}
 #content .scene.docsindex .files h2 {padding-bottom: 15px;}
-#content .scene.docsindex .files ul {max-width: 500px;}
+#content .scene.docsindex .files ul.library {width: 500px;}
 
-#content .scene.docsindex .files li {position: relative;}
+#content .scene.docsindex .files li {position: relative; padding: 5px; border-top: 1px solid #dedede;}
 #content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
-#content .scene.docsindex .files li p {display: none;}
+#content .scene.docsindex .files li p {font-size: 13px; color: #999999; padding: 0;}
 
 
 /* BROWSER SUPPORT */

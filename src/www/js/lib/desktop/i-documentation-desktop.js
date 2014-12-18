@@ -1,7 +1,9 @@
 Util.Objects["docsindex"] = new function() {
 	this.init = function(scene) {
 
-		var files = u.qsa(".files li", scene);
+//		u.bug("init docsindex");
+
+		var files = u.qsa("div.files li", scene);
 		var i, node;
 
 		// initialize search field
@@ -46,8 +48,12 @@ Util.Objects["docsindex"] = new function() {
 			u.request(node, node.url);
 		}
 
+
+//		u.bug("field._input:" + field._input);
 		// auto complete handler
 		field._input._autocomplete = function() {
+//			u.bug("autocomplete")
+
 
 			var i, _function;
 
@@ -76,13 +82,14 @@ Util.Objects["docsindex"] = new function() {
 		}
 
 		field._input._keyup = function(event) {
-
+//			u.bug("keyup")
 			// reset existing timer
 			u.t.resetTimer(this.t_autocomplete);
 			this.t_autocomplete = u.t.setTimer(this, this._autocomplete, 300);
 		}
 
 		field._input.focused = function() {
+//			u.bug("focused")
 			u.e.addEvent(this, "keyup", this._keyup)
 		}
 

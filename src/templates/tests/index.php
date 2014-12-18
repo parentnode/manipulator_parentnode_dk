@@ -6,7 +6,7 @@
 	<ul>
 		<li><a href="/tests/u-animation">Animation (started)</a></li>
 		<li><a href="/tests/u-array">Array</a></li>
-		<li><a href="/tests/u-audio">Audio (started)</a></li>
+		<li><a href="/tests/u-audio">Audio</a></li>
 		<li><a href="/tests/u-cookie">Cookie</a></li>
 		<li><a href="/tests/u-date">Date</a></li>
 		<li><a href="/tests/u-debug">Debug</a></li>
@@ -37,7 +37,7 @@
 		<li><a href="/tests/u-template">Template (started)</a></li>
 		<li><a href="/tests/u-textscaler">Textscaler (not started)</a></li>
 		<li><a href="/tests/u-url">URL</a></li>
-		<li><a href="/tests/u-video">Video (started)</a></li>
+		<li><a href="/tests/u-video">Video</a></li>
 	</ul>
 
 

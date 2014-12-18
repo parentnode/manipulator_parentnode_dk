@@ -1,19 +1,22 @@
 <style type="text/css">
+	body {overflow: auto;}
+
 	.scene {position: relative;}
 	.toc {font-size: 0;}
+	.toc li {display: inline-block; vertical-align: top; padding: 10px 20px; margin-right: 10px; border-radius: 10px; border: 1px solid black;}
 
-	.toc li {display: inline-block; vertical-align: top; padding: 10px 20px;}
+	#content .scene .coords {z-index: 10; position: fixed; top: 100px; right: 50px; background-color: rgba(255, 0, 255, 0.8); padding-top: 15px;}
 
-	#content .scrollable {padding: 0; margin: 0;}
-	.scrollable > li {height: 400px; position: relative; display: block;}
+	#content .scene .scrollable {padding: 0; margin: 0;}
+	#content .scene .scrollable > li {height: 400px; position: relative; display: block;}
 
-	.scrollable > li#item1 {background: red;}
-	.scrollable > li#item2 {background: blue;}
-	.scrollable > li#item3 {background: green;}
-	.scrollable > li#item4 {background: yellow;}
+	#content .scrollable > li#item1 {background: red;}
+	#content .scrollable > li#item2 {background: blue; margin-left: 400px; width: 100%;}
+	#content .scrollable > li#item3 {background: green;}
+	#content .scrollable > li#item4 {background: black;}
 
-	.scrollable > li .toc {position: absolute; top: 0; right: 0;}
-
+	#content .scrollable > li .toc {position: absolute; top: 15px; right: 0;}
+	#content .scrollable > li .toc li a {color: #ffffff;}
 
 </style>
 
@@ -23,63 +26,69 @@
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
-			// window._scrollHandler = function() {
-			// 	u.bug("scroll")
-			// }
-			// u.e.click(window);
-			// window.clicked = function() {
-			// 	if(window.scroll_on) {
-			// 		window.scroll_on = false;
-			// 		u.e.removeEvent(window, "scroll", window._scrollHandler);
-			// 	}
-			// 	else {
-			// 		window.scroll_on = true;
-			// 		u.e.addEvent(window, "scroll", window._scrollHandler);
-			// 	}
-			// }
-
-
-
-
-
 			var i, node;
 
 			var main_toc_nodes = u.qsa(".scene > .toc li");
 			for(i = 0; node = main_toc_nodes[i]; i++) {
-//				u.bug("node:" + node)
 				u.ce(node);
 				node.clicked = function(event) {
 					var id = this.url.split("#")[1];
 					var to = u.qs("#"+id);
 
-//					u.bug(u.nodeId(to));
-					u.scrollTo(to, {"offset_y":100});
+					u.scrollTo({"node":to, "offset_y":100});
 				}
+			}
 
-//				u.a.setHeight(node, u.browserH());
+
+			var coord_nodes = u.qsa(".scene > .coords li");
+			for(i = 0; node = coord_nodes[i]; i++) {
+				u.ce(node);
+				node.clicked = function(event) {
+
+					if(u.hc(this, "top")) {
+						u.scrollTo({"x":0, "y": 0});
+					}
+					else if(u.hc(this, "middle")) {
+						u.scrollTo({"x":u.htmlW()/2 - u.browserW()/2, "y": u.htmlH()/2 - u.browserH()/2});
+					}
+					else if(u.hc(this, "bottom")) {
+						u.scrollTo({"x":u.htmlW(), "y": u.htmlH()});
+					}
+
+				}
 			}
 
 
 			var sub_toc_nodes = u.qsa(".scrollable .toc li");
 			for(i = 0; node = sub_toc_nodes[i]; i++) {
-//				u.bug("node:" + node)
 				u.ce(node);
 				node.clicked = function(event) {
 					var id = this.url.split("#")[1];
 					var to = u.qs("#"+id);
 
-//					u.bug(u.nodeId(to));
-					u.scrollTo(to, {"offset_y":100});
+					u.scrollTo({"node":to, "offset_y":100});
 				}
-
-//				u.a.setHeight(node, u.browserH());
 			}
 		}
 	}
+
 </script>
 
 <div class="scene i:test">
 	<h1>ScrollTo</h1>
+	<p>
+		Scroll to item 1-4, from different locations. 
+		item 1-4 has an offset_y: 100px. Scrolling to result in top aligning with purple box 
+		(except item 4, where page is not big enough).
+	</p>
+	<p>Scroll to top, middle and bottom.</p>
+
+	<ul class="coords">
+		<li class="top"><a href="#header">To top/left</a></li>
+		<li class="middle"><a href="#content">To middle</a></li>
+		<li class="bottom"><a href="#footer">To bottom right</a></li>
+	</ul>
+
 
 	<ul class="toc">
 		<li class="item1"><a href="#item1">To item1</a></li>

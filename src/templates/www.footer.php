@@ -1,13 +1,24 @@
+<?
+$navigation = 0; //session()->value("navigation_main");
+// or get complete structure from system
+if(!$navigation) {
+
+	$NC = new Navigation();
+	$navigation = $NC->getNavigations(array("handle" => "main"));
+
+	session()->value("navigation_main", $navigation);
+
+}
+?>
 	</div>
 
 	<div id="navigation">
 		<ul class="navigation">
-			<li class="front"><a href="/">Frontpage</a></li>
-
-			<li class="download"><a href="/download">Download</a></li>
-			<li class="docs"><a href="/docs">Documentation</a></li>
-			<!--li class="demo"><a href="/demo">Demo</a></li>
-			<li class="about"><a href="/about">About</a></li-->
+<?		if($navigation):
+			foreach($navigation["nodes"] as $node): ?>
+			<li<?= $HTML->attribute("class", $node["classname"]) ?>><a href="<?= ($node["link"] ? $node["link"] : ("/page/".$node["sindex"])) ?>"<?= strpos($node["link"], "http://") === 0 ? $HTML->attribute("target", "_blank") : "" ?>><?= $node["name"] ?></a></li>
+<?			endforeach;
+	 	endif; ?>
 		</ul>
 	</div>
 

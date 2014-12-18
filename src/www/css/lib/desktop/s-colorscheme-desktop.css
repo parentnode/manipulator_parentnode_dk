@@ -31,6 +31,7 @@ body {background: #ffffff;}
 
 .front #header .logo,
 .docs #navigation ul li.docs,
+.gettingstarted #navigation ul li.gettingstarted,
 .download #navigation ul li.download {color: #9b001c;}
 
 #content .scene.docpage .section.functions .function .body .callbacks dt {color: #9b001c;}
