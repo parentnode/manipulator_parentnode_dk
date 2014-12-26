@@ -71,7 +71,11 @@
 			</li>
 			<li>
 				<h3><a href="/docs/u-form">Form</a></h3>
-				<p>In progress: Form extension</p>
+				<p>Form interface, input validation and event callbacks</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-form-builder">Form builder</a></h3>
+				<p>Form building methods</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-geometry">Geometry</a></h3>

@@ -1,8 +1,13 @@
 <div class="scene docpage i:docpage">
 	<h1>Form</h1>
 	<p>
-		Advanced form controller. Validation, event callbacks and helper methods to customize form design 
-		and interaction.
+		Advanced form controller and API. Grants full control of the HTML form elements.
+	</p>
+	<p>
+		Full type validation, and event callbacks for any user interaction.
+	</p>
+	<p>
+		Helper methods to customize form design and interaction responses.
 	</p>
 	<p>
 		Util.Form is based on the <a href="http://modulator.parentnode.dk" target="_blank">modulator HTML Form syntax</a>, 
