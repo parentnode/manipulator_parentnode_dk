@@ -1,8 +1,8 @@
 <style type="text/css">
 	.scene > div {margin: 0 0 5px;}
 	.error {background: red;}
-	.correct {background: green;}
-	div.wc div.correct {color: yellow;} 
+	.correct {background: green; color: #ffffff;}
+/*	div.wc div.correct {color: yellow;} */
 </style>
 
 <script type="text/javascript">
@@ -24,7 +24,8 @@
 			// getElement
 			if(u.ge("type:1").innerHTML == "getElement") {
 				u.ge("type:1").innerHTML = "getElement: correct";
-				u.ge("type:1", scene).parentNode.className = "correct"
+				u.ge("type:1", scene).parentNode.className = "correct";
+				u.ac(u.ge("type:1", scene), "correct");
 			}
 			// getElements
 			if(u.ges("type\:[1-2]", scene).length == 2) {
@@ -32,24 +33,81 @@
 			}
 
 			// parent node
-			if(u.pn(u.qs(".parentnode ul li span", scene), "div").className == "parentnode correct") {
-				u.pn(u.qs(".parentnode ul li span", scene), "div").innerHTML = "u.parentNode: correct";
+			pn_span = u.qs(".parentnode ul li span", scene);
+			// u.bug("li" == u.nodeId(u.pn(pn_span)).toLowerCase())
+			// u.bug(u.pn(pn_span, {"include":"div"}).className == "parentnode correct");
+			if(
+				"li" == u.nodeId(u.pn(pn_span)).toLowerCase() &&
+				"ul.u2" == u.nodeId(u.pn(pn_span, {"exclude":"li"})).toLowerCase() &&
+				"ul.u1" == u.nodeId(u.pn(pn_span, {"include":"ul.u1"})).toLowerCase() &&
+				u.pn(pn_span, {"include":"div"}).className == "parentnode correct"
+				
+			) {
+				u.pn(u.qs(".parentnode ul li span", scene), {"include":"div"}).innerHTML = "u.parentNode: correct";
 			}
+
+
 
 			// ns + ps
 			// nextSibling
-			if(u.ns(u.qs("div.ns .start", scene)).className == "nons" && !u.ns(u.qs("div.ns .start", scene), "li") && u.ns(u.qs("div.ns .start", scene), "nons").className == "end") {
+			ns_li = u.qs("div.ns .start", scene);
+			ns_div = u.qs("div.ns div.c1", scene);
+			// u.bug("li.nons" + u.nodeId(u.ns(ns_li)).toLowerCase());
+			// u.bug("li.jens" + u.nodeId(u.ns(ns_li, {"exclude":".nons"})).toLowerCase());
+			// u.bug("li.end" + u.nodeId(u.ns(ns_li, {"exclude":".nons","include":".end"})).toLowerCase());
+			// u.bug("span.c1" + u.nodeId(u.ns(ns_div)).toLowerCase());
+			// u.bug("span.c2" + u.nodeId(u.ns(ns_div, {"include":".c2"})).toLowerCase());
+			// u.bug("div.c2" + u.nodeId(u.ns(ns_div, {"exclude":"span"})).toLowerCase());
+			// u.bug("span.c2" + u.nodeId(u.ns(ns_div, {"include":"span.c2"})).toLowerCase());
+			if(
+				"li.nons" == u.nodeId(u.ns(ns_li)).toLowerCase() &&
+				"li.jens" == u.nodeId(u.ns(ns_li, {"exclude":".nons"})).toLowerCase() &&
+				"li.end" == u.nodeId(u.ns(ns_li, {"exclude":".nons","include":".end"})).toLowerCase() &&
+				"span.c1" == u.nodeId(u.ns(ns_div)).toLowerCase() &&
+				"span.c2" == u.nodeId(u.ns(ns_div, {"include":".c2"})).toLowerCase() &&
+				"div.c2" == u.nodeId(u.ns(ns_div, {"exclude":"span"})).toLowerCase() &&
+				"span.c2" == u.nodeId(u.ns(ns_div, {"include":"span.c2"})).toLowerCase()			
+			
+			) {
 				u.qs("div.ns").innerHTML = "nextSibling: correct";
 			}
-			
+
+
 			// previousSibling
-			if(u.ps(u.qs("div.ps .start", scene), "nops").className == "end") {
+			ps_li = u.qs("div.ps .start", scene);
+			ps_div = u.qs("div.ps div.c2", scene);
+			if(
+				"li.nops" == u.nodeId(u.ps(ps_li)).toLowerCase() &&
+				"li.jeps" == u.nodeId(u.ps(ps_li, {"exclude":".nops"})).toLowerCase() &&
+				"li.end" == u.nodeId(u.ps(ps_li, {"exclude":".nops","include":".end"})).toLowerCase() &&
+				"span.c2" == u.nodeId(u.ps(ps_div)).toLowerCase() &&
+				"span.c1" == u.nodeId(u.ps(ps_div, {"include":".c1"})).toLowerCase() &&
+				"div.c1" == u.nodeId(u.ps(ps_div, {"exclude":"span"})).toLowerCase() &&
+				"ul" == u.nodeId(u.ps(ps_div, {"exclude":"span,div"})).toLowerCase() &&
+				"span.c1" == u.nodeId(u.ps(ps_div, {"include":"span.c1"})).toLowerCase()			
+			) {
 				u.qs("div.ps").innerHTML = "previousSibling: correct";
 			}
 
+
 			// childNodes
-			if(u.cn(u.qs("div.cn", scene), "span").length == 2) {
+			cn_node = u.qs("div.cn", scene);
+			// u.bug(u.cn(cn_node, {"include":"span"}).length);
+			// u.bug(u.cn(cn_node, {"include":".c1"}).length);
+			// u.bug(u.cn(cn_node, {"include":"div.c1"}).length);
+			// u.bug(u.cn(cn_node, {"exclude":"span"}).length);
+			// u.bug(u.cn(cn_node, {"exclude":"span.c1"}).length);
+			if(
+				u.cn(cn_node, {"include":"span"}).length == 3 &&
+				u.cn(cn_node, {"include":".c1"}).length == 2 &&
+				u.cn(cn_node, {"include":"div.c1"}).length == 1 &&
+				u.cn(cn_node, {"exclude":"span"}).length == 4 &&
+				u.cn(cn_node, {"exclude":"span.c1"}).length == 6
+				
+			) {
+
 				u.qs("div.cn").innerHTML = "childNodes: correct";
+
 			}
 
 
@@ -228,14 +286,41 @@
 	<div class="qsatest correct"><span class="error">querySelectorAll</span></div>
 	<div class="error"><div class="type:1">getElement</div></div>
 	<div class="type:2 correct"><span class="error">getElements</span></div>
-	<div class="parentnode correct"><ul><li><span class="error">parentNode</span></li></ul></div>
+	<div class="parentnode correct"><ul class="u1"><li><ul class="u2"><li><span class="error">parentNode</span></li></ul></li></ul></div>
 
-	<div class="ns correct"><ul><li class="start"><span class="error">nextSibling</span></li><li class="nons"></li><li class="end"></li></ul></div>
-	<div class="ps correct"><ul><li class="end"><span class="error">previousSibling</span></li><li class="nops"></li><li class="start"></li></ul></div>
+	<div class="ns correct">
+		<ul>
+			<li class="start"><span class="error">nextSibling</span></li>
+			<li class="nons"></li>
+			<li class="jens"></li>
+			<li class="end"></li>
+		</ul>
+		<div class="c1"></div>
+		<span class="c1"></span>
+		<span class="c2"></span>
+		<div class="c2"></div>
+	</div>
+	<div class="ps correct">
+		<ul>
+			<li class="end"><span class="error">previousSibling</span></li>
+			<li class="jeps"></li>
+			<li class="nops"></li>
+			<li class="start"></li>
+		</ul>
+		<div class="c1"></div>
+		<span class="c1"></span>
+		<span class="c2"></span>
+		<div class="c2"></div>
+	</div>
+
 	<div class="cn correct">
 		<div class="error">childNodes</div>
 		<a class="error"><span>childNodes</span></a>
 		<span class="error">childNodes</span>
+		<div class="c1"></div>
+		<span class="c1"></span>
+		<span class="c2"></span>
+		<div class="c2"></div>
 	</div>
 	<div class="textcontent">
 		<!-- COMMENT -->

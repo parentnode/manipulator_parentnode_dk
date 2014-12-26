@@ -16,6 +16,7 @@
 		<li><a href="/tests/u-events-browser">Browser events</a></li>
 		<li><a href="/tests/u-flash">Flash</a></li>
 		<li><a href="/tests/u-form">Form (started)</a></li>
+		<li><a href="/tests/u-form">Form builder</a></li>
 		<li><a href="/tests/u-geometry">Geometry</a></li>
 		<li><a href="/tests/u-googleanalytics">Google Analytics (not started)</a></li>
 		<li><a href="/tests/u-gridmaster">Gridmaster (started)</a></li>
@@ -27,11 +28,12 @@
 		<li><a href="/tests/u-popup">Popup</a></li>
 		<li><a href="/tests/u-preloader">Preloader (started)</a></li>
 		<li><a href="/tests/u-request">Request</a></li>
-		<li><a href="/tests/u-scrollto">ScrollTo (started)</a></li>
+		<li><a href="/tests/u-scrollto">ScrollTo</a></li>
 		<li><a href="/tests/u-segment">Segment test (started)</a></li>
 		<li><a href="/tests/u-sequence">Sequence (not started)</a></li>
 		<li><a href="/tests/u-sortable">Sortable (started)</a></li>
 		<li><a href="/tests/u-string">String</a></li>
+		<li><a href="/tests/u-svg">SVG</a></li>
 		<li><a href="/tests/u-system">System</a></li>
 		<li><a href="/tests/u-timer">Timer</a></li>
 		<li><a href="/tests/u-template">Template (started)</a></li>
