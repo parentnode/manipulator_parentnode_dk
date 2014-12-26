@@ -1,107 +1,104 @@
 <style type="text/css">
-	.scene {width: 960px;}
 
 	.videos li {font-size: 13px; display: block;}
 
-	.test1 .videoplayer {padding-top: 30px; position: relative;}
-	.test1 .videoplayer video,
-	.test1 .videoplayer object {width: 720px; height: 360px; background: red;}
+	.videoplayer {position: relative; margin: 0 0 0 50px; border: 1px solid #000000; width: 720px; height: 360px;}
+	.videoplayer video,
+	.videoplayer object {width: 100%; height: 100%;}
 
 
-	.test1 .controls {position: absolute; left: 0; top: 0;}
-	.test1 .controls a {height: 20px; width: 100px; text-align: center; display: inline-block;}
-	.test1 .controls .playpause {background: green;}
-	.test1 .playing .controls .playpause {background: red;}
-	.test1 .controls .ff {background: blue;}
-	.test1 .controls .rw {background: yellow;}
-
-	.test1 .controls .playpause:before {content: "play";}
-	.test1 .controls .ff:before {content: "ff";}
-	.test1 .controls .rw:before {content: "rw";}
-	.test1 .playing .controls .playpause:before {content: "pause";}
-
-
-
-	.test2 {margin-top: 30px; border-top: 2px solid black; padding-top: 20px;}
-
-	.test2 .videoplayer {padding-top: 30px; position: relative;}
-	.test2 .videoplayer video,
-	.test2 .videoplayer object {width: 720px; height: 360px; background: red;}
-
-	.test2 .controls {position: absolute; left: 0; top: 0;}
-	.test2 .controls a {height: 20px; width: 100px; text-align: center; display: inline-block;}
-	.test2 .controls .playpause {background: green;}
-	.test2 .playing .controls .playpause {background: red;}
-	.test2 .controls .ff {background: blue;}
-	.test2 .controls .rw {background: yellow;}
-
-	.test2 .controls .playpause:before {content: "play";}
-	.test2 .controls .ff:before {content: "ff";}
-	.test2 .controls .rw:before {content: "rw";}
-	.test2 .playing .controls .playpause:before {content: "pause";}
+	.controls {position: absolute; left: 0; bottom: 0; width: 100%;}
+	.controls a {height: 23px; width: 100px; text-align: center; display: inline-block;}
+	.controls .playpause {background: green;}
+	.playing .controls .playpause {background: red;}
+	.controls .ff {background: blue;}
+	.controls .rw {background: yellow;}
+	.controls .playpause:before {content: "play"; color: white;}
+	.playing .controls .playpause:before {content: "pause";}
+	.controls .ff:before {content: "ff";}
+	.controls .rw:before {content: "rw";}
 </style>
 
 <script type="text/javascript">
+// testing extended controls setup
+
 	Util.Objects["test1"] = new function() {
+		this.init = function(div) {
+
+			div.player = u.videoPlayer();
+			div.player = u.ae(div, div.player);
+			div.player.load("/media/video/video_1.mov", {"playpause":true});
+			div.player.ended = function() {
+				this.play();
+			}
+		}
+	}
+
+
+	Util.Objects["test2"] = new function() {
+		this.init = function(div) {
+
+			div.player = u.videoPlayer({"playpause":true, "search":true});
+			div.player = u.ae(div, div.player);
+			div.player.load("/media/video/video_3.mov");
+		}
+	}
+
+
+	Util.Objects["test3"] = new function() {
+		this.init = function(div) {
+
+			div.player = u.videoPlayer({"playpause":true});
+			div.player = u.ae(div, div.player);
+
+
+			div.playlist = u.qsa(".videos li", div);
+
+			div.playlist[0].player = div.player;
+			u.ce(div.playlist[0]);
+			div.playlist[0].clicked = function() {
+				this.player.loadAndPlay(this.url, {"playpause":false, "search":false});
+			}
+
+			div.playlist[1].player = div.player;
+			u.ce(div.playlist[1]);
+			div.playlist[1].clicked = function() {
+				this.player.loadAndPlay(this.url, {"playpause":true, "search":false});
+			}
+
+			div.playlist[2].player = div.player;
+			u.ce(div.playlist[2]);
+			div.playlist[2].clicked = function() {
+				this.player.loadAndPlay(this.url, {"playpause":true, "search":true});
+			}
+
+		}
+
+	}
+
+
+	Util.Objects["test4"] = new function() {
 		this.init = function(scene) {
 
-			scene.player = u.videoPlayer();
+			scene.player = u.videoPlayer({"playpause":true, "search":true});
 			u.ae(scene, scene.player);
 
 
-			// player controls
-			scene.player.controls = u.ae(scene.player, "div", {"class":"controls"});
+			var progress = u.ae(scene.player, "div", {"class":"progress"});
+			progress.player = scene.player;
+			progress.player.progress = progress;
 
-			// set up playback controls
-			var playpause = u.ae(scene.player.controls, "a", {"class":"playpause"});
-			playpause.player = scene.player;
-			u.e.click(playpause);
-			playpause.clicked = function(event) {
-				this.player.togglePlay();
-			}
+			var src_path = u.ae(scene.player, "div", {"class":"src_path"});
+			src_path.player = scene.player;
+			src_path.player.src_path = src_path;
 
-			var rw = u.ae(scene.player.controls, "a", {"class":"rw"});
-			rw.player = scene.player;
-			rw.mousedowned = function(event) {
-//				u.bug("down")
-				this.t_rw = u.t.setTimer(this, this.mousedowned, 500);
-				this.player.rw();
-			}
-			u.e.addEvent(rw, "mousedown", rw.mousedowned);
-			rw.mouseupped = function(event) {
-//				u.bug("up")
-				u.t.resetTimer(this.t_rw);
-			}
-			u.e.addEvent(rw, "mouseup", rw.mouseupped);
-			u.e.addEvent(rw, "mouseout", rw.mouseupped);
-
-
-			var ff = u.ae(scene.player.controls, "a", {"class":"ff"});
-			ff.player = scene.player;
-			ff.mousedowned = function(event) {
-//				u.bug("down")
-				this.t_ff = u.t.setTimer(this, this.mousedowned, 500);
-				this.player.ff();
-			}
-			u.e.addStartEvent(ff, ff.mousedowned);
-			ff.mouseupped = function(event) {
-//				u.bug("up")
-				u.t.resetTimer(this.t_ff);
-			}
-			u.e.addEndEvent(ff, ff.mouseupped);
-			u.e.addEvent(ff, "mouseout", ff.mouseupped);
-
-
-			var playback_info = u.ae(scene.player.controls, "a", {"class":"playback_info"});
-			playback_info.player = scene.player;
-			playback_info.player.playback_info = playback_info;
 			scene.player.playing = function(event) {
-				u.bug("src:" + this.video.src);
+				this.src_path.innerHTML = this.video.src;
 			}
 
 			scene.player.timeupdate = function(event) {
 				if(this.currentTime) {
-					this.playback_info.innerHTML = u.period("m:s.u", {"seconds":this.currentTime}) + "/" + u.period("m:s.u", {"seconds":this.duration});
+					this.progress.innerHTML = u.period("m:s.u", {"seconds":this.currentTime}) + "/" + u.period("m:s.u", {"seconds":this.duration});
 				}
 			}
 
@@ -114,101 +111,75 @@
 //			scene.player.loadeddata = function() {u.bug("loadeddata");}
 
 
-			// hide controls
-			scene.player.hideControls = function() {
-				// reset timer to avoid double actions
-				this.t_controls = u.t.resetTimer(this.t_controls);
-
-				u.a.transition(this.controls, "all 0.3s ease-out");
-				u.a.setOpacity(this.controls, 0);
-			}
-			// show controls
-			scene.player.showControls = function() {
-				// reset timer to keep visible
-				if(this.t_controls) {
-					this.t_controls = u.t.resetTimer(this.t_controls);
-				}
-				// fade up
-				else {
-					u.a.transition(this.controls, "all 0.5s ease-out");
-					u.a.setOpacity(this.controls, 1);
-				}
-
-				// auto hide after 1 sec of inactivity
-				this.t_controls = u.t.setTimer(this, this.hideControls, 1500);
-			}
-			// enable controls on mousemove
-			//u.e.addEvent(player, "mousemove", player.showControls);
-
-
 			scene.playlist = u.qsa(".videos li", scene);
 			for(i = 0; video = scene.playlist[i]; i++) {
 				video.player = scene.player;
-				u.link(video);
+				u.ce(video);
 				video.clicked = function() {
 					this.player.loadAndPlay(this.url);
 				}
 			}
 
-			scene.playlist[0].clicked();
+//			scene.playlist[0].clicked();
 		}
 
 	}
 
-
-
-	// testing extended controls setup
-	Util.Objects["test2"] = new function() {
-		this.init = function(div) {
-
-			div.player = u.videoPlayer({"playpause":true});
-
-			div.player = u.ae(div, div.player);
-
-
-			div.playlist = u.qsa(".videos li", div);
-			for(i = 0; video = div.playlist[i]; i++) {
-				video.player = div.player;
-				u.link(video);
-				if(i%2) {
-					video.clicked = function() {
-						this.player.loadAndPlay(this.url);
-					}
-				}
-				else {
-					video.clicked = function() {
-						this.player.loadAndPlay(this.url, {"playpause":false});
-					}
-				}
-			}
-
-			div.playlist[0].clicked();
-		}
-
-	}
-
-//	var obj = u.flash(document.createElement("div"), "/documentation/media/flash/videoplayer.swf")	
-	
 </script>
 
 <div class="scene i:test">
 	<h1>Video</h1>
 	<p>Videotest requires interaction and observation :)</p>
 
+
+	<hr />
+
+
 	<div class="test1 i:test1">
+		<h2>Looping video test</h2>
+		<p>Creates looping player</p>
+	</div>
+
+
+	<hr />
+
+
+	<div class="test2 i:test2">
+		<h2>Simple video player test</h2>
+		<p>Creates player with controls for play/pause/ff/rw</p>
+	</div>
+
+
+	<hr />
+
+
+	<div class="test3 i:test3">
+		<h2>Semi advanced video test</h2>
+		<p>Creates player with playlist and different controls for different videos</p>
+
 		<ul class="videos">
-			<li><a href="/media/video/video_1.mp4?fisk">Video 1</a></li>
-			<li><a href="/media/video/video_2.mp4">Video 2</a></li>
+			<li><a href="/media/video/video_1.mp4">Video 1 (with no controls)</a></li>
+			<li><a href="/media/video/video_2.mp4">Video 2 (with controls for play/pause)</a></li>
+			<li><a href="/media/video/video_3.mp4">Video 3 (with controls for play/pause/ff/rw)</a></li>
 		</ul>
 	</div>
 
-	<div class="test2 i:test2">
+
+	<hr />
+
+
+	<div class="test4 i:test4">
+		<h2>Advanced video test</h2>
+		<p>Creates player with playlist and custom callbacks</p>
+
 		<ul class="videos">
 			<li><a href="/media/video/video_1.mp4">Video 1</a></li>
 			<li><a href="/media/video/video_2.mp4">Video 2</a></li>
+			<li><a href="/media/video/video_3.mp4">Video 3</a></li>
 		</ul>
 	</div>
 
+
 </div>
 
-<div class="comments">Not working in IE 6</div>
+<div class="comments">Needs to be tested in IE 6</div>
