@@ -1,3 +1,27 @@
+<?php
+$page->bodyClass("changelog");
+$page->pageTitle("It's just improvements");
+?>
+<div class="scene changelog i:scene">
+
+	<h1>Milestones</h1>
+
+
+	<h2>Version 0.9.5</h2>
+	<p></p>
+	<ul class="changes">
+		<li></li>
+	</ul>
+
+
+	<h2>Version 1.0</h2>
+	<ul class="changes">
+		<li></li>
+	</ul>
+
+Implement TODOs and go through the mess below:
+
+
 JES todos:
 kør JS med strict js warnings i Firefox og ret uhensigtsmæssigheder 
 double check JSON parameter implementation and align it throughout library 
@@ -43,6 +67,60 @@ Image/Preloader - all segments
 Init - all segments 
 Video - all segments 
 
+
+TODO - v0.9:
+
+u.request - new parameter jsonp_callback
+
+
+Document and test
+u.e.addWindowResizeEvent
+u.e.removeWindowResizeEvent
+u.e.addWindowScrollEvent
+u.e.removeWindowScrollEvent
+
+u.k
+
+Must look at:
+dom update on u.a.transition?
+
+
+text editor
+video+audio player
+scrollTo
+template
+
+Preloader:
+max-processes parameter
+
+
+
+
+Maybe:
+sequence player
+textscaler
+sortable
+
+
+Update callback documentation
+
+// request - function name string
+// slideshow - function name string
+// sortable - function name string
+// movements - function name string
+// gridmaster - function name string
+// history - function name string
+
+// navigation - hardcoded function
+// scrollTo - hardcoded function
+// events - hardcoded function
+// form - hardcoded function
+// video - hardcoded function
+// audio - hardcoded function
+
+// timer - function reference
+// sequence - function reference
+// preloader - function reference
 
 
 
@@ -111,3 +189,5 @@ Maybe put clicks and drags and multitouch in separate files with independent res
 KEY
 
 .addAction(key, action)
+
+</div>

@@ -1,3 +1,7 @@
+<?php
+$page->bodyClass("demo");
+$page->pageTitle("Manipulator demonstration");
+?>
 <div class="scene">
 
 	<h1>Demo</h1>

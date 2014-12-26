@@ -105,7 +105,8 @@
 	
 <div class="scene speed">
 
-	<h1>Speed and performance test, comparing Native JS, Manipulator and jQuery</h1>
+	<h1>Performance</h1>
+	<h2>Speed and performance test, comparing Native JavaScript, Manipulator and jQuery.</h2>
 	<p>
 		This test injects 5 divs, <em>div.n1-5</em>, each containing one <em>div.m</em>.
 		Then 1050 new divs are injected into <span class="htmltag">div.n1 div.m</span>, with two classes 
@@ -119,6 +120,7 @@
 		how a library performs.
 	</p>
 
+	<hr />
 
 	<div class="native">
 		<h1>Native JavaScript</h1>
