@@ -59,7 +59,7 @@
 
 <div class="scene i:test">
 	<h1>Sortable</h1>
-	<p>Needs to be updated!!!</p>
+	<p>Sortable lists in various shades and colors.</p>
 
 
 	<h2>Simple one level</h2>
