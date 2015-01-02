@@ -1,16 +1,12 @@
 <style type="text/css">
 	.scene div {margin: 0 0 5px;}
-	.correct {background: green;}
+	.correct {background: green; color: #ffffff;}
 	.error {background: red;}
 </style>
 
 <script type="text/javascript">
 	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
-
-			
-
-
 
 
 			// test resetAllTimers
@@ -43,6 +39,15 @@
 			}
 			scene.div_test_timer = u.ae(scene, "div", ({"class":"error", "html":"setTimer: waiting"}));
 			u.t.setTimer(scene, scene.test_timer, 500);
+
+
+			scene.test_timer_name = function() {
+				u.sc(this.div_test_timer_name, "correct");
+				this.div_test_timer_name.innerHTML += "correct";
+			}
+			scene.div_test_timer_name = u.ae(scene, "div", ({"class":"error", "html":"setTimer callback to function name: "}));
+			u.t.setTimer(scene, "test_timer_name", 500);
+
 
 
 			// test resetTimer

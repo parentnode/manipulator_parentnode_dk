@@ -61,8 +61,12 @@
 									<h5>Options</h5>
 									<dl class="options">
 										<!-- specific options -->
-										<dt><span class="value">callback</span></dt>
-										<dd>Callback function when loading is done. Callback is executed on <span class="var">node</span></dd>
+										<dt><span class="value">loaded</span></dt>
+										<dd>Callback function name of loaded callback.</dd>
+										<dt><span class="value">loading</span></dt>
+										<dd>Callback function name of loading callback.</dd>
+										<dt><span class="value">waiting</span></dt>
+										<dd>Callback function name of waiting callback.</dd>
 									</dl>
 								</div>
 							</dd>

@@ -8,67 +8,6 @@
 		</div>
 		<div class="body">
 
-			<div class="function" id="Util.debugURL">
-				<div class="header">
-					<h3>Util.debugURL</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.debugURL</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Boolean</span> = Util.debugURL();</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>
-							Is the current url a test-url? Does it run on .local. The following functions only output 
-							to screen or console if site is running on valid test-urls.
-						</p>
-						<p>To override the domain detection in other debugging functions, set <span class="var">u.bug_force = true;</span> in your script</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-						<p>No parameters</p>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Boolean</span> Debug url returns true, else false.</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>No examples</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<!-- list javascript functions used by function -->
-							<h5>JavaScript</h5>
-							<ul>
-								<li>Sting.match</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
-							<h5>Manipulator</h5>
-							<p>Nothing</p>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
 			<div class="function" id="Util.nodeId">
 				<div class="header">
 					<h3>Util.nodeId</h3>
@@ -360,6 +299,147 @@
 								<li>Util.debugURL</li>
 								<li>Util.nodeId</li>
 							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.exception">
+				<div class="header">
+					<h3>Util.exception</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.exception</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = Util.exception(
+								<span class="type">String</span> <span class="var">name</span>, 
+								<span class="type">Object</span> <span class="var">arguments</span>,
+								<span class="type">String</span> <span class="var">exception</span>
+							);</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Uses u.bug to generate standard exception output.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">name</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> The name of function exception occured in
+								</div>
+							</dd>
+							<dt><span class="var">arguments</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Object</span> The arguments object from the function causing the exception
+								</div>
+							</dd>
+							<dt><span class="var">exception</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> The exception message
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>arguments.callee.caller</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>Util.bug</p>
+							<p>Util.xInObject</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.debugURL">
+				<div class="header">
+					<h3>Util.debugURL</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.debugURL</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Boolean</span> = Util.debugURL();</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Is the current url a test-url? Does it run on .local. The following functions only output 
+							to screen or console if site is running on valid test-urls.
+						</p>
+						<p>To override the domain detection in other debugging functions, set <span class="var">u.bug_force = true;</span> in your script</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<p>No parameters</p>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Boolean</span> Debug url returns true, else false.</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<ul>
+								<li>Sting.match</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<p>Nothing</p>
 						</div>
 
 					</div>

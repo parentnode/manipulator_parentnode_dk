@@ -12,7 +12,7 @@
 u.ga_domain = 'manipulator.parentnode.dk';</code>
 
 	<p>
-		Aside for built in tracking shorthand functions are available for custom tracking.
+		Aside from built in tracking, shorthand functions are available for custom tracking.
 	</p>
 
 

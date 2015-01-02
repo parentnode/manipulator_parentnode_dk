@@ -20,8 +20,6 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.date</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.date</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax">
 								<span class="type">String</span> = Util.date(

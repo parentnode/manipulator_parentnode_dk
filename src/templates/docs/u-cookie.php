@@ -29,7 +29,7 @@
 								<span class="type">Void</span> = Util.saveCookie(
 								<span class="type">String</span> <span class="var">name</span>, 
 								<span class="type">String</span> <span class="var">value</span> 
-								[, <span class="type">JSON</span> <span class="var">options</span>]
+								[, <span class="type">JSON</span> <span class="var">_options</span>]
 								);
 							</dd>
 						</dl>
@@ -56,7 +56,7 @@
 									<span class="type">String</span> Cookie value
 								</div>
 							</dd>
-							<dt><span class="var">options</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Additional cookie options
@@ -210,7 +210,7 @@
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.deleteCookie(
 									<span class="type">String</span> <span class="var">name</span>
-									[, <span class="type">JSON</span> <span class="var">options</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								);
 							</dd>
 						</dl>
@@ -231,7 +231,7 @@
 									<span class="type">String</span> Cookie name
 								</div>
 							</dd>
-							<dt><span class="var">options</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Additional cookie options

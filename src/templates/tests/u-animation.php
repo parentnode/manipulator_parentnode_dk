@@ -7,6 +7,9 @@
 		*display: block;
 	}
 
+
+	.aniframe {position: relative;}
+
 	.bgpos {background-image: url(/img/test-720x576.jpg); background-position: 0 0;}
 
 	.linear {top: 0;}
@@ -90,6 +93,56 @@
 	}
 
 	Util.Objects["test"] = new function() {
+		this.init = function(scene) {
+
+//			alert("te")
+//			u.bug(document.body.style.MozTransform + ", " + document.body.style.mozTransform)
+
+//			u.bug("Vendor:" + u.a.vendor("Transform") + ", " + u.a.vendor()+"Transform" + ", " + u.a.vendor("requestAnimationFrame"))
+
+			scene.a_ids = [];
+			var bn = u.qs(".aniframe", scene);
+			u.ce(bn);
+			bn.clicked = function() {
+
+
+				this.transitioned = function() {
+					// u.a.transition(this, "all linear 150ms");
+					// u.a.translate(this, 100, 50);
+				}
+				u.a.to(this, "all linear 150ms", {"left":"100px", "top":"300px", "fontSize": "100px"});
+
+				u.bug("Start animation");
+//				scene.a_ids.push(u.a.requestAnimationFrame(scene, "animate", 150));
+
+			}
+			
+			scene.animate = function(time) {
+
+				u.bug("Animate time:" + time)
+
+				// if(time > 250) {
+				// 	u.bug("Animate done")
+				// 	u.a.cancelAnimationFrame(this.a_ids.shift());
+				//
+				//
+				// 	// if(this.repeat < 2) {
+				// 	// 	u.bug("Restart animation:" + this.repeat);
+				// 	// 	this.repeat++;
+				// 	// 	this.a_id = u.a.requestAnimationFrame(this, "animate");
+				// 	// 	u.bug("this.a_id:" + scene.a_id)
+				// 	// }
+				// }
+
+	//				u.bug("time:" + time);
+			}
+
+
+
+		}
+	}
+
+	Util.Objects["1test"] = new function() {
 		this.init = function(scene) {
 
 //		alert("segment:" + u.segment());
@@ -538,6 +591,8 @@
 
 <div class="scene i:test">
 	<h1>Animation</h1>
+
+	<div class="aniframe">Aniframetest</div>
 
 	<!--div class="death_star">
 		<div id="darth_vader"></div>

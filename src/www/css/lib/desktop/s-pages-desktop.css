@@ -1,10 +1,28 @@
+/* FRONT */
+
+
+/* USED BY */
+#content .scene .usedby {min-width: 600px; margin-top: 20px; margin-bottom: -50px; padding-top: 5px; border-top: 1px solid #cccccc;}
+#content .scene .usedby h2 {display: none;}
+#content .scene .usedby ul { padding-bottom: 0;}
+#content .scene .usedby ul li {display: inline-block; width: 20%; background-position: center center; background-repeat: no-repeat; height: 150px; text-indent: -9999px;}
+#content .scene .usedby ul li.metro {background-image: url(/img/logos/metro.png); background-size: 70px auto;}
+#content .scene .usedby ul li.soulland {background-image: url(/img/logos/soulland.png); background-size: 70px auto;}
+#content .scene .usedby ul li.peoplegroup {background-image: url(/img/logos/peoplegroup.png);}
+#content .scene .usedby ul li.cphpix {background-image: url(/img/logos/cphpix.png);}
+#content .scene .usedby ul li.tuborg {background-image: url(/img/logos/tuborg.png);}
+
+
 /* DOWNLOAD */
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px; border: none;}
 
-/* OLDER */
-#content .scene.older {}
-#content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
+
+/* GETTING STARTED */
+#content .scene.gettingstarted {}
+#content .scene.gettingstarted ul.topics li.performance {padding-top: 20px; padding-bottom: 27px;}
+#content .scene.gettingstarted ul.topics li.browsersupport {padding-bottom: 27px;}
+
 
 
 /* DOCUMENTATION FRONTPAGE */
@@ -14,7 +32,6 @@
 #content .scene.docsindex .notes {display: none;}
 #content .scene.docsindex .tests {display: none;}
 
-
 /* FILES */
 #content .scene.docsindex .files {padding-top: 25px;}
 #content .scene.docsindex .files h2 {padding-bottom: 15px;}
@@ -23,12 +40,6 @@
 #content .scene.docsindex .files li {position: relative; padding: 5px; border-top: 1px solid #dedede;}
 #content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
 #content .scene.docsindex .files li p {font-size: 13px; color: #999999; padding: 0;}
-
-
-/* BROWSER SUPPORT */
-#content .scene.docsindex .browsersupport {padding-top: 25px;}
-#content .scene.docsindex .browsersupport h2 {padding-bottom: 15px;}
-
 
 /* SEARCH */
 #content .scene.docsindex .search {padding-top: 15px;}
@@ -50,6 +61,27 @@
 #content .scene.docsindex .search .results .function .definition dt {display: none;}
 
 
+
+/* OLDER */
+#content .scene.older {}
+#content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
+
+
+/* BROWSER SUPPORT */
+#content .scene.browsersupport {padding-top: 25px;}
+#content .scene.browsersupport h2 {padding-bottom: 15px;}
+
+
+/* CHANGELOG */
+#content .scene.changelog ul.changes {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
+#content .scene.changelog ul.changes li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
+
+
+/* MILESTONES */
+#content .scene.milestones ul.todo {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
+#content .scene.milestones ul.todo li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
+
+
 /* DOCUMENTATION PAGE */
 #content .scene.docpage .example code {top: 0;}
 #content .scene.docpage h2 {padding-bottom: 15px;}
@@ -63,7 +95,9 @@
 
 
 #content .scene.docpage .section.functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
-#content .scene.docpage .section.functions .function .header {}
+#content .scene.docpage .section.functions .function .header {position: relative;}
+#content .scene.docpage .section.functions .function .header svg {position: absolute; top: 5px; right: 50px; stroke: #999999; stroke-width: 3px;}
+
 #content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
 
 
@@ -79,16 +113,30 @@
 
 
 #content .scene.docpage .section.functions .function .body .example {padding: 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .example p {padding-bottom: 5px;}
+#content .scene.docpage .section.functions .function .body .example p {padding-bottom: 20px;}
 
+
+#content .scene.docpage .section.functions .function .body .uses {height: 20px; overflow: hidden; margin-bottom: 20px; position: relative;}
+#content .scene.docpage .section.functions .function .body .uses svg {position: absolute; top: 3px; left: 90px; stroke: #999999; stroke-width: 2px;}
 
 #content .scene.docpage .section.functions .function .body .uses .javascript {padding: 5px 0 0 20px;}
 #content .scene.docpage .section.functions .function .body .uses .manipulator {padding: 5px 0 0 20px;}
+#content .scene.docpage .section.functions .function .body .uses .manipulator ul {padding-bottom: 0;}
 
 
+#content .scene.docpage .section.files {padding-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #bbbbbb;}
+#content .scene.docpage .section.files .header {position: relative;}
+#content .scene.docpage .section.files .header svg {position: absolute; top: 10px; right: 50px; stroke: #999999; stroke-width: 3px;}
 
-#content .scene.docpage .section.files {padding-top: 25px;}
-#content .scene.docpage .section.segments {padding-top: 15px;}
+#content .scene.docpage .section.files .body {display: none;}
+
+
+#content .scene.docpage .section.segments {padding-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #bbbbbb;}
+#content .scene.docpage .section.segments .header {position: relative;}
+#content .scene.docpage .section.segments .header svg {position: absolute; top: 10px; right: 50px; stroke: #999999; stroke-width: 3px;}
+
+#content .scene.docpage .section.segments .body {display: none;}
+
 
 #content .scene.docpage dd {padding-bottom: 5px;}
 

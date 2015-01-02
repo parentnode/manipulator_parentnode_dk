@@ -8,11 +8,11 @@
 
 	<p>
 		This documentation cover utilities and tools of the Manipulator JavaScript library and 
-		framework.
+		framework. If you are new to Manipulator, check out <a href="/getting-started">getting started</a>.
 	</p>
 	<p>
-		For specific documentation on the framework see <a href="/docs/u-objects">Initializer Objects</a> 
-		and <a href="/docs/page-model">Page model</a>.
+		For specific documentation on understanding the framework see <a href="/pages/initializer-objects">Initializer Objects</a> 
+		and <a href="/pages/page-model">Page model</a>.
 	</p>
 	<p>
 		While utilities and tools are used to perform general JavaScript routines and HTML manipulation, 
@@ -83,7 +83,7 @@
 			</li>
 			<li>
 				<h3><a href="/docs/u-googleanalytics">Google Analytics</a></h3>
-				<p>In progress: Built-in Google Analytics tracking</p>
+				<p>Built-in Google Analytics tracking</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-history">History</a></h3>
@@ -94,8 +94,8 @@
 				<p>Manipulator module initializer</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-objects">Initializer Objects</a></h3>
-				<p>Manipulator HTML node extensions and flow controllers</p>
+				<h3><a href="/docs/u-keyboard">Keyboard</a></h3>
+				<p>Keyboard input and shortcut handling</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-math">Math</a></h3>
@@ -126,6 +126,10 @@
 				<p>Animated native scrolling to coordinate or Node.</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-sortable">Sortable</a></h3>
+				<p>Sort a list of nodes.</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-string">String</a></h3>
 				<p>String manipulation and random key generation.</p>
 			</li>
@@ -133,6 +137,13 @@
 				<h3><a href="/docs/u-system">System</a></h3>
 				<p>System and browser information</p>
 			</li>
+			<li>
+				<h3><a href="/docs/u-svg">SVG</a></h3>
+				<p>SVG creation</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-textscaler">Textscaler</a></h3>
+				<p>Scale text on window resize.</p>
 			<li>
 				<h3><a href="/docs/u-timer">Timer</a></h3>
 				<p>Timeouts and intervals.</p>

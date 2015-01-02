@@ -22,6 +22,7 @@
 		<li><a href="/tests/u-gridmaster">Gridmaster (started)</a></li>
 		<li><a href="/tests/u-history">History</a></li>
 		<li><a href="/tests/u-init">Init</a></li>
+		<li><a href="/tests/u-keyboard">Keyboard</a></li>
 		<li><a href="/tests/u-math">Math</a></li>
 		<li><a href="/tests/u-navigation">Navigation (not started)</a></li>
 		<li><a href="/tests/u-period">Period</a></li>
@@ -35,9 +36,9 @@
 		<li><a href="/tests/u-string">String</a></li>
 		<li><a href="/tests/u-svg">SVG</a></li>
 		<li><a href="/tests/u-system">System</a></li>
-		<li><a href="/tests/u-timer">Timer</a></li>
 		<li><a href="/tests/u-template">Template (started)</a></li>
-		<li><a href="/tests/u-textscaler">Textscaler (not started)</a></li>
+		<li><a href="/tests/u-textscaler">Textscaler</a></li>
+		<li><a href="/tests/u-timer">Timer</a></li>
 		<li><a href="/tests/u-url">URL</a></li>
 		<li><a href="/tests/u-video">Video</a></li>
 	</ul>

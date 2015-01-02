@@ -26,7 +26,7 @@
 								Util.request(
 									<span class="type">Node</span> <span class="var">node</span>
 									<span class="type">String</span> <span class="var">url</span>
-									[, <span class="type">JSON</span> <span class="var">settings</span> ]
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -66,7 +66,7 @@
 									<span class="type">String</span> url to make request to.
 								</div>
 							</dd>
-							<dt><span class="var">settings</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Optional - additional request settings.
@@ -96,7 +96,10 @@
 											Headers cannot be used with SCRIPT injection.
 										</dd>
 										<dt><span class="value">callback</span></dt>
-										<dd>Response custom callback function name</dd>
+										<dd>Response callback function name, default: response</dd>
+										<dt><span class="value">jsonp_callback</span></dt>
+										<dd>Jsonp requests callback function name parameter, default: callback</dd>
+
 									</dl>
 								</div>
 							</dd>
@@ -116,6 +119,7 @@
 							<dt>node.responseError(response)</dt>
 							<dd>if request fails</dd>
 						</dl>
+					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>

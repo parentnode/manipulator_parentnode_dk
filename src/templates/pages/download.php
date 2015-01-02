@@ -108,7 +108,7 @@ function findModules($file) {
 
 	<h2>Version history</h2>
 	<p>
-		Looking for <a href="/pages/older-versions">older versions</a> of Manipulator or <a href="/pages/changelog">the change log</a>?
+		Looking for <a href="/pages/older-versions">older versions</a> of Manipulator or the <a href="/pages/changelog">changelog</a>?
 	</p>
 	
 

@@ -425,7 +425,7 @@ u.querySelectorAll("li.item", list_node);</code>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.parentNode(
 									<span class="type">Node</span> <span class="var">node</span>
-									[, <span class="type">String</span> <span class="var">node_type</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								)
 							</dd>
 						</dl>
@@ -434,7 +434,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get first parentNode of node or first matching parent of <span class="var">node_type</span>.
+							Get first parentNode of node or first parent matching <span class="var">_options</span>.
 						</p>
 					</div>
 
@@ -448,11 +448,21 @@ u.querySelectorAll("li.item", list_node);</code>
 								</div>
 							</dd>
 			
-							<dt><span class="var">node_type</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> Optional, type of Node to look for.
+									<span class="type">JSON</span> Optional filters to include/exclude specific elements.
 								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">exclude</span></dt>
+										<dd>CSS-selector to exclude as parent node.</dd>
+										<dt><span class="value">include</span></dt>
+										<dd>CSS-selector to include as parent node.</dd>
+									</dl>
+								</div>
+
 							</dd>
 						</dl>
 					</div>
@@ -473,9 +483,25 @@ u.querySelectorAll("li.item", list_node);</code>
 &lt;/div&gt;
 &lt;script&gt;
 	var item = u.querySelector(".scene .item");
-	u.parentNode(item, "div");
+	u.parentNode(item, {"include":"div"});
 &lt;/script&gt;</code>
-							<p>Returns Node with class=scene</p>
+							<p>Returns Node <span class="htmltag">div.scene</span></p>
+						</div>
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;ul class=&quot;list&quot;&gt;
+		&lt;li class=&quot;item&quot;&gt;
+			&lt;ul class=&quot;list&quot;&gt;
+				&lt;li class=&quot;inner&quot;&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+&lt;script&gt;
+	var item = u.querySelector(".scene span");
+	u.parentNode(item, {"exclude":"li.inner", "include":"li"});
+&lt;/script&gt;</code>
+							<p>Returns Node <span class="htmltag">li.item</span></p>
 						</div>
 					</div>
 
@@ -514,7 +540,7 @@ u.querySelectorAll("li.item", list_node);</code>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.previousSibling(
 									<span class="type">Node</span> <span class="var">node</span> 
-									[, <span class="type">String</span> <span class="var">exclude</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								)
 							</dd>
 						</dl>
@@ -523,7 +549,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get previous sibling, not counting text nodes as siblings and ignoring Nodes matching exclude=className/nodeName
+							Get previous sibling, not counting text nodes as siblings and matching <span class="var">_options</span>
 						</p>
 					</div>
 
@@ -536,12 +562,22 @@ u.querySelectorAll("li.item", list_node);</code>
 									<span class="type">Node</span> node to find previous sibling of.
 								</div>
 							</dd>
-			
-							<dt><span class="var">exclude</span></dt>
+
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> Optional, classnames or tagnames to exclude.
+									<span class="type">JSON</span> Optional filters to include/exclude specific elements.
 								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">exclude</span></dt>
+										<dd>CSS-selector to exclude as sibling node.</dd>
+										<dt><span class="value">include</span></dt>
+										<dd>CSS-selector to include as sibling node.</dd>
+									</dl>
+								</div>
+
 							</dd>
 						</dl>
 					</div>
@@ -565,7 +601,7 @@ u.querySelectorAll("li.item", list_node);</code>
 	var footer = u.querySelector(".footer");
 	u.previousSibling(footer);
 &lt;/script&gt;</code>
-							<p>returns <span class="type">Node</span> with class=content</p>
+							<p>Returns Node <span class="htmltag">div.content</span></p>
 						</div>
 
 						<div class="example">
@@ -577,9 +613,9 @@ u.querySelectorAll("li.item", list_node);</code>
 
 &lt;script&gt;
 	var footer = u.querySelector(".footer");
-	u.previousSibling(footer, "content");
+	u.previousSibling(footer, {"exclude":"content"});
 &lt;/script&gt;</code>
-							<p>returns <span class="type">Node</span> with class=header</p>
+							<p>Returns Node <span class="htmltag">div.header</span></p>
 						</div>
 					</div>
 				
@@ -619,7 +655,7 @@ u.querySelectorAll("li.item", list_node);</code>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.nextSibling(
 									<span class="type">Node</span> <span class="var">node</span> 
-									[, <span class="type">String</span> <span class="var">exclude</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								)
 							</dd>
 						</dl>
@@ -628,7 +664,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get next sibling, not counting text nodes as siblings and ignoring Nodes matching exclude=className/nodeName
+							Get next sibling, not counting text nodes as siblings and matching <span class="var">_options</span>
 						</p>
 					</div>
 
@@ -641,11 +677,21 @@ u.querySelectorAll("li.item", list_node);</code>
 									<span class="type">Node</span> node to find next sibling of
 								</div>
 							</dd>
-							<dt><span class="var">exclude</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> Optional, classnames or tagnames to exclude
+									<span class="type">JSON</span> Optional filters to include/exclude specific elements.
 								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">exclude</span></dt>
+										<dd>CSS-selector to exclude as sibling node.</dd>
+										<dt><span class="value">include</span></dt>
+										<dd>CSS-selector to include as sibling node.</dd>
+									</dl>
+								</div>
+
 							</dd>
 						</dl>
 					</div>
@@ -669,7 +715,7 @@ u.querySelectorAll("li.item", list_node);</code>
 	var header = u.querySelector(".header");
 	u.nextSibling(header);
 &lt;/script&gt;</code>
-							<p>returns <span class="type">Node</span> with class=content</p>
+							<p>Returns Node <span class="htmltag">div.content</span></p>
 						</div>
 
 						<div class="example">
@@ -681,9 +727,9 @@ u.querySelectorAll("li.item", list_node);</code>
 
 &lt;script&gt;
 	var header = u.querySelector(".header");
-	u.nextSibling(header, "content");
+	u.nextSibling(header, {"exclude":".content"});
 &lt;/script&gt;</code>
-							<p>returns <span class="type">Node</span> with class=footer</p>
+							<p>Returns Node <span class="htmltag">div.footer</span></p>
 						</div>
 					</div>
 				
@@ -723,7 +769,7 @@ u.querySelectorAll("li.item", list_node);</code>
 							<dd class="syntax"><span class="type">Node</span> = 
 								Util.childNodes(
 									<span class="type">Node</span> <span class="var">node</span> 
-									[, <span class="type">String</span> <span class="var">exclude</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								)
 							</dd>
 						</dl>
@@ -732,7 +778,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Get childNodes, not counting text nodes and ignoring Nodes matching exclude=className/nodeName
+							Get childNodes of node, not counting text nodes and matching <span class="var">_options</span>.
 						</p>
 					</div>
 
@@ -745,11 +791,21 @@ u.querySelectorAll("li.item", list_node);</code>
 									<span class="type">Node</span> node to find childNodes of
 								</div>
 							</dd>
-							<dt><span class="var">exclude</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> Optional, classnames or tagnames to exclude
+									<span class="type">JSON</span> Optional filters to include/exclude specific elements.
 								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">exclude</span></dt>
+										<dd>CSS-selector to exclude as childnode node.</dd>
+										<dt><span class="value">include</span></dt>
+										<dd>CSS-selector to include as childnode node.</dd>
+									</dl>
+								</div>
+
 							</dd>
 						</dl>
 					</div>
@@ -771,9 +827,9 @@ u.querySelectorAll("li.item", list_node);</code>
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.childNodes(scene, "header");
+	u.childNodes(scene, {"exclude":".header"});
 &lt;/script&gt;</code>
-							<p>returns <span class="type">Array</span> two Nodes (div.content + div.footer)</p>
+							<p>returns <span class="type">Array</span> two Nodes <span class="htmltag">div.content</span> and <span class="htmltag">div.footer</span>.</p>
 						</div>
 					</div>
 
@@ -1445,7 +1501,8 @@ u.ie(header, nav);</code>
 						<h4>Description</h4>
 						<p>
 							Make <span class="type">node</span> clickable - adding click event (if Events module is included), and removing href 
-							from first <span class="domnode">a</span> found within <span class="type">node</span>. Value of <span class="attribute">href</span> is stored in 
+							from first <span class="htmltag">a</span> found within <span class="type">node</span> (or optionally in <span class="type">options.use</span>). 
+							Value of <span class="attribute">href</span> is stored in 
 							node.url. It applies <span class="value">link</span> class to node if it contains <span class="domnode">a</span> otherwise 
 							<span class="value">clickable</span> class is added.
 						</p>
@@ -1485,6 +1542,10 @@ u.ie(header, nav);</code>
 											Detects CMD/CTRL key, sending url to new tab/window. Detects page.navigate
 											function to redirect url to ajax navigation controller.
 										</dd>
+										<dt><span class="value">use</span></dt>
+										<dd>
+											<span class="value">HTML tag</span> to look for link in
+										</dd>
 									</dl>
 								</div>
 							</dd>
@@ -1519,6 +1580,24 @@ u.ie(header, nav);</code>
 	&lt;div class=&quot;header link&quot;&gt;&lt;h1&gt;&lt;a&gt;Index&lt;/a&gt;&lt;/h1&gt;&lt;/div&gt;
 	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code>
+						</div>
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;header&quot;&gt;
+		&lt;h1&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/h1&gt;
+		&lt;h2&gt;&lt;a href=&quot;default&quot;&gt;Index&lt;/a&gt;&lt;/h2&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var header = u.querySelector(".header");
+	u.clickableElement(header, {"use":"h2"});
+&lt;/script&gt;</code>
+
+							<p>
+								returns <span class="type">node</span> where node.url = "default", with applied click event listener
+							</p>
 						</div>
 					</div>
 
@@ -2334,8 +2413,8 @@ u.ie(header, nav);</code>
 					<div class="return">
 						<h4>Returns</h4>
 						<p>
-							Void - does not return anything, because it is impossible to tell if browser supports the given 
-							style.
+							Void - does not return anything, because it is impossible to tell if browser executed the update the given
+							property as expected.
 						</p>
 					</div>
 
@@ -2511,6 +2590,8 @@ u.ie(header, nav);</code>
 						<p>
 							Get computed style value for css property.
 						</p>
+						<p>
+							Accepts both JS and CSS syntax properties. Ie: backgroundImage or background-image.
 						<p>
 							Note: Some older browsers returns the specified value, whereas newer browser return the computed value, 
 							ie. widths specified with % will be returned as px, and backgrounds will be returned as rgb().

@@ -327,7 +327,7 @@
 									<h5>Options</h5>
 									<dl class="options">
 										<dt><span class="value">send_as</span></dt>
-										<dd>Define type of returned object. Default to regular GET string. Optional JSON, Object or custom type offered through u.f.customSend[send_as].</dd>
+										<dd>Define type of returned object. Default to regular GET string. Optional formdata, JSON, Object or custom type offered through u.f.customSend[send_as].</dd>
 										<dt><span class="value">ignore_inputs</span></dt>
 										<dd>Input classes to be ignored when collecting data</dd>
 									</dl>

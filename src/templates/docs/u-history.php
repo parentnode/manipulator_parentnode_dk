@@ -58,7 +58,7 @@
 							<dt><span class="var">callback</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Function</span> Callback function to notify of event
+									<span class="type">String</span> Callback function name to notify of url/hash change event
 								</div>
 							</dd>
 						</dl>

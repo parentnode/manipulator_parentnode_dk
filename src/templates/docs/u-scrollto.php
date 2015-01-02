@@ -23,6 +23,7 @@
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.scrollTo(
+									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">JSON</span> <span class="var">_options</span> 
 								);
 							</dd>
@@ -31,7 +32,7 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Scroll window to position of <span class="htmltag">node</span> or specified x,y coordinate.</p>
+						<p>Scroll node to position of <span class="htmltag">node</span> or specified x,y coordinate.</p>
 						<p>Cancels scroll animation if user attempts to scroll midway.</p>
 					</div>
 
@@ -39,6 +40,12 @@
 						<h4>Parameters</h4>
 
 						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to scroll
+								</div>
+							</dd>
 							<dt><span class="var">_option</span></dt>
 							<dd>
 								<div class="summary">
@@ -47,10 +54,12 @@
 								<div class="details">
 									<h5>Options</h5>
 									<dl class="options">
-										<dt><span class="value">node</span></dt>
-										<dd>Node to scroll to</dd>
 										<dt><span class="value">callback</span></dt>
 										<dd>Name of callback function on successful scroll (default: scrolledTo)</dd>
+										<dt><span class="value">callback_cancelled</span></dt>
+										<dd>Name of callback function on cancelled scroll (default: scrolledToCancelled)</dd>
+										<dt><span class="value">node</span></dt>
+										<dd>Node to scroll to</dd>
 										<dt><span class="value">x</span></dt>
 										<dd>X coordinate to scroll to</dd>
 										<dt><span class="value">y</span></dt>
@@ -94,6 +103,9 @@
 	u.scrollTo({"node":footer, "offset_y":100);
 &lt;/script&gt;</code>
 							<p>Scrolls to "footer" -100px.</p>
+						</div>
+						<div class="example">
+							<p><a href="/tests/u-scrollto">See the test page for extended example</a>.</p>
 						</div>
 					</div>
 

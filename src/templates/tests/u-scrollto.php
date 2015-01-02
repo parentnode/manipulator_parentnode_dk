@@ -35,7 +35,7 @@
 					var id = this.url.split("#")[1];
 					var to = u.qs("#"+id);
 
-					u.scrollTo({"node":to, "offset_y":100});
+					u.scrollTo(window, {"node":to, "offset_y":100});
 				}
 			}
 
@@ -46,13 +46,13 @@
 				node.clicked = function(event) {
 
 					if(u.hc(this, "top")) {
-						u.scrollTo({"x":0, "y": 0});
+						u.scrollTo(window, {"x":0, "y": 0});
 					}
 					else if(u.hc(this, "middle")) {
-						u.scrollTo({"x":u.htmlW()/2 - u.browserW()/2, "y": u.htmlH()/2 - u.browserH()/2});
+						u.scrollTo(window, {"x":document.body.scrollWidth/2 - u.browserW()/2, "y": u.htmlH()/2 - u.browserH()/2});
 					}
 					else if(u.hc(this, "bottom")) {
-						u.scrollTo({"x":u.htmlW(), "y": u.htmlH()});
+						u.scrollTo(window, {"x":document.body.scrollWidth, "y": u.htmlH()});
 					}
 
 				}
@@ -66,7 +66,7 @@
 					var id = this.url.split("#")[1];
 					var to = u.qs("#"+id);
 
-					u.scrollTo({"node":to, "offset_y":100});
+					u.scrollTo(window, {"node":to, "offset_y":100});
 				}
 			}
 		}

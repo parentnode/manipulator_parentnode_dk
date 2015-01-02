@@ -24,7 +24,7 @@
 							<dd class="syntax"><span class="type">Number</span> = 
 								Util.Timer.setTimer(
 									<span class="type">Node</span> <span class="var">node</span>, 
-									<span class="type">Function</span> <span class="var">action</span>,
+									<span class="type">Function|String</span> <span class="var">action</span>,
 									<span class="type">Number</span> <span class="var">timeout</span>
 								);
 							</dd>
@@ -49,7 +49,7 @@
 							<dt><span class="var">action</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Function</span> Function to execute on timeout
+									<span class="type">Function|Strubg</span> Function or name of function to execute on timeout
 								</div>
 							</dd>
 							<dt><span class="var">timeout</span></dt>

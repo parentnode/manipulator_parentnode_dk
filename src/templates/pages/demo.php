@@ -1,6 +1,6 @@
 <?php
-$page->bodyClass("demo");
-$page->pageTitle("Manipulator demonstration");
+$this->bodyClass("demo");
+$this->pageTitle("Manipulator demonstration");
 ?>
 <div class="scene">
 

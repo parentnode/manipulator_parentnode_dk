@@ -1,193 +1,178 @@
 <?php
-$page->bodyClass("changelog");
-$page->pageTitle("It's just improvements");
+$this->bodyClass("docs");
+$this->pageTitle("Where we are heading ...");
 ?>
-<div class="scene changelog i:scene">
+<div class="scene milestones i:scene">
 
 	<h1>Milestones</h1>
+	<p>
+		The core functionality of Manipulator is final and is already implemented across
+		a multitude of websites. The further development of Manipulator is focused on syntax
+		alignment, performance optimization, extending the advanced feature set and minor
+		bug-fixing.
+	</p>
+	<p>
+		Below you'll find the current roadmap for reaching version 1.
+	</p>
 
 
 	<h2>Version 0.9.5</h2>
-	<p></p>
-	<ul class="changes">
-		<li></li>
+
+	<h3>General</h3>
+	<ul class="todo">
+		<li>Test entire library using strict warnings to identify any undeclared variables</li>
+		<li>Align callback syntax and methodology across all functions.</li>
+		<li>Add general "getting started" examples</li>
+		<li>Add page model introduction and documentation</li>
 	</ul>
+
+	<h4>Callback alignment status:</h4>
+	<p>
+		The preferred method is "function name string"-parameters as primary method, with an optional
+		function reference as an additional option. Update remaining functions using function references 
+		or hardcoded callbacks:
+	</p>
+	<ul>
+		<li>request - function name string</li>
+		<li>slideshow - function name string</li>
+		<li>sortable - function name string</li>
+		<li>movements - function name string</li>
+		<li>gridmaster - function name string</li>
+		<li>history - function name string</li>
+		<li>scrollTo - function name string</li>
+		<li>preloader - function name string</li>
+		<li>timer - function reference or function name string (better to support both methods for timer)</li>
+	</ul>
+	<ul>
+		<li>navigation - hardcoded function</li>
+		<li>events - hardcoded function</li>
+		<li>form - hardcoded function</li>
+		<li>video - hardcoded function</li>
+		<li>audio - hardcoded function</li>
+	</ul>
+	<ul>
+		<li>sequence - function reference</li>
+	</ul>
+
+
+	<h3>Animation</h3>
+	<ul class="todo">
+		<li>Dom update on u.a.transition?</li>
+		<li>Implement custom transition methods (Manipulator:easeIn4, Manipulator:bounce, etc)</li>
+		<li>Replace timerbased fallback with animation frame</li>
+	</ul>
+
+	<h3>Events</h3>
+	<ul class="todo">
+		<li>Mouseover and mouseout events (and touch equivalent) shorthand functions</li>
+		<li>Doubleclick for IE8 (it does not allow for two mousedown events, probably reserved for built-in dblclick)</li>
+		<li>Make initial speed calculation better - maybe use two moveevents before calculating start speed (direction)</li>
+	</ul>
+
+	<h3>Form</h3>
+	<ul class="todo">
+		<li>Dropdown (autocomplete input, with select features)</li>
+		<li>Designed checkbox (add interaction classes for easy visualisation)</li>
+		<li>Designed radiobutton (add interaction classes for easy visualisation)</li>
+	</ul>
+
+	<h3>Preloader</h3>
+	<ul class="todo">
+		<li>Max-processes parameter</li>
+		<li>Return individual queues instead of global loader queue? Pros/cons evaluation.</li>
+		<li>Implement progress callbacks</li>
+	</ul>
+
+	<h3>Sortable</h3>
+	<ul class="todo">
+		<li>Update nesting drag'n'drop detection</li>
+	</ul>
+
+	<h3>Template</h3>
+	<ul class="todo">
+		<li>Test, documentation and release</li>
+	</ul>
+
+
 
 
 	<h2>Version 1.0</h2>
-	<ul class="changes">
-		<li></li>
+
+	<h3>Audio</h3>
+	<ul class="todo">
+		<li>desktop_light player out of BETA</li>
 	</ul>
 
-Implement TODOs and go through the mess below:
+	<h3>Detector</h3>
+	<ul class="todo">
+		<li>Simplified browser segmented detection, deduced from Detector API, implemented with Regular Expectations.</li>
+	</ul>
+
+	<h3>Layover</h3>
+	<ul class="todo">
+		<li>Should remove scrollbar and inject layover</li>
+		<li>Layover should remember scroll-position and disable all scrolling while page is in layover state</li>
+		<li>Layover should contain self-close function</li>
+		<li>Optional click outside overlay to close</li>
+		<li>Adapt early u-fullscreen features</li>
+	</ul>
+
+	<h3>Gridmaster</h3>
+	<ul class="todo">
+		<li>Finalize, add tests and documentation</li>
+	</ul>
+
+	<h3>Scroll</h3>
+	<ul class="todo">
+		<li>Complete native scroll override with scrolling transition</li>
+		<li>Custom scrollbar with drag'n'drop</li>
+		<li>Finalize, add tests and documentation</li>
+	</ul>
+
+	<h3>Sequence</h3>
+	<ul class="todo">
+		<li>Switch timer to Animation frame</li>
+		<li>Finalize, add tests and documentation</li>
+	</ul>
+
+	<h3>Slideshow</h3>
+	<ul class="todo">
+		<li>Extend callback options</li>
+		<li>Implement additional layout options</li>
+		<li>Finalize, add tests and documentation</li>
+	</ul>
+
+	<h3>Support</h3>
+	<ul class="todo">
+		<li>Provide JavaScript feature detection</li>
+		<li>Feature support test functions</li>
+	</ul>
+
+	<h3>Video</h3>
+	<ul class="todo">
+		<li>desktop_light player out of BETA</li>
+	</ul>
 
 
-JES todos:
-kør JS med strict js warnings i Firefox og ret uhensigtsmæssigheder 
-double check JSON parameter implementation and align it throughout library 
-u-form, add custom inits and validators (75% done) 
-u-events-dekstop_light - dblclick for IE8 (it does not allow for two mousedown events, probably reserved for built-in dblclick) 
-Change u-fullscreen to be independent of #page 
-Util.Notification - global notification handler 
-Add u-fullscreen-overlay (as alternative to u-fullscreen (modal) 
+	<h2>For consideration</h2>
+	<p>
+		Most of Manipulator has been created on a need-to basis. Whenever something is needed in a project,
+		we build the first version for that project. If it turns out to be a reoccuring need, it might end up
+		as an official function.
+	</p>
+	<p>
+		The following ideas have shown up along the way and are listed here to preserved initial thoughts for 
+		further refinement.
+	</p>
 
-WTF-EVENTS - make initial speed calculation better - IE use two moveevents before calculation start speed
-
-
-u.e.scroll - finalize, document and test 
-u-form - add JSON parameters to init, to make initialization more flexible 
-build a linking handler that detects cmd/ctrl keypress and opens link in a new window 
-Modals 
-Dropdown (autocomplete input)
-Scrollspy 
-
-Tooltips 
-Alerts (actions) 
-Checkbox 
-Radio 
-File upload (regular with styling) 
-File upload (drag'n'drop) 
-Carousels 
-Custom scrollbar 
-Twitter feed 
-Video - flash 
-Video - html5 fallback 
-Video - YouTube option 
-
-Docs todo:
-Audio 
-Video 
-
-Tests:
-Debug - all segments 
-Form - all segments 
-Google analytics - all segments 
-Hash - all segments 
-Image/Preloader - all segments 
-Init - all segments 
-Video - all segments 
-
-
-TODO - v0.9:
-
-u.request - new parameter jsonp_callback
-
-
-Document and test
-u.e.addWindowResizeEvent
-u.e.removeWindowResizeEvent
-u.e.addWindowScrollEvent
-u.e.removeWindowScrollEvent
-
-u.k
-
-Must look at:
-dom update on u.a.transition?
-
-
-text editor
-video+audio player
-scrollTo
-template
-
-Preloader:
-max-processes parameter
-
-
-
-
-Maybe:
-sequence player
-textscaler
-sortable
-
-
-Update callback documentation
-
-// request - function name string
-// slideshow - function name string
-// sortable - function name string
-// movements - function name string
-// gridmaster - function name string
-// history - function name string
-
-// navigation - hardcoded function
-// scrollTo - hardcoded function
-// events - hardcoded function
-// form - hardcoded function
-// video - hardcoded function
-// audio - hardcoded function
-
-// timer - function reference
-// sequence - function reference
-// preloader - function reference
-
-
-
-
-Objects
-
-Util = u (utilities)
-
-Util.Animation = u.a (animations)
-
-Util.Dom = u.d (dom query and manipulation functions)
-
-Util.Events = u.e (events base)
-- basics (just event handlers)
-- clicks (click, dbl-click, hold)
-- drags (drag, swipe, overlap)
-- multitouch (pinch, zoom, rotate)
-
-Util.Events.Key = u.e.key (onkeydown)
-
-Util.Form = u.f (form)
-
-Util.History = u.h (ajax navigation history)
-
-Util.Image = u.i (image preloading)
-
-Util.Timer = u.t (timeouts and interval)
-
-
-
-- Util.Sort? - sortable? Requires drag and thus has multiple functions required to work
-
-
-Sortable (rearrange/sort by/search)
-
-Support - (support test functions)
-
-
-
-
-Layover - simple function
-Should remove scrollbar and inject layover
-Layover remembers scroll-position
-
-Layover contains self-close function
-
-Returns layover 
-
-Sortby - simple function
-Get settings from classnames
-
-
-Autocomplete - simple function
-
-
-
-U.EVENTS
-- load, over, out, progress, ?
-
-
-Reset
-Make smarter reset function
-
-Maybe put clicks and drags and multitouch in separate files with independent resets?
-
-KEY
-
-.addAction(key, action)
+	<ul class="todo">
+		<li>Sortby - simple function to sort rows/columns in structure (table/div+span/li etc)</li>
+		<li>Autocomplete - simple function making server request and storing data for quick match return</li>
+		<li>Notification object - global notification handler (prototype implemented in Janitor Admin interface)</li>
+		<li>Modal window?</li>
+		<li>Scrollspy - primarily a matter of defining a likable syntax for ease of mapping functions to scroll positions</li>
+		<li>Tooltips - syntax approach of mapping extended information to nodes, preferably with some SEO considerations.</li>
+		<li>Alerts and warnings - advanced visual feedback for better usabillity</li>
+	</ul>
 
 </div>

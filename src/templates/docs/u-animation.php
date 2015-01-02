@@ -966,38 +966,46 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.variant">
+			<div class="function" id="Util.Animation.vendor">
 				<div class="header">
-					<h3>Util.Animation.variant</h3>
+					<h3>Util.Animation.vendor</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.variant</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.variant</dd>
+							<dd class="name">Util.Animation.vendor</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">String</span> = 
-								Util.Animation.variant();
+								Util.Animation.vendor(
+									<span class="type">String</span> <span class="var">method</span>
+								);
 							</dd>
 						</dl>
 					</div>
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Get implementation variant prefix - Moz, webkit, ms, o etc.</p>
+						<p>Get implementation vendor prefix - Moz, webkit, ms, o etc.</p>
+						<p>Pass specific method to get the full vendor version.
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>No parameters</p>
+						<dl class="parameters">
+							<dt><span class="var">method</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> method to get vendor specific version of
+								</div>
+							</dd>
+						</dl>
 					</div>
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p><span class="type">String</span> string containing variant prefix</p>
+						<p><span class="type">String</span> string containing vendor prefix, or vendor specific method.</p>
 					</div>
 
 					<div class="examples">

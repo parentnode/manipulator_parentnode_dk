@@ -114,11 +114,37 @@ Util.Objects["docpage"] = new function() {
 		// loop through functions in page
 		var functions = u.qsa(".function", scene);
 		for(i = 0; func = functions[i]; i++) {
+
+
+			// FUNCTION HEADER
+
 			func._header = u.qs(".header", func);
+
+			u.svg({
+				"node":func._header,
+				"width": "15px",
+				"height": "12px",
+				"shapes":[
+					{
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":7,
+						"y2":12
+					},
+					{
+						"type":"line",
+						"x1":6,
+						"y1":12,
+						"x2":12,
+						"y2":0
+					}
+				]
+			});
+
 			func._header._func = func;
 			func._body = u.qs(".body", func);
 			func._body._func = func;
-
 
 			u.e.click(func._header);
 			func._header.clicked = function(event) {
@@ -144,6 +170,52 @@ Util.Objects["docpage"] = new function() {
 				func._header.clicked();
 			}
 
+
+
+			// FUNCTION USES
+
+			func._uses = u.qs(".uses", func);
+			func._uses._func = func;
+
+			u.svg({
+				"node":func._uses,
+				"width": "15px",
+				"height": "12px",
+				"shapes":[
+					{
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":5,
+						"y2":9
+					},
+					{
+						"type":"line",
+						"x1":4,
+						"y1":9,
+						"x2":8,
+						"y2":0
+					}
+				]
+			});
+
+			u.e.click(func._uses);
+			func._uses.clicked = function(event) {
+
+				if(u.hc(this, "open")) {
+
+					u.as(this, "height", "20px");
+					u.rc(this, "open");
+				}
+				else {
+
+					u.as(this, "height", "auto");
+					u.ac(this, "open");
+				}
+			}
+
+
+
 		}
 
 		// is specific function stated in url
@@ -160,16 +232,101 @@ Util.Objects["docpage"] = new function() {
 
 
 
+		// FILES
 
-		// add test link to segments section
-		// var segments = u.qs(".segments", scene);
-		// var test = u.ae(segments, "div", {"class":"test", "html":"Test utilities"});
-		// u.e.click(test);
-		// test.clicked = function() {
-		// 	location.href = "/tests/" + location.href.split("/").pop();
-		// }
+		scene._files = u.qs("div.files", scene);
 
-//		alert("fis")
+		scene._files._header = u.qs("div.header", scene._files);
+		scene._files._header._files = scene._files;
+
+		scene._files._body = u.qs("div.body", scene._files);
+		scene._files._body._files = scene._files;
+
+		u.svg({
+			"node":scene._files._header,
+			"width": "15px",
+			"height": "12px",
+			"shapes":[
+				{
+					"type":"line",
+					"x1":1,
+					"y1":0,
+					"x2":7,
+					"y2":12
+				},
+				{
+					"type":"line",
+					"x1":6,
+					"y1":12,
+					"x2":12,
+					"y2":0
+				}
+			]
+		});
+
+		u.e.click(scene._files._header);
+		scene._files._header.clicked = function(event) {
+
+			if(u.hc(this._files, "open")) {
+
+			u.as(this._files._body, "display", "none");
+				u.rc(this._files, "open");
+			}
+			else {
+
+				u.as(this._files._body, "display", "block");
+				u.ac(this._files, "open");
+			}
+		}
+
+
+
+		// SEGMENTS
+
+		scene._segments = u.qs("div.segments", scene);
+
+		scene._segments._header = u.qs("div.header", scene._segments);
+		scene._segments._header._segments = scene._segments;
+
+		scene._segments._body = u.qs("div.body", scene._segments);
+		scene._segments._body._segments = scene._segments;
+
+		u.svg({
+			"node":scene._segments._header,
+			"width": "15px",
+			"height": "12px",
+			"shapes":[
+				{
+					"type":"line",
+					"x1":1,
+					"y1":0,
+					"x2":7,
+					"y2":12
+				},
+				{
+					"type":"line",
+					"x1":6,
+					"y1":12,
+					"x2":12,
+					"y2":0
+				}
+			]
+		});
+
+		u.e.click(scene._segments._header);
+		scene._segments._header.clicked = function(event) {
+
+			if(u.hc(this._segments, "open")) {
+
+			u.as(this._segments._body, "display", "none");
+				u.rc(this._segments, "open");
+			}
+			else {
+
+				u.as(this._segments._body, "display", "block");
+				u.ac(this._segments, "open");
+			}
+		}
 		
 
 	}
