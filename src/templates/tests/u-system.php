@@ -214,11 +214,11 @@
 				u.ae(scene, "div", ({"class":"error", "html":"opacity support: error ("+u.support("opacity")+")"}));
 			}
 
-			if(u.support(u.a.variant()+"Transition")) {
-				u.ae(scene, "div", ({"class":"correct", "html":"transition support: correct ("+u.support(u.a.variant()+"Transition")+")"}));
+			if(u.support(u.a.vendor("Transition"))) {
+				u.ae(scene, "div", ({"class":"correct", "html":"transition support: correct ("+u.support(u.a.vendor("Transition"))+")"}));
 			}
 			else {
-				u.ae(scene, "div", ({"class":"error", "html":"transition support: error ("+u.support(u.a.variant()+"Transition")+")"}));
+				u.ae(scene, "div", ({"class":"error", "html":"transition support: error ("+u.support(u.a.vendor("Transition"))+")"}));
 			}
 
 		}
