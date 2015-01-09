@@ -112,8 +112,95 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 								<li>Util.Events.addEvent</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Animation.origin">
+				<div class="header">
+					<h3>Util.Animation.origin</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Animation.origin</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Animation.origin(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">Integer</span> <span class="var">x</span>,
+									<span class="type">Integer</span> <span class="var">y</span>
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Set CSS3 TransformOrigin to new coordinates x,y.</p>
+						<p>
+							New origin is saved in node._origin_x and node._origin_y.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to change TransformOrigin of
+								</div>
+							</dd>
+							<dt><span class="var">x</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> x-coordinate.
+								</div>
+							</dd>
+							<dt><span class="var">y</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> y-coordinate.
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<ul>
+								<li>Util.Animation.vendor</li>
+								<li>Util.Animation.support3d</li>
 							</ul>
 						</div>
 
@@ -218,7 +305,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 								<li>Util.Animation.support3d</li>
 							</ul>
 						</div>
@@ -317,7 +404,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -425,7 +512,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -520,7 +607,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -612,7 +699,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -702,7 +789,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -799,7 +886,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -889,7 +976,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
@@ -957,7 +1044,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.variant</li>
+								<li>Util.Animation.vendor</li>
 							</ul>
 						</div>
 
