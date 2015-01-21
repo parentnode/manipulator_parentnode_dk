@@ -28,9 +28,11 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-textscaler.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
@@ -38,11 +40,9 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-animation-to.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-devices.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-sequence.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-gridmaster.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-template.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-textscaler.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_ie.js"></script>');
 
