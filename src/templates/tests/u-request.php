@@ -98,6 +98,7 @@
 			}
 			node.responseError = function(response) {
 				u.ac(this, "correct");
+				u.ac(this._span, "correct");
 
 				if(response.exception) {
 					this.innerHTML += " EXCEPTION: " + response.exception;
