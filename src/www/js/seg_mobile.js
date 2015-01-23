@@ -1,6 +1,6 @@
 /*
 Manipulator v0.8 Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-12-08 07:51:38
+js-merged @ 2015-01-23 05:49:18
 */
 
 /*seg_mobile_include.js*/
@@ -10,9 +10,8 @@ wtf-js-merged @ 2014-12-08 07:51:38
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = 0.8;
-	u.bug = function() {};
-	u.nodeId = function() {};
+	u.version = 0.9;
+	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
 

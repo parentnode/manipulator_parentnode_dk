@@ -1,6 +1,6 @@
 /*
-Manipulator v0.8-light Copyright 2014 http://manipulator.parentnode.dk
-wtf-js-merged @ 2014-06-05 03:47:20
+Manipulator v0.9-light Copyright 2015 http://manipulator.parentnode.dk
+js-merged @ 2015-01-22 04:12:40
 */
 
 /*seg_basic_include.js*/
@@ -8,9 +8,8 @@ wtf-js-merged @ 2014-06-05 03:47:20
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = 0.8;
-	u.bug = function() {};
-	u.nodeId = function() {};
+	u.version = 0.9;
+	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
 

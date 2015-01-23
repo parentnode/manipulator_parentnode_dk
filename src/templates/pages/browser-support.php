@@ -19,6 +19,9 @@
 		<li>Mobile Internet Explorer 7+</li>
 		<li>Opera 8+</li>
 		<li>Netscape 7+</li>
+
+
+		<!--li>NetAccess 1+</li-->
 	</ul>
 
 	<h2>Disclaimer</h2>

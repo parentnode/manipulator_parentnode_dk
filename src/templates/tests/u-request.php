@@ -215,6 +215,8 @@
 			<input type="hidden" name="test" value="POST, to HTML: correct" />
 			<span>/ajax/post.php</span>
 		</div>
+
+
 		<div class="i:test method:post send:json">
 			<input type="hidden" name="test" value="POST, to JSON, send JSON: correct" />
 			<span>/ajax/post_json.json.php</span>
