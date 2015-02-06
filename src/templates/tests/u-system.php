@@ -221,6 +221,52 @@
 				u.ae(scene, "div", ({"class":"error", "html":"transition support: error ("+u.support(u.a.vendor("Transition"))+")"}));
 			}
 
+
+			// u.system
+			// Windows
+			if(u.system("windows")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"Windows system: correct ("+u.system("windows")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"Windows system: error ("+u.system("windows")+")"}));
+			}
+
+			// u.system
+			// Mac
+			if(u.system("mac")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"Mac system: correct ("+u.system("mac")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"Mac system: error ("+u.system("mac")+")"}));
+			}
+
+			// u.system
+			// Android
+			if(u.system("android")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"Android system: correct ("+u.system("android")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"Android system: error ("+u.system("android")+")"}));
+			}
+
+			// u.system
+			// Linux
+			if(u.system("linux")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"Linux system: correct ("+u.system("linux")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"Linux system: error ("+u.system("linux")+")"}));
+			}
+
+			// u.system
+			// iOS
+			if(u.system("ios")) {
+				u.ae(scene, "div", ({"class":"correct", "html":"iOS system: correct ("+u.system("ios")+")"}));
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error", "html":"iOS system: error ("+u.system("ios")+")"}));
+			}
+
 		}
 
 	}
