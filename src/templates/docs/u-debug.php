@@ -245,7 +245,10 @@
 							<dt class="name">Name</dt>
 							<dd class="name">Util.xInObject</dd>
 							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Void</span> = Util.xInObject(<span class="type">Object</span> <span class="var">object</span>);</dd>
+							<dd class="syntax"><span class="type">Void</span> = Util.xInObject(
+								<span class="type">Object</span> <span class="var">object</span>
+								[, <span class="type">JSON</span> <span class="var">_options</span>]
+							);</dd>
 						</dl>
 					</div>
 
@@ -262,6 +265,27 @@
 							<dd>
 								<div class="summary">
 									<span class="type">Object</span> object to output
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional, JSON object with options for object debugging.
+								</div>
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">return</span></dt>
+										<dd>
+											return debugging information as string instead of sending it to u.bug. Default false.
+										</dd>
+										<dt><span class="value">objects</span></dt>
+										<dd>
+											Explore nested objects by applying u.xInObject to nested objects (can cause infinite loops). Default false.
+										</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
