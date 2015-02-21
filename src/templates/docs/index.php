@@ -21,7 +21,7 @@
 
 	<div class="search"></div>
 
-	<div class="files">
+	<div class="files" id="library_files">
 
 		<h2>Library Index</h2>
 		<ul class="library">

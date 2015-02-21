@@ -1,28 +1,33 @@
+/*
+#ef002a - PRIMARY LIGHT
+#9b001c - PRIMARY DARK
+#cccccc - BORDER
+*/
+
 * {color: #9b001c;}
 
-body {background: #ffffff;}
-#header {background: #ffffff; z-index: 100;}
+body {}
 
 #header .logo {color: #ef002a;}
 #navigation ul {border-color: #cccccc;}
 #navigation ul li {color: #ef002a;}
 
 #content .scene a {color: #ef002a;}
-
 #content .scene hr {border-color: #cccccc;}
-#content .scene code {color: #333333;}
+
+#content ul.actions input.button.primary,
+#content ul.actions a.button.primary {background-color: #ef002a;}
+#content ul.actions input.button.primary:active,
+#content ul.actions a.button.primary:active {background-color: #9b001c;}
 
 #footer {border-color: #cccccc;}
 #footer p {color: #9b001c;}
 
 
-#content ul.actions input.button.primary,
-#content ul.actions a.button.primary {background-color: #9b001c;}
-#content ul.actions input.button.primary:hover,
-#content ul.actions a.button.primary:hover {background-color: #ef002a;}
-#content .scene.docpage .section.functions .function .body .callbacks dt {color: #9b001c;}
+/* LOCAL */
 
+.front #header .logo,
+.docs #navigation ul li.docs,
+.gettingstarted #navigation ul li.gettingstarted,
+.download #navigation ul li.download {color: #9b001c;}
 
-.front #navigation .front,
-.manifest #navigation ul li.manifest,
-.about #navigation ul li.about {color: #9b001c;}

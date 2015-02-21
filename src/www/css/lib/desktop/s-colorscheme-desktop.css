@@ -1,11 +1,12 @@
 /*
 #ef002a - PRIMARY LIGHT
 #9b001c - PRIMARY DARK
+#cccccc - BORDER
 */
 
 * {color: #9b001c;}
 
-body {background: #ffffff;}
+body {}
 
 #header .logo {color: #ef002a;}
 #navigation ul li {color: #ef002a;}
@@ -13,15 +14,12 @@ body {background: #ffffff;}
 #content .scene a,
 #content .scene dl.geo.active dd {color: #ef002a;}
 #content .scene hr {border-color: #cccccc;}
-#content .scene code {color: #333333;}
+
 #content ul.actions input.button.primary,
 #content ul.actions a.button.primary {background-color: #ef002a;}
-#content ul.actions input.button.primary:hover,
-#content ul.actions a.button.primary:hover {background-color: #9b001c;}
 
 #footer {border-color: #cccccc;}
 
-.terms_notification {background: #ffffff;}
 .terms_notification .accept,
 .terms_notification .details {color: #ef002a;}
 .terms_notification {border-color: #9b001c;}
@@ -33,5 +31,3 @@ body {background: #ffffff;}
 .docs #navigation ul li.docs,
 .gettingstarted #navigation ul li.gettingstarted,
 .download #navigation ul li.download {color: #9b001c;}
-
-#content .scene.docpage .section.functions .function .body .callbacks dt {color: #9b001c;}

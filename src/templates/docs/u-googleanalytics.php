@@ -169,7 +169,7 @@ u.ga_domain = 'manipulator.parentnode.dk';</code>
 		</div>
 	</div>
 
-	<div class="section files">
+	<div class="section includefiles">
 		<div class="header">
 			<h2>Files</h2>
 		</div>
@@ -194,7 +194,7 @@ u.ga_domain = 'manipulator.parentnode.dk';</code>
 		</div>
 	</div>
 
-	<div class="section segments">
+	<div class="section segmentsupport">
 		<div class="header">
 			<h2>Segment dependencies</h2>
 		</div>

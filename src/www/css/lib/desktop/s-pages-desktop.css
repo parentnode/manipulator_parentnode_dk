@@ -1,7 +1,7 @@
 /* FRONT */
 
 
-/* USED BY */
+/* USED BY (BRANDING FOOTER) */
 #content .scene .usedby {min-width: 600px; margin-top: 20px; margin-bottom: -50px; padding-top: 5px; border-top: 1px solid #cccccc;}
 #content .scene .usedby h2 {display: none;}
 #content .scene .usedby ul { padding-bottom: 0;}
@@ -24,44 +24,6 @@
 #content .scene.gettingstarted ul.topics li.browsersupport {padding-bottom: 27px;}
 
 
-
-/* DOCUMENTATION FRONTPAGE */
-#content .scene.docsindex {}
-#content .scene.docsindex h1+ul.actions {display: none;}
-
-#content .scene.docsindex .notes {display: none;}
-#content .scene.docsindex .tests {display: none;}
-
-/* FILES */
-#content .scene.docsindex .files {padding-top: 25px;}
-#content .scene.docsindex .files h2 {padding-bottom: 15px;}
-#content .scene.docsindex .files ul.library {width: 500px;}
-
-#content .scene.docsindex .files li {position: relative; padding: 5px; border-top: 1px solid #dedede;}
-#content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
-#content .scene.docsindex .files li p {font-size: 13px; color: #999999; padding: 0;}
-
-/* SEARCH */
-#content .scene.docsindex .search {padding-top: 15px;}
-#content .scene.docsindex .search.loading {background: transparent url(/img/gx_loader.gif) no-repeat 438px 68px;}
-#content .scene.docsindex .search h2 {padding-bottom: 15px;}
-#content .scene.docsindex .search .results .function {padding: 15px 0 0; border-top: 1px solid #dedede; cursor: pointer;}
-#content .scene.docsindex .search .results .function .header h3 {padding-bottom: 5px;}
-#content .scene.docsindex .search .results .function .definition dl {width: auto;}
-#content .scene.docsindex .search .results .function .definition dd {padding-bottom: 0; width: auto; display: block;}
-
-#content .scene.docsindex .search .results .function .parameters,
-#content .scene.docsindex .search .results .function .examples,
-#content .scene.docsindex .search .results .function .return,
-#content .scene.docsindex .search .results .function .uses,
-#content .scene.docsindex .search .results .function .description,
-#content .scene.docsindex .search .results .function .callbacks,
-#content .scene.docsindex .search .results .function .definition h4,
-#content .scene.docsindex .search .results .function .definition .name,
-#content .scene.docsindex .search .results .function .definition dt {display: none;}
-
-
-
 /* OLDER */
 #content .scene.older {}
 #content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
@@ -82,61 +44,4 @@
 #content .scene.milestones ul.todo li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
 
 
-/* DOCUMENTATION PAGE */
-#content .scene.docpage .example code {top: 0;}
-#content .scene.docpage h2 {padding-bottom: 15px;}
-
-
-/* FUNCTIONS */
-#content .scene.docpage .section.functions {}
-#content .scene.docpage .section.functions .function .body {display: none;}
-#content .scene.docpage .section.functions .header {cursor: pointer;}
-#content .scene.docpage .section.functions .body {border-bottom: 1px solid #bbbbbb;}
-
-
-#content .scene.docpage .section.functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
-#content .scene.docpage .section.functions .function .header {position: relative;}
-#content .scene.docpage .section.functions .function .header svg {position: absolute; top: 5px; right: 50px; stroke: #999999; stroke-width: 3px;}
-
-#content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
-
-
-#content .scene.docpage .section.functions .function .body .definition dd {white-space: nowrap;}
-
-
-#content .scene.docpage .section.functions .function .body .parameters dl.options {margin-left: -80px; width: 475px;}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dt {width: 130px;}
-
-#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 70px;}
-#content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700;}
-#content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
-
-
-#content .scene.docpage .section.functions .function .body .example {padding: 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .example p {padding-bottom: 20px;}
-
-
-#content .scene.docpage .section.functions .function .body .uses {height: 20px; overflow: hidden; margin-bottom: 20px; position: relative;}
-#content .scene.docpage .section.functions .function .body .uses svg {position: absolute; top: 3px; left: 90px; stroke: #999999; stroke-width: 2px;}
-
-#content .scene.docpage .section.functions .function .body .uses .javascript {padding: 5px 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .uses .manipulator {padding: 5px 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .uses .manipulator ul {padding-bottom: 0;}
-
-
-#content .scene.docpage .section.files {padding-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #bbbbbb;}
-#content .scene.docpage .section.files .header {position: relative;}
-#content .scene.docpage .section.files .header svg {position: absolute; top: 10px; right: 50px; stroke: #999999; stroke-width: 3px;}
-
-#content .scene.docpage .section.files .body {display: none;}
-
-
-#content .scene.docpage .section.segments {padding-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #bbbbbb;}
-#content .scene.docpage .section.segments .header {position: relative;}
-#content .scene.docpage .section.segments .header svg {position: absolute; top: 10px; right: 50px; stroke: #999999; stroke-width: 3px;}
-
-#content .scene.docpage .section.segments .body {display: none;}
-
-
-#content .scene.docpage dd {padding-bottom: 5px;}
 

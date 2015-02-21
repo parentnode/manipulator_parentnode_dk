@@ -1,93 +1,26 @@
+#content .scene .usedby {display: none;}
+
 /* DOWNLOAD */
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
 
-
-/* DOCUMENTATION FRONTPAGE */
-#content .scene.docsindex {}
-#content .scene.docsindex h1+ul.actions {display: none;}
-
-#content .scene.docsindex .notes {display: none;}
-#content .scene.docsindex .tests {display: none;}
-
-
-/* FILES */
-#content .scene.docsindex .files {padding-top: 25px;}
-#content .scene.docsindex .files h2 {padding-bottom: 15px;}
-#content .scene.docsindex .files ul {}
-
-#content .scene.docsindex .files li {position: relative;}
-#content .scene.docsindex .files li h3 {font-size: 16px; padding: 0;}
-#content .scene.docsindex .files li p {display: none;}
-
+/* GETTING STARTED */
+#content .scene.gettingstarted {}
+#content .scene.gettingstarted ul.topics li.performance {padding-top: 15px; padding-bottom: 22px;}
+#content .scene.gettingstarted ul.topics li.browsersupport {padding-bottom: 22px;}
 
 /* BROWSER SUPPORT */
-#content .scene.docsindex .browsersupport {padding-top: 25px;}
-#content .scene.docsindex .browsersupport h2 {padding-bottom: 15px;}
+#content .scene.browsersupport {padding-top: 25px;}
+#content .scene.browsersupport h2 {padding-bottom: 15px;}
 
+/* OLDER */
+#content .scene.older {}
+#content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
 
-/* SEARCH */
-#content .scene.docsindex .search {padding-top: 15px;}
-#content .scene.docsindex .search.loading {background: transparent url(/img/gx_loader.gif) no-repeat 438px 68px;}
-#content .scene.docsindex .search h2 {padding-bottom: 15px;}
-#content .scene.docsindex .search .results .function {padding: 15px 0 0; border-top: 1px solid #dedede; cursor: pointer;}
-#content .scene.docsindex .search .results .function .header h3 {padding-bottom: 5px;}
-#content .scene.docsindex .search .results .function .definition dl {width: auto;}
-#content .scene.docsindex .search .results .function .definition dd {padding-bottom: 0; width: auto; display: block;}
+/* CHANGELOG */
+#content .scene.changelog ul.changes {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
+#content .scene.changelog ul.changes li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
 
-#content .scene.docsindex .search .results .function .parameters,
-#content .scene.docsindex .search .results .function .examples,
-#content .scene.docsindex .search .results .function .return,
-#content .scene.docsindex .search .results .function .uses,
-#content .scene.docsindex .search .results .function .description,
-#content .scene.docsindex .search .results .function .callbacks,
-#content .scene.docsindex .search .results .function .definition h4,
-#content .scene.docsindex .search .results .function .definition .name,
-#content .scene.docsindex .search .results .function .definition dt {display: none;}
-
-
-/* DOCUMENTATION PAGE */
-#content .scene.docpage .example code {top: 0;}
-#content .scene.docpage h2 {padding-bottom: 15px;}
-
-
-/* FUNCTIONS */
-#content .scene.docpage .section.functions {}
-#content .scene.docpage .section.functions .function .body {display: none;}
-#content .scene.docpage .section.functions .header {cursor: pointer;}
-#content .scene.docpage .section.functions .body {border-bottom: 1px solid #bbbbbb;}
-
-
-#content .scene.docpage .section.functions .function {padding: 10px 0 0; overflow: hidden; border-top: 1px solid #bbbbbb; background: #ffffff;}
-#content .scene.docpage .section.functions .function .header {}
-#content .scene.docpage .section.functions .function .body {padding: 20px 0 0; border: none;}
-
-
-#content .scene.docpage .section.functions .function .body .definition dd {
-/*	white-space: nowrap;*/
-}
-
-
-#content .scene.docpage .section.functions .function .body .parameters dl.options {}
-#content .scene.docpage .section.functions .function .body .parameters dl.options dt {}
-
-
-#content .scene.docpage .section.functions .function .body .callbacks dl {padding-left: 30px;}
-#content .scene.docpage .section.functions .function .body .callbacks dt {width: auto; display: block; text-align: left; font-weight: 700;}
-#content .scene.docpage .section.functions .function .body .callbacks dd {width: auto; display: block;}
-
-
-#content .scene.docpage .section.functions .function .body .example {padding: 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .example p {padding-bottom: 5px;}
-
-
-#content .scene.docpage .section.functions .function .body .uses .javascript {padding: 5px 0 0 20px;}
-#content .scene.docpage .section.functions .function .body .uses .manipulator {padding: 5px 0 0 20px;}
-
-
-
-#content .scene.docpage .section.files {padding-top: 25px;}
-#content .scene.docpage .section.segments {padding-top: 15px;}
-
-#content .scene.docpage dd {padding-bottom: 5px;}
-
+/* MILESTONES */
+#content .scene.milestones ul.todo {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
+#content .scene.milestones ul.todo li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
