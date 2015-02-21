@@ -837,11 +837,12 @@
 		<ul class="actions">
 			<li><input type="button" value="buttonm name" name="button_name" class="button" /></li>
 			<li><input type="button" value="button" class="button" /></li>
-			<li><input type="submit" value="submit, name" name="submit_name" class="button" /></li>
-			<li><input type="submit" value="submit" class="button" /></li>
-			<li><input type="reset" value="reset, name" name="reset_name" class="button" /></li>
-			<li><input type="reset" value="reset" class="button" /></li>
-			<li><a href="#" class="button">a</a></li>
+			<li><input type="submit" value="submit, name, primary" name="submit_name" class="button primary" /></li>
+			<li><input type="submit" value="submit, primary" class="button primary" /></li>
+			<li><input type="reset" value="reset, name, secondary" name="reset_name" class="button secondary" /></li>
+			<li><input type="reset" value="reset, secondary" class="button secondary" /></li>
+			<li><a href="#" class="button">a default</a></li>
+			<li><a href="#" class="button primary">a primary</a></li>
 		</ul>
 
 

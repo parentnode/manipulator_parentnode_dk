@@ -29,7 +29,7 @@
 			</p>
 			<p>
 				Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it - with 
-				<a href="/getting-started/browser-support">IE6</a> support.
+				<a href="/pages/browser-support">IE6</a> support.
 			</p>
 			<ul class="actions">
 				<li><a href="/getting-started" class="button primary">Getting started</a></li>
@@ -41,7 +41,7 @@
 			</p>
 			<ul class="goal">
 				<li>Using the newest standards</li>
-				<li>Support for <a href="/getting-started/browser-support">all devices</a></li>
+				<li>Support for <a href="/pages/browser-support">all devices</a></li>
 				<li><a href="/pages/performance">Performance optimized</a> in all possible ways</li>
 				<li>Leveraging standard JavaScript knowledge<br />(not changing the way you write JavaScript)</li>
 				<li>Providing a solution to common cross-device/cross-browser problems</li>

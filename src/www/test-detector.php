@@ -1,3 +1,9 @@
+<?php
+$access_item = false;
+if(isset($read_access) && $read_access) {
+	return;
+}
+?>
 <!DOCTYPE html>
 <html lang="EN">
 <head>

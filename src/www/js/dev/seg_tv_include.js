@@ -14,8 +14,8 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor-desktop_light.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');

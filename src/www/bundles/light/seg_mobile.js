@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9-light Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-01-22 04:12:40
+js-merged @ 2015-02-21 08:46:44
 */
 
 /*seg_mobile_include.js*/
@@ -258,7 +258,7 @@ Util.clickableElement = u.ce = function(node, _options) {
 					window.open(this.url);
 				}
 				else {
-					if(typeof(page.navigate) == "function") {
+					if(typeof(page) != "undefined" && typeof(page.navigate) == "function") {
 						page.navigate(this.url);
 					}
 					else {
@@ -425,7 +425,7 @@ Util.nodeWithin = u.nw = function(node, scope) {
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
-	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && u.browser("explorer")) ? "mouse" : "touch";
+	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && navigator.userAgent.match(/Windows/i)) ? "mouse" : "touch";
 	this.kill = function(event) {
 		if(event) {
 			event.preventDefault();
@@ -1044,7 +1044,7 @@ Util.browser = function(model, version) {
 		}
 	}
 	else if(model.match(/\bfirefox\b|\bgecko\b/i)) {
-		if(window.navigator.mozIsLocallyAvailable) {
+		if(navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)) {
 			current_version = navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)[2];
 		}
 	}
@@ -1107,6 +1107,48 @@ Util.segment = function(segment) {
 	return u.current_segment;
 }
 Util.system = function(os, version) {
+	var current_version = false;
+	if(os.match(/\bwindows\b/i)) {
+		if(navigator.userAgent.match(/(Windows NT )(\d+.\d)/i)) {
+			current_version = navigator.userAgent.match(/(Windows NT )(\d+.\d)/i)[2];
+		}
+	}
+	else if(os.match(/\bios\b/i)) {
+		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)) {
+			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)[2].replace("_", ".");
+		}
+	}
+	else if(os.match(/\bandroid\b/i)) {
+		if(navigator.userAgent.match(/(Android )(\d+.\d)/i)) {
+			current_version = navigator.userAgent.match(/(Android )(\d+.\d)/i)[2];
+		}
+	}
+	else if(os.match(/\bmac\b/i)) {
+		if(navigator.userAgent.match(/(Macintosh; Intel Mac OS X )(\d+[._]{1}\d)/i)) {
+			current_version = navigator.userAgent.match(/(Macintosh; Intel Mac OS X )(\d+[._]{1}\d)/i)[2].replace("_", ".");
+		}
+	}
+	else if(os.match(/\blinux\b/i)) {
+		if(navigator.userAgent.match(/linux|x11/i)) {
+			current_version = true;
+		}
+	}
+	if(current_version) {
+		if(!version) {
+			return current_version;
+		}
+		else {
+			if(!isNaN(version)) {
+				return current_version == version;
+			}
+			else {
+				return eval(current_version + version);
+			}
+		}
+	}
+	else {
+		return false;
+	}
 }
 Util.support = function(property) {
 	if(document.documentElement) {
@@ -1234,6 +1276,9 @@ if(typeof(document.defaultView) == "undefined") {
 		// 
 		if(document.body.currentStyle && attribute != "opacity") {
 			attribute = attribute.replace(/(-\w)/g, function(word){return word.replace(/-/, "").toUpperCase()});
+			if(e.currentStyle[attribute] == "medium") {
+				return 0;
+			}
 			return e.currentStyle[attribute];
 		}
 		else if(document.body.currentStyle && attribute == "opacity" && e.currentStyle["filter"]) {

@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-01-22 04:12:47
+js-merged @ 2015-02-21 08:46:36
 */
 
 /*seg_tv_include.js*/
@@ -92,11 +92,22 @@ Util.bug = function(message, corner, color) {
 		}
 	}
 }
-Util.xInObject = function(object, return_string) {
+Util.xInObject = function(object, _options) {
 	if(u.debugURL()) {
+		var return_string = false;
+		var explore_objects = false;
+		if(typeof(_options) == "object") {
+			var _argument;
+			for(_argument in _options) {
+				switch(_argument) {
+					case "return"     : return_string               = _options[_argument]; break;
+					case "objects"    : explore_objects             = _options[_argument]; break;
+				}
+			}
+		}
 		var x, s = "--- start object ---\n";
 		for(x in object) {
-			if(object[x] && typeof(object[x]) == "object" && typeof(object[x].nodeName) != "string") {
+			if(explore_objects && object[x] && typeof(object[x]) == "object" && typeof(object[x].nodeName) != "string") {
 				s += x + "=" + object[x]+" => \n";
 				s += u.xInObject(object[x], true);
 			}
@@ -1042,7 +1053,7 @@ Util.clickableElement = u.ce = function(node, _options) {
 					window.open(this.url);
 				}
 				else {
-					if(typeof(page.navigate) == "function") {
+					if(typeof(page) != "undefined" && typeof(page.navigate) == "function") {
 						page.navigate(this.url);
 					}
 					else {
@@ -1209,7 +1220,7 @@ Util.nodeWithin = u.nw = function(node, scope) {
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
-	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && u.browser("explorer")) ? "mouse" : "touch";
+	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && navigator.userAgent.match(/Windows/i)) ? "mouse" : "touch";
 	this.kill = function(event) {
 		if(event) {
 			event.preventDefault();
@@ -2100,7 +2111,9 @@ Util.Form = u.f = new function() {
 		}
 		var actions = u.qsa(".actions li input[type=button],.actions li input[type=submit],.actions li a.button", form);
 		for(i = 0; action = actions[i]; i++) {
-			action.form = form;
+			if(!action.form) {
+				action.form = form;
+			}
 			this.activateButton(action);
 		}
 		if(form._debug_init) {
@@ -2957,11 +2970,11 @@ u.f.addAction = function(node, _options) {
 		}
 	}
 	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, {"include":"ul"});
-	if(!u.hc(p_ul, "actions")) {
+	if(!p_ul || !u.hc(p_ul, "actions")) {
 		p_ul = u.ae(node, "ul", {"class":"actions"});
 	}
 	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, {"include":"li"});
-	if(p_ul != p_li.parentNode) {
+	if(!p_li || p_ul != p_li.parentNode) {
 		p_li = u.ae(p_ul, "li", {"class":action_name});
 	}
 	else {
@@ -3055,7 +3068,7 @@ Util.History = u.h = new function() {
 		}
 		var urlChanged = function(event) {
 			var url = u.h.getCleanUrl(location.href);
-			if(event.state) {
+			if(event.state || (!event.state && event.path)) {
 				if(typeof(u.h.node[u.h.node.callback_urlchange]) == "function") {
 					u.h.node[u.h.node.callback_urlchange](url);
 				}
@@ -4196,7 +4209,7 @@ Util.browser = function(model, version) {
 		}
 	}
 	else if(model.match(/\bfirefox\b|\bgecko\b/i)) {
-		if(window.navigator.mozIsLocallyAvailable) {
+		if(navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)) {
 			current_version = navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)[2];
 		}
 	}
@@ -4259,6 +4272,48 @@ Util.segment = function(segment) {
 	return u.current_segment;
 }
 Util.system = function(os, version) {
+	var current_version = false;
+	if(os.match(/\bwindows\b/i)) {
+		if(navigator.userAgent.match(/(Windows NT )(\d+.\d)/i)) {
+			current_version = navigator.userAgent.match(/(Windows NT )(\d+.\d)/i)[2];
+		}
+	}
+	else if(os.match(/\bios\b/i)) {
+		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)) {
+			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)[2].replace("_", ".");
+		}
+	}
+	else if(os.match(/\bandroid\b/i)) {
+		if(navigator.userAgent.match(/(Android )(\d+.\d)/i)) {
+			current_version = navigator.userAgent.match(/(Android )(\d+.\d)/i)[2];
+		}
+	}
+	else if(os.match(/\bmac\b/i)) {
+		if(navigator.userAgent.match(/(Macintosh; Intel Mac OS X )(\d+[._]{1}\d)/i)) {
+			current_version = navigator.userAgent.match(/(Macintosh; Intel Mac OS X )(\d+[._]{1}\d)/i)[2].replace("_", ".");
+		}
+	}
+	else if(os.match(/\blinux\b/i)) {
+		if(navigator.userAgent.match(/linux|x11/i)) {
+			current_version = true;
+		}
+	}
+	if(current_version) {
+		if(!version) {
+			return current_version;
+		}
+		else {
+			if(!isNaN(version)) {
+				return current_version == version;
+			}
+			else {
+				return eval(current_version + version);
+			}
+		}
+	}
+	else {
+		return false;
+	}
 }
 Util.support = function(property) {
 	if(document.documentElement) {
@@ -4802,8 +4857,8 @@ if(!document.documentElement || document.documentElement.style[u.a.vendor("Trans
 				node.transitioned = null;
 			}
 		}
-		if(u.support(this.variant("Transition"))) {
-			node.style[this.variant("Transition")] = "none";
+		if(u.support(u.a.vendor("Transition"))) {
+			node.style[u.a.vendor("Transition")] = "none";
 		}
 	}
 	u.a.translate = function(node, x, y) {
@@ -5193,6 +5248,9 @@ if(typeof(document.defaultView) == "undefined") {
 		// 
 		if(document.body.currentStyle && attribute != "opacity") {
 			attribute = attribute.replace(/(-\w)/g, function(word){return word.replace(/-/, "").toUpperCase()});
+			if(e.currentStyle[attribute] == "medium") {
+				return 0;
+			}
 			return e.currentStyle[attribute];
 		}
 		else if(document.body.currentStyle && attribute == "opacity" && e.currentStyle["filter"]) {

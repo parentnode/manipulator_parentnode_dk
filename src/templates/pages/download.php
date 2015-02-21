@@ -51,7 +51,7 @@ function findModules($file) {
 
 
 	<ul class="actions">
-		<li><a href="/bundles/archive/v0_8.zip" class="button primary">Download 0.9 ZIP</a></li>
+		<li><a href="/bundles/archive/v0_9.zip" class="button primary">Download 0.9 ZIP</a></li>
 	</ul>
 
 
@@ -68,11 +68,6 @@ function findModules($file) {
 		The bundles are NOT minified. Minification saves some bytes, but renders code unreadable.
 		Using fewer includes, optimizing your HTML or simply writing better JavaScript are much more efficient ways 
 		of enhancing performance. If you really want it - use your own tool to minify.
-	</p>
-	<p>
-		Without further compression the full Manipulator library for a desktop computer is 79Kb.
-		If you are using webserver compression on JavaScript servings, the full Manipulator footprint 
-		for a desktop computer is reduced to about 25kb.
 	</p>
 
 

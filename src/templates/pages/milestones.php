@@ -20,6 +20,7 @@ $this->pageTitle("Where we are heading ...");
 
 	<h3>General</h3>
 	<ul class="todo">
+		<li>Test <em>page</em> variable missing availability in older browsers (FX 5 and others - used in u.ce)</li>
 		<li>Test entire library using strict warnings to identify any undeclared variables</li>
 		<li>Align callback syntax and methodology across all functions.</li>
 		<li>Add general "getting started" examples</li>

@@ -1,6 +1,6 @@
 /*
-Manipulator v0.8 Copyright 2014 http://manipulator.parentnode.dk
-js-merged @ 2015-01-23 05:49:18
+Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
+js-merged @ 2015-02-21 09:05:55
 */
 
 /*seg_mobile_light_include.js*/

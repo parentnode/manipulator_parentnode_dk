@@ -142,7 +142,7 @@
 		}
 	}
 
-	Util.Objects["1test"] = new function() {
+	Util.Objects["test"] = new function() {
 		this.init = function(scene) {
 
 //		alert("segment:" + u.segment());
