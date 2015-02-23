@@ -1,5 +1,5 @@
 <?php
-$this->bodyClass("download");
+$this->bodyClass("changelog");
 $this->pageTitle("It's just improvements");
 ?>
 <div class="scene changelog i:scene">
