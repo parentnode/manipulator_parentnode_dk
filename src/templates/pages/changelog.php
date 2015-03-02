@@ -6,6 +6,21 @@ $this->pageTitle("It's just improvements");
 
 	<h1>Changelog</h1>
 
+	<h2>Version 9.5</h2>
+	<p>
+		
+	</p>
+	<ul class="changes">
+		<li>
+			Improvements to u.svg. Now supporting id, class and title on svg element. Fixed bug in svg_cache, which
+			caused an error when using id for svg_cache.
+		</li>
+		<li>
+			u-form-builder now supporting text element (textarea).
+		</li>
+	</ul>
+
+
 	<h2>Version 9.0</h2>
 	<p>
 		Version 0.9 sees some major modules coming out of BETA strives to align both parameter and
