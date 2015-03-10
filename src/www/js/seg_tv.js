@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-02-21 09:20:59
+js-merged @ 2015-03-10 08:20:40
 */
 
 /*seg_tv_include.js*/
@@ -205,6 +205,57 @@ Util.Objects["page"] = new function() {
 window.onload = u.init;
 
 
+/*i-login-desktop_light.js*/
+Util.Objects["login"] = new function() {
+	this.init = function(scene) {
+		scene.resized = function() {
+		}
+		scene.scrolled = function() {
+		}
+		scene.ready = function() {
+			this._form = u.qs("form", this);
+			u.f.init(this._form);
+			page.cN.scene = this;
+		}
+		scene.ready();
+	}
+}
+
+
+/*i-signup-desktop_light.js*/
+Util.Objects["signup"] = new function() {
+	this.init = function(scene) {
+		scene.resized = function() {
+		}
+		scene.scrolled = function() {
+		}
+		scene.ready = function() {
+			this._form = u.qs("form", this);
+			u.f.init(this._form);
+			page.cN.scene = this;
+		}
+		scene.ready();
+	}
+}
+
+
+/*i-newsletter-desktop_light.js*/
+Util.Objects["newsletter"] = new function() {
+	this.init = function(scene) {
+		scene.resized = function() {
+		}
+		scene.scrolled = function() {
+		}
+		scene.ready = function() {
+			this._form = u.qs("form", this);
+			u.f.init(this._form);
+			page.cN.scene = this;
+		}
+		scene.ready();
+	}
+}
+
+
 
 /*i-documentation-desktop_light.js*/
 Util.Objects["docpage"] = new function() {
@@ -246,37 +297,41 @@ Util.Objects["docpage"] = new function() {
 			}
 		}
 		scene._files = u.qs("div.includefiles", scene);
-		scene._files._header = u.qs("div.header", scene._files);
-		scene._files._header._files = scene._files;
-		scene._files._body = u.qs("div.body", scene._files);
-		u.as(scene._files._body, "display", "none");
-		scene._files._body._files = scene._files;
-		u.e.click(scene._files._header);
-		scene._files._header.clicked = function(event) {
-			if(u.hc(this._files, "open")) {
-			u.as(this._files._body, "display", "none");
-				u.rc(this._files, "open");
-			}
-			else {
-				u.as(this._files._body, "display", "block");
-				u.ac(this._files, "open");
+		if(scene._files) {
+			scene._files._header = u.qs("div.header", scene._files);
+			scene._files._header._files = scene._files;
+			scene._files._body = u.qs("div.body", scene._files);
+			u.as(scene._files._body, "display", "none");
+			scene._files._body._files = scene._files;
+			u.e.click(scene._files._header);
+			scene._files._header.clicked = function(event) {
+				if(u.hc(this._files, "open")) {
+				u.as(this._files._body, "display", "none");
+					u.rc(this._files, "open");
+				}
+				else {
+					u.as(this._files._body, "display", "block");
+					u.ac(this._files, "open");
+				}
 			}
 		}
 		scene._segments = u.qs("div.segmentsupport", scene);
-		scene._segments._header = u.qs("div.header", scene._segments);
-		scene._segments._header._segments = scene._segments;
-		scene._segments._body = u.qs("div.body", scene._segments);
-		u.as(scene._segments._body, "display", "none");
-		scene._segments._body._segments = scene._segments;
-		u.e.click(scene._segments._header);
-		scene._segments._header.clicked = function(event) {
-			if(u.hc(this._segments, "open")) {
-			u.as(this._segments._body, "display", "none");
-				u.rc(this._segments, "open");
-			}
-			else {
-				u.as(this._segments._body, "display", "block");
-				u.ac(this._segments, "open");
+		if(scene._segments) {
+			scene._segments._header = u.qs("div.header", scene._segments);
+			scene._segments._header._segments = scene._segments;
+			scene._segments._body = u.qs("div.body", scene._segments);
+			u.as(scene._segments._body, "display", "none");
+			scene._segments._body._segments = scene._segments;
+			u.e.click(scene._segments._header);
+			scene._segments._header.clicked = function(event) {
+				if(u.hc(this._segments, "open")) {
+				u.as(this._segments._body, "display", "none");
+					u.rc(this._segments, "open");
+				}
+				else {
+					u.as(this._segments._body, "display", "block");
+					u.ac(this._segments, "open");
+				}
 			}
 		}
 	}

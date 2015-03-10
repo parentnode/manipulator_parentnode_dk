@@ -40,6 +40,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-animation-to.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-devices.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-fontpreloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-sequence.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-gridmaster.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-template.js"></script>');
