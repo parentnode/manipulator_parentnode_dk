@@ -1,5 +1,5 @@
 <?php
-$this->bodyClass("changelog");
+$this->bodyClass("gettingstarted");
 $this->pageTitle("It's just improvements");
 ?>
 <div class="scene changelog i:scene">
@@ -17,6 +17,13 @@ $this->pageTitle("It's just improvements");
 		</li>
 		<li>
 			u-form-builder now supporting text element (textarea).
+		</li>
+		<li>
+			Added new u-fontsready module (beta), for testing if webfonts are loaded.
+		</li>
+		<li>
+			Enhanced text-scaler to support height based scaling. Also allowed for simplyfied global min/max width/height 
+			and unit settings.
 		</li>
 	</ul>
 

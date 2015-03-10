@@ -1,3 +1,7 @@
+<?php
+$this->bodyClass("gettingstarted");
+$this->pageTitle("Browser support");
+?>
 <div class="scene browsersupport i:scene">
 
 	<h1>Browser support</h1>

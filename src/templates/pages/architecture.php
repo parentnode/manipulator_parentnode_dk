@@ -1,6 +1,6 @@
 <?php
-$this->bodyClass("architecture");
-$this->pageTitle("Where we are heading ...");
+$this->bodyClass("gettingstarted");
+$this->pageTitle("How it is put together ...");
 ?>
 <div class="scene architecture i:scene">
 

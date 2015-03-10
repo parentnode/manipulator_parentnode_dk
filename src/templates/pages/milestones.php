@@ -1,12 +1,12 @@
 <?php
-$this->bodyClass("docs");
+$this->bodyClass("gettingstarted");
 $this->pageTitle("Where we are heading ...");
 ?>
 <div class="scene milestones i:scene">
 
 	<h1>Milestones</h1>
 	<p>
-		The core functionality of Manipulator is final and is already implemented across
+		The core functionality of Manipulator is solid and already implemented across
 		a multitude of websites. The further development of Manipulator is focused on syntax
 		alignment, performance optimization, extending the advanced feature set and minor
 		bug-fixing.
@@ -25,6 +25,7 @@ $this->pageTitle("Where we are heading ...");
 		<li>Align callback syntax and methodology across all functions.</li>
 		<li>Add general "getting started" examples</li>
 		<li>Add page model introduction and documentation</li>
+		<li>Add "Fork me on Github" to this website</li>
 	</ul>
 
 	<h4>Callback alignment status:</h4>
