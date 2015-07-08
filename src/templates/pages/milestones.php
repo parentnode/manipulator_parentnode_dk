@@ -64,6 +64,11 @@ $this->pageTitle("Where we are heading ...");
 		<li>Replace timerbased fallback with animation frame</li>
 	</ul>
 
+	<h3>Cookie</h3>
+	<ul class="todo">
+		<li>Strip nodeCookie-identification for any init-values (or anything with : in it)</li>
+	</ul>
+
 	<h3>Events</h3>
 	<ul class="todo">
 		<li>Mouseover and mouseout events (and touch equivalent) shorthand functions</li>
@@ -76,6 +81,7 @@ $this->pageTitle("Where we are heading ...");
 		<li>Dropdown (autocomplete input, with select features)</li>
 		<li>Designed checkbox (add interaction classes for easy visualisation)</li>
 		<li>Designed radiobutton (add interaction classes for easy visualisation)</li>
+		<li>HTML Editor - test update/change callbacks</li>
 	</ul>
 
 	<h3>Preloader</h3>

@@ -35,6 +35,7 @@
 				<li><a href="/getting-started" class="button primary">Getting started</a></li>
 			</ul>
 
+
 			<h2>The goal behind designing the Manipulator library</h2>
 			<p>
 				The Manipulator library has be developed with the following priorities:
@@ -60,13 +61,13 @@
 	</div>
 
 	<div class="usedby">
-		<h2>Manipulator in business:</h2>
+		<h2>Selected clients</h2>
 		<ul>
-			<li class="metro">Copenhagen Metro</li>
-			<li class="tuborg">Tuborg</li>
-			<li class="soulland">Soulland</li>
-			<li class="cphpix">CPH PIX</li>
-			<li class="peoplegroup">Peoplegroup</li>
+			<li class="cphpix" title="CPH PIX">CPH PIX</li>
+			<li class="metro" title="Copenhagen Metro">Copenhagen Metro</li>
+			<li class="soulland" title="Soulland">Soulland</li>
+			<li class="tuborg" title="Tuborg">Tuborg</li>
+			<li class="distortion" title="Distortion">Distortion</li>
 		</ul>
 	</div>
 </div>

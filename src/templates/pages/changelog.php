@@ -6,7 +6,7 @@ $this->pageTitle("It's just improvements");
 
 	<h1>Changelog</h1>
 
-	<h2>Version 9.5</h2>
+	<h2>Version 9.5.aplha</h2>
 	<p>
 		
 	</p>
@@ -24,6 +24,15 @@ $this->pageTitle("It's just improvements");
 		<li>
 			Enhanced text-scaler to support height based scaling. Also allowed for simplyfied global min/max width/height 
 			and unit settings.
+		</li>
+		<li>
+			New transitioned callback model.
+		</li>
+		<li>
+			u.a.to animates svg paths and polygons.
+		</li>
+		<li>
+			New easing module added for custom easings.
 		</li>
 	</ul>
 

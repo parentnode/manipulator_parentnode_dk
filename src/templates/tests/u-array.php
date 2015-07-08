@@ -1,6 +1,6 @@
 <style type="text/css">
 	.scene div {margin: 0 0 5px;}
-	.correct {background: green;}
+	.correct {background: green; color: white;}
 	.error {background: red;}
 </style>
 

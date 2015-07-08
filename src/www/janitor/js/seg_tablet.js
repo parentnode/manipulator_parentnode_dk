@@ -4946,6 +4946,12 @@ u.f.textEditor = function(field) {
 	field.update = function() {
 		this.updateViewer();
 		this.updateContent();
+		if(this._input.form && typeof(this._input.form.updated) == "function") {
+			this._input.form.updated(this._input);
+		}
+		if(this._input.form && typeof(this._input.form.changed) == "function") {
+			this._input.form.changed(this._input);
+		}
 	}
 	field.updateViewer = function() {
 		var tags = u.qsa("div.tag", this);

@@ -5,6 +5,7 @@
 	<h2>Component tests</h2>
 	<ul>
 		<li><a href="/tests/u-animation">Animation (started)</a></li>
+		<li><a href="/tests/u-animation-to">Animation-to (started)</a></li>
 		<li><a href="/tests/u-array">Array</a></li>
 		<li><a href="/tests/u-audio">Audio</a></li>
 		<li><a href="/tests/u-cookie">Cookie</a></li>

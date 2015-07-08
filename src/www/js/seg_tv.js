@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-03-10 09:25:15
+js-merged @ 2015-07-08 04:19:29
 */
 
 /*seg_tv_include.js*/
@@ -12,6 +12,7 @@ js-merged @ 2015-03-10 09:25:15
 
 /*u-settings.js*/
 u.site_name = "Manipulator";
+u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork me on GitHub"};
 
 /*ga.js*/
 u.ga_account = 'UA-49740096-1';
