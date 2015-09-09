@@ -48,6 +48,10 @@
 							is the XMLHTTPRequest object used to attempt the request. If error is exception, the exception can be found in
 							request.exception.
 						</p>
+						<p>
+							See <a href="/docs/u-form#Util.Form.getParams">Util.Form.getParams</a> to know more about retrieving values from a form.
+						</p>
+
 					</div>
 
 					<div class="parameters">
@@ -77,13 +81,14 @@
 										<dt><span class="value">method</span></dt>
 										<dd>
 											POST, GET, PUT, PATCH, SCRIPT - default GET. SCRIPT causes a script injection in &lt;head&gt;
-											and responder must wrap result in callback function, which is appended to url as <span class="var">callback</span>
+											and responder must wrap result in callback function, which is appended to url as <span class="var">callback</span>.
+											Default: GET.
 										</dd>
 										<dt><span class="value">params</span></dt>
 										<dd>
 											Parameters to send. Can be string of parameters or JSON-object with variables.
 											If GET or SCRIPT request, JSON object is automatically converted to string of parameters and 
-											appended to url. When using POST, PUT or PATCH the JSON object will be sent as a JSON-string.
+											appended to url. When using POST, PUT or PATCH a JSON object will be sent as a JSON-string.
 										</dd>
 										<dt><span class="value">async</span></dt>
 										<dd>Send async - default false. Does not apply to SCRIPT injection.</dd>
@@ -98,7 +103,10 @@
 										<dt><span class="value">callback</span></dt>
 										<dd>Response callback function name, default: response</dd>
 										<dt><span class="value">jsonp_callback</span></dt>
-										<dd>Jsonp requests callback function name parameter, default: callback</dd>
+										<dd>
+											Jsonp requests callback function name parameter. Appended to request in case receiving
+											end does not use default callback parameter. Default: callback.
+										</dd>
 
 									</dl>
 								</div>
@@ -125,6 +133,7 @@
 						<h4>Examples</h4>
 
 						<div class="example">
+							<h5>JSON GET Request</h5>
 							<code>var node = u.qs("#content");
 node.response = function(response) {
 	var name = response.name;
@@ -134,6 +143,37 @@ u.request(node, "/json");</code>
 						</div>
 
 						<div class="example">
+							<h5>Post Request with parameters</h5>
+							<code>var node = u.qs("#content");
+node.response = function(response) {
+	alert(response);
+}
+u.request(node, "/post", {"params":"name=martin"});</code>
+							<p>Makes POST request to /post and alerts the the response string.</p>
+						</div>
+
+						<div class="example">
+							<h5>Post Request with headers</h5>
+							<code>var node = u.qs("#content");
+node.response = function(response) {
+	alert(response);
+}
+u.request(node, "/post", {"headers":{"X-CSRF-Token":"1234-4321-1234"});</code>
+							<p>Makes POST request to /post and sends header X-CSRF-Token=1234-4321-1234.</p>
+						</div>
+
+						<div class="example">
+							<h5>GEET Request with custom callback</h5>
+							<code>var node = u.qs("#content");
+node.customCallback = function(response) {
+	alert(response);
+}
+u.request(node, "/get", {"callback":"customCallback");</code>
+							<p>Makes GET request to /get and returns <span class="var">response</span> to node.customCallback.</p>
+						</div>
+
+						<div class="example">
+							<h5>Make a SCRIPT injection for a JSONP Request</h5>
 							<code>var node = u.qs("#content");
 node.response = function(response) {
 	var name = response.name;
@@ -143,6 +183,7 @@ u.request(node, "/jsonp", {"method":"SCRIPT"});</code>
 						</div>
 
 						<div class="example">
+							<h5>Catching a response error</h5>
 							<code>var node = u.qs("#content");
 node.responseError = function(request) {
 	if(response.exception) {
