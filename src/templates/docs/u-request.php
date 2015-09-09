@@ -158,8 +158,8 @@ u.request(node, "/post", {"params":"name=martin"});</code>
 node.response = function(response) {
 	alert(response);
 }
-u.request(node, "/post", {"headers":{"X-CSRF-Token":"1234-4321-1234"});</code>
-							<p>Makes POST request to /post and sends header X-CSRF-Token=1234-4321-1234.</p>
+u.request(node, "/post", {"headers":{"Accept":"application/json"});</code>
+							<p>Makes POST request to /post and sends header Accept=application/json.</p>
 						</div>
 
 						<div class="example">
