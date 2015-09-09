@@ -40,7 +40,7 @@
 							Makes callback to node.response(response, [request_id]) when valid response is received. Declare this function
 							on <span class="var">node</span> to receive callback. <span class="var">response</span> parameter will
 							be DOM- or JSON-object, or text-string. DOM-object has response.isHTML variable declared. JSON-object has
-							response.isJSON variable declared.
+							response.isJSON variable declared, to make testing for response type easier.
 						</p>
 						<p>
 							Makes callback to node.responseError(request) if request fails - on security exceptions, page not found or server error. 
