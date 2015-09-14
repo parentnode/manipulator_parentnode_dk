@@ -48,11 +48,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-animat
 
 
 document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
 
 
-document.write('<script type="text/javascript" src="http://parentnode.local/js/lib/desktop/i-page-desktop.js"></script>');
-document.write('<script type="text/javascript" src="http://parentnode.local/js/lib/desktop/i-login-desktop.js"></script>');
-
-document.write('<script type="text/javascript" src="/js/lib/desktop/i-documentation-desktop.js"></script>');
+document.write('<script type="text/javascript" src="http://parentnode.local/js/global/desktop/i-page-desktop.js"></script>');
