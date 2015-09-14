@@ -20,7 +20,7 @@ $this->pageTitle("Where we are heading ...");
 
 	<h3>General</h3>
 	<ul class="todo">
-		<li>Test <em>page</em> variable missing availability in older browsers (FX 5 and others - used in u.ce)</li>
+		<li>Test <em>page</em> variable missing availability in older browsers (FX 5 and others - used in u.ce) - DONE (problem was automatic variable creation of node#id in newer browsers)</li>
 		<li>Test entire library using strict warnings to identify any undeclared variables</li>
 		<li>Align callback syntax and methodology across all functions.</li>
 		<li>Add general "getting started" examples</li>
@@ -71,13 +71,14 @@ $this->pageTitle("Where we are heading ...");
 
 	<h3>Events</h3>
 	<ul class="todo">
-		<li>Mouseover and mouseout events (and touch equivalent) shorthand functions</li>
+		<li>Mouseover and mouseout events (and touch equivalent) shorthand functions - DONE (u.e.hover)</li>
 		<li>Doubleclick for IE8 (it does not allow for two mousedown events, probably reserved for built-in dblclick)</li>
-		<li>Make initial speed calculation better - maybe use two moveevents before calculating start speed (direction)</li>
+		<li>Make initial speed calculation better - maybe use two moveevents before calculating start speed (direction) - DONE</li>
 	</ul>
 
 	<h3>Form</h3>
 	<ul class="todo">
+		<li>Global form error callback + individual input error callback - DONE - validationPassed and validationFailed</li>
 		<li>Dropdown (autocomplete input, with select features)</li>
 		<li>Designed checkbox (add interaction classes for easy visualisation)</li>
 		<li>Designed radiobutton (add interaction classes for easy visualisation)</li>
@@ -89,6 +90,12 @@ $this->pageTitle("Where we are heading ...");
 		<li>Max-processes parameter</li>
 		<li>Return individual queues instead of global loader queue? Pros/cons evaluation.</li>
 		<li>Implement progress callbacks</li>
+	</ul>
+
+	<h3>Request</h3>
+	<ul class="todo">
+		<li>responseError callback is (perhaps) never invoked because response object is caught by script-request evaluation</li>
+		<li>Test new onreadystatechange event handling in older IEs - DONE</li>
 	</ul>
 
 	<h3>Sortable</h3>
