@@ -279,6 +279,16 @@
 				u.request(this, this.action, {"params": u.f.getParams(this), "method": "post"});
 			}
 
+			form.validationPassed = function() {
+				u.bug("validation passed")
+			}
+			form.validationFailed = function(iNs) {
+				u.bug("Form validationFailed:");
+				for(x in iNs) {
+					u.bug("input failed:" + x + ", value=" + this.fields[x].val() + ", field:" + u.nodeId(this.fields[x]));
+				}
+			}
+
 			form.updated = function(iN) {
 				u.bug("Form updated:" + u.nodeId(iN) + " = " + iN.val());
 			}

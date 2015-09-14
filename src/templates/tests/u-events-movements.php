@@ -76,9 +76,9 @@
 	}
 
 	#content div.link1 {width: 50px; height: 50px; background: pink; position: absolute; left: 0; top: 0;}
-	#content div.link1 a {height: 50px; display: block; text-indent: -9999px;}
+	#content div.link1 a {height: 30px; display: block; text-indent: -9999px; margin: 10px;}
 	#content div.link2 {width: 50px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
-	#content div.link2 a {height: 50px; display: block;}
+	#content div.link2 a {height: 50px; display: block; text-align: center;}
 
 	#content ul.info li.links {background: PapayaWhip;}
 	#content ul.info li.link1 {background: pink;}
@@ -129,7 +129,7 @@
 
 			u.bug_position = "fixed";
 			u.bug_force = true;
-			u.bug_console_only = false;
+			u.bug_console_only = true;
 
 			var drag = u.qs("div.drag", scene);
 
@@ -312,15 +312,21 @@
 			link2.clicked = function(event) {
 				u.bug("link2 clicked")
 			}
+			link2.inputStarted = function(event) {
+				u.bug("link2 inputStarted")
+			}
+			link2.clickedCancelled = function(event) {
+				u.bug("link2 clicked")
+			}
 			u.e.drag(link2, links);
 			link2.picked = function(event) {
-//				u.bug("link2 picked")
+				u.bug("link2 picked")
 			}
 			link2.moved = function(event) {
-//				u.bug("link2 moved")
+				u.bug("link2 moved")
 			}
 			link2.dropped = function(event) {
-//				u.bug("link2 dropped")
+				u.bug("link2 dropped")
 			}
 
 

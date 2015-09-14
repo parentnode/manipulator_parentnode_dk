@@ -60,6 +60,16 @@
 				u.ae(scene, "div", ({"class":"error"})).innerHTML = "indexOf: error";
 			}
 
+
+			// Object.keys
+			var object = {"a":1, "b":2, "c":3};
+			if(Object.keys(object).length == 3 && Object.keys(object)[1] == "b") {
+				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "Object.keys: correct";
+			}
+			else {
+				u.ae(scene, "div", ({"class":"error"})).innerHTML = "Object.keys: error";
+			}
+
 		}
 
 	}

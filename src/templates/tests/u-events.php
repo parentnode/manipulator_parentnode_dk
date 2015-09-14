@@ -5,6 +5,7 @@
 	.level4 {width: 120px; height: 30px; padding: 30px 50px; background: yellow;}
 	.testlink {width: 100px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
 	.testlink a {height: 50px; display: block; text-indent: -9999px;}
+	.testlink.over {background: blue;}
 </style>
 
 <script type="text/javascript">
@@ -22,10 +23,28 @@
 
 			var link = u.qs(".testlink");
 
+			u.e.hover(link, {"delay":1000});
+			link.over = function(event) {
+				u.ac(this, "over");
+				u.bug("link over");
+			}
+			link.out = function(event) {
+				u.rc(this, "over");
+				u.bug("link out:" + event);
+			}
 
 			u.ce(link);
 			link.clicked = function(event) {
 				u.bug("link clicked");
+			}
+			link.moved = function(event) {
+				u.bug("link moved:" + this.current_x + ", " + this.current_xps);
+			}
+			link.inputStarted = function(event) {
+				u.bug("link inputStarted");
+			}
+			link.clickCancelled = function(event) {
+				u.bug("link clickCancelled");
 			}
 
 
@@ -84,7 +103,7 @@
 	</div>
 
 	<div class="testlink">
-		<a href="#">link</a>
+		<a href="#">link hover</a>
 	</div>
 
 

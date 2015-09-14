@@ -7,10 +7,9 @@
 </style>
 
 <script type="text/javascript">
-
 	Util.Objects["test"] = new function() {
 		this.init = function(node) {
-
+//			alert("test")
 
 			node._span = u.qs("span", node);
 
