@@ -31,6 +31,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Add value to end of Array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -93,6 +94,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Pops the last element off Array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -149,6 +151,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Reverses order of Array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -205,6 +208,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Add value to beginning of Array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -271,6 +275,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Removes first index of Array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -326,6 +331,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Does Array contain value.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
 					</div>
 
 					<div class="parameters">
@@ -359,6 +365,76 @@
 							<h5>JavaScript</h5>
 							<ul>
 								<li>none</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<ul>
+								<li>none</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Object.keys">
+				<div class="header">
+					<h3>Object.keys</h3>
+				</div>
+				<div class="body">
+
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Object.keys</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Array</span> = Object.keys(<span class="type">Object</span> <span class="var">object</span>);</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Get keys of object as array.</p>
+						<p>This is a fallback support function - only applied if browser does not support this natively.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">object</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Object</span> object to find keys of
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Array</span> array of object keys</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<ul>
+								<li>for ... in</li>
+								<li>Object.hasOwnProperty</li>
+								<li>Array.push</li>
 							</ul>
 						</div>
 

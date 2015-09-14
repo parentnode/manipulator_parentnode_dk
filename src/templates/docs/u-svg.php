@@ -262,7 +262,7 @@
 
 				<dt>desktop_light</dt>
 				<dd>
-					<span class="file">u-svg.js</span>
+					<span class="file">not supported</span>
 				</dd>
 
 				<dt>tablet</dt>
@@ -272,7 +272,7 @@
 
 				<dt>tv</dt>
 				<dd>
-					<span class="file">u-svg.js</span>
+					<span class="file">not supported</span>
 				</dd>
 
 				<dt>mobile_touch</dt>

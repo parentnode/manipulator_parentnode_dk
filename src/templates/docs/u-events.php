@@ -326,6 +326,124 @@ node.dblclicked = function(event) {
 				</div>
 			</div>
 
+			<div class="function" id="Util.Events.hover">
+				<div class="header">
+					<h3>Util.Events.hover</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Events.hover</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.e.hover</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Events.hover(
+									<span class="type">Node</span> <span class="var">node</span>
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Add hover event listeners using either mouse- or touchevents depending on device support (Autodetected).</p>
+						<p>Invokes callback to node.over and node.out when true event occurs.</p>
+						<p>
+							Out events occuring due to mouse passing over childnodes are ignored.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to add hover event listener to.
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional options for hover
+								</div>
+								<!-- optional details -->
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">delay</span></dt>
+										<dd>out-event delay - stalling out event.</dd>
+										<dt><span class="value">over</span></dt>
+										<dd>Callback function name of over callback. Default is <span class="value">over</span>.</dd>
+										<dt><span class="value">out</span></dt>
+										<dd>Callback function name of out callback. Default is <span class="value">out</span>.</dd>
+									</dl>
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="callbacks">
+						<h4>Callbacks</h4>
+						<dl class="callbacks">
+							<dt>node.over(event)</dt>
+							<dd>when mouseover or touchstart event occurs</dd>
+							<dt>node.out(event)</dt>
+							<dd>when mouseout or touchend event occurs</dd>
+						</dl>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.e.hover(node);
+
+node.over = function(event) {
+	// pointer has entered node
+}
+node.out = function(event) {
+	// pointer has left node
+}</code>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<ul>
+								<li>Util.Events.addOverEvent</li>
+								<li>Util.Events.addOutEvent</li>
+								<li>Util.Timer.setTimer</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
 			<div class="function" id="Util.Events.kill">
 				<div class="header">
 					<h3>Util.Events.kill</h3>

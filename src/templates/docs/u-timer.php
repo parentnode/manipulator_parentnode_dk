@@ -26,6 +26,7 @@
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Function|String</span> <span class="var">action</span>,
 									<span class="type">Number</span> <span class="var">timeout</span>
+									[, <span class="type">Mixed</span> <span class="var">param</span>]
 								);
 							</dd>
 						</dl>
@@ -49,13 +50,19 @@
 							<dt><span class="var">action</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Function|Strubg</span> Function or name of function to execute on timeout
+									<span class="type">Function|String</span> Function or name of function to execute on timeout
 								</div>
 							</dd>
 							<dt><span class="var">timeout</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">Number</span> timeout in milliseconds
+								</div>
+							</dd>
+							<dt><span class="var">param</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Optional parameter to pass to callback when timeout occurs.
 								</div>
 							</dd>
 						</dl>
@@ -69,11 +76,40 @@
 					<div class="examples">
 						<h4>Examples</h4>
 						<div class="example">
+							<h5>Plain timer - action as string (lowest memory footprint)</h5>
+							<code>var node = u.qs("#node");
+node.timerDone = function() {
+	// timer done
+}
+u.t.setTimer(node, "timerDone", 500);</code>
+							<p>Returns timer_id.</p>
+						</div>
+						<div class="example">
+							<h5>Plain timer - function reference</h5>
 							<code>var node = u.qs("#node");
 node.timerDone = function() {
 	// timer done
 }
 u.t.setTimer(node, node.timerDone, 500);</code>
+							<p>Returns timer_id.</p>
+						</div>
+						<div class="example">
+							<h5>Plain timer - inline function</h5>
+							<code>var node = u.qs("#node");
+u.t.setTimer(node, function() {
+	// timer done
+}, 500);</code>
+							<p>Returns timer_id.</p>
+						</div>
+						<div class="example">
+							<h5>Passing parameter</h5>
+							<code>var node = u.qs("#node");
+node.timerDone = function(string) {
+	
+	// timer done
+	alert(string);
+}
+u.t.setTimer(node, node.timerDone, 500, "hello");</code>
 							<p>Returns timer_id.</p>
 						</div>
 					</div>
@@ -260,6 +296,7 @@ u.t.resetTimer(node.timer_id);</code>
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Function</span> <span class="var">action</span>,
 									<span class="type">Number</span> <span class="var">timeout</span>
+									[, <span class="type">Mixed</span> <span class="var">param</span>]
 								);
 							</dd>
 						</dl>
@@ -290,6 +327,12 @@ u.t.resetTimer(node.timer_id);</code>
 							<dd>
 								<div class="summary">
 									<span class="type">Number</span> timeout in milliseconds
+								</div>
+							</dd>
+							<dt><span class="var">param</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Optional parameter to pass to callback when timeout occurs.
 								</div>
 							</dd>
 						</dl>

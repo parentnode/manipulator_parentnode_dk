@@ -161,8 +161,11 @@
 							<dt>form.submitted(input)</dt>
 							<dd>when form is submitted - if callback function is not declared, form will be submitted as regular HTML form.</dd>
 
-							<dt>form.validationFailed</dt>
-							<dd>when form is submitted but validation failed</dd>
+							<dt>form.validationFailed(JSON errors)</dt>
+							<dd>when form validation fails - sends errors object, containing names of all failed inputs</dd>
+
+							<dt>form.validationPassed()</dt>
+							<dd>when form validation is passed - form contains no errors</dd>
 
 							<dt>input.updated</dt>
 							<dd>when input is updated</dd>
@@ -172,6 +175,8 @@
 							<dd>when input gets focus</dd>
 							<dt>input.blurred</dt>
 							<dd>when input loses focus</dd>
+							<dt>input.validationFailed</dt>
+							<dd>when input failes validation</dd>
 
 							<dt>action.focused</dt>
 							<dd>when action gets focus</dd>
@@ -231,8 +236,12 @@
 		// callback for form submit
 	}
 
-	form.validationFailed = function() {
+	form.validationFailed = function(errors) {
 		// callback for failed form validation 
+	}
+
+	form.validationPassed = function() {
+		// callback for passed form validation 
 	}
 
 &lt;/script&gt;</code>
