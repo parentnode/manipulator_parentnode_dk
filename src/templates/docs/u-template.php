@@ -30,17 +30,31 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Creates nodes from json object based on <span class="htmltag">template</span>. Returns list of created nodes-</p>
+						<p>
+							Creates HTML nodes from array of JSON objects based on <span class="htmltag">template</span>. 
+						</p>
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
 
 						<dl class="parameters">
-							<dt><span class="var">_var_</span></dt>
+							<dt><span class="var">template</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">_type_</span> _summary_
+									<span class="type">Node</span> HTML node to be used as template.
+								</div>
+							</dd>
+							<dt><span class="var">json</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> JSON object containing array of objects.
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional options for parsing
 								</div>
 								<!-- optional details -->
 								<div class="details">
@@ -48,15 +62,9 @@
 									<h5>Options</h5>
 									<dl class="options">
 										<!-- specific options -->
-										<dt><span class="value">_value_</span></dt>
-										<dd>_description_</dd>
+										<dt><span class="value">append</span></dt>
+										<dd>Node to append results to</dd>
 									</dl>
-								</div>
-							</dd>
-							<dt><span class="var">identifier</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">_type_</span> _summary_
 								</div>
 							</dd>
 						</dl>
@@ -64,13 +72,97 @@
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p><span class="type">_type_</span> _returnsummary_</p>
+						<p>
+							<span class="type">ChildNodes|Array</span> 
+							Returns list of created nodes as ChildNodes reference or Array of nodes if the 
+							<span class="var">append</span> option is used to append nodes automatically.
+						</p>
 					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>
 
 						<div class="example">
+							<h5>Simplest usage</h5>
+							<code>&lt;ul&gt;
+	&lt;li class="template"&gt;
+		&lt;h3&gt;{name}&lt;/h3&gt;
+		&lt;p&gt;{description}&lt;/p&gt;
+		&lt;a href="{url}">link&lt;/a&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+	var data = [
+		{
+			"name":"Manipulator",
+			"description":"JavaScript framework",
+			"url":"http://manipulator.parentnode.dk"
+		},
+		{
+			"name":"Detector",
+			"description":"Device detection"
+			"url":"http://detector.parentnode.dk"
+		}
+	];
+	var template = u.qs("li.template");
+	var nodes = u.template(template, data);
+&lt;/script&gt;</code>
+							<p>Returns nodeList with 2 html nodes, shown below:</p>
+							<code>&lt;li&gt;
+	&lt;h3&gt;Manipulator&lt;/h3&gt;
+	&lt;p&gt;JavaScript framework&lt;/p&gt;
+	&lt;a href="http://manipulator.parentnode.dk">link&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+	&lt;h3&gt;Detector&lt;/h3&gt;
+	&lt;p&gt;Device detection&lt;/p&gt;
+	&lt;a href="http://detector.parentnode.dk">link&lt;/a&gt;
+&lt;/li&gt;</code>
+						</div>
+						<div class="example">
+							<h5>With automatic appending</h5>
+							<code>&lt;ul&gt;
+	&lt;li class="template"&gt;
+		&lt;h3&gt;{name}&lt;/h3&gt;
+		&lt;p&gt;{description}&lt;/p&gt;
+		&lt;a href="{url}">link&lt;/a&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+	var data = [
+		{
+			"name":"Manipulator",
+			"description":"JavaScript framework",
+			"url":"http://manipulator.parentnode.dk"
+		},
+		{
+			"name":"Detector",
+			"description":"Device detection"
+			"url":"http://detector.parentnode.dk"
+		}
+	];
+	var list = u.qs("ul");
+	var template = u.qs("li.template");
+	var nodes = u.template(template, data, {"append":list});
+&lt;/script&gt;</code>
+							<p>Adds two new nodes to the UL, making the ul look like:</p>
+							<code>&lt;ul&gt;
+	&lt;li class="template"&gt;
+		&lt;h3&gt;{name}&lt;/h3&gt;
+		&lt;p&gt;{description}&lt;/p&gt;
+		&lt;a href="{url}">link&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;h3&gt;Manipulator&lt;/h3&gt;
+		&lt;p&gt;JavaScript framework&lt;/p&gt;
+		&lt;a href="http://manipulator.parentnode.dk">link&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;h3&gt;Detector&lt;/h3&gt;
+		&lt;p&gt;Device detection&lt;/p&gt;
+		&lt;a href="http://detector.parentnode.dk">link&lt;/a&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;</code>
 						</div>
 					</div>
 
@@ -78,18 +170,23 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>switch ... case</li>
+								<li>document.createElement</li>
+								<li>Node.cloneNode</li>
+								<li>Node.appendChild</li>
+								<li>decodeURIComponent</li>
+								<li>String.replace</li>
+								<li>String.toLowerCase</li>
+								<li>Array.push</li>
 							</ul>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -119,7 +216,7 @@
 				<h3>Segment support files</h3>
 				<ul>
 					<!-- specify segment support js files (like: u-dom-desktop_light.js) -->
-					<li>none ???</li>
+					<li>none</li>
 				</ul>
 			</div>
 

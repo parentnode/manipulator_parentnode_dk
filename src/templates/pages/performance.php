@@ -105,51 +105,64 @@
 	
 <div class="scene speed">
 
-	<h1>Performance</h1>
-	<h2>Speed and performance test, comparing Native JavaScript, Manipulator and jQuery.</h2>
-	<p>
-		This test injects 5 divs, <em>div.n1-5</em>, each containing one <em>div.m</em>.
-		Then 1050 new divs are injected into <span class="htmltag">div.n1 div.m</span>, with two classes 
-		<em>start</em> and <em>box0-1049</em>, 
-		A click event is added and triggered, which then replaces class <em>start</em> with <em>done</em>.
-		Finally the processing time in milliseconds is injected into a new div in the end of the list.
-	</p>
-	<p>
-		Querying Nodes, manipulating classes, injecting HTML and adding events are probably the most
-		reoccuring actions, handled by a library. These actions will have a considerable impact on
-		how a library performs.
-	</p>
+	<div class="article" itemscope itemtype="http://schema.org/Article">
+		<h1 itemprop="headline">Performance</h1>
 
-	<hr />
+		<dl class="info">
+			<dt class="published_at">Date published</dt>
+			<dd class="published_at" itemprop="datePublished" content="<?= date("Y-m-d", filemtime(__FILE__)) ?>"><?= date("Y-m-d, H:i", filemtime(__FILE__)) ?></dd>
+			<dt class="author">Author</dt>
+			<dd class="author" itemprop="author">Martin Kæstel Nielsen</dd>
+		</dl>
+		<div itemprop="image" content="<?= SITE_URL ?>/img/logo.png"></div>
 
-	<div class="native">
-		<h1>Native JavaScript</h1>
+		<div class="articlebody" itemprop="articleBody">
 
-		<ul class="actions">
-			<li class="starttest"><a class="button primary" onclick="testNative()">Do test</a></li>
-		</ul>
+			<h2>Speed and performance test, comparing Native JavaScript, Manipulator and jQuery.</h2>
+			<p>
+				This test injects 5 divs, <em>div.n1-5</em>, each containing one <em>div.m</em>.
+				Then 1050 new divs are injected into <span class="htmltag">div.n1 div.m</span>, with two classes 
+				<em>start</em> and <em>box0-1049</em>, 
+				A click event is added and triggered, which then replaces class <em>start</em> with <em>done</em>.
+				Finally the processing time in milliseconds is injected into a new div in the end of the list.
+			</p>
+			<p>
+				Querying Nodes, manipulating classes, injecting HTML and adding events are probably the most
+				reoccuring actions, handled by a library. These actions will have a considerable impact on
+				how a library performs.
+			</p>
 
-		<div class="testzone"></div>
+			<hr />
+
+			<div class="native">
+				<h1>Native JavaScript</h1>
+
+				<ul class="actions">
+					<li class="starttest"><a class="button primary" onclick="testNative()">Do test</a></li>
+				</ul>
+
+				<div class="testzone"></div>
+			</div>
+
+			<div class="manipulator">
+				<h1>Manipulator</h1>
+
+				<ul class="actions">
+					<li class="starttest"><a class="button primary" onclick="testManipulator()">Do test</a></li>
+				</ul>
+
+				<div class="testzone"></div>
+			</div>
+
+			<div class="jquery">
+				<h1>jQuery</h1>
+
+				<ul class="actions">
+					<li class="starttest"><a class="button primary" onclick="testjQuery()">Do test</a></li>
+				</ul>
+
+				<div class="testzone"></div>
+			</div>
+		</div>
 	</div>
-
-	<div class="manipulator">
-		<h1>Manipulator</h1>
-
-		<ul class="actions">
-			<li class="starttest"><a class="button primary" onclick="testManipulator()">Do test</a></li>
-		</ul>
-
-		<div class="testzone"></div>
-	</div>
-
-	<div class="jquery">
-		<h1>jQuery</h1>
-
-		<ul class="actions">
-			<li class="starttest"><a class="button primary" onclick="testjQuery()">Do test</a></li>
-		</ul>
-
-		<div class="testzone"></div>
-	</div>
-
 </div>

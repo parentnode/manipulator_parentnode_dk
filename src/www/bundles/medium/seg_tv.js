@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9-medium Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-02-21 09:12:11
+js-merged @ 2015-09-14 02:35:42
 */
 
 /*seg_tv_include.js*/
@@ -154,7 +154,16 @@ Util.Animation = u.a = new function() {
 		return this._support3d;
 	}
 	this._vendor_exceptions = {
-		"mozTransform":"MozTransform","mozTransition":"MozTransition","mozTransitionEnd":"transitionend","mozTransformOrigin":"MozTransformOrigin"
+		"mozTransform":"MozTransform",
+		"mozTransition":"MozTransition",
+		"mozTransitionEnd":"transitionend",
+		"msTransitionEnd":"transitionend",
+		"mozTransformOrigin":"MozTransformOrigin",
+		"mozPerspectiveOrigin":"MozPerspectiveOrigin",
+		"mozTransformStyle":"MozTransformStyle",
+		"mozPerspective":"MozPerspective",
+		"mozBackfaceVisibility":"MozBackfaceVisibility",
+		"msCancelAnimationFrame":"cancelAnimationFrame"
 	};
 	this._vendor_methods = {};
  	this.vendorMethod = function(method) {
@@ -193,30 +202,54 @@ Util.Animation = u.a = new function() {
 		}
 		return this._vendor_methods[this._vendor+method];
 	}
-	this.transition = function(node, transition) {
+	this.transition = function(node, transition, callback) {
 		try {
 			var duration = transition.match(/[0-9.]+[ms]+/g);
 			if(duration) {
 				node.duration = duration[0].match("ms") ? parseFloat(duration[0]) : (parseFloat(duration[0]) * 1000);
+				if(callback) {
+					var transitioned;
+					transitioned = (function(event) {
+						u.e.removeEvent(event.target, u.a.vendor("transitionEnd"), transitioned);
+						if(event.target == this) {
+							u.a.transition(this, "none");
+							if(typeof(callback) == "function") {
+								var key = u.randomString(4);
+								node[key] = callback;
+								node[key].callback(event);
+								node[key] = null;
+								callback = null;
+							}
+							else if(typeof(this[callback]) == "function") {
+								this[callback](event);
+								this[callback] = null;
+							}
+						}
+						else {
+						}
+					});
+					u.e.addEvent(node, this.vendor("transitionEnd"), transitioned);
+				}
+				else {
+					u.e.addEvent(node, this.vendor("transitionEnd"), this._transitioned);
+				}
 			}
 			else {
 				node.duration = false;
-				if(transition.match(/none/i)) {
-					node.transitioned = null;
-				}
 			}
 			node.style[this.vendor("Transition")] = transition;
-			u.e.addEvent(node, this.vendor("transitionEnd"), this._transitioned);
 		}
 		catch(exception) {
 			u.exception("u.a.transition", arguments, exception);
 		}
 	}
 	this._transitioned = function(event) {
+		u.e.removeEvent(event.target, u.a.vendor("transitionEnd"), u.a._transitioned);
 		if(event.target == this && typeof(this.transitioned) == "function") {
 			this.transitioned(event);
+			this.transitioned = null;
 		}
-		u.a.transition(this, "none");
+		u.a.transition(event.target, "none");
 	}
 	this.removeTransform = function(node) {
 		node.style[this.vendor("Transform")] = "none";
@@ -650,6 +683,7 @@ Util.textContent = u.text = function(node) {
 	catch(exception) {
 		u.exception("u.text", arguments, exception);
 	}
+	return "";
 }
 Util.clickableElement = u.ce = function(node, _options) {
 	node._use_link = "a";
@@ -850,6 +884,35 @@ Util.nodeWithin = u.nw = function(node, scope) {
 /*u-events.js*/
 Util.Events = u.e = new function() {
 	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && navigator.userAgent.match(/Windows/i)) ? "mouse" : "touch";
+	if(navigator.maxTouchPoints > 1) {
+		if(typeof(document.ontouchmove) == "undefined" && typeof(document.onmousemove) == "undefined") {
+			this.event_support = "multi";
+		}
+	}
+	if(!this.event_support) {
+		if(typeof(document.ontouchmove) == "undefined") {
+			this.event_support = "mouse";
+		}
+		else {
+			this.event_support = "touch";
+		}
+	}
+	this.events = {
+		"mouse": {
+			"start":"mousedown",
+			"move":"mousemove",
+			"end":"mouseup",
+			"over":"mouseover",
+			"out":"mouseout"
+		},
+		"touch": {
+			"start":"touchstart",
+			"move":"touchmove",
+			"end":"touchend",
+			"over":"touchstart",
+			"out":"touchend"
+		}
+	}
 	this.kill = function(event) {
 		if(event) {
 			event.preventDefault();
@@ -873,27 +936,93 @@ Util.Events = u.e = new function() {
 		}
 	}
 	this.addStartEvent = this.addDownEvent = function(node, action) {
-		u.e.addEvent(node, (this.event_pref == "touch" ? "touchstart" : "mousedown"), action);
+		if(this.event_support == "multi") {
+			u.e.addEvent(node, this.events.mouse.start, action);
+			u.e.addEvent(node, this.events.touch.start, action);
+		}
+		else {
+			u.e.addEvent(node, this.events[this.event_support].start, action);
+		}
 	}
 	this.removeStartEvent = this.removeDownEvent = function(node, action) {
-		u.e.removeEvent(node, (this.event_pref == "touch" ? "touchstart" : "mousedown"), action);
+		if(this.event_support == "multi") {
+			u.e.removeEvent(node, this.events.mouse.start, action);
+			u.e.removeEvent(node, this.events.touch.start, action);
+		}
+		else {
+			u.e.removeEvent(node, this.events[this.event_support].start, action);
+		}
 	}
 	this.addMoveEvent = function(node, action) {
-		u.e.addEvent(node, (this.event_pref == "touch" ? "touchmove" : "mousemove"), action);
+		if(this.event_support == "multi") {
+			u.e.addEvent(node, this.events.mouse.move, action);
+			u.e.addEvent(node, this.events.touch.move, action);
+		}
+		else {
+			u.e.addEvent(node, this.events[this.event_support].move, action);
+		}
 	}
 	this.removeMoveEvent = function(node, action) {
-		u.e.removeEvent(node, (this.event_pref == "touch" ? "touchmove" : "mousemove"), action);
+		if(this.event_support == "multi") {
+			u.e.removeEvent(node, this.events.mouse.move, action);
+			u.e.removeEvent(node, this.events.touch.move, action);
+		}
+		else {
+			u.e.removeEvent(node, this.events[this.event_support].move, action);
+		}
 	}
 	this.addEndEvent = this.addUpEvent = function(node, action) {
-		u.e.addEvent(node, (this.event_pref == "touch" ? "touchend" : "mouseup"), action);
-		if(node.snapback && u.e.event_pref == "mouse") {
-			u.e.addEvent(node, "mouseout", this._snapback);
+		if(this.event_support == "multi") {
+			u.e.addEvent(node, this.events.mouse.end, action);
+			u.e.addEvent(node, this.events.touch.end, action);
+		}
+		else {
+			u.e.addEvent(node, this.events[this.event_support].end, action);
 		}
 	}
 	this.removeEndEvent = this.removeUpEvent = function(node, action) {
-		u.e.removeEvent(node, (this.event_pref == "touch" ? "touchend" : "mouseup"), action);
-		if(node.snapback && u.e.event_pref == "mouse") {
-			u.e.removeEvent(node, "mouseout", this._snapback);
+		if(this.event_support == "multi") {
+			u.e.removeEvent(node, this.events.mouse.end, action);
+			u.e.removeEvent(node, this.events.touch.end, action);
+		}
+		else {
+			u.e.removeEvent(node, this.events[this.event_support].end, action);
+		}
+	}
+	this.addOverEvent = function(node, action) {
+		if(this.event_support == "multi") {
+			u.e.addEvent(node, this.events.mouse.over, action);
+			u.e.addEvent(node, this.events.touch.over, action);
+		}
+		else {
+			u.e.addEvent(node, this.events[this.event_support].over, action);
+		}
+	}
+	this.removeOverEvent = function(node, action) {
+		if(this.event_support == "multi") {
+			u.e.removeEvent(node, this.events.mouse.over, action);
+			u.e.removeEvent(node, this.events.touch.over, action);
+		}
+		else {
+			u.e.removeEvent(node, this.events[this.event_support].over, action);
+		}
+	}
+	this.addOutEvent = function(node, action) {
+		if(this.event_support == "multi") {
+			u.e.addEvent(node, this.events.mouse.out, action);
+			u.e.addEvent(node, this.events.touch.out, action);
+		}
+		else {
+			u.e.addEvent(node, this.events[this.event_support].out, action);
+		}
+	}
+	this.removeOutEvent = function(node, action) {
+		if(this.event_support == "multi") {
+			u.e.removeEvent(node, this.events.mouse.out, action);
+			u.e.removeEvent(node, this.events.touch.out, action);
+		}
+		else {
+			u.e.removeEvent(node, this.events[this.event_support].out, action);
 		}
 	}
 	this.resetClickEvents = function(node) {
@@ -926,26 +1055,30 @@ Util.Events = u.e = new function() {
 		this.start_event_y = u.eventY(event);
 		this.current_xps = 0;
 		this.current_yps = 0;
+		this.move_timestamp = event.timeStamp;
+		this.move_last_x = 0;
+		this.move_last_y = 0;
+		this._moves_cancel = 0;
 		this.swiped = false;
 		if(this.e_click || this.e_dblclick || this.e_hold) {
-			var node = this;
-			while(node) {
-				if(node.e_drag || node.e_swipe) {
-					u.e.addMoveEvent(this, u.e._cancelClick);
-					break;
+			if(event.type.match(/mouse/)) {
+				var node = this;
+				while(node) {
+					if(node.e_drag || node.e_swipe) {
+						u.e.addMoveEvent(this, u.e._cancelClick);
+						break;
+					}
+					else {
+						node = node.parentNode;
+					}
 				}
-				else {
-					node = node.parentNode;
-				}
-			}
-			u.e.addMoveEvent(this, u.e._move);
-			if(u.e.event_pref == "touch") {
-				u.e.addMoveEvent(this, u.e._cancelClick);
-			}
-			u.e.addEndEvent(this, u.e._dblclicked);
-			if(u.e.event_pref == "mouse") {
 				u.e.addEvent(this, "mouseout", u.e._cancelClick);
 			}
+			else {
+				u.e.addMoveEvent(this, u.e._cancelClick);
+			}
+			u.e.addMoveEvent(this, u.e._move);
+			u.e.addEndEvent(this, u.e._dblclicked);
 		}
 		if(this.e_hold) {
 			this.t_held = u.t.setTimer(this, u.e._held, 750);
@@ -963,13 +1096,26 @@ Util.Events = u.e = new function() {
 		}
 	}
 	this._cancelClick = function(event) {
-		u.e.resetClickEvents(this);
-		if(typeof(this.clickCancelled) == "function") {
-			this.clickCancelled(event);
+		if(event.type.match(/mouseout/) || this._moves_cancel > 1 || (event.type.match(/move/) && (Math.abs(this.current_xps) > 30 || Math.abs(this.current_yps) > 30))) {
+			u.e.resetClickEvents(this);
+			if(typeof(this.clickCancelled) == "function") {
+				this.clickCancelled(event);
+			}
+		}
+		else if(event.type.match(/move/)) {
+			this._moves_cancel++;
 		}
 	}
 	this._move = function(event) {
+		u.bug("_move:" + u.nodeId(this))
 		if(typeof(this.moved) == "function") {
+			this.current_x = u.eventX(event) - this.start_event_x;
+			this.current_y = u.eventY(event) - this.start_event_y;
+			this.current_xps = Math.round(((this.current_x - this.move_last_x) / (event.timeStamp - this.move_timestamp)) * 1000);
+			this.current_yps = Math.round(((this.current_y - this.move_last_y) / (event.timeStamp - this.move_timestamp)) * 1000);
+			this.move_timestamp = event.timeStamp;
+			this.move_last_x = this.current_x;
+			this.move_last_y = this.current_y;
 			this.moved(event);
 		}
 	}
@@ -1012,13 +1158,47 @@ Util.Events = u.e = new function() {
 			this._clicked = u.e._clicked;
 			this._clicked(event);
 		}
-		else if(!event) {
+		else if(event.type == "timeout") {
 			this._clicked = u.e._clicked;
 			this._clicked(this.event_var);
 		}
 		else {
 			u.e.resetNestedEvents(this);
 			this.t_clicked = u.t.setTimer(this, u.e._dblclicked, 400);
+		}
+	}
+	this.hover = function(node, _options) {
+		node._hover_out_delay = 100;
+		node._callback_out = "out";
+		node._callback_over = "over";
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "over"				: node._callback_over		= _options[argument]; break;
+					case "out"				: node._callback_out		= _options[argument]; break;
+					case "delay"			: node._hover_out_delay		= _options[argument]; break;
+				}
+			}
+		}
+		node.e_hover = true;
+		u.e.addOverEvent(node, this._over);
+		u.e.addOutEvent(node, this._out);
+	}
+	this._over = function(event) {
+		u.t.resetTimer(this.t_out);
+		if(typeof(this[this._callback_over]) == "function" && !this.is_hovered) {
+			this[this._callback_over](event);
+		}
+		this.is_hovered = true;
+	}
+	this._out = function(event) {
+		this.t_out = u.t.setTimer(this, u.e.__out, this._hover_out_delay, event);
+	}
+	this.__out = function(event) {
+		this.is_hovered = false;
+		if(typeof(this[this._callback_out]) == "function") {
+			this[this._callback_out](event);
 		}
 	}
 }
@@ -1279,12 +1459,22 @@ Util.round = function(number, decimals) {
 
 /*u-navigation.js*/
 u.navigation = function(_options) {
-	// 
-	page._nav_path = page._nav_path ? page._nav_path : u.h.getCleanUrl(location.href, 1);
-	page._nav_history = page._nav_history ? page._nav_history : [];
-	page._navigate = function(url) {
+	var callback_navigate = "navigate";
+	var navigation_node = page;
+	if(typeof(_options) == "object") {
+		var argument;
+		for(argument in _options) {
+			switch(argument) {
+				case "callback"       : callback_navigate      = _options[argument]; break;
+				case "node"           : navigation_node        = _options[argument]; break;
+			}
+		}
+	}
+	navigation_node._nav_path = navigation_node._nav_path ? navigation_node._nav_path : u.h.getCleanUrl(location.href, 1);
+	navigation_node._nav_history = navigation_node._nav_history ? navigation_node._nav_history : [];
+	navigation_node._navigate = function(url) {
 		url = u.h.getCleanUrl(url);
-		page._nav_history.unshift(url);
+		navigation_node._nav_history.unshift(url);
 		u.stats.pageView(url);
 		if(!this._nav_path || ((this._nav_path != u.h.getCleanHash(location.hash, 1) && !u.h.popstate) || (this._nav_path != u.h.getCleanUrl(location.href, 1) && u.h.popstate))) {
 			if(this.cN && typeof(this.cN.navigate) == "function") {
@@ -1306,11 +1496,11 @@ u.navigation = function(_options) {
 			this._nav_path = u.h.getCleanUrl(location.href, 1);
 		}
 	}
-	page.navigate = function(url, node) {
+	navigation_node.navigate = function(url, node) {
 		this.history_node = node ? node : false;
 		if(u.h.popstate) {
 			history.pushState({}, url, url);
-			page._navigate(url);
+			navigation_node._navigate(url);
 		}
 		else {
 			location.hash = u.h.getCleanUrl(url);
@@ -1321,32 +1511,32 @@ u.navigation = function(_options) {
 	}
 	if(!u.h.popstate) {
 		if(location.hash.length < 2) {
-			page.navigate(location.href, page);
-			page._nav_path = u.h.getCleanUrl(location.href);
-			u.init(page.cN);
+			navigation_node.navigate(location.href, page);
+			navigation_node._nav_path = u.h.getCleanUrl(location.href);
+			u.init(navigation_node.cN);
 		}
 		else if(u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href) && location.hash.match(/^#\//)) {
-			page._nav_path = u.h.getCleanUrl(location.href);
-			page._navigate(u.h.getCleanHash(location.hash), page);
+			navigation_node._nav_path = u.h.getCleanUrl(location.href);
+			navigation_node._navigate(u.h.getCleanHash(location.hash), page);
 		}
 		else {
-			u.init(page.cN);
+			u.init(navigation_node.cN);
 		}
 	}
 	else {
 		if(u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href) && location.hash.match(/^#\//)) {
-			page._nav_path = u.h.getCleanHash(location.hash);
-			page.navigate(u.h.getCleanHash(location.hash), page);
+			navigation_node._nav_path = u.h.getCleanHash(location.hash);
+			navigation_node.navigate(u.h.getCleanHash(location.hash), page);
 		}
 		else {
-			u.init(page.cN);
+			u.init(navigation_node.cN);
 		}
 	}
-	page._initHistory = function() {
+	navigation_node._initHistory = function() {
 		u.h.catchEvent(page, {"callback":"_navigate"});
 	}
-	u.t.setTimer(page, page._initHistory, 100);
-	page.historyBack = function() {
+	u.t.setTimer(page, navigation_node._initHistory, 100);
+	navigation_node.historyBack = function() {
 		if(this._nav_history.length > 1) {
 			this._nav_history.shift();
 			return this._nav_history.shift();
@@ -1516,11 +1706,12 @@ Util.request = function(node, url, _options) {
 		node[request_id].HTTPRequest.node = node;
 		node[request_id].HTTPRequest.request_id = request_id;
 		if(node[request_id].request_async) {
-			node[request_id].HTTPRequest.onreadystatechange = function() {
+			node[request_id].HTTPRequest.statechanged = function() {
 				if(this.readyState == 4) {
 					u.validateResponse(this);
 				}
 			}
+			u.e.addEvent(node[request_id].HTTPRequest, "readystatechange", node[request_id].HTTPRequest.statechanged);
 		}
 		try {
 			if(node[request_id].request_method.match(/GET/i)) {
@@ -1685,11 +1876,11 @@ Util.validateResponse = function(response){
 		// 
 	}
 	else {
-		if(typeof(response.node.ResponseError) == "function") {
-			response.node.ResponseError(response);
-		}
 		if(typeof(response.node.responseError) == "function") {
 			response.node.responseError(response);
+		}
+		else if(typeof(response.node[response.node[response.request_id].callback_response]) == "function") {
+			response.node[response.node[response.request_id].callback_response](response, response.request_id);
 		}
 	}
 }
@@ -1889,9 +2080,10 @@ Util.osx = function() {
 /*u-timer.js*/
 Util.Timer = u.t = new function() {
 	this._timers = new Array();
-	this.setTimer = function(node, action, timeout) {
+	this.setTimer = function(node, action, timeout, param) {
 		var id = this._timers.length;
-		this._timers[id] = {"_a":action, "_n":node, "_t":setTimeout("u.t._executeTimer("+id+")", timeout)};
+		param = param ? param : {"target":node, "type":"timeout"};
+		this._timers[id] = {"_a":action, "_n":node, "_p":param, "_t":setTimeout("u.t._executeTimer("+id+")", timeout)};
 		return id;
 	}
 	this.resetTimer = function(id) {
@@ -1901,20 +2093,22 @@ Util.Timer = u.t = new function() {
 		}
 	}
 	this._executeTimer = function(id) {
-		var node = this._timers[id]._n;
-		if(typeof(this._timers[id]._a) == "function") {
-			node._timer_action = this._timers[id]._a;
-			node._timer_action();
+		var timer = this._timers[id];
+		this._timers[id] = false;
+		var node = timer._n;
+		if(typeof(timer._a) == "function") {
+			node._timer_action = timer._a;
+			node._timer_action(timer._p);
 			node._timer_action = null;
 		}
-		else if(typeof(node[this._timers[id]._a]) == "function") {
-			node[this._timers[id]._a]();
+		else if(typeof(node[timer._a]) == "function") {
+			node[timer._a](timer._p);
 		}
-		this._timers[id] = false;
 	}
-	this.setInterval = function(node, action, interval) {
+	this.setInterval = function(node, action, interval, param) {
 		var id = this._timers.length;
-		this._timers[id] = {"_a":action, "_n":node, "_i":setInterval("u.t._executeInterval("+id+")", interval)};
+		param = param ? param : {"target":node, "type":"timeout"};
+		this._timers[id] = {"_a":action, "_n":node, "_p":param, "_i":setInterval("u.t._executeInterval("+id+")", interval)};
 		return id;
 	}
 	this.resetInterval = function(id) {
@@ -1927,11 +2121,11 @@ Util.Timer = u.t = new function() {
 		var node = this._timers[id]._n;
 		if(typeof(this._timers[id]._a) == "function") {
 			node._interval_action = this._timers[id]._a;
-			node._interval_action();
+			node._interval_action(this._timers[id]._p);
 			node._interval_action = null;
 		}
 		else if(typeof(node[this._timers[id]._a]) == "function") {
-			node[this._timers[id]._a]();
+			node[this._timers[id]._a](this._timers[id]._p);
 		}
 	}
 	this.valid = function(id) {
@@ -2348,7 +2542,18 @@ if(!Array.prototype.indexOf) {
 		return -1;
 	}
 }
-
+if(!Object.keys) {
+	Object.keys = function(object) {
+		var keys = [];
+		var x;
+		for(x in object) {
+			if(object.hasOwnProperty(x)) {
+				keys.push(x);
+			}
+		}
+		return keys;
+	};
+}
 
 /*u-dom-desktop_light.js*/
 if(typeof(document.defaultView) == "undefined") {
@@ -3554,7 +3759,7 @@ if(document.querySelector == undefined) {
 
 
 /*u-events-desktop_light.js*/
-if(document.all) {
+if(document.all && document.addEventListener == undefined) {
 	window.attachedEvents = {};
 	window.eventHandler = function(eid) {
 		var element, i;
@@ -3580,6 +3785,7 @@ if(document.all) {
 		return;
 	}
 	u.e.event_pref = "mouse";
+	u.e.event_support = "mouse";
 	u.e.kill = function(event) {
 		if(event) {
 			event.cancelBubble = true;
@@ -3587,7 +3793,11 @@ if(document.all) {
 		}
 	}
 	u.e.addEvent = function(node, type, action) {
-		if(node != window) {
+		if(typeof(node) == "object" && typeof(node.childNodes) == "undefined") {
+			node["on"+ type] = action;
+			return;
+		}
+		else if(node != window) {
 			var eid = u.cv(node, "eid");
 			if(!eid) {
 				var eid = u.randomString();
@@ -3612,7 +3822,11 @@ if(document.all) {
 		}
 	}
 	u.e.removeEvent = function(node, type, action) {
-		if(node != window) {
+		if(typeof(node) == "object" && typeof(node.childNodes) == "undefined") {
+			node["on"+ type] = null;
+			return;
+		}
+		else if(node != window) {
 			var eid = u.cv(node, "eid");
 		}
 		else {
@@ -3915,16 +4129,26 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 		else if(window.ActiveXObject) {
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
+		else {
+			return {
+				"open":function() {}, 
+				"setRequestHeader":function() {}, 
+				"send":function(){
+					this.response({"status":"404", "responseText":"No Ajax support"});
+				}
+			};
+		}
 		if(xmlhttp) {
-			var wrapper = new Object();
+			var wrapper = u.ae(document.body, "div", {"style":"display: none;"});
 			wrapper.xmlhttp = xmlhttp;
 			wrapper.xmlhttp.onreadystatechange = function() {
 				if(wrapper.xmlhttp.readyState == 4) {
 					wrapper.responseText = wrapper.xmlhttp.responseText;
 					wrapper.status = wrapper.xmlhttp.status;
 					wrapper.readyState = 4;
-					if(typeof(wrapper.onreadystatechange) == "function") {
-						wrapper.onreadystatechange();
+					if(typeof(wrapper.statechanged) == "function") {
+						wrapper.statechanged();
+						wrapper.parentNode.removeChild(wrapper);
 					}
 				}
 			}

@@ -1,7 +1,7 @@
 <div class="scene gettingstarted i:scene">
 
 	<div class="article" itemscope itemtype="http://schema.org/Article">
-		<h1 itemprop="name">Getting started with Manipulator</h1>
+		<h1 itemprop="headline">Getting started with Manipulator</h1>
 
 		<dl class="info">
 			<dt class="published_at">Date published</dt>
@@ -9,6 +9,7 @@
 			<dt class="author">Author</dt>
 			<dd class="author" itemprop="author">Martin Kæstel Nielsen</dd>
 		</dl>
+		<div itemprop="image" content="<?= SITE_URL ?>/img/logo.png"></div>
 
 		<div class="articlebody" itemprop="articleBody">
 			<p>
@@ -22,9 +23,9 @@
 
 			<h2>Topics</h2>
 			<ul class="topics">
-				<li><a href="/pages/architecture">Architecture</a></li>
-				<li><a href="/pages/page-model">Page model</a></li>
-				<li><a href="/pages/initializer-objects">Initializer objects</a></li>
+				<li><a href="/pages/architecture">Library: Architecture</a></li>
+				<li><a href="/pages/page-model">Framework: The Page model</a></li>
+				<li><a href="/pages/initializer-objects">Framework: Initializer objects</a></li>
 				<li><a href="/examples">Examples</a></li>
 
 				<li class="performance"><a href="/pages/performance">Performace comparison</a></li>

@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-07-08 04:19:28
+js-merged @ 2015-10-23 01:14:29
 */
 
 /*seg_desktop_include.js*/
@@ -4744,6 +4744,10 @@ Util.videoPlayer = function(_options) {
 /*u-settings.js*/
 u.site_name = "Manipulator";
 u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork me on GitHub"};
+u.translations = {};
+u.translations["en"] = {};
+u.translations["en"]["build-headline"] = "Build a Manipulator bundle now";
+u.translations["en"]["build-intro"] = "Select the Manipulator modules you want to include in your bundle.";
 
 /*ga.js*/
 u.ga_account = 'UA-49740096-1';
@@ -4812,6 +4816,7 @@ u.f.addField = function(node, _options) {
 	var field_name = "js_name";
 	var field_value = "";
 	var field_class = "";
+	var field_maxlength = "";
 	if(typeof(_options) == "object") {
 		var _argument;
 		for(_argument in _options) {
@@ -4821,6 +4826,7 @@ u.f.addField = function(node, _options) {
 				case "name"			: field_name			= _options[_argument]; break;
 				case "value"		: field_value			= _options[_argument]; break;
 				case "class"		: field_class			= _options[_argument]; break;
+				case "max"			: field_maxlength		= _options[_argument]; break;
 			}
 		}
 	}
@@ -4828,7 +4834,7 @@ u.f.addField = function(node, _options) {
 	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
 	if(field_type == "string") {
 		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
-		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":"text"});
+		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":"text", "maxlength":field_maxlength});
 	}
 	else if(field_type == "email" || field_type == "number" || field_type == "tel") {
 		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
@@ -7095,3 +7101,35 @@ Util.Objects["docpage"] = new function() {
 		}
 	}
 }
+
+/*i-front-desktop.js*/
+Util.Objects["front"] = new function() {
+	this.init = function(scene) {
+		u.bug("scene init:" + u.nodeId(scene))
+		scene.resized = function() {
+		}
+		scene.scrolled = function() {
+		}
+		scene.ready = function() {
+			page.cN.scene = this;
+			this.module_list = u.qs("ul.modules", this);
+			this.module_list.response = function(response) {
+				var h3, p, li;
+				var modules = u.qsa(".scene ul.library > li", response);
+				for(i = 0; module = modules[i]; i++) {
+					h3 = u.qs("h3", module);
+					p = u.qs("p", module);
+					li = u.ae(this, "li", {"class":"module"});
+					u.ae(li, h3);
+					u.ce(li);
+					li.clicked = function(event) {
+					}
+				}
+			}
+			u.request(this.module_list, "/docs");
+			page.resized();
+		}
+		scene.ready();
+	}
+}
+

@@ -142,8 +142,13 @@
 				<p>SVG creation</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-template">Template</a></h3>
+				<p>JSON to HTML Template parser.</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-textscaler">Textscaler</a></h3>
 				<p>Scale text on window resize.</p>
+			</li>
 			<li>
 				<h3><a href="/docs/u-timer">Timer</a></h3>
 				<p>Timeouts and intervals.</p>

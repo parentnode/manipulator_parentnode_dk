@@ -45,6 +45,46 @@
 	// }
 
 
+	// TODO: to be used for new test
+	div.testme1 = function(event) {
+		u.bug("testme1:" + event.target)
+	}
+	div.testme2 = function(event) {
+		u.bug("testme2:" + event.target)
+	}
+
+	var test1 = u.e.addWindowStartEvent(div, "testme1");
+	var test2 = u.e.addWindowStartEvent(div, div.testme2);
+
+	u.e.removeWindowStartEvent(div, test1);
+	u.e.removeWindowStartEvent(div, test2);
+
+
+	var test1 = u.e.addWindowMoveEvent(div, "testme1");
+	var test2 = u.e.addWindowMoveEvent(div, div.testme2);
+
+	u.e.removeWindowMoveEvent(div, test1);
+	u.e.removeWindowMoveEvent(div, test2);
+
+	var test1 = u.e.addWindowEndEvent(div, "testme1");
+	var test2 = u.e.addWindowEndEvent(div, div.testme2);
+
+	u.e.removeWindowEndEvent(div, test1);
+	u.e.removeWindowEndEvent(div, test2);
+
+	var test1 = u.e.addWindowResizeEvent(div, "testme1");
+	var test2 = u.e.addWindowResizeEvent(div, div.testme2);
+
+	u.e.removeWindowResizeEvent(div, test1);
+	u.e.removeWindowResizeEvent(div, test2);
+
+	var test1 = u.e.addWindowScrollEvent(div, "testme1");
+	var test2 = u.e.addWindowScrollEvent(div, div.testme2);
+
+	u.e.removeWindowScrollEvent(div, test1);
+	u.e.removeWindowScrollEvent(div, test2);
+
+
 
 
 	Util.Objects["test"] = new function() {

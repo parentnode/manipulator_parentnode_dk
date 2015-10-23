@@ -11,7 +11,7 @@ $action = $page->actions();
 
 
 $page->bodyClass("front");
-$page->pageTitle("Don't be scared - It's just JavaScript");
+$page->pageTitle("Don't be scared, it's just JavaScript");
 
 
 $page->page(array(

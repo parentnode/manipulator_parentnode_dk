@@ -14,7 +14,7 @@
 		<li><a href="/tests/u-dom">DOM</a></li>
 		<li><a href="/tests/u-events">Events</a></li>
 		<li><a href="/tests/u-events-movements">Movements events (drag, swipe, scrolling)</a></li>
-		<li><a href="/tests/u-events-browser">Browser events</a></li>
+		<li><a href="/tests/u-events-browser">Browser events (started)</a></li>
 		<li><a href="/tests/u-flash">Flash</a></li>
 		<li><a href="/tests/u-form">Form (started)</a></li>
 		<li><a href="/tests/u-form">Form builder</a></li>

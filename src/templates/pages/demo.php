@@ -8,40 +8,52 @@ $this->pageTitle("Manipulator demonstration");
 	<p>What? No demo yet ... </p>
 
 	<div class="additional">
-		<h2>Additional references</h2>
+		<h2>References</h2>
 		<ul>
 			<li>
-				<h3><a href="http://html5-app.hvadhedderde.com" target="_blank">HTML5 App Demo</a></h3>
-				<p>JES v0.8alpha - HTML5 App demo. Performance and interaction showcase.</p>
+				<h3><a href="http://think.dk" target="_blank">think.dk</a></h3>
+				<p>Manipulator v0.9 - Website</p>
 			</li>
 			<li>
-				<h3><a href="http://hvadhedderde.com" target="_blank">hvadhedderde.com</a></h3>
-				<p>JES v0.8alpha - Fully responsive website</p>
+				<h3><a href="http://gadearmbaand.dk" target="_blank">gadearmbaand.dk</a></h3>
+				<p>Manipulator v0.9 - Campaign website for the Distortion festival</p>
 			</li>
 			<li>
-				<h3><a href="http://whattheframework.org" target="_blank">whattheframework.org</a></h3>
-				<p>JES v0.8alpha - Fully responsive website</p>
+				<h3><a href="http://parentnode.dk" target="_blank">parentnode.dk</a></h3>
+				<p>Manipulator v0.9</p>
+			</li>
+			<li>
+				<h3><a href="http://dukkepartiet.dk" target="_blank">dukkepartiet.dk</a></h3>
+				<p>Manipulator v0.9 - Website</p>
+			</li>
+			<li>
+				<h3><a href="http://urbangreen.dk" target="_blank">urbangreen.dk</a></h3>
+				<p>Manipulator v0.8 - URBAN GREEN website</p>
 			</li>
 
+			<li>
+				<h3><a href="http://cphpix.dk" target="_blank">cphpix.dk</a></h3>
+				<p>Manipulator v0.8 - Website</p>
+			</li>
+			<li>
+				<h3><a href="http://oeo.dk" target="_blank">oeo.dk</a></h3>
+				<p>Manipulator v0.8 - Corporate website for OEO design studio</p>
+			</li>
 
 			<li>
-				<h3><a href="http://wdp.dk" target="_blank">wdp.dk</a></h3>
-				<p>JES v0.6 - website for Desktops, Tablets and Smartphones</p>
-			</li>
-			<li>
-				<h3><a href="http://sinisalminen.com" target="_blank">sinisalminen.com</a></h3>
-				<p>JES v0.6 - website for Desktops and Tablets</p>
+				<h3><a href="http://fralandet.dk" target="_blank">Fralandet.dk</a></h3>
+				<p>Manipulator v0.8 - Campaign website for Landbrug og Fødevarer.</p>
 			</li>
 
+			<li>
+				<h3><a href="http://e-types.com" target="_blank">e-types.com</a></h3>
+				<p>Manipulator v0.8 - Corporate website for e-Types.</p>
+			</li>
+			<li>
+				<h3><a href="http://tilbyen.dk" target="_blank">Tilbyen.dk</a></h3>
+				<p>Manipulator v0.8 - Campaign website for the Copenhagen Metro company.</p>
+			</li>
 
-			<li>
-				<h3><a href="http://peoplegroup.dk" target="_blank">peoplegroup.dk</a></h3>
-				<p>JES v0.5 - Corporate website for Desktops and Tablets</p>
-			</li>
-			<li>
-				<h3><a href="http://tuborg.dk" target="_blank">tuborg.dk</a></h3>
-				<p>JES v0.5 - Corporate website for Desktops and Tablets</p>
-			</li>
 		</ul>
 	</div>
 </div>

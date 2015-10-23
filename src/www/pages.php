@@ -11,7 +11,7 @@ $action = $page->actions();
 
 
 $page->bodyClass("pages");
-$page->pageTitle("Every good library deserves content");
+$page->pageTitle("Every good library deserves books");
 
 
 if(is_array($action) && count($action)) {

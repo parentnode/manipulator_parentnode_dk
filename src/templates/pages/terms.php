@@ -1,7 +1,7 @@
 <div class="scene terms i:terms">
 
 	<div class="article" itemscope itemtype="http://schema.org/Article">
-		<h1 itemprop="name">Cookies, privacy and terms of use</h1>
+		<h1 itemprop="headline">Cookies, privacy and terms of use</h1>
 
 		<dl class="info">
 			<dt class="published_at">Date published</dt>
@@ -9,6 +9,7 @@
 			<dt class="author">Author</dt>
 			<dd class="author" itemprop="author">Martin Kæstel Nielsen</dd>
 		</dl>
+		<div itemprop="image" content="<?= SITE_URL ?>/img/logo.png"></div>
 
 		<div class="articlebody" itemprop="articleBody">
 			<p>
