@@ -3,11 +3,11 @@ Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
 js-merged @ 2015-10-23 01:20:29
 */
 
-/*seg_tablet_include.js*/
+/*seg_smartphone_include.js*/
 
-/*seg_tablet_include.js*/
+/*seg_smartphone_include.js*/
 
-/*seg_tablet.js*/
+/*seg_mobile_touch.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
 	u.version = 0.9;
@@ -4787,159 +4787,6 @@ if(u.ga_account) {
 }
 
 
-/*u-form-builder.js*/
-u.f.addForm = function(node, _options) {
-	var form_name = "js_form";
-	var form_action = "#";
-	var form_method = "post";
-	var form_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "name"			: form_name				= _options[_argument]; break;
-				case "action"		: form_action			= _options[_argument]; break;
-				case "method"		: form_method			= _options[_argument]; break;
-				case "class"		: form_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var form = u.ae(node, "form", {"class":form_class, "name": form_name, "action":form_action, "method":form_method});
-	return form;
-}
-u.f.addFieldset = function(node) {
-	return u.ae(node, "fieldset");
-}
-u.f.addField = function(node, _options) {
-	var field_type = "string";
-	var field_label = "Value";
-	var field_name = "js_name";
-	var field_value = "";
-	var field_class = "";
-	var field_maxlength = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "type"			: field_type			= _options[_argument]; break;
-				case "label"		: field_label			= _options[_argument]; break;
-				case "name"			: field_name			= _options[_argument]; break;
-				case "value"		: field_value			= _options[_argument]; break;
-				case "class"		: field_class			= _options[_argument]; break;
-				case "max"			: field_maxlength		= _options[_argument]; break;
-			}
-		}
-	}
-	var input_id = "input_"+field_type+"_"+field_name;
-	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
-	if(field_type == "string") {
-		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
-		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":"text", "maxlength":field_maxlength});
-	}
-	else if(field_type == "email" || field_type == "number" || field_type == "tel") {
-		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
-		var input = u.ae(field, "input", {"id":input_id, "value":field_value, "name":field_name, "type":field_type});
-	}
-	else if(field_type == "checkbox") {
-		var input = u.ae(field, "input", {"id":input_id, "value":"true", "name":field_name, "type":field_type});
-		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
-	}
-	else if(field_type == "text") {
-		var label = u.ae(field, "label", {"for":input_id, "html":field_label});
-		var input = u.ae(field, "textarea", {"id":input_id, "html":field_value, "name":field_name});
-	}
-	else if(field_type == "select") {
-		u.bug("Select not implemented yet")
-	}
-	else {
-		u.bug("input type not implemented yet")
-	}
-	return field;
-}
-u.f.addAction = function(node, _options) {
-	var action_type = "submit";
-	var action_name = "js_name";
-	var action_value = "";
-	var action_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "type"			: action_type			= _options[_argument]; break;
-				case "name"			: action_name			= _options[_argument]; break;
-				case "value"		: action_value			= _options[_argument]; break;
-				case "class"		: action_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, {"include":"ul"});
-	if(!p_ul || !u.hc(p_ul, "actions")) {
-		p_ul = u.ae(node, "ul", {"class":"actions"});
-	}
-	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, {"include":"li"});
-	if(!p_li || p_ul != p_li.parentNode) {
-		p_li = u.ae(p_ul, "li", {"class":action_name});
-	}
-	else {
-		p_li = node;
-	}
-	var action = u.ae(p_li, "input", {"type":action_type, "class":action_class, "value":action_value, "name":action_name})
-	return action;
-}
-
-
-/*u-svg.js*/
-Util.svg = function(svg_object) {
-	var svg, shape, svg_shape;
-	if(svg_object.name && u._svg_cache && u._svg_cache[svg_object.name]) {
-		svg = u._svg_cache[svg_object.name].cloneNode(true);
-	}
-	if(!svg) {
-		svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-		if(svg_object.title) {
-			svg.setAttributeNS(null, "title", svg_object.title);
-		}
-		if(svg_object.class) {
-			svg.setAttributeNS(null, "class", svg_object.class);
-		}
-		if(svg_object.width) {
-			svg.setAttributeNS(null, "width", svg_object.width);
-		}
-		if(svg_object.height) {
-			svg.setAttributeNS(null, "height", svg_object.height);
-		}
-		if(svg_object.id) {
-			svg.setAttributeNS(null, "id", svg_object.id);
-		}
-		if(svg_object.node) {
-			svg.node = svg_object.node;
-		}
-		for(shape in svg_object.shapes) {
-			Util.svgShape(svg, svg_object.shapes[shape]);
-		}
-		if(svg_object.name) {
-			if(!u._svg_cache) {
-				u._svg_cache = {};
-			}
-			u._svg_cache[svg_object.name] = svg.cloneNode(true);
-		}
-	}
-	if(svg_object.node) {
-		svg_object.node.appendChild(svg);
-	}
-	return svg;
-}
-Util.svgShape = function(svg, svg_object) {
-	svg_shape = document.createElementNS("http://www.w3.org/2000/svg", svg_object["type"]);
-	svg_object["type"] = null;
-	delete svg_object["type"];
-	for(detail in svg_object) {
-		svg_shape.setAttributeNS(null, detail, svg_object[detail]);
-	}
-	return svg.appendChild(svg_shape);
-}
-
-
 /*u-form-geolocation.js*/
 Util.Form.customInit["location"] = function(form, field) {
 	field._inputs = u.qsa("input", field);
@@ -6377,300 +6224,149 @@ u.f.textEditor = function(field) {
 }
 
 
-/*beta-u-animation-to.js*/
-	u.a.parseSVGPolygon = function(value) {
-		var pairs = value.trim().split(" ");
-		var sets = [];
-		for(x in pairs) {
-			parts = pairs[x].trim().split(",");
-			for(part in parts) {
-				parts[part] = Number(parts[part]);
-			}
-			sets[x] = parts;
-		}
-		return sets;
-	}
-	u.a.parseSVGPath = function(value) {
-		var pairs = {"m":2, "l":2, "a":7, "c":6, "s":4, "q":4, "z":0};
-		value = value.replace(/-/g, " -");
-		value = value.replace(/,/g, " ");
-		value = value.replace(/(m|l|a|c|s|q|M|L|A|C|S|Q)/g, " $1 ");
-		value = value.replace(/  /g, " ");
-		sets = value.match(/(m|l|a|c|s|q|M|L|A|C|S|Q)([0-9 \-\.]+)/g);
-		for(x in sets) {
-			parts = sets[x].trim().split(" ");
-			sets[x] = parts;
-			if(parts && pairs[parts[0].toLowerCase()] == parts.length-1) {
-			}
-			else {
-			}
-		}
-		return sets;
-	}
-	u.a.getInitialValue = function(node, attribute) {
-		var value = (node.getAttribute(attribute) ? node.getAttribute(attribute) : u.gcs(node, attribute)).replace(node._unit[attribute], "")
-		if(attribute.match(/^(d|points)$/)) {
-			return value;
-		}
-		else {
-			return Number(value.replace(/auto/, 0));
-		}
-	}
-	u.a.to = function(node, transition, attributes) {
-		var transition_parts = transition.split(" ");
-		if(transition_parts.length >= 3) {
-			node._target = transition_parts[0];
-			node.duration = transition_parts[1].match("ms") ? parseFloat(transition_parts[1]) : (parseFloat(transition_parts[1]) * 1000);
-			node._ease = transition_parts[2];
-			if(transition_parts.length == 4) {
-				node.delay = transition_parts[3].match("ms") ? parseFloat(transition_parts[3]) : (parseFloat(transition_parts[3]) * 1000);
-			}
-		}
-		var value, d;
-		node._start = {};
-		node._end = {};
-		node._unit = {};
-		for(attribute in attributes) {
-			if(attribute.match(/^(d)$/)) {
-				node._start[attribute] = this.parseSVGPath(this.getInitialValue(node, attribute));
-				node._end[attribute] = this.parseSVGPath(attributes[attribute]);
-			}
-			else if(attribute.match(/^(points)$/)) {
-				node._start[attribute] = this.parseSVGPolygon(this.getInitialValue(node, attribute));
-				node._end[attribute] = this.parseSVGPolygon(attributes[attribute]);
-			}
-			else {
-				node._unit[attribute] = attributes[attribute].toString().match(/\%|px/);
-				node._start[attribute] = this.getInitialValue(node, attribute);
-				node._end[attribute] = attributes[attribute].toString().replace(node._unit[attribute], "");
-			}
-		}
-		node.easing = u.easings[node._ease];
-		node.transitionTo = function(progress) {
-			var easing = node.easing(progress);
-			for(attribute in attributes) {
-				if(attribute.match(/^(translate|rotate|scale)$/)) {
-					if(attribute == "translate") {
-						u.a.translate(this, Math.round((this._end_x - this._start_x) * easing), Math.round((this._end_y - this._start_y) * easing))
-					}
-					else if(attribute == "rotate") {
-					}
-				}
-				else if(attribute.match(/^(x1|y1|x2|y2|r|cx|cy|stroke-width)$/)) {
-					var new_value = (this._start[attribute] + ((this._end[attribute] - this._start[attribute]) * easing)) +  this._unit[attribute]
-					this.setAttribute(attribute, new_value);
-				}
-				else if(attribute.match(/^(d)$/)) {
-					var new_value = "";
-					for(x in this._start[attribute]) {
-						for(y in this._start[attribute][x]) {
-							if(parseFloat(this._start[attribute][x][y]) == this._start[attribute][x][y]) {
-								new_value += (Number(this._start[attribute][x][y]) + ((Number(this._end[attribute][x][y]) - Number(this._start[attribute][x][y])) * easing)) + " ";
-							}
-							else {
-								new_value += this._end[attribute][x][y] + " ";
-							}
-						}
-					}
-					this.setAttribute(attribute, new_value);
-				}
-				else if(attribute.match(/^(points)$/)) {
-					var new_value = "";
-					for(x in this._start[attribute]) {
-						new_value += (this._start[attribute][x][0] + ((this._end[attribute][x][0] - this._start[attribute][x][0]) * easing)) + ",";
-						new_value += (this._start[attribute][x][1] + ((this._end[attribute][x][1] - this._start[attribute][x][1]) * easing)) + " ";
-					}
-					this.setAttribute(attribute, new_value);
-				}
-				else {
-					var new_value = (this._start[attribute] + ((this._end[attribute] - this._start[attribute]) * easing)) +  this._unit[attribute]
-					u.as(node, attribute, new_value, false);
-				}
-			}
-		}
-		u.a.requestAnimationFrame(node, "transitionTo", node.duration);
-	}
-
-
-/*u-easings.js*/
-u.easings = new function() {
-	this["ease-in"] = function(progress) {
-		return Math.pow((progress*this.duration) / this.duration, 3);
-	}
-	this["linear"] = function(progress) {
-		return progress;
-	}
-	this["ease-out"] = function(progress) {
-		return 1 - Math.pow(1 - ((progress*this.duration) / this.duration), 3);
-	}
-	this["linear"] = function(progress) {
-		return (progress*this.duration) / this.duration;
-	}
-	this["ease-in-out"] = function(progress) {
-		if((progress*this.duration) > (this.duration / 2)) {
-			return 1 - Math.pow(1 - ((progress*this.duration) / this.duration), 3);
-		}
-		return Math.pow((progress*this.duration) / this.duration, 3);
-	}
-}
-
-/*i-page-desktop.js*/
+/*i-page-smartphone.js*/
+u.bug_force = true;
 u.bug_console_only = true;
 Util.Objects["page"] = new function() {
 	this.init = function(page) {
-			window.page = page;
-			page.style_tag = document.createElement("style");
-			page.style_tag.setAttribute("media", "all")
-			page.style_tag.setAttribute("type", "text/css")
-			page.style_tag = u.ae(document.head, page.style_tag);
-			page.hN = u.qs("#header");
-			page.hN.service = u.qs(".servicenavigation", page.hN);
-			page.cN = u.qs("#content", page);
-			page.nN = u.qs("#navigation", page);
-			page.nN = u.ie(page.hN, page.nN);
-			page.fN = u.qs("#footer");
-			page.fN.service = u.qs(".servicenavigation", page.fN);
-			page.fN.slogan = u.qs("p", page.fN);
-			if(page.fN.slogan) {
-				u.ce(page.fN.slogan);
-				page.fN.slogan.clicked = function(event) {
-					window.open("http://parentnode.dk");
+		page.hN = u.qs("#header");
+		page.hN.service = u.qs(".servicenavigation", page.hN);
+		u.e.drag(page.hN, page.hN);
+		page.logo = u.ie(page.hN, "a", {"class":"logo", "html":u.eitherOr(u.site_name, "Frontpage")});
+		page.logo.url = '/';
+		page.cN = u.qs("#content", page);
+		page.nN = u.qs("#navigation", page);
+		page.nN.list = u.qs("ul", page.nN);
+		page.nN = u.ie(page.hN, page.nN);
+		page.fN = u.qs("#footer");
+		page.fN.service = u.qs(".servicenavigation", page.fN);
+		page.fN.slogan = u.qs("p", page.fN);
+		u.ce(page.fN.slogan);
+		page.fN.slogan.clicked = function(event) {
+			window.open("http://parentnode.dk");
+		}
+		page.resized = function() {
+			this.calc_height = u.browserH();
+			this.calc_width = u.browserW();
+			this.available_height = this.calc_height - page.hN.offsetHeight - page.fN.offsetHeight;
+			u.as(page.cN, "height", "auto", false);
+			if(this.available_height >= page.cN.offsetHeight) {
+				u.as(page.cN, "height", this.available_height+"px", false);
+			}
+			if(this.calc_width > 1300) {
+				u.ac(page, "fixed");
+			}
+			else {
+				u.rc(page, "fixed");
+			}
+			if(page.cN && page.cN.scene) {
+				if(typeof(page.cN.scene.resized) == "function") {
+					page.cN.scene.resized();
 				}
 			}
-			page.logo = u.ie(page.hN, "a", {"class":"logo", "html":u.eitherOr(u.site_name, "Frontpage")});
-			page.logo.url = '/';
-			page.logo.font_size = parseInt(u.gcs(page.logo, "font-size"));
-			page.logo.font_size_gap = page.logo.font_size-14;
-			page.logo.top_offset = u.absY(page.nN) + parseInt(u.gcs(page.nN, "padding-top"));
-			page.style_tag.sheet.insertRule("#header a.logo {}", 0);
-			page.logo.css_rule = page.style_tag.sheet.cssRules[0];
-			if(u.github_fork) {
-				var github = u.ae(page.hN.service, "li", {"html":'<a href="'+u.github_fork.url+'">'+u.github_fork.text+'</a>', "class":"github"});
-				u.ce(github, {"type":"link"});
+		}
+		page.scrolled = function() {
+			if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
+				page.cN.scene.scrolled();
 			}
-			page.resized = function() {
-				u.bug("page resized")
-				page.browser_h = u.browserH();
-				page.browser_w = u.browserW();
-				page.available_height = page.browser_h - page.hN.offsetHeight - page.fN.offsetHeight;
-				u.as(page.cN, "min-height", "auto", false);
-				if(page.available_height >= page.cN.offsetHeight) {
-					u.as(page.cN, "minHeight", page.available_height+"px", false);
+		}
+		page.orientationchanged = function() {
+			if(u.hc(page.bn_nav, "open")) {
+				u.as(page.hN, "height", window.innerHeight + "px");
+			}
+		}
+		page.ready = function() {
+			if(!u.hc(this, "ready")) {
+				u.addClass(this, "ready");
+				u.e.addEvent(window, "resize", page.resized);
+				u.e.addEvent(window, "scroll", page.scrolled);
+				u.e.addEvent(window, "orientationchange", page.orientationchanged);
+				this.initNavigation();
+				this.resized();
+				if(!u.getCookie("terms_v1")) {
+					var terms = u.ie(page.cN, "div", {"class":"terms_notification"});
+					u.ae(terms, "h3", {"html":"We love <br />cookies and privacy"});
+					var bn_accept = u.ae(terms, "a", {"class":"accept", "html":"Accept"});
+					bn_accept.terms = terms;
+					u.ce(bn_accept);
+					bn_accept.clicked = function() {
+						this.terms.parentNode.removeChild(this.terms);
+						u.saveCookie("terms_v1", true, {"expiry":new Date(new Date().getTime()+(1000*60*60*24*365)).toGMTString()});
+					}
+					if(!location.href.match(/\/terms/)) {
+						var bn_details = u.ae(terms, "a", {"class":"details", "html":"Details"});
+						bn_details.url = "/terms";
+						u.ce(bn_details, {"type":"link"});
+					}
 				}
-				if(page.browser_w > 1300) {
-					u.ac(page, "fixed");
+			}
+		}
+		page.initNavigation = function() {
+			this.bn_nav = u.qs(".servicenavigation li.navigation", this.hN);
+			u.ae(this.bn_nav, "div");
+			u.ae(this.bn_nav, "div");
+			u.ae(this.bn_nav, "div");
+			u.ce(this.bn_nav);
+			this.bn_nav.clicked = function(event) {
+				if(u.hc(this, "open")) {
+					u.rc(this, "open");
+					u.as(page.hN, "height", "60px");
+					u.as(page.nN, "display", "none");
 				}
 				else {
-					u.rc(page, "fixed");
-				}
-				if(page.cN && page.cN.scene) {
-					if(typeof(page.cN.scene.resized) == "function") {
-						page.cN.scene.resized();
-					}
-				}
-			}
-			page.scrolled = function() {
-				page.scrolled_y = u.scrollY();
-				if(page.scrolled_y < page.logo.top_offset) {
-					page.logo.is_reduced = false;
-					var reduce_font = (1-(page.logo.top_offset-page.scrolled_y)/page.logo.top_offset) * page.logo.font_size_gap;
-					page.logo.css_rule.style.setProperty("font-size", (page.logo.font_size-reduce_font)+"px", "important");
-				}
-				else if(!page.logo.is_reduced) {
-					page.logo.is_reduced = true;
-					page.logo.css_rule.style.setProperty("font-size", (page.logo.font_size-page.logo.font_size_gap)+"px", "important");
-				}
-				if(page.nN.top_offset && page.scrolled_y < page.nN.top_offset) {
-					page.nN.is_reduced = false;
-					var factor = (1-(page.nN.top_offset-page.scrolled_y)/page.nN.top_offset);
-					var reduce_font = factor * page.nN.font_size_gap;
-					page.nN.list.css_rule.style.setProperty("font-size", (page.nN.font_size-reduce_font)+"px", "important");
-					var reduce_top = factor * page.nN.top_offset_gap;
-					page.nN.css_rule.style.setProperty("top", (page.nN.top_offset-reduce_top)+"px", "important");
-				}
-				else if(page.nN.top_offset && !page.nN.is_reduced) {
-					page.nN.is_reduced = true;
-					page.nN.list.css_rule.style.setProperty("font-size", (page.nN.font_size-page.nN.font_size_gap)+"px", "important");
-					page.nN.css_rule.style.setProperty("top", (page.nN.top_offset-page.nN.top_offset_gap)+"px", "important");
-				}
-				if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
-					page.cN.scene.scrolled();
+					u.ac(this, "open");
+					u.as(page.hN, "height", window.innerHeight + "px");
+					u.as(page.nN, "display", "block");
+					page.nN.start_drag_y = (window.innerHeight - 100) - page.nN.offsetHeight;
+					page.nN.end_drag_y = page.nN.offsetHeight;
 				}
 			}
-			page.ready = function() {
-				if(!this.is_ready) {
-					this.is_ready = true;
-					u.e.addEvent(window, "resize", page.resized);
-					u.e.addEvent(window, "scroll", page.scrolled);
-					this.initNavigation();
-					this.resized();
-					if(!u.getCookie("terms_v1")) {
-					}
-				}
-			}
-			page.initNavigation = function() {
-				var i, node;
-				page.nN.list = u.qs("ul", page.nN);
-				page.nN.list.nodes = u.qsa("li", page.nN);
-				if(page.nN.list.nodes.length) {
-					page.nN.font_size = parseInt(u.gcs(page.nN.list.nodes[1], "font-size"));
-					page.nN.font_size_gap = page.nN.font_size-14;
-					page.nN.top_offset = u.absY(page.nN) + parseInt(u.gcs(page.nN, "padding-top"));
-					page.nN.top_offset_gap = page.nN.top_offset-10;
-					page.style_tag.sheet.insertRule("#navigation {}", 0);
-					page.nN.css_rule = page.style_tag.sheet.cssRules[0];
-					page.style_tag.sheet.insertRule("#navigation ul li {}", 0);
-					page.nN.list.css_rule = page.style_tag.sheet.cssRules[0];
-				}
-				this.hN.nodes = u.qsa("#navigation li,a.logo", page.hN);
-				for(i = 0; node = this.hN.nodes[i]; i++) {
+			u.e.drag(this.nN, [0, (window.innerHeight - 100) - this.nN.offsetHeight, this.hN.offsetWidth, this.nN.offsetHeight], {"strict":false, "elastica":200, "vertical_lock":true});
+			var i, node;
+			this.hN.nodes = u.qsa("#navigation li,a.logo", page.hN);
+			for(i = 0; node = this.hN.nodes[i]; i++) {
 				u.ce(node, {"type":"link"});
-					node._mousedover = function() {
+				node._mousedover = function() {
+					this.transitioned = function() {
 						this.transitioned = function() {
-							this.transitioned = function() {
-								this.transitioned = function() {
-									u.a.transition(this, "none");
-								}
-								u.a.transition(this, "all 0.1s ease-in-out");
-								u.a.scale(this, 1.2);
-							}
-							u.a.transition(this, "all 0.1s ease-in-out");
-							u.a.scale(this, 1.15);
+							u.a.transition(this, "none");
 						}
 						u.a.transition(this, "all 0.1s ease-in-out");
-						u.a.scale(this, 1.22);
+						u.a.scale(this, 1.15);
 					}
-					node._mousedout = function() {
+					u.a.transition(this, "all 0.1s ease-in-out");
+					u.a.scale(this, 1.22);
+				}
+				node._mousedout = function() {
+					this.transitioned = function() {
 						this.transitioned = function() {
-							this.transitioned = function() {
-								u.a.transition(this, "none");
-							}
-							u.a.transition(this, "all 0.1s ease-in");
-							u.a.scale(this, 1);
+							u.a.transition(this, "none");
 						}
-						u.a.transition(this, "all 0.1s ease-in");
-						u.a.scale(this, 0.8);
+						u.a.transition(this, "all 0.1s ease-in-out");
+						u.a.scale(this, 1);
 					}
-					if(u.e.event_pref == "mouse") {
-						u.e.addEvent(node, "mouseover", node._mousedover);
-						u.e.addEvent(node, "mouseout", node._mousedout);
-					}
-					else {
-						u.e.addStartEvent(node, node._mousedover);
-						u.e.addEndEvent(node, node._mousedout);
-					}
+					u.a.transition(this, "all 0.1s ease-in-out");
+					u.a.scale(this, 0.9);
+				}
+				if(u.e.event_pref == "mouse") {
+					u.e.addEvent(node, "mouseover", node._mousedover);
+					u.e.addEvent(node, "mouseout", node._mousedout);
+				}
+				else {
+					u.e.addEvent(node, "touchstart", node._mousedover);
+					u.e.addEvent(node, "touchend", node._mousedout);
 				}
 			}
-			page.ready();
+		}
+		page.ready();
 	}
 }
 u.e.addDOMReadyEvent(u.init);
 
 
-/*i-login-desktop.js*/
+/*i-login-smartphone.js*/
 Util.Objects["login"] = new function() {
 	this.init = function(scene) {
-		u.bug("scene init:" + u.nodeId(scene))
 		scene.resized = function() {
 		}
 		scene.scrolled = function() {
@@ -6678,7 +6374,6 @@ Util.Objects["login"] = new function() {
 		scene.ready = function() {
 			this._form = u.qs("form", this);
 			u.f.init(this._form);
-			this._form.fields["username"].focus();
 			page.cN.scene = this;
 			page.resized();
 		}
@@ -6687,10 +6382,9 @@ Util.Objects["login"] = new function() {
 }
 
 
-/*i-signup-desktop.js*/
+/*i-signup-smartphone.js*/
 Util.Objects["signup"] = new function() {
 	this.init = function(scene) {
-		u.bug("scene init:" + u.nodeId(scene))
 		scene.resized = function() {
 		}
 		scene.scrolled = function() {
@@ -6706,7 +6400,7 @@ Util.Objects["signup"] = new function() {
 }
 
 
-/*i-newsletter-desktop.js*/
+/*i-newsletter-smartphone.js*/
 Util.Objects["newsletter"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6724,56 +6418,26 @@ Util.Objects["newsletter"] = new function() {
 }
 
 
-/*i-article-desktop.js*/
+/*i-article-smartphone.js*/
 Util.Objects["article"] = new function() {
 	this.init = function(article) {
-		u.bug("article init:" + u.nodeId(article) + "," + u.qs("h1,h2,h3", article).innerHTML)
 		var i, image;
 		article._images = u.qsa("div.image,div.media", article);
 		for(i = 0; image = article._images[i]; i++) {
-			image.node = article;
 			image._id = u.cv(image, "item_id");
 			image._format = u.cv(image, "format");
 			image._variant = u.cv(image, "variant");
+			u.ce(image);
+			u.rc(image, "link");
 			if(image._id && image._format) {
-				image._image_src = "/images/" + image._id + "/" + (image._variant ? image._variant+"/" : "") + image.offsetWidth + "x." + image._format;
+				image._image_src = "/images/" + image._id + "/" + (image._variant ? image._variant+"/" : "") + "480x." + image._format;
+				image._image = u.ie(image, "img");
 				u.a.setOpacity(image, 0);
 				image.loaded = function(queue) {
-					u.ac(this, "loaded");
-					this._image = u.ie(this, "img");
-					this._image.image = this;
+					if(u.absY(this) < u.scrollY()) {
+						window.scrollTo(0, u.scrollY()+queue[0].image.height)
+					}
 					this._image.src = queue[0].image.src;
-					if(this.node.article_list) {
-						this.node.article_list.correctScroll(this.node, this, -10);
-					}
-					u.ce(this._image);
-					this._image.clicked = function() {
-						if(u.hc(this.image, "fullsize")) {
-							u.a.transition(this, "all 0.3s ease-in-out");
-							u.rc(this.image, "fullsize");
-							this.src = this.image._image_src;
-						}
-						else {
-							u.a.transition(this, "all 0.3s ease-in-out");
-							u.ac(this.image, "fullsize");
-							if(this._fullsize_src) {
-								this.src = this._fullsize_src;
-							}
-							else {
-								this._fullsize_width = 1300;
-								this._fullsize_src = "/images/" + this.image._id + "/" + (this.image._variant ? this.image._variant+"/" : "") + this._fullsize_width + "x." + this.image._format;
-								this.response = function() {
-									this.src = this._fullsize_src;
-								}
-								this.responseError = function() {
-									this._fullsize_width = this._fullsize_width-200;
-									this._fullsize_src = "/images/" + this._id + "/" + (this.image._variant ? this.image._variant+"/" : "") + this._fullsize_width + "x." + this.image._format;
-									u.request(this, this._fullsize_src);
-								}
-								u.request(this, this._fullsize_src);
-							}
-						}
-					}
 					u.a.transition(this, "all 0.5s ease-in-out");
 					u.a.setOpacity(this, 1);
 				}
@@ -6784,80 +6448,15 @@ Util.Objects["article"] = new function() {
 		if(article.geolocation && typeof(u.injectGeolocation) == "function") {
 			u.injectGeolocation(article);
 		}
-		var hardlink = u.qs("dd.hardlink", article);
-		article.hardlink = hardlink ? hardlink.innerHTML : false;
-		if(article.hardlink && typeof(u.injectSharing) == "function") {
-			article.shareInjected = function() {
-				this.article_list.correctScroll(this, this.sharing);
-			}
-			u.injectSharing(article);
-		}
-	}
-}
-
-
-/*i-todolist-desktop.js*/
-Util.Objects["todolist"] = new function() {
-	this.init = function(scene) {
-		scene.resized = function() {
-		}
-		scene.scrolled = function() {
-		}
-		scene.ready = function() {
-			u.bug("scene.ready:" + u.nodeId(this));
-			this.nodes = u.qsa("li.item", this);
-			if(this.nodes.length) {
-				var i, node;
-				for(i = 0; node = this.nodes[i]; i++) {
-					node.item_id = u.cv(node, "id");
-					node.actions = u.qs("ul.actions", node);
-					node.close_form = u.qs("li.close form", node);
-					u.f.init(node.close_form);
-					node.bn_close = u.qs("input[type=submit]", node.close_form);
-					node.bn_close.node = node;
-					u.e.click(node.bn_close)
-					node.bn_close.clicked = function(event) {
-						u.e.kill(event);
-						this.response = function(response) {
-							if(response.cms_status == "success") {
-								u.ac(this.node.actions, "closed");
-							}
-							else {
-							}
-						}
-						u.request(this, this.form.action, {"method":this.form.method, "params":u.f.getParams(this.form)});
-					}
-					node.open_form = u.qs("li.open form", node);
-					u.f.init(node.open_form);
-					node.bn_open = u.qs("input[type=submit]", node.open_form);
-					node.bn_open.node = node;
-					u.e.click(node.bn_open)
-					node.bn_open.clicked = function(event) {
-						u.e.kill(event);
-						this.response = function(response) {
-							if(response.cms_status == "success") {
-								u.rc(this.node.actions, "closed");
-							}
-							else {
-							}
-						}
-						u.request(this, this.form.action, {"method":this.form.method, "params":u.f.getParams(this.form)});
-					}
-				}
-			}
-			page.cN.scene = this;
-			page.resized();
-		}
-		scene.ready();
 	}
 }
 
 
 
-/*i-documentation-desktop.js*/
+/*i-documentation-smartphone.js*/
 Util.Objects["docsindex"] = new function() {
 	this.init = function(scene) {
-		var files = u.qsa("div.files li", scene);
+		var files = u.qsa(".files li", scene);
 		var i, node;
 		scene.div_search = u.qs(".search", scene);
 		scene.div_search.h2 = u.ae(scene.div_search, "h2", {"html":"Search utilities and tools"});
@@ -6865,6 +6464,7 @@ Util.Objects["docsindex"] = new function() {
 		var fieldset = u.f.addFieldset(form);
 		var field = u.f.addField(fieldset, {"name":"search", "label":"Search term of minimum 3 chars"})
 		u.f.init(form);
+		u.as(field._input, "width", (u.browserW()-60)+"px");
 		field._input.div_search = scene.div_search;
 		field._input.results = u.ae(scene.div_search, "div", {"class":"results"});
 		for(i = 0; node = files[i]; i++) {
@@ -6925,30 +6525,28 @@ Util.Objects["docpage"] = new function() {
 		var functions = u.qsa(".function", scene);
 		for(i = 0; func = functions[i]; i++) {
 			func._header = u.qs(".header", func);
-			func._header.expandarrow = u.svg({
-				"name":"expandarrow",
+			func._header._func = func;
+			u.svg({
 				"node":func._header,
-				"class":"arrow",
-				"width":17,
-				"height":17,
+				"width": "15px",
+				"height": "12px",
 				"shapes":[
 					{
-						"type": "line",
-						"x1": 2,
-						"y1": 2,
-						"x2": 7,
-						"y2": 9
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":7,
+						"y2":12
 					},
 					{
-						"type": "line",
-						"x1": 6,
-						"y1": 9,
-						"x2": 11,
-						"y2": 2
+						"type":"line",
+						"x1":6,
+						"y1":12,
+						"x2":12,
+						"y2":0
 					}
 				]
 			});
-			func._header._func = func;
 			func._body = u.qs(".body", func);
 			u.as(func._body, "display", "none");
 			func._body._func = func;
@@ -6971,26 +6569,24 @@ Util.Objects["docpage"] = new function() {
 			func._uses = u.qs(".uses", func);
 			u.as(func._uses, "height", "20px");
 			func._uses._func = func;
-			func._uses.expandarrow = u.svg({
-				"name":"expandarrow",
+			u.svg({
 				"node":func._uses,
-				"class":"arrow",
-				"width":17,
-				"height":17,
+				"width": "15px",
+				"height": "12px",
 				"shapes":[
 					{
-						"type": "line",
-						"x1": 2,
-						"y1": 2,
-						"x2": 7,
-						"y2": 9
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":5,
+						"y2":9
 					},
 					{
-						"type": "line",
-						"x1": 6,
-						"y1": 9,
-						"x2": 11,
-						"y2": 2
+						"type":"line",
+						"x1":4,
+						"y1":9,
+						"x2":8,
+						"y2":0
 					}
 				]
 			});
@@ -7022,26 +6618,24 @@ Util.Objects["docpage"] = new function() {
 			scene._files._body = u.qs("div.body", scene._files);
 			u.as(scene._files._body, "display", "none");
 			scene._files._body._files = scene._files;
-			scene._files._header.expandarrow = u.svg({
-				"name":"expandarrow",
+			u.svg({
 				"node":scene._files._header,
-				"class":"arrow",
-				"width":17,
-				"height":17,
+				"width": "15px",
+				"height": "12px",
 				"shapes":[
 					{
-						"type": "line",
-						"x1": 2,
-						"y1": 2,
-						"x2": 7,
-						"y2": 9
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":7,
+						"y2":12
 					},
 					{
-						"type": "line",
-						"x1": 6,
-						"y1": 9,
-						"x2": 11,
-						"y2": 2
+						"type":"line",
+						"x1":6,
+						"y1":12,
+						"x2":12,
+						"y2":0
 					}
 				]
 			});
@@ -7064,26 +6658,24 @@ Util.Objects["docpage"] = new function() {
 			scene._segments._body = u.qs("div.body", scene._segments);
 			u.as(scene._segments._body, "display", "none");
 			scene._segments._body._segments = scene._segments;
-			scene._segments._header.expandarrow = u.svg({
-				"name":"expandarrow",
+			u.svg({
 				"node":scene._segments._header,
-				"class":"arrow",
-				"width":17,
-				"height":17,
+				"width": "15px",
+				"height": "12px",
 				"shapes":[
 					{
-						"type": "line",
-						"x1": 2,
-						"y1": 2,
-						"x2": 7,
-						"y2": 9
+						"type":"line",
+						"x1":1,
+						"y1":0,
+						"x2":7,
+						"y2":12
 					},
 					{
-						"type": "line",
-						"x1": 6,
-						"y1": 9,
-						"x2": 11,
-						"y2": 2
+						"type":"line",
+						"x1":6,
+						"y1":12,
+						"x2":12,
+						"y2":0
 					}
 				]
 			});

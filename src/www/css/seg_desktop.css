@@ -169,6 +169,7 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 #content .scene div.categories ul.tags li:after {content: "";}
 #content .scene div.categories ul.actions {padding-bottom: 0;}
 #content .scene div.categories ul.actions li {padding-bottom: 0; font-size: 15px; display: block;}
+#content .scene div.article {position: relative;}
 #content .scene div.article ul.tags {padding-bottom: 30px;}
 #content .scene div.article ul.tags a {color: #cccccc;}
 #content .scene ul.articles {padding: 0;}
@@ -381,7 +382,7 @@ iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; 
 @media all and (-webkit-min-device-pixel-ratio:0) {
 	#content ul.actions input.button {padding: 3px 12px 5px;}
 }
-#content ul.actions a.button {display: block; text-decoration: none; height: 14px; padding: 6px 12px 8px;}
+#content ul.actions a.button {display: block; text-decoration: none; height: 16px; padding: 6px 12px 8px;}
 #content ul.actions input.button,
 #content ul.actions a.button {font-size: 14px; background-color: #dedede; color: #333333; border: none; cursor: pointer; border-radius: 3px;}
 #content ul.actions input.button.primary,
@@ -494,6 +495,11 @@ body #selection_options ul.actions a.button {display: block; text-decoration: no
 body #selection_options ul.actions input.button,
 body #selection_options ul.actions a.button {background-color: #8c9399; color: #ffffff; border: none; cursor: pointer; border-radius: 3px;}
 .delete_selection {position: absolute; z-index: 1150; top: 0; left: 0; border-radius: 8px; width: 14px; height: 14px; font-size: 10px; line-height: 14px; text-align: center; background: #ffffff; border: 1px solid #000000; cursor: pointer;}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	#content .field.files input[type=file] {font-size: 130px;}
+	#content .field.html .editor div.tag.media input {font-size: 130px;}
+	#content .field.html .editor div.tag.file input {font-size: 130px;}	
+}
 
 
 /*s-itemtypes-desktop.css*/
@@ -637,6 +643,19 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 
 
 /*s-pages-desktop.css*/
+#content .scene.front ul.modules {list-style: none; margin: 0; padding-left: 45px; padding-right: 45px; font-size: 0; text-align: center; width: auto;}
+#content .scene.front ul.modules li {display: inline-block; vertical-align: top; width: 108px; border-radius: 5px; 
+	background: #9b001c; margin: 0 5px 10px; padding: 0;
+	text-align: center;
+}
+#content .scene.front ul.modules li h3 {
+	padding: 0; font-size: 12px; 
+	display: table; height: 40px; width: 100%;
+}
+#content .scene.front ul.modules li h3 a {
+	display: table-cell; vertical-align: middle; text-align: center; color: #ffffff; padding: 0 10px;
+}
+#content .scene .article dl.info {display: none;}
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px; border: none;}
 #content .scene.gettingstarted {}
