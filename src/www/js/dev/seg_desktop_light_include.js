@@ -11,22 +11,22 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-events
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-browser.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.js"></script>');
-//
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor-desktop_light.js"></script>');
-//
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-keyboard.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor-desktop_light.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-keyboard.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 // document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 // document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
 // document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
