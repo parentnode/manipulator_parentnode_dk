@@ -53,6 +53,7 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 					catch(exception) {
 						wrapper.IEreadyState = true;
 					}
+
 					if(typeof(wrapper.statechanged) == "function") {
 						wrapper.statechanged();
 						wrapper.parentNode.removeChild(wrapper);
