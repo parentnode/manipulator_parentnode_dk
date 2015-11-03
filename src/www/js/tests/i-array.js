@@ -1,5 +1,6 @@
 Util.Objects["array"] = new function() {
 	this.init = function(div) {
+		u.bug("array init")
 
 		div.test_results = {};
 
