@@ -46,7 +46,7 @@ Util.Objects["scene"] = new function() {
 
 			}
 			u.bug("make request")
-			u.request(this, "/tests");
+//			u.request(this, "/tests");
 			u.bug("request made")
 
 			page.resized();
