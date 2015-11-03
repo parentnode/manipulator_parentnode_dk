@@ -50,7 +50,7 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 					u.bug("ready")
 					wrapper.status = wrapper.xmlhttp.status;
 					u.bug("ready")
-					wrapper.setAttribute("readyState", 4):
+//					wrapper.setAttribute("readyState", 4):
 //					wrapper.readyState = 4;
 					u.bug("ready")
 					if(typeof(wrapper.statechanged) == "function") {
