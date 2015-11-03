@@ -7,7 +7,7 @@ $this->headerIncludes(array(
 <div class="scene i:scene">
 	<h1>Array</h1>
 
-	<div class="tests i:array"></div>
+	<div class="tests i:array2"></div>
 
 </div>
 <div class="comments"></div>
