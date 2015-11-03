@@ -1,6 +1,10 @@
 <div class="scene">
 	<h1>Tests</h1>
 	<p>Tests for the Manipulator library</p>
+	
+	<h2>You are currently testing:</h2>
+	<p>UA: <?= $_SERVER["HTTP_USER_AGENT"] ?></p>
+	<p>Segment: <?= $this->segment() ?></p>
 
 	<h2>Automatic tests</h2>
 	<ul class="automatic">
