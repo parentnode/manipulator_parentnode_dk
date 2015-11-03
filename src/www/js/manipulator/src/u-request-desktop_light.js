@@ -7,7 +7,6 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 
 	// Create xmlhttprequest object 
 	Util.createRequestObject = function() {
-		u.bug("create request object")
 		var xmlhttp;
 
 		if(window.XMLHttpRequest) {
@@ -41,24 +40,19 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 
 			// perform 
 			wrapper.xmlhttp.onreadystatechange = function() {
-				u.bug("response received")
 				// wrapper.xmlhttp should be this, but does not work in IE or Firefox 2
 				// wait for correct readyState, map variables and call back to main loop
 				if(wrapper.xmlhttp.readyState == 4) {
-					u.bug("ready")
 					wrapper.responseText = wrapper.xmlhttp.responseText;
-					u.bug("ready")
 					wrapper.status = wrapper.xmlhttp.status;
-					u.bug("ready")
+
+					// IE 6 cannot update readyState value on element
 					try {
 						wrapper.readyState = 4;
 					}
 					catch(exception) {
-						u.bug("readyState error")
+						wrapper.IEreadyState = true;
 					}
-					wrapper.fallbackState = true;
-					wrapper.setAttribute("readyState", "4"):
-					u.bug("ready")
 					if(typeof(wrapper.statechanged) == "function") {
 						wrapper.statechanged();
 						wrapper.parentNode.removeChild(wrapper);
