@@ -25,6 +25,7 @@ Util.Objects["scene"] = new function() {
 
 				var i, test, current_location;
 				for(i = 0; test = tests[i]; i++) {
+					u.bug("location.href:" + location.href)
 					current_location = location.href;
 					if(location.search) {
 						current_location = current_location.replace(location.search, "");
@@ -34,6 +35,7 @@ Util.Objects["scene"] = new function() {
 					}
 
 					if(test.href == current_location) {
+						u.bug("found match")
 						if(tests.length > i+1) {
 							page.fN.innerHTML = "";
 							u.ae(page.fN, "a", {"html":"Next test: " + tests[i+1].innerHTML, "href":tests[i+1].href});
