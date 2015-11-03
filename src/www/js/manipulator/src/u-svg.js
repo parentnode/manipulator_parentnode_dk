@@ -29,7 +29,7 @@
 
 
 Util.svg = function(svg_object) {
-//	u.bug("create svg");
+	u.bug("create svg");
 
 	var svg, shape, svg_shape;
 
@@ -66,9 +66,9 @@ Util.svg = function(svg_object) {
 		// if(svg_object.id) {
 		// 	svg.setAttributeNS(null, "id", svg_object.id);
 		// }
-		// if(svg_object.node) {
-		// 	svg.node = svg_object.node;
-		// }
+		if(svg_object.node) {
+			svg.node = svg_object.node;
+		}
 
 
 		// TODO: implement filters
