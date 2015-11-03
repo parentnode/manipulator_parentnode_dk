@@ -481,10 +481,19 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
+				<dt>desktop_edge</dt>
+				<dd>No include required</dd>
+
+				<dt>desktop_ie11</dt>
+				<dd>No include required</dd>
+
 				<dt>desktop</dt>
 				<dd>No include required</dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd>No include required</dd>
+
+				<dt>desktop_ie9</dt>
 				<dd>No include required</dd>
 
 				<dt>desktop_light</dt>
@@ -493,10 +502,10 @@
 				<dt>tablet</dt>
 				<dd>No include required</dd>
 
-				<dt>tv</dt>
-				<dd><span class="file">u-array-desktop_light.js</span></dd>
+				<dt>tablet_light</dt>
+				<dd>No include required</dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd>No include required</dd>
 	
 				<dt>mobile</dt>
@@ -505,7 +514,10 @@
 				<dt>mobile_light</dt>
 				<dd class="todo">not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd><span class="file">u-array-desktop_light.js</span></dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

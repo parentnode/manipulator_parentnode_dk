@@ -1,41 +1,15 @@
-<style type="text/css">
-	.scene div {margin: 0 0 5px;}
-	.correct {background: green;}
-	.error {background: red;}
-</style>
+<?php
+$this->headerIncludes(array(
+	"/js/tests/i-init.js"
+));
+?>
 
-<script type="text/javascript">
-
-	var time = new Date().getTime();
-
-	Util.Objects["test"] = new function() {
-		this.init = function(scene) {
-			load_time = new Date().getTime();
-//			text += "#onload ("+(load_time - time)+")<br>" + document.body + "<br>" + document.readyState + "<br>";
-
-//			u.bug(text);
-			if(!scene.initialized) {
-				scene.initialized = true;
-				var init_div = u.qs(".init", scene)
-				init_div.parentNode.removeChild(init_div);
-
-				u.ae(scene, "div", {"class":"correct", "html":"Initialized: "+(load_time - time)});
-			}
-			else {
-				u.ae(scene, "div", {"class":"error", "html":"Multiple initializations"});
-			}
-
-		}
-
-	}
-
-	
-</script>
-
-<div class="scene i:test">
+<div class="scene i:scene">
 	<h1>Init</h1>
 
-	<div class="init">Waiting for initialization</div>
+	<div class="tests i:init">
+		<div class="init error">u.init: waiting</div>
+	</div>
 
 </div>
 <div class="comments"></div>

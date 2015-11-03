@@ -1,0 +1,9 @@
+#content .scene div.tests .simple {padding: 0 0 30px; border-bottom: 1px solid #000000; margin: 0 0 30px;}
+#content .scene div.tests .complex {border-bottom: 1px solid #000000; margin: 0 0 30px;}
+#content .scene div.tests .complex p {padding-left: 0; padding-right: 0;}
+#content .scene div.tests .sortable {list-style: none;}
+#content .scene div.tests .sortable li {padding: 10px; margin: 1px; border: 1px solid #dedede; color: #dedede;}
+#content .scene div.tests .simple li,
+#content .scene div.tests .sortable li.draggable {color: red; border: 1px solid red; cursor: move;}
+
+#content .scene div.tests li.target {background: green;}

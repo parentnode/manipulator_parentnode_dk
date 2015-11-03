@@ -6,17 +6,16 @@
 	<!-- If you want to help build the ultimate frontend-centered platform, visit parentnode.dk -->
 	<title><?= SITE_URL ?> - <?= $this->pageTitle() ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="keywords" content="JavaScript library object oo mvc js parentnode html css animation manipulation" />
+	<meta name="keywords" content="tests" />
 	<meta name="description" content="<?= $this->pageDescription() ?>" />
 	<meta name="viewport" content="initial-scale=1, user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<? if(session()->value("dev")) { ?>
-	<link type="text/css" rel="stylesheet" media="all" href="/css/lib/seg_<?= $this->segment() ?>_include.css" />
-<? } else { ?>
-	<link type="text/css" rel="stylesheet" media="all" href="/css/seg_<?= $this->segment() ?>.css" />
-<? } ?>
-	<script type="text/javascript" src="/js/dev/seg_<?= $this->segment() ?>_include.js"></script>
+
+	<link type="text/css" rel="stylesheet" media="all" href="/css/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.css" />
+	<script type="text/javascript" src="/js/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.js"></script>
+
+	<?= $this->headerIncludes() ?>
 </head>
 
 <body<?= $HTML->attribute("class", $this->bodyClass()) ?>>

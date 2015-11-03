@@ -503,10 +503,19 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
+				<dt>desktop_edge</dt>
+				<dd><span class="file">u-debug.js</span></dd>
+
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-debug.js</span></dd>
+
 				<dt>desktop</dt>
 				<dd><span class="file">u-debug.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-debug.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-debug.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -515,10 +524,10 @@
 				<dt>tablet</dt>
 				<dd><span class="file">u-debug.js</span></dd>
 
-				<dt>tv</dt>
+				<dt>tablet_light</dt>
 				<dd><span class="file">u-debug.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-debug.js</span></dd>
 	
 				<dt>mobile</dt>
@@ -527,7 +536,10 @@
 				<dt>mobile_light</dt>
 				<dd class="todo">not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd><span class="file">u-debug.js</span></dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

@@ -68,7 +68,7 @@
 										<dd>
 											path to save cookie with - default is current path 
 										</dd>
-										<dt><span class="value">expiry</span></dt>
+										<dt><span class="value">expires</span></dt>
 										<dd>
 											Expiry date like, "Tue, 05-Apr-2020 05:00:00 GMT"
 										</dd>
@@ -91,11 +91,11 @@
 							<p>Saves cookie=Chocolate%20Chip as session cookie</p>
 						</div>
 						<div class="example">
-							<code>u.saveCookie("cookie", "Oatmeal", {"expiry":"Tue, 05-Apr-2020 05:00:00 GMT"});</code>
+							<code>u.saveCookie("cookie", "Oatmeal", {"expires":"Tue, 05-Apr-2020 05:00:00 GMT"});</code>
 							<p>Saves cookie=Oatmeal as permanent cookie, with expiry Tue, 05-Apr-2020 05:00:00 GMT</p>
 						</div>
 						<div class="example">
-							<code>u.saveCookie("cookie", "Oatmeal", {"expiry":true});</code>
+							<code>u.saveCookie("cookie", "Oatmeal", {"expires":true});</code>
 							<p>Saves cookie=Oatmeal as permanent cookie, with expiry Mon, 04-Apr-2020 05:00:00 GMT</p>
 						</div>
 					</div>
@@ -563,12 +563,19 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
-				<!-- specify which files are required for which segments -->
-				<!-- add todo class if segment is not tested yet -->
+				<dt>desktop_edge</dt>
+				<dd><span class="file">u-cookie.js</span></dd>
+
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-cookie.js</span></dd>
+
 				<dt>desktop</dt>
 				<dd><span class="file">u-cookie.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-cookie.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-cookie.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -580,13 +587,10 @@
 				<dt>tablet</dt>
 				<dd><span class="file">u-cookie.js</span></dd>
 
-				<dt>tv</dt>
-				<dd>
-					<span class="file">u-cookie.js</span> +
-					<span class="file">u-json-desktop_light.js</span>
-				</dd>
+				<dt>tablet_light</dt>
+				<dd><span class="file">u-cookie.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-cookie.js</span></dd>
 	
 				<dt>mobile</dt>
@@ -595,7 +599,13 @@
 				<dt>mobile_light</dt>
 				<dd class="todo">not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-cookie.js</span> +
+					<span class="file">u-json-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

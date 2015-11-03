@@ -1,0 +1,2 @@
+#content .scene .remaining {background: red; color: white;}
+#content .scene .remaining.done {background: green; color: white;}

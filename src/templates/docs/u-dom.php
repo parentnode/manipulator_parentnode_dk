@@ -2737,6 +2737,85 @@ u.ie(header, nav);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.nodeWithin">
+				<div class="header">
+					<h3>Util.nodeWithin</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.nodeWithin</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Boolean</span> = 
+								Util.nodeWithin(
+									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">Node</span> <span class="var">scope</span>
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Check if <span class="var">node</span> is within (is a child of) <span class="var">scope</span>.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to check
+								</div>
+							</dd>
+							<dt><span class="var">scope</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> scope to check
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>Nothing</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.randomString</li>
+								<li>u.addClass</li>
+								<li>u.querySelector</li>
+								<li>u.removeClass</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -2769,10 +2848,19 @@ u.ie(header, nav);</code>
 		</div>
 		<div class="body">
 			<dl class="segments">
+				<dt>desktop_edge</dt>
+				<dd><span class="file">u-dom.js</span></dd>
+
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-dom.js</span></dd>
+
 				<dt>desktop</dt>
 				<dd><span class="file">u-dom.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-dom.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-dom.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -2784,13 +2872,10 @@ u.ie(header, nav);</code>
 				<dt>tablet</dt>
 				<dd><span class="file">u-dom.js</span></dd>
 
-				<dt>tv</dt>
-				<dd>
-					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_light.js</span>
-				</dd>
+				<dt>tablet_light</dt>
+				<dd><span class="file">u-dom.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-dom.js</span></dd>
 	
 				<dt>mobile</dt>
@@ -2799,7 +2884,13 @@ u.ie(header, nav);</code>
 				<dt>mobile_light</dt>
 				<dd class="todo">not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

@@ -148,5 +148,28 @@ Util.Objects["svgs"] = new function() {
 		<div class="svg"></div>
 	</div>
 
+
+
+	<div class="border i:borders">
+		<h2>Drawing borders</h2>
+		<p>NOT FINISHED</p>
+		<span class="one"></span>
+		<span class="three"></span>
+		<span class="four"></span>
+		<h1>Button</h1>
+	</div>
+
+	<!--div class="block linear"></div>
+	<div class="block easeIn"></div>
+	<div class="block easeOut"></div>
+	<div class="block easeInOut"></div-->
+		
+		<div class="aniframe">Aniframetest</div>
+
+		<!--div class="death_star">
+			<div id="darth_vader"></div>
+		</div-->
+		
+
 </div>
 <div class="comments"></div>

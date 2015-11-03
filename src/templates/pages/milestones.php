@@ -77,7 +77,7 @@ $this->pageTitle("Where we are heading ...");
 
 			<h3>Cookie</h3>
 			<ul class="todo">
-				<li>Strip nodeCookie-identification for any init-values (or anything with : in it)</li>
+				<li>Strip nodeCookie-identification for any init-values (or anything with : in it) - Looked at it, but failed to remember why this would be a good idea?</li>
 			</ul>
 
 			<h3>Events</h3>
@@ -100,6 +100,18 @@ $this->pageTitle("Where we are heading ...");
 				<li>HTML Editor - test update/change callbacks</li>
 			</ul>
 
+			<h3>History</h3>
+			<ul class="todo">
+				<li>Enable mutiple listeners (by using real eventlisteners)</li>
+				<li>Shift u.navigation -> node.navigate to u.h.history (seems like it belongs there)</li>
+			</ul>
+
+			<h3>Navigation</h3>
+			<ul class="todo">
+				<li>Hardcoded callbacks</li>
+				<li>Shift node.navigate to u.h.history (seems like it belongs there)</li>
+			</ul>
+
 			<h3>Preloader</h3>
 			<ul class="todo">
 				<li>Max-processes parameter</li>
@@ -114,14 +126,20 @@ $this->pageTitle("Where we are heading ...");
 				<li>Test: new onreadystatechange event handling in older IEs - DONE</li>
 			</ul>
 
+			<h3>ScrollTo</h3>
+			<ul class="todo">
+				<li>Investigate why IEMobile does _not_ scroll the the value passed in window.scrollTo (to avoid using a IE hack in the scrollTo function)</li>
+			</ul>
+
 			<h3>Sortable</h3>
 			<ul class="todo">
+				<li>Add callback tests</li>
 				<li>Update nesting drag'n'drop detection</li>
 			</ul>
 
 			<h3>Template</h3>
 			<ul class="todo">
-				<li>Test, documentation and release - Included in 0.9.1</li>
+				<li>Add Object templating as implementet in the Axpoint project</li>
 			</ul>
 
 

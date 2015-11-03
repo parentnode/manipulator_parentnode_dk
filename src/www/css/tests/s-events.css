@@ -1,0 +1,12 @@
+
+#content .scene div.tests div.level1,
+#content .scene div.tests div.level1 * {font-size: 13px; color: #ffffff;}
+#content .scene div.tests div.level1 {width: 100%; height: 270px; position: relative; background: red; padding: 0;}
+#content .scene div.tests div.level2 {width: 60%; height: 160px; position: absolute; left: 10%; top: 30px; padding: 25px 10%; background: green;}
+#content .scene div.tests div.level3 {width: 60%; height: 120px; padding: 10px 20%; background: blue;}
+#content .scene div.tests div.level4 {width: 60%; height: 30px; padding: 10px 20%; background: yellow; color: #000000;}
+
+
+#content .scene div.tests div.testlink {width: 100px; height: 50px; background: orange;}
+#content .scene div.tests div.testlink a {height: 50px; display: block; text-indent: -9999px;}
+#content .scene div.tests div.testlink.over {background: blue;}

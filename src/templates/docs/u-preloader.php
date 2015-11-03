@@ -168,29 +168,71 @@ u.preloader(node, ["file.jpg", "file2.jpg", "file3.jpg"]);</code>
 			<dl class="segments">
 				<!-- specify which files are required for which segments -->
 				<!-- add todo class if segment is not tested yet -->
-				<dt>desktop</dt>
-				<dd><span class="file">u-preloader.js</span></dd>
+				<dt>desktop_edge</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
 
-				<dt>desktop_ie</dt>
-				<dd><span class="file">u-preloader.js</span></dd>
+				<dt>desktop_ie11</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
+
+				<dt>desktop</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
+
+				<dt>desktop_ie10</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
+
+				<dt>desktop_ie9</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
 
 				<dt>desktop_light</dt>
 				<dd>
 					<span class="file">u-preloader.js</span> + 
-					<span class="file">u-preloader-desktop_light.js</span>
+					<span class="file">u-preloader-desktop_light.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-dekstop_light.js</span> +
+					<span class="file">u-events.js</span> + 
+					<span class="file">u-events-desktop_light.js</span>
 				</dd>
 
 				<dt>tablet</dt>
-				<dd><span class="file">u-preloader.js</span></dd>
-
-				<dt>tv</dt>
 				<dd>
 					<span class="file">u-preloader.js</span> + 
-					<span class="file">u-preloader-desktop_light.js</span>
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
 				</dd>
 
-				<dt>mobile_touch</dt>
-				<dd><span class="file">u-preloader.js</span></dd>
+				<dt>tablet_light</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
+
+				<dt>smartphone</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-events.js</span>
+				</dd>
 	
 				<dt>mobile</dt>
 				<dd>not tested</dd>
@@ -198,7 +240,17 @@ u.preloader(node, ["file.jpg", "file2.jpg", "file3.jpg"]);</code>
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-preloader.js</span> + 
+					<span class="file">u-preloader-desktop_light.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-dekstop_light.js</span> +
+					<span class="file">u-events.js</span> + 
+					<span class="file">u-events-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

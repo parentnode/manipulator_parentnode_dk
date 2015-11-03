@@ -6,6 +6,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-audio.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-easings.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-browser.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
@@ -28,29 +29,18 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-template.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-textscaler.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
 
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-animation-to.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-devices.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-sortable.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-sequence.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-gridmaster.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-template.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-textscaler.js"></script>');
-
-
 document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
-document.write('<script type="text/javascript" src="/js/lib/ga.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-googleanalytics.js"></script>');
-
-
-document.write('<script type="text/javascript" src="http://parentnode.local/js/lib/mobile_touch/i-page-mobile_touch.js"></script>');
-
-document.write('<script type="text/javascript" src="/js/lib/mobile_touch/i-documentation-mobile_touch.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/mobile/i-page.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/mobile/i-scene.js"></script>');
 

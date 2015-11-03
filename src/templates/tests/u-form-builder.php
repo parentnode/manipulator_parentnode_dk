@@ -1,23 +1,13 @@
-<style type="text/css">
+<?php
+$this->headerIncludes(array(
+	"/js/tests/i-form-builder.js"
+));
+?>
 
-</style>
-
-<script type="text/javascript">
-
-
-	Util.Objects["test"] = new function() {
-		this.init = function(form) {
-
-		}
-	}
-
-</script>
-
-<div class="scene">
+<div class="scene i:scene">
 	<h1>Form Builder</h1>
 
-
-
+	<div class="tests i:formbuilder"></div>
 
 </div>
 

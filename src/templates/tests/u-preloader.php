@@ -1,65 +1,14 @@
-<style type="text/css">
-	.scene ul {}
-	.scene li {height: 10px; margin: 5px; background: gray;}
-	.scene li.loading {background: orange;}
-	.scene li.loaded {background: blue;}
-	.scene .correct li.loaded {background: green;}
-	.scene .error li.loaded {background: red;}
-</style>
+<?php
+$this->headerIncludes(array(
+	"/js/tests/i-preloader.js",
+	"/css/tests/s-preloader.css"
+));
+?>
 
-<script type="text/javascript">
-	Util.Objects["test"] = new function() {
-		this.init = function(scene) {
-
-			var preloader;
-//			preloader = u.preloader();
-//			div = u.ae(scene, "div");
-
-			u.ae(scene, "h2", {"html":"Preloader with user-defined callback"});
-			scene.callback = function(queue) {
-				if(u.qsa("li.loaded", queue[0]._queue).length == u.qsa("li", queue[0]._queue).length) {
-					u.ac(queue[0]._queue, "correct");
-				}
-				else {
-					u.ac(queue[0]._queue, "error");
-				}
-			}
-			u.ae(scene, u.preloader(scene, ["../img/test-350x350.jpg","../img/test-355x500.jpg","../img/test-400x250.png","../img/test-450x300.jpg","../img/test-720x576.jpg"], {"loaded":"callback"}));
-
-
-			u.ae(scene, "h2", {"html":"Preloader with default callback"});
-			scene.loaded = function(queue) {
-				if(u.qsa("li.loaded", queue[0]._queue).length == u.qsa("li", queue[0]._queue).length) {
-					u.ac(queue[0]._queue, "correct");
-				}
-				else {
-					u.ac(queue[0]._queue, "error");
-				}
-			}
-			u.ae(scene, u.preloader(scene, ["../img/test-460x321.png","../img/test-468x334.jpg","../img/test-640x360.png","../img/test-720x576.jpg"]));
-
-
-
-			u.ae(scene, "h2", {"html":"Image with size"});
-			var node = u.ae(scene, "div", {"class":"background"});
-			node.loaded = function(queue) {
-				u.as(this, "width", queue[0].image.width+"px");
-				u.as(this, "height", queue[0].image.height+"px");
-				u.as(this, "backgroundImage", "url("+ queue[0].image.src+")");
-
-				u.ac(queue[0]._queue, "correct");
-			}
-			u.ae(scene, u.preloader(node, ["../img/test-350x350.jpg"]));
-
-
-		}
-	}
-</script>
-
-<div class="scene i:test">
+<div class="scene i:scene">
 	<h1>Preloader</h1>
 
-
+	<div class="tests i:preloader"></div>
 
 </div>
 <div class="comments"></div>

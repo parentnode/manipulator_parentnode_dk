@@ -1,0 +1,129 @@
+* {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+#content .scene div.tests > div {padding: 0; margin: 0;}
+#content .scene div.tests div.drag {position: relative; z-index: 1;}
+#content .scene div.tests ul.info {padding: 0; margin: 20px 0;}
+#content .scene div.tests ul.info li {padding: 3px;}
+
+
+/* FIXED */
+#content .scene div.tests.drag_fixed {z-index: 100;}
+#content .scene div.tests.drag_fixed div.fixed {z-index: 200; width: 50px; height: 200px; position: fixed; z-index: 5000; background: yellow; top: 100px; right: 0px;}
+#content .scene div.tests.drag_fixed div.fixed div.handle {width: 50px; height: 50px; background: gray;}
+
+#content .scene div.tests.drag_fixed ul.info li.handle {background: gray; color: #ffffff;}
+
+
+
+
+/* MIXED */
+#content .scene div.tests.mixed div.level1,
+#content .scene div.tests.mixed div.level1 * {font-size: 13px; color: #ffffff;}
+#content .scene div.tests.mixed div.level1 {width: 100%; height: 270px; position: relative; background: red; padding: 0;}
+#content .scene div.tests.mixed div.level2 {width: 60%; height: 160px; position: absolute; left: 10%; top: 30px; padding: 25px 10%; background: green;}
+#content .scene div.tests.mixed div.level3 {width: 60%; height: 120px; padding: 10px 20%; background: blue;}
+#content .scene div.tests.mixed div.level4 {width: 60%; height: 30px; padding: 10px 20%; background: yellow; color: #000000;}
+
+#content ul.info li.level1 {background: red; color: white;}
+#content ul.info li.level2 {background: green; color: white;}
+#content ul.info li.level3 {background: blue; color: white;}
+#content ul.info li.level4 {background: yellow;}
+
+
+
+/* NESTED */
+#content .scene div.tests.nested div.nested_view {width: 200px; height: 200px; overflow: hidden; position: relative;
+	background: LawnGreen;
+}
+#content .scene div.tests.nested div.nested_view ul {width: 600px; height: 200px; margin: 0; padding: 0; list-style: none; font-size: 0; border-radius: 35px; overflow: hidden;
+	background: Purple; 
+}
+#content .scene div.tests.nested div.nested_view ul li {width: 200px; height: 200px; display: inline-block; vertical-align: top; overflow: hidden; position: relative; border-radius: 75px;}
+#content .scene div.tests.nested div.nested_view ul ul {height: 600px; width: 200px;}
+#content .scene div.tests.nested div.nested_view ul ul li {display: block; padding-top: 90px; height: 110px; text-align: center; border-radius: 100px;}
+#content .scene div.tests.nested div.nested_view ul ul.inner_a {
+	background: Tomato;
+}
+#content .scene div.tests.nested div.nested_view ul ul.inner_a li {
+	background: DeepSkyBlue;
+}
+#content .scene div.tests.nested div.nested_view ul ul.inner_b {
+	background: PeachPuff;
+}
+#content .scene div.tests.nested div.nested_view ul ul.inner_b li {
+	background: Brown;
+}
+#content .scene div.tests.nested div.nested_view ul ul.inner_c {
+	background: Aquamarine;
+}
+#content .scene div.tests.nested div.nested_view ul ul.inner_c li {
+	background: DarkCyan;
+}
+
+#content ul.info li.outer {background: Purple; color: white;}
+#content ul.info li.inner_a {background: DeepSkyBlue; color: white;}
+#content ul.info li.inner_b {background: Brown; color: white;}
+#content ul.info li.inner_c {background: DarkCyan; color: white;}
+
+
+
+/* LINKS */
+#content .scene div.tests.links div.links {position: relative; height: 50px; background: PapayaWhip; z-index: 1; }
+#content .scene div.tests.links div.links a {
+	-moz-user-select: element;
+}
+
+#content .scene div.tests.links div.link1 {width: 50px; height: 50px; background: pink; position: absolute; left: 0; top: 0;}
+#content .scene div.tests.links div.link1 a {height: 30px; display: block; text-indent: -9999px; margin: 10px;}
+#content .scene div.tests.links div.link2 {width: 50px; height: 50px; background: orange; position: absolute; right: 0; top: 0;}
+#content .scene div.tests.links div.link2 a {height: 50px; display: block; text-align: center;}
+
+#content ul.info li.links {background: PapayaWhip;}
+#content ul.info li.link1 {background: pink;}
+#content ul.info li.link2 {background: orange;}
+
+
+
+/* NODEBOUNDARIES */
+#content .scene div.tests.boundaries div.nodeboundaries {position: relative; height: 300px; background: Gainsboro;}
+#content .scene div.tests.boundaries div.drag_a1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: ForestGreen;}
+#content .scene div.tests.boundaries div.drag_a2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: LawnGreen;}
+#content .scene div.tests.boundaries div.drag_a3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: FireBrick;}
+#content .scene div.tests.boundaries div.drag_a4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: SkyBlue;}
+
+#content ul.info li.boundary_a {background: Gainsboro;}
+#content ul.info li.drag_a1 {background: ForestGreen; color: white;}
+#content ul.info li.drag_a2 {background: LawnGreen;}
+#content ul.info li.drag_a3 {background: FireBrick; color: white;}
+#content ul.info li.drag_a4 {background: SkyBlue;}
+
+
+/* ARRAYBOUNDARIES */
+#content .scene div.tests.boundaries div.arrayboundaries {position: relative; height: 300px; background: Bisque;}
+#content .scene div.tests.boundaries div.drag_b1 {position: absolute; top: 0; left: 0; width: 50px; height: 50px; background: DarkGoldenRod;}
+#content .scene div.tests.boundaries div.drag_b2 {position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: Aqua;}
+#content .scene div.tests.boundaries div.drag_b3 {position: absolute; bottom: 0; right: 0; width: 50px; height: 50px; background: DarkSalmon;}
+#content .scene div.tests.boundaries div.drag_b4 {position: absolute; bottom: 0; left: 0; width: 50px; height: 50px; background: MidnightBlue;}
+
+#content ul.info li.boundary_b {background: Bisque;}
+#content ul.info li.drag_b1 {background: DarkGoldenRod; color: white;}
+#content ul.info li.drag_b2 {background: Aqua;}
+#content ul.info li.drag_b3 {background: DarkSalmon;}
+#content ul.info li.drag_b4 {background: MidnightBlue; color: white;}
+
+
+
+/* SWIPE */
+#content .scene div.tests.swipe div.images {height: 200px; margin: 0 0 20px;}
+
+/* SWIPE ON UL */
+#content .scene div.tests.swipe ul.imagesul {width: 60%; height: 200px; position: relative; margin: 0 auto;}
+#content .scene div.tests.swipe ul.imagesul li {position: absolute; top: 0; left: 0; width: 100%; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
+
+/* SWIPE ON LI */
+#content .scene div.tests.swipe ul.imagesli {width: 60%; height: 200px; position: relative; margin: 0 auto;}
+#content .scene div.tests.swipe ul.imagesli li {position: absolute; top: 0; left: 0; width: 100%; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}

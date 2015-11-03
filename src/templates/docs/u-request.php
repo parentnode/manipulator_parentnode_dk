@@ -436,6 +436,20 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 			<dl class="segments">
 				<!-- specify which files are required for which segments -->
 				<!-- add todo class if segment is not tested yet -->
+				<dt>desktop_edge</dt>
+				<dd>
+					<span class="file">u-request.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
+				<dt>desktop_ie11</dt>
+				<dd>
+					<span class="file">u-request.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
 				<dt>desktop</dt>
 				<dd>
 					<span class="file">u-request.js</span> +
@@ -443,7 +457,14 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd>
+					<span class="file">u-request.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
+				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
@@ -468,18 +489,14 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>tv</dt>
+				<dt>tablet_lignt</dt>
 				<dd>
 					<span class="file">u-request.js</span> +
-					<span class="file">u-request-desktop_light.js</span> +
-					<span class="file">u-array-desktop_light.js</span> +
 					<span class="file">u-dom.js</span> +
-					<span class="file">u-dom-desktop_light.js</span> +
-					<span class="file">u-string.js</span> +
-					<span class="file">u-string-desktop_light.js</span>
+					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
@@ -492,7 +509,18 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-request.js</span> +
+					<span class="file">u-request-desktop_light.js</span> +
+					<span class="file">u-array-desktop_light.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_light.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-string-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

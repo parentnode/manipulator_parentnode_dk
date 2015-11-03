@@ -116,6 +116,8 @@
 							<ul>
 								<li>navigator</li>
 								<li>String.match</li>
+								<li>eval</li>
+								<li>isNaN</li>
 							</ul>
 						</div>
 
@@ -184,7 +186,6 @@
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
 								<li>document.documentElement</li>
@@ -194,7 +195,6 @@
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<p>None</p>
 						</div>
@@ -204,9 +204,9 @@
 				</div>
 			</div>
 
-			<!--div class="function">
+			<div class="function" id="Util.system">
 				<div class="header">
-					<h3>Util.system - To be implemented</h3>
+					<h3>Util.system</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
@@ -214,29 +214,62 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.system</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.system</dd>
 							<dt class="syntax">Syntax</dt>
-							<dd class="syntax">Mixed = Util.system()</dd>
+							<dd class="syntax">Mixed = 
+								Util.system(
+									<span class="type">String</span> <span class="var">os</span>
+								);
+							</dd>
 						</dl>
 					</div>
 
 					<div class="description">
 						<h4>Description</h4>
-						<p></p>
+						<p>Detect if the current OS matches <span class="var">os</span></p>
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">os</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Name of OS to check for
+								</div>
+								<!-- optional details -->
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">mac</span></dt>
+										<dd>Mac</dd>
+										<dt><span class="value">windows</span></dt>
+										<dd>Windows</dd>
+										<dt><span class="value">linux</span></dt>
+										<dd>Linux based</dd>
+										<dt><span class="value">ios</span></dt>
+										<dd>iOS</dd>
+										<dt><span class="value">android</span></dt>
+										<dd>Android</dd>
+									</dl>
+								</div>
+							</dd>
+						</dl>
 					</div>
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p></p>
+						<p>Mixed - version number or boolean is current OS matches <span class="var">os</span>.</p>
 					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>
+						<div class="example">
+							<code>u.system("mac");</code>
+	
+							<p>returns true if OS is a Mac, else false</p>
+						</div>
 					</div>
 				
 					<div class="uses">
@@ -245,7 +278,10 @@
 						<div class="javascript">
 							<h5>JavaScript</h5>
 							<ul>
-								<li>None</li>
+								<li>navigator</li>
+								<li>String.match</li>
+								<li>eval</li>
+								<li>isNaN</li>
 							</ul>
 						</div>
 
@@ -258,7 +294,7 @@
 
 					</div>
 				</div>
-			</div-->
+			</div>
 
 		</div>
 	</div>
@@ -292,10 +328,19 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
+				<dt>desktop_edge</dt>
+				<dd><span class="file">u-system.js</span></dd>
+
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-system.js</span></dd>
+
 				<dt>desktop</dt>
 				<dd><span class="file">u-system.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-system.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-system.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -304,10 +349,10 @@
 				<dt>tablet</dt>
 				<dd><span class="file">u-system.js</span></dd>
 
-				<dt>tv</dt>
+				<dt>tablet_light</dt>
 				<dd><span class="file">u-system.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-system.js</span></dd>
 	
 				<dt>mobile</dt>
@@ -316,7 +361,10 @@
 				<dt>mobile_light</dt>
 				<dd class="todo">not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd><span class="file">u-system.js</span></dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

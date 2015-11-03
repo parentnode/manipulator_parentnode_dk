@@ -1,58 +1,13 @@
-<style type="text/css">
-	.scene div {margin: 0 0 5px;}
-	.correct {background: green;}
-	.error {background: red;}
-</style>
+<?php
+$this->headerIncludes(array(
+	"/js/tests/i-math.js"
+));
+?>
 
-<script type="text/javascript">
-	Util.Objects["test"] = new function() {
-		this.init = function(scene) {
-
-			var node;
-
-
-			// u.random
-			if(u.random(1,10) >= 1 && u.random(1,10) <= 10) {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "random: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "random: error";
-			}
-
-			// u.numToHex
-			if(u.numToHex(255) == "ff" && u.numToHex(47) == "2f") {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "numToHex: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "numToHex: error";
-			}
-
-			// u.hexToNum
-			if(u.hexToNum("ff") == 255 && u.hexToNum("0F") == 15) {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "hexToNum: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "hexToNum: error";
-			}
-
-			// u.round
-			if(u.round(0.123456, 2) == 0.12 && u.round(0.1234567, 5) == 0.12346) {
-				u.ae(scene, "div", ({"class":"correct"})).innerHTML = "round: correct";
-			}
-			else {
-				u.ae(scene, "div", ({"class":"error"})).innerHTML = "round: error";
-			}
-
-
-		}
-
-	}
-</script>
-
-<div class="scene i:test">
+<div class="scene i:scene">
 	<h1>Math</h1>
 
+	<div class="tests i:math"></div>
 
 </div>
-<div class="comments">
-</div>
+<div class="comments"></div>

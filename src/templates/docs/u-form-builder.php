@@ -112,6 +112,7 @@
 							<dd class="syntax"><span class="type">Node Fieldset</span> = 
 								Util.Form.addFieldset(
 									<span class="type">Node</span> <span class="var">node</span> 
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -129,7 +130,20 @@
 							<dt><span class="var">node</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Node</span> node to append form to
+									<span class="type">Node</span> node to append fieldset to
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> JSON object with fieldset options
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">class</span></dt>
+										<dd>Fieldset class</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -340,7 +354,10 @@
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<ul>
+								<li>Util.querySelector</li>
 								<li>Util.appendElement</li>
+								<li>Util.parentNode</li>
+								<li>Util.hasClass</li>
 							</ul>
 						</div>
 
@@ -381,26 +398,59 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
-				<dt>desktop</dt>
-				<dd><span class="file">u-form-builder.js</span></dd>
+				<dt>desktop_edge</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie11</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
+				<dt>desktop</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
+
+				<dt>desktop_ie10</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
+
+				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-form-builder.js</span> +
 					<span class="file">u-dom.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
-				<dd><span class="file">u-form-builder.js</span></dd>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_light.js</span>
+				</dd>
 
 				<dt>tablet</dt>
-				<dd><span class="file">u-form-builder.js</span></dd>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
 
-				<dt>tv</dt>
-				<dd><span class="file">u-form-builder.js</span></dd>
+				<dt>tablet_light</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
 
-				<dt>mobile_touch</dt>
-				<dd><span class="file">u-form-builder.js</span></dd>
+				<dt>smartphone</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span>
+				</dd>
 	
 				<dt>mobile</dt>
 				<dd>not tested</dd>
@@ -408,7 +458,14 @@
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-form-builder.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

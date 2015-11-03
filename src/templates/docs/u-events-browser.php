@@ -8,19 +8,19 @@
 		</div>
 		<div class="body">
 
-			<div class="function" id="Util.addDOMReadyEvent">
+			<div class="function" id="Util.Events.addDOMReadyEvent">
 				<div class="header">
-					<h3>Util.addDOMReadyEvent</h3>
+					<h3>Util.Events.addDOMReadyEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.addDOMReadyEvent</dd>
+							<dd class="name">Util.Events.addDOMReadyEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.addDOMReadyEvent(
+								Util.Events.addDOMReadyEvent(
 									<span class="type">Function</span> <span class="var">action</span> 
 								);
 							</dd>
@@ -87,19 +87,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.addOnloadEvent">
+			<div class="function" id="Util.Events.addOnloadEvent">
 				<div class="header">
-					<h3>Util.addOnloadEvent</h3>
+					<h3>Util.Events.addOnloadEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.addOnloadEvent</dd>
+							<dd class="name">Util.Events.addOnloadEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.addOnloadEvent(
+								Util.Events.addOnloadEvent(
 									<span class="type">Function</span> <span class="var">action</span> 
 								);
 							</dd>
@@ -158,19 +158,188 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.addWindowResizeEvent">
+			<div class="function" id="Util.Events.addWindowEvent">
 				<div class="header">
-					<h3>Util.addWindowResizeEvent</h3>
+					<h3>Util.Events.addWindowEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.addWindowResizeEvent</dd>
+							<dd class="name">Util.Events.addWindowEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">String</span> = 
-								Util.addWindowResizeEvent(
+								Util.Events.addWindowEvent(
+									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">String</span> <span class="var">type</span>,
+									<span class="type">Function</span> <span class="var">action</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Add window event handler with custom callback node.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to execute callback on
+								</div>
+							</dd>
+							<dt><span class="var">type</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Event to listen for
+								</div>
+							</dd>
+							<dt><span class="var">action</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Function</span> function to execute on event
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">String</span> event id, to be used if event needs to be cancelled.</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>none</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>eval</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>Util.Events.addEvent</li>
+								<li>Util.Events.removeEvent</li>
+								<li>Util.randomString</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Events.removeWindowEvent">
+				<div class="header">
+					<h3>Util.Events.removeWindowEvent</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Events.removeWindowEvent</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Events.removeWindowEvent(
+									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">String</span> <span class="var">id</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Remove window event handler with custom callback node.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to execute callback on
+								</div>
+							</dd>
+							<dt><span class="var">type</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Event to listen for
+								</div>
+							</dd>
+							<dt><span class="var">id</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> event id to remove from node
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>none</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>eval</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>Util.Events.addEvent</li>
+								<li>Util.Events.removeEvent</li>
+								<li>Util.randomString</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Events.addWindowStartEvent">
+				<div class="header">
+					<h3>Util.Events.addWindowStartEvent</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Events.addWindowStartlEvent</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">String</span> = 
+								Util.Events.addWindowStartEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">Function</span> <span class="var">action</span> 
 								);
@@ -180,7 +349,7 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Add window resize event handler with custom callback node.</p>
+						<p>Add window start event (mousedown/touchstart) handler with custom callback node.</p>
 					</div>
 
 					<div class="parameters">
@@ -236,19 +405,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.removeWindowResizeEvent">
+			<div class="function" id="Util.Events.removeWindowStartEvent">
 				<div class="header">
-					<h3>Util.removeWindowResizeEvent</h3>
+					<h3>Util.Events.removeWindowStartEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.removeWindowResizeEvent</dd>
+							<dd class="name">Util.Events.removeWindowStartEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.removeWindowResizeEvent(
+								Util.Events.removeWindowStartEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">String</span> <span class="var">id</span> 
 								);
@@ -258,7 +427,7 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Remove window resize event handler with custom callback node.</p>
+						<p>Remove window start event (mousedown/touchstart) handler with custom callback node.</p>
 					</div>
 
 					<div class="parameters">
@@ -314,175 +483,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.addWindowScrollEvent">
+			<div class="function" id="Util.Events.addWindowMoveEvent">
 				<div class="header">
-					<h3>Util.addWindowScrollEvent</h3>
+					<h3>Util.Events.addWindowMoveEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.addWindowScrollEvent</dd>
+							<dd class="name">Util.Events.addWindowMoveEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">String</span> = 
-								Util.addWindowScrollEvent(
-									<span class="type">Node</span> <span class="var">node</span>,
-									<span class="type">Function</span> <span class="var">action</span> 
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Add window scroll event handler with custom callback node.</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">node</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Node</span> node to execute callback on
-								</div>
-							</dd>
-							<dt><span class="var">action</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Function</span> function to execute on event
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">String</span> event id, to be used if event needs to be cancelled.</p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>none</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>eval</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<h5>Manipulator</h5>
-							<ul>
-								<li>Util.Events.addEvent</li>
-								<li>Util.Events.removeEvent</li>
-								<li>Util.randomString</li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="Util.removeWindowScrollEvent">
-				<div class="header">
-					<h3>Util.removeWindowScrollEvent</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.removeWindowScrollEvent</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Void</span> = 
-								Util.removeWindowScrollEvent(
-									<span class="type">Node</span> <span class="var">node</span>,
-									<span class="type">String</span> <span class="var">id</span> 
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Remove window scroll event handler with custom callback node.</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">node</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Node</span> node to execute callback on
-								</div>
-							</dd>
-							<dt><span class="var">id</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">String</span> event id to remove from node
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Void</span></p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>none</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>eval</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<h5>Manipulator</h5>
-							<ul>
-								<li>Util.Events.addEvent</li>
-								<li>Util.Events.removeEvent</li>
-								<li>Util.randomString</li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="Util.addWindowMoveEvent">
-				<div class="header">
-					<h3>Util.addWindowMoveEvent</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.addWindowMoveEvent</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">String</span> = 
-								Util.addWindowMoveEvent(
+								Util.Events.addWindowMoveEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">Function</span> <span class="var">action</span> 
 								);
@@ -548,19 +561,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.removeWindowMoveEvent">
+			<div class="function" id="Util.Events.removeWindowMoveEvent">
 				<div class="header">
-					<h3>Util.removeWindowMoveEvent</h3>
+					<h3>Util.Events.removeWindowMoveEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.removeWindowMoveEvent</dd>
+							<dd class="name">Util.Events.removeWindowMoveEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.removeWindowMoveEvent(
+								Util.Events.removeWindowMoveEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">String</span> <span class="var">id</span> 
 								);
@@ -626,19 +639,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.addWindowEndEvent">
+			<div class="function" id="Util.Events.addWindowEndEvent">
 				<div class="header">
-					<h3>Util.addWindowEndEvent</h3>
+					<h3>Util.Events.addWindowEndEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.addWindowEndEvent</dd>
+							<dd class="name">Util.Events.addWindowEndEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">String</span> = 
-								Util.addWindowEndEvent(
+								Util.Events.addWindowEndEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">Function</span> <span class="var">action</span> 
 								);
@@ -704,19 +717,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.removeWindowEndEvent">
+			<div class="function" id="Util.Events.removeWindowEndEvent">
 				<div class="header">
-					<h3>Util.removeWindowEndEvent</h3>
+					<h3>Util.Events.removeWindowEndEvent</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.removeWindowEndEvent</dd>
+							<dd class="name">Util.Events.removeWindowEndEvent</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.removeWindowEndEvent(
+								Util.Events.removeWindowEndEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">String</span> <span class="var">id</span> 
 								);
@@ -816,8 +829,20 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
-				<!-- specify which files are required for which segments -->
-				<!-- add todo class if segment is not tested yet -->
+				<dt>desktop_edge</dt>
+				<dd>
+					<span class="file">u-events-browser.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
+				<dt>desktop_ie11</dt>
+				<dd>
+					<span class="file">u-events-browser.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
 				<dt>desktop</dt>
 				<dd>
 					<span class="file">u-events-browser.js</span> +
@@ -825,7 +850,14 @@
 					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie10</dt>
+				<dd>
+					<span class="file">u-events-browser.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-string.js</span>
+				</dd>
+
+				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-events-browser.js</span> +
 					<span class="file">u-events.js</span> +
@@ -848,16 +880,14 @@
 					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>tv</dt>
+				<dt>tablet_light</dt>
 				<dd>
 					<span class="file">u-events-browser.js</span> +
 					<span class="file">u-events.js</span> +
-					<span class="file">u-events-desktop_light.js</span> +
-					<span class="file">u-string.js</span> +
-					<span class="file">u-string-desktop_light.js</span>
+					<span class="file">u-string.js</span>
 				</dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd>
 					<span class="file">u-events-browser.js</span> +
 					<span class="file">u-events.js</span> +
@@ -870,7 +900,16 @@
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
 
-				<dt>basic</dt>
+				<dt>tv</dt>
+				<dd>
+					<span class="file">u-events-browser.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-events-desktop_light.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-string-desktop_light.js</span>
+				</dd>
+
+				<dt>seo</dt>
 				<dd>not supported</dd>
 			</dl>
 		</div>

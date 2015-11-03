@@ -1,0 +1,5 @@
+#content .scene > div.tests img {height: 25px; display: inline-block; vertical-align: top;}
+#content .scene > div.tests .template {display: none;}
+#content .scene > div.tests ul {margin-bottom: 20px;}
+#content .scene > div.tests ul li {margin-bottom: 5px;}
+#content .scene > div.tests table {margin: 0 50px;}

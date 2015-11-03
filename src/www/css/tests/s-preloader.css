@@ -1,0 +1,6 @@
+.scene ul {}
+.scene li {height: 10px; margin: 5px; background: gray;}
+.scene li.loading {background: orange;}
+.scene li.loaded {background: blue;}
+.scene .correct li.loaded {background: green;}
+.scene .error li.loaded {background: red;}

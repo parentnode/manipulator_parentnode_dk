@@ -1,0 +1,30 @@
+
+
+/* BORDERS */
+.scene div.borders .aniframe {position: relative;}
+
+
+
+
+.linear {top: 0;}
+.easeIn {top: 55px;}
+.easeOut {top: 110px;}
+.easeInOut {top: 165px;}
+
+
+
+/* Border stuff */
+.scene .border {width: 200px; height: 0px; background: grey; margin-bottom:100px; position: relative;
+	border-right:3px solid #000;
+	border-left:3px solid #000;
+}
+.scene .border span {position: absolute; width:0px; height: 3px; display: none;}
+.scene .border span.one {display: block; width: 0px; left:50%; background-color:#000; position: absolute;}
+.scene .border span.three {bottom: 0; left: 0; background-color:#000; width:0;}
+.scene .border span.four {bottom: 0; right: 0; background-color:#000; width:0;}
+.scene .border h1 {color:#000; font-size:24px; font-family: Helvetica, Arial, Verdana; text-align:center; position:absolute; padding:100px 64px 10px 64px; display:none;}
+
+
+/* Matrix stuff */
+.death_star {height:400px; position: relative; display: block; border:1px solid;}
+.death_star #darth_vader {width:200px; height:200px; background:green; }

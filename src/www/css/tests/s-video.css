@@ -1,0 +1,21 @@
+#content .scene  div.tests .videos li {font-size: 13px; display: block;}
+
+#content .scene  div.tests .videoplayer {position: relative; border: 1px solid #000000; height: 360px;}
+#content .scene  div.tests .videoplayer video,
+#content .scene  div.tests .videoplayer object {width: 100%; height: 100%;}
+
+
+#content .scene  div.tests .controls {position: absolute; left: 0; bottom: 0; width: 100%;}
+#content .scene  div.tests div.controls a {height: 23px; width: 50px; text-align: center; display: inline-block;}
+#content .scene  div.tests div.controls a span {height: 23px; width: 50px; text-align: center; display: block;}
+
+#content .scene  div.tests div.controls * {font-size: 13px;}
+
+#content .scene  div.tests div.controls .playpause span.play {background: green; color: #ffffff;}
+#content .scene  div.tests div.controls .playpause span.pause {display: none; background: red; color: #ffffff;}
+
+#content .scene  div.tests div.playing .controls .playpause span.pause {display: block;}
+#content .scene  div.tests div.playing .controls .playpause span.play {display: none;}
+
+#content .scene  div.tests .controls .ff {background: blue;}
+#content .scene  div.tests .controls .rw {background: yellow;}

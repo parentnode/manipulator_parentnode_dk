@@ -24,4 +24,28 @@ $segments_config["www"] = array(
 
 );
 	
+// local segmentation
+$segments_config["dev"] = array(
+	
+	"desktop_edge"  => "desktop_edge",
+	"desktop"       => "desktop",
+	"desktop_ie11"  => "desktop_ie11",
+	"desktop_ie10"  => "desktop_ie10",
+
+	"smartphone"    => "smartphone",
+
+	"desktop_ie9"   => "desktop_ie9",
+	"desktop_light" => "desktop_light",
+	"tv"            => "tv",
+
+	"tablet"        => "tablet",
+	"tablet_light"  => "tablet_light",
+
+	"mobile"        => "mobile",
+	"mobile_light"  => "mobile_light",
+
+	"seo"           => "seo"
+
+);
+
 ?>

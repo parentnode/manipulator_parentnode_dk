@@ -1,0 +1,8 @@
+
+/* BASICS */
+#content .scene div.basics .block {display: inline-block; vertical-align: top; width: 50px; height: 50px; background: #ff0000; margin: 30px 10px 30px 0; padding: 0; font-size: 12px; color: #ffffff;
+	*display: block;
+}
+#content .scene div.basics .block.done {background-color: green;}
+#content .scene div.basics .block.bgpos {background-image: url(/img/test-720x576.jpg); background-position: 0 0;}
+

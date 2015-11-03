@@ -30,7 +30,7 @@ $this->pageTitle("It's just improvements");
 				<li>Enhance drag-dropout functionality to avoid dropping smaller draggable elements</li>
 				<li>Mouseover and mouseout events (and touch equivalent) shorthand functions (u.e.hover)</li>
 				<li>Improved move detection for click and drag to ensure clicks are not cancelled by shaking hands</li>
-				
+				<li>u.nodeWithin added</li>
 				<li>
 					Rewritten window resize, scroll, start, move and end event handlers with callback to node
 					 - missing test and documentation (now support callback as function reference or string and start event added).
