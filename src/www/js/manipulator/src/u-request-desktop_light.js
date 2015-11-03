@@ -47,7 +47,9 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 				if(wrapper.xmlhttp.readyState == 4) {
 					u.bug("ready")
 					wrapper.responseText = wrapper.xmlhttp.responseText;
+					u.bug("ready")
 					wrapper.status = wrapper.xmlhttp.status;
+					u.bug("ready")
 					wrapper.readyState = 4;
 					if(typeof(wrapper.statechanged) == "function") {
 						wrapper.statechanged();
