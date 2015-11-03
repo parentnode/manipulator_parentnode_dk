@@ -15,11 +15,12 @@ Util.Objects["scene"] = new function() {
 		}
 
 		scene.ready = function() {
-//			u.bug("scene.ready:" + u.nodeId(this));
+			u.bug("scene.ready:" + u.nodeId(this));
 
 			page.cN.scene = this;
 
 			this.response = function(response) {
+				u.bug("response")
 				var tests = u.qsa("li.test a", response);
 
 				var i, test, current_location;
