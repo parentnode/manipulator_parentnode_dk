@@ -7,6 +7,7 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 
 	// Create xmlhttprequest object 
 	Util.createRequestObject = function() {
+		u.bug("create request object")
 		var xmlhttp;
 
 		if(window.XMLHttpRequest) {
