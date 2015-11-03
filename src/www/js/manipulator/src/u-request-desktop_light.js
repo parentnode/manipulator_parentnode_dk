@@ -45,10 +45,10 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 				// wrapper.xmlhttp should be this, but does not work in IE or Firefox 2
 				// wait for correct readyState, map variables and call back to main loop
 				if(wrapper.xmlhttp.readyState == 4) {
+					u.bug("ready")
 					wrapper.responseText = wrapper.xmlhttp.responseText;
 					wrapper.status = wrapper.xmlhttp.status;
 					wrapper.readyState = 4;
-					u.bug("ready")
 					if(typeof(wrapper.statechanged) == "function") {
 						wrapper.statechanged();
 						wrapper.parentNode.removeChild(wrapper);
