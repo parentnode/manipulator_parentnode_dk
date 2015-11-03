@@ -4,7 +4,7 @@
 // ));
 ?>
 
-<div class="scene i:scene2">
+<div class="scene i:scene">
 	<h1>Array</h1>
 
 	<div class="tests i:array2"></div>
