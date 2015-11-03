@@ -36,19 +36,19 @@ Util.Objects["page"] = new function() {
 			u.bug("page resized")
 
 			// adjust content height
-			page.browser_h = u.browserH();
-			page.browser_w = u.browserW();
-			page.available_height = page.browser_h - page.hN.offsetHeight - page.fN.offsetHeight;
-
-			u.as(page.cN, "min-height", "auto", false);
-			if(page.available_height >= page.cN.offsetHeight) {
-				u.as(page.cN, "minHeight", page.available_height+"px", false);
-			}
-
-			// forward resize event to current scene
-			if(page.cN && page.cN.scene && typeof(page.cN.scene.resized) == "function") {
-				page.cN.scene.resized();
-			}
+			// page.browser_h = u.browserH();
+			// page.browser_w = u.browserW();
+			// page.available_height = page.browser_h - page.hN.offsetHeight - page.fN.offsetHeight;
+			//
+			// u.as(page.cN, "min-height", "auto", false);
+			// if(page.available_height >= page.cN.offsetHeight) {
+			// 	u.as(page.cN, "minHeight", page.available_height+"px", false);
+			// }
+			//
+			// // forward resize event to current scene
+			// if(page.cN && page.cN.scene && typeof(page.cN.scene.resized) == "function") {
+			// 	page.cN.scene.resized();
+			// }
 
 		}
 
