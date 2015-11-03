@@ -53,10 +53,10 @@ Util.svg = function(svg_object) {
 		if(svg_object.title) {
 			svg.setAttributeNS(null, "title", svg_object.title);
 		}
-		// if(svg_object.class) {
-		// 	svg.setAttributeNS(null, "class", svg_object.class);
-		// }
-		//
+		if(svg_object.class) {
+			svg.setAttributeNS(null, "class", svg_object.class);
+		}
+
 		if(svg_object.width) {
 			svg.setAttributeNS(null, "width", svg_object.width);
 		}
