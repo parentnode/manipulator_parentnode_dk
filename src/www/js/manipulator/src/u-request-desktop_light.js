@@ -50,7 +50,6 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 					wrapper.readyState = 4;
 					u.bug("readystate = 4"):
 					if(typeof(wrapper.statechanged) == "function") {
-						u.bug("precallback")
 						wrapper.statechanged();
 						wrapper.parentNode.removeChild(wrapper);
 						u.bug("callback")
