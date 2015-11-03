@@ -23,6 +23,7 @@ Util.Objects["scene"] = new function() {
 				u.bug("response")
 				var tests = u.qsa("li.test a", response);
 
+				u.bug("tests:" + tests.length)
 				var i, test, current_location;
 				for(i = 0; test = tests[i]; i++) {
 					u.bug("location.href:" + location.href)
