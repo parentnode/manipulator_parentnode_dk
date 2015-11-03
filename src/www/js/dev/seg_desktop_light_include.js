@@ -38,21 +38,21 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-textsc
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
-//
-//
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-array-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-json-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-request-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-string-desktop_light.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-video-desktop_light.js"></script>');
-//
-//
-// document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
-// document.write('<script type="text/javascript" src="/js/dev/desktop/i-page.js"></script>');
-// document.write('<script type="text/javascript" src="/js/dev/desktop/i-scene.js"></script>');
+
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-array-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-json-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-request-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-string-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-video-desktop_light.js"></script>');
+
+
+document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/desktop/i-page.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/desktop/i-scene.js"></script>');
 
