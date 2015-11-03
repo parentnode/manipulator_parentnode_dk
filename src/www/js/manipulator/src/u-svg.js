@@ -60,9 +60,9 @@ Util.svg = function(svg_object) {
 		// if(svg_object.width) {
 		// 	svg.setAttributeNS(null, "width", svg_object.width);
 		// }
-		// if(svg_object.height) {
-		// 	svg.setAttributeNS(null, "height", svg_object.height);
-		// }
+		if(svg_object.height) {
+			svg.setAttributeNS(null, "height", svg_object.height);
+		}
 		if(svg_object.id) {
 			svg.setAttributeNS(null, "id", svg_object.id);
 		}
