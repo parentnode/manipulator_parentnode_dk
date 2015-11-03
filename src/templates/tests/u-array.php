@@ -1,7 +1,7 @@
 <?php
-$this->headerIncludes(array(
-	"/js/tests/i-array.js"
-));
+// $this->headerIncludes(array(
+// 	"/js/tests/i-array.js"
+// ));
 ?>
 
 <div class="scene i:scene2">
