@@ -61,6 +61,7 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 #navigation {z-index: 10; position: fixed; right: 40px; top: 0; background-color: rgba(255,255,255, 0.8); border-radius: 5px;}
 #navigation ul {}
 #navigation ul li {display: inline-block; vertical-align: top; padding: 10px; font-size: 18px; color: #888888;
+	*display: inline;
 	font-family: "PT Serif", Times, serif;
 }
 #navigation ul li.front {display: none;}
@@ -76,37 +77,42 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 
 
 /* TESTS */
-#content .scene > div.tests {padding: 0 50px;}
+#content .scene div.tests {padding: 0 50px;}
 
-#content .scene > div.tests div.debug {font-size: 13px; color: #ffffff; background: #000000; max-height: 152px; padding: 5px; overflow: auto;}
+#content .scene div.tests div.debug {font-size: 13px; color: #ffffff; background: #000000; max-height: 152px; padding: 5px; overflow: auto;}
 
-#content .scene > div.tests > div {margin: 0 0 3px; padding: 1px 5px 3px;}
-#content .scene > div.tests > h2 {padding: 10px 0px 5px;}
-#content .scene > div.tests > p {padding: 0px 0px 10px;}
+#content .scene div.tests h2 {padding: 10px 0px 5px;}
+#content .scene div.tests p {padding: 0px 0px 10px;}
 
-#content .scene > div.tests > div.correct {background: green;}
-#content .scene > div.tests > div.error {background: red;}
+#content .scene div.tests div.correct {background: green;}
+#content .scene div.tests div.error {background: red;}
 
-#content .scene > div.tests > div.correct,
-#content .scene > div.tests > div.error,
-#content .scene > div.tests > div.correct *,
-#content .scene > div.tests > div.error * {color: white; font-size: 13px; line-height: 16px;}
+#content .scene div.tests div.correct,
+#content .scene div.tests div.error {margin: 0 0 3px; padding: 1px 5px 3px;}
 
-#content .scene > div.tests > div.correct *,
-#content .scene > div.tests > div.error * {padding: 0; margin: 0;}
+#content .scene div.tests div.correct,
+#content .scene div.tests div.error,
+#content .scene div.tests div.correct *,
+#content .scene div.tests div.error * {color: white; font-size: 13px; line-height: 16px;}
+
+#content .scene div.tests div.correct *,
+#content .scene div.tests div.error * {padding: 0; margin: 0;}
 
 
 
 /* BUTTONS */
 #content ul.actions {}
 #content ul.actions li {width: auto; height: auto; display: inline-block; padding: 0 10px 10px 0; vertical-align: top;
+	*display: inline;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
 
 
-#content ul.actions input.button {width: auto; height: 28px; padding: 3px 9px; display: inline-block; vertical-align: top;}
+#content ul.actions input.button {width: auto; height: 28px; padding: 3px 9px; display: inline-block; vertical-align: top;
+	*display: inline;
+}
 @media all and (-webkit-min-device-pixel-ratio:0) {
 	#content ul.actions input.button {padding: 3px 12px 5px;}
 }
