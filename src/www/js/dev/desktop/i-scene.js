@@ -19,35 +19,35 @@ Util.Objects["scene"] = new function() {
 
 			page.cN.scene = this;
 
-			// this.response = function(response) {
-			// 	u.bug("response")
-			// 	var tests = u.qsa("li.test a", response);
-			//
-			// 	u.bug("tests:" + tests.length)
-			// 	var i, test, current_location;
-			// 	for(i = 0; test = tests[i]; i++) {
-			// 		u.bug("location.href:" + location.href)
-			// 		current_location = location.href;
-			// 		if(location.search) {
-			// 			current_location = current_location.replace(location.search, "");
-			// 		}
-			// 		if(location.hash) {
-			// 			current_location = current_location.replace(location.hash, "");
-			// 		}
-			//
-			// 		if(test.href == current_location) {
-			// 			u.bug("found match")
-			// 			if(tests.length > i+1) {
-			// 				page.fN.innerHTML = "";
-			// 				u.ae(page.fN, "a", {"html":"Next test: " + tests[i+1].innerHTML, "href":tests[i+1].href});
-			// 			}
-			// 		}
-			// 	}
-			//
-			// }
-			// u.bug("make request")
-			// u.request(this, "/tests");
-			// u.bug("request made")
+			this.response = function(response) {
+				u.bug("response")
+				var tests = u.qsa("li.test a", response);
+
+				u.bug("tests:" + tests.length)
+				var i, test, current_location;
+				for(i = 0; test = tests[i]; i++) {
+					u.bug("location.href:" + location.href)
+					current_location = location.href;
+					if(location.search) {
+						current_location = current_location.replace(location.search, "");
+					}
+					if(location.hash) {
+						current_location = current_location.replace(location.hash, "");
+					}
+
+					if(test.href == current_location) {
+						u.bug("found match")
+						if(tests.length > i+1) {
+							page.fN.innerHTML = "";
+							u.ae(page.fN, "a", {"html":"Next test: " + tests[i+1].innerHTML, "href":tests[i+1].href});
+						}
+					}
+				}
+
+			}
+			u.bug("make request")
+			u.request(this, "/tests");
+			u.bug("request made")
 
 			page.resized();
 		}
