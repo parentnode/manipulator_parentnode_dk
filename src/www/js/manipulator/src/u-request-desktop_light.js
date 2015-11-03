@@ -57,7 +57,7 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 						u.bug("readyState error")
 					}
 					wrapper.fallbackState = true;
-//					wrapper.setAttribute("readyState", 4):
+					wrapper.setAttribute("readyState", "4"):
 					u.bug("ready")
 					if(typeof(wrapper.statechanged) == "function") {
 						wrapper.statechanged();
