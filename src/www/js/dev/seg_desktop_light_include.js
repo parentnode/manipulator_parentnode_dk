@@ -1,16 +1,16 @@
 document.write('<script type="text/javascript" src="/js/manipulator/src/u.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-debug.js"></script>');
 
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-audio.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-easings.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-events.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-browser.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-audio.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-easings.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-events.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-browser.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.js"></script>');
 //
 // document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
 // document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
