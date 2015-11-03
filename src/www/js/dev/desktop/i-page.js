@@ -87,7 +87,7 @@ Util.Objects["page"] = new function() {
 
 
 		// ready to start page builing process
-		page.ready();
+//		page.ready();
 
 	}
 }
