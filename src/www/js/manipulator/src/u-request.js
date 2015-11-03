@@ -331,7 +331,7 @@ Util.validateResponse = function(response){
 //		u.bug("response:" + response + ":" + u.nodeId(response.node) + ":" + response.status)
 
 		u.bug("status:" + response.status + ":" + u.nodeId(response.node));
-		// u.bug("responseText:" + response.responseText);
+		u.bug("responseText:" + response.responseText);
 
 		try {
 			// valid response status
