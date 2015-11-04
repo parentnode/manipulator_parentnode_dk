@@ -120,7 +120,7 @@ Util.system = function(os, version) {
 	else if(os.match(/\bios\b/i)) {
 
 		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]*)( like Mac OS X)/i)) {
-			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]*)( like Mac OS X)/i)[2].replace("_", ".");
+			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]*)( like Mac OS X)/i)[2].replace(/_/g, ".");
 		}
 
 		// CPU OS 8_0 l
