@@ -119,12 +119,13 @@ Util.system = function(os, version) {
 	}
 	else if(os.match(/\bios\b/i)) {
 
-		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]?)( like Mac OS X)/i)) {
-			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]?)( like Mac OS X)/i)[2].replace("_", ".");
+		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]*)( like Mac OS X)/i)) {
+			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]*)( like Mac OS X)/i)[2].replace("_", ".");
 		}
 
 		// CPU OS 8_0 l
 		//  iPhone OS 8_0 like Mac OS X
+		//  iPhone OS 9_0_1 like Mac OS X
 		// CPU OS 8_0 like Mac OS X
 		// CPU iPhone OS 4_2 like Mac OS X
 	}
