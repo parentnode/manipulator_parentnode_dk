@@ -50,8 +50,7 @@ $this->headerIncludes(array(
 		</div>
 
 
-		<h2>Nested structure</h2>
-		<p>Still in BETA testing</p>
+		<h2>BETA TESTING: Nested structure</h2>
 		<div class="nested">
 			<ul class="sortable target t1">
 				<li class="draggable t1 l1">
