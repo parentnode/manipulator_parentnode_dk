@@ -7,7 +7,7 @@ Util.Objects["keyboard"] = new function() {
 		u.k.addKey(node, "a");
 		node.clicked = function(event){
 
-			u.ac(this, "correct");
+			u.ac(this, "testpassed");
 			u.rc(this, "error");
 			this.innerHTML = this.innerHTML.replace("waiting", "correct")
 
@@ -25,8 +25,8 @@ Util.Objects["keyboard"] = new function() {
 		u.k.addKey(node, "b");
 		node.clicked = function(event){
 
-			u.ac(this, "correct");
-			u.rc(this, "error");
+			u.ac(this, "testpassed");
+			u.rc(this, "testfailed");
 			this.innerHTML = this.innerHTML.replace("waiting", "correct")
 
 			// u.bug("A2 clicked:" + event.type);
@@ -42,8 +42,8 @@ Util.Objects["keyboard"] = new function() {
 		u.k.addKey(node, "c");
 		node.clicked = function(event) {
 
-			u.ac(this, "correct");
-			u.rc(this, "error");
+			u.ac(this, "testpassed");
+			u.rc(this, "testfailed");
 			this.innerHTML = this.innerHTML.replace("waiting", "correct")
 
 			// u.bug("A3 clicked:" + event.type);
@@ -65,8 +65,8 @@ Util.Objects["keyboard"] = new function() {
 		// }
 		node.keyboard = function(event) {
 
-			u.ac(this, "correct");
-			u.rc(this, "error");
+			u.ac(this, "testpassed");
+			u.rc(this, "testfailed");
 			this.innerHTML = this.innerHTML.replace("waiting", "correct")
 
 			// u.bug("A4 keyboard:" + event.type);
@@ -81,8 +81,8 @@ Util.Objects["keyboard"] = new function() {
 		u.k.addKey(node, "e", {"metakey":false});
 		node.clicked = function(event) {
 
-			u.ac(this, "correct");
-			u.rc(this, "error");
+			u.ac(this, "testpassed");
+			u.rc(this, "testfailed");
 			this.innerHTML = this.innerHTML.replace("waiting", "correct")
 
 			// u.bug("A5 clicked:" + event.type);

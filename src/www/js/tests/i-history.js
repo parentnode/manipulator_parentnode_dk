@@ -66,10 +66,10 @@ Util.Objects["history"] = new function() {
 			u.h.getCleanUrl(url+"#hashsomething") == "/tests/u-history" &&
 			u.h.getCleanUrl(url+"?param=something") == "/tests/u-history?param=something"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.h.getCleanUrl: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.h.getCleanUrl: correct"});
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.h.getCleanUrl: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.h.getCleanUrl: error"});
 		}
 
 
@@ -79,10 +79,10 @@ Util.Objects["history"] = new function() {
 			u.h.getCleanHash("#/thank/you", 1) == "/thank" && 
 			u.h.getCleanHash("#thank/you/for/crap") == "thank/you/for/crap"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.h.getCleanHash: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.h.getCleanHash: correct"});
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.h.getCleanHash: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.h.getCleanHash: error"});
 		}
 
 

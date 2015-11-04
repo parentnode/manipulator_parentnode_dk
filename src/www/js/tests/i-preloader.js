@@ -19,11 +19,11 @@
 					queue[queue.length-1].image.width == 450 &&
 					queue[queue.length-1].image.height == 300
 				) {
-					u.ae(this, "div", {"class":"correct", "html":"u.preloader (custom callback): correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.preloader (custom callback): correct"});
 					this.test_results["u.preloader (custom callback)"] = true;
 				}
 				else {
-					u.ae(this, "div", {"class":"error", "html":"u.preloader (custom callback): error"});
+					u.ae(this, "div", {"class":"testfailed", "html":"u.preloader (custom callback): error"});
 					this.test_results["u.preloader (custom callback)"] = true;
 				}
 			}
@@ -42,11 +42,11 @@
 					queue[queue.length-1].image.width == 720 &&
 					queue[queue.length-1].image.height == 576
 				) {
-					u.ae(this, "div", {"class":"correct", "html":"u.preloader (default callback): correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.preloader (default callback): correct"});
 					this.test_results["u.preloader (default callback)"] = true;
 				}
 				else {
-					u.ae(this, "div", {"class":"error", "html":"u.preloader (default callback): error"});
+					u.ae(this, "div", {"class":"testfailed", "html":"u.preloader (default callback): error"});
 					this.test_results["u.preloader (default callback)"] = true;
 				}
 			}
@@ -61,11 +61,11 @@
 					queue[0].image.width == 355 && 
 					queue[0].image.height == 500
 				) {
-					u.ae(this, "div", {"class":"correct", "html":"u.preloader (image size): correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.preloader (image size): correct"});
 					this.test_results["u.preloader (image size)"] = true;
 				}
 				else {
-					u.ae(this, "div", {"class":"error", "html":"u.preloader (image size): error"});
+					u.ae(this, "div", {"class":"testfailed", "html":"u.preloader (image size): error"});
 					this.test_results["u.preloader (image size)"] = true;
 					
 				}

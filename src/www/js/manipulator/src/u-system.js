@@ -15,13 +15,13 @@ Util.browser = function(model, version) {
 	}
 	else if(model.match(/\bfirefox\b|\bgecko\b/i)) {
 //		u.bug("##trying to match firefox")
-		if(navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)) {
+		if(navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i) && !u.system("ie")) {
 			current_version = navigator.userAgent.match(/(Firefox\/)(\d+\.\d+)/i)[2];
 		}
 	}
 	else if(model.match(/\bwebkit\b/i)) {
-//		u.bug("##trying to match webkit")
-		if(document.body.style.webkitTransform != undefined) {
+//		u.bug("##trying to match webkit:" + document.body.style.webkitTransform)
+		if(document.body.style.webkitTransform != undefined && !u.system("ie")) {
 			current_version = navigator.userAgent.match(/(AppleWebKit\/)(\d+.\d)/i)[2];
 		}
 	}
@@ -33,7 +33,7 @@ Util.browser = function(model, version) {
 	}
 	else if(model.match(/\bsafari\b/i)) {
 //		u.bug("##trying to match safari")
-		if(!window.chrome && document.body.style.webkitTransform != undefined) {
+		if(!window.chrome && document.body.style.webkitTransform != undefined && !u.system("ie")) {
 			current_version = navigator.userAgent.match(/(Version\/)(\d+)(.\d)/i)[2];
 		}
 	}

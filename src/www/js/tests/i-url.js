@@ -23,11 +23,11 @@ Util.Objects["url"] = new function() {
 				&& u.getVar("test2", location.href + "?test1=get_this&test2=get_that#test1=fake_param&test3=fake_param") == "get_that" 
 				&& !u.getVar("test3", location.href + "?test1=get_this&test2=get_that#test1=fake_param&test3=fake_param")
 			) {
-				u.ae(div, "div", {"class":"correct", "html":"u.getVar: correct"});
+				u.ae(div, "div", {"class":"testpassed", "html":"u.getVar: correct"});
 				div.test_results["u.browser"] = true;
 			}
 			else {
-				u.ae(div, "div", {"class":"error", "html":"u.getVar: error"});
+				u.ae(div, "div", {"class":"testfailed", "html":"u.getVar: error"});
 				div.test_results["u.url"] = false;
 			}
 		}

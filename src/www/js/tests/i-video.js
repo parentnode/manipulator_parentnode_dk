@@ -6,8 +6,10 @@
 			div.player.load("/media/video/video_1.mov", {"playpause":true});
 
 			var bn_playpause = u.qs("div.controls a.playpause", div.player);
-			u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
-			u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			if(bn_playpause && !u.qs("span", bn_playpause)) {
+				u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+				u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			}
 
 			div.player.ended = function() {
 				this.play();
@@ -24,14 +26,20 @@
 			div.player.load("/media/video/video_3.mov");
 
 			var bn_playpause = u.qs("div.controls a.playpause", div.player);
-			u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
-			u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			if(bn_playpause && !u.qs("span", bn_playpause)) {
+				u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+				u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			}
 
 			var bn_ff = u.qs("div.controls a.ff", div.player);
-			u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+			if(bn_ff && !u.qs("span", bn_ff)) {
+				u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+			}
 
 			var bn_rw = u.qs("div.controls a.rw", div.player);
-			u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
+			if(bn_rw && !u.qs("span", bn_rw)) {
+				u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
+			}
 		}
 	}
 
@@ -43,19 +51,23 @@
 			div.player = u.ae(div, div.player);
 
 			div.player.extendButtons = function() {
-				if(!this._buttons_extended) {
-					this._buttons_extended = true;
 
-					var bn_playpause = u.qs("div.controls a.playpause", this);
+				var bn_playpause = u.qs("div.controls a.playpause", this);
+				if(bn_playpause && !u.qs("span", bn_playpause)) {
 					u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
 					u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+				}
 
-					var bn_ff = u.qs("div.controls a.ff", this);
+				var bn_ff = u.qs("div.controls a.ff", this);
+				if(bn_ff && !u.qs("span", bn_ff)) {
 					u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+				}
 
-					var bn_rw = u.qs("div.controls a.rw", this);
+				var bn_rw = u.qs("div.controls a.rw", this);
+				if(bn_rw && !u.qs("span", bn_rw)) {
 					u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
 				}
+
 			}
 
 
@@ -94,17 +106,20 @@
 			u.ae(div, div.player);
 
 			div.player.extendButtons = function() {
-				if(!this._buttons_extended) {
-					this._buttons_extended = true;
 
-					var bn_playpause = u.qs("div.controls a.playpause", this);
+				var bn_playpause = u.qs("div.controls a.playpause", this);
+				if(bn_playpause && !u.qs("span", bn_playpause)) {
 					u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
 					u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+				}
 
-					var bn_ff = u.qs("div.controls a.ff", this);
+				var bn_ff = u.qs("div.controls a.ff", this);
+				if(bn_ff && !u.qs("span", bn_ff)) {
 					u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+				}
 
-					var bn_rw = u.qs("div.controls a.rw", this);
+				var bn_rw = u.qs("div.controls a.rw", this);
+				if(bn_rw && !u.qs("span", bn_rw)) {
 					u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
 				}
 			}

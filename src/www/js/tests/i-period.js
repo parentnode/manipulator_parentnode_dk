@@ -19,41 +19,41 @@ Util.Objects["period"] = new function() {
 
 
 		if(u.period("m:s.u", {"seconds":13.31809}) == "00:13.318") {
-			u.ae(div, "div", {"class":"correct", "html":'u.period("m:s.u", {"seconds":13.31809}): correct'});
+			u.ae(div, "div", {"class":"testpassed", "html":'u.period("m:s.u", {"seconds":13.31809}): correct'});
 			div.test_results["u.period-1"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":'u.period("m:s.u", {"seconds":13.31809}): error'});
+			u.ae(div, "div", {"class":"testfailed", "html":'u.period("m:s.u", {"seconds":13.31809}): error'});
 			div.test_results["u.period-1"] = false;
 		}
 
 
 		if(u.period("D h:m:s.u", {"seconds":2013034.2347}) == "23 07:10:34.235") {
-			u.ae(div, "div", {"class":"correct", "html": 'u.period("D h:m:s.u", {"seconds":2013034.234}): correct'});
+			u.ae(div, "div", {"class":"testpassed", "html": 'u.period("D h:m:s.u", {"seconds":2013034.234}): correct'});
 			div.test_results["u.period-2"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":'u.period("D h:m:s.u", {"seconds":2013034.234}): error'});
+			u.ae(div, "div", {"class":"testfailed", "html":'u.period("D h:m:s.u", {"seconds":2013034.234}): error'});
 			div.test_results["u.period-2"] = false;
 		}
 
 
 		if(u.period("D", {"years":2}) == 730) {
-			u.ae(div, "div", {"class":"correct", "html":'u.period("D", {"years":2}): correct'});
+			u.ae(div, "div", {"class":"testpassed", "html":'u.period("D", {"years":2}): correct'});
 			div.test_results["u.period-3"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":'u.period("D", {"years":2}): error'});
+			u.ae(div, "div", {"class":"testfailed", "html":'u.period("D", {"years":2}): error'});
 			div.test_results["u.period-3"] = false;
 		}
 
 
 		if(u.period("H", {"months":4}) == 2920) {
-			u.ae(div, "div", {"class":"correct", "html":'u.period("H", {"months":4}): correct'});
+			u.ae(div, "div", {"class":"testpassed", "html":'u.period("H", {"months":4}): correct'});
 			div.test_results["u.period-4"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":'u.period("H", {"months":4}): error'});
+			u.ae(div, "div", {"class":"testfailed", "html":'u.period("H", {"months":4}): error'});
 			div.test_results["u.period-4"] = false;
 		}
 

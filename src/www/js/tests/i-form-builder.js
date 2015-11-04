@@ -24,11 +24,11 @@ Util.Objects["formbuilder"] = new function() {
 		// u.f.addForm
 		form = u.qs("form", div);
 		if(form && form.action == (location.href+"#") && form.method == "post" && form.name == "test_form" && form.className == "test_form") {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addForm: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addForm: correct"});
 			div.test_results["u.f.addForm"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addForm: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addForm: error"});
 			div.test_results["u.f.addForm"] = false;
 		}
 
@@ -36,11 +36,11 @@ Util.Objects["formbuilder"] = new function() {
 		// u.f.addFieldset
 		fieldset = u.qs("fieldset", form);
 		if(fieldset && fieldset.className == "fieldset" && fieldset.parentNode == form) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addFieldset: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addFieldset: correct"});
 			div.test_results["u.f.addFieldset"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addFieldset: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addFieldset: error"});
 			div.test_results["u.f.addFieldset"] = false;
 		}
 
@@ -60,11 +60,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_string" &&
 			input.value == "value_string"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addField (string): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addField (string): correct"});
 			div.test_results["u.f.addField (string)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addField (string): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addField (string): error"});
 			div.test_results["u.f.addField (string)"] = false;
 		}
 
@@ -84,11 +84,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_email" &&
 			input.value == "value_email"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addField (email): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addField (email): correct"});
 			div.test_results["u.f.addField (email)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addField (email): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addField (email): error"});
 			div.test_results["u.f.addField (email)"] = false;
 		}
 
@@ -108,11 +108,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_checkbox" &&
 			input.value == "true"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addField (checkbox): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addField (checkbox): correct"});
 			div.test_results["u.f.addField (checkbox)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addField (checkbox): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addField (checkbox): error"});
 			div.test_results["u.f.addField (checkbox)"] = false;
 		}
 
@@ -132,11 +132,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_text" &&
 			input.value == "value_text"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addField (text): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addField (text): correct"});
 			div.test_results["u.f.addField (text)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addField (text): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addField (text): error"});
 			div.test_results["u.f.addField (text)"] = false;
 		}
 
@@ -144,11 +144,11 @@ Util.Objects["formbuilder"] = new function() {
 		// actions
 		actions = u.qsa("ul.actions", form);
 		if(actions.length == 1 && actions[0].parentNode == form) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addAction (ul): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addAction (ul): correct"});
 			div.test_results["u.f.addAction (ul)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addAction (ul): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addAction (ul): error"});
 			div.test_results["u.f.addAction (ul)"] = false;
 		}
 
@@ -163,11 +163,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_submit" &&
 			input.value == "value_submit"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addAction (li + submit): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addAction (li + submit): correct"});
 			div.test_results["u.f.addAction (li + submit)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addAction (li + submit): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addAction (li + submit): error"});
 			div.test_results["u.f.addAction (li + submit)"] = false;
 		}
 
@@ -182,11 +182,11 @@ Util.Objects["formbuilder"] = new function() {
 			input.name == "name_button" &&
 			input.value == "value_button"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.f.addAction (li + button): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addAction (li + button): correct"});
 			div.test_results["u.f.addAction (li + button)"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.f.addAction (li + button): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.f.addAction (li + button): error"});
 			div.test_results["u.f.addAction (li + button)"] = false;
 		}
 

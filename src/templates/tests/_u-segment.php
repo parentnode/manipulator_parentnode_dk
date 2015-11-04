@@ -27,7 +27,7 @@
 
 				// transform
 				if(document.body.style[Variants[variant]["Transform"]] != undefined) {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = variant + "Transform: correct";
+					u.ae(scene, "div", ({"class":"testpassed"})).innerHTML = variant + "Transform: correct";
 				}
 				else {
 					u.ae(scene, "div", ({"class":"error"})).innerHTML = variant + "Transform: error";
@@ -36,7 +36,7 @@
 
 				// Transition
 				if(document.body.style[Variants[variant]["Transition"]] != undefined) {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = variant + "Transition: correct";
+					u.ae(scene, "div", ({"class":"testpassed"})).innerHTML = variant + "Transition: correct";
 				}
 				else {
 					u.ae(scene, "div", ({"class":"error"})).innerHTML = variant + "Transition: error";
@@ -47,7 +47,7 @@
 				// translate
 				testNode.style[Variants[variant]["Transform"]] = "translate(300px, 30px)";
 				if(testNode.style[Variants[variant]["Transform"]] == "translate(300px, 30px)") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = variant + "Transform translate: correct";
+					u.ae(scene, "div", ({"class":"testpassed"})).innerHTML = variant + "Transform translate: correct";
 				}
 				else {
 					u.ae(scene, "div", ({"class":"error"})).innerHTML = variant + "Transform translate: error";
@@ -56,7 +56,7 @@
 				// translate3d
 				testNode.style[Variants[variant]["Transform"]] = "translate3d(300px, 30px, 0px)";
 				if(testNode.style[Variants[variant]["Transform"]] == "translate3d(300px, 30px, 0px)") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = variant + "Transform translate3d: correct";
+					u.ae(scene, "div", ({"class":"testpassed"})).innerHTML = variant + "Transform translate3d: correct";
 				}
 				else {
 					u.ae(scene, "div", ({"class":"error"})).innerHTML = variant + "Transform translate3d: error";
@@ -64,7 +64,7 @@
 
 
 				if(typeof(window.history.pushState) == "function") {
-					u.ae(scene, "div", ({"class":"correct"})).innerHTML = "history.pushState: correct";
+					u.ae(scene, "div", ({"class":"testpassed"})).innerHTML = "history.pushState: correct";
 				}
 				else {
 					u.ae(scene, "div", ({"class":"error"})).innerHTML = "history.pushState: error";

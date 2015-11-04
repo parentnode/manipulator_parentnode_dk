@@ -63,13 +63,13 @@ Util.Objects["template"] = new function() {
 		
 		) {
 
-			u.ae(div, "div", {"class":"correct", "html":"u.template (DOM template, no autoappend): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template (DOM template, no autoappend): correct"});
 			div.test_results["u.template - 1"] = true;
 		}
 		// error
 		else {
 
-			u.ae(div, "div", {"class":"error", "html":"u.template (DOM template, no autoappend): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template (DOM template, no autoappend): error"});
 			div.test_results["u.template - 1"] = false;
 		}
 
@@ -91,13 +91,13 @@ Util.Objects["template"] = new function() {
 			u.qs("img", control_children[2]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
 			u.text(control_children[3]) == "Martin4"
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.template (DOM template, autoappend): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template (DOM template, autoappend): correct"});
 			div.test_results["u.template - 2"] = true;
 		}
 		// error
 		else {
 
-			u.ae(div, "div", {"class":"error", "html":"u.template (DOM template, autoappend): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template (DOM template, autoappend): error"});
 			div.test_results["u.template - 2"] = false;
 		}
 
@@ -122,13 +122,13 @@ Util.Objects["template"] = new function() {
 			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"
 
 		) {
-			u.ae(div, "div", {"class":"correct", "html":"u.template (Virtual template, autoappend): correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template (Virtual template, autoappend): correct"});
 			div.test_results["u.template - 3"] = true;
 		}
 		// error
 		else {
 
-			u.ae(div, "div", {"class":"error", "html":"u.template (Virtual template, autoappend): error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template (Virtual template, autoappend): error"});
 			div.test_results["u.template - 3"] = false;
 		}
 

@@ -10,12 +10,12 @@
 					this.clicked = function() {
 						this.popup.close();
 						this.innerHTML = "Popup 400x300: correct";
-						u.ac(this, "correct");
+						u.ac(this, "testpassed");
 //						u.bug("popup:" + this.popup);
 					}
 				}
 				else {
-					u.ac(this, "error");
+					u.ac(this, "testfailed");
 					this.innerHTML = "popup, 400x300: error";
 				}
 //				u.bug("name:" + this.popup.name);
@@ -30,12 +30,12 @@
 					this.clicked = function() {
 						this.popup.close();
 						this.innerHTML = "Popup name: correct";
-						u.ac(this, "correct");
+						u.ac(this, "testpassed");
 //						u.bug("popup:" + this.popup);
 					}
 				}
 				else {
-					u.ac(this, "error");
+					u.ac(this, "testfailed");
 					this.innerHTML = "popup name: error";
 				}
 //				u.bug("name:" + this.popup.name);

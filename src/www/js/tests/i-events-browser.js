@@ -10,10 +10,10 @@ Util.Objects["eventsBrowser"] = new function() {
 			div.initialized = true;
 			node.parentNode.removeChild(node);
 
-			u.ae(div, "div", {"class":"correct", "html":"u.e.addDOMReadyEvent: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.e.addDOMReadyEvent: correct"});
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.e.addDOMReadyEvent: error (Multiple initializations)"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.e.addDOMReadyEvent: error (Multiple initializations)"});
 		}
 
 
@@ -21,7 +21,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		// u.e.addWindowMoveEvent
 		u.ae(div, "h2", {"html":"Window.move"});
 		u.ae(div, "p", {"html":"Move mouse / swipe screen to perform test"});
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowMoveEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowMoveEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -29,8 +29,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -41,7 +41,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowMoveEvent(div.node, div.node.funtion_reference);
 
 		// u.e.removeWindowStartEvent
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowMoveEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowMoveEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -49,8 +49,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -66,7 +66,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		// u.e.addWindowEvent (scroll)
 		u.ae(div, "h2", {"html":"Window.scroll"});
 		u.ae(div, "p", {"html":"Scroll content to perform test"});
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowEvent (scroll): waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowEvent (scroll): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -74,8 +74,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -86,7 +86,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowEvent(div.node, "scroll", div.node.funtion_reference);
 
 		// u.e.removeWindowEvent (scroll)
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowEvent (scroll): waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowEvent (scroll): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -94,8 +94,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -111,7 +111,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		// u.e.addWindowStartEvent
 		u.ae(div, "h2", {"html":"Window.start + Window.end"});
 		u.ae(div, "p", {"html":"Click/tap screen to perform test"});
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowStartEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowStartEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -119,8 +119,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -131,7 +131,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowStartEvent(div.node, div.node.funtion_reference);
 
 		// u.e.removeWindowStartEvent
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowStartEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowStartEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -139,8 +139,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -154,7 +154,7 @@ Util.Objects["eventsBrowser"] = new function() {
 
 
 		// u.e.addWindowEndEvent
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowEndEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowEndEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -162,8 +162,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -174,7 +174,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowEndEvent(div.node, div.node.funtion_reference);
 
 		// u.e.removeWindowEndEvent
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowEndEvent: waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowEndEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -182,8 +182,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -199,7 +199,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		// u.e.addWindowEvent (resize)
 		u.ae(div, "h2", {"html":"Window.resize"});
 		u.ae(div, "p", {"html":"Resize browser window to perform test"});
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowEvent (resize): waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowEvent (resize): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -207,8 +207,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -219,7 +219,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowEvent(div.node, "resize", div.node.funtion_reference);
 
 		// u.e.removeWindowEvent (resize)
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowEvent (resize): waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowEvent (resize): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -227,8 +227,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -243,8 +243,8 @@ Util.Objects["eventsBrowser"] = new function() {
 
 		// u.e.addWindowEvent (keydown)
 		u.ae(div, "h2", {"html":"Window.keydown"});
-		u.ae(div, "p", {"html":"Press any key to perform test"});
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.addWindowEvent (keydown): waiting"});
+		u.ae(div, "p", {"html":"Press any key to perform test (only for fixed keyboard devices)"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowEvent (keydown): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -252,8 +252,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {
@@ -264,7 +264,7 @@ Util.Objects["eventsBrowser"] = new function() {
 		var test2 = u.e.addWindowEvent(div.node, "keydown", div.node.funtion_reference);
 
 		// u.e.removeWindowEvent (scroll)
-		div.node = u.ae(div, "div", {"class":"error", "html":"u.e.removeWindowEvent (keydown): waiting"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowEvent (keydown): waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
 			this.string_callback = true;
@@ -272,8 +272,8 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node.funtion_reference = function(event) {
 
 			if(!this.string_callback) {
-				u.rc(this, "error");
-				u.ac(this, "correct");
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 			else {

@@ -19,22 +19,22 @@ Util.Objects["cookie"] = new function() {
 
 		// save cookie
 		if(regex.test(document.cookie)) {
-			u.ae(div, "div", {"class":"correct", "html":"u.saveCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie: correct"});
 			div.test_results["u.saveCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.saveCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.saveCookie: error"});
 			div.test_results["u.saveCookie"] = false;
 		}
 
 
 		// get cookie
 		if(u.getCookie("test") == cookie_value1) {
-			u.ae(div, "div", {"class":"correct", "html":"u.getCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.getCookie: correct"});
 			div.test_results["u.getCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.getCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.getCookie: error"});
 			div.test_results["u.getCookie"] = false;
 		}
 
@@ -50,11 +50,11 @@ Util.Objects["cookie"] = new function() {
 		var no_cookie = u.getCookie("test");
 		
 		if(root_cookie == cookie_value2 && !no_cookie) {
-			u.ae(div, "div", {"class":"correct", "html":"u.deleteCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteCookie: correct"});
 			div.test_results["u.deleteCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.deleteCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteCookie: error"});
 			div.test_results["u.deleteCookie"] = false;
 		}
 
@@ -78,22 +78,22 @@ Util.Objects["cookie"] = new function() {
 
 		var man_mem_cookie = JSON.parse(u.getCookie("man_mem"));
 		if(man_mem_cookie["DIV#content DIV.i:node node id:1234"]["test"] == cookie_value2 && man_mem_cookie["DIV#nodeCookieTest"].test == cookie_value3 && man_mem_cookie["DIV#content DIV"].test == cookie_value4) {
-			u.ae(div, "div", {"class":"correct", "html":"u.saveNodeCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveNodeCookie: correct"});
 			div.test_results["u.saveNodeCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.saveNodeCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.saveNodeCookie: error"});
 			div.test_results["u.saveNodeCookie"] = false;
 		}
 
 
 		// getNodeCookie
 		if(u.getNodeCookie(node_class, "test") == cookie_value2 && u.getNodeCookie(node_id, "test") == cookie_value3 && u.getNodeCookie(node, "test") == cookie_value4) {
-			u.ae(div, "div", {"class":"correct", "html":"u.getNodeCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.getNodeCookie: correct"});
 			div.test_results["u.getNodeCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.getNodeCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.getNodeCookie: error"});
 			div.test_results["u.getNodeCookie"] = false;
 		}
 
@@ -102,11 +102,11 @@ Util.Objects["cookie"] = new function() {
 		u.deleteNodeCookie(node_class, "test");
 		u.deleteNodeCookie(node_id);
 		if(!u.getNodeCookie(node_class, "test") && u.getNodeCookie(node_class).testtest == cookie_value1 && !u.getNodeCookie(node_id) && u.getNodeCookie(node, "test") == cookie_value4) {
-			u.ae(div, "div", {"class":"correct", "html":"u.deleteNodeCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteNodeCookie: correct"});
 			div.test_results["u.deleteNodeCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"error", "html":"u.deleteNodeCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteNodeCookie: error"});
 			div.test_results["u.deleteNodeCookie"] = false;
 		}
 

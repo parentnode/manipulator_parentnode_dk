@@ -88,19 +88,19 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 #content .scene div.tests h2 {padding: 10px 0px 5px;}
 #content .scene div.tests p {padding: 0px 0px 10px;}
 
-#content .scene div.tests div.correct {background: green;}
-#content .scene div.tests div.error {background: red;}
+#content .scene div.tests div.testpassed {background: green;}
+#content .scene div.tests div.testfailed {background: red;}
 
-#content .scene div.tests div.correct,
-#content .scene div.tests div.error {margin: 0 0 3px; padding: 1px 5px 3px;}
+#content .scene div.tests div.testpassed,
+#content .scene div.tests div.testfailed {margin: 0 0 3px; padding: 1px 5px 3px;}
 
-#content .scene div.tests div.correct,
-#content .scene div.tests div.error,
-#content .scene div.tests div.correct *,
-#content .scene div.tests div.error * {color: white; font-size: 13px; line-height: 16px;}
+#content .scene div.tests div.testpassed,
+#content .scene div.tests div.testfailed,
+#content .scene div.tests div.testpassed *,
+#content .scene div.tests div.testfailed * {color: white; font-size: 13px; line-height: 16px;}
 
-#content .scene div.tests div.correct *,
-#content .scene div.tests div.error * {padding: 0; margin: 0;}
+#content .scene div.tests div.testpassed *,
+#content .scene div.tests div.testfailed * {padding: 0; margin: 0;}
 
 
 

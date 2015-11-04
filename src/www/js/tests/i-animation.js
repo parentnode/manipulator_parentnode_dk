@@ -27,13 +27,13 @@ Util.Objects["callbacks"] = new function() {
 
 
 		// SIMPLE CALLBACK
-		node = u.ae(div, "div", {"class":"error", "html":"node.transitioned: waiting"});
+		node = u.ae(div, "div", {"class":"testfailed", "html":"node.transitioned: waiting"});
 		node.transitioned = function(event) {
 			if(
 				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)"])
 				 && checkTransition(this)
 			) {
-				u.tc(this, "error", "correct");
+				u.tc(this, "testfailed", "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 		}
@@ -46,7 +46,7 @@ Util.Objects["callbacks"] = new function() {
 
 
 		// CHAINED CALLBACK
-		div.e1 = u.ae(div, "div", {"class":"e1 error", "html":"node.transitioned (chained): waiting"});
+		div.e1 = u.ae(div, "div", {"class":"e1 testfailed", "html":"node.transitioned (chained): waiting"});
 		div.e1.called_back = 0;
 		div.e1.step1 = function(event) {
 			this.called_back++;
@@ -81,7 +81,7 @@ Util.Objects["callbacks"] = new function() {
 					checkTransition(this) &&
 					!this.step5
 				) {
-					u.tc(this, "error", "correct");
+					u.tc(this, "testfailed", "testpassed");
 					this.innerHTML = this.innerHTML.replace("waiting", "correct");
 				}
 			}
@@ -170,10 +170,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.translate: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.translate: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.translate: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.translate: error"});
 			}
 			
 		}
@@ -198,10 +198,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.rotate correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.rotate correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.rotate error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.rotate error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");
@@ -221,10 +221,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.scale: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.scale: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.scale: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.scale: error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");
@@ -244,10 +244,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.opacity: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.opacity: correct"});
 			}
 			else {
-				u.ae(this, "div", {"class":"error", "html":"u.a.opacity: error"});
+				u.ae(this, "div", {"class":"testfailed", "html":"u.a.opacity: error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");
@@ -267,10 +267,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.width: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.width: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.width: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.width: error"});
 			}
 		
 		}
@@ -291,10 +291,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.height: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.height: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.height: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.height: error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");
@@ -314,10 +314,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.bgpos: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgpos: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.bgpos: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgpos: error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");
@@ -337,10 +337,10 @@ Util.Objects["basics"] = new function() {
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
-				u.ae(this.div, "div", {"class":"correct", "html":"u.a.bgcolor: correct"});
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgcolor: correct"});
 			}
 			else {
-				u.ae(this.div, "div", {"class":"error", "html":"u.a.bgcolor: error"});
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgcolor: error"});
 			}
 		}
 		u.a.transition(node, "all 1s ease-in");

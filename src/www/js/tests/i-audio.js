@@ -7,8 +7,10 @@ Util.Objects["audio1"] = new function() {
 
 		// add label to buttons
 		var bn_playpause = u.qs("div.controls a.playpause", div.player);
-		u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
-		u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+		if(bn_playpause && !u.qs("span", bn_playpause)) {
+			u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+			u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+		}
 
 		div.player.ended = function() {
 			this.play();
@@ -26,14 +28,20 @@ Util.Objects["audio2"] = new function() {
 		div.player.load("/media/audio/audio_1.mp3");
 
 		var bn_playpause = u.qs("div.controls a.playpause", div.player);
-		u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
-		u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+		if(bn_playpause && !u.qs("span", bn_playpause)) {
+			u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+			u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+		}
 
 		var bn_ff = u.qs("div.controls a.ff", div.player);
-		u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+		if(bn_ff && !u.qs("span", bn_ff)) {
+			u.ae(bn_ff, "span", {"class":"ff", "html":"FF"});
+		}
 
 		var bn_rw = u.qs("div.controls a.rw", div.player);
-		u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
+		if(bn_rw && !u.qs("span", bn_rw)) {
+			u.ae(bn_rw, "span", {"class":"rw", "html":"RW"});
+		}
 	}
 }
 
@@ -59,8 +67,10 @@ Util.Objects["audio3"] = new function() {
 			this.player.loadAndPlay(this.url, {"playpause":true, "search":false});
 
 			var bn_playpause = u.qs("div.controls a.playpause", this.player);
-			u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
-			u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			if(bn_playpause && !u.qs("span", bn_playpause)) {
+				u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+				u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+			}
 		}
 
 	}
