@@ -76,7 +76,7 @@ $this->headerIncludes(array(
 				</div>
 
 				<div class="field date required">
-					<label for="combined_date_required">Date, required</label>
+					<label for="combined_date_required">Date, required (YYYY-MM-DD)</label>
 					<input type="date" name="date_required" id="combined_date_required" />
 					<div class="help">
 						<div class="hint">hint</div>
@@ -85,7 +85,7 @@ $this->headerIncludes(array(
 				</div>
 
 				<div class="field datetime required">
-					<label for="combined_datetime_required">Datetime, required</label>
+					<label for="combined_datetime_required">Datetime, required (YYYY-MM-DD HH:MM)</label>
 					<input type="datetime" name="datetime_required" id="combined_datetime_required" />
 					<div class="help">
 						<div class="hint">hint</div>
