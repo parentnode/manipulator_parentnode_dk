@@ -64,6 +64,20 @@ Util.Objects["page"] = new function() {
 
 		}
 
+		// global orientationchange handler 
+		page.orientationchanged = function() {
+
+			// forward orientationchange event to current scene
+			if(page.cN && page.cN.scene && typeof(page.cN.scene.orientationchanged) == "function") {
+				page.cN.scene.orientationchanged();
+			}
+
+		}
+
+		page.error = function(event) {
+			alert("JavaScript error occured:\n\n" + event.message);
+			return false;
+		}
 
 		// Page is ready - called from several places, evaluates when page is ready to be shown
 		page.ready = function() {
@@ -79,6 +93,13 @@ Util.Objects["page"] = new function() {
 				u.e.addEvent(window, "resize", page.resized);
 				// set scroll handler
 				u.e.addEvent(window, "scroll", page.scrolled);
+				// set orientationchange handler
+				u.e.addEvent(window, "orientationchange", page.orientationchanged);
+
+
+				// set error handler
+				u.e.addEvent(window, "error", page.error);
+
 
 				this.resized();
 

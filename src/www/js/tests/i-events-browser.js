@@ -241,6 +241,51 @@ Util.Objects["eventsBrowser"] = new function() {
 
 
 
+		// u.e.addWindowEvent (orientationchange)
+		u.ae(div, "h2", {"html":"Window.orientationchange"});
+		u.ae(div, "p", {"html":"Turn your device to perform test (only on smartphone/tablet devices)"});
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowEvent (orientationchange): waiting"});
+		div.node.callback = 0;
+		div.node.function_string = function(event) {
+			this.string_callback = true;
+		}
+		div.node.funtion_reference = function(event) {
+
+			if(this.string_callback) {
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
+				this.innerHTML = this.innerHTML.replace("waiting", "correct");
+			}
+			else {
+				this.innerHTML = this.innerHTML.replace("waiting", "error");
+			}
+		}
+		var test1 = u.e.addWindowEvent(div.node, "orientationchange", "function_string");
+		var test2 = u.e.addWindowEvent(div.node, "orientationchange", div.node.funtion_reference);
+
+		// u.e.removeWindowEvent (resize)
+		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.removeWindowEvent (orientationchange): waiting"});
+		div.node.callback = 0;
+		div.node.function_string = function(event) {
+			this.string_callback = true;
+		}
+		div.node.funtion_reference = function(event) {
+
+			if(!this.string_callback) {
+				u.rc(this, "testfailed");
+				u.ac(this, "testpassed");
+				this.innerHTML = this.innerHTML.replace("waiting", "correct");
+			}
+			else {
+				this.innerHTML = this.innerHTML.replace("waiting", "error");
+			}
+		}
+		var test1 = u.e.addWindowEvent(div.node, "orientationchange", "function_string");
+		var test2 = u.e.addWindowEvent(div.node, "orientationchange", div.node.funtion_reference);
+		u.e.removeWindowEvent(div.node, "orientationchange", test1);
+
+
+
 		// u.e.addWindowEvent (keydown)
 		u.ae(div, "h2", {"html":"Window.keydown"});
 		u.ae(div, "p", {"html":"Press any key to perform test (only for fixed keyboard devices)"});

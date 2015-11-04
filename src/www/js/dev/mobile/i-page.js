@@ -54,12 +54,20 @@ Util.Objects["page"] = new function() {
 
 		}
 
+		// global orientationchange handler 
 		page.orientationchanged = function() {
-			if(u.hc(page.bn_nav, "open")) {
-				u.as(page.hN, "height", window.innerHeight + "px");
+
+			// forward orientationchange event to current scene
+			if(page.cN && page.cN.scene && typeof(page.cN.scene.orientationchanged) == "function") {
+				page.cN.scene.orientationchanged();
 			}
 		}
 		
+
+		page.error = function(event) {
+			alert("JavaScript error occured:\n\n" + event.message);
+			return false;
+		}
 
 
 		// Page is ready - called from several places, evaluates when page is ready to be shown
@@ -78,6 +86,11 @@ Util.Objects["page"] = new function() {
 				u.e.addEvent(window, "scroll", page.scrolled);
 				// set orientation change handler
 				u.e.addEvent(window, "orientationchange", page.orientationchanged);
+
+
+				// set error handler
+				u.e.addEvent(window, "error", page.error);
+
 
 				this.resized();
 

@@ -6,7 +6,7 @@ $this->headerIncludes(array(
 
 <div class="scene i:scene">
 	<h1>Keyboard shortcuts</h1>
-	<p>Test all shortcuts</p>
+	<p>Test all shortcuts (only for devices with fixed keyboards)</p>
 
 	<div class="tests i:keyboard"></div>
 

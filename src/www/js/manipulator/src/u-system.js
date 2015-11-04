@@ -119,8 +119,8 @@ Util.system = function(os, version) {
 	}
 	else if(os.match(/\bios\b/i)) {
 
-		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)) {
-			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d)( like Mac OS X)/i)[2].replace("_", ".");
+		if(navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]?)( like Mac OS X)/i)) {
+			current_version = navigator.userAgent.match(/(OS )(\d+[._]{1}\d+[._\d]?)( like Mac OS X)/i)[2].replace("_", ".");
 		}
 
 		// CPU OS 8_0 l
