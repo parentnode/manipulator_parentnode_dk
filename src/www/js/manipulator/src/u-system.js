@@ -143,7 +143,7 @@ Util.system = function(os, version) {
 	}
 	else if(os.match(/\blinux\b/i)) {
 
-		if(navigator.userAgent.match(/linux|x11/i)) {
+		if(navigator.userAgent.match(/linux|x11/i) && !navigator.userAgent.match(/android/)) {
 			current_version = true;
 		}
 	}
