@@ -83,19 +83,24 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 
 
 /* TESTS */
-#content .scene > div.tests {padding: 0 10px;}
+#content .scene div.tests {padding: 0 10px;}
+#content .scene div.tests form {margin: 0 -10px 10px;}
 
-#content .scene > div.tests > div {margin: 0 0 3px; padding: 1px 5px 3px;}
-#content .scene > div.tests > h2 {padding: 10px 0px 5px;}
-#content .scene > div.tests > p {padding: 0px 0px 10px;}
+#content .scene div.tests div.debug {font-size: 13px; color: #ffffff; background: #000000; max-height: 152px; padding: 5px; overflow: auto;}
 
-#content .scene > div.tests > div.correct {background: green;}
-#content .scene > div.tests > div.error {background: red;}
+#content .scene div.tests h2 {padding: 10px 0px 5px;}
+#content .scene div.tests p {padding: 0px 0px 10px;}
 
-#content .scene > div.tests > div.correct,
-#content .scene > div.tests > div.error,
-#content .scene > div.tests > div.correct *,
-#content .scene > div.tests > div.error * {color: white; font-size: 13px; line-height: 16px;}
+#content .scene div.tests div.correct {background: green;}
+#content .scene div.tests div.error {background: red;}
+
+#content .scene div.tests div.correct,
+#content .scene div.tests div.error {margin: 0 0 3px; padding: 1px 5px 3px;}
+
+#content .scene div.tests div.correct,
+#content .scene div.tests div.error,
+#content .scene div.tests div.correct *,
+#content .scene div.tests div.error * {color: white; font-size: 13px; line-height: 16px;}
 
 
 

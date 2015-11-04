@@ -1,6 +1,6 @@
 
 function checkTransition(node) {
-//		u.bug("checkTransition: " + u.gcs(node, "transition"));
+		u.bug("checkTransition: " + u.gcs(node, "transition"));
 	return (u.gcs(node, "transition") == "" || u.gcs(node, "transition") == "none 0s ease 0s") ? true : false;
 }
 
@@ -8,7 +8,7 @@ function checkValues(node, property, values) {
 	var value;
 	while(values.length) {
 		value = values.pop();
-//		u.bug("u.gcs(node, property):" + u.gcs(node, property) + " # " + value);
+		u.bug("u.gcs(node, property):" + u.gcs(node, property) + " # " + value + " :: " + u.nodeId(node));
 		if(u.gcs(node, property) == value) {
 			return true;
 		}
@@ -30,8 +30,8 @@ Util.Objects["callbacks"] = new function() {
 		node = u.ae(div, "div", {"class":"error", "html":"node.transitioned: waiting"});
 		node.transitioned = function(event) {
 			if(
-				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)"]) &&
-				checkTransition(this)
+				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)"])
+				 && checkTransition(this)
 			) {
 				u.tc(this, "error", "correct");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");

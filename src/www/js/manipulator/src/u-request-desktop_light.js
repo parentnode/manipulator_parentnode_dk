@@ -73,11 +73,27 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 
 				// avoid heavy caching by activex component
 				url += (url.match(/\?/) ? "&" : "?") + "refresh_activex=" + u.randomString();
-				this.xmlhttp.open(method, url, async);
+				try {
+					this.xmlhttp.open(method, url, async);
+				}
+				catch(exception) {}
 			}
 
 			wrapper.send = function(params) {
-				this.xmlhttp.send(params);
+				// will fail on crossdomain requests
+				try {
+					this.xmlhttp.send(params);
+				}
+				// invoke responder
+				catch(exception) {
+
+					this.IEreadyState = true;
+
+					if(typeof(this.statechanged) == "function") {
+						this.statechanged();
+						this.parentNode.removeChild(this);
+					}
+				}
 
 				// make variables available on wrapper
 				if(!this.async) {

@@ -5,7 +5,7 @@ Util.createRequestObject = function() {
 
 // Request object
 Util.request = function(node, url, _options) {
-//	u.bug("request")
+//	u.bug("request:" + url)
 
 	var request_id = u.randomString(6);
 
@@ -163,7 +163,6 @@ Util.request = function(node, url, _options) {
 		document[key].node = node;
 		document[key].request_id = request_id;
 		document[key].responder = function(response) {
-
 			// make object to map node
 			var response_object = new Object();
 			response_object.node = this.node;
@@ -329,8 +328,7 @@ Util.validateResponse = function(response){
 	if(response) {
 
 //		u.bug("response:" + response + ":" + u.nodeId(response.node) + ":" + response.status)
-
-		// u.bug("status:" + response.status + ":" + u.nodeId(response.node));
+//		u.bug("status:" + response.status + ":" + u.nodeId(response.node));
 		// u.bug("responseText:" + response.responseText);
 
 		try {

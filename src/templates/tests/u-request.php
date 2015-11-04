@@ -95,14 +95,14 @@ $this->headerIncludes(array(
 			<span>/ajax/script.jsonp.php?test=error</span>
 		</div>
 
-		<div class="test method:script">
+		<div class="test method:script a">
 			<form name="testform" action="" method="">
 				<input type="hidden" name="test" value="SCRIPT, to JSONP outside domain: correct" />
 			</form>
 			<span>http://manipulator.parentnode.dk/ajax/script.jsonp.php</span>
 		</div>
 
-		<div class="test shouldfail:true method:post">
+		<div class="test shouldfail:true method:post b">
 			<form name="testform" action="" method="">
 				<input type="hidden" name="test" value="POST, outside domain: correct" />
 			</form>
