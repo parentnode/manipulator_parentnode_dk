@@ -6,7 +6,7 @@ Util.Objects["history"] = new function() {
 
 		//
 		div.navigate = function(url) {
-
+			u.bug("navigate:" + url)
 			// popstate handling
 			if(u.h.popstate) {
 				history.pushState({}, url, url);

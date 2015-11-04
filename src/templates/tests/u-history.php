@@ -18,6 +18,8 @@ $this->headerIncludes(array(
 			<li><a href="<?= preg_replace("/.php/", "", $_SERVER["PHP_SELF"]) ?>"><?= preg_replace("/.php/", "", $_SERVER["PHP_SELF"]) ?></a></li>
 			<li><a href="/test1">/test1</a></li>
 			<li><a href="/test2">/test2</a></li>
+			<li><a href="/test3/test4">/test3/test4</a></li>
+			<li><a href="/test5/test6">/test5/test6</a></li>
 		</ul>
 
 		<h2>Current location</h2>

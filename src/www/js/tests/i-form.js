@@ -9,7 +9,7 @@ Util.Objects["formIndividual"] = new function() {
 			form.debug = u.ae(form, "div", {"class":"debug"});
 			form.addDebug = function(message) {
 				this.debug.innerHTML += message + "<br>";
-				this.debug.scrollTo(0, 1000);
+				this.debug.scrollTop = this.debug.scrollTop + 25;
 			}
 
 
@@ -58,7 +58,7 @@ Util.Objects["formCombined"] = new function() {
 		form.debug = u.ae(form, "div", {"class":"debug"});
 		form.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 

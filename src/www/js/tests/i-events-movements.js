@@ -4,7 +4,7 @@ Util.Objects["drag1"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
@@ -41,7 +41,7 @@ Util.Objects["drag2"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 		// MIXED
@@ -121,7 +121,7 @@ Util.Objects["drag3"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
@@ -204,7 +204,7 @@ Util.Objects["drag4"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 		// LINKS
@@ -267,7 +267,7 @@ Util.Objects["drag5"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
@@ -312,7 +312,7 @@ Util.Objects["drag6"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
@@ -359,7 +359,7 @@ Util.Objects["swipe1"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
@@ -448,7 +448,7 @@ Util.Objects["swipe2"] = new function() {
 		div.debug = u.ae(div, "div", {"class":"debug"});
 		div.addDebug = function(message) {
 			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTo(0, 1000);
+			this.debug.scrollTop = this.debug.scrollTop + 25;
 		}
 
 
