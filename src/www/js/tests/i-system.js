@@ -250,7 +250,7 @@ Util.Objects["system"] = new function() {
 		if(u.support("opacity") && div.opacitySupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Opacity support: correct ("+u.support("opacity")+")"});
 		}
-		else if(!div.opacitySupport()) {
+		else if(!u.support("opacity") && !div.opacitySupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Opacity support: correct (no support)"});
 		}
 		else {
@@ -260,7 +260,7 @@ Util.Objects["system"] = new function() {
 		if(u.support(u.a.vendor("Transform")) && div.transformSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct ("+u.support(u.a.vendor("Transform"))+")"});
 		}
-		else if(!div.transformSupport()) {
+		else if(!u.support(u.a.vendor("Transform")) && !div.transformSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct (no support)"});
 		}
 		else {
@@ -270,7 +270,7 @@ Util.Objects["system"] = new function() {
 		if(u.support(u.a.vendor("Transition")) && div.transitionSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct ("+u.support(u.a.vendor("Transition"))+")"});
 		}
-		else if(!div.transitionSupport()) {
+		else if(!u.support(u.a.vendor("Transition")) && !div.transitionSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct (no support)"});
 		}
 		else {
