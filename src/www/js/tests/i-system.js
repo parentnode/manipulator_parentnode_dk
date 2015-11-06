@@ -250,6 +250,9 @@ Util.Objects["system"] = new function() {
 		if(u.support("opacity") && div.opacitySupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Opacity support: correct ("+u.support("opacity")+")"});
 		}
+		else if(!div.opacitySupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Opacity support: correct (no support)"});
+		}
 		else {
 			u.ae(div, "div", {"class":"testfailed", "html":"Opacity support: error ("+u.support("opacity")+")"});
 		}
@@ -257,12 +260,18 @@ Util.Objects["system"] = new function() {
 		if(u.support(u.a.vendor("Transform")) && div.transformSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct ("+u.support(u.a.vendor("Transform"))+")"});
 		}
+		else if(!div.transformSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct (no support)"});
+		}
 		else {
 			u.ae(div, "div", {"class":"testfailed", "html":"Transform support: error ("+u.support(u.a.vendor("Transform"))+")"});
 		}
 
 		if(u.support(u.a.vendor("Transition")) && div.transitionSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct ("+u.support(u.a.vendor("Transition"))+")"});
+		}
+		else if(!div.transitionSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct (no support)"});
 		}
 		else {
 			u.ae(div, "div", {"class":"testfailed", "html":"Transition support: error ("+u.support(u.a.vendor("Transition"))+")"});
