@@ -2,36 +2,11 @@ Util.Objects["history"] = new function() {
 	this.init = function(div) {
 
 
-		div._location = u.qs(".location", div);
+		page._location_1 = u.qs(".l1.location", div);
+		page._location_2 = u.qs(".l2.location", div);
+		page._location_3 = u.qs(".l3.location", div);
+		page._location_4 = u.qs(".l4.location", div);
 
-		//
-		div.navigate = function(url) {
-			u.bug("navigate:" + url)
-			// popstate handling
-			if(u.h.popstate) {
-				history.pushState({}, url, url);
-				this.updated(url);
-			}
-			// hash handling
-			else {
-				location.hash = u.h.getCleanUrl(url);
-			}
-		}
-		//
-		// 	u.bug("url:" + url)
-		// //	this._location.innerHTML = u.h.getCleanUrl(url);
-		//
-		// 	// // popstate handling
-		// 	// if(u.h.popstate) {
-		// 	// 	history.pushState({}, url, url);
-		// 	// 	div.updated(u.h.getCleanUrl(url));
-		// 	// }
-		// 	// // hash handling
-		// 	// else {
-		// 	// 	location.hash = u.h.getCleanUrl(url);
-		// 	// }
-		//
-		// }
 
 		var links = u.qsa("ul.links li", div);
 		for(i = 0; link = links[i]; i++) {
@@ -40,19 +15,38 @@ Util.Objects["history"] = new function() {
 			u.ce(link);
 			link.clicked = function() {
 
-				this.div.navigate(this.url);
+				u.h.navigate(this.url);
 			}
 		}
-		//
-		//
+
+
+		// Test multiple callback methods
 		div.updated = function(url) {
 
-			this._location.innerHTML = url;
+			page._location_2.innerHTML = url;
+		}
+		page.updated = function(url) {
 
+			page._location_1.innerHTML = url;
+		}
+		div.navigated = function(url) {
+
+			page._location_3.innerHTML = url;
+		}
+		div.removed = function(url) {
+
+			page._location_4.innerHTML = url;
 		}
 
 		
-		u.h.catchEvent(div, div.updated);
+		u.h.addEvent(page, {"callback":"updated"});
+		u.h.addEvent(div, {"callback":"updated"});
+		u.h.addEvent(div, {"callback":"navigated"});
+
+		u.h.addEvent(div, {"callback":"removed"});
+		u.h.removeEvent(div, {"callback":"removed"});
+
+
 
 
 		u.ae(div, "h2", {"html":"Helper methods"});

@@ -2,7 +2,15 @@ Util.browser = function(model, version) {
 
 	var current_version = false;
 
-	if(model.match(/\bexplorer\b|\bie\b/i)) {
+	if(model.match(/\bedge\b/i)) {
+
+		if(navigator.userAgent.match(/ edge\/(\d+)/i) && !u.system("webkit")) {
+			current_version = navigator.userAgent.match(/ edge\/(\d+)/i)[1];
+		}
+
+	}
+
+	else if(model.match(/\bexplorer\b|\bie\b/i)) {
 		// u.bug("##trying to match IE:" + document.all + ":" + window.ActiveXObject)
 		// u.bug(navigator.userAgent.match(/Trident\/[\d+]\.\d[^$]+rv:(\d+.\d)/i))
 

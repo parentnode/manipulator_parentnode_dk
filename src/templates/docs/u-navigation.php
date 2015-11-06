@@ -1,17 +1,26 @@
 <div class="scene docpage i:docpage">
 	<h1>Navigation</h1>
+	<h2>Ajax Navigation controller</h2>
 	<p>
 		This is the extended Navigation controller, customized for the Manipulator Modulator Model. 
 		A lot of M's, yeah I know. The MMM is a page/flow controller designed for ultimate rendering control.
 	</p>
 	<p>
-		It is composed of a <span class="htmltag">div#page</span> containing a <span class="htmltag">div#header</span>, 
+		Uses Util.History for browser History and Location control. 
+		Seamless fallback to location.hash and Legacy translation between #/ and real url paths for support
+		for links shared between different generation browsers.
+	</p>
+	<p>
+		In default implementation it is composed of a <span class="htmltag">div#page</span> containing a <span class="htmltag">div#header</span>, 
 		a <span class="htmltag">div#footer</span> and a <span class="htmltag">div#content</span>. In the 
 		<span class="htmltag">div#content</span> we place our individual page content in a 
 		<span class="htmltag">div.scene</span>. When using an AJAX enabled navigation the Manipulator Navigation 
 		module forwards popstate and HASH changes to either <span class="htmltag">div#content</span> or
 		<span class="htmltag">div.scene</span> depending on the url fragments. First level changes is redirected to
 		<span class="htmltag">div#content</span>, all others to <span class="htmltag">div.scene</span>.
+	</p>
+	<p>
+		The module can also be used with custom callback and node.
 	</p>
 
 	<div class="section functions">
@@ -32,7 +41,9 @@
 							<dd class="name">Util.navigation</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.navigation();
+								Util.navigation(
+									<span class="type">JSON</span> <span class="var">_options</span> 
+								);
 							</dd>
 						</dl>
 					</div>
@@ -59,7 +70,32 @@
 
 					<div class="parameters">
 						<h4>Parameters</h4>
-						<p>No parameters</p>
+
+						<dl class="parameters">
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional - additional settings.
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">callback</span></dt>
+										<dd>
+											 Callback function name. Default: page.cN.navigate and page.cN.scene.navigate
+										</dd>
+										<dt><span class="value">node</span></dt>
+										<dd>
+											 Callback node. default: page
+										</dd>
+										<dt><span class="value">scope</span></dt>
+										<dd>
+											 Initialization scope on setup.
+										</dd>
+									</dl>
+								</div>
+							</dd>
+						</dl>
 					</div>
 
 					<div class="return">
@@ -91,89 +127,6 @@
 								<li>Util.history</li>
 								<li>Util.init</li>
 								<li>Util.timer</li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="page.navigate">
-				<div class="header">
-					<h3>page.navigate</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">page.navigate</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Void</span> = 
-								page.navigate(
-									<span class="type">String</span> <span class="var">url</span> 
-									[, <span class="type">Node</span> <span class="var">node</span> ]
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>
-							Navigation rounting function. Pass a url to this function to invoke AJAX based
-							navigation.
-						</p>
-						<p class="note">
-							This function is only available after invoking Util.navigation.
-						</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">url</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">String</span> url to load
-								</div>
-							</dd>
-							<dt><span class="var">node</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Node</span> Optional node where the navigation was invoked from.
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Void</span></p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>No examples</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<h5>JavaScript</h5>
-							<ul>
-								<li>history.pushState</li>
-								<li>location.hash</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<h5>Manipulator</h5>
-							<ul>
-								<li>Util.history</li>
 							</ul>
 						</div>
 
