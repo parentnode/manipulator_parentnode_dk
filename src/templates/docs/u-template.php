@@ -245,7 +245,7 @@
 				<dd><span class="file">u-template.js</span></dd>
 
 				<dt>desktop_light</dt>
-				<dd><span class="file">u-template.js</span></dd>
+				<dd>not supported</dd>
 
 				<dt>tablet</dt>
 				<dd><span class="file">u-template.js</span></dd>
@@ -260,10 +260,10 @@
 				<dd>not tested</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd><span class="file">u-template.js</span></dd>
+				<dd>not supported</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>
