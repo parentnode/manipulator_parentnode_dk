@@ -47,7 +47,7 @@ if(typeof(document.defaultView) == "undefined") {
 
 
 // only punish older IEs
-if(document.all && document.addEventListener == undefined) {
+if(document.all && document.addEventListener == undefined || 1) {
 
 
 	// IE 7 class bug - will not apply class unless set as node.className
@@ -60,10 +60,7 @@ if(document.all && document.addEventListener == undefined) {
 				var attribute;
 				for(attribute in attributes) {
 	//				u.bug("append:" + attribute);
-					if(attribute == "html") {
-						node.innerHTML = attributes[attribute]
-					}
-					else if(attribute != "class" && attribute != "type" && attribute != "value") {
+					if(!attribute.match(/^(class|type|value|html)$/)) {
 						node.setAttribute(attribute, attributes[attribute]);
 					}
 				}
@@ -88,38 +85,29 @@ if(document.all && document.addEventListener == undefined) {
 				if(attributes["value"]) {
 					node.value = attributes["value"];
 				}
+				if(attributes["html"]) {
+					node.innerHTML = attributes["html"];
+				}
 			}
 
-	//		node.e = e;
 			return node;
 		}
 		catch(exception) {
 			u.exception("u.ae (desktop_light)", arguments, exception);
-			// u.bug("Exception ("+exception+") in u.ae, called from: "+arguments.callee.caller);
-			// u.bug("node:" + u.nodeId(parent, 1));
-	//		u.xInObject(attributes);
 		}
 
 	}
-
 
 	// IE 7 class bug - will not apply class unless set as node.className
 	Util.insertElement = u.ie = function(parent, node_type, attributes) {
 		try {
 			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
 
-		//	u.bug("node:" + u.nodeId(node));
-
-		//	u.xInObject(attributes);
-
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
 		//			u.bug(attribute)
-					if(attribute == "html") {
-						node.innerHTML = attributes[attribute]
-					}
-					else if(attribute != "class" && attribute != "type" && attribute != "value") {
+					if(!attribute.match(/^(class|type|value|html)$/)) {
 						node.setAttribute(attribute, attributes[attribute]);
 					}
 				}
@@ -144,6 +132,9 @@ if(document.all && document.addEventListener == undefined) {
 				// Value must be set after appending to dom
 				if(attributes["value"]) {
 					node.value = attributes["value"];
+				}
+				if(attributes["html"]) {
+					node.innerHTML = attributes["html"];
 				}
 			}
 
