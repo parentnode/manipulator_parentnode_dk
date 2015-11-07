@@ -36,7 +36,14 @@ Util.Objects["debug"] = new function() {
 		// u.xInObject
 		u.xInObject({"class":"fisk", "node":"frø"});
 		var debug_0 = u.qsa(".debug_0 div");
-		if(debug_0.length == 3 && debug_0[2].innerHTML == "--- start object ---\nclass=fisk\nnode=frø\n--- end object ---\n") {
+		if(
+			debug_0.length == 3 && 
+			(
+				debug_0[2].innerHTML == "--- start object ---\nclass=fisk\nnode=frø\n--- end object ---\n" ||
+				// IE >= 8 will out output the \n
+				debug_0[2].innerHTML == "--- start object --- class=fisk node=frø --- end object --- "
+			)
+		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.xInObject: correct"});
 		}
 		else {

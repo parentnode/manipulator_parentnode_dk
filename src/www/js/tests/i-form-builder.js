@@ -72,7 +72,8 @@ Util.Objects["formbuilder"] = new function() {
 		// u.f.addField - email
 		field = u.qs("div.field.email", fieldset);
 		label = u.qs("label", field);
-		input = u.qs("input[type=email]", field);
+		// have to select by name attribute as older browsers won't set the HTML5 types
+		input = u.qs("input[name=name_email]", field);
 		if(field && label && input &&
 			u.hc(field, "class_email") && 
 			field.parentNode == fieldset && 
