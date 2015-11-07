@@ -26,6 +26,7 @@ u.template = function(template, json, _options) {
 		// Therefore we let it clone the node.
 		// Without this check jsons with an empty result array will create a "ghost" node.
 		if (json.length == undefined || (json.length && json.length > 0)) {
+//			u.bug("TEMPLATE:" + template.innerHTML)
 			clone = template.cloneNode(true);
 			u.rc(clone, "template");
 
@@ -42,6 +43,8 @@ u.template = function(template, json, _options) {
 
 			container.appendChild(clone);
 			template_string = container.innerHTML;
+//			u.bug("template_string:" + template_string);
+			
 			template_string = template_string.replace(/href\=\"([^\"]+)\"/g, function(string) {return decodeURIComponent(string);});
 			template_string = template_string.replace(/src\=\"([^\"]+)\"/g, function(string) {return decodeURIComponent(string);});
 			item_template;
@@ -52,72 +55,75 @@ u.template = function(template, json, _options) {
 			// use _item (WITH UNDERSCORE) to help IE, where item will be interpreted as item()
 			for(_item in json) {
 
-//				u.bug("item:" + _item)
-				item_template = template_string;
+				if(json.hasOwnProperty(_item)) {
 
-				// look for functions and conditional statements
-				// TODO: not finalized
-// 				if(item_template.match(/\{\{/)) {
-// 
-// 					
-// 					// first get expression to evaluate
-// //					look for ?
-// //					 and :
-// 
-// //					alert(item_template)
-// 					expression = item_template.match(/\{\{(.+?)\}/g);
-// 
-// 					//{{checked} ? checked="checked" : }
-// 					
-// //					expression = template.match(/\{\{(.+?)\}[\s\?]+(.+?)[\s\:]+(.+?)\}/);
-// //					item_template = item_template.replace();
-// 					
-// 
-// 					u.bug("contains if:" + expression)
-// 
-// 					
-// 
-// 					if(expression.length && json[item][expression[1]]) {
-// 						u.bug("true")
-// 					}
-// 				}
-				// item_template = template.replace(/\{{(.+?)\}/g, "");
-				// 						u.bug("temp:" + string)
-				// 						if(string.match("{{")) {
-				// 							u.bug("function")
-				// 						}
+					item_template = template_string;
 
-										//}
-										//else 
+					// look for functions and conditional statements
+					// TODO: not finalized
+	// 				if(item_template.match(/\{\{/)) {
+	// 
+	// 					
+	// 					// first get expression to evaluate
+	// //					look for ?
+	// //					 and :
+	// 
+	// //					alert(item_template)
+	// 					expression = item_template.match(/\{\{(.+?)\}/g);
+	// 
+	// 					//{{checked} ? checked="checked" : }
+	// 					
+	// //					expression = template.match(/\{\{(.+?)\}[\s\?]+(.+?)[\s\:]+(.+?)\}/);
+	// //					item_template = item_template.replace();
+	// 					
+	// 
+	// 					u.bug("contains if:" + expression)
+	// 
+	// 					
+	// 
+	// 					if(expression.length && json[item][expression[1]]) {
+	// 						u.bug("true")
+	// 					}
+	// 				}
+					// item_template = template.replace(/\{{(.+?)\}/g, "");
+					// 						u.bug("temp:" + string)
+					// 						if(string.match("{{")) {
+					// 							u.bug("function")
+					// 						}
+
+											//}
+											//else 
 				
 
-				html += item_template.replace(/\{(.+?)\}/g, 
-					function(string) {
-						if(string == "{children}") {
-							if(json[_item].children && json[_item].children.length) {
-								var parent_node = template.parentNode.nodeName.toLowerCase();
-								var parent_class = template.parentNode.className;
-								return '<'+parent_node+' class="'+parent_class+'">'+u.template(template, json[_item].children)+'</'+parent_node+'>';
+					html += item_template.replace(/\{(.+?)\}/g, 
+						function(string) {
+							if(string == "{children}") {
+								if(json[_item].children && json[_item].children.length) {
+									var parent_node = template.parentNode.nodeName.toLowerCase();
+									var parent_class = template.parentNode.className;
+									return '<'+parent_node+' class="'+parent_class+'">'+u.template(template, json[_item].children)+'</'+parent_node+'>';
+								}
+								else {
+									return "";
+								}
+							}
+							else if(json[_item][string.replace(/[\{\}]/g, "")]) {
+								if(json[_item][string.replace(/[\{\}]/g, "")] === true) {
+									return "true";
+								}
+							
+								return json[_item][string.replace(/[\{\}]/g, "")];
+							}
+							else if(json[_item][string.replace(/[\{\}]/g, "")] === false) {
+								return "false";
 							}
 							else {
 								return "";
 							}
 						}
-						else if(json[_item][string.replace(/[\{\}]/g, "")]) {
-							if(json[_item][string.replace(/[\{\}]/g, "")] === true) {
-								return "true";
-							}
-							
-							return json[_item][string.replace(/[\{\}]/g, "")];
-						}
-						else if(json[_item][string.replace(/[\{\}]/g, "")] === false) {
-							return "false";
-						}
-						else {
-							return "";
-						}
-					}
-				);
+					);
+				}
+
 			}
 		}
 		// only one result
@@ -143,7 +149,9 @@ u.template = function(template, json, _options) {
 			dom = document.createElement("div");
 		}
 	}
+//	u.bug("html:" + html);
 	dom.innerHTML = html;
+//	u.bug("dom:" + dom.innerHTML);
 
 	// should children be appended to node automatically
 	if(append_to_node) {
