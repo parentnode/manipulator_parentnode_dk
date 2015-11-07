@@ -1,6 +1,9 @@
 Util.Objects["template"] = new function() {
 	this.init = function(div) {
 
+		u.bug_force = true;
+//		u.bug_console_only = false;
+
 		div.test_results = {};
 
 		var object = [
@@ -32,7 +35,6 @@ Util.Objects["template"] = new function() {
 
 		var i, node;
 
-
 		// create dom template
 		var ul = u.ae(div, "ul");
 		var template = u.ae(ul, "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a>'})
@@ -53,7 +55,6 @@ Util.Objects["template"] = new function() {
 		var control_children = u.qsa("li", ul);
 
 		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + nodes_length + ", " + u.text(control_children[2]))
-		u.bug("proto:" + location.protocol)
 		if(
 			control_children.length == 5 && 
 			nodes_length == 4 && 
@@ -109,12 +110,16 @@ Util.Objects["template"] = new function() {
 		// create virtual template
 		var virtual_template = document.createElement("tr");
 		virtual_template.innerHTML = '<td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td>';
+		
 
 		// get appended result nodes
 		var nodes = u.template(virtual_template, object, {"append":table});
 
+//		u.bug("table:" + table.innerHTML)
 		// check if it seems correct
 		var control_children = u.qsa("tr", table);
+
+		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + nodes_length)
 		if(
 			control_children.length == 4 && 
 			nodes.length == 4 && 
