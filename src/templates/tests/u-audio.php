@@ -7,6 +7,11 @@ $this->headerIncludes(array(
 
 <div class="scene i:scene">
 	<h1>Audio</h1>
+
+<? if(preg_match("/desktop_light|tv|mobile_light|seo/", $this->segment(array("type" => "dev")))): ?>
+	<p class="nosupport">NOT SUPPORTED in <?= $this->segment(array("type" => "dev")) ?></p>
+<? else: ?>
+
 	<p>Audiotest requires interaction and observation :)</p>
 
 	<hr />
@@ -38,6 +43,10 @@ $this->headerIncludes(array(
 
 	</div>
 
+<? endif;?>
+
 </div>
 
-<div class="comments"></div>
+<div class="comments">
+	<p>Audio desktop_light support in BETA</p>
+</div>

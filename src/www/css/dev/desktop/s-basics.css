@@ -80,6 +80,8 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 
 
 /* TESTS */
+#content .scene p.nosupport {margin: 0 50px; padding: 2px 5px; background: red; color: white;}
+
 #content .scene div.tests {padding: 0 50px;}
 #content .scene div.tests form {margin: 0 -50px 20px;}
 
