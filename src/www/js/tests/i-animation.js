@@ -157,8 +157,8 @@ Util.Objects["basics"] = new function() {
 	this.init = function(div) {
 		u.bug("init basics");
 
-		u.bug_force = true;
-		u.bug_console_only = false;
+		// u.bug_force = true;
+		// u.bug_console_only = false;
 
 		// translate
 		node = u.ae(div, "div", {"class":"block translate", "html":"translate"});
