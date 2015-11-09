@@ -186,172 +186,171 @@ Util.Objects["basics"] = new function() {
 		u.a.translate(node, 6, -20);
 
 
-		// // rotate
-		// node = u.ae(div, "div", {"class":"block rotate", "html":"rotate"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	u.bug("gcs rotate:" + u.gcs(this, "transform"))
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "transform",
-		// 		[
-		// 			"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
-		// 			"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)",
-		// 			"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)"
-		// 		]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.rotate correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.rotate error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.rotate(node, 45);
-		//
-		//
-		// // scale
-		// node = u.ae(div, "div", {"class":"block scale", "html":"scale"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "transform", ["matrix(1.5, 0, 0, 1.5, 0, 0)"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.scale: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.scale: error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.scale(node, 1.5);
-		//
+		// rotate
+		node = u.ae(div, "div", {"class":"block rotate", "html":"rotate"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
 
-		// // height
-		// node = u.ae(div, "div", {"class":"block opacity", "html":"opacity"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "opacity", ["0.5"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.opacity: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this, "div", {"class":"testfailed", "html":"u.a.opacity: error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.setOpacity(node, .5);
-		//
-		//
-		// // width
-		// node = u.ae(div, "div", {"class":"block width", "html":"width"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "width", ["100px"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.width: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.width: error"});
-		// 	}
-		//
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.setWidth(node, 100);
-		//
-		//
-		// // height
-		// node = u.ae(div, "div", {"class":"block height", "html":"height"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "height", ["25px"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.height: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.height: error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.setHeight(node, 25);
-		//
-		//
-		// // bgpos
-		// node = u.ae(div, "div", {"class":"block bgpos", "html":"bgpos"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "background-position", ["-200px -100px"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgpos: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgpos: error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.setBgPos(node, -200, -100);
-		//
-		//
-		// // bgcolor
-		// node = u.ae(div, "div", {"class":"block bgcolor", "html":"bgcolor"});
-		// node.div = div;
-		// node.offsetHeight;
-		// node.transitioned = function(event) {
-		//
-		// 	this.innerHTML += ": DONE";
-		//
-		// 	if(
-		// 		checkValues(this, "background-color", ["rgb(0, 128, 0)"]) &&
-		// 		checkTransition(this)
-		// 	) {
-		// 		u.ac(this, "done");
-		// 		u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgcolor: correct"});
-		// 	}
-		// 	else {
-		// 		u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgcolor: error"});
-		// 	}
-		// }
-		// u.a.transition(node, "all 1s ease-in");
-		// u.a.setBgColor(node, "#008000");
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, u.a.vendor("transform"),
+				[
+					"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
+					"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)",
+					"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)"
+				]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.rotate correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.rotate error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.rotate(node, 45);
+
+
+		// scale
+		node = u.ae(div, "div", {"class":"block scale", "html":"scale"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, u.a.vendor("transform"), ["matrix(1.5, 0, 0, 1.5, 0, 0)"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.scale: correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.scale: error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.scale(node, 1.5);
+
+
+		// height
+		node = u.ae(div, "div", {"class":"block opacity", "html":"opacity"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, "opacity", ["0.5"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.opacity: correct"});
+			}
+			else {
+				u.ae(this, "div", {"class":"testfailed", "html":"u.a.opacity: error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.setOpacity(node, .5);
+
+
+		// width
+		node = u.ae(div, "div", {"class":"block width", "html":"width"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, "width", ["100px"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.width: correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.width: error"});
+			}
+
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.setWidth(node, 100);
+
+
+		// height
+		node = u.ae(div, "div", {"class":"block height", "html":"height"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, "height", ["25px"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.height: correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.height: error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.setHeight(node, 25);
+
+
+		// bgpos
+		node = u.ae(div, "div", {"class":"block bgpos", "html":"bgpos"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, "background-position", ["-200px -100px"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgpos: correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgpos: error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.setBgPos(node, -200, -100);
+
+
+		// bgcolor
+		node = u.ae(div, "div", {"class":"block bgcolor", "html":"bgcolor"});
+		node.div = div;
+		node.offsetHeight;
+		node.transitioned = function(event) {
+
+			this.innerHTML += ": DONE";
+
+			if(
+				checkValues(this, "background-color", ["rgb(0, 128, 0)"]) &&
+				checkTransition(this)
+			) {
+				u.ac(this, "done");
+				u.ae(this.div, "div", {"class":"testpassed", "html":"u.a.bgcolor: correct"});
+			}
+			else {
+				u.ae(this.div, "div", {"class":"testfailed", "html":"u.a.bgcolor: error"});
+			}
+		}
+		u.a.transition(node, "all 1s ease-in");
+		u.a.setBgColor(node, "#008000");
 
 
 	}
