@@ -526,13 +526,20 @@ Util.applyStyles = u.ass = function(node, styles, dom_update) {
 // Get elements computed style value for css property
 // compensated for JS value syntax
 Util.getComputedStyle = u.gcs = function(node, property) {
+
+//	u.bug("property:" + property);
+
 	// query DOM to force update
 	node.offsetHeight;
-	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()});
+//	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()});
 
-	if(property.match(/^webkit/)) {
-		property.replace("webkit", "-webkit");
-	}
+	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase().replace("(webkit|ms|moz)", "-$1")});
+
+	// if(property.match(/^webkit/)) {
+	// 	property = property.replace(/webkit/, "-webkit");
+	// }
+	//
+	// u.bug("property:" + property);
 
 	// return computed style if method is supported
 	if(document.defaultView && document.defaultView.getComputedStyle) {
