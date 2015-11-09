@@ -1,2 +1,4 @@
+body {overflow: auto;}
+
 .div_a {position: absolute; top: 300px; left: 250px; padding: 55px 50px; border: none; z-index: 1000; background: orange;}
 .div_b {padding: 10px; width: 100px; height: 50px; background: blue;}
