@@ -207,13 +207,14 @@
 			div.scroll_x = 175;
 			div.scroll_y = 75;
 
-			div.scrolled_x = function() {
-				u.bug("scrolled_x");
+			// some phone take a little time to update the internal scrolling values
+			div.check_scrolling = function() {
+				u.bug("scrolled");
 
 
 			//	u.e.removeWindowEvent(this, "scroll", this.event_id);
 
-
+				// scroll_x
 				if(u.scrollX() == this.scroll_x) {
 					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct" + u.scrollX()});
 					this.test_results["u.scrollX"] = true;
@@ -223,21 +224,7 @@
 					this.test_results["u.scrollX"] = false;
 				}
 
-				u.as(document.body, "width", "auto");
-				window.scrollTo(0, 0);
-
-
-				this.event_id = u.e.addWindowEvent(this, "scroll", "scrolled_y");
-				window.scrollTo(0, this.scroll_y);
-
-			}
-
-			div.scrolled_y = function() {
-				u.bug("scrolled_y");
-
-		//		u.e.removeWindowEvent(this, "scroll", this.event_id);
-
-
+				// scroll_y
 				if(u.scrollY() == this.scroll_y) {
 					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollY: correct" + u.scrollY()});
 					this.test_results["u.scrollY"] = true;
@@ -247,17 +234,37 @@
 					this.test_results["u.scrollY"] = false;
 				}
 
-//				u.as(document.body, "height", "auto");
 				u.as(document.body, {"height": "auto", "width": "auto"});
+
+
+//				u.as(document.body, "width", "auto");
 				window.scrollTo(0, 0);
+
+
+				// this.event_id = u.e.addWindowEvent(this, "scroll", "scrolled_y");
+				// window.scrollTo(0, this.scroll_y);
+
 			}
 
+// 			div.scrolled_y = function() {
+// 				u.bug("scrolled_y");
+//
+// 		//		u.e.removeWindowEvent(this, "scroll", this.event_id);
+//
+//
+//
+// //				u.as(document.body, "height", "auto");
+// 				u.as(document.body, {"height": "auto", "width": "auto"});
+// 				window.scrollTo(0, 0);
+// 			}
 
-			div.event_id = u.e.addWindowEvent(div, "scroll", "scrolled_x");
+
+//			div.event_id = u.e.addWindowEvent(div, "scroll", "scrolled_x");
 			// 			window.scrollTop = scroll_y;
 //			window.scrollLeft = div.scroll_x;
-			window.scrollTo(div.scroll_x, 0);
+			window.scrollTo(div.scroll_x, div.scroll_y);
 
+			u.t.setTimer(div, div.check_scrolling, 200);
 
 
 
