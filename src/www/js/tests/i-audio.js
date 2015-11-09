@@ -63,6 +63,7 @@ Util.Objects["audio3"] = new function() {
 		div.playlist[0].clicked = function() {
 			this.player.loadAndPlay(this.url, {"playpause":false, "search":false});
 
+			this.player.play();
 		}
 
 		div.playlist[1].player = div.player;
