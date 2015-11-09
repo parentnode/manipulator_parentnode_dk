@@ -201,8 +201,8 @@
 			// u.scrollX
 			var scroll_x = 75;
 			u.as(document.body, "width", 6000+"px");
-			window.scrollLeft = scroll_y;
 			document.body.offsetHeight;
+			window.scrollLeft = scroll_x;
 //			window.scrollTo(scroll_x, 0);
 
 			if(u.scrollX() == scroll_x) {
