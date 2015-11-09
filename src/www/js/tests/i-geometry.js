@@ -198,7 +198,7 @@
 			u.as(document.body, "height", "auto");
 
 
-			alert("fisk")
+			alert("fusk")
 			u.as(document.body, "height", 6000+"px");
 			u.as(document.body, "width", 6000+"px");
 			document.body.offsetHeight;
@@ -208,7 +208,7 @@
 
 			// u.scrollX
 			var scroll_x = 75;
-			window.scrollLeft = scroll_x;
+			document.body.scrollLeft = scroll_x;
 			window.scrollTo(scroll_x, 0);
 
 			if(u.scrollX() == scroll_x) {
@@ -226,7 +226,7 @@
 			// u.scrollY
 			var scroll_y = 75;
 
-			window.scrollTop = scroll_y;
+			document.body.scrollTop = scroll_y;
 			window.scrollTo(0, scroll_y);
 
 			if(u.scrollY() == scroll_y) {
