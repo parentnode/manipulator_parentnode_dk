@@ -221,6 +221,7 @@
 
 			test_scroll = function() {
 
+				document.body.offsetHeight;
 
 				if(u.scrollX() == scroll_x) {
 					u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
@@ -245,6 +246,7 @@
 				// u.as(document.body, "height", "auto");
 
 			}
+			test_scroll();
 			u.t.setTimer(window, test_scroll, 500);
 
 
