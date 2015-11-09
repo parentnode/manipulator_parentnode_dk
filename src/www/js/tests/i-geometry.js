@@ -223,7 +223,7 @@
 //			window.scroll(0, scroll_y);
 
 
-			u.as(document.body, "overflow", "hidden");
+//			u.as(document.body, "overflow", "hidden");
 
 
 			test_scroll = function() {
@@ -253,7 +253,7 @@
 				// window.scrollTo(0, 0);
 				// u.as(document.body, "height", "auto");
 
-				u.as(document.body, "overflow", "auto");
+//				u.as(document.body, "overflow", "auto");
 
 			}
 			test_scroll();
