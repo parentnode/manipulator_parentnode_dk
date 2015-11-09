@@ -101,11 +101,15 @@ Util.audioPlayer = function(_options) {
 
 		// Play audio
 		player.play = function(position) {
+			u.bug("play")
 
 			// use position only if stated (position can be 0)
 			if(this.audio.currentTime && position !== undefined) {
 				this.audio.currentTime = position;
 			}
+			u.bug("this.audio.currentTime:" + this.audio.currentTime)
+
+			u.bug("this.audio.src:" + this.audio.src)
 
 			// has src? then play
 			if(this.audio.src) {
