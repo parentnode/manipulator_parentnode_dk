@@ -225,7 +225,7 @@
 				div.test_results["u.scrollY"] = true;
 			}
 			else {
-				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollY: error"});
+				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollY: error" + u.scrollY()});
 				div.test_results["u.scrollY"] = false;
 			}
 			// window.scrollTo(0, 0);
