@@ -26,15 +26,16 @@ Util.Objects["page"] = new function() {
 
 		// global resize handler 
 		page.resized = function() {
+			u.bug("resized")
 
 			// adjust content height
 			this.calc_height = u.browserH();
 			this.calc_width = u.browserW();
 			this.available_height = this.calc_height - page.hN.offsetHeight - page.fN.offsetHeight;
 
-			u.as(page.cN, "height", "auto", false);
-			if(this.available_height >= page.cN.offsetHeight) {
-				u.as(page.cN, "height", this.available_height+"px", false);
+			u.as(page.cN, "min-height", "auto", false);
+			if(page.available_height >= page.cN.offsetHeight) {
+				u.as(page.cN, "minHeight", page.available_height+"px", false);
 			}
 
 			// forward resize event to current scene
