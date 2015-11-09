@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="keywords" content="tests" />
 	<meta name="description" content="<?= $this->pageDescription() ?>" />
-	<meta name="viewport" content="initial-scale=1, user-scalable=no" />
+	<meta name="viewport" content="initial-scale=1, user-scalable=no, max-scale=1, min-scale=1" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
