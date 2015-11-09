@@ -533,13 +533,13 @@ Util.getComputedStyle = u.gcs = function(node, property) {
 	node.offsetHeight;
 //	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()});
 
-	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase().replace("(webkit|ms|moz)", "-$1")});
+	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase().replace(/^(webkit|ms|moz)/, "-$1")});
 
 	// if(property.match(/^webkit/)) {
 	// 	property = property.replace(/webkit/, "-webkit");
 	// }
 	//
-	// u.bug("property:" + property);
+	u.bug("property:" + property);
 
 	// return computed style if method is supported
 	if(document.defaultView && document.defaultView.getComputedStyle) {
