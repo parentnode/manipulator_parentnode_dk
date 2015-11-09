@@ -215,15 +215,16 @@
 			// u.scrollY
 			var scroll_y = 175;
 
+			u.as(document.body, "overflow", "hidden");
+
 //			document.body.scrollTop = scroll_y;
 			window.scrollTo(scroll_x, scroll_y);
-			window.scrollTop = scroll_y;
-			window.scrollLeft = scroll_x;
+//			window.scrollTop = scroll_y;
+//			window.scrollLeft = scroll_x;
 //			window.scroll(0, scroll_y);
 
 			test_scroll = function() {
 
-				u.as(document.body, "overflow", "hidden");
 
 				document.body.offsetHeight;
 
