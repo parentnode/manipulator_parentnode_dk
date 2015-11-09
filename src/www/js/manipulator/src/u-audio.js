@@ -89,6 +89,7 @@ Util.audioPlayer = function(_options) {
 				// get correct source for browser
 				this.audio.src = this.correctSource(src);
 
+				u.bug("this.audio.src:" + this.audio.src)
 				// load audio
 				this.audio.load();
 

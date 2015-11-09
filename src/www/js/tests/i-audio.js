@@ -48,6 +48,10 @@ Util.Objects["audio2"] = new function() {
 Util.Objects["audio3"] = new function() {
 	this.init = function(div) {
 
+		u.bug_force = true;
+		u.bug_console_only = false;
+		u.bug_position = "fixed";
+		
 		div.player = u.audioPlayer({"playpause":true});
 		div.player = u.ae(div, div.player);
 
