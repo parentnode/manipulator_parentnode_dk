@@ -5,6 +5,9 @@ Util.Objects["formbuilder"] = new function() {
 
 		var field, label, input, actions, action;
 
+		// u.bug_force = true;
+		// u.bug_console_only = false;
+
 
 		// build form
 		var form = u.f.addForm(div, {"action":"#", "method":"post", "name":"test_form", "class":"test_form"});
@@ -23,7 +26,13 @@ Util.Objects["formbuilder"] = new function() {
 
 		// u.f.addForm
 		form = u.qs("form", div);
-		if(form && form.action == (location.href+"#") && form.method == "post" && form.name == "test_form" && form.className == "test_form") {
+		if(
+			form && 
+			(form.action == (location.href+"#") || form.action ==  "#") && 
+			form.method == "post" && 
+			form.name == "test_form" && 
+			form.className == "test_form"
+		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addForm: correct"});
 			div.test_results["u.f.addForm"] = true;
 		}
@@ -98,6 +107,8 @@ Util.Objects["formbuilder"] = new function() {
 		field = u.qs("div.field.checkbox", fieldset);
 		label = u.qs("label", field);
 		input = u.qs("input[type=checkbox]", field);
+//		u.bug(u.hc(field, "class_checkbox") + ", " + (field.parentNode == fieldset) + ", " + (label.parentNode == field) + ", " + (input.parentNode == field) + ", " + (u.ps(label) == input) + ", " + (label.innerHTML) + ", " + (label.getAttribute("for") == input.id) + ", " + (input.name) + ", " + input.value)
+		
 		if(field && label && input &&
 			u.hc(field, "class_checkbox") && 
 			field.parentNode == fieldset && 
@@ -107,7 +118,7 @@ Util.Objects["formbuilder"] = new function() {
 			label.innerHTML == "Checkbox" && 
 			label.getAttribute("for") == input.id && 
 			input.name == "name_checkbox" &&
-			input.value == "true"
+			input.value == "value_checkbox"
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.f.addField (checkbox): correct"});
 			div.test_results["u.f.addField (checkbox)"] = true;

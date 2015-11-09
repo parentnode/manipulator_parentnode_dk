@@ -75,7 +75,7 @@ Util.Objects["page"] = new function() {
 		}
 
 		page.error = function(event) {
-			alert("JavaScript error occured:\n\n" + event.message);
+			alert("JavaScript error occured:\n\n" + (event.message));
 			return false;
 		}
 

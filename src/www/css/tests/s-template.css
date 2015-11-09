@@ -3,3 +3,5 @@
 #content .scene > div.tests ul {margin-bottom: 20px;}
 #content .scene > div.tests ul li {margin-bottom: 5px;}
 #content .scene > div.tests table {margin: 0 50px;}
+
+#content .scene > div.tests table {height: 100px; background: red;}

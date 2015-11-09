@@ -1,5 +1,14 @@
 <div class="scene docpage i:docpage">
 	<h1>Template</h1>
+	<p>
+		Convert Array of JSON objects into HTML structure or new Array of JSON objects.
+	</p>
+
+	<p class="note">
+		IE 6-9 does not support table.innerHTML, so temlating with tables, require the passed template to be string as it
+		won't work with a <TR> DOM node. This partial support is acceptable as full TABLE/TR support will impact overall
+		performance to severely.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
@@ -18,9 +27,9 @@
 							<dt class="name">Name</dt>
 							<dd class="name">Util.template</dd>
 							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Nodelist | Array</span> = 
+							<dd class="syntax"><span class="type">Nodelist | Array | JSON</span> = 
 								Util.template(
-									<span class="type">Node</span> <span class="var">template</span> 
+									<span class="type">Node|String|JSON</span> <span class="var">template</span> 
 									, <span class="type">JSON</span> <span class="var">json</span> 
 									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
@@ -31,7 +40,12 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Creates HTML nodes from array of JSON objects based on <span class="htmltag">template</span>. 
+							If HTML (node or string) is passed as template, it creates HTML nodes from <span class="var">json</span> 
+							based on <span class="var">template</span>. 
+						</p>
+						<p>
+							If JSON (Object or string) is passed as template, it creates new Array of JSON Object 
+							from <span class="var">json</span> based on <span class="var">template</span>. 
 						</p>
 					</div>
 
@@ -45,10 +59,22 @@
 									<span class="type">Node</span> HTML node to be used as template.
 								</div>
 							</dd>
+							<dt><span class="var">template</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> HTML or JSON string to be used as template.
+								</div>
+							</dd>
+							<dt><span class="var">template</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> JSON object to be used as template.
+								</div>
+							</dd>
 							<dt><span class="var">json</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">JSON</span> JSON object containing array of objects.
+									<span class="type">JSON</span> Array of JSON objects to use as values.
 								</div>
 							</dd>
 							<dt><span class="var">_options</span></dt>
@@ -73,9 +99,10 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p>
-							<span class="type">ChildNodes|Array</span> 
-							Returns list of created nodes as ChildNodes reference or Array of nodes if the 
+							<span class="type">ChildNodes|Array|JSON</span> 
+							If HTML is passed as <span class="template">template</span> it returns list of created nodes as ChildNodes reference or Array of nodes if the 
 							<span class="var">append</span> option is used to append nodes automatically.
+							If JSON is passed as <span class="template">template</span> it returns Array of JSON Objects.
 						</p>
 					</div>
 
@@ -245,7 +272,7 @@
 				<dd><span class="file">u-template.js</span></dd>
 
 				<dt>desktop_light</dt>
-				<dd>not supported</dd>
+				<dd><span class="file">u-template.js</span></dd>
 
 				<dt>tablet</dt>
 				<dd><span class="file">u-template.js</span></dd>
@@ -263,7 +290,7 @@
 				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>not supported</dd>
+				<dd><span class="file">u-template.js</span></dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>
