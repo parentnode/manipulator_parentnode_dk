@@ -202,7 +202,7 @@
 			var scroll_x = 75;
 			window.scrollLeft = scroll_y;
 			u.as(document.body, "width", 6000+"px");
-			window.scrollTo(scroll_x, 0);
+//			window.scrollTo(scroll_x, 0);
 			if(u.scrollX() == scroll_x) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
 				div.test_results["u.scrollX"] = true;
