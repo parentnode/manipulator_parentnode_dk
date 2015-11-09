@@ -215,7 +215,7 @@
 
 
 				if(u.scrollX() == this.scroll_x) {
-					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct" + u.scrollX()});
 					this.test_results["u.scrollX"] = true;
 				}
 				else {
@@ -239,7 +239,7 @@
 
 
 				if(u.scrollY() == this.scroll_y) {
-					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollY: correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollY: correct" + u.scrollY()});
 					this.test_results["u.scrollY"] = true;
 				}
 				else {
