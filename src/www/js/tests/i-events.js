@@ -21,7 +21,7 @@ Util.Objects["events"] = new function() {
 
 		div.addDebug = function(target, message) {
 			this[target].innerHTML += message + "<br>";
-			this.debug.scrollTop = this.debug.scrollTop + 25;
+			this[target].scrollTop = this[target].scrollTop + 25;
 		}
 
 		u.e.click(level1);
