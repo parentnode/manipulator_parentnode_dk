@@ -194,6 +194,8 @@ Util.Objects["basics"] = new function() {
 
 			this.innerHTML += ": DONE";
 
+			u.bug("gcs:" + u.gcs(this, u.a.vendor("transform")));
+
 			if(
 				checkValues(this, u.a.vendor("transform"),
 				[
