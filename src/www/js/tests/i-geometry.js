@@ -198,7 +198,7 @@
 			u.as(document.body, "height", "auto");
 
 
-			alert("fusk")
+//			alert("fusk")
 			u.as(document.body, "height", 6000+"px");
 			u.as(document.body, "width", 6000+"px");
 			// document.body.offsetHeight;
@@ -245,7 +245,7 @@
 				// u.as(document.body, "height", "auto");
 
 			}
-			u.t.setTimer(window, test_scroll, 500);
+			u.t.setTimer(window, test_scroll, 1500);
 
 
 
