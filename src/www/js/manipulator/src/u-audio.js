@@ -94,8 +94,8 @@ Util.audioPlayer = function(_options) {
 				// load audio
 				this.audio.load();
 
-				this.audio.controls = player._controls;
-				this.audio.autoplay = player._autoplay;
+				this.audio.controls = this._controls;
+				this.audio.autoplay = this._autoplay;
 			}
 		}
 
@@ -235,7 +235,7 @@ Util.audioPlayer = function(_options) {
 
 			// movie is playing
 			this.audio._playing = function(event) {
-//				u.bug("_playing");
+				u.bug("_playing");
 
 				u.rc(this.player, "loading|paused");
 				u.ac(this.player, "playing");
