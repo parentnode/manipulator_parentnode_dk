@@ -1,6 +1,6 @@
 
 function checkTransition(node) {
-		u.bug("checkTransition: " + u.gcs(node, "transition"));
+//	u.bug("checkTransition: " + u.gcs(node, "transition"));
 	return (u.gcs(node, "transition") == "" || u.gcs(node, "transition") == "none 0s ease 0s") ? true : false;
 }
 

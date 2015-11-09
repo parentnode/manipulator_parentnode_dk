@@ -531,15 +531,11 @@ Util.getComputedStyle = u.gcs = function(node, property) {
 
 	// query DOM to force update
 	node.offsetHeight;
+
 //	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()});
 
-	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase().replace(/^(webkit|ms|moz)/, "-$1")});
-
-	// if(property.match(/^webkit/)) {
-	// 	property = property.replace(/webkit/, "-webkit");
-	// }
-	//
-	u.bug("property:" + property);
+	// also convert vendor prefix
+	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()}).replace(/^(webkit|ms|moz)/g, "-$1");
 
 	// return computed style if method is supported
 	if(document.defaultView && document.defaultView.getComputedStyle) {
