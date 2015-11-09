@@ -210,8 +210,8 @@
 				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollX: error"});
 				div.test_results["u.scrollX"] = false;
 			}
-			window.scrollTo(0, 0);
-			u.as(document.body, "width", "auto");
+			// window.scrollTo(0, 0);
+			// u.as(document.body, "width", "auto");
 
 
 			// u.scrollY
@@ -226,8 +226,8 @@
 				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollY: error"});
 				div.test_results["u.scrollY"] = false;
 			}
-			window.scrollTo(0, 0);
-			u.as(document.body, "height", "auto");
+			// window.scrollTo(0, 0);
+			// u.as(document.body, "height", "auto");
 
 
 			// Cleanup
