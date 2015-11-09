@@ -206,23 +206,25 @@
 			page.offsetHeight;
 			page.resized();
 
-			// u.scrollX
-			var scroll_x = 175;
-			document.body.scrollLeft = scroll_x;
-			window.scrollTo(scroll_x, 0);
-			window.scroll(scroll_x, 0);
+			test_scroll = function() {
+				// u.scrollX
+				var scroll_x = 175;
+				document.body.scrollLeft = scroll_x;
+				window.scrollTo(scroll_x, 0);
+				window.scroll(scroll_x, 0);
 
-			if(u.scrollX() == scroll_x) {
-				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
-				div.test_results["u.scrollX"] = true;
+				if(u.scrollX() == scroll_x) {
+					u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
+					div.test_results["u.scrollX"] = true;
+				}
+				else {
+					u.ae(div, "div", {"class":"testfailed", "html":"u.scrollX: error"});
+					div.test_results["u.scrollX"] = false;
+				}
+				// window.scrollTo(0, 0);
+				// u.as(document.body, "width", "auto");
 			}
-			else {
-				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollX: error"});
-				div.test_results["u.scrollX"] = false;
-			}
-			// window.scrollTo(0, 0);
-			// u.as(document.body, "width", "auto");
-
+			u.t.setTimer(window, test_scroll, 500);
 
 			// u.scrollY
 			var scroll_y = 175;
