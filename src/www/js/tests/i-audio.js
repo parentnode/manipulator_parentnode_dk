@@ -66,6 +66,12 @@ Util.Objects["audio3"] = new function() {
 			this.player.play();
 		}
 
+		div.player.playing = function() {
+			u.bug("playing callback")
+			this.play();
+		}
+
+
 		div.playlist[1].player = div.player;
 		u.ce(div.playlist[1]);
 		div.playlist[1].clicked = function() {
