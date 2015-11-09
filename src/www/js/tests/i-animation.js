@@ -187,13 +187,15 @@ Util.Objects["basics"] = new function() {
 		node.offsetHeight;
 		node.transitioned = function(event) {
 
+			u.bug("gcs rotate:" + u.gcs(this, "transform"))
 			this.innerHTML += ": DONE";
 
 			if(
 				checkValues(this, "transform", 
 				[
 					"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)", 
-					"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)"
+					"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)",
+					"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)"
 				]) &&
 				checkTransition(this)
 			) {

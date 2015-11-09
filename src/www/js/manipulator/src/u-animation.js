@@ -191,7 +191,7 @@ Util.Animation = u.a = new function() {
 	// not for chained transitions - will reset node.transitioned and remove transition
 	this._transitioned = function(event) {
 
-		u.bug("default transitioned:" + u.nodeId(this))
+//		u.bug("default transitioned:" + u.nodeId(this))
 //		u.bug("transitioned: " + u.nodeId(event.target) + ", " + u.nodeId(this) + ", " + typeof(this.transitioned))
 
 		// remove event listener - it's job is done

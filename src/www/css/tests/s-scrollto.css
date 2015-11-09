@@ -3,8 +3,6 @@ body {overflow: auto;}
 .scene {position: relative;}
 .toc,
 .subtoc {font-size: 0;}
-.toc li,
-.subtoc li {}
 
 #content .scene div.tests {padding: 0;}
 
