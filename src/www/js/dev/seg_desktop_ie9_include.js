@@ -40,6 +40,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
 
 
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie10.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_ie9.js"></script>');
 
 
