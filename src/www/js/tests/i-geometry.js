@@ -257,7 +257,7 @@
 
 			}
 			test_scroll();
-			u.t.setTimer(window, test_scroll, 500);
+			u.t.setTimer(window, test_scroll, 10);
 
 
 
