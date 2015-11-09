@@ -200,6 +200,7 @@
 
 			// u.scrollX
 			var scroll_x = 75;
+			window.scrollLeft = scroll_y;
 			u.as(document.body, "width", 6000+"px");
 			window.scrollTo(scroll_x, 0);
 			if(u.scrollX() == scroll_x) {
@@ -217,7 +218,8 @@
 			// u.scrollY
 			var scroll_y = 75;
 			u.as(document.body, "height", 6000+"px");
-			window.scrollTo(0, scroll_y);
+			window.scrollTop = scroll_y;
+//			window.scrollTo(0, scroll_y);
 			if(u.scrollY() == scroll_y) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollY: correct"});
 				div.test_results["u.scrollY"] = true;
