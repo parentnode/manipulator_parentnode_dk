@@ -217,11 +217,11 @@ Util.childNodes = u.cn = function(node, _options) {
 * @param Optional ClassName or attribute object
 * return HTML node
 */
-Util.appendElement = u.ae = function(parent, node_type, attributes) {
+Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 	try {
 		// is node_type already DOM node
 		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
-		node = parent.appendChild(node);
+		node = _parent.appendChild(node);
 
 		// add attributes
 		if(attributes) {
@@ -246,10 +246,10 @@ Util.appendElement = u.ae = function(parent, node_type, attributes) {
 /**
 * Insert element
 */
-Util.insertElement = u.ie = function(parent, node_type, attributes) {
+Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 	try {
 		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
-		node = parent.insertBefore(node, parent.firstChild);
+		node = _parent.insertBefore(node, _parent.firstChild);
 		// add attributes
 		if(attributes) {
 			var attribute;
