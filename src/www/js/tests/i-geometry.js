@@ -3,8 +3,8 @@
 
 			div.test_results = {};
 
-			u.bug_force = true;
-			u.bug_console_only = false;
+			// u.bug_force = true;
+			// u.bug_console_only = false;
 
 
 			var div_a = u.ae(document.body, "div", {"class":"div_a"});
@@ -242,7 +242,7 @@
 				}
 
 				// return document to original state
-//				u.ass(document.body, {"height": "auto", "width": "auto"});
+				u.ass(document.body, {"height": "auto", "width": "auto"});
 				window.scrollTo(0, 0);
 
 			}
