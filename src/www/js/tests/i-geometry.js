@@ -206,12 +206,21 @@
 			page.offsetHeight;
 			page.resized();
 
+			// u.scrollX
+			var scroll_x = 175;
+//			document.body.scrollLeft = scroll_x;
+//			window.scrollTo(scroll_x, 0);
+//			window.scroll(scroll_x, 0);
+
+			// u.scrollY
+			var scroll_y = 175;
+
+//			document.body.scrollTop = scroll_y;
+			window.scrollTo(scroll_x, scroll_y);
+//			window.scroll(0, scroll_y);
+
 			test_scroll = function() {
-				// u.scrollX
-				var scroll_x = 175;
-				document.body.scrollLeft = scroll_x;
-				window.scrollTo(scroll_x, 0);
-				window.scroll(scroll_x, 0);
+
 
 				if(u.scrollX() == scroll_x) {
 					u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
@@ -223,26 +232,22 @@
 				}
 				// window.scrollTo(0, 0);
 				// u.as(document.body, "width", "auto");
+
+				if(u.scrollY() == scroll_y) {
+					u.ae(div, "div", {"class":"testpassed", "html":"u.scrollY: correct"});
+					div.test_results["u.scrollY"] = true;
+				}
+				else {
+					u.ae(div, "div", {"class":"testfailed", "html":"u.scrollY: error" + u.scrollY()});
+					div.test_results["u.scrollY"] = false;
+				}
+				// window.scrollTo(0, 0);
+				// u.as(document.body, "height", "auto");
+
 			}
 			u.t.setTimer(window, test_scroll, 500);
 
-			// u.scrollY
-			var scroll_y = 175;
 
-			document.body.scrollTop = scroll_y;
-			window.scrollTo(0, scroll_y);
-			window.scroll(0, scroll_y);
-
-			if(u.scrollY() == scroll_y) {
-				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollY: correct"});
-				div.test_results["u.scrollY"] = true;
-			}
-			else {
-				u.ae(div, "div", {"class":"testfailed", "html":"u.scrollY: error" + u.scrollY()});
-				div.test_results["u.scrollY"] = false;
-			}
-			// window.scrollTo(0, 0);
-			// u.as(document.body, "height", "auto");
 
 
 			// Cleanup
