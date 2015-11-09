@@ -8,7 +8,7 @@ function checkValues(node, property, values) {
 	var value;
 	while(values.length) {
 		value = values.pop();
-		u.bug("u.gcs(node, property):" + u.gcs(node, property) + " # " + value + " :: " + u.nodeId(node));
+		u.bug("u.gcs(node, property):" + u.gcs(node, u.a.vendor(property)) + " # " + value + " :: " + u.nodeId(node));
 		if(u.gcs(node, property) == value) {
 			return true;
 		}
