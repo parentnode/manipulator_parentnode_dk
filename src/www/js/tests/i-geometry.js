@@ -223,6 +223,8 @@
 
 			test_scroll = function() {
 
+				u.as(document.body, "overflow", "hidden");
+
 				document.body.offsetHeight;
 
 				if(u.scrollX() == scroll_x) {
@@ -246,6 +248,8 @@
 				}
 				// window.scrollTo(0, 0);
 				// u.as(document.body, "height", "auto");
+
+				u.as(document.body, "overflow", "auto");
 
 			}
 			test_scroll();
