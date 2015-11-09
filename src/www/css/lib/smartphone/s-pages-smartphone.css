@@ -23,3 +23,6 @@
 /* MILESTONES */
 #content .scene.milestones ul.todo {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
 #content .scene.milestones ul.todo li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
+
+/* TESTS */
+#content .scene.tests ul li {padding-top: 5px; padding-bottom: 5px;}
