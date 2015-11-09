@@ -3,6 +3,10 @@
 
 			div.test_results = {};
 
+			u.bug_force = true;
+			u.bug_console_only = false;
+
+
 			var div_a = u.ae(document.body, "div", {"class":"div_a"});
 			var div_b = u.ae(div_a, "div", {"class":"div_b"});
 
@@ -206,8 +210,12 @@
 
 			div.scroll_x = 175;
 			div.scroll_y = 75;
-			window.scrollTo(div.scroll_x, div.scroll_y);
-
+			div.reset_scrolling = function() {
+				window.scrollTo(0, 0);
+			}
+			div.update_scrolling = function() {
+				window.scrollTo(div.scroll_x, div.scroll_y);
+			}
 
 			// some phones take a little time to update the internal scrolling values
 			// run the check with small delay
@@ -215,11 +223,11 @@
 
 				// scroll_x
 				if(u.scrollX() == this.scroll_x) {
-					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
+					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct" + u.scrollX()});
 					this.test_results["u.scrollX"] = true;
 				}
 				else {
-					u.ae(this, "div", {"class":"testfailed", "html":"u.scrollX: error"});
+					u.ae(this, "div", {"class":"testfailed", "html":"u.scrollX: error" + u.scrollX()});
 					this.test_results["u.scrollX"] = false;
 				}
 
@@ -234,18 +242,18 @@
 				}
 
 				// return document to original state
-				u.ass(document.body, {"height": "auto", "width": "auto"});
+//				u.ass(document.body, {"height": "auto", "width": "auto"});
 				window.scrollTo(0, 0);
 
 			}
 
-			u.t.setTimer(div, div.check_scrolling, 200);
+			// chrome overrules window.scrollTo on refresh
+			// - so this is a small jump the hoop to avoid it messing up scrollvalues
+			u.t.setTimer(div, div.check_scrolling, 400);
+			u.t.setTimer(div, div.reset_scrolling, 200);
+			u.t.setTimer(div, div.update_scrolling, 250);
 
 
-			div.showScroll = function() {
-				u.bug("scroll:" + window.scrollLeft + "x" + window.scrollTop)
-			}
-			u.e.addWindowEvent(div, "scroll", div.showScroll);
 
 			// Cleanup
 			div_a.parentNode.removeChild(div_a);
