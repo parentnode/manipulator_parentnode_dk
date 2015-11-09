@@ -18,6 +18,7 @@ function checkValues(node, property, values) {
 }
 
 
+
 Util.Objects["callbacks"] = new function() {
 	this.init = function(div) {
 		u.bug("init callbacks");
@@ -194,14 +195,13 @@ Util.Objects["basics"] = new function() {
 
 			this.innerHTML += ": DONE";
 
-			u.bug("gcs:" + u.gcs(this, u.a.vendor("transform")));
-
 			if(
 				checkValues(this, u.a.vendor("transform"),
 				[
 					"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
 					"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)",
-					"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)"
+					"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)",
+					"matrix(0.7071067811865475, 0.7071067811865476, -0.7071067811865476, 0.7071067811865475, 0, 0)"
 				]) &&
 				checkTransition(this)
 			) {

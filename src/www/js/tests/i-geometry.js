@@ -242,6 +242,10 @@
 			u.t.setTimer(div, div.check_scrolling, 200);
 
 
+			div.showScroll = function() {
+				u.bug("scroll:" + window.scrollLeft + "x" + window.scrollTop)
+			}
+			u.e.addWindowEvent(div, "scroll", div.showScroll);
 
 			// Cleanup
 			div_a.parentNode.removeChild(div_a);
