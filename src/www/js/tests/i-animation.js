@@ -165,6 +165,9 @@ Util.Objects["basics"] = new function() {
 		node.offsetHeight;
 		node.transitioned = function(event) {
 
+			u.bug("style:" + this.style.toString());
+			u.xInObject(this.style);
+
 			this.innerHTML += ": DONE";
 
 			if(
