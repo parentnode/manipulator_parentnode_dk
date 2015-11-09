@@ -201,9 +201,10 @@
 			// u.scrollX
 			var scroll_x = 75;
 			u.as(document.body, "width", 6000+"px");
-//			window.scrollLeft = scroll_y;
+			window.scrollLeft = scroll_y;
 			document.body.offsetHeight;
-			window.scrollTo(scroll_x, 0);
+//			window.scrollTo(scroll_x, 0);
+
 			if(u.scrollX() == scroll_x) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
 				div.test_results["u.scrollX"] = true;
@@ -220,9 +221,9 @@
 			var scroll_y = 75;
 			u.as(document.body, "height", 6000+"px");
 			document.body.offsetHeight;
-//			window.scrollTop = scroll_y;
+			window.scrollTop = scroll_y;
 
-			window.scrollTo(0, scroll_y);
+//			window.scrollTo(0, scroll_y);
 
 			if(u.scrollY() == scroll_y) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollY: correct"});

@@ -384,6 +384,7 @@ Util.Objects["dom"] = new function() {
 			div.test_results["u.nodeWithin"] = false;
 		}
 
+		page.resized();
 
 		// inNodeList
 
