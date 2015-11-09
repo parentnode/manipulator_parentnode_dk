@@ -8,7 +8,7 @@ function checkValues(node, property, values) {
 	var value;
 	while(values.length) {
 		value = values.pop();
-		u.bug("u.gcs(node, "+u.a.vendor(property)+"):" + u.gcs(node, u.a.vendor(property)) + " # " + value + " :: " + u.nodeId(node));
+//		u.bug("u.gcs(node, "+u.a.vendor(property)+"):" + u.gcs(node, u.a.vendor(property)) + " # " + value + " :: " + u.nodeId(node));
 		if(u.gcs(node, property) == value) {
 			return true;
 		}
@@ -30,7 +30,7 @@ Util.Objects["callbacks"] = new function() {
 		node = u.ae(div, "div", {"class":"testfailed", "html":"node.transitioned: waiting"});
 		node.transitioned = function(event) {
 			if(
-				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)"])
+				checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 0, 0)"])
 				 && checkTransition(this)
 			) {
 				u.tc(this, "testfailed", "testpassed");
@@ -77,7 +77,7 @@ Util.Objects["callbacks"] = new function() {
 			this.transitioned = function() {
 				if(
 					this.called_back == 5 &&
-					checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
+					checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 0, 0)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
 					checkTransition(this) &&
 					!this.step5
 				) {
@@ -171,7 +171,7 @@ Util.Objects["basics"] = new function() {
 			this.innerHTML += ": DONE";
 
 			if(
-				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 6, -20)", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6, -20, 0, 1)"]) &&
+				checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 6, -20)", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6, -20, 0, 1)"]) &&
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
