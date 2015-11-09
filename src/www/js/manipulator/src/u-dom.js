@@ -530,6 +530,10 @@ Util.getComputedStyle = u.gcs = function(node, property) {
 	node.offsetHeight;
 	property = property.replace(/([A-Z]{1})/g, function(word){return word.replace(/([A-Z]{1})/, "-$1").toLowerCase()});
 
+	if(property.match(/^webkit/)) {
+		property.replace("webkit", "-webkit");
+	}
+
 	// return computed style if method is supported
 	if(document.defaultView && document.defaultView.getComputedStyle) {
 		return document.defaultView.getComputedStyle(node, null).getPropertyValue(property);
