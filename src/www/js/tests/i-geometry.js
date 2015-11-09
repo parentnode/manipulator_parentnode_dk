@@ -201,10 +201,10 @@
 			alert("fusk")
 			u.as(document.body, "height", 6000+"px");
 			u.as(document.body, "width", 6000+"px");
-			document.body.offsetHeight;
-			document.body.offsetWidth;
-			page.offsetHeight;
-			page.resized();
+			// document.body.offsetHeight;
+			// document.body.offsetWidth;
+			// page.offsetHeight;
+			// page.resized();
 
 			// u.scrollX
 			var scroll_x = 175;
@@ -227,7 +227,7 @@
 					div.test_results["u.scrollX"] = true;
 				}
 				else {
-					u.ae(div, "div", {"class":"testfailed", "html":"u.scrollX: error"});
+					u.ae(div, "div", {"class":"testfailed", "html":"u.scrollX: error" + u.scrollX()});
 					div.test_results["u.scrollX"] = false;
 				}
 				// window.scrollTo(0, 0);
