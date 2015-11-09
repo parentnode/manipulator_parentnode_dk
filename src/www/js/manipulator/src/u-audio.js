@@ -143,11 +143,13 @@ Util.audioPlayer = function(_options) {
 
 		// Pause playback but stay at current position
 		player.pause = function() {
+			u.bug("pause")
 			this.audio.pause();
 		}
 
 		// Stop playback and reset postion
 		player.stop = function() {
+			u.bug("stop")
 
 			this.audio.pause();
 
