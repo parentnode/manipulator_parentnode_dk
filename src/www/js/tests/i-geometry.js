@@ -209,7 +209,8 @@
 
 			div.scrolled = function() {
 				
-				u.e.removeWindowEvent(this, "scroll", this.event_id);
+//				u.e.removeWindowEvent(this, "scroll", this.event_id);
+
 
 				if(u.scrollX() == this.scroll_x) {
 					u.ae(this, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
@@ -234,12 +235,14 @@
 				// u.as(document.body, "height", "auto");
 
 				window.scrollTo(0, 0);
-				u.ass(document.body, {"height":"auto", "width":"auto"});
+//				u.ass(document.body, {"height":"auto", "width":"auto"});
 
 //				u.as(document.body, "overflow", "auto");
 			}
 
 			div.event_id = u.e.addWindowEvent(div, "scroll", "scrolled");
+			window.scrollTo(div.scroll_x, div.scroll_y);
+
 			// document.body.offsetHeight;
 			// document.body.offsetWidth;
 			// page.offsetHeight;
@@ -256,7 +259,6 @@
 
 
 //			document.body.scrollTop = scroll_y;
-			window.scrollTo(div.scroll_x, div.scroll_y);
 // 			window.scrollTop = scroll_y;
 // 			window.scrollLeft = scroll_x;
 // //			window.scroll(0, scroll_y);
