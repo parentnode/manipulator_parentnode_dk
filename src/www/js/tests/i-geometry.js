@@ -245,7 +245,7 @@
 				// u.as(document.body, "height", "auto");
 
 			}
-			u.t.setTimer(window, test_scroll, 1500);
+			u.t.setTimer(window, test_scroll, 500);
 
 
 
