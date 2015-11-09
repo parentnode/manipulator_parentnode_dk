@@ -234,7 +234,7 @@
 				}
 
 				// return document to original state
-				u.as(document.body, {"height": "auto", "width": "auto"});
+				u.ass(document.body, {"height": "auto", "width": "auto"});
 				window.scrollTo(0, 0);
 
 			}
