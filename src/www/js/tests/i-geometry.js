@@ -207,9 +207,10 @@
 			page.resized();
 
 			// u.scrollX
-			var scroll_x = 75;
+			var scroll_x = 175;
 			document.body.scrollLeft = scroll_x;
 			window.scrollTo(scroll_x, 0);
+			window.scroll(scroll_x, 0);
 
 			if(u.scrollX() == scroll_x) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollX: correct"});
@@ -224,10 +225,11 @@
 
 
 			// u.scrollY
-			var scroll_y = 75;
+			var scroll_y = 175;
 
 			document.body.scrollTop = scroll_y;
 			window.scrollTo(0, scroll_y);
+			window.scroll(0, scroll_y);
 
 			if(u.scrollY() == scroll_y) {
 				u.ae(div, "div", {"class":"testpassed", "html":"u.scrollY: correct"});
