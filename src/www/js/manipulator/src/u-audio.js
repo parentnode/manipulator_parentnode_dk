@@ -90,6 +90,7 @@ Util.audioPlayer = function(_options) {
 				this.audio.src = this.correctSource(src);
 
 				u.bug("this.audio.src:" + this.audio.src)
+
 				// load audio
 				this.audio.load();
 
@@ -210,7 +211,7 @@ Util.audioPlayer = function(_options) {
 
 
 			this.audio._loadstart = function(event) {
-//				u.bug("_loadstart");
+				u.bug("_loadstart");
 
 				u.ac(this.player, "loading");
 
@@ -222,7 +223,7 @@ Util.audioPlayer = function(_options) {
 
 			// enough is loaded to play entire movie
 			this.audio._canplaythrough = function(event) {
-//				u.bug("_canplaythrough");
+				u.bug("_canplaythrough");
 
 				u.rc(this.player, "loading");
 
