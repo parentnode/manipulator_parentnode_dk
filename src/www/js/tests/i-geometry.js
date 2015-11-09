@@ -217,6 +217,8 @@
 
 //			document.body.scrollTop = scroll_y;
 			window.scrollTo(scroll_x, scroll_y);
+			window.scrollTop = scroll_y;
+			window.scrollLeft = scroll_x;
 //			window.scroll(0, scroll_y);
 
 			test_scroll = function() {
