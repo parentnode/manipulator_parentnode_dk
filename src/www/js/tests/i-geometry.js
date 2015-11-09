@@ -211,7 +211,7 @@
 				u.bug("scrolled_x");
 
 
-				u.e.removeWindowEvent(this, "scroll", this.event_id);
+			//	u.e.removeWindowEvent(this, "scroll", this.event_id);
 
 
 				if(u.scrollX() == this.scroll_x) {
@@ -235,7 +235,7 @@
 			div.scrolled_y = function() {
 				u.bug("scrolled_y");
 
-				u.e.removeWindowEvent(this, "scroll", this.event_id);
+		//		u.e.removeWindowEvent(this, "scroll", this.event_id);
 
 
 				if(u.scrollY() == this.scroll_y) {
