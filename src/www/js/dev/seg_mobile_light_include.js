@@ -1,7 +1,7 @@
 document.write('<script type="text/javascript" src="/js/manipulator/src/u.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-debug.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
+//document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-audio.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
@@ -29,7 +29,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
+//document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
@@ -40,7 +40,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
 
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
+//document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-array-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
