@@ -77,7 +77,7 @@ Util.Objects["cookie"] = new function() {
 		u.saveNodeCookie(node, "test", cookie_value4);
 
 		var man_mem_cookie = JSON.parse(u.getCookie("man_mem"));
-		if(man_mem_cookie["DIV#content DIV.i:node node id:1234"]["test"] == cookie_value2 && man_mem_cookie["DIV#nodeCookieTest"].test == cookie_value3 && man_mem_cookie["DIV#content DIV"].test == cookie_value4) {
+		if(man_mem_cookie["DIV#content DIV.i:node.node.id:1234"] && man_mem_cookie["DIV#content DIV.i:node.node.id:1234"]["test"] == cookie_value2 && man_mem_cookie["DIV#nodeCookieTest"].test == cookie_value3 && man_mem_cookie["DIV#content DIV"].test == cookie_value4) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.saveNodeCookie: correct"});
 			div.test_results["u.saveNodeCookie"] = true;
 		}

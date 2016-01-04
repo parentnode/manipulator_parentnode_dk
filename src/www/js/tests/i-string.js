@@ -85,6 +85,28 @@ Util.Objects["string"] = new function() {
 			div.test_results["u.substr"] = false;
 		}
 
+		// ucfirst
+		var test_string = "test string";
+		if(u.ucfirst(test_string) == "Test string") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.ucfirst: correct"});
+			div.test_results["u.ucfirst"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.ucfirst: error"});
+			div.test_results["u.ucfirst"] = false;
+		}
+
+		// lcfirst
+		var test_string = "TEST STRING";
+		if(u.lcfirst(test_string) == "tEST STRING") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.lcfirst: correct"});
+			div.test_results["u.lcfirst"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.lcfirst: error"});
+			div.test_results["u.lcfirst"] = false;
+		}
+
 	}
 
 }

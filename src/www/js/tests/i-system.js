@@ -1,8 +1,11 @@
 Util.Objects["system"] = new function() {
 	this.init = function(div) {
 
+		u.bug_console_only = false;
 
 		div.test_results = {};
+
+
 
 		var current_browser = false;
 
@@ -14,6 +17,15 @@ Util.Objects["system"] = new function() {
 		// Model detection
 		u.ae(div, "h2", {"html":"Model"});
 		u.ae(div, "p", {"html":"Only the correct browser should be green"});
+
+		// edge
+		if(u.browser("edge")) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Edge: correct ("+u.browser("edge")+")"});
+			current_browser = "ie";
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"Edge: error ("+u.browser("edge")+")"});
+		}
 
 		// ie
 		if(u.browser("ie") && u.browser("IE") && u.browser("explorer")) {
@@ -209,6 +221,21 @@ Util.Objects["system"] = new function() {
 
 		div.opacitySupport = function() {
 			if(
+				u.browser("edge", ">=12") ||
+				u.browser("ie", ">=9") ||
+				u.browser("firefox", ">=2") ||
+				u.browser("chrome", ">=4") ||
+				u.browser("safari", ">=3") ||
+				u.browser("opera", ">=10")
+			) {
+				return true;
+			}
+			return false;
+		}
+
+		div.borderRadiusSupport = function() {
+			if(
+				u.browser("edge", ">=12") ||
 				u.browser("ie", ">=9") ||
 				u.browser("firefox", ">=2") ||
 				u.browser("chrome", ">=4") ||
@@ -222,8 +249,9 @@ Util.Objects["system"] = new function() {
 
 		div.transformSupport = function() {
 			if(
+				u.browser("edge", ">=12") ||
 				u.browser("ie", ">=9") ||
-				u.browser("firefox", ">=4") ||
+				u.browser("firefox", ">=3.5") ||
 				u.browser("chrome", ">=4") ||
 				u.browser("safari", ">=3") ||
 				u.browser("opera", ">=11")
@@ -235,6 +263,7 @@ Util.Objects["system"] = new function() {
 
 		div.transitionSupport = function() {
 			if(
+				u.browser("edge", ">=12") ||
 				u.browser("ie", ">=10") ||
 				u.browser("firefox", ">=4") ||
 				u.browser("chrome", ">=4") ||
@@ -246,7 +275,9 @@ Util.Objects["system"] = new function() {
 			return false;
 		}
 
+
 		// u.support
+		// opacity
 		if(u.support("opacity") && div.opacitySupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Opacity support: correct ("+u.support("opacity")+")"});
 		}
@@ -257,24 +288,76 @@ Util.Objects["system"] = new function() {
 			u.ae(div, "div", {"class":"testfailed", "html":"Opacity support: error ("+u.support("opacity")+")"});
 		}
 
-		if(u.support(u.a.vendor("Transform")) && div.transformSupport()) {
-			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct ("+u.support(u.a.vendor("Transform"))+")"});
+		// borderRadius
+		if(u.support("border-radius") && u.support("borderRadius") && u.support("-webkit-border-radius") && u.support("MozBorderRadius") && div.borderRadiusSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"borderRadius support: correct ("+u.support("border-radius")+")"});
 		}
-		else if(!u.support(u.a.vendor("Transform")) && !div.transformSupport()) {
+		else if(!u.support("border-radius") && !div.borderRadiusSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"borderRadius support: correct (no support)"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"borderRadius support: error ("+u.support("opacity")+")"});
+		}
+
+		// Transform
+		if(u.support("transform") && div.transformSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct ("+u.support("transform")+")"});
+		}
+		else if(!u.support("transform") && !div.transformSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transform support: correct (no support)"});
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"Transform support: error ("+u.support(u.a.vendor("Transform"))+")"});
+			u.ae(div, "div", {"class":"testfailed", "html":"Transform support: error ("+u.support("transform")+")"});
 		}
 
-		if(u.support(u.a.vendor("Transition")) && div.transitionSupport()) {
-			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct ("+u.support(u.a.vendor("Transition"))+")"});
+		// Transition
+		if(u.support("transition") && div.transitionSupport()) {
+			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct ("+u.support("Transition")+")"});
 		}
-		else if(!u.support(u.a.vendor("Transition")) && !div.transitionSupport()) {
+		else if(!u.support("transition") && !div.transitionSupport()) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Transition support: correct (no support)"});
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"Transition support: error ("+u.support(u.a.vendor("Transition"))+")"});
+			u.ae(div, "div", {"class":"testfailed", "html":"Transition support: error ("+u.support("Transition")+")"});
+		}
+
+
+		// vendor tools
+		u.ae(div, "h2", {"html":"Vendor tools"});
+		// vendorPrefix
+		if(
+			(u.vendorPrefix() == "webkit" && u.browser("webkit")) ||
+			(u.vendorPrefix() == "Moz" && u.browser("firefox")) ||
+			(u.vendorPrefix() == "ms" && u.browser("ie,edge")) ||
+			(u.vendorPrefix() == "O" && u.browser("opera")) ||
+			(!u.vendorPrefix())
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.vendorPrefix: correct ("+u.vendorPrefix()+")"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.vendorPrefix: error ("+u.vendorPrefix()+")"});
+		}
+
+		// vendorProperty
+		if(u.vendorProperty("border-radius").match(/^(webkitB|MozB|OB|msB|b)orderRadius$/)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.vendorProperty(border-radius): correct ("+u.vendorProperty("border-radius")+")"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.vendorProperty(border-radius): error ("+u.vendorProperty("border-radius")+")"});
+		}
+
+		if(u.vendorProperty("transform").match(/^(webkitT|MozT|OT|msT|t)ransform$/)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.vendorProperty(transform): correct ("+u.vendorProperty("transform")+")"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.vendorProperty(transform): error ("+u.vendorProperty("transform")+")"});
+		}
+
+		if(u.vendorProperty("user-select").match(/^(webkitU|MozU|OU|msU|U)serSelect$/)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.vendorProperty(user-select): correct ("+u.vendorProperty("user-select")+")"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.vendorProperty(user-select): error ("+u.vendorProperty("user-select")+")"});
 		}
 
 
