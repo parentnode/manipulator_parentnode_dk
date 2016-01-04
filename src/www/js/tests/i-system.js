@@ -1,8 +1,6 @@
 Util.Objects["system"] = new function() {
 	this.init = function(div) {
 
-		u.bug_console_only = false;
-
 		div.test_results = {};
 
 
