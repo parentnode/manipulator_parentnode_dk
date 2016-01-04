@@ -18,7 +18,7 @@ $this->pageTitle("Older versions");
 		<div class="articlebody" itemprop="articleBody">
 
 			<p>
-				Unless you have a specific reason to use an older bundle you should <a href="/">build</a> a custom bundle.
+				Unless you have a very specific reason to use an older bundle you should get the <a href="/">latest version</a>.
 			</p>
 
 			<h2>Github</h2>
@@ -45,7 +45,7 @@ $this->pageTitle("Older versions");
 			<h2>Version 0.9</h2>
 			<p>Released on 21st of February, 2015.</p>
 			<ul class="actions">
-				<li><a href="/bundles/archive/v0_9.zip" class="button primary">Download 0.8 ZIP</a></li>
+				<li><a href="/bundles/archive/v0_9.zip" class="button primary">Download 0.9 ZIP</a></li>
 			</ul>
 
 
