@@ -1,1 +1,1 @@
-Manipulator v0.9-light Copyright 2015 http://manipulator.parentnode.dk
+Manipulator v0.9.1-light Copyright 2015 http://manipulator.parentnode.dk

@@ -1,11 +1,14 @@
 // older browsers have some problems with the request object
 // The ActiveX object for IE6 and IE5 cannot be extended
 // The onreadystatechange is not acting on Request object in Firefox 2
+// Opera 11 does not support addEventListener on XHR object
+// Sharepoint cancel native onreadystatechange (so this must be set using addEventListener)
+
 // The solution is to wrap the Request object in a plain object, and transfer all required variables
 
-if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRequest().channel; return false;} catch(exception) {return true;}}()) {
+if(typeof(window.XMLHttpRequest) == "undefined" || function(){return (typeof(window.XMLHttpRequest.addEventListener) != "function")}() || function(){try {new XMLHttpRequest().channel; return false;} catch(exception) {return true;}}()) {
 
-	// Create xmlhttprequest object 
+	// Create xmlhttprequest object
 	Util.createRequestObject = function() {
 		var xmlhttp;
 
@@ -73,27 +76,11 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){try {new XMLHttpRe
 
 				// avoid heavy caching by activex component
 				url += (url.match(/\?/) ? "&" : "?") + "refresh_activex=" + u.randomString();
-				try {
-					this.xmlhttp.open(method, url, async);
-				}
-				catch(exception) {}
+				this.xmlhttp.open(method, url, async);
 			}
 
 			wrapper.send = function(params) {
-				// will fail on crossdomain requests
-				try {
-					this.xmlhttp.send(params);
-				}
-				// invoke responder
-				catch(exception) {
-
-					this.IEreadyState = true;
-
-					if(typeof(this.statechanged) == "function") {
-						this.statechanged();
-						this.parentNode.removeChild(this);
-					}
-				}
+				this.xmlhttp.send(params);
 
 				// make variables available on wrapper
 				if(!this.async) {

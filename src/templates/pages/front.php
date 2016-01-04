@@ -1,8 +1,3 @@
-<?
-$fs = new FileSystem();
-$modules = $fs->files(LOCAL_PATH."/www/bundles/src");
-
-?>
 <div class="scene front i:front">
 
 	<div class="article i:article" itemscope itemtype="http://schema.org/Article">
@@ -17,17 +12,20 @@ $modules = $fs->files(LOCAL_PATH."/www/bundles/src");
 		<div itemprop="image" content="<?= SITE_URL ?>/img/logo.png"></div>
 
 		<div class="articlebody" itemprop="articleBody">
-			<h2>Build a Manipulator bundle now</h2>
-			<p>Module introduction
-			Load module list from docs frontpage with js instead of php
-			Use file information from docs page to determine include requirements
-			
+			<h2>Quick-bundles and source</h2>
+			<p>
+				The package available for download contains the complete source and precompiled universal bundle of the Manipulator 
+				JavaScript library. It's a "two sizes fits all" download for now.
 			</p>
-			<ul class="modules">
 
-
-
+			<ul class="actions">
+				<li><a href="/bundles/archive/v0_9_1.zip" class="button primary">Download 0.9.1 ZIP</a></li>
 			</ul>
+
+			<p>
+				If you need an optimized/segmented bundle, you need to grab the source and make it on your own, until
+				we have finished the new bundle-builder.
+			</p>
 
 			<h2>New to Manipulator?</h2>
 			<p>
@@ -42,10 +40,6 @@ $modules = $fs->files(LOCAL_PATH."/www/bundles/src");
 				The Manipulator library provides an extensive set of name spaced cross-device shorthand functions, written 
 				to utilize the the best performance option available - without inventing new concepts or abiding
 				old implementation flaws.
-			</p>
-			<p>
-				Have you ever tried building clean JavaScript/CSS3 for just WebKit 533+? This is it - with 
-				<a href="/pages/browser-support">IE6</a> support.
 			</p>
 			<ul class="actions">
 				<li><a href="/getting-started" class="button primary">Getting started</a></li>

@@ -20,8 +20,8 @@ $this->pageTitle("It's just improvements");
 			<h2>Version 0.9.1</h2>
 			<p>
 				Version 0.9.1 primarily updates the library to the new Detector v3 segmentation model. 
-				The template module is finally out of BETA.
-				It also includes bug-fixes and minor extensions of existing modules.
+				The template module is out of BETA.
+				It also includes many bug-fixes and minor extensions of existing modules.
 			</p>
 			<ul class="changes">
 				<li>
@@ -32,11 +32,14 @@ $this->pageTitle("It's just improvements");
 				<li>Improved move detection for click and drag to ensure clicks are not cancelled by shaking hands</li>
 				<li>u.nodeWithin added</li>
 				<li>
-					Rewritten window resize, scroll, start, move and end event handlers with callback to node
-					 - missing test and documentation (now support callback as function reference or string and start event added).
+					Automatic vendor detection in u.as and u.ass.
 				</li>
 				<li>
-					u.template out of BETA. Basic template (JSON to HTML) parser. 
+					Rewritten window resize, scroll, start, move and end event handlers with callback to node
+					 - now also support callback as function reference or string.
+				</li>
+				<li>
+					u.template out of BETA. Basic template (JSON to HTML/JSON) parser. 
 				</li>
 				<li>
 					u.e.hover implements mouseover/mouseout events with true mouseout detection (ignoring mouseout on childNodes).
@@ -46,7 +49,7 @@ $this->pageTitle("It's just improvements");
 					caused an error when using id for svg_cache.
 				</li>
 				<li>
-					u-form-builder now supporting text element (textarea).
+					u-form-builder now supporting all standard elements and allow for custom build methods.
 				</li>
 				<li>
 					Added new u-fontsready module (beta), for testing if webfonts are loaded.
@@ -68,7 +71,15 @@ $this->pageTitle("It's just improvements");
 					Global form validation callback + individual input error callback through
 					validationPassed and validationFailed.
 				</li>
-
+				<li>
+					Extended nodeCookie reference options.
+				</li>
+				<li>
+					Added Util.upperCaseFirst and Util.lowerCaseFirst string functions</li>
+				</li>
+				<li>
+					Updated vendor prefix detection to avoid using prefix when not required.
+				</li>
 			</ul>
 
 

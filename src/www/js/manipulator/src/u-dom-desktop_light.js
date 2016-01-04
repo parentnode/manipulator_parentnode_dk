@@ -186,6 +186,7 @@ if(document.all && document.addEventListener == undefined) {
 		}
 	}
 
+
 	// insert element in wrap-element and return wrapper
 	Util.wrapElement = u.we = function(node, node_type, attributes) {
 		try {

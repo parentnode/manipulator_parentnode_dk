@@ -23,13 +23,13 @@
 *			"name":"f1",
 *			"type": "feGaussianBlur",
 *	  		"stdDeviation": 2
-*		]
+*		] 
 *	}
 */
 
 
 Util.svg = function(svg_object) {
-	u.bug("create svg");
+//	u.bug("create svg");
 
 	var svg, shape, svg_shape;
 
@@ -49,7 +49,7 @@ Util.svg = function(svg_object) {
 		svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
 
-		// // width and height settings
+		// width and height settings
 		if(svg_object.title) {
 			svg.setAttributeNS(null, "title", svg_object.title);
 		}
@@ -101,8 +101,8 @@ Util.svg = function(svg_object) {
 
 	// return svg
 	return svg;
-
-
+	
+	
 }
 
 /**

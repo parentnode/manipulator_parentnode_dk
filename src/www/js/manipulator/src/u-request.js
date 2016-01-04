@@ -5,7 +5,7 @@ Util.createRequestObject = function() {
 
 // Request object
 Util.request = function(node, url, _options) {
-//	u.bug("request:" + url)
+//	u.bug("request")
 
 	var request_id = u.randomString(6);
 
@@ -58,7 +58,9 @@ Util.request = function(node, url, _options) {
 					u.validateResponse(this);
 				}
 			}
-			u.e.addEvent(node[request_id].HTTPRequest, "readystatechange", node[request_id].HTTPRequest.statechanged);
+			if(typeof(node[request_id].HTTPRequest.addEventListener) == "function") {
+				u.e.addEvent(node[request_id].HTTPRequest, "readystatechange", node[request_id].HTTPRequest.statechanged);
+			}
 		}
 
 		// perform request
@@ -163,6 +165,7 @@ Util.request = function(node, url, _options) {
 		document[key].node = node;
 		document[key].request_id = request_id;
 		document[key].responder = function(response) {
+
 			// make object to map node
 			var response_object = new Object();
 			response_object.node = this.node;
@@ -328,12 +331,13 @@ Util.validateResponse = function(response){
 	if(response) {
 
 //		u.bug("response:" + response + ":" + u.nodeId(response.node) + ":" + response.status)
-//		u.bug("status:" + response.status + ":" + u.nodeId(response.node));
+
+		// u.bug("status:" + response.status + ":" + u.nodeId(response.node));
 		// u.bug("responseText:" + response.responseText);
 
 		try {
 			// valid response status
-			if(response.status && !response.status.toString().match(/^403|404|500|0$/)) {
+			if(response.status && !response.status.toString().match(/403|404|500/)) {
 				object = u.evaluateResponseText(response.responseText);
 			}
 			// SCRIPT has no response.status

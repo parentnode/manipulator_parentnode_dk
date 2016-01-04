@@ -71,7 +71,6 @@ Util.stringOr = u.eitherOr = function(value, replacement) {
 	}	
 }
 
-
 // get grouped matches globally
 // So far used to fix IE7 issue when appending nodes with src or href beginning with "{"
 // TODO: implement as standard function
@@ -83,3 +82,10 @@ Util.getMatches = function(string, regex) {
 	return matches;
 }
 
+// TODO: New additions
+Util.upperCaseFirst = u.ucfirst = function(string) {
+	return string.replace(/^(.){1}/, function($1) {return $1.toUpperCase()});
+}
+Util.lowerCaseFirst = u.lcfirst = function(string) {
+	return string.replace(/^(.){1}/, function($1) {return $1.toLowerCase()});
+}

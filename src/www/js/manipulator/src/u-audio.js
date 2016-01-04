@@ -89,27 +89,21 @@ Util.audioPlayer = function(_options) {
 				// get correct source for browser
 				this.audio.src = this.correctSource(src);
 
-				u.bug("this.audio.src:" + this.audio.src)
-
 				// load audio
 				this.audio.load();
 
-				this.audio.controls = this._controls;
-				this.audio.autoplay = this._autoplay;
+				this.audio.controls = player._controls;
+				this.audio.autoplay = player._autoplay;
 			}
 		}
 
 		// Play audio
 		player.play = function(position) {
-			u.bug("play")
 
 			// use position only if stated (position can be 0)
 			if(this.audio.currentTime && position !== undefined) {
 				this.audio.currentTime = position;
 			}
-			u.bug("this.audio.currentTime:" + this.audio.currentTime)
-
-			u.bug("this.audio.src:" + this.audio.src)
 
 			// has src? then play
 			if(this.audio.src) {
@@ -143,13 +137,11 @@ Util.audioPlayer = function(_options) {
 
 		// Pause playback but stay at current position
 		player.pause = function() {
-			u.bug("pause")
 			this.audio.pause();
 		}
 
 		// Stop playback and reset postion
 		player.stop = function() {
-			u.bug("stop")
 
 			this.audio.pause();
 
@@ -217,7 +209,7 @@ Util.audioPlayer = function(_options) {
 
 
 			this.audio._loadstart = function(event) {
-				u.bug("_loadstart");
+//				u.bug("_loadstart");
 
 				u.ac(this.player, "loading");
 
@@ -229,7 +221,7 @@ Util.audioPlayer = function(_options) {
 
 			// enough is loaded to play entire movie
 			this.audio._canplaythrough = function(event) {
-				u.bug("_canplaythrough");
+//				u.bug("_canplaythrough");
 
 				u.rc(this.player, "loading");
 
@@ -241,7 +233,7 @@ Util.audioPlayer = function(_options) {
 
 			// movie is playing
 			this.audio._playing = function(event) {
-				u.bug("_playing");
+//				u.bug("_playing");
 
 				u.rc(this.player, "loading|paused");
 				u.ac(this.player, "playing");
