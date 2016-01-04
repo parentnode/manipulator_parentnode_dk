@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-10-23 01:20:28
+js-merged @ 2016-01-04 10:51:50
 */
 
 /*seg_desktop_light_include.js*/
@@ -6774,12 +6774,13 @@ if(u.ga_account) {
 
 
 /*u-form-geolocation-desktop_light.js*/
-Util.Form.customInit["location"] = function(form, field) {
+Util.Form.customInit["location"] = function(_form, field) {
 	field._inputs = u.qsa("input", field);
 	field._input = field._inputs[0];
 	for(j = 0; input = field._inputs[j]; j++) {
 		input.field = field;
-		form.fields[input.name] = input;
+		input._form = _form;
+		_form.fields[input.name] = input;
 		input._label = u.qs("label[for='"+input.id+"']", field);
 		input.val = u.f._value;
 		u.e.addEvent(input, "keyup", u.f._updated);
@@ -6847,10 +6848,11 @@ Util.Form.customValidate["location"] = function(iN) {
 
 
 /*u-form-htmleditor-desktop_light.js*/
-Util.Form.customInit["html"] = function(form, field) {
+Util.Form.customInit["html"] = function(_form, field) {
 	field._input = u.qs("textarea", field);
+	field._input._form = _form;
 	field._input.field = field;
-	form.fields[field._input.name] = field._input;
+	_form.fields[field._input.name] = field._input;
 	field._input._label = u.qs("label[for='"+field._input.id+"']", field);
 	field._input.val = u.f._value;
 	u.e.addEvent(field._input, "keyup", u.f._updated);
@@ -6879,7 +6881,7 @@ Util.Form.customValidate["html"] = function(iN) {
 }
 
 
-/*i-page-desktop_light.js*/
+/*i-page.js*/
 u.bug_console_only = true;
 Util.Objects["page"] = new function() {
 	this.init = function(page) {
@@ -6927,7 +6929,7 @@ Util.Objects["page"] = new function() {
 window.onload = u.init;
 
 
-/*i-login-desktop_light.js*/
+/*i-login.js*/
 Util.Objects["login"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6944,7 +6946,7 @@ Util.Objects["login"] = new function() {
 }
 
 
-/*i-signup-desktop_light.js*/
+/*i-signup.js*/
 Util.Objects["signup"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6961,7 +6963,7 @@ Util.Objects["signup"] = new function() {
 }
 
 
-/*i-newsletter-desktop_light.js*/
+/*i-newsletter.js*/
 Util.Objects["newsletter"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6979,7 +6981,7 @@ Util.Objects["newsletter"] = new function() {
 
 
 
-/*i-documentation-desktop_light.js*/
+/*i-documentation.js*/
 Util.Objects["docpage"] = new function() {
 	this.init = function(scene) {
 		var i, func;

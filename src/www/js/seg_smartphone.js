@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-10-23 01:20:29
+js-merged @ 2016-01-04 10:51:51
 */
 
 /*seg_smartphone_include.js*/
@@ -6224,7 +6224,7 @@ u.f.textEditor = function(field) {
 }
 
 
-/*i-page-smartphone.js*/
+/*i-page.js*/
 u.bug_force = true;
 u.bug_console_only = true;
 Util.Objects["page"] = new function() {
@@ -6364,7 +6364,7 @@ Util.Objects["page"] = new function() {
 u.e.addDOMReadyEvent(u.init);
 
 
-/*i-login-smartphone.js*/
+/*i-login.js*/
 Util.Objects["login"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6382,7 +6382,7 @@ Util.Objects["login"] = new function() {
 }
 
 
-/*i-signup-smartphone.js*/
+/*i-signup.js*/
 Util.Objects["signup"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6400,7 +6400,7 @@ Util.Objects["signup"] = new function() {
 }
 
 
-/*i-newsletter-smartphone.js*/
+/*i-newsletter.js*/
 Util.Objects["newsletter"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
@@ -6418,7 +6418,7 @@ Util.Objects["newsletter"] = new function() {
 }
 
 
-/*i-article-smartphone.js*/
+/*i-article.js*/
 Util.Objects["article"] = new function() {
 	this.init = function(article) {
 		var i, image;
@@ -6453,7 +6453,7 @@ Util.Objects["article"] = new function() {
 
 
 
-/*i-documentation-smartphone.js*/
+/*i-documentation.js*/
 Util.Objects["docsindex"] = new function() {
 	this.init = function(scene) {
 		var files = u.qsa(".files li", scene);
