@@ -85,6 +85,7 @@ Util.Objects["system"] = new function() {
 
 			// version detection
 			u.ae(div, "h2", {"html":"Version"});
+			u.ae(div, "p", {"html":"All should be green"});
 
 			u.ae(div, "div", {"class":"testpassed", "html":"Current browser model detected: " + current_browser});
 			div.test_results["u.browser"] = true;
@@ -216,6 +217,7 @@ Util.Objects["system"] = new function() {
 
 		// Feature detection
 		u.ae(div, "h2", {"html":"Feature support"});
+		u.ae(div, "p", {"html":"All should be green"});
 
 		div.opacitySupport = function() {
 			if(
@@ -294,7 +296,7 @@ Util.Objects["system"] = new function() {
 			u.ae(div, "div", {"class":"testpassed", "html":"borderRadius support: correct (no support)"});
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"borderRadius support: error ("+u.support("opacity")+")"});
+			u.ae(div, "div", {"class":"testfailed", "html":"borderRadius support: error ("+u.support("border-radius")+")"});
 		}
 
 		// Transform
@@ -322,6 +324,7 @@ Util.Objects["system"] = new function() {
 
 		// vendor tools
 		u.ae(div, "h2", {"html":"Vendor tools"});
+		u.ae(div, "p", {"html":"All should be green"});
 		// vendorPrefix
 		if(
 			(u.vendorPrefix() == "webkit" && u.browser("webkit")) ||
@@ -351,7 +354,7 @@ Util.Objects["system"] = new function() {
 			u.ae(div, "div", {"class":"testfailed", "html":"u.vendorProperty(transform): error ("+u.vendorProperty("transform")+")"});
 		}
 
-		if(u.vendorProperty("user-select").match(/^(webkitU|MozU|OU|msU|U)serSelect$/)) {
+		if(u.vendorProperty("user-select").match(/^(webkitU|MozU|OU|msU|u)serSelect$/)) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.vendorProperty(user-select): correct ("+u.vendorProperty("user-select")+")"});
 		}
 		else {

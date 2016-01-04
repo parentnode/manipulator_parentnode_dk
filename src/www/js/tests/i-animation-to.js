@@ -1,3 +1,5 @@
+//http://stackoverflow.com/questions/14275249/how-can-i-animate-a-progressive-drawing-of-svg-path
+
 
 	// easing tests
 	function linear(time, duration){

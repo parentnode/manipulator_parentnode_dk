@@ -8,8 +8,11 @@ function checkValues(node, property, values) {
 	var value;
 	while(values.length) {
 		value = values.pop();
-//		u.bug("u.gcs(node, "+u.a.vendor(property)+"):" + u.gcs(node, u.a.vendor(property)) + " # " + value + " :: " + u.nodeId(node));
+		// if(property == "height") {
+//		 	u.bug("checkValues(node, "+u.vendorProperty(property)+"): u.gcs: '" + u.gcs(node, property) + "' #value: '" + value + "' :: " + u.nodeId(node));
+		// }
 		if(u.gcs(node, property) == value) {
+//			u.bug("found correct")
 			return true;
 		}
 		
@@ -23,7 +26,6 @@ Util.Objects["callbacks"] = new function() {
 	this.init = function(div) {
 		u.bug("init callbacks");
 
-
 		var node;
 
 
@@ -31,14 +33,14 @@ Util.Objects["callbacks"] = new function() {
 		node = u.ae(div, "div", {"class":"testfailed", "html":"node.transitioned: waiting"});
 		node.transitioned = function(event) {
 			if(
-				checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 0, 0)"])
+				(checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)", "matrix(1, 0, 0, 1, 0px, 0px)"]) || checkValues(this, "left", ["auto"]))
 				 && checkTransition(this)
 			) {
 				u.tc(this, "testfailed", "testpassed");
 				this.innerHTML = this.innerHTML.replace("waiting", "correct");
 			}
 		}
-		u.as(node, u.a.vendor("transformOrigin"), "0 50%");
+		u.as(node, "transformOrigin", "0 50%");
 		u.a.scale(node, 0.5);
 
 		u.a.transition(node, "all 0.5s ease-in");
@@ -78,7 +80,7 @@ Util.Objects["callbacks"] = new function() {
 			this.transitioned = function() {
 				if(
 					this.called_back == 5 &&
-					checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 0, 0)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
+					checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 0px, 0px)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
 					checkTransition(this) &&
 					!this.step5
 				) {
@@ -139,7 +141,7 @@ Util.Objects["callbacks"] = new function() {
 		// 	u.a.scale(div.e2, 1);
 		// }
 		//
-		// u.as(div.e2, u.a.vendor("transformOrigin"), "0 50%");
+		// u.as(div.e2, "transformOrigin", "0 50%");
 		// u.a.scale(div.e2, 1);
 		// u.a.setOpacity(div.e2, 0);
 		//
@@ -172,7 +174,7 @@ Util.Objects["basics"] = new function() {
 			this.innerHTML += ": DONE";
 
 			if(
-				checkValues(this, u.a.vendor("transform"), ["matrix(1, 0, 0, 1, 6, -20)", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6, -20, 0, 1)"]) &&
+				checkValues(this, "transform", ["matrix(1, 0, 0, 1, 6px, -20px)", "matrix(1, 0, 0, 1, 6, -20)", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6, -20, 0, 1)"]) &&
 				checkTransition(this)
 			) {
 				u.ac(this, "done");
@@ -196,8 +198,9 @@ Util.Objects["basics"] = new function() {
 			this.innerHTML += ": DONE";
 
 			if(
-				checkValues(this, u.a.vendor("transform"),
+				checkValues(this, "transform",
 				[
+					"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0px, 0px)",
 					"matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
 					"matrix(0.707106781186548, 0.707106781186548, -0.707106781186548, 0.707106781186548, 0, 0)",
 					"matrix(0.7071067811865476, 0.7071067811865475, -0.7071067811865475, 0.7071067811865476, 0, 0)",
@@ -225,7 +228,7 @@ Util.Objects["basics"] = new function() {
 			this.innerHTML += ": DONE";
 
 			if(
-				checkValues(this, u.a.vendor("transform"), ["matrix(1.5, 0, 0, 1.5, 0, 0)"]) &&
+				checkValues(this, "transform", ["matrix(1.5, 0, 0, 1.5, 0px, 0px)", "matrix(1.5, 0, 0, 1.5, 0, 0)"]) &&
 				checkTransition(this)
 			) {
 				u.ac(this, "done");

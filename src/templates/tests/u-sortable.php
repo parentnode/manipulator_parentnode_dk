@@ -7,6 +7,11 @@ $this->headerIncludes(array(
 
 <div class="scene i:scene">
 	<h1>Sortable</h1>
+
+<? if(preg_match("/desktop_light|mobile|mobile_light|seo/", $this->segment(array("type" => "dev")))): ?>
+	<p class="nosupport">NOT SUPPORTED in <?= $this->segment(array("type" => "dev")) ?></p>
+<? else: ?>
+
 	<p>Sortable lists in various shades and colors.</p>
 
 	<div class="tests i:sortable">
@@ -80,6 +85,8 @@ $this->headerIncludes(array(
 			</ul>
 		</div>
 	</div>
+
+<? endif;?>
 
 </div>
 <div class="comments"></div>

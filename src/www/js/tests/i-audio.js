@@ -62,13 +62,18 @@ Util.Objects["audio3"] = new function() {
 		u.ce(div.playlist[0]);
 		div.playlist[0].clicked = function() {
 			this.player.loadAndPlay(this.url, {"playpause":false, "search":false});
-
-			this.player.play();
 		}
 
 		div.player.playing = function() {
 			u.bug("playing callback")
-			this.play();
+		}
+
+		div.player.loaded = function() {
+			u.bug("loaded callback")
+		}
+
+		div.player.canplaythrough = function() {
+			u.bug("canplaythrough callback")
 		}
 
 

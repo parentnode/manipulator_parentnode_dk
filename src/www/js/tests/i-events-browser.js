@@ -333,42 +333,4 @@ Util.Objects["eventsBrowser"] = new function() {
 
 	}
 
-
-	// OLD domready test
-	// function e_onload () {
-	// 	var onloadevent = document.createEvent("UIEvents");
-	// 	onloadevent.initEvent("load", true, true);
-	// 	document.dispatchEvent(onloadevent);
-	// }
-	// function e_readystate () {
-	// 	var onloadevent = document.createEvent("UIEvents");
-	// 	onloadevent.initEvent("readystatechange", true, true);
-	// 	document.dispatchEvent(onloadevent);
-	// }
-	// 
-	// 
-	// 
-	// // Mozilla, Opera and webkit nightlies currently support this event
-	//     if(document.addEventListener ) {
-	//         // Use the handy event callback
-	//         document.addEventListener( "DOMContentLoaded", function(){
-	//                 document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-	// 
-	// 			dom_time = new Date().getTime();
-	// 			text += "#DOMContentLoaded ("+(dom_time - time)+")<br>"+ document.body + "<br>" + document.readyState + "<br>";
-	//         }, false );
-	// 
-	//     }
-	// // If IE event model is used
-	// else if ( document.attachEvent ) {
-	//         // ensure firing before onload,
-	//         // maybe late but safe also for iframes
-	//         document.attachEvent("onreadystatechange", function(){
-	//                 if(document.readyState === "complete" ) {
-	//                         document.detachEvent( "onreadystatechange", arguments.callee );
-	// 					dom_time = new Date().getTime();
-	// 					text += "#complete ("+(dom_time - time)+")<br>"+ document.body + "<br>" + document.readyState + "<br>";
-	//                 }
-	//         });
-	// }
 }
