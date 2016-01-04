@@ -196,6 +196,7 @@
 				<dd>
 					<span class="file">u-textscaler.js</span> + 
 					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-string.js</span>
@@ -205,6 +206,7 @@
 				<dd>
 					<span class="file">u-textscaler.js</span> + 
 					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-string.js</span>
@@ -254,7 +256,7 @@
 				<dd>not tested</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 
 				<dt>tv</dt>
 				<dd>

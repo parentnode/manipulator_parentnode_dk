@@ -298,7 +298,7 @@
 				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>not supported</dd>
+				<dd>not tested</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>

@@ -49,6 +49,10 @@
 							and provides some collections to help you access any form component with ease.
 						</p>
 						<p>
+							Can also be used on partial form, if wrapping node is passed instead of outer form. This makes
+							it extra useful in frameworks which dictate a global form element (like .NET).
+						</p>
+						<p>
 							"focus", "error" and "correct" classes are added/removed from field and input when state changes.
 						</p>
 

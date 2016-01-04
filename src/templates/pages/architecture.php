@@ -24,7 +24,7 @@ $this->pageTitle("How it is put together ...");
 			<p>
 				Manipulator attempts to be as close to Native JavaScript as possible, to facilitate your own mix of
 				library and native JavaScript. About 60% of the functions in the library are only included to fix crossbrowser
-				issues in a simple way, the rest are encapsulation complex tasks in simpler wrapper function for ease of use - 
+				issues in a simple way, the rest are encapsulating complex tasks in simpler wrapper functions for ease of use - 
 				but with careful consideration. It is a design principle of Manipulator to thoroughly consider 
 				performance cost/benefits when adding new functions. Encapsulation will by nature limit flexibility and impact
 				performance, as the code will have to consider more options than the one you need to perform at any given time.

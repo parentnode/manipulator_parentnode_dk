@@ -26,13 +26,12 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.Animation.transition</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.transition</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Animation.transition(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">String</span> <span class="var">transition</span>
+									<span class="type">Mixed</span> <span class="var">callback</span>
 								);
 							</dd>
 						</dl>
@@ -46,6 +45,13 @@
 						</p>
 						<p>
 							The transition duration in milliseconds, is stored in node.duration.
+						</p>
+						<p>
+							Pass a <span class="var">callback</span> parameter with a function reference or name of function
+							to be invoked when transition is done.
+						</p>
+						<p>
+							Automatically adds vendor prefix (like Moz, webkit, ms or O).
 						</p>
 					</div>
 
@@ -63,6 +69,13 @@
 							<dd>
 								<div class="summary">
 									<span class="type">String</span> transition to apply to node
+								</div>
+							</dd>
+							<dt><span class="var">callback</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Optional function reference or name of function to be 
+									executed when transition is done
 								</div>
 							</dd>
 						</dl>
@@ -112,95 +125,9 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 								<li>Util.Events.addEvent</li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="Util.Animation.origin">
-				<div class="header">
-					<h3>Util.Animation.origin</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.origin</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Void</span> = 
-								Util.Animation.origin(
-									<span class="type">Node</span> <span class="var">node</span>, 
-									<span class="type">Integer</span> <span class="var">x</span>,
-									<span class="type">Integer</span> <span class="var">y</span>
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Set CSS3 TransformOrigin to new coordinates x,y.</p>
-						<p>
-							New origin is saved in node._origin_x and node._origin_y.
-						</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">node</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Node</span> node to change TransformOrigin of
-								</div>
-							</dd>
-							<dt><span class="var">x</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Integer</span> x-coordinate.
-								</div>
-							</dd>
-							<dt><span class="var">y</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Integer</span> y-coordinate.
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Void</span></p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-						<p>No examples</p>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<!-- list javascript functions used by function -->
-							<h5>JavaScript</h5>
-							<p>none</p>
-						</div>
-
-						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
-							<h5>Manipulator</h5>
-							<ul>
-								<li>Util.Animation.vendor</li>
-								<li>Util.Animation.support3d</li>
+								<li>Util.Animation.transitionEndEventName</li>
 							</ul>
 						</div>
 
@@ -219,8 +146,6 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.Animation.translate</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.translate</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Animation.translate(
@@ -305,7 +230,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 								<li>Util.Animation.support3d</li>
 							</ul>
 						</div>
@@ -325,8 +250,6 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.Animation.rotate</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.rotate</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Animation.rotate(
@@ -404,7 +327,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 							</ul>
 						</div>
 
@@ -423,8 +346,6 @@
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.Animation.scale</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.scale</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Animation.scale(
@@ -512,7 +433,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 							</ul>
 						</div>
 
@@ -521,21 +442,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.setOpacity">
+			<div class="function" id="Util.Animation.opacity">
 				<div class="header">
-					<h3>Util.Animation.setOpacity</h3>
+					<h3>Util.Animation.opacity</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.setOpacity</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.setOpacity</dd>
+							<dd class="name">Util.Animation.opacity</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Boolean</span> = 
-								Util.Animation.setOpacity(
+								Util.Animation.opacity(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Number</span> <span class="var">opacity</span>
 								);
@@ -588,7 +507,7 @@
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.a.setOpacity(scene, 0.5);
+	u.a.opacity(scene, 0.5);
 &lt;/script&gt;</code>
 							<p>Make div.scene semi-transparent.</p>
 						</div>
@@ -607,7 +526,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 							</ul>
 						</div>
 
@@ -616,21 +535,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.setWidth">
+			<div class="function" id="Util.Animation.width">
 				<div class="header">
-					<h3>Util.Animation.setWidth</h3>
+					<h3>Util.Animation.width</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.setWidth</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.setWidth</dd>
+							<dd class="name">Util.Animation.width</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.Animation.setWidth(
+								Util.Animation.width(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Integer</span> <span class="var">width</span>
 								);
@@ -680,7 +597,7 @@
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.a.setWidth(scene, 200);
+	u.a.width(scene, 200);
 &lt;/script&gt;</code>
 							<p>Set width of div.scene to 200px.</p>
 						</div>
@@ -699,7 +616,7 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.applyStyle</li>
 							</ul>
 						</div>
 
@@ -708,21 +625,19 @@
 				</div>
 			</div>
 
-			<div class="function">
+			<div class="function" id="Util.Animation.heigth">
 				<div class="header">
-					<h3>Util.Animation.setHeight</h3>
+					<h3>Util.Animation.height</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.setHeight</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.setHeight</dd>
+							<dd class="name">Util.Animation.height</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.Animation.setHeight(
+								Util.Animation.height(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Integer</span> <span class="var">height</span>
 								);
@@ -770,7 +685,7 @@
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.a.setHeight(scene, 200);
+	u.a.height(scene, 200);
 &lt;/script&gt;</code>
 							<p>Set height of div.scene to 200px.</p>
 						</div>
@@ -798,21 +713,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.setBgPos">
+			<div class="function" id="Util.Animation.bgPos">
 				<div class="header">
-					<h3>Util.Animation.setBgPos</h3>
+					<h3>Util.Animation.bgPos</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.setBgPos</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.setBgPos</dd>
+							<dd class="name">Util.Animation.bgPos</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.Animation.setBgPos(
+								Util.Animation.bgPos(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">Integer</span> <span class="var">x</span>
 									<span class="type">Integer</span> <span class="var">y</span>
@@ -867,7 +780,7 @@
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.a.setBgPos(scene, 200, 200);
+	u.a.bgPos(scene, 200, 200);
 &lt;/script&gt;</code>
 							<p>Set background-position: 200px 200px; on div.scene</p>
 						</div>
@@ -895,21 +808,19 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.setBgColor">
+			<div class="function" id="Util.Animation.bgColor">
 				<div class="header">
-					<h3>Util.Animation.setBgColor</h3>
+					<h3>Util.Animation.bgColor</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.setBgColor</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.a.setBgColor</dd>
+							<dd class="name">Util.Animation.bgColor</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
-								Util.Animation.setBgColor(
+								Util.Animation.bgColor(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">String</span> <span class="var">color</span>
 								);
@@ -957,7 +868,7 @@
 
 &lt;script&gt;
 	var scene = u.querySelector(".scene");
-	u.a.setBgColor(scene, #0000ff);
+	u.a.bgColor(scene, #0000ff);
 &lt;/script&gt;</code>
 							<p>Set background-color: #0000ff; on div.scene</p>
 						</div>
@@ -977,6 +888,93 @@
 							<h5>Manipulator</h5>
 							<ul>
 								<li>Util.Animation.vendor</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Animation.requestAnimationFrame">
+				<div class="header">
+					<h3>Util.Animation.requestAnimationFrame</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Animation.requestAnimationFrame</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">String</span> = 
+								Util.Animation.requestAnimationFrame(
+									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">String</span> <span class="var">callback</span>,
+									<span class="type">Integer</span> <span class="var">duration</span>
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Request animation frame <span class="var">callback</span> to <span class="var">node</span>, for the specified <span class="var">duration</span>.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> Node to make callback to
+								</div>
+							</dd>
+							<dt><span class="var">callback</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> Name of callback function
+								</div>
+							</dd>
+							<dt><span class="var">duration</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> Duration of animation frame in milliseconds
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples.</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>Object.keys</li>
+								<li>Date</li>
+								<li>eval</li>
+								<li>for ... in</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>Util.vendorProperty</li>
+								<li>Util.Timer.setTimer</li>
+								<li>Util.randomString</li>
 							</ul>
 						</div>
 
@@ -1035,8 +1033,9 @@
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>document.createElement</li>
+								<li>document.removeChild</li>
 								<li>try ... catch</li>
+								<li>String.match</li>
 							</ul>
 						</div>
 
@@ -1044,7 +1043,9 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>Util.Animation.vendor</li>
+								<li>Util.getComputedStyle</li>
+								<li>Util.appendElement</li>
+								<li>Util.applyStyle</li>
 							</ul>
 						</div>
 
@@ -1053,20 +1054,22 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.vendor">
+			<!--div class="function" id="Util.Animation.origin">
 				<div class="header">
-					<h3>Util.Animation.vendor</h3>
+					<h3>Util.Animation.origin</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Animation.vendor</dd>
+							<dd class="name">Util.Animation.origin</dd>
 							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">String</span> = 
-								Util.Animation.vendor(
-									<span class="type">String</span> <span class="var">method</span>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Animation.origin(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">Integer</span> <span class="var">x</span>,
+									<span class="type">Integer</span> <span class="var">y</span>
 								);
 							</dd>
 						</dl>
@@ -1074,17 +1077,32 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Get implementation vendor prefix - Moz, webkit, ms, o etc.</p>
-						<p>Pass specific method to get the full vendor version.
+						<p>Set CSS3 TransformOrigin to new coordinates x,y.</p>
+						<p>
+							New origin is saved in node._origin_x and node._origin_y.
+						</p>
 					</div>
 
 					<div class="parameters">
 						<h4>Parameters</h4>
+
 						<dl class="parameters">
-							<dt><span class="var">method</span></dt>
+							<dt><span class="var">node</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> method to get vendor specific version of
+									<span class="type">Node</span> node to change TransformOrigin of
+								</div>
+							</dd>
+							<dt><span class="var">x</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> x-coordinate.
+								</div>
+							</dd>
+							<dt><span class="var">y</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> y-coordinate.
 								</div>
 							</dd>
 						</dl>
@@ -1092,33 +1110,35 @@
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p><span class="type">String</span> string containing vendor prefix, or vendor specific method.</p>
+						<p><span class="type">Void</span></p>
 					</div>
 
 					<div class="examples">
 						<h4>Examples</h4>
-						<p>No examples.</p>
+						<p>No examples</p>
 					</div>
 
 					<div class="uses">
 						<h4>Uses</h4>
 
 						<div class="javascript">
-							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<p>none</p>
 						</div>
 
 						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
-							<p>none</p>
+							<ul>
+								<li>Util.Animation.vendor</li>
+								<li>Util.Animation.support3d</li>
+							</ul>
 						</div>
 
 					</div>
 
 				</div>
-			</div>
+			</div-->
+
 
 		</div>
 	</div>
@@ -1142,8 +1162,8 @@
 				<h3>Segment support files</h3>
 				<ul>
 					<!-- specify segment support js files (like: u-dom-desktop_light.js) -->
-					<li><span class="file">u-animation-desktop_ie.js</span></li>
-					<li><span class="file">u-animation-desktop_light.js</span></li>
+					<li><span class="file">u-animation-desktop_ie9.js</span></li>
+					<!--li><span class="file">u-animation-desktop_light.js</span></li-->
 				</ul>
 			</div>
 
@@ -1186,7 +1206,7 @@
 				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-animation.js</span> + 
-					<span class="file">u-animation-desktop_ie.js</span> +
+					<span class="file">u-animation-desktop_ie9.js</span> +
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-dom.js</span> +
@@ -1194,7 +1214,8 @@
 				</dd>
 
 				<dt>desktop_light</dt>
-				<dd>
+				<dd>not supported</dd>
+				<!--dd>
 					<span class="file">u-animation.js</span> + 
 					<span class="file">u-animation-desktop_light.js</span> +
 					<span class="file">u-events.js</span> + 
@@ -1203,7 +1224,7 @@
 					<span class="file">u-dom-desktop_light.js</span> +
 					<span class="file">u-geometry.js</span> +
 					<span class="file">u-math.js</span>
-				</dd>
+				</dd-->
 
 				<dt>tablet</dt>
 				<dd>
@@ -1230,10 +1251,11 @@
 				<dd>not tested</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>
+				<dd>not tested</dd>
+				<!--dd>
 					<span class="file">u-animation.js</span> + 
 					<span class="file">u-animation-desktop_light.js</span> +
 					<span class="file">u-events.js</span> + 
@@ -1242,7 +1264,7 @@
 					<span class="file">u-dom-desktop_light.js</span> +
 					<span class="file">u-geometry.js</span> +
 					<span class="file">u-math.js</span>
-				</dd>
+				</dd-->
 
 				<dt>seo</dt>
 				<dd>not supported</dd>

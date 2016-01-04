@@ -30,7 +30,7 @@
 	<ul class="interaction">
 		<li class="test"><a href="/tests/u-animation">Animation</a></li>
 		<li class="test"><a href="/tests/u-audio">Audio</a></li>
-		<li class="test"><a href="/tests/u-events">Events (click, hold, dblclick)</a></li>
+		<li class="test"><a href="/tests/u-events">Events (click, hold, dblclick, hover)</a></li>
 		<li class="test"><a href="/tests/u-events-movements">Movements events (drag, swipe)</a></li>
 		<li class="test"><a href="/tests/u-events-browser">Browser events</a></li>
 		<li class="test"><a href="/tests/u-flash">Flash</a></li>

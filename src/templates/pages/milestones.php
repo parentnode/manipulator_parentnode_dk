@@ -37,6 +37,8 @@ $this->pageTitle("Where we are heading ...");
 				<li>Add general "getting started" examples</li>
 				<li>Add page model introduction and documentation</li>
 				<li>Add "Fork me on Github" to this website - DONE</li>
+				<li>Documentation for: u.lcfirst and u.ucfirst</li>
+				<li>Documentation for window resize, scroll, start, move and end event</li>
 			</ul>
 
 			<h4>Callback alignment status:</h4>

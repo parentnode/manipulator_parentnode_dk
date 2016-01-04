@@ -587,20 +587,13 @@
 					<span class="file">u-events-movements.js</span> +
 					<span class="file">u-events.js</span> +
 					<span class="file">u-animation.js</span> +
-					<span class="file">u-animation-desktop_ie.js</span> +
+					<span class="file">u-animation-desktop_ie9.js</span> +
 					<span class="file">u-timer.js</span> +
 					<span class="file">u-geometry.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
-				<dd>
-					<span class="file">u-events-movements.js</span> +
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> +
-					<span class="file">u-animation.js</span> +
-					<span class="file">u-animation-desktop_light.js</span> +
-					<span class="file">u-geometry.js</span>
-				</dd>
+				<dd>not supported</dd>
 
 				<dt>tablet</dt>
 				<dd>
@@ -630,17 +623,10 @@
 				<dd>not tested</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>
-					<span class="file">u-events-movements.js</span> +
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> +
-					<span class="file">u-animation.js</span> +
-					<span class="file">u-animation-desktop_light.js</span> +
-					<span class="file">u-geometry.js</span>
-				</dd>
+				<dd>not tested</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>

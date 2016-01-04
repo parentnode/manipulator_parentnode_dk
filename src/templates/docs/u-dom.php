@@ -2362,7 +2362,8 @@ u.ie(header, nav);</code>
 						<h4>Description</h4>
 						<p>
 							Adds style <span class="var">property</span> to <span class="var">node</span>. Basically this is just 
-							a shorthand for node.style.property = value, but it also, as default, updates the DOM.
+							a shorthand function for setting: node.style.property = value - with automatic vendor prefixing and 
+							update the DOM (default).
 						</p>
 						<p>
 							DOM is automatically updated as default, because that is the only way 
@@ -2374,6 +2375,9 @@ u.ie(header, nav);</code>
 						<p>
 							If you need to animate style property, use Util.Animation equivalent, which can translate
 							applied transition to timed execution for fallback.
+						</p>
+						<p>
+							It uses u.vendorProperty to ensure correct vendor prefix is added to the property.
 						</p>
 					</div>
 
@@ -2445,7 +2449,9 @@ u.ie(header, nav);</code>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
-							<p>None</p>
+							<ul>
+								<li>Util.vendorProperty</li>
+							</ul>
 						</div>
 
 					</div>
@@ -2556,7 +2562,9 @@ u.ie(header, nav);</code>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
-							<p>None</p>
+							<ul>
+								<li>Util.vendorProperty</li>
+							</ul>
 						</div>
 
 					</div>
@@ -2649,13 +2657,16 @@ u.ie(header, nav);</code>
 						<div class="javascript">
 							<h5>JavaScript</h5>
 							<ul>
-								<li>document.defaultView</li>
+								<li>window.getComputedStyle</li>
+								<li>String.replace</li>
 							</ul>
 						</div>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
-							<p>None</p>
+							<ul>
+								<li>Util.vendorProperty</li>
+							</ul>
 						</div>
 
 					</div>

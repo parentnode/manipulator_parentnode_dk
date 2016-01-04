@@ -383,7 +383,7 @@
 				<dd><span class="file">u-math.js</span></dd>
 
 				<dt>smartphone</dt>
-				<dd><span class="file">u-.mathjs</span></dd>
+				<dd><span class="file">u-math.js</span></dd>
 	
 				<dt>mobile</dt>
 				<dd>not tested</dd>

@@ -337,6 +337,7 @@
 				<dd>
 					<span class="file">u-sortable.js</span> + 
 					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-events-browser.js</span>
@@ -346,22 +347,14 @@
 				<dd>
 					<span class="file">u-sortable.js</span> + 
 					<span class="file">u-dom.js</span> + 
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-events-browser.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
-				<dd>
-					<span class="file">u-sortable.js</span> + 
-					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_light.js</span> + 
-					<span class="file">u-geometry.js</span> + 
-					<span class="file">u-geometry-desktop_light.js</span> + 
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> + 
-					<span class="file">u-events-browser.js</span>
-				</dd>
+				<dd>not supported</dd>
 
 				<dt>tablet</dt>
 				<dd>
@@ -391,22 +384,13 @@
 				</dd>
 	
 				<dt>mobile</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
+				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>
-					<span class="file">u-sortable.js</span> + 
-					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_light.js</span> + 
-					<span class="file">u-geometry.js</span> + 
-					<span class="file">u-geometry-desktop_light.js</span> + 
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> + 
-					<span class="file">u-events-browser.js</span>
-				</dd>
+				<dd>not tested</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>

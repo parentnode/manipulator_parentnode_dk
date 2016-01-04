@@ -799,6 +799,7 @@ player.stop();
 					<span class="file">u-video.js</span> +
 					<span class="file">u-events.js</span> +
 					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-timer.js</span>
 				</dd>
 
@@ -807,6 +808,7 @@ player.stop();
 					<span class="file">u-video.js</span> +
 					<span class="file">u-events.js</span> +
 					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-timer.js</span>
 				</dd>
 

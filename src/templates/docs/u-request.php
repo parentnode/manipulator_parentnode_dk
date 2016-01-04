@@ -461,6 +461,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 				<dd>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-string.js</span>
 				</dd>
 
@@ -468,6 +469,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 				<dd>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-string.js</span>
 				</dd>
 

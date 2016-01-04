@@ -192,14 +192,16 @@
 				<dd>
 					<span class="file">u-keyboard.js</span> +
 					<span class="file">u-events.js</span> +
-					<span class="file">u-dom.js</span>
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span>
 				</dd>
 
 				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-keyboard.js</span> +
 					<span class="file">u-events.js</span> +
-					<span class="file">u-dom.js</span>
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
