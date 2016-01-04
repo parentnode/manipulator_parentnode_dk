@@ -8,6 +8,10 @@ $this->headerIncludes(array(
 <div class="scene i:scene">
 	<h1>Events, movements</h1>
 
+<? if(preg_match("/desktop_light|mobile_light|seo/", $this->segment(array("type" => "dev")))): ?>
+	<p class="nosupport">NOT SUPPORTED in <?= $this->segment(array("type" => "dev")) ?></p>
+<? else: ?>
+
 	<div class="tests i:drag1 drag drag_fixed">
 		<h2>1: Fixed node with drag</h2>
 
@@ -16,7 +20,7 @@ $this->headerIncludes(array(
 		</div>
 
 		<ul class="info">
-			<li class="handle">Green box on the right to be dragged inside fixed yellow element</li>
+			<li class="handle">Gray box on the right to be dragged inside fixed yellow element</li>
 		</ul>
 	</div>
 
@@ -184,6 +188,8 @@ $this->headerIncludes(array(
 			</ul>
 		</div>
 	</div>
+
+<? endif;?>
 
 </div>
 <div class="comments"></div>
