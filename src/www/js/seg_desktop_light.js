@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 01:23:12
+Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
+js-merged @ 2016-01-05 02:31:22
 */
 
 /*seg_desktop_light_include.js*/
@@ -3671,114 +3671,6 @@ if(u.ga_account) {
 				return u.cutString(e.innerText.trim(), 20) + "(<"+e.nodeName+">)";
 			}
 		}
-	}
-}
-
-
-/*u-form-geolocation-desktop_light.js*/
-Util.Form.customInit["location"] = function(_form, field) {
-	field._inputs = u.qsa("input", field);
-	field._input = field._inputs[0];
-	for(j = 0; input = field._inputs[j]; j++) {
-		input.field = field;
-		input._form = _form;
-		_form.fields[input.name] = input;
-		input._label = u.qs("label[for='"+input.id+"']", field);
-		input.val = u.f._value;
-		u.e.addEvent(input, "keyup", u.f._updated);
-		u.e.addEvent(input, "change", u.f._changed);
-		u.f.inputOnEnter(input);
-		u.f.activateInput(input);
-	}
-	u.f.validate(field._input);
-}
-Util.Form.customValidate["location"] = function(iN) {
-	var loc_fields = 0;
-	if(iN.field._input) {
-		loc_fields++;
-		min = 1;
-		max = 255;
-		if(
-			iN.field._input.val().length >= min &&
-			iN.field._input.val().length <= max
-		) {
-			u.f.fieldCorrect(iN.field._input);
-		}
-		else {
-			u.f.fieldError(iN.field._input);
-		}
-	}
-	if(iN.field.lat_input) {
-		loc_fields++;
-		min = -90;
-		max = 90;
-		if(
-			!isNaN(iN.field.lat_input.val()) && 
-			iN.field.lat_input.val() >= min && 
-			iN.field.lat_input.val() <= max
-		) {
-			u.f.fieldCorrect(iN.field.lat_input);
-		}
-		else {
-			u.f.fieldError(iN.field.lat_input);
-		}
-	}
-	if(iN.field.lon_input) {
-		loc_fields++;
-		min = -180;
-		max = 180;
-		if(
-			!isNaN(iN.field.lon_input.val()) && 
-			iN.field.lon_input.val() >= min && 
-			iN.field.lon_input.val() <= max
-		) {
-			u.f.fieldCorrect(iN.field.lon_input);
-		}
-		else {
-			u.f.fieldError(iN.field.lon_input);
-		}
-	}
-	if(u.qsa("input.error", iN.field).length) {
-		u.rc(iN.field, "correct");
-		u.ac(iN.field, "error");
-	}
-	else if(u.qsa("input.correct", iN.field).length == loc_fields) {
-		u.ac(iN.field, "correct");
-		u.rc(iN.field, "error");
-	}
-}
-
-
-/*u-form-htmleditor-desktop_light.js*/
-Util.Form.customInit["html"] = function(_form, field) {
-	field._input = u.qs("textarea", field);
-	field._input._form = _form;
-	field._input.field = field;
-	_form.fields[field._input.name] = field._input;
-	field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-	field._input.val = u.f._value;
-	u.e.addEvent(field._input, "keyup", u.f._updated);
-	u.e.addEvent(field._input, "change", u.f._changed);
-	u.f.inputOnEnter(field._input);
-	u.f.activateInput(field._input);
-	u.f.validate(field._input);
-}
-Util.Form.customValidate["html"] = function(iN) {
-	min = Number(u.cv(iN.field, "min"));
-	max = Number(u.cv(iN.field, "max"));
-	min = min ? min : 1;
-	max = max ? max : 10000000;
-	pattern = iN.getAttribute("pattern");
-	if(
-		u.text(iN.field._viewer) &&
-		u.text(iN.field._viewer).length >= min && 
-		u.text(iN.field._viewer).length <= max && 
-		(!pattern || iN.val().match("^"+pattern+"$"))
-	) {
-		u.f.fieldCorrect(iN);
-	}
-	else {
-		u.f.fieldError(iN);
 	}
 }
 

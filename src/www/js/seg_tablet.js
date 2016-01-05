@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 01:23:12
+Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
+js-merged @ 2016-01-05 02:31:22
 */
 
 /*seg_tablet_include.js*/
