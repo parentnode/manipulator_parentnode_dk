@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 01:15:04
+js-merged @ 2016-01-05 05:30:47
 */
 
 /*seg_desktop_include.js*/
@@ -3972,7 +3972,7 @@ Util.browser = function(model, version) {
 	var current_version = false;
 	if(model.match(/\bedge\b/i)) {
 		if(navigator.userAgent.match(/Windows[^$]+Gecko[^$]+Edge\/(\d+.\d)/i)) {
-			current_version = navigator.userAgent.match(/Edge\/(\d+.\d)/i)[1];
+			current_version = navigator.userAgent.match(/Edge\/(\d+)/i)[1];
 		}
 	}
 	else if(model.match(/\bexplorer\b|\bie\b/i)) {

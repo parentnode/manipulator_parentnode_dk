@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 01:15:05
+js-merged @ 2016-01-05 05:30:48
 */
 
 /*seg_desktop_light_include.js*/
@@ -1650,7 +1650,7 @@ Util.browser = function(model, version) {
 	var current_version = false;
 	if(model.match(/\bedge\b/i)) {
 		if(navigator.userAgent.match(/Windows[^$]+Gecko[^$]+Edge\/(\d+.\d)/i)) {
-			current_version = navigator.userAgent.match(/Edge\/(\d+.\d)/i)[1];
+			current_version = navigator.userAgent.match(/Edge\/(\d+)/i)[1];
 		}
 	}
 	else if(model.match(/\bexplorer\b|\bie\b/i)) {
@@ -2050,7 +2050,7 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
-					if(!attribute.match(/^(class|type|value|html)$/)) {
+					if(!attribute.match(/^(class|type|value|html|checked)$/)) {
 						node.setAttribute(attribute, attributes[attribute]);
 					}
 				}
@@ -2065,6 +2065,9 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				if(attributes["value"]) {
 					node.value = attributes["value"];
+				}
+				if(attributes["checked"]) {
+					node.checked = attributes["checked"];
 				}
 				if(attributes["html"]) {
 					node.innerHTML = attributes["html"];
@@ -2110,6 +2113,9 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				if(attributes["value"]) {
 					node.value = attributes["value"];
+				}
+				if(attributes["checked"]) {
+					node.checked = attributes["checked"];
 				}
 				if(attributes["html"]) {
 					node.innerHTML = attributes["html"];
@@ -2184,7 +2190,7 @@ if(document.all && document.addEventListener == undefined) {
 }
 if(typeof(document.textContent) == "undefined") {
 	Util.textContent = u.text = function(node) {
-		if(node.textContent) {
+		if(node.textContent !== undefined) {
 			return node.textContent;
 		}
 		else if(node.innerText) {
@@ -3659,7 +3665,17 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){return (typeof(win
 			wrapper.open = function(method, url, async) {
 				this.async = async;
 				url += (url.match(/\?/) ? "&" : "?") + "refresh_activex=" + u.randomString();
-				this.xmlhttp.open(method, url, async);
+				try {
+					this.xmlhttp.open(method, url, async);
+				}
+				catch(exception) {
+					if(typeof(wrapper.statechanged) == "function") {
+						this.status = 400;
+						this.IEreadyState = true;
+						this.statechanged();
+						this.parentNode.removeChild(wrapper);
+					}
+				}
 			}
 			wrapper.send = function(params) {
 				this.xmlhttp.send(params);
