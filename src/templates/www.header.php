@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<?= $this->language() ?>">
 <head>
-	<!-- (c) & (p) parentnode.dk 2009-2015 //-->
+	<!-- (c) & (p) parentnode.dk 2009-2016 //-->
 	<!-- All material protected by copyrightlaws, as if you didnt know //-->
 	<!-- If you want to help build the ultimate frontend-centered platform, visit parentnode.dk -->
 	<title><?= SITE_NAME ?> - <?= $this->pageTitle() ?></title>
@@ -14,8 +14,8 @@
 
 	<?= $this->sharingMetaData() ?>
 
-	<link rel="apple-touch-icon" href="touchicon.png">
-	<link rel="icon" href="favicon.png">
+	<link rel="apple-touch-icon" href="/touchicon.png">
+	<link rel="icon" href="/favicon.png">
 
 <? if(session()->value("dev")) { ?>
 	<link type="text/css" rel="stylesheet" media="all" href="/css/lib/seg_<?= $this->segment() ?>_include.css" />

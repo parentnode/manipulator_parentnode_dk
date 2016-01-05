@@ -1,19 +1,20 @@
 /*
-Manipulator v0.9 Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 01:23:12
+Manipulator v0.9.1-full Copyright 2015 http://manipulator.parentnode.dk
+js-merged @ 2016-01-05 01:15:05
 */
 
 /*seg_mobile_include.js*/
 
-/*seg_mobile_include.js*/
-
-/*seg_mobile.js*/
+/*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
 	u.version = "0.9.1";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
+
+
+/*u-debug.js*/
 Util.debugURL = function(url) {
 	if(u.bug_force) {
 		return true;
@@ -129,6 +130,9 @@ Util.xInObject = function(object, _options) {
 		}
 	}
 }
+
+
+/*u-cookie.js*/
 Util.saveCookie = function(name, value, _options) {
 	var expires = true;
 	var path = false;
@@ -266,6 +270,9 @@ Util.cookieReference = function(node, _options) {
 	}
 	return ref;
 }
+
+
+/*u-dom.js*/
 Util.querySelector = u.qs = function(query, scope) {
 	scope = scope ? scope : document;
 	return scope.querySelector(query);
@@ -674,6 +681,9 @@ Util.nodeWithin = u.nw = function(node, scope) {
 	u.rc(scope, scope_key);
 	return false;
 }
+
+
+/*u-events.js*/
 Util.Events = u.e = new function() {
 	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && navigator.userAgent.match(/Windows/i)) ? "mouse" : "touch";
 	if(navigator.maxTouchPoints > 1) {
@@ -995,6 +1005,9 @@ Util.Events = u.e = new function() {
 		}
 	}
 }
+
+
+/*u-events-browser.js*/
 u.e.addDOMReadyEvent = function(action) {
 	if(document.readyState && document.addEventListener) {
 		if((document.readyState == "interactive" && !u.browser("ie")) || document.readyState == "complete" || document.readyState == "loaded") {
@@ -1130,6 +1143,9 @@ u.e.removeWindowScrollEvent = function(node, id) {
 	window["_Onscroll_node_"+id] = null;
 	window["_Onscroll_callback_"+id] = null;
 }
+
+
+/*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
 		return node.offsetLeft + u.absX(node.offsetParent);
@@ -1184,6 +1200,9 @@ Util.pageScrollX = u.scrollX = function() {
 Util.pageScrollY = u.scrollY = function() {
 	return window.pageYOffset;
 }
+
+
+/*u-init.js*/
 Util.Objects = u.o = new Object();
 Util.init = function(scope) {
 	var i, node, nodes, object;
@@ -1198,6 +1217,9 @@ Util.init = function(scope) {
 		}
 	}
 }
+
+
+/*u-math.js*/
 Util.random = function(min, max) {
 	return Math.round((Math.random() * (max - min)) + min);
 }
@@ -1211,6 +1233,8 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
+
+/*u-preloader.js*/
 u.preloader = function(node, files, _options) {
 	var callback_preloader_loaded = "loaded";
 	var callback_preloader_loading = "loading";
@@ -1288,6 +1312,7 @@ u._queueLoader = function() {
 						if(typeof(this._queue._node[this._queue._callback_loaded]) == "function") {
 							this._queue._node[this._queue._callback_loaded](this._queue.nodes);
 						}
+						// 
 					}
 					u._queueLoader();
 				}
@@ -1333,6 +1358,9 @@ u._imageLoadDebug = function(event) {
 	u.bug("event:" + event.type);
 	u.xInObject(event);
 }
+
+
+/*u-request.js*/
 Util.createRequestObject = function() {
 	return new XMLHttpRequest();
 }
@@ -1533,6 +1561,7 @@ Util.validateResponse = function(response){
 		if(typeof(response.node[response.node[response.request_id].callback_response]) == "function") {
 			response.node[response.node[response.request_id].callback_response](object, response.request_id);
 		}
+		// 
 	}
 	else {
 		if(typeof(response.node.responseError) == "function") {
@@ -1543,6 +1572,9 @@ Util.validateResponse = function(response){
 		}
 	}
 }
+
+
+/*u-string.js*/
 Util.cutString = function(string, length) {
 	var matches, match, i;
 	if(string.length <= length) {
@@ -1612,6 +1644,8 @@ Util.upperCaseFirst = u.ucfirst = function(string) {
 Util.lowerCaseFirst = u.lcfirst = function(string) {
 	return string.replace(/^(.){1}/, function($1) {return $1.toLowerCase()});
 }
+
+/*u-system.js*/
 Util.browser = function(model, version) {
 	var current_version = false;
 	if(model.match(/\bedge\b/i)) {
@@ -1798,6 +1832,9 @@ Util.vendorPrefix = function(type) {
 	}
 	return Util.vendor_prefix;
 }
+
+
+/*u-timer.js*/
 Util.Timer = u.t = new function() {
 	this._timers = new Array();
 	this.setTimer = function(node, action, timeout, param) {
@@ -1868,6 +1905,9 @@ Util.Timer = u.t = new function() {
 		}
 	}
 }
+
+
+/*u-url.js*/
 Util.getVar = function(param, url) {
 	var string = url ? url.split("#")[0] : location.search;
 	var regexp = new RegExp("[\&\?\b]{1}"+param+"\=([^\&\b]+)");
@@ -1879,6 +1919,9 @@ Util.getVar = function(param, url) {
 		return "";
 	}
 }
+
+
+/*u-array-desktop_light.js*/
 if(!Array.prototype.unshift || new Array(1,2).unshift(0) != 3) {
 	Array.prototype.unshift = function(a) {
 		var b;
@@ -1919,6 +1962,8 @@ if(!Object.keys) {
 		return keys;
 	};
 }
+
+/*u-dom-desktop_ie10.js*/
 if(false && document.documentMode <= 10) {
 	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 		try {
@@ -1973,12 +2018,15 @@ if(false && document.documentMode <= 10) {
 		}
 	}
 }
+
+/*u-dom-desktop_light.js*/
 if(typeof(document.defaultView) == "undefined") {
 	Util.getComputedStyle = u.gcs = function(e, attribute) {
 		e.offsetHeight;
 		if(attribute == "opacity" && e._opacity != undefined) {
 			return e._opacity;
 		}
+		// 
 		if(document.body.currentStyle && attribute != "opacity") {
 			attribute = attribute.replace(/(-\w)/g, function(word){return word.replace(/-/, "").toUpperCase()});
 			if(e.currentStyle[attribute] == "medium") {
@@ -3204,6 +3252,9 @@ if(document.querySelector == undefined) {
 		return res;
 	}
 }
+
+
+/*u-events-desktop_light.js*/
 if(document.all && document.addEventListener == undefined) {
 	window.attachedEvents = {};
 	window.eventHandler = function(eid) {
@@ -3289,6 +3340,9 @@ if(document.all && document.addEventListener == undefined) {
 		}
 	}
 }
+
+
+/*u-geometry-desktop_light.js*/
 Util.actualWidth = u.actualW = function(node) {
 	var width = parseInt(u.gcs(node, "width"));
 	if(isNaN(width) || u.browser("opera", "<=9")) {
@@ -3357,6 +3411,9 @@ Util.pageScrollY = u.scrollY = function() {
 		return 0;
 	}
 }
+
+
+/*u-json-desktop_light.js*/
 if (typeof JSON !== 'object') {
     JSON = {};
 }
@@ -3538,6 +3595,9 @@ if (typeof JSON !== 'object') {
         };
     }
 }());
+
+
+/*u-preloader-desktop_light.js*/
 if(document.all || (new Image().onerror) === undefined) {
 	u.loadImage = function(node, src) {
 		var image = new Image();
@@ -3554,6 +3614,8 @@ if(document.all || (new Image().onerror) === undefined) {
 		image.src = src;
 	}
 }
+
+/*u-request-desktop_light.js*/
 if(typeof(window.XMLHttpRequest) == "undefined" || function(){return (typeof(window.XMLHttpRequest.addEventListener) != "function")}() || function(){try {new XMLHttpRequest().channel; return false;} catch(exception) {return true;}}()) {
 	Util.createRequestObject = function() {
 		var xmlhttp;
@@ -3614,6 +3676,9 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){return (typeof(win
 		}
 	}
 }
+
+
+/*u-string-desktop_light.js*/
 if(String.prototype.trim == undefined) {
 	String.prototype.trim = function() {
 		return this.replace(/^\s+|\s+$/g, "");
@@ -3627,43 +3692,4 @@ if(String.prototype.substr == undefined || "ABC".substr(-1,1) == "A") {
 		return this.substring(start_index, length);
 	};
 }
-
-
-/*ga.js*/
-u.ga_account = 'UA-49740096-1';
-u.ga_domain = 'manipulator.parentnode.dk';
-
-
-/*u-googleanalytics.js*/
-if(u.ga_account) {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.defer=true;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', u.ga_account, u.ga_domain);
-    ga('send', 'pageview');
-	u.stats = new function() {
-		this.pageView = function(url) {
-			ga('send', 'pageview', url);
-		}
-		this.event = function(node, action, label) {
-			ga('_trackEvent', location.href.replace(document.location.protocol + "//" + document.domain, ""), action, (label ? label : this.nodeSnippet(node)));
-		}
-		this.customVar = function(slot, name, value, scope) {
-			//       slot,		
-			//       name,		
-			//       value,	
-			//       scope		
-		}
-		this.nodeSnippet = function(e) {
-			if(e.textContent != undefined) {
-				return u.cutString(e.textContent.trim(), 20) + "(<"+e.nodeName+">)";
-			}
-			else {
-				return u.cutString(e.innerText.trim(), 20) + "(<"+e.nodeName+">)";
-			}
-		}
-	}
-}
-
 

@@ -573,7 +573,7 @@ body #selection_options ul.actions a.button:active {background-color: #313942;}
 }
 
 
-/*s-colorscheme-smartphone.css*/
+/*s-colorscheme.css*/
 * {color: #9b001c;}
 body {}
 #header .logo {color: #ef002a;}
@@ -597,7 +597,7 @@ body {}
 .download #navigation ul li.download {color: #9b001c;}
 
 
-/*s-pages-smartphone.css*/
+/*s-pages.css*/
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
 #content .scene.gettingstarted {}

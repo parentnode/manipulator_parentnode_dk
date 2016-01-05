@@ -642,7 +642,7 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 }
 
 
-/*s-pages-desktop.css*/
+/*s-pages.css*/
 #content .scene.front ul.modules {list-style: none; margin: 0; padding-left: 45px; padding-right: 45px; font-size: 0; text-align: center; width: auto;}
 #content .scene.front ul.modules li {display: inline-block; vertical-align: top; width: 108px; border-radius: 5px; 
 	background: #9b001c; margin: 0 5px 10px; padding: 0;
@@ -671,7 +671,7 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content .scene.milestones ul.todo li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
 
 
-/*s-colorscheme-desktop.css*/
+/*s-colorscheme.css*/
 * {color: #9b001c;}
 body {}
 #header .logo {color: #ef002a;}
@@ -692,7 +692,7 @@ body {}
 .download #navigation ul li.download {color: #9b001c;}
 
 
-/*s-pages-hovers-desktop.css*/
+/*s-pages-hovers.css*/
 #content ul.actions input.button.primary:hover,
 #content ul.actions a.button.primary:hover,
 #header ul.servicenavigation li.github:hover {background-color: #9b001c;}

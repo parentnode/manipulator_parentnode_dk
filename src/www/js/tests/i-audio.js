@@ -1,4 +1,4 @@
-Util.Objects["audio11"] = new function() {
+Util.Objects["audio1"] = new function() {
 	this.init = function(div) {
 
 		div.player = u.audioPlayer();
@@ -19,7 +19,7 @@ Util.Objects["audio11"] = new function() {
 }
 
 
-Util.Objects["audio21"] = new function() {
+Util.Objects["audio2"] = new function() {
 	this.init = function(div) {
 
 		div.player = u.audioPlayer({"playpause":true, "search":true});

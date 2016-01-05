@@ -333,13 +333,13 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 }
 
 
-/*s-pages-mobile.css*/
+/*s-pages.css*/
 #content .scene .usedby {display: none;}
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
 
 
-/*s-colorscheme-mobile.css*/
+/*s-colorscheme.css*/
 * {color: #9b001c;}
 body {}
 #header .logo {color: #ef002a;}
