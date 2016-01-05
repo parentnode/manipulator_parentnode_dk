@@ -403,6 +403,154 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.upperCaseFirst">
+				<div class="header">
+					<h3>Util.upperCaseFirst</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.upperCaseFirst</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.ucfirst</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">String</span> = 
+								Util.upperCaseFirst(
+									<span class="type">String</span> <span class="var">string</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Make first letter in word uppercase</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> string to perform case conversion on
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">String</span> string with first letter in uppercase</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.ucfirst("martin")</code>
+							<p>Returns "Martin"</p>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.toUpperCase</li>
+								<li>String.replace</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.lowerCaseFirst">
+				<div class="header">
+					<h3>Util.lowerCaseFirst</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.lowerCaseFirst</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.lcfirst</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">String</span> = 
+								Util.lowerCaseFirst(
+									<span class="type">String</span> <span class="var">string</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Make first letter in word lowercase</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> string to perform case conversion on
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">String</span> string with first letter in lowercase</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.lcfirst("ParentNode")</code>
+							<p>Returns "parentNode"</p>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.toLowerCase</li>
+								<li>String.replace</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
 			<!--div class="function" id="Util.stringOr">
 				<div class="header">
 					<h3>Util.stringOr</h3>

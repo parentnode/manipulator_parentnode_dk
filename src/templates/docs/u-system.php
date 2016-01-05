@@ -56,6 +56,8 @@
 									<h5>Options</h5>
 									<dl class="options">
 										<!-- specific options -->
+										<dt><span class="value">edge</span></dt>
+										<dd>Microsoft Edge</dd>
 										<dt><span class="value">ie</span></dt>
 										<dd>Internet Explorer</dd>
 										<dt><span class="value">explorer</span></dt>
@@ -106,6 +108,11 @@
 	
 							<p>returns version of Firefox if browser is Firefox, else false</p>
 						</div>
+						<div class="example">
+							<code>u.browser("ie,edge");</code>
+	
+							<p>returns true if browser is either IE or chrome</p>
+						</div>
 					</div>
 				
 					<div class="uses">
@@ -153,7 +160,10 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Check if browser has support for CSS <span class="var">property</span>.</p>
+						<p>
+							Check if browser has support for CSS <span class="var">property</span>.
+							Automatically looks for vendor prefixed method to provide support.
+						</p>
 					</div>
 
 					<div class="parameters">

@@ -230,8 +230,28 @@
 										<dd>Input value</dd>
 										<dt><span class="value">type</span></dt>
 										<dd>Input type</dd>
+										<dt><span class="value">options</span></dt>
+										<dd>Options for radiobuttons or selects</dd>
 										<dt><span class="value">class</span></dt>
 										<dd>Input class</dd>
+										<dt><span class="value">id</span></dt>
+										<dd>Input id</dd>
+										<dt><span class="value">max</span></dt>
+										<dd>Max length/date/number</dd>
+										<dt><span class="value">min</span></dt>
+										<dd>Min length/date/number</dd>
+										<dt><span class="value">pattern</span></dt>
+										<dd>Regular expression pattern to be matched</dd>
+										<dt><span class="value">required</span></dt>
+										<dd>Set the field required state</dd>
+										<dt><span class="value">disabled</span></dt>
+										<dd>Set the field to disabled</dd>
+										<dt><span class="value">readonly</span></dt>
+										<dd>Set the field to readonly</dd>
+										<dt><span class="value">hint_message</span></dt>
+										<dd>Text to be shown as hint</dd>
+										<dt><span class="value">error_message</span></dt>
+										<dd>Text to be shown on validation error</dd>
 									</dl>
 								</div>
 							</dd>

@@ -588,6 +588,8 @@
 					<span class="file">u-events.js</span> +
 					<span class="file">u-animation.js</span> +
 					<span class="file">u-animation-desktop_ie9.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> +
 					<span class="file">u-timer.js</span> +
 					<span class="file">u-geometry.js</span>
 				</dd>

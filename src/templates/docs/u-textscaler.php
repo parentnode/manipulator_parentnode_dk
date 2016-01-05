@@ -213,17 +213,7 @@
 				</dd>
 
 				<dt>desktop_light</dt>
-				<dd>
-					<span class="file">u-textscaler.js</span> + 
-					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_light.js</span> + 
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> + 
-					<span class="file">u-geometry.js</span> + 
-					<span class="file">u-geometry-desktop_light.js</span> + 
-					<span class="file">u-string.js</span> + 
-					<span class="file">u-string-desktop_light.js</span>
-				</dd>
+				<dd>not supported</dd>
 
 				<dt>tablet</dt>
 				<dd>
@@ -259,17 +249,7 @@
 				<dd>not supported</dd>
 
 				<dt>tv</dt>
-				<dd>
-					<span class="file">u-textscaler.js</span> + 
-					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_light.js</span> + 
-					<span class="file">u-events.js</span> + 
-					<span class="file">u-events-desktop_light.js</span> + 
-					<span class="file">u-geometry.js</span> + 
-					<span class="file">u-geometry-desktop_light.js</span> + 
-					<span class="file">u-string.js</span> + 
-					<span class="file">u-string-desktop_light.js</span>
-				</dd>
+				<dd>not tested</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>

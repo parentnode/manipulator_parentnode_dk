@@ -9,6 +9,10 @@
 		Just add your transition, using the shorthand function and state your change. Declare a callback function to be notified when
 		transition has ended.
 	</p>
+	<p class="note">
+		Animation support for desktop_light browsers has been disabled because the development overhead exceeded the actual
+		value. Animations are still supported in IE9.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
@@ -41,7 +45,8 @@
 						<h4>Description</h4>
 						<p>
 							Set CSS3 transition for node, with timer-based fallback for browsers with no CSS transition support. 
-							Declare node.transitioned to receive callback, when transition is done.
+							Declare node.transitioned to receive callback, when transition is done. Transitions (and declared callback functions) 
+							are automatically removed when done.
 						</p>
 						<p>
 							The transition duration in milliseconds, is stored in node.duration.
@@ -983,6 +988,70 @@
 				</div>
 			</div>
 
+			<div class="function" id="Util.Animation.cancelAnimationFrame">
+				<div class="header">
+					<h3>Util.Animation.cancelAnimationFrame</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Animation.cancelAnimationFrame</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Animation.cancelAnimationFrame(
+									<span class="type">String</span> <span class="var">id</span>,
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Cancels animation frame with <span class="var">id</span> (id is returned when requesting animation frame).</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">id</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> id of animation frame
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples.</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
 			<div class="function" id="Util.Animation.support3d">
 				<div class="header">
 					<h3>Util.Animation.support3d</h3>
@@ -1139,7 +1208,6 @@
 				</div>
 			</div-->
 
-
 		</div>
 	</div>
 
@@ -1210,6 +1278,7 @@
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie10.js</span> +
 					<span class="file">u-math.js</span>
 				</dd>
 

@@ -302,6 +302,7 @@
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">String</span> <span class="var">name</span>, 
 									<span class="type">String</span> <span class="var">value</span> 
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								);
 							</dd>
 						</dl>
@@ -333,6 +334,26 @@
 							<dd>
 								<div class="summary">
 									<span class="type">String</span> Cookie value
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Additional node reference options
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">ignore_classnames</span></dt>
+										<dd>
+											List of classnames to ignore in node reference
+										</dd>
+
+										<dt><span class="value">ignore_classvars</span></dt>
+										<dd>
+											Remove any classvars (x:y) classnames in node reference. Default <span class="value">false</span>. 
+										</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -388,6 +409,7 @@
 								Util.getNodeCookie(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									[<span class="type">String</span> <span class="var">name</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								);
 							</dd>
 						</dl>
@@ -412,6 +434,26 @@
 							<dd>
 								<div class="summary">
 									<span class="type">String</span> Optional Cookie name
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Additional node reference options
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">ignore_classnames</span></dt>
+										<dd>
+											List of classnames to ignore in node reference
+										</dd>
+
+										<dt><span class="value">ignore_classvars</span></dt>
+										<dd>
+											Remove any classvars (x:y) classnames in node reference. Default <span class="value">false</span>. 
+										</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -468,6 +510,7 @@
 								Util.deleteNodeCookie(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									[<span class="type">String</span> <span class="var">name</span>]
+									[, <span class="type">JSON</span> <span class="var">_options</span>]
 								);
 							</dd>
 						</dl>
@@ -492,6 +535,26 @@
 							<dd>
 								<div class="summary">
 									<span class="type">String</span> Optional Cookie name
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Additional node reference options
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">ignore_classnames</span></dt>
+										<dd>
+											List of classnames to ignore in node reference
+										</dd>
+
+										<dt><span class="value">ignore_classvars</span></dt>
+										<dd>
+											Remove any classvars (x:y) classnames in node reference. Default <span class="value">false</span>. 
+										</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
