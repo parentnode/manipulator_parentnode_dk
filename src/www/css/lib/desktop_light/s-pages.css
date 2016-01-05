@@ -9,3 +9,6 @@
 #content .scene.browsersupport {padding-top: 25px;}
 #content .scene.browsersupport h2 {padding-bottom: 15px;}
 
+/* ARTICLES */
+#content .scene .article dl.info {display: none;}
+

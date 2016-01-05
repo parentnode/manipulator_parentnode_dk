@@ -4,3 +4,5 @@
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
 
+/* ARTICLES */
+#content .scene .article dl.info {display: none;}
