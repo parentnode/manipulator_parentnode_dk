@@ -11,4 +11,6 @@ $this->headerIncludes(array(
 	<div class="tests i:flash"></div>
 
 </div>
-<div class="comments"></div>
+<div class="comments">
+	<p>IE11: Flash content may not play due to system settings - haven't found good workaround.</p>
+</div>

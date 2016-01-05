@@ -18,4 +18,6 @@ $this->headerIncludes(array(
 	</div>
 
 </div>
-<div class="comments"></div>
+<div class="comments">
+	<p>IE6: Windows events does not work in IE6 - only u.e.addDOMReadyEvent test works in this browser</p>
+</div>

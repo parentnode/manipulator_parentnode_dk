@@ -19,7 +19,7 @@ Util.Objects["system"] = new function() {
 		// edge
 		if(u.browser("edge")) {
 			u.ae(div, "div", {"class":"testpassed", "html":"Edge: correct ("+u.browser("edge")+")"});
-			current_browser = "ie";
+			current_browser = "edge";
 		}
 		else {
 			u.ae(div, "div", {"class":"testfailed", "html":"Edge: error ("+u.browser("edge")+")"});
@@ -327,9 +327,9 @@ Util.Objects["system"] = new function() {
 		u.ae(div, "p", {"html":"All should be green"});
 		// vendorPrefix
 		if(
-			(u.vendorPrefix() == "webkit" && u.browser("webkit")) ||
+			(u.vendorPrefix() == "webkit" && u.browser("webkit,edge")) ||
 			(u.vendorPrefix() == "Moz" && u.browser("firefox")) ||
-			(u.vendorPrefix() == "ms" && u.browser("ie,edge")) ||
+			(u.vendorPrefix() == "ms" && u.browser("ie")) ||
 			(u.vendorPrefix() == "O" && u.browser("opera")) ||
 			(!u.vendorPrefix())
 		) {

@@ -106,9 +106,11 @@ Util.Objects["formbuilder"] = new function() {
 		field = u.qs("div.field.email", fieldset);
 		label = u.qs("label", field);
 		// have to select by name attribute as older browsers won't set the HTML5 types
-		input = u.qs("input[name=name_email]", field);
+		input = u.qs("input[name='name_email']", field);
 
 		var input_email = {"input":input, "label":label, "field":field};
+
+		u.bug(field + ", " + label + ", " + input)
 
 		if(field && label && input &&
 			u.hc(field, "class_email") && 
@@ -134,7 +136,7 @@ Util.Objects["formbuilder"] = new function() {
 		field = u.qs("div.field.password", fieldset);
 		label = u.qs("label", field);
 		// have to select by name attribute as older browsers won't set the HTML5 types
-		input = u.qs("input[name=name_password]", field);
+		input = u.qs("input[name='name_password']", field);
 
 		var input_password = {"input":input, "label":label, "field":field};
 
@@ -389,7 +391,11 @@ Util.Objects["formbuilder"] = new function() {
 
 		u.bug("focus:" + form.fields["name_checkbox"].val())
 
-//		u.bug(form.fields["name_string"] + ", " + form.fields["name_password"]._label);
+		// IE6 debugging
+		// u.bug(form.fields["name_password"].field.innerHTML)
+		// u.ae(form, "div", {"for":"me", "id":"idd"});
+		// u.bug("query:" + u.qs("[for='me']"))
+		// u.bug(form.fields["name_string"]._label + ", " + form.fields["name_password"]._label);
 
 		if(
 			form.fields["name_string"] == input_string.input &&

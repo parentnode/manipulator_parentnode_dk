@@ -13,6 +13,8 @@ $this->headerIncludes(array(
 </div>
 <div class="comments">
 	<p>
+		IE6: keyboard shortcuts doesn't work (possibly due to window events of IE6 - see events-browser)
+	<p>
 		Should not work on hidden nodes
 	</p>
 	<p>

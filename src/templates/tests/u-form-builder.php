@@ -11,4 +11,7 @@ $this->headerIncludes(array(
 
 </div>
 
-<div class="comments"></div>
+<div class="comments">
+	<p>IE6: u.f.init error: input._label reference does not work, because sizzle will not find labels with for-attribute.</p>
+	
+</div>

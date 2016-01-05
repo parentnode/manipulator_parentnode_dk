@@ -4,6 +4,8 @@ Util.Objects["eventsBrowser"] = new function() {
 
 		var node;
 
+		//u.bug_console_only = false;
+
 		// u.e.addDOMReadyEvent / u.e.addOnloadEvent
 		node = u.qs("div.init.error", div)
 		if(!div.initialized) {
@@ -24,9 +26,11 @@ Util.Objects["eventsBrowser"] = new function() {
 		div.node = u.ae(div, "div", {"class":"testfailed", "html":"u.e.addWindowMoveEvent: waiting"});
 		div.node.callback = 0;
 		div.node.function_string = function(event) {
+			u.bug("callback")
 			this.string_callback = true;
 		}
 		div.node.funtion_reference = function(event) {
+			u.bug("callback")
 
 			if(this.string_callback) {
 				u.rc(this, "testfailed");

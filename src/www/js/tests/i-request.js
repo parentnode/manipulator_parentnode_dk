@@ -3,11 +3,14 @@ Util.Objects["request"] = new function() {
 
 		div.test_results = {};
 
+		//u.bug_console_only = false;
+
 		var tests = u.qsa("div.test", div);
 		var i, node;
 		for(i = 0; node = tests[i]; i++) {
 
 			node.response = function(response, request_id) {
+				u.bug("response:" + this.url)
 				if(response.isHTML && !this[request_id].request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "testpassed");
 					this.innerHTML = u.qs(".test", response).innerHTML
@@ -31,6 +34,7 @@ Util.Objects["request"] = new function() {
 				}
 			}
 			node.responseError = function(response) {
+				u.bug("error response:" + this.url)
 
 				if(!this.shouldfail) {
 					u.ac(this, "testfailed");
@@ -77,6 +81,7 @@ Util.Objects["request"] = new function() {
 				}
 			}
 
+			u.bug("request:" + node.url)
 			u.request(node, node.url, settings);
 		}
 
