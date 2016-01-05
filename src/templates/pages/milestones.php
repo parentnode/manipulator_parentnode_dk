@@ -36,8 +36,8 @@ $this->pageTitle("Where we are heading ...");
 				<li>Add general "getting started" examples</li>
 				<li>Fix: Flash in IE11 (not playing)</li>
 				<li>Fix: Video pause doesn't work in Simple video test for IE11</li>
+				<li>Fix: Window events buggy in IE6</li>
 				<li>Add page model introduction and documentation</li>
-				<li>Documentation for: u.lcfirst and u.ucfirst</li>
 				<li>Documentation for window resize, scroll, start, move and end event</li>
 			</ul>
 
@@ -77,11 +77,6 @@ $this->pageTitle("Where we are heading ...");
 				<li>Replace timerbased fallback with animation frame</li>
 			</ul>
 
-			<h3>Cookie</h3>
-			<ul class="todo">
-				<li>Strip nodeCookie-identification for any init-values (or anything with : in it) - Looked at it, but failed to remember why this would be a good idea?</li>
-			</ul>
-
 			<h3>Events</h3>
 			<ul class="todo">
 				<li>Doubleclick for IE8 (it does not allow for two mousedown events, probably reserved for built-in dblclick)</li>
@@ -94,24 +89,17 @@ $this->pageTitle("Where we are heading ...");
 
 			<h3>Form</h3>
 			<ul class="todo">
-				<li>Global form error callback + individual input error callback - Included in 0.9.1</li>
 				<li>Dropdown (autocomplete input, with select features)</li>
 				<li>Designed checkbox (add interaction classes for easy visualisation)</li>
 				<li>Designed radiobutton (add interaction classes for easy visualisation)</li>
 				<li>Designed datepicker</li>
 				<li>HTML Editor - test update/change callbacks</li>
-			</ul>
-
-			<h3>History</h3>
-			<ul class="todo">
-				<li>Enable mutiple listeners (by using real eventlisteners)</li>
-				<li>Shift u.navigation -> node.navigate to u.h.history (seems like it belongs there)</li>
+				<li>Add useful CSS to Tablet test module for improved testing</li>
 			</ul>
 
 			<h3>Navigation</h3>
 			<ul class="todo">
 				<li>Hardcoded callbacks</li>
-				<li>Shift node.navigate to u.h.history (seems like it belongs there)</li>
 			</ul>
 
 			<h3>Preloader</h3>
@@ -125,7 +113,6 @@ $this->pageTitle("Where we are heading ...");
 			<ul class="todo">
 				<li>Test: responseError callback is (perhaps) never invoked because response object is caught by script-request evaluation</li>
 				<li>Make it possible to set responseError callback name</li>
-				<li>Test: new onreadystatechange event handling in older IEs - DONE</li>
 			</ul>
 
 			<h3>ScrollTo</h3>
@@ -139,24 +126,12 @@ $this->pageTitle("Where we are heading ...");
 				<li>Update nesting drag'n'drop detection</li>
 			</ul>
 
-			<h3>Template</h3>
-			<ul class="todo">
-				<li>Add Object templating as implementet in the Axpoint project</li>
-			</ul>
-
-
-
 
 			<h2>Version 1.0</h2>
 
 			<h3>Audio</h3>
 			<ul class="todo">
 				<li>desktop_light player out of BETA</li>
-			</ul>
-
-			<h3>Detector</h3>
-			<ul class="todo">
-				<li>Simplified browser segmented detection, deduced from Detector API, implemented with Regular Expectations.</li>
 			</ul>
 
 			<h3>Layover</h3>
@@ -191,12 +166,6 @@ $this->pageTitle("Where we are heading ...");
 				<li>Extend callback options</li>
 				<li>Implement additional layout options</li>
 				<li>Finalize, add tests and documentation</li>
-			</ul>
-
-			<h3>Support</h3>
-			<ul class="todo">
-				<li>Provide JavaScript feature detection</li>
-				<li>Feature support test functions</li>
 			</ul>
 
 			<h3>Video</h3>

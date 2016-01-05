@@ -20,19 +20,32 @@ $this->pageTitle("It's just improvements");
 			<h2>Version 0.9.1</h2>
 			<p>
 				Version 0.9.1 primarily updates the library to the new Detector v3 segmentation model. 
-				The template module is out of BETA.
 				It also includes many bug-fixes and minor extensions of existing modules.
+				Oh, and the template module is out of BETA.
 			</p>
 			<ul class="changes">
-				<li>
-					New Manipulator bundle builder
+				<li>R
+					enamed animation functions setOpacity, setHeight, setWidth, setBgColor 
+					and setBgPos to opacity, height, width, bgColor and bgPos.
 				</li>
-				<li>Enhance drag-dropout functionality to avoid dropping smaller draggable elements</li>
-				<li>Mouseover and mouseout events (and touch equivalent) shorthand functions (u.e.hover)</li>
-				<li>Improved move detection for click and drag to ensure clicks are not cancelled by shaking hands</li>
-				<li>u.nodeWithin added</li>
 				<li>
-					Automatic vendor detection in u.as and u.ass.
+					Enhance drag-dropout functionality to avoid dropping smaller 
+					draggable elements.
+				</li>
+				<li>
+					Major update to History and Navigation. History can be used to implement custom
+					navigation flows and allows mutiple "url-change" listeners, with callback to multiple
+					nodes. Navigation now works specifically to implement the Manipulator Ajax based Page model.
+				</li>
+				<li>
+					Improved move detection for click and drag to ensure clicks are not 
+					cancelled by shaking hands
+				</li>
+				<li>
+					u.nodeWithin added to help determine if a node is within scope.
+				</li>
+				<li>
+					Automatic vendor detection in u.as and u.ass and all animation functions.
 				</li>
 				<li>
 					Rewritten window resize, scroll, start, move and end event handlers with callback to node
@@ -42,10 +55,12 @@ $this->pageTitle("It's just improvements");
 					u.template out of BETA. Basic template (JSON to HTML/JSON) parser. 
 				</li>
 				<li>
-					u.e.hover implements mouseover/mouseout events with true mouseout detection (ignoring mouseout on childNodes).
+					u.e.hover implements mouseover/mouseout events with true mouseout detection 
+					(ignoring mouseout on childNodes).
 				</li>
 				<li>
-					Improvements to u.svg. Now supporting id, class and title on svg element. Fixed bug in svg_cache, which
+					Improvements to u.svg. Now supporting id, class and title on svg element. 
+					Fixed bug in svg_cache, which
 					caused an error when using id for svg_cache.
 				</li>
 				<li>
@@ -55,11 +70,14 @@ $this->pageTitle("It's just improvements");
 					Added new u-fontsready module (beta), for testing if webfonts are loaded.
 				</li>
 				<li>
-					Enhanced text-scaler to support height based scaling. Also allowed for simplyfied global min/max width/height 
-					and unit settings.
+					Added new u-notification module (beta), for central notification control.
 				</li>
 				<li>
-					New transitioned callback model.
+					Enhanced text-scaler to support height based scaling. Also allowed for simplyfied 
+					global min/max width/height and unit settings.
+				</li>
+				<li>
+					New transitioned callback model allowing custom callbacks.
 				</li>
 				<li>
 					u.a.to animates svg paths and polygons.
@@ -72,13 +90,14 @@ $this->pageTitle("It's just improvements");
 					validationPassed and validationFailed.
 				</li>
 				<li>
-					Extended nodeCookie reference options.
+					Extended nodeCookie node reference options.
 				</li>
 				<li>
 					Added Util.upperCaseFirst and Util.lowerCaseFirst string functions</li>
 				</li>
 				<li>
-					Updated vendor prefix detection to avoid using prefix when not required.
+					Updated vendor prefix detection to avoid using prefix when not required and seamless verdor
+					prefix support.
 				</li>
 			</ul>
 
