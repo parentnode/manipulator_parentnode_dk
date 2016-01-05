@@ -31,12 +31,12 @@ $this->pageTitle("Where we are heading ...");
 
 			<h3>General</h3>
 			<ul class="todo">
-				<li>Test <em>page</em> variable missing availability in older browsers (FX 5 and others - used in u.ce) - DONE (problem was automatic variable creation of node#id in newer browsers)</li>
 				<li>Test entire library using strict warnings to identify any undeclared variables</li>
 				<li>Align callback syntax and methodology across all functions.</li>
 				<li>Add general "getting started" examples</li>
+				<li>Fix: Flash in IE11 (not playing)</li>
+				<li>Fix: Video pause doesn't work in Simple video test for IE11</li>
 				<li>Add page model introduction and documentation</li>
-				<li>Add "Fork me on Github" to this website - DONE</li>
 				<li>Documentation for: u.lcfirst and u.ucfirst</li>
 				<li>Documentation for window resize, scroll, start, move and end event</li>
 			</ul>
