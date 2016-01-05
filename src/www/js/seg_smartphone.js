@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
-js-merged @ 2016-01-05 05:30:55
+js-merged @ 2016-01-06 12:53:25
 */
 
 /*seg_smartphone_include.js*/
@@ -3889,7 +3889,7 @@ Util.browser = function(model, version) {
 			current_version = navigator.userAgent.match(/Edge\/(\d+)/i)[1];
 		}
 	}
-	else if(model.match(/\bexplorer\b|\bie\b/i)) {
+	if(model.match(/\bexplorer\b|\bie\b/i)) {
 		if(window.ActiveXObject && navigator.userAgent.match(/MSIE (\d+.\d)/i)) {
 			current_version = navigator.userAgent.match(/MSIE (\d+.\d)/i)[1];
 		}
@@ -3897,27 +3897,27 @@ Util.browser = function(model, version) {
 			current_version = navigator.userAgent.match(/Trident\/[\d+]\.\d[^$]+rv:(\d+.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bfirefox\b|\bgecko\b/i) && !u.browser("ie,edge")) {
+	if(model.match(/\bfirefox\b|\bgecko\b/i) && !u.browser("ie,edge")) {
 		if(navigator.userAgent.match(/Firefox\/(\d+\.\d+)/i)) {
 			current_version = navigator.userAgent.match(/Firefox\/(\d+\.\d+)/i)[1];
 		}
 	}
-	else if(model.match(/\bwebkit\b/i)) {
+	if(model.match(/\bwebkit\b/i)) {
 		if(navigator.userAgent.match(/WebKit/i) && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/AppleWebKit\/(\d+.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bchrome\b/i)) {
+	if(model.match(/\bchrome\b/i)) {
 		if(window.chrome && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/Chrome\/(\d+)(.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bsafari\b/i)) {
+	if(model.match(/\bsafari\b/i)) {
 		if(!window.chrome && document.body.style.webkitTransform != undefined && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/Version\/(\d+)(.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bopera\b/i)) {
+	if(model.match(/\bopera\b/i)) {
 		if(window.opera) {
 			if(navigator.userAgent.match(/Version\//)) {
 				current_version = navigator.userAgent.match(/Version\/(\d+)(.\d)/i)[1];
@@ -4033,7 +4033,7 @@ Util.vendorProperty = function(property) {
 	return Util.vendor_properties[property];
 }
 Util.vendor_prefix = false;
-Util.vendorPrefix = function(type) {
+Util.vendorPrefix = function() {
 	if(Util.vendor_prefix === false) {
 		Util.vendor_prefix = "";
 		if(document.documentElement && typeof(window.getComputedStyle) == "function") {
