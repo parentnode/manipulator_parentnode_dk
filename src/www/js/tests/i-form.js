@@ -2,6 +2,9 @@
 Util.Objects["formIndividual"] = new function() {
 	this.init = function(div) {
 
+//		u.bug_console_only = false;
+
+
 		var forms = u.qsa("form", div);
 		var form, i;
 		for(i = 0; form = forms[i]; i++) {
