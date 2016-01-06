@@ -17,6 +17,17 @@ $this->pageTitle("It's just improvements");
 
 		<div class="articlebody" itemprop="articleBody">
 
+			<h2>Version 0.9.2</h2>
+			<p>
+				Version 0.9.2 is work in progress
+			</p>
+			<ul class="changes">
+				<li>
+					u.template: Allow quotes in JSON source
+				</li>
+			</ul>
+
+
 			<h2>Version 0.9.1</h2>
 			<p>
 				Version 0.9.1 primarily updates the library to the new Detector v3 segmentation model. 
@@ -24,8 +35,8 @@ $this->pageTitle("It's just improvements");
 				Oh, and the template module is out of BETA.
 			</p>
 			<ul class="changes">
-				<li>R
-					enamed animation functions setOpacity, setHeight, setWidth, setBgColor 
+				<li>
+					Renamed animation functions setOpacity, setHeight, setWidth, setBgColor 
 					and setBgPos to opacity, height, width, bgColor and bgPos.
 				</li>
 				<li>
