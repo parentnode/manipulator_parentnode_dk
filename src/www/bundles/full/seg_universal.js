@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-04 11:13:53
+Manipulator v0.9.1-full Copyright 2015 http://manipulator.parentnode.dk
+js-merged @ 2016-01-06 01:09:59
 */
 
 /*seg_universal_include.js*/
@@ -8,7 +8,7 @@ js-merged @ 2016-01-04 11:13:53
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = 0.9;
+	u.version = "0.9.1";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};this.customVar = function(){};}
 }
@@ -225,10 +225,6 @@ Util.Animation = u.a = new function() {
 	this.removeTransform = function(node) {
 		u.as(node, "transform", "none");
 	}
-	// 
-	// 	
-	// 	
-	// 	
 	this.translate = function(node, x, y) {
 		if(this.support3d()) {
 			u.as(node, "transform", "translate3d("+x+"px, "+y+"px, 0)");
@@ -4794,10 +4790,10 @@ Util.browser = function(model, version) {
 	var current_version = false;
 	if(model.match(/\bedge\b/i)) {
 		if(navigator.userAgent.match(/Windows[^$]+Gecko[^$]+Edge\/(\d+.\d)/i)) {
-			current_version = navigator.userAgent.match(/Edge\/(\d+.\d)/i)[1];
+			current_version = navigator.userAgent.match(/Edge\/(\d+)/i)[1];
 		}
 	}
-	else if(model.match(/\bexplorer\b|\bie\b/i)) {
+	if(model.match(/\bexplorer\b|\bie\b/i)) {
 		if(window.ActiveXObject && navigator.userAgent.match(/MSIE (\d+.\d)/i)) {
 			current_version = navigator.userAgent.match(/MSIE (\d+.\d)/i)[1];
 		}
@@ -4805,27 +4801,27 @@ Util.browser = function(model, version) {
 			current_version = navigator.userAgent.match(/Trident\/[\d+]\.\d[^$]+rv:(\d+.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bfirefox\b|\bgecko\b/i) && !u.browser("ie,edge")) {
+	if(model.match(/\bfirefox\b|\bgecko\b/i) && !u.browser("ie,edge")) {
 		if(navigator.userAgent.match(/Firefox\/(\d+\.\d+)/i)) {
 			current_version = navigator.userAgent.match(/Firefox\/(\d+\.\d+)/i)[1];
 		}
 	}
-	else if(model.match(/\bwebkit\b/i)) {
+	if(model.match(/\bwebkit\b/i)) {
 		if(navigator.userAgent.match(/WebKit/i) && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/AppleWebKit\/(\d+.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bchrome\b/i)) {
+	if(model.match(/\bchrome\b/i)) {
 		if(window.chrome && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/Chrome\/(\d+)(.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bsafari\b/i)) {
+	if(model.match(/\bsafari\b/i)) {
 		if(!window.chrome && document.body.style.webkitTransform != undefined && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/Version\/(\d+)(.\d)/i)[1];
 		}
 	}
-	else if(model.match(/\bopera\b/i)) {
+	if(model.match(/\bopera\b/i)) {
 		if(window.opera) {
 			if(navigator.userAgent.match(/Version\//)) {
 				current_version = navigator.userAgent.match(/Version\/(\d+)(.\d)/i)[1];
@@ -4941,7 +4937,7 @@ Util.vendorProperty = function(property) {
 	return Util.vendor_properties[property];
 }
 Util.vendor_prefix = false;
-Util.vendorPrefix = function(type) {
+Util.vendorPrefix = function() {
 	if(Util.vendor_prefix === false) {
 		Util.vendor_prefix = "";
 		if(document.documentElement && typeof(window.getComputedStyle) == "function") {
@@ -6254,7 +6250,7 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
-					if(!attribute.match(/^(class|type|value|html)$/)) {
+					if(!attribute.match(/^(class|type|value|html|checked)$/)) {
 						node.setAttribute(attribute, attributes[attribute]);
 					}
 				}
@@ -6269,6 +6265,9 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				if(attributes["value"]) {
 					node.value = attributes["value"];
+				}
+				if(attributes["checked"]) {
+					node.checked = attributes["checked"];
 				}
 				if(attributes["html"]) {
 					node.innerHTML = attributes["html"];
@@ -6314,6 +6313,9 @@ if(document.all && document.addEventListener == undefined) {
 			if(attributes) {
 				if(attributes["value"]) {
 					node.value = attributes["value"];
+				}
+				if(attributes["checked"]) {
+					node.checked = attributes["checked"];
 				}
 				if(attributes["html"]) {
 					node.innerHTML = attributes["html"];
@@ -7863,7 +7865,17 @@ if(typeof(window.XMLHttpRequest) == "undefined" || function(){return (typeof(win
 			wrapper.open = function(method, url, async) {
 				this.async = async;
 				url += (url.match(/\?/) ? "&" : "?") + "refresh_activex=" + u.randomString();
-				this.xmlhttp.open(method, url, async);
+				try {
+					this.xmlhttp.open(method, url, async);
+				}
+				catch(exception) {
+					if(typeof(wrapper.statechanged) == "function") {
+						this.status = 400;
+						this.IEreadyState = true;
+						this.statechanged();
+						this.parentNode.removeChild(wrapper);
+					}
+				}
 			}
 			wrapper.send = function(params) {
 				this.xmlhttp.send(params);
