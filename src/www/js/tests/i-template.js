@@ -15,7 +15,7 @@ Util.Objects["template"] = new function() {
 				"image_extra":"/img/test-400x250.png"
 			},
 			{
-				"text":"Martin 2",
+				"text":'Martin "2"',
 				"url":"/test/this/url2",
 				"url_second":"/also/test/this/url2",
 				"alt":"Alt text2",
@@ -60,6 +60,7 @@ Util.Objects["template"] = new function() {
 		// check if it seems correct
 		var control_children = u.qsa("li", ul);
 		var images_1 = u.qsa("img", control_children[1]);
+		// u.bug("test:" + (u.text(control_children[2]) == "Martin \\\"2\\\""));
 //		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + u.qs("img", control_children[1]).src + ", " + nodes_length + ", " + u.text(control_children[2]))
 		if(
 			control_children.length == 5 &&
@@ -67,7 +68,7 @@ Util.Objects["template"] = new function() {
 			u.qsa("img", control_children[1])[0].src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
 			u.qsa("img", control_children[1])[1].src == location.protocol+"//" + document.domain + "/img/test-400x250.png" &&
 			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
-			u.text(control_children[2]) == "Martin 2"
+			u.text(control_children[2]) == "Martin \\\"2\\\""
 
 		) {
 
