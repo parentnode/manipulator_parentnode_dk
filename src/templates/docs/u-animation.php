@@ -901,7 +901,7 @@
 				</div>
 			</div>
 
-			<div class="function" id="Util.Animation.requestAnimationFrame">
+			<!--div class="function" id="Util.Animation.requestAnimationFrame">
 				<div class="header">
 					<h3>Util.Animation.requestAnimationFrame</h3>
 				</div>
@@ -986,9 +986,9 @@
 					</div>
 
 				</div>
-			</div>
+			</div-->
 
-			<div class="function" id="Util.Animation.cancelAnimationFrame">
+			<!--div class="function" id="Util.Animation.cancelAnimationFrame">
 				<div class="header">
 					<h3>Util.Animation.cancelAnimationFrame</h3>
 				</div>
@@ -1050,7 +1050,7 @@
 					</div>
 
 				</div>
-			</div>
+			</div-->
 
 			<div class="function" id="Util.Animation.support3d">
 				<div class="header">
