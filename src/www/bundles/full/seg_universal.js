@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2016-01-06 01:09:59
+js-merged @ 2016-01-12 09:43:39
 */
 
 /*seg_universal_include.js*/
@@ -279,13 +279,14 @@ Util.Animation = u.a = new function() {
 	// 	
 	this._animationqueue = {};
 	this.requestAnimationFrame = function(node, callback, duration) {
-		var start = new Date().getTime();
+		if(!u.a.__animation_frame_start) {
+			u.a.__animation_frame_start = Date.now();
+		}
 		var id = u.randomString();
 		u.a._animationqueue[id] = {};
 		u.a._animationqueue[id].id = id;
 		u.a._animationqueue[id].node = node;
 		u.a._animationqueue[id].callback = callback;
-		u.a._animationqueue[id].start = start;
 		u.a._animationqueue[id].duration = duration;
 		u.t.setTimer(u.a, function() {u.a.finalAnimationFrame(id)}, duration);
 		if(!u.a._animationframe) {
@@ -295,7 +296,10 @@ Util.Animation = u.a = new function() {
 				var id, animation;
 				for(id in u.a._animationqueue) {
 					animation = u.a._animationqueue[id];
-					animation.node[animation.callback]((timestamp-animation.start) / animation.duration);
+					if(!animation["__animation_frame_start_"+id]) {
+						animation["__animation_frame_start_"+id] = timestamp;
+					}
+					animation.node[animation.callback]((timestamp-animation["__animation_frame_start_"+id]) / animation.duration);
 				}
 				if(Object.keys(u.a._animationqueue).length) {
 					u.a._requestAnimationId = window._requestAnimationFrame(u.a._animationframe);
@@ -309,6 +313,7 @@ Util.Animation = u.a = new function() {
 	}
 	this.finalAnimationFrame = function(id) {
 		var animation = u.a._animationqueue[id];
+		animation["__animation_frame_start_"+id] = false;
 		animation.node[animation.callback](1);
 		if(typeof(animation.node.transitioned) == "function") {
 			animation.node.transitioned({});
@@ -324,6 +329,7 @@ Util.Animation = u.a = new function() {
 		}
 		if(u.a._requestAnimationId) {
 			window._cancelAnimationFrame(u.a._requestAnimationId);
+			u.a.__animation_frame_start = false;
 			u.a._requestAnimationId = false;
 		}
 	}
@@ -5056,21 +5062,11 @@ u.template = function(template, json, _options) {
 	// 
 					string += item_template.replace(/\{(.+?)\}/g, 
 						function(string) {
-							if(string == "{children}") {
-								if(json[_item].children && json[_item].children.length) {
-									var parent_node = template.parentNode.nodeName.toLowerCase();
-									var parent_class = template.parentNode.className;
-									return '<'+parent_node+' class="'+parent_class+'">'+u.template(template, json[_item].children)+'</'+parent_node+'>';
-								}
-								else {
-									return "";
-								}
-							}
-							else if(json[_item][string.replace(/[\{\}]/g, "")]) {
+							if(json[_item][string.replace(/[\{\}]/g, "")]) {
 								if(json[_item][string.replace(/[\{\}]/g, "")] === true) {
 									return "true";
 								}
-								return json[_item][string.replace(/[\{\}]/g, "")];
+								return json[_item][string.replace(/[\{\}]/g, "")].replace(/(\"|\')/g, "\\$1");
 							}
 							else if(json[_item][string.replace(/[\{\}]/g, "")] === false) {
 								return "false";
@@ -5084,7 +5080,7 @@ u.template = function(template, json, _options) {
 			}
 		}
 		else {
-			string += template_string.replace(/\{(.+?)\}/g, function(string) {if(json[string.replace(/[\{\}]/g, "")]) {return json[string.replace(/[\{\}]/g, "")]}else{return ""}});
+			string += template_string.replace(/\{(.+?)\}/g, function(string) {if(json[string.replace(/[\{\}]/g, "")]) {return json[string.replace(/[\{\}]/g, "")].replace(/(\"|\')/g, "\\$1")}else{return ""}});
 		}
 	}
 	if(type_template == "HTML_STRING" || type_template == "HTML") {
