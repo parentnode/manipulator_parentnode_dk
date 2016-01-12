@@ -338,6 +338,8 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
 #content .scene .article dl.info {display: none;}
+#content .scene.milestones div.todolists ul.todolists {list-style: none; padding-left: 0; padding-right: 0; margin: 0;}
+#content .scene.milestones div.todolists ul.todolists li.todolist h2 {padding-top: 20px;}
 
 
 /*s-colorscheme.css*/
