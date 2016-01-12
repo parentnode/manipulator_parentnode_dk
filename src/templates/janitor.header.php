@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<?= $this->language() ?>">
 <head>
-	<!-- (c) & (p) parentNode.dk 2009-2015 //-->
+	<!-- (c) & (p) parentNode.dk 2009-2016 //-->
 	<!-- All material protected by copyrightlaws, as if you didnt know //-->
 	<!-- If you want to help build the ultimate frontend-centered platform, visit parentnode.dk -->
 	<title><?= $this->pageTitle() ?></title>
@@ -11,14 +11,16 @@
 	<meta name="viewport" content="initial-scale=1, user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
 <? if(session()->value("dev")) { ?>
-	<link type="text/css" rel="stylesheet" media="all" href="/janitor/css/lib/seg_<?= $this->segment() ?>_include.css" />
-	<script type="text/javascript" src="/janitor/js/lib/seg_<?= $this->segment() ?>_include.js"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="/janitor/css/lib/seg_<?= $this->segment(array("type" => "janitor")) ?>_include.css" />
+	<script type="text/javascript" src="/janitor/js/lib/seg_<?= $this->segment(array("type" => "janitor")) ?>_include.js"></script>
 <? } else { ?>
-	<link type="text/css" rel="stylesheet" media="all" href="/janitor/css/seg_<?= $this->segment() ?>.css" />
-	<script type="text/javascript" src="/janitor/js/seg_<?= $this->segment() ?>.js"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="/janitor/css/seg_<?= $this->segment(array("type" => "janitor")) ?>.css" />
+	<script type="text/javascript" src="/janitor/js/seg_<?= $this->segment(array("type" => "janitor")) ?>.js"></script>
 <? } ?>
 
+	<?= $this->headerIncludes() ?>
 </head>
 
 <body<?= $HTML->attribute("class", $this->bodyClass()) ?>>

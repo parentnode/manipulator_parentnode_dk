@@ -337,6 +337,7 @@ dd {display: block; vertical-align: top; font-size: 13px; line-height: 1.25em;}
 #content .scene .usedby {display: none;}
 #content .scene.download {}
 #content .scene.download .actions {padding-top: 20px;}
+#content .scene .article dl.info {display: none;}
 
 
 /*s-colorscheme.css*/
