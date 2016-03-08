@@ -25,6 +25,15 @@ $this->pageTitle("It's just improvements");
 				<li>
 					u.template: Allow quotes in JSON source
 				</li>
+				<li>
+					u.request now supporting POSTing ArrayBuffer objects
+				</li>
+				<li>
+					Util.Form now implements form.reset()
+				</li>
+				<li>
+					SVG cache limited to svg shape.
+				</li>
 			</ul>
 
 
