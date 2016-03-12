@@ -29,7 +29,7 @@
 
 			<h2>New to Manipulator?</h2>
 			<p>
-				Manipulator is an extremely flexible, performance optimized JavaScript library and
+				Manipulator is an extremely flexible, performance optimized open source JavaScript library and
 				framework with a slightly neurotic focus on details.
 				It is designed to mimic regular JavaScript, utilize and extend the DOM objects instead of inventing new
 				objects. Work WITH the DOM and take back control of your interface. Keep it close to native JavaScript
