@@ -10,7 +10,7 @@
 		Helper methods to customize form design and interaction responses.
 	</p>
 	<p>
-		Util.Form is based on the <a href="http://modulator.parentnode.dk" target="_blank">modulator HTML Form syntax</a>, 
+		Util.Form is based on the <a href="http://modulator.parentnode.dk/docs/form" target="_blank">modulator HTML Form syntax</a>, 
 		ensuring full HTML fallback when no JavaScript is available.
 	</p>
 
