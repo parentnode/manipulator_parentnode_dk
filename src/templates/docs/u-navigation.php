@@ -2,8 +2,8 @@
 	<h1>Navigation</h1>
 	<h2>Ajax Navigation controller</h2>
 	<p>
-		This is the extended Navigation controller, customized for the Manipulator Modulator Model. 
-		A lot of M's, yeah I know. The MMM is a page/flow controller designed for ultimate rendering control.
+		This is the extended Navigation controller, customized for the Manipulator <a href="http://templator.parentnode.dk">Templator</a> Model. 
+		This page/flow controller is designed for full rendering control.
 	</p>
 	<p>
 		Uses Util.History for browser History and Location control. 

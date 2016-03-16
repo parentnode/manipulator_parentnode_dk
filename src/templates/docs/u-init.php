@@ -2,17 +2,17 @@
 	<h1>Init</h1>
 	<p>
 		Manipulator is designed to utilize the object nature of the DOM. Your HTML-page is already a wellformed
-		object structure, and Util.init provides a simple way of extending your 
-		<a href="http://modulator.parentnode.dk">Modulator</a> HTML nodes, using.
+		object structure, and Util.init provides a simple way to extend your HTML nodes to meet the design and 
+		functionality requirements.
 	</p>
 	<p>
 		By adding initializer-classes to appropriate nodes, those nodes will be extended, if your current segment code
-		contains an matching Manipulator-module. Otherwise it will be ignored. This behavior allows you to seamlessly apply 
-		different interfaces and functionality for different segments - IE. a
-		desktop segment may look and work different than a mobile segment.
+		contains a matching Manipulator-module. Otherwise it will be ignored. This behavior allows you to seamlessly apply 
+		different interfaces and functionality for different <a href="http://detector.parentnode.dk/docs/segments" target="_blank">Detector segments</a> - IE. a desktop segment may look and work different 
+		than a mobile segment.
 	</p>
 	<p>
-		This is how you create a Modulator Object:
+		This is how you create a Manipulator Object:
 	</p>
 	<code>Util.Objects[&quot;object_name&quot;] = new Function() {
 	this.init = function(node) {

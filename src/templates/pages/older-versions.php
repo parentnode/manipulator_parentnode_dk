@@ -33,7 +33,7 @@ $this->pageTitle("Older versions");
 			<p>
 				The Manipulator library is based on segments. This means the library contains variations depending on which segment(s) 
 				you are building for. In each bundle you will find 9 include files. For more information about <a href="http://detector.parentnode.dk/segments">segments</a>
-				visit <a href="http://detector.parentnode.dk" target="_blank">http://detector.parentnode.dk</a> and <a href="http://modulator.parentnode.dk" target="_blank">http://modulator.parentnode.dk</a>.
+				visit <a href="http://detector.parentnode.dk" target="_blank">http://detector.parentnode.dk</a> and <a href="http://templator.parentnode.dk" target="_blank">http://templator.parentnode.dk</a>.
 			</p>
 			<p>
 				The bundles are NOT minified. Minification saves some bytes, but renders code unreadable.

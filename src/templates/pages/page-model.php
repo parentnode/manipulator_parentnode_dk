@@ -43,7 +43,7 @@ $this->pageTitle("Be a good example ...");
 				It does NOT extend generally ... - to optimize performance
 			</p>
 			<p>
-				The Manipulator Page Model is designed around the Modulator markup model, but it can be used with any kind of HTML
+				The Manipulator Page Model is designed around the <a href="http://templator.parentnode.dk">Templator</a> markup model, but it can be used with any kind of HTML
 				layout.
 			</p>
 			<h2>
