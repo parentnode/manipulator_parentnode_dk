@@ -1,6 +1,18 @@
 <div class="scene docpage i:docpage">
 	<h1>Browser events</h1>
-
+	<p>Events related to page rendering or the window object.</p>
+	<p>
+		Knowing when to starting applying JavaScript to your page is essential for providing a good 
+		user experience. When it comes to JavaScript, everything starts with the
+		DOMReady event or the legacy onload event. Manipulator provides handlers for these events with seamless
+		fallback for older browsers.
+	</p>
+	<p>
+		Some events (like scrolling or resizing) typically occur on the window object, but a lot of 
+		times you want to handle the event in a different context. That is why Manipulator provides an
+		extensive set of function, which can register eventListeners on the window object, but redirect
+		the callback to a specific node.
+	</p>
 
 	<div class="section functions">
 		<div class="header">

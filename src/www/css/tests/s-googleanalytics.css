@@ -1,0 +1,26 @@
+#bn_event_ce2 {
+	display: block; 
+}
+#bn_event_ce2.testpassed {color: white; font-size: 13px; line-height: 16px; margin: 0 0 3px; padding: 1px 5px 3px; background: green;}
+
+
+#bn_event_dbl {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+#bn_event_drop {height: 150px; border: 1px solid #aaaaaa;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+#bn_event_drop span {
+	display: inline-block;
+}
+
+#bn_event_swipe {height: 150px; border: 1px solid #aaaaaa;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}

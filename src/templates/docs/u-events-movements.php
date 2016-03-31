@@ -1,6 +1,18 @@
 <div class="scene docpage i:docpage">
 	<h1>Movements</h1>
-	<p>Advanced events for drag and swipe handling. Includes overlap detection.</p>
+	<p>Advanced events and handlers for drag and swipe interaction.</p>
+	<p>
+		Just detecting the movement isn't enough if you want a nice and real-time responsive user experience. 
+		Manipulator provides speed-calculation, vertical/horisontal locking, 
+		simple boundary settings and callbacks for 
+		each step of the interaction, <em>picked</em>, <em>moved</em> and <em>dropped</em> 
+		and for swipes additionally <em>swipedLeft</em>, <em>swipedRight</em>, <em>swipedUp</em> or <em>swipedDown</em>.
+		It also has the ability to calculate a final end position based on acceleration at the drop event.
+	</p>
+	<p>
+		Manipulator also includes an overlap detection method, which helps you to know whether a dragged element is overlapping
+		another element.
+	</p>
 
 	<div class="section functions">
 		<div class="header">
@@ -25,7 +37,7 @@
 								Util.Events.drag(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">Mixed</span> <span class="var">boundaries</span>
-									[, <span class="type">JSON</span> <span class="var">settings</span> ]
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -33,7 +45,8 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Make node draggable, within boundaries.</p>
+						<p>Make node draggable, within the defined boundaries.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the drop-event will be registered automatically (see Parameters for options).</p>
 					</div>
 
 					<div class="parameters">
@@ -64,7 +77,7 @@
 									</dl>
 								</div>
 							</dd>
-							<dt><span class="var">settings</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Optional, JSON object with drag-settings
@@ -88,6 +101,18 @@
 										<dd>moved event custom callback function name</dd>
 										<dt><span class="value">dropped</span></dt>
 										<dd>dropped event custom callback function name</dd>
+										<dt><span class="value">eventCategory</span></dt>
+										<dd>Category label for tracking. Default: Uncategorized</dd>
+										<dt><span class="value">eventAction</span></dt>
+										<dd>Action label for tracking. Default: DblClicked</dd>
+										<dt><span class="value">eventLabel</span></dt>
+										<dd>Additional label for tracking. Default: event.target.url or small except of node content</dd>
+										<dt><span class="value">eventValue</span></dt>
+										<dd>Value label for tracking. Default: Null</dd>
+										<dt><span class="value">nonInteraction</span></dt>
+										<dd>nonInteraction value for tracking. Default: false</dd>
+										<dt><span class="value">hitCallback</span></dt>
+										<dd>Callback for successful tracking. Default: null</dd>
 									</dl>
 								</div>
 							</dd>
@@ -200,7 +225,7 @@
 								Util.Events.swipe(
 									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">Mixed</span> <span class="var">boundaries</span>
-									[, <span class="type">JSON</span> <span class="var">settings</span> ]
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -208,7 +233,8 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Make node swipeable, within boundaries.</p>
+						<p>Make node swipeable, within defined boundaries.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the swiped-event will be registered automatically (see Parameters for options).</p>
 					</div>
 
 					<div class="parameters">
@@ -239,7 +265,7 @@
 									</dl>
 								</div>
 							</dd>
-							<dt><span class="var">settings</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">JSON</span> Optional, JSON object with swipe-settings
@@ -261,6 +287,18 @@
 										<dd>moved event custom callback function name</dd>
 										<dt><span class="value">dropped</span></dt>
 										<dd>dropped event custom callback function name</dd>
+										<dt><span class="value">eventCategory</span></dt>
+										<dd>Category label for tracking. Default: Uncategorized</dd>
+										<dt><span class="value">eventAction</span></dt>
+										<dd>Action label for tracking. Default: DblClicked</dd>
+										<dt><span class="value">eventLabel</span></dt>
+										<dd>Additional label for tracking. Default: event.target.url or small except of node content</dd>
+										<dt><span class="value">eventValue</span></dt>
+										<dd>Value label for tracking. Default: Null</dd>
+										<dt><span class="value">nonInteraction</span></dt>
+										<dd>nonInteraction value for tracking. Default: false</dd>
+										<dt><span class="value">hitCallback</span></dt>
+										<dd>Callback for successful tracking. Default: null</dd>
 									</dl>
 								</div>
 							</dd>

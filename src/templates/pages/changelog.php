@@ -23,16 +23,22 @@ $this->pageTitle("It's just improvements");
 			</p>
 			<ul class="changes">
 				<li>
-					u.template: Allow quotes in JSON source
+					u.template now allows quotes in JSON input source
 				</li>
 				<li>
-					u.request now supporting POSTing ArrayBuffer objects
+					u.request now supporting POSTing ArrayBuffer objects.
 				</li>
 				<li>
-					Util.Form now implements form.reset()
+					Util.Form now implements form.reset() functionality.
 				</li>
 				<li>
-					SVG cache limited to svg shape.
+					SVG cache now limited to svg shape (not class, id, title, width, height and node).
+				</li>
+				<li>
+					Google analytics module updated and automatic event tracking options extended.
+				</li>
+				<li>
+					u.bug_console_only is now the default setting.
 				</li>
 			</ul>
 

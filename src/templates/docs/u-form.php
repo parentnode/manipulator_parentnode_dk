@@ -309,7 +309,7 @@
 							<dd class="syntax"><span class="type">Mixed</span> = 
 								Util.Form.getParams(
 									<span class="type">Node</span> <span class="var">form</span> 
-									[, <span class="type">JSON</span> <span class="var">settings</span> ]
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -330,12 +330,11 @@
 									<span class="type">Node</span> node to use as form scope. Can be form or just plain HTML node.
 								</div>
 							</dd>
-							<dt><span class="var">settings</span></dt>
+							<dt><span class="var">_options</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">JSON</span> Optional, JSON settings
+									<span class="type">JSON</span> Optional, JSON _options
 								</div>
-
 								<div class="details">
 									<h5>Options</h5>
 									<dl class="options">

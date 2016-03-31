@@ -1,6 +1,9 @@
 u.site_name = "Manipulator";
 u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork me on GitHub"};
 
+u.ga_account = 'UA-49740096-1';
+u.ga_domain = 'manipulator.parentnode.dk';
+
 u.translations = {};
 u.translations["en"] = {};
 

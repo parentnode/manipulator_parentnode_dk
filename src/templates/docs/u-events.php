@@ -13,11 +13,14 @@
 		listeners. This way you always have as few event listeners as possible applied at any given time.
 	</p>
 	<p>
-		Manipulator automatically detects touch-event support and applies events appropriately.
+		Manipulator automatically detects touch-event support and applies events appropriately. It even supports dual events on
+		devices with both touch and mouse input. Manipulator also has seamless fallback to browsers using attachEvent.
 	</p>
 	<p>
-		Manipulator has seamless fallback to browsers using attachEvent.
+		For <em>window</em> and <em>browser</em> events, see the <a href="/docs/u-events-browser">Browser events documentation</a>.
+		For <em>drag</em> and <em>swipe</em> events, see the <a href="/docs/u-events-movements">Movements documentation</a>.
 	</p>
+
 
 	<div class="section functions">
 		<div class="header">
@@ -41,6 +44,7 @@
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Events.hold(
 									<span class="type">Node</span> <span class="var">node</span>
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -50,9 +54,11 @@
 						<h4>Description</h4>
 						<p>Add hold event listener to node. Declare node.held function to receive callback on Event occurrence. A hold-event occurs after 750ms.</p>
 						<p>
-							If your scripts are using the Manipulator Google Analytics module, the hold-event will be registered automatically. On
-							touch capable devices drag/move will always cancel click because it is considered scrolling.
-							On mouse capable devices mouseout will cancel the click.
+							If your scripts are using the Manipulator Google Analytics module, the hold-event will be registered 
+							automatically (see Parameters for options).
+						</p>
+						<p> On touch capable devices drag/move will always cancel hold, because it is considered scrolling.
+							On mouse capable devices mouseout will cancel the hold.
 						</p>
 					</div>
 
@@ -64,6 +70,29 @@
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> node to add hold event listener to.
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional event settings
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">eventCategory</span></dt>
+										<dd>Category label for tracking. Default: Uncategorized</dd>
+										<dt><span class="value">eventAction</span></dt>
+										<dd>Action label for tracking. Default: Held</dd>
+										<dt><span class="value">eventLabel</span></dt>
+										<dd>Additional label for tracking. Default: event.target.url or small except of node content</dd>
+										<dt><span class="value">eventValue</span></dt>
+										<dd>Value label for tracking. Default: Null</dd>
+										<dt><span class="value">nonInteraction</span></dt>
+										<dd>nonInteraction value for tracking. Default: false</dd>
+										<dt><span class="value">hitCallback</span></dt>
+										<dd>Callback for successful tracking. Default: null</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -93,6 +122,14 @@
 
 						<div class="example">
 							<code>u.e.hold(node);
+
+node.held = function(event) {
+	// do what you want
+}</code>
+						</div>
+						<div class="example">
+							<p>With tracking eventCategory:</p>
+							<code>u.e.hold(node, {"eventCategory":"Holding"});
 
 node.held = function(event) {
 	// do what you want
@@ -139,6 +176,7 @@ node.held = function(event) {
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Events.click(
 									<span class="type">Node</span> <span class="var">node</span>
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -148,7 +186,7 @@ node.held = function(event) {
 						<h4>Description</h4>
 						<p>Add a click event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.clicked when click event occurs, if node.clicked exists.</p>
-						<p>If your scripts are using the Manipulator Google Analytics module, the click-event will be registered automatically.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the click-event will be registered automatically (see Parameters for options).</p>
 						<p>
 							If your clickable node is inside a draggable node, dragging the node will prevent the node.clicked callback. On
 							touch capable devices drag/move will always cancel click because it is considered scrolling.
@@ -164,6 +202,29 @@ node.held = function(event) {
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> node to add click eventlistener to.
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional event settings
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">eventCategory</span></dt>
+										<dd>Category label for tracking. Default: Uncategorized</dd>
+										<dt><span class="value">eventAction</span></dt>
+										<dd>Action label for tracking. Default: Clicked</dd>
+										<dt><span class="value">eventLabel</span></dt>
+										<dd>Additional label for tracking. Default: event.target.url or small except of node content</dd>
+										<dt><span class="value">eventValue</span></dt>
+										<dd>Value label for tracking. Default: Null</dd>
+										<dt><span class="value">nonInteraction</span></dt>
+										<dd>nonInteraction value for tracking. Default: false</dd>
+										<dt><span class="value">hitCallback</span></dt>
+										<dd>Callback for successful tracking. Default: null</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -193,6 +254,14 @@ node.held = function(event) {
 
 						<div class="example">
 							<code>u.e.click(node);
+
+node.clicked = function(event) {
+	// do what you want
+}</code>
+						</div>
+						<div class="example">
+							<p>With tracking eventCategory:</p>
+							<code>u.e.click(node, {"eventCategory":"Clicking"});
 
 node.clicked = function(event) {
 	// do what you want
@@ -239,6 +308,7 @@ node.clicked = function(event) {
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Events.dblclick(
 									<span class="type">Node</span> <span class="var">node</span>
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -248,10 +318,10 @@ node.clicked = function(event) {
 						<h4>Description</h4>
 						<p>Add a dblclick event listener using either mouse- or touchevents depending on device support (Autodetected).</p>
 						<p>Invokes callback to node.dblclicked when dblclick event occurs, if node.dblclicked exists.</p>
-						<p>If your scripts are using the Manipulator Google Analytics module, the dblclick-event will be registered automatically.</p>
+						<p>If your scripts are using the Manipulator Google Analytics module, the dblclick-event will be registered automatically (see Parameters for options).</p>
 						<p>
 							If your clickable node is inside a draggable node, dragging the node will prevent the 
-							node.dblclicked callback. On touch capable devices drag/move will always cancel click 
+							node.dblclicked callback. On touch capable devices drag/move will always cancel dblclick 
 							because it is considered scrolling. On mouse capable devices mouseout will cancel the dblclick.
 						</p>
 						<p class="note">As of now, the dblclick-event does not work in IE8 and older because they require a specific dblclick event.</p>
@@ -265,6 +335,29 @@ node.clicked = function(event) {
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> node to add dblclick event listener to.
+								</div>
+							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional event settings
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">eventCategory</span></dt>
+										<dd>Category label for tracking. Default: Uncategorized</dd>
+										<dt><span class="value">eventAction</span></dt>
+										<dd>Action label for tracking. Default: DblClicked</dd>
+										<dt><span class="value">eventLabel</span></dt>
+										<dd>Additional label for tracking. Default: event.target.url or small except of node content</dd>
+										<dt><span class="value">eventValue</span></dt>
+										<dd>Value label for tracking. Default: Null</dd>
+										<dt><span class="value">nonInteraction</span></dt>
+										<dd>nonInteraction value for tracking. Default: false</dd>
+										<dt><span class="value">hitCallback</span></dt>
+										<dd>Callback for successful tracking. Default: null</dd>
+									</dl>
 								</div>
 							</dd>
 						</dl>
@@ -294,6 +387,14 @@ node.clicked = function(event) {
 
 						<div class="example">
 							<code>u.e.dblclick(node);
+
+node.dblclicked = function(event) {
+	// do what you want
+}</code>
+						</div>
+						<div class="example">
+							<p>With tracking eventCategory:</p>
+							<code>u.e.dblclick(node, {"eventCategory":"DblClicking"});
 
 node.dblclicked = function(event) {
 	// do what you want

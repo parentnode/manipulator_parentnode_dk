@@ -35,6 +35,7 @@
 		<li class="test"><a href="/tests/u-events-browser">Browser events</a></li>
 		<li class="test"><a href="/tests/u-flash">Flash</a></li>
 		<li class="test"><a href="/tests/u-form">Form</a></li>
+		<li class="test"><a href="/tests/u-googleanalytics">Google Analytics</a></li>
 		<li class="test"><a href="/tests/u-history">History</a></li>
 		<li class="test"><a href="/tests/u-keyboard">Keyboard</a></li>
 		<li class="test"><a href="/tests/u-navigation">Navigation</a></li>
@@ -51,10 +52,9 @@
 		<li><a href="/tests/u-speed-functions">function declarations</a></li>
 	</ul>
 
-	<h2>Missing tests</h2>
+	<!--h2>Missing tests</h2>
 	<ul class="missing">
-		<li class="test"><a href="/tests/u-googleanalytics">* Google Analytics (not started)</a></li>
-	</ul>
+	</ul-->
 
 	<h2>Beta tests</h2>
 	<ul class="beta">
