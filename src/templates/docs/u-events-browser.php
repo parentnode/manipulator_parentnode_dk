@@ -269,6 +269,7 @@
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Events.removeWindowEvent(
 									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">String</span> <span class="var">type</span>,
 									<span class="type">String</span> <span class="var">id</span> 
 								);
 							</dd>

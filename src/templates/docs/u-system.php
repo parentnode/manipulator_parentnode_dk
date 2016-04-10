@@ -262,6 +262,8 @@
 										<dd>iOS</dd>
 										<dt><span class="value">android</span></dt>
 										<dd>Android</dd>
+										<dt><span class="value">winphone</span></dt>
+										<dd>Windows Phone</dd>
 									</dl>
 								</div>
 							</dd>
@@ -279,6 +281,11 @@
 							<code>u.system("mac");</code>
 	
 							<p>returns true if OS is a Mac, else false</p>
+						</div>
+						<div class="example">
+							<code>u.system("android,winphone");</code>
+	
+							<p>returns true if OS is a Android or Windows Phone, else false</p>
 						</div>
 					</div>
 				
