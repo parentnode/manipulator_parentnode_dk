@@ -799,9 +799,10 @@ body {}
 #content .scene a,
 #content .scene ul.geo.active li.location {color: #ef002a;}
 #content .scene hr {border-color: #cccccc;}
-#content ul.actions input.button.primary,
+ul.actions input.button.primary,
+ul.actions a.button.primary,
 #content ul.actions a.button.primary,
-#header ul.servicenavigation li.github {background-color: #ef002a;}
+#header ul.servicenavigation li.github {background-color: #ef002a; color: #ffffff;}
 #footer {border-color: #cccccc;}
 .terms_notification .accept,
 .terms_notification .details {color: #ef002a;}
