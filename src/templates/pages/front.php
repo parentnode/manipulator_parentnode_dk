@@ -76,7 +76,7 @@
 			<li class="metro" title="Copenhagen Metro">Copenhagen Metro</li>
 			<li class="soulland" title="Soulland">Soulland</li>
 			<li class="tuborg" title="Tuborg">Tuborg</li>
-			<li class="distortion" title="Distortion">Distortion</li>
+			<li class="torvehallerne" title="Torvehallerne">Torvehallerne</li>
 		</ul>
 	</div>
 </div>

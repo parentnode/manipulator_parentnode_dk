@@ -19,7 +19,8 @@ $this->pageTitle("It's just improvements");
 
 			<h2>Version 0.9.2</h2>
 			<p>
-				Version 0.9.2 is minor bugfixes and some new beta modules.
+				Version 0.9.2 is mostly minor bugfixes and some new beta modules, though a few 
+				extensions of existing modules are also included.
 			</p>
 			<ul class="changes">
 				<li>
