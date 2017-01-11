@@ -12,7 +12,9 @@ Util.Objects["template"] = new function() {
 				"url":"/test/this/url",
 				"alt":"Alt text",
 				"image":"/img/test-350x350.jpg",
-				"image_extra":"/img/test-400x250.png"
+				"image_extra":"/img/test-400x250.png",
+				"boolean":false,
+				"number":1
 			},
 			{
 				"text":'Martin "2"',
@@ -20,7 +22,9 @@ Util.Objects["template"] = new function() {
 				"url_second":"/also/test/this/url2",
 				"alt":"Alt text2",
 				"image":"/img/test-400x250.png",
-				"image_extra":"/img/test-350x350.jpg"
+				"image_extra":"/img/test-350x350.jpg",
+				"boolean":true,
+				"number":2
 			},
 			{
 				"text":"Martin \"3\"",
@@ -28,7 +32,9 @@ Util.Objects["template"] = new function() {
 				"url_second":"/also/test/this/url3",
 				"alt":"Alt tex3t",
 				"image":"/img/test-460x321.png",
-				"image_extra":"/img/test-640x360.png"
+				"image_extra":"/img/test-640x360.png",
+				"boolean":false,
+				"number":3
 			},
 			{
 				"text":"Martin4",
@@ -36,7 +42,9 @@ Util.Objects["template"] = new function() {
 				"url_second":"/also/test/this/url4",
 				"alt":"Alt text4",
 				"image":"/img/test-640x360.png",
-				"image_extra":"/img/test-460x321.png"
+				"image_extra":"/img/test-460x321.png",
+				"boolean":true,
+				"number":4
 			}
 		]
 
@@ -44,10 +52,11 @@ Util.Objects["template"] = new function() {
 
 		// create dom template
 		var ul = u.ae(div, "ul", {"class":"test1"});
-		var template = u.ae(ul, "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" />'})
+		var template = u.ae(ul, "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" />'})
 
 		// get result nodes
 		var nodes = u.template(template, object);
+//		console.log(nodes)
 
 		// save return length for test after appending
 		var nodes_length = nodes.length;
@@ -60,14 +69,18 @@ Util.Objects["template"] = new function() {
 		// check if it seems correct
 		var control_children = u.qsa("li", ul);
 		var images_1 = u.qsa("img", control_children[1]);
+
 		// u.bug("test:" + (u.text(control_children[2]) == "Martin \\\"2\\\""));
-//		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + u.qs("img", control_children[1]).src + ", " + nodes_length + ", " + u.text(control_children[2]))
+		// u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + u.qs("img", control_children[1]).src + ", " + nodes_length + ", " + u.text(control_children[2]))
+
 		if(
 			control_children.length == 5 &&
 			nodes_length == 4 &&
 			u.qsa("img", control_children[1])[0].src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
 			u.qsa("img", control_children[1])[1].src == location.protocol+"//" + document.domain + "/img/test-400x250.png" &&
 			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
+			u.qs("input", control_children[2]).value == "true" &&
+			u.qs("input", control_children[3]).value == "false" &&
 			u.text(control_children[2]) == "Martin \"2\""
 
 		) {
@@ -98,6 +111,8 @@ Util.Objects["template"] = new function() {
 			nodes.length == 4 &&
 			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
 			u.qs("img", control_children[2]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
+			u.qs("input", control_children[1]).value == "true" &&
+			u.qs("input", control_children[2]).value == "false" &&
 			u.text(control_children[3]) == "Martin4"
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template (DOM template, autoappend): correct"});
@@ -115,12 +130,12 @@ Util.Objects["template"] = new function() {
 		// test 3 - using u.template on JSON string and then HTML string with the result of JSON string
 		var ul3 = u.ae(div, "ul", {"class":"test3"});
 
-		var virtual_json = '{"url_json":"{url}", "image_json":"{image}", "text_json":"{text}"}';
+		var virtual_json = '{"url_json":"{url}", "image_json":"{image}", "text_json":"{text}", "boolean_json":"{boolean}"}';
 		// get new JSON object
 		var json = u.template(virtual_json, object);
 
 		// create virtual template
-		var virtual_template = '<li><a href="{url_json}"><img src="{image_json}" alt="{alt}" />{text_json}</a></li>';
+		var virtual_template = '<li><a href="{url_json}"><img src="{image_json}" alt="{alt}" />{text_json}</a><input type="text" value="{boolean_json}" /></li>';
 
 		// get appended result nodes
 		var nodes = u.template(virtual_template, json, {"append":ul3});
@@ -128,12 +143,17 @@ Util.Objects["template"] = new function() {
 		// check if it seems correct
 		var control_children = u.qsa("li", ul3);
 //		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length)
+		// u.bug(u.qs("input", control_children[0]).value)
+
 		if(
 			control_children.length == 4 &&
 			nodes.length == 4 &&
 			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"
-
+			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
+			u.qs("input", control_children[1]).value == "true" &&
+			u.qs("input", control_children[2]).value == "false" &&
+			!json[0].boolean_json && 
+			json[1].boolean_json
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template (First JSON String, then HTML String template, autoappend): correct"});
 			div.test_results["u.template - 3"] = true;
@@ -149,12 +169,12 @@ Util.Objects["template"] = new function() {
 		// test 4 - using u.template on JSON object and then HTML string with the result of JSON object translation
 		var ul4 = u.ae(div, "ul", {"class":"test4"});
 
-		var real_json = {"url_real":"{url}", "image_real":"{image}", "text_real":"{text}"};
+		var real_json = {"url_real":"{url}", "image_real":"{image}", "text_real":"{text}", "boolean_real":"{boolean}", "number_real":"{number}"};
 		// get new JSON object
 		var json = u.template(real_json, object);
 
 		// create virtual template
-		var virtual_template = '<li><a href="{url_real}"><img src="{image_real}" alt="{alt}" />{text_real}</a></li>';
+		var virtual_template = '<li><a href="{url_real}"><img src="{image_real}" alt="{alt}" />{text_real}</a><input type="text" value="{boolean_real}" /><span>{number_real}</span></li>';
 
 		// get appended result nodes
 		var nodes = u.template(virtual_template, json, {"append":ul4});
@@ -166,8 +186,14 @@ Util.Objects["template"] = new function() {
 			control_children.length == 4 &&
 			nodes.length == 4 &&
 			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"
-
+			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
+			u.qs("input", control_children[1]).value == "true" &&
+			u.qs("input", control_children[2]).value == "false" &&
+			u.qs("span", control_children[2]).innerHTML == 3 &&
+			!json[0].boolean_real && 
+			json[1].boolean_real &&
+			json[0].number_real == 1 &&
+			json[3].number_real == 4
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template (First JSON, then HTML String template, autoappend): correct"});
 			div.test_results["u.template - 4"] = true;
@@ -190,7 +216,7 @@ Util.Objects["template"] = new function() {
 		var table_body = u.ae(table, "tbody");
 
 		// create virtual template
-		var virtual_template = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td></tr>';
+		var virtual_template = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /></td></tr>';
 
 
 		// get appended result nodes
@@ -200,12 +226,14 @@ Util.Objects["template"] = new function() {
 		// check if it seems correct
 		var control_children = u.qsa("tr", table_body);
 
-		u.bug("table:" + control_children.length + ", " + u.qs("img", control_children[0]).src + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length + ", " + (u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg") + ", "+ (u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"))
+		// u.bug("table:" + control_children.length + ", " + u.qs("img", control_children[0]).src + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length + ", " + (u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg") + ", "+ (u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"))
 		if(
 			control_children.length == 4 &&
 			nodes.length == 4 &&
 			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"
+			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
+			u.qs("input", control_children[1]).value == "true" &&
+			u.qs("input", control_children[2]).value == "false"
 
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template (Table + string template, autoappend): correct"});

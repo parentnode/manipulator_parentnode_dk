@@ -19,14 +19,24 @@ $this->pageTitle("It's just improvements");
 
 			<h2>Version 0.9.2</h2>
 			<p>
-				Version 0.9.2 is work in progress
+				Version 0.9.2 is minor bugfixes and some new beta modules.
 			</p>
 			<ul class="changes">
 				<li>
-					u.template now allows quotes in JSON input source
+					Beta paymentcards module added for credit card validation.
 				</li>
 				<li>
-					u.request now supporting POSTing ArrayBuffer objects.
+					Beta timeline module added for timed sequences.
+				</li>
+				<li>
+					Beta notifier module added for central notification handling.
+				</li>
+				<li>
+					u.template now allows quotes in JSON input source and translates numbers and booleans correctly
+					when used for object rewrites.
+				</li>
+				<li>
+					u.request now supporting POSTing ArrayBuffer objects. "params" parameter replaced with "data".
 				</li>
 				<li>
 					Util.Form now implements form.reset() functionality.

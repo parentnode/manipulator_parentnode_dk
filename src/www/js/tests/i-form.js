@@ -17,6 +17,17 @@ Util.Objects["formIndividual"] = new function() {
 
 
 			u.f.init(form);
+
+			// get field reference
+			for(x in form.fields) {
+				if(u.hc(form.fields[x].field, "required")) {
+					var field_required = form.fields[x].field;
+				}
+				else {
+					var field = form.fields[x].field;
+				}
+			}
+
 			form.submitted = function(input) {
 
 				var params = u.f.getParams(this, {"send_as":"json"});
@@ -36,15 +47,28 @@ Util.Objects["formIndividual"] = new function() {
 			form.validationFailed = function(iNs) {
 				this.addDebug("form.validationFailed:" + iNs);
 				for(x in iNs) {
-					this.addDebug("input failed: value=" + this.fields[x].val() + ", field:" + u.nodeId(this.fields[x]));
+					this.addDebug("input failed: value=" + this.fields[x].val().replace(/</g, "&lt;").replace(/>/g, "&gt;") + ", field:" + u.nodeId(this.fields[x]));
 				}
 			}
 
 			form.updated = function(iN) {
-				this.addDebug("form.updated:" + u.nodeId(iN) + " = " + iN.val());
+				this.addDebug("form.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 			}
 			form.changed = function(iN) {
-				this.addDebug("form.changed:" + u.nodeId(iN) + " = " + iN.val());
+				this.addDebug("form.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			}
+
+			field.updated = function(iN) {
+				iN._form.addDebug("field.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			}
+			field.changed = function(iN) {
+				iN._form.addDebug("field.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			}
+			field_required.updated = function(iN) {
+				iN._form.addDebug("required field.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			}
+			field_required.changed = function(iN) {
+				iN._form.addDebug("required field.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 			}
 
 		}

@@ -551,6 +551,76 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.normalize">
+				<div class="header">
+					<h3>Util.normalize</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.normalize</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.normalize(string);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Normalizes string by lowercasing and replacing any special chars and spaces with - (hyphens). Removes any double or trailing 
+							hyphens before returning string.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to normalize
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>Normalized string</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.normalize("København er så lækker");</code>
+	
+							<p>returns <span class="value">k-benhavn-er-s-l-kker</span></p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>String.toLowerCase</p>
+							<p>String.replace</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 			<!--div class="function" id="Util.stringOr">
 				<div class="header">
 					<h3>Util.stringOr</h3>

@@ -19,7 +19,7 @@
 			</p>
 
 			<ul class="actions">
-				<li><a href="/bundles/archive/v0_9_1.zip" class="button primary">Download 0.9.1 (zip)</a></li>
+				<li><a href="/bundles/archive/v0_9_2.zip" class="button primary">Download 0.9.2 (zip)</a></li>
 			</ul>
 
 			<p>

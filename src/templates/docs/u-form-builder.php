@@ -232,6 +232,8 @@
 										<dd>Input type</dd>
 										<dt><span class="value">options</span></dt>
 										<dd>Options for radiobuttons or selects</dd>
+										<dt><span class="value">checked</span></dt>
+										<dd>Checkbox checked-state</dd>
 										<dt><span class="value">class</span></dt>
 										<dd>Input class</dd>
 										<dt><span class="value">id</span></dt>

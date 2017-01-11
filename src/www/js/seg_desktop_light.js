@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
-js-merged @ 2016-01-12 10:15:39
+js-merged @ 2017-01-11 04:59:53
 */
 
 /*seg_desktop_light_include.js*/
@@ -3648,15 +3648,16 @@ if(String.prototype.substr == undefined || "ABC".substr(-1,1) == "A") {
 /*u-settings.js*/
 u.site_name = "Manipulator";
 u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork me on GitHub"};
+u.ga_account = 'UA-49740096-1';
+u.ga_domain = 'manipulator.parentnode.dk';
 u.translations = {};
 u.translations["en"] = {};
 u.translations["en"]["build-headline"] = "Build a Manipulator bundle now";
 u.translations["en"]["build-intro"] = "Select the Manipulator modules you want to include in your bundle.";
-
-/*ga.js*/
-u.ga_account = 'UA-49740096-1';
-u.ga_domain = 'manipulator.parentnode.dk';
-
+u.txt = {};
+u.txt["terms-headline"] = "We love <br />cookies and privacy";
+u.txt["terms-accept"] = "Accept";
+u.txt["terms-details"] = "Details";
 
 /*u-googleanalytics.js*/
 if(u.ga_account) {
@@ -3670,22 +3671,57 @@ if(u.ga_account) {
 		this.pageView = function(url) {
 			ga('send', 'pageview', url);
 		}
-		this.event = function(node, action, label) {
-			ga('_trackEvent', location.href.replace(document.location.protocol + "//" + document.domain, ""), action, (label ? label : this.nodeSnippet(node)));
-		}
-		this.customVar = function(slot, name, value, scope) {
-			//       slot,		
-			//       name,		
-			//       value,	
-			//       scope		
-		}
-		this.nodeSnippet = function(e) {
-			if(e.textContent != undefined) {
-				return u.cutString(e.textContent.trim(), 20) + "(<"+e.nodeName+">)";
+		this.event = function(node, _options) {
+			var event = false;
+			var eventCategory = "Uncategorized";
+			var eventAction = null;
+			var eventLabel = null;
+			var eventValue = null;
+			var nonInteraction = false;
+			var hitCallback = null;
+			if(typeof(_options) == "object") {
+				var _argument;
+				for(_argument in _options) {
+					switch(_argument) {
+						case "event"				: event					= _options[_argument]; break;
+						case "eventCategory"		: eventCategory			= _options[_argument]; break;
+						case "eventAction"			: eventAction			= _options[_argument]; break;
+						case "eventLabel"			: eventLabel			= _options[_argument]; break;
+						case "eventValue"			: eventValue			= _options[_argument]; break;
+						case "nonInteraction"		: nonInteraction		= _options[_argument]; break;
+						case "hitCallback"			: hitCallback			= _options[_argument]; break;
+					}
+				}
 			}
-			else {
-				return u.cutString(e.innerText.trim(), 20) + "(<"+e.nodeName+">)";
+			if(!eventAction && event && event.type) {
+				eventAction = event.type;
 			}
+			else if(!eventAction) {
+				eventAction = "Unknown";
+			}
+			if(!eventLabel && event && event.currentTarget && event.currentTarget.url) {
+				eventLabel = event.currentTarget.url;
+			}
+			else if(!eventLabel) {
+				eventLabel = this.nodeSnippet(node);
+			}
+			ga('send', 'event', {
+				"eventCategory": eventCategory, 
+				"eventAction": eventAction,
+				"eventLabel": eventLabel,
+				"eventValue": eventValue,
+				"nonInteraction": nonInteraction,
+				"hitCallback": hitCallback
+			});
+		}
+		// 	
+		// 	//       slot,		
+		// 	//       name,		
+		// 	//       value,	
+		// 	//       scope		
+		// 	
+		this.nodeSnippet = function(node) {
+			return u.cutString(u.text(node).trim(), 20) + "(<"+node.nodeName+">)";
 		}
 	}
 }
@@ -3695,42 +3731,76 @@ if(u.ga_account) {
 u.bug_console_only = true;
 Util.Objects["page"] = new function() {
 	this.init = function(page) {
+		window.page = page;
+		u.bug_force = true;
+		u.bug("This site is built using Manipulator, Janitor and Detector");
+		u.bug("Visit http://parentnode.dk for more information");
+		u.bug("Free lunch for new contributers ;-)");
+		u.bug_force = false;
 		page.hN = u.qs("#header");
 		page.hN.service = u.qs(".servicenavigation", page.hN);
+		page.cN = u.qs("#content", page);
+		page.nN = u.qs("#navigation", page);
+		page.nN = u.ie(page.hN, page.nN);
+		page.fN = u.qs("#footer");
+		page.fN.service = u.qs(".servicenavigation", page.fN);
 		page.logo = u.ie(page.hN, "a", {"class":"logo", "html":u.eitherOr(u.site_name, "Frontpage")});
 		u.ce(page.logo);
 		page.logo.clicked = function(event) {
 			location.href = '/';
 		}
-		page.cN = u.qs("#content", page);
-		page.nN = u.qs("#navigation", page);
-		page.nN.list = u.qs("ul", page.nN);
-		page.nN = u.ie(page.hN, page.nN);
-		page.fN = u.qs("#footer");
-		page.fN.service = u.qs(".servicenavigation", page.fN);
-		page.fN.slogan = u.qs("p", page.fN);
-		u.ce(page.fN.slogan);
-		page.fN.slogan.clicked = function(event) {
-			window.open("http://parentnode.dk");
+		page.resized = function() {
+			page.browser_h = u.browserH();
+			page.browser_w = u.browserW();
+			if(page.cN && page.cN.scene && typeof(page.cN.scene.resized) == "function") {
+				page.cN.scene.resized();
+			}
+		}
+		page.scrolled = function() {
+			page.scrolled_y = u.scrollY();
+			if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
+				page.cN.scene.scrolled();
+			}
 		}
 		page.ready = function() {
 			if(!u.hc(this, "ready")) {
 				u.ac(this, "ready");
-				if(!u.getCookie("terms_v1")) {
-					var terms = u.ie(document.body, "div", {"class":"terms_notification"});
-					u.ae(terms, "h3", {"html":"We love <br />cookies and privacy"});
-					var bn_accept = u.ae(terms, "a", {"class":"accept", "html":"Accept"});
-					bn_accept.terms = terms;
-					u.ce(bn_accept);
-					bn_accept.clicked = function() {
-						this.terms.parentNode.removeChild(this.terms);
-						u.saveCookie("terms_v1", true, {"expiry":new Date(new Date().getTime()+(1000*60*60*24*365)).toGMTString()});
-					}
-					if(!location.href.match(/\/terms/)) {
-						var bn_details = u.ae(terms, "a", {"class":"details", "html":"Details", "href":"/terms"});
-						u.ce(bn_details, {"type":"link"});
-					}
+				this.initNavigation();
+				this.resized();
+				page.acceptCookies();
+			}
+		}
+		page.acceptCookies = function() {
+			if(u.terms_version && !u.getCookie(u.terms_version)) {
+				var terms = u.ie(document.body, "div", {"class":"terms_notification"});
+				u.ae(terms, "h3", {"html":"We love <br />cookies and privacy"});
+				var bn_accept = u.ae(terms, "a", {"class":"accept", "html":"Accept"});
+				bn_accept.terms = terms;
+				u.ce(bn_accept);
+				bn_accept.clicked = function() {
+					this.terms.parentNode.removeChild(this.terms);
+					u.saveCookie(u.terms_version, true, {"expiry":new Date(new Date().getTime()+(1000*60*60*24*365)).toGMTString()});
 				}
+				if(!location.href.match(/\/terms\//)) {
+					var bn_details = u.ae(terms, "a", {"class":"details", "html":"Details", "href":"/terms"});
+					u.ce(bn_details, {"type":"link"});
+				}
+			}
+		}
+		page.initNavigation = function() {
+			var i, node, nodes;
+			if(page.hN.service) {
+				var nav_anchor = u.qs("li.navigation", page.hN.service);
+				if(nav_anchor) {
+					page.hN.service.removeChild(nav_anchor);
+				}
+			}
+			if(page.fN.service) {
+				nodes = u.qsa("li", page.fN.service);
+				for(i = 0; node = nodes[i]; i++) {
+					u.ie(page.hN.service, node);
+				}
+				page.fN.removeChild(page.fN.service);
 			}
 		}
 		page.ready();
@@ -3747,8 +3817,10 @@ Util.Objects["login"] = new function() {
 		scene.scrolled = function() {
 		}
 		scene.ready = function() {
-			this._form = u.qs("form", this);
-			u.f.init(this._form);
+			u.ae(this, "p", {"html":"Your browser is not supported by the Administration system.<br />Please upgrade:"})
+			var ul = u.ae(this, "ul");
+			u.ae(ul, "li", {"html":'<a href="https://firefox.com/download" target="_blank">Firefox</a>'});
+			u.ae(ul, "li", {"html":'<a href="https://www.google.com/chrome/" target="_blank">Chrome</a>'});
 			page.cN.scene = this;
 		}
 		scene.ready();

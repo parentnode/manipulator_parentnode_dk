@@ -58,7 +58,7 @@ Util.Objects["request"] = new function() {
 			node._span = u.qs("span", node);
 			node.url = node._span.innerHTML;
 			node.method = u.cv(node, "method");
-			node.params = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
+			node.data = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
 			node.async = u.cv(node, "async");
 			node.headers = u.cv(node, "headers");
 			node.shouldfail = u.cv(node, "shouldfail");
@@ -67,8 +67,8 @@ Util.Objects["request"] = new function() {
 			if(node.method) {
 				settings.method = node.method;
 			}
-			if(node.params) {
-				settings.params = node.params;
+			if(node.data) {
+				settings.data = node.data;
 			}
 			if(node.async) {
 				settings.async = node.async;

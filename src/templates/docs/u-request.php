@@ -24,7 +24,7 @@
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.request(
-									<span class="type">Node</span> <span class="var">node</span>
+									<span class="type">Node</span> <span class="var">node</span>,
 									<span class="type">String</span> <span class="var">url</span>
 									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
@@ -84,7 +84,7 @@
 											and responder must wrap result in callback function, which is appended to url as <span class="var">callback</span>.
 											Default: GET.
 										</dd>
-										<dt><span class="value">params</span></dt>
+										<dt><span class="value">data</span></dt>
 										<dd>
 											Parameters to send. Can be string of parameters or JSON-object with variables.
 											If GET or SCRIPT request, JSON object is automatically converted to string of parameters and 
@@ -138,7 +138,7 @@
 node.response = function(response) {
 	var name = response.name;
 }
-u.request(node, "/json");</code>
+u.request(node, "/json-url");</code>
 							<p>Makes GET request to /json and gets the name variable from the received JSON-object.</p>
 						</div>
 
@@ -148,7 +148,7 @@ u.request(node, "/json");</code>
 node.response = function(response) {
 	alert(response);
 }
-u.request(node, "/post", {"params":"name=martin"});</code>
+u.request(node, "/post-url", {"method":"post", "data":"name=martin"});</code>
 							<p>Makes POST request to /post and alerts the the response string.</p>
 						</div>
 
@@ -158,17 +158,17 @@ u.request(node, "/post", {"params":"name=martin"});</code>
 node.response = function(response) {
 	alert(response);
 }
-u.request(node, "/post", {"headers":{"Accept":"application/json"});</code>
+u.request(node, "/post-url", {"method":"post", "headers":{"Accept":"application/json"});</code>
 							<p>Makes POST request to /post and sends header Accept=application/json.</p>
 						</div>
 
 						<div class="example">
-							<h5>GEET Request with custom callback</h5>
+							<h5>GET Request with custom callback</h5>
 							<code>var node = u.qs("#content");
 node.customCallback = function(response) {
 	alert(response);
 }
-u.request(node, "/get", {"callback":"customCallback");</code>
+u.request(node, "/get-url", {"callback":"customCallback");</code>
 							<p>Makes GET request to /get and returns <span class="var">response</span> to node.customCallback.</p>
 						</div>
 
@@ -178,7 +178,7 @@ u.request(node, "/get", {"callback":"customCallback");</code>
 node.response = function(response) {
 	var name = response.name;
 }
-u.request(node, "/jsonp", {"method":"SCRIPT"});</code>
+u.request(node, "/jsonp-url", {"method":"SCRIPT"});</code>
 							<p>Makes SCRIPT injection request to /jsonp and gets the name variable from the received JSON-object.</p>
 						</div>
 
