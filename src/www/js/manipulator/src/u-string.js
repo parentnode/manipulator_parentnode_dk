@@ -89,3 +89,30 @@ Util.upperCaseFirst = u.ucfirst = function(string) {
 Util.lowerCaseFirst = u.lcfirst = function(string) {
 	return string.replace(/^(.){1}/, function($1) {return $1.toLowerCase()});
 }
+
+
+// Normalizes, lowercases and replaces unknown chars with - (hyphen)
+Util.normalize = function(string) {
+
+	// lowercase
+	string = string.toLowerCase();
+
+	// replace all specialchars with hyphens
+	string = string.replace(/[^a-z0-9\_]/g, '-');
+
+	// remove double hyphens
+	string = string.replace(/-+/g, '-');
+
+	// remove leading and trailing hyphens
+	string = string.replace(/^-|-$/g, '');
+
+	return string;
+}
+
+// select correct form, based on count
+Util.pluralize = function(count, singular, plural) {
+	if(count != 1) {
+		return count + " " + plural;
+	}
+	return count + " " + singular;
+}

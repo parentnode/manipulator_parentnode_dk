@@ -122,9 +122,6 @@ Util.Form = u.f = new function() {
 			field._error = u.qs(".error", field);
 
 
-			// Add required indicator (for showing icons)
-			field._indicator = u.ae(field, "div", {"class":"indicator"});
-
 
 			// Implementing support for non-manipulator system HTML output
 			// This allows for Manipulator form to run on HTML output which cannot be fine-tuned serverside
@@ -529,7 +526,11 @@ Util.Form = u.f = new function() {
 				}
 
 			}
+
+			// Add required indicator (for showing icons)
+			field._indicator = u.ae(field._input._label, "span", {"class":"indicator", "html":"&nbsp;*"});
 		}
+
 
 
 		// reference hidden fields to allow accessing them through form fields array
@@ -1149,20 +1150,8 @@ Util.Form = u.f = new function() {
 					return;
 				}
 			}
-			
-
-			var input_middle, help_top;
-
- 			if(u.hc(field, "html")) {
-				input_middle = field._editor.offsetTop + (field._editor.offsetHeight / 2);
-			}
-			else {
-				input_middle = field._input.offsetTop + (field._input.offsetHeight / 2);
-			}
-
-			help_top = input_middle - field._help.offsetHeight / 2;
-			u.as(field._help, "top", help_top + "px");
 		}
+
 	}
 
 	// activate input
@@ -1173,64 +1162,10 @@ Util.Form = u.f = new function() {
 		u.e.addEvent(iN, "focus", this._focus);
 		u.e.addEvent(iN, "blur", this._blur);
 
-		// added accessibility
-		if(u.e.event_pref == "mouse") {
-			u.e.addEvent(iN, "mouseenter", this._mouseenter);
-			u.e.addEvent(iN, "mouseleave", this._mouseleave);
-		}
-
 		// validate on input blur
 		u.e.addEvent(iN, "blur", this._validate);
-
-
-		// Labelstyle is defined?
-		// currently only one input style
-		// inject in input
-		if(iN._form.labelstyle == "inject") {
-
-			// some inputs cannot have labels injected
-			// textarea has no type
-			if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
-
-				// store default value
-				iN.default_value = u.text(iN._label);
-
-				// add default handlers to focus and blur events
-				u.e.addEvent(iN, "focus", this._changed_state);
-				u.e.addEvent(iN, "blur", this._changed_state);
-
-
-				// Create psydo label for inputs that cant show label value
-				// Did experiments with with field replacement, but required too much work
-				// replacing event and references (this seems to provide sufficient backup)
-				if(iN.type.match(/number|integer/)) {
-
-					iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
-					iN.pseudolabel.iN = iN;
-
-					// position on top of input
-					u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
-					u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
-					// create event to remove pseudolabel
-					u.ce(iN.pseudolabel)
-					iN.pseudolabel.inputStarted = function(event) {
-						u.e.kill(event);
-						this.iN.focus();
-					}
-
-				}
-
-				u.f.updateDefaultState(iN);
-
-			}
-		}
-
-		// set empty default value for non injection forms
-		else {
-			iN.default_value = "";
-		}
-
 	}
+
 
 	// activate button
 	this.activateButton = function(action) {
@@ -1452,7 +1387,7 @@ Util.Form = u.f = new function() {
 				iN.field.validationPassed();
 			}
 
-			if(typeof(iN._form.validationPassed) == "function") {
+			if(typeof(iN._form.validationFailed) == "function") {
 				iN._form.validationPassed();
 			}
 
@@ -1492,7 +1427,7 @@ Util.Form = u.f = new function() {
 	// - datetime
 	// - files
 	this.validate = function(iN) {
-//		u.bug("validate:" + iN.name + ", " + iN.val());
+//		u.bug("validate:" + iN.name)
 
 
 		// validation is disabled

@@ -1,9 +1,12 @@
+// default debug is console
+u.bug_console_only = true;
+
 // test urls
 Util.debugURL = function(url) {
 	if(u.bug_force) {
 		return true;
 	}
-	return document.domain.match(/.local$/);
+	return document.domain.match(/(\.local|\.proxy)$/);
 }
 
 // identify node
