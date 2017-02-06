@@ -45,7 +45,7 @@ Util.Events = u.e = new function() {
 	// theoretical support for dual input sources
 	if(navigator.maxTouchPoints > 1) {
 
-		if(typeof(document.ontouchmove) == "undefined" && typeof(document.onmousemove) == "undefined") {
+		if((typeof(document.ontouchmove) == "undefined" && typeof(document.onmousemove) == "undefined") || (document.ontouchmove === null && document.onmousemove === null)) {
 
 			this.event_support = "multi";
 		}
