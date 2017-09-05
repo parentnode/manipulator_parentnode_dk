@@ -1,8 +1,8 @@
 <div class="scene docpage i:docpage">
 	<h1>Template</h1>
 	<p>
-		Convert Array of JSON objects into HTML structure or new Array of JSON objects.
-	</p>
+		Convert Array of JSON objects into a HTML structure, a new Array of JSON objects or a plain string, using a template.
+	</p>	
 
 	<p class="note">
 		IE 6-9 does not support table.innerHTML, so temlating with tables, require the passed template to be string as it
@@ -62,7 +62,7 @@
 							<dt><span class="var">template</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> HTML or JSON string to be used as template.
+									<span class="type">String</span>Text, HTML or JSON string to be used as template.
 								</div>
 							</dd>
 							<dt><span class="var">template</span></dt>
@@ -110,7 +110,7 @@
 						<h4>Examples</h4>
 
 						<div class="example">
-							<h5>Simplest usage</h5>
+							<h5>HTML templating, Simplest usage</h5>
 							<code>&lt;ul&gt;
 	&lt;li class="template"&gt;
 		&lt;h3&gt;{name}&lt;/h3&gt;
@@ -190,6 +190,53 @@
 		&lt;a href="http://detector.parentnode.dk">link&lt;/a&gt;
 	&lt;/li&gt;
 &lt;/ul&gt;</code>
+						</div>
+
+
+						<div class="example">
+							<h5>JSON conversion</h5>
+							<code>var template = {
+	"name":{res1},
+	"description":{res2},
+	"url":{res3}
+};
+
+var data = [
+	{
+		"res1":"Manipulator",
+		"res2":"JavaScript framework",
+		"res3":"http://manipulator.parentnode.dk"
+		"meta":{
+			"key":"{1231-BFED-12312-21231}",
+			"signature":"Xew-12345"
+		},
+	},
+	{
+		"res1":"Detector",
+		"res2":"Device detection"
+		"res3":"http://detector.parentnode.dk"
+		"meta":{
+			"key":"{1231-BFED-12312-21231}",
+			"signature":"Xew-12345"
+		},
+	}
+];
+
+var new_json = u.template(template, data);
+</code>
+							<p>Returns lean JSON object with custom keys:</p>
+							<code>[
+	{
+		"name":"Manipulator",
+		"description":"JavaScript framework",
+		"url":"http://manipulator.parentnode.dk"
+	},
+	{
+		"name":"Detector",
+		"description":"Device detection"
+		"url":"http://detector.parentnode.dk"
+	}
+];</code>
 						</div>
 					</div>
 

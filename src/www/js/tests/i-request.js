@@ -10,7 +10,9 @@ Util.Objects["request"] = new function() {
 		for(i = 0; node = tests[i]; i++) {
 
 			node.response = function(response, request_id) {
-				u.bug("response:" + this.url)
+				// u.bug("response:" + this.url);
+				// u.bug("request_id:" + request_id);
+				// u.bug("this[request_id].request_url:" + this[request_id].request_url);
 				if(response.isHTML && !this[request_id].request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 					u.ac(this, "testpassed");
 					this.innerHTML = u.qs(".test", response).innerHTML
@@ -25,10 +27,10 @@ Util.Objects["request"] = new function() {
 				}
 				else {
 
-					u.bug("error:" + response.isJSON + ":" + this.request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+					u.bug("error:" + response.isJSON + ":" + this[request_id].request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
 
 					u.ac(this, "testfailed");
-					this.innerHTML += (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
+					this.innerHTML += " - async:" + u.cv(this, "async") + " - method:" + u.cv(this, "method") + " - send:" + u.cv(this, "send") + " - request invalid";
 
 					div.test_results["u.request ("+this.url+", "+this.method+", "+typeof(this.params)+", "+typeof(this.headers)+", "+this.async+") "] = false;
 				}
@@ -81,7 +83,8 @@ Util.Objects["request"] = new function() {
 				}
 			}
 
-			u.bug("request:" + node.url)
+			u.bug("request:" + node.url);
+			console.log(settings);
 			u.request(node, node.url, settings);
 		}
 

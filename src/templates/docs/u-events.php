@@ -479,6 +479,8 @@ node.dblclicked = function(event) {
 									<h5>Options</h5>
 									<dl class="options">
 										<!-- specific options -->
+										<dt><span class="value">delay_over</span></dt>
+										<dd>over-event delay - stalling over event.</dd>
 										<dt><span class="value">delay</span></dt>
 										<dd>out-event delay - stalling out event.</dd>
 										<dt><span class="value">over</span></dt>

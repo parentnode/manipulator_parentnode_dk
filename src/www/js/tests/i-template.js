@@ -6,7 +6,24 @@ Util.Objects["template"] = new function() {
 
 		div.test_results = {};
 
-		var object = [
+		// templates
+		var tem_string = 'string {text} string';
+
+		var tem_string_json = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":{boolean}, "number":{number}, "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":{object}}';
+		var tem_string_json_quoted = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":"{object}"}';
+		var tem_object = {"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":"{object}"};
+
+		var tem_string_html = '<li><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span></li>';
+		var tem_html = u.ae(document.createElement("ul"), "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span>'})
+
+		var tem_string_html_table = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td><td><input type="text" value="{boolean}" /></td><td class="number">{number}</td><td class="string_number">{string_number}</td><td class="string_boolean">{string_boolean}</td></tr>';
+
+		// value sets
+		var set_void_array = [];
+		var set_void_object = {};
+		var set_void_string = "";
+		var set_string = "I'm bad content";
+		var set_array_objects = [
 			{
 				"text":"Martin",
 				"url":"/test/this/url",
@@ -14,7 +31,12 @@ Util.Objects["template"] = new function() {
 				"image":"/img/test-350x350.jpg",
 				"image_extra":"/img/test-400x250.png",
 				"boolean":false,
-				"number":1
+				"number":1,
+				"string_boolean":"false",
+				"string_number":"1",
+				"object": {
+					"name":"object 1"
+				}
 			},
 			{
 				"text":'Martin "2"',
@@ -24,17 +46,27 @@ Util.Objects["template"] = new function() {
 				"image":"/img/test-400x250.png",
 				"image_extra":"/img/test-350x350.jpg",
 				"boolean":true,
-				"number":2
+				"number":2,
+				"string_boolean":"true",
+				"string_number":"2",
+				"object": {
+					"name":"object 2"
+				}
 			},
 			{
 				"text":"Martin \"3\"",
 				"url":"/test/this/url3",
 				"url_second":"/also/test/this/url3",
-				"alt":"Alt tex3t",
+				"alt":"Alt text3",
 				"image":"/img/test-460x321.png",
 				"image_extra":"/img/test-640x360.png",
 				"boolean":false,
-				"number":3
+				"number":3,
+				"string_boolean":"false",
+				"string_number":"3",
+				"object": {
+					"name":"object 3"
+				}
 			},
 			{
 				"text":"Martin4",
@@ -44,214 +76,476 @@ Util.Objects["template"] = new function() {
 				"image":"/img/test-640x360.png",
 				"image_extra":"/img/test-460x321.png",
 				"boolean":true,
-				"number":4
-			}
-		]
+				"number":4,
+				"string_boolean":"true",
+				"string_number":"4",
+				"object": {
+					"name":"object 4"
+				}
+			},
+			{
+				"text":"Martin '5'",
+				"url":"/test/this/url5",
+				"url_second":"/also/test/this/url5",
+				"alt":"Alt text5",
+				"image":"/img/test-460x321.png",
+				"image_extra":"/img/test-640x360.png",
+				"boolean":false,
+				"number":3,
+				"string_boolean":"false",
+				"string_number":"5",
+				"object": {
+					"name":"object 5"
+				}
+			},
+			
+		];
+
 
 		var i, node;
+		var result;
 
-		// create dom template
-		var ul = u.ae(div, "ul", {"class":"test1"});
-		var template = u.ae(ul, "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" />'})
 
-		// get result nodes
-		var nodes = u.template(template, object);
-//		console.log(nodes)
-
-		// save return length for test after appending
-		var nodes_length = nodes.length;
-
-		// append to list
-		while(nodes.length) {
-			u.ae(ul, nodes[0], {"class":"test1"});
+		// STRING TEMPLATE
+		result = u.template(tem_string, set_void_string);
+		if(!result) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, \"\"): correct"});
 		}
-
-		// check if it seems correct
-		var control_children = u.qsa("li", ul);
-		var images_1 = u.qsa("img", control_children[1]);
-
-		// u.bug("test:" + (u.text(control_children[2]) == "Martin \\\"2\\\""));
-		// u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + u.qs("img", control_children[1]).src + ", " + nodes_length + ", " + u.text(control_children[2]))
-
-		if(
-			control_children.length == 5 &&
-			nodes_length == 4 &&
-			u.qsa("img", control_children[1])[0].src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qsa("img", control_children[1])[1].src == location.protocol+"//" + document.domain + "/img/test-400x250.png" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
-			u.qs("input", control_children[2]).value == "true" &&
-			u.qs("input", control_children[3]).value == "false" &&
-			u.text(control_children[2]) == "Martin \"2\""
-
-		) {
-
-			u.ae(div, "div", {"class":"testpassed", "html":"u.template (DOM template, no autoappend): correct"});
-			div.test_results["u.template - 1"] = true;
-		}
-		// error
 		else {
-
-			u.ae(div, "div", {"class":"testfailed", "html":"u.template (DOM template, no autoappend): error"});
-			div.test_results["u.template - 1"] = false;
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, \"\"): error"});
 		}
 
-
-
-		// test 2 - auto append
-		var ul2 = u.ae(div, "ul", {"class":"test2"});
-		u.ac(template, "test2");
-
-		// get appended result nodes
-		var nodes = u.template(template, object, {"append":ul2});
-
-		// check if it seems correct
-		var control_children = u.qsa("li", ul2);
-		if(
-			control_children.length == 4 &&
-			nodes.length == 4 &&
-			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[2]).src == location.protocol+"//" + document.domain + "/img/test-460x321.png" &&
-			u.qs("input", control_children[1]).value == "true" &&
-			u.qs("input", control_children[2]).value == "false" &&
-			u.text(control_children[3]) == "Martin4"
-		) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.template (DOM template, autoappend): correct"});
-			div.test_results["u.template - 2"] = true;
+		result = u.template(tem_string, set_void_object);
+		if(!result) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, {}): correct"});
 		}
-		// error
 		else {
-
-			u.ae(div, "div", {"class":"testfailed", "html":"u.template (DOM template, autoappend): error"});
-			div.test_results["u.template - 2"] = false;
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, {}): error"});
 		}
 
-
-
-		// test 3 - using u.template on JSON string and then HTML string with the result of JSON string
-		var ul3 = u.ae(div, "ul", {"class":"test3"});
-
-		var virtual_json = '{"url_json":"{url}", "image_json":"{image}", "text_json":"{text}", "boolean_json":"{boolean}"}';
-		// get new JSON object
-		var json = u.template(virtual_json, object);
-
-		// create virtual template
-		var virtual_template = '<li><a href="{url_json}"><img src="{image_json}" alt="{alt}" />{text_json}</a><input type="text" value="{boolean_json}" /></li>';
-
-		// get appended result nodes
-		var nodes = u.template(virtual_template, json, {"append":ul3});
-
-		// check if it seems correct
-		var control_children = u.qsa("li", ul3);
-//		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length)
-		// u.bug(u.qs("input", control_children[0]).value)
-
-		if(
-			control_children.length == 4 &&
-			nodes.length == 4 &&
-			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
-			u.qs("input", control_children[1]).value == "true" &&
-			u.qs("input", control_children[2]).value == "false" &&
-			!json[0].boolean_json && 
-			json[1].boolean_json
-		) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.template (First JSON String, then HTML String template, autoappend): correct"});
-			div.test_results["u.template - 3"] = true;
+		result = u.template(tem_string, set_void_array);
+		if(!result) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, []): correct"});
 		}
-		// error
 		else {
-
-			u.ae(div, "div", {"class":"testfailed", "html":"u.template (First JSON String, then HTML String template, autoappend): error"});
-			div.test_results["u.template - 3"] = false;
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, []): error"});
 		}
 
-
-		// test 4 - using u.template on JSON object and then HTML string with the result of JSON object translation
-		var ul4 = u.ae(div, "ul", {"class":"test4"});
-
-		var real_json = {"url_real":"{url}", "image_real":"{image}", "text_real":"{text}", "boolean_real":"{boolean}", "number_real":"{number}"};
-		// get new JSON object
-		var json = u.template(real_json, object);
-
-		// create virtual template
-		var virtual_template = '<li><a href="{url_real}"><img src="{image_real}" alt="{alt}" />{text_real}</a><input type="text" value="{boolean_real}" /><span>{number_real}</span></li>';
-
-		// get appended result nodes
-		var nodes = u.template(virtual_template, json, {"append":ul4});
-
-		// check if it seems correct
-		var control_children = u.qsa("li", ul4);
-//		u.bug(control_children.length + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length)
-		if(
-			control_children.length == 4 &&
-			nodes.length == 4 &&
-			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
-			u.qs("input", control_children[1]).value == "true" &&
-			u.qs("input", control_children[2]).value == "false" &&
-			u.qs("span", control_children[2]).innerHTML == 3 &&
-			!json[0].boolean_real && 
-			json[1].boolean_real &&
-			json[0].number_real == 1 &&
-			json[3].number_real == 4
-		) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.template (First JSON, then HTML String template, autoappend): correct"});
-			div.test_results["u.template - 4"] = true;
+		result = u.template(tem_string, set_string);
+		if(!result) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, "+set_string+"): correct"});
 		}
-		// error
 		else {
-
-			u.ae(div, "div", {"class":"testfailed", "html":"u.template (First JSON, then HTML String template, autoappend): error"});
-			div.test_results["u.template - 4"] = false;
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, "+set_string+"): error"});
 		}
 
-
-
-
-
-		// test 5 - string template and auto append (on tabæe)
-		var table = u.ae(div, "table", {"class":"test5"});
-
-		// IE requires table_body
-		var table_body = u.ae(table, "tbody");
-
-		// create virtual template
-		var virtual_template = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /></td></tr>';
-
-
-		// get appended result nodes
-		var nodes = u.template(virtual_template, object, {"append":table_body});
-
-
-		// check if it seems correct
-		var control_children = u.qsa("tr", table_body);
-
-		// u.bug("table:" + control_children.length + ", " + u.qs("img", control_children[0]).src + ", " + u.qs("img", control_children[3]).src + ", " + nodes.length + ", " + (u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg") + ", "+ (u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png"))
-		if(
-			control_children.length == 4 &&
-			nodes.length == 4 &&
-			u.qs("img", control_children[0]).src == location.protocol+"//" + document.domain + "/img/test-350x350.jpg" &&
-			u.qs("img", control_children[3]).src == location.protocol+"//" + document.domain + "/img/test-640x360.png" &&
-			u.qs("input", control_children[1]).value == "true" &&
-			u.qs("input", control_children[2]).value == "false"
-
-		) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.template (Table + string template, autoappend): correct"});
-			div.test_results["u.template - 5"] = true;
+		result = u.template(tem_string, set_array_objects[0]);
+		if(result == "string Martin string") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, object): correct"});
 		}
-		// error
 		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, object): error"});
+		}
 
-			u.ae(div, "div", {"class":"testfailed", "html":"u.template (Table + string template, autoappend): error"});
-			div.test_results["u.template - 5"] = false;
+		result = u.template(tem_string, set_array_objects);
+		if(result == "string Martin stringstring Martin \"2\" stringstring Martin \"3\" stringstring Martin4 stringstring Martin \'5\' string") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(string, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(string, array of objects): error"});
 		}
 
 
-		// cleanup
+
+		// JSON STRING
+
+		result = u.template(tem_string_json, set_void_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, \"\"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, \"\"): error"});
+		}
+
+		result = u.template(tem_string_json, set_void_object);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, {}): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, {}): error"});
+		}
+
+		result = u.template(tem_string_json, set_void_array);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, []): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, []): error"});
+		}
+
+		result = u.template(tem_string_json, set_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, "+set_string+"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, "+set_string+"): error"});
+		}
+
+		result = u.template(tem_string_json, set_array_objects[0]);
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg"
+			
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, object): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, object): error"});
+		}
+
+		result = u.template(tem_string_json_quoted, set_array_objects[0]);
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json_quoted, object): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json_quoted, object): error"});
+		}
+
+		result = u.template(tem_string_json, set_array_objects);
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg" &&
+
+			result[1].text === "Martin \"2\"" &&
+			result[1].boolean === true &&
+			result[1].number === 2 &&
+			result[1].string_boolean === "true" &&
+			result[1].string_number === "2" &&
+			result[1].object.name === "object 2" &&
+			result[1].image === "/img/test-400x250.png"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json, array of objects): error"});
+		}
+
+		result = u.template(tem_string_json_quoted, set_array_objects);
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg" &&
+
+			result[1].text === "Martin \"2\"" &&
+			result[1].boolean === true &&
+			result[1].number === 2 &&
+			result[1].string_boolean === "true" &&
+			result[1].string_number === "2" &&
+			result[1].object.name === "object 2" &&
+			result[1].image === "/img/test-400x250.png"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json_quoted, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_json_quoted, array of objects): error"});
+		}
+
+
+
+		// JSON OBJECT
+
+		result = u.template(tem_object, set_void_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, \"\"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, \"\"): error"});
+		}
+
+		result = u.template(tem_object, set_void_object);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, {}): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, {}): error"});
+		}
+
+		result = u.template(tem_object, set_void_array);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, []): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, []): error"});
+		}
+
+		result = u.template(tem_object, set_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, "+set_string+"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, "+set_string+"): error"});
+		}
+
+		result = u.template(tem_object, set_array_objects[0]);
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, object): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, object): error"});
+		}
+
+		result = u.template(tem_object, set_array_objects);
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+			result[0].text === "Martin" &&
+			result[0].boolean === false &&
+			result[0].number === 1 &&
+			result[0].string_boolean === "false" &&
+			result[0].string_number === "1" &&
+			result[0].object.name === "object 1" &&
+			result[0].image === "/img/test-350x350.jpg" &&
+
+			result[1].text === "Martin \"2\"" &&
+			result[1].boolean === true &&
+			result[1].number === 2 &&
+			result[1].string_boolean === "true" &&
+			result[1].string_number === "2" &&
+			result[1].object.name === "object 2" &&
+			result[1].image === "/img/test-400x250.png"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_object, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_object, array of objects): error"});
+		}
+
+
+
+		// HTML STRING
+
+		result = u.template(tem_string_html, set_void_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, \"\"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, \"\"): error"});
+		}
+
+		result = u.template(tem_string_html, set_void_object);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, {}): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, {}): error"});
+		}
+
+		result = u.template(tem_string_html, set_void_array);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, []): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, []): error"});
+		}
+
+		result = u.template(tem_string_html, set_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, "+set_string+"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, "+set_string+"): error"});
+		}
+
+		result = u.template(tem_string_html, set_array_objects[0]);
+		if(typeof(result) == "object" && result.length == 1 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("span.number", result[0])) === "1" &&
+			u.text(u.qs("span.string_number", result[0])) === "1"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, object): error"});
+		}
+
+		result = u.template(tem_string_html, set_array_objects);
+		if(typeof(result) == "object" && result.length == 5 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("span.number", result[0])) === "1" &&
+			u.text(u.qs("span.string_number", result[0])) === "1"
+			
+			&&
+
+			u.qs("input", result[1]).value == "true" &&
+			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
+			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
+			u.text(u.qs("span.number", result[1])) === "2" &&
+			u.text(u.qs("span.string_number", result[1])) === "2"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, array of objects): error"});
+		}
+
+
+
+		// HTML OBJECT
+
+		result = u.template(tem_html, set_void_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_html, \"\"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_html, \"\"): error"});
+		}
+
+		result = u.template(tem_html, set_void_object);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_html, {}): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_html, {}): error"});
+		}
+
+		result = u.template(tem_html, set_void_array);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_html, []): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_html, []): error"});
+		}
+
+		result = u.template(tem_html, set_string);
+		if(typeof(result) == "object" && result.length === 0) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_html, "+set_string+"): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_html, "+set_string+"): error"});
+		}
+
+		result = u.template(tem_html, set_array_objects[0]);
+		if(typeof(result) == "object" && result.length == 1 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("span.number", result[0])) === "1" &&
+			u.text(u.qs("span.string_number", result[0])) === "1"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, object): error"});
+		}
+
+		result = u.template(tem_html, set_array_objects);
+		if(typeof(result) == "object" && result.length == 5 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("span.number", result[0])) === "1" &&
+			u.text(u.qs("span.string_number", result[0])) === "1"
+			
+			&&
+
+			u.qs("input", result[1]).value == "true" &&
+			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
+			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
+			u.text(u.qs("span.number", result[1])) === "2" &&
+			u.text(u.qs("span.string_number", result[1])) === "2"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, array of objects): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, array of objects): error"});
+		}
+
+
+
+		// AUTO APPEND
+
+		var ul = u.ae(div, "ul", {"class":"appendtest"});
+		result = u.template(tem_html, set_array_objects, {"append":ul});
+		if(typeof(result) == "object" && result.length == 5 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("span.number", result[0])) === "1" &&
+			u.text(u.qs("span.string_number", result[0])) === "1"
+			
+			&&
+
+			u.qs("input", result[1]).value == "true" &&
+			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
+			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
+			u.text(u.qs("span.number", result[1])) === "2" &&
+			u.text(u.qs("span.string_number", result[1])) === "2"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, array of objects, append to ul): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, array of objects, append to ul): error"});
+		}
+
+
+		var table = u.ae(div, "table", {"class":"appendtest"});
+		result = u.template(tem_string_html_table, set_array_objects, {"append":table});
+		if(typeof(result) == "object" && result.length == 5 && 
+			u.qs("input", result[0]).value == "false" &&
+			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+			u.text(u.qs("a", result[0])) === "Martin" &&
+			u.text(u.qs("td.number", result[0])) === "1" &&
+			u.text(u.qs("td.string_number", result[0])) === "1"
+			
+			&&
+
+			u.qs("input", result[1]).value == "true" &&
+			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
+			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
+			u.text(u.qs("td.number", result[1])) === "2" &&
+			u.text(u.qs("td.string_number", result[1])) === "2"
+		) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html_table, array of objects, append to table): correct"});
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html_table, array of objects, append to table): error"});
+		}
+
+
+		// CLEAN UP
 		ul.parentNode.removeChild(ul);
-		ul2.parentNode.removeChild(ul2);
-		ul3.parentNode.removeChild(ul3);
-		ul4.parentNode.removeChild(ul4);
 		table.parentNode.removeChild(table);
 
 	}

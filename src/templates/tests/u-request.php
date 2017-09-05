@@ -30,11 +30,33 @@ $this->headerIncludes(array(
 			<span>/ajax/post.json.php</span>
 		</div>
 
+		<div class="test method:post async:false">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, to JSON, sync: correct" />
+			</form>
+			<span>/ajax/post.json.php</span>
+		</div>
+
+		<div class="test method:post async:true send:formdata">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST FormData, to HTML, async, send formdata: correct" />
+			</form>
+			<span>/ajax/post.php</span>
+		</div>
+
 		<div class="test method:post async:true">
 			<form name="testform" action="" method="">
 				<input type="hidden" name="test" value="POST, to HTML, async: correct" />
 			</form>
 			<span>/ajax/post.php</span>
+		</div>
+
+		<div class="test method:post async:true headers:Content-Type:JSON">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, to HTML, async: correct, content-type header: JSON" />
+				<input type="hidden" name="headers" value="Content-Type,JSON" />
+			</form>
+			<span>/ajax/post_headers_content_type.php</span>
 		</div>
 
 		<div class="test method:post async:true headers:TeSt:Value">
@@ -113,4 +135,6 @@ $this->headerIncludes(array(
 
 </div>
 
-<div class="comments"></div>
+<div class="comments">
+	<p>TODO: Expand with file upload tests</p>
+</div>

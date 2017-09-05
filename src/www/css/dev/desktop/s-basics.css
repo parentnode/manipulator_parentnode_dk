@@ -94,7 +94,7 @@ dd {display: inline-block; vertical-align: top; font-size: 13px; line-height: 1.
 #content .scene div.tests div.testfailed {background: red;}
 
 #content .scene div.tests div.testpassed,
-#content .scene div.tests div.testfailed {margin: 0 0 3px; padding: 1px 5px 3px;}
+#content .scene div.tests div.testfailed {margin: 0 0 5px; padding: 5px 9px; border-radius: 4px;}
 
 #content .scene div.tests div.testpassed,
 #content .scene div.tests div.testfailed,

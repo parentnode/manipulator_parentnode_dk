@@ -621,6 +621,86 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.pluralize">
+				<div class="header">
+					<h3>Util.pluralize</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.pluralize</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.pluralize(count, singular, plural);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Pluralize quantity descriptive string, based on count value.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">count</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Number</span> Quantity used to determine singular/plural.
+								</div>
+							</dd>
+							<dt><span class="var">singular</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to use in singular case. 
+								</div>
+							</dd>
+							<dt><span class="var">plural</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to use in plural case. 
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>Quantity specific string, pluralized if needed.</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.pluralize(houses.length, "house", "houses");</code>
+	
+							<p>If houses.length is 1, then it returns <span class="value">1 house</span>. If houses.length is 2, it returns <span class="value">2 houses</span>.</p>
+						</div>
+					</div>
+				
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 			<!--div class="function" id="Util.stringOr">
 				<div class="header">
 					<h3>Util.stringOr</h3>
