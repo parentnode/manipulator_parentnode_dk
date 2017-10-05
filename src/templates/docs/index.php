@@ -24,26 +24,15 @@
 	<div class="files" id="library_files">
 
 		<h2>Library Index</h2>
+		<h3>Core modules</h3>
 		<ul class="library">
-			<li>
-				<h3><a href="/docs/u-animation">Animation</a></h3>
-				<p>CSS3 transitions with fallback.</p>
-			</li>
 			<li>
 				<h3><a href="/docs/u-array">Arrays</a></h3>
 				<p>Array prototypes for older browsers</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-audio">Audio</a></h3>
-				<p>Audio player</p>
-			</li>
-			<li>
 				<h3><a href="/docs/u-cookie">Cookie</a></h3>
 				<p>Cookie handling.</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-date">Date</a></h3>
-				<p>Date formatting.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-debug">Debug</a></h3>
@@ -55,59 +44,88 @@
 			</li>
 			<li>
 				<h3><a href="/docs/u-events">Events</a></h3>
-				<p>Add/remove events and basic event shorthands for Click, Hold, Dblclick.</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-events-movements">Events, Movements</a></h3>
-				<p>Movement events. Drag, Swipe.</p>
+				<p>Add/remove events and basic event shorthands for Click, Hold, Dblclick and Hover.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-events-browser">Events, Browser</a></h3>
-				<p>Browser events. DOM ready, Onload.</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-flash">Flash</a></h3>
-				<p>Flash object and detection</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-form">Form</a></h3>
-				<p>Form interface, input validation and event callbacks</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-form-builder">Form builder</a></h3>
-				<p>Form building methods</p>
+				<p>Browser events. DOM ready, Onload, etc.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-geometry">Geometry</a></h3>
 				<p>Positioning, sizes and offsets</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-googleanalytics">Google Analytics</a></h3>
-				<p>Built-in Google Analytics tracking</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-history">History</a></h3>
-				<p>Browser history for Ajax based navigation</p>
-			</li>
-			<li>
 				<h3><a href="/docs/u-init">Init</a></h3>
 				<p>Manipulator module initializer</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-keyboard">Keyboard</a></h3>
-				<p>Keyboard input and shortcut handling</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-math">Math</a></h3>
 				<p>Math based functions</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-string">String</a></h3>
+				<p>String manipulation and random key generation.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-system">System</a></h3>
+				<p>System and browser information</p>
+			</li>
+		</ul>
+
+
+		<h3>Extension modules</h3>
+		<ul class="library">
+			<li>
+				<h3><a href="/docs/u-animation">Animation</a></h3>
+				<p>CSS3 transitions with fallback.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-audio">Audio</a></h3>
+				<p>Audio player</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-date">Date</a></h3>
+				<p>Date formatting.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-events-movements">Events, Movements</a></h3>
+				<p>Movement events. Drag, Swipe.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-flash">Flash</a></h3>
+				<p>Flash object and detection.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-fontsready">FontsReady</a></h3>
+				<p>Font checker and preloader.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-form">Form</a></h3>
+				<p>Form interface, input validation and event callbacks.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-form-builder">Form builder</a></h3>
+				<p>Form building methods.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-googleanalytics">Google Analytics</a></h3>
+				<p>Built-in Google Analytics tracking.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-history">History</a></h3>
+				<p>Browser history for Ajax based navigation.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-keyboard">Keyboard</a></h3>
+				<p>Keyboard input and shortcut handling.</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-navigation">Navigation</a></h3>
-				<p>Ajax navigation controller</p>
+				<p>Ajax navigation controller.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-period">Period</a></h3>
-				<p>Time period formatting</p>
+				<p>Time period formatting.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-popup">Popup</a></h3>
@@ -115,7 +133,7 @@
 			</li>
 			<li>
 				<h3><a href="/docs/u-preloader">Preloader</a></h3>
-				<p>Loadbalanced image preloader</p>
+				<p>Loadbalanced image preloader.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-request">Request</a></h3>
@@ -130,20 +148,12 @@
 				<p>Sort a list of nodes.</p>
 			</li>
 			<li>
-				<h3><a href="/docs/u-string">String</a></h3>
-				<p>String manipulation and random key generation.</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-system">System</a></h3>
-				<p>System and browser information</p>
-			</li>
-			<li>
 				<h3><a href="/docs/u-svg">SVG</a></h3>
-				<p>SVG creation</p>
+				<p>SVG creation.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-template">Template</a></h3>
-				<p>JSON to HTML Template parser.</p>
+				<p>JSON to JSON/HTML Template parser.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-textscaler">Textscaler</a></h3>
@@ -159,7 +169,7 @@
 			</li>
 			<li>
 				<h3><a href="/docs/u-video">Video</a></h3>
-				<p>Video player</p>
+				<p>Video player.</p>
 			</li>
 		</ul>
 	</div>

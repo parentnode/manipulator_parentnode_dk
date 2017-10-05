@@ -36,9 +36,9 @@ var test3 = function() {
 
 	Util.Objects["test"] = new function() {
 
-		this.iterations = 100000;
+		this.iterations = 1000000;
 
-		this.init = function(scene) {
+		this.init = function(div) {
 			var i;
 
 			var t1 = new Date().getTime();
@@ -61,9 +61,11 @@ var test3 = function() {
 
 			var t4 = new Date().getTime();
 
-			u.bug("1:" + (t2-t1))
-			u.bug("2:" + (t3-t2))
-			u.bug("3:" + (t4-t3))
+
+			
+			u.ae(div, "div", {"class":"test", "html":"Static function ("+this.iterations+" loops): " + (t2-t1) + "ms"})
+			u.ae(div, "div", {"class":"test", "html":"Object with name:function ("+this.iterations+" loops): " + (t3-t2) + "ms"})
+			u.ae(div, "div", {"class":"test", "html":"Variable function ("+this.iterations+" loops): " + (t4-t3) + "ms"})
 		}
 
 
@@ -71,10 +73,12 @@ var test3 = function() {
 	}
 </script>
 
-<div class="scene i:test">
+<div class="scene">
 	<h1>Functions speed test</h1>
 	<p>Testing different types of function declaration</p>
 
-
+	<div class="tests i:test">
+		
+	</div>
 </div>
 <div class="comments"></div>
