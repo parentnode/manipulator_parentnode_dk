@@ -374,14 +374,14 @@ Util.Objects["dom"] = new function() {
 
 
 		// nodeWithin
-		node = u.ae(div, "div", {"html":"u.nodeWithin: error"});
+		node = u.ae(div, "div", {"html":"u.nw: error"});
 		if(u.nodeWithin(node, div) && !u.nodeWithin(div, node)) {
-			u.ae(div, node, {"class":"testpassed", "html":"u.nodeWithin: correct"});
-			div.test_results["u.nodeWithin"] = true;
+			u.ae(div, node, {"class":"testpassed", "html":"u.nw: correct"});
+			div.test_results["u.nw"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"nodeWithin: error"});
-			div.test_results["u.nodeWithin"] = false;
+			u.ae(div, node, {"class":"testfailed", "html":"nw: error"});
+			div.test_results["u.nw"] = false;
 		}
 
 

@@ -22,6 +22,7 @@ function loopTest(id, div) {
 u.nodeWithin_1 = u.nw = function(node, scope) {
 
 	if(scope != node) {
+
 		var node_key = u.randomString(8);
 	//	var scope_key = u.randomString(8);
 		node.classList.add(node_key);
@@ -41,6 +42,7 @@ u.nodeWithin_1 = u.nw = function(node, scope) {
 
 		node.classList.remove(node_key);
 		scope.classList.remove(node_key);
+
 	}
 	// u.rc(node, node_key);
 	// u.rc(scope, scope_key);
@@ -331,7 +333,7 @@ Util.Objects["test"] = new function() {
 </script>
 
 <div class="scene">
-	<h1>For loop test</h1>
+	<h1>u.nodeWithin test</h1>
 	<p>Testing different scope detection methods (to figure out if one node is inside another)</p>
 
 	<div class="tests i:test">

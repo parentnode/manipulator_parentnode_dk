@@ -2763,6 +2763,8 @@ u.ie(header, nav);</code>
 						<dl class="definition">
 							<dt class="name">Name</dt>
 							<dd class="name">Util.nodeWithin</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.nw</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Boolean</span> = 
 								Util.nodeWithin(
@@ -2801,7 +2803,8 @@ u.ie(header, nav);</code>
 					<div class="return">
 						<h4>Returns</h4>
 						<p>
-							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not.
+							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not. 
+							It also returns false if node IS scope (as opposed to Node.contains).
 						</p>
 					</div>
 
@@ -2815,17 +2818,14 @@ u.ie(header, nav);</code>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
-							<p>Nothing</p>
+							<ul>
+								<li>Node.contains</li>
+							</ul>
 						</div>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
-							<ul>
-								<li>u.randomString</li>
-								<li>u.addClass</li>
-								<li>u.querySelector</li>
-								<li>u.removeClass</li>
-							</ul>
+							<p>Nothing</p>
 						</div>
 
 					</div>

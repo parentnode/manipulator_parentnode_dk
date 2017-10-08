@@ -98,6 +98,25 @@ Util.Objects["test_e"] = new function() {
 
 }
 
+Util.Objects["test_f"] = new function() {
+	this.run = function() {
+
+		var test = 0;
+		for(var i = 0, l = objects.length; i < l; i++) {
+
+			var node = objects[i];
+
+			if(node.a != node.b) {
+				test += Math.pow(33, 3) * Math.sqrt(777)/10000;
+			}
+
+		}
+
+		return test;
+	}
+
+}
+
 
 function loopTest(id) {
 	
@@ -143,6 +162,10 @@ Util.Objects["test"] = new function() {
 
 		var t6 = new Date().getTime();
 
+		var result = loopTest("test_f");
+
+		var t7 = new Date().getTime();
+
 
 		
 		u.ae(div, "div", {"class":"test", "html":"Auto assignment ("+object_count+" objects, "+iterations+" loops): " + (t2-t1) + "ms"})
@@ -150,6 +173,7 @@ Util.Objects["test"] = new function() {
 		u.ae(div, "div", {"class":"test", "html":"No assignment ("+object_count+" objects, "+iterations+" loops): " + (t4-t3) + "ms"})
 		u.ae(div, "div", {"class":"test", "html":"No assignment, but lenght assignment ("+object_count+" objects, "+iterations+" loops): " + (t5-t4) + "ms"})
 		u.ae(div, "div", {"class":"test", "html":"for ... in ("+object_count+" objects, "+iterations+" loops): " + (t6-t5) + "ms"})
+		u.ae(div, "div", {"class":"test", "html":"all var in for ("+object_count+" objects, "+iterations+" loops): " + (t7-t6) + "ms"})
 	}
 
 }
