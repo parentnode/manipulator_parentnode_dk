@@ -79,10 +79,10 @@
 				<h3><a href="/docs/u-animation">Animation</a></h3>
 				<p>CSS3 transitions with fallback.</p>
 			</li>
-			<li>
+			<!--li>
 				<h3><a href="/docs/u-audio">Audio</a></h3>
 				<p>Audio player</p>
-			</li>
+			</li-->
 			<li>
 				<h3><a href="/docs/u-date">Date</a></h3>
 				<p>Date formatting.</p>
@@ -118,6 +118,10 @@
 			<li>
 				<h3><a href="/docs/u-keyboard">Keyboard</a></h3>
 				<p>Keyboard input and shortcut handling.</p>
+			</li>
+			<li>
+				<h3><a href="/docs/u-media">Media</a></h3>
+				<p>Video and audio player with custom controls.</p>
 			</li>
 			<li>
 				<h3><a href="/docs/u-navigation">Navigation</a></h3>
@@ -166,10 +170,6 @@
 			<li>
 				<h3><a href="/docs/u-url">URL</a></h3>
 				<p>Read GET params from URL.</p>
-			</li>
-			<li>
-				<h3><a href="/docs/u-video">Video</a></h3>
-				<p>Video player.</p>
 			</li>
 		</ul>
 	</div>

@@ -14,9 +14,15 @@ $this->headerIncludes(array(
 
 	<p>Audiotest requires interaction and observation :)</p>
 
+	<div class="tests i:audioAuto audioAuto">
+		<h2>Autoplay audio test</h2>
+		<p>Creates Autoplay player</p>
+		
+	</div>
+
 	<hr />
 
-	<div class="tests i:audio1">
+	<div class="tests i:audio1 audio1">
 		<h2>Looping audio test</h2>
 		<p>Creates looping player</p>
 		

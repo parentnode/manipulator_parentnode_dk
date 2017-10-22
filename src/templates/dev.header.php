@@ -8,12 +8,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="keywords" content="tests" />
 	<meta name="description" content="<?= $this->pageDescription() ?>" />
-	<meta name="viewport" content="initial-scale=1, user-scalable=no, max-scale=1, min-scale=1" />
+	<meta name="viewport" content="initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-	<link type="text/css" rel="stylesheet" media="all" href="/css/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.css" />
-	<script type="text/javascript" src="/js/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.js"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="/css/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.css?cb=<?= randomKey(2) ?>" />
+	<script type="text/javascript" src="/js/dev/seg_<?= $this->segment(array("type" => "dev")) ?>_include.js?cb=<?= randomKey(2) ?>"></script>
 
 	<?= $this->headerIncludes() ?>
 </head>

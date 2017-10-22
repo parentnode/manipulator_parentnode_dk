@@ -7,12 +7,26 @@
 
 #content .scene  div.tests .controls {position: absolute; left: 0; bottom: 0; width: 100%;}
 #content .scene  div.tests div.controls a {height: 23px; width: 50px; text-align: center; display: inline-block;}
+
 #content .scene  div.tests div.controls a span {height: 23px; width: 50px; text-align: center; display: block;}
 
 #content .scene  div.tests div.controls * {font-size: 13px;}
 
-#content .scene  div.tests div.controls .playpause span.play {background: green; color: #ffffff;}
-#content .scene  div.tests div.controls .playpause span.pause {display: none; background: red; color: #ffffff;}
+#content .scene  div.tests div.audioplayer div.controls a.stop
+/*,
+#content .scene  div.tests div.audioplayer div.controls a.playpause span.play*/ 
+{background: red; color: #ffffff;}
+
+#content .scene  div.tests div.audioplayer div.controls a.playpause
+/*,
+#content .scene  div.tests div.audioplayer div.controls a.playpause span.play*/ 
+{background: green; color: #ffffff;}
+
+#content .scene  div.tests div.audioplayer.playing div.controls a.playpause
+/*,
+
+#content .scene  div.tests div.audioplayer div.controls a.playpause span.pause*/ 
+{/*display: none;*/ background: orange; color: #ffffff;}
 
 #content .scene  div.tests div.playing .controls .playpause span.pause {display: block;}
 #content .scene  div.tests div.playing .controls .playpause span.play {display: none;}

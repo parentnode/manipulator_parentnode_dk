@@ -29,7 +29,7 @@
 	<h2>Interaction tests</h2>
 	<ul class="interaction">
 		<li class="test"><a href="/tests/u-animation">Animation</a></li>
-		<li class="test"><a href="/tests/u-audio">Audio</a></li>
+		<!--li class="test"><a href="/tests/u-audio">Audio</a></li-->
 		<li class="test"><a href="/tests/u-events">Events (click, hold, dblclick, hover)</a></li>
 		<li class="test"><a href="/tests/u-events-movements">Movements events (drag, swipe)</a></li>
 		<li class="test"><a href="/tests/u-events-browser">Browser events</a></li>
@@ -38,13 +38,14 @@
 		<li class="test"><a href="/tests/u-googleanalytics">Google Analytics</a></li>
 		<li class="test"><a href="/tests/u-history">History</a></li>
 		<li class="test"><a href="/tests/u-keyboard">Keyboard</a></li>
+		<li class="test"><a href="/tests/u-media">Media</a></li>
 		<li class="test"><a href="/tests/u-navigation">Navigation</a></li>
 		<li class="test"><a href="/tests/u-popup">Popup</a></li>
 		<li class="test"><a href="/tests/u-scrollto">ScrollTo</a></li>
 		<li class="test"><a href="/tests/u-sortable">Sortable (started)</a></li>
 		<li class="test"><a href="/tests/u-svg">SVG</a></li>
 		<li class="test"><a href="/tests/u-textscaler">Textscaler</a></li>
-		<li class="test"><a href="/tests/u-video">Video</a></li>
+		<!--li class="test"><a href="/tests/u-video">Video</a></li-->
 	</ul>
 
 	<h2>Speed/performance</h2>

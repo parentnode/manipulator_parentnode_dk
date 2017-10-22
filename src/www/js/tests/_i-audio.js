@@ -1,3 +1,41 @@
+Util.Objects["audioAuto"] = new function() {
+	this.init = function(div) {
+
+		div.player = u.audioPlayer({
+			"autoplay":true,
+			"loop":true
+		});
+		u.ae(div, div.player);
+
+		div.player.load("/media/audio/audio_2.mp3", {"playpause":true, "stop":true});
+
+		div.player.loading = function() {
+			console.log("pauto loading")
+		}
+		div.player.error = function() {
+			console.log("pauto error")
+		}
+		div.player.canplaythrough = function() {
+			console.log("pauto canplaythrough")
+		}
+		div.player.stalled = function() {
+			console.log("pauto stalled")
+		}
+		div.player.loadedmetadata = function() {
+			console.log("pauto loadedmetadata")
+		}
+		
+		// // add label to buttons
+		// var bn_playpause = u.qs("div.controls a.playpause", div.player);
+		// if(bn_playpause && !u.qs("span", bn_playpause)) {
+		// 	u.ae(bn_playpause, "span", {"class":"play", "html":"play"});
+		// 	u.ae(bn_playpause, "span", {"class":"pause", "html":"pause"});
+		// }
+
+	}
+}
+
+
 Util.Objects["audio1"] = new function() {
 	this.init = function(div) {
 
