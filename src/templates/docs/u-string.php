@@ -701,6 +701,179 @@ u.cutString(string, 10);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.isStringJSON">
+				<div class="header">
+					<h3>Util.isStringJSON</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.isStringJSON</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.isStringJSON</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Mixed</span> = 
+								Util.isStringJSON(
+									<span class="type">String</span> <span class="var">string</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Checks if string contains JSON object. If string contains JSON, JSON-object is returned, and object.isJSON is added to object.</p>
+						<p>Note: This test is automatically performed on all request responses before being returned to callback function.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">String</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">string</span> string to validate for JSON content
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Mixed</span> JSON object if found, else <span class="value">false</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>Util.isStringJSON('{"name":"manipulator"}');</code>
+							<p>Returns JSON object.</p>
+						</div>
+
+						<div class="example">
+							<code>Util.isStringJSON('manipulator');</code>
+							<p>Returns <span class="value">false</span>.</p>
+						</div>
+
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.substr</li>
+								<li>String.trim</li>
+								<li>String.match</li>
+								<li>try ... catch</li>
+								<li>JSON.parse</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.isStringHTML">
+				<div class="header">
+					<h3>Util.isStringHTML</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.isStringHTML</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.isStringHTML</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Mixed</span> = 
+								Util.isStringHTML(
+									<span class="type">String</span> <span class="var">string</span> 
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Checks if string contains DOM object, also knows as HTML. If string contains HTML, DOM-object is returned, and object.isHTML is added to object.</p>
+						<p>Note: This test is automatically performed on all request responses before being returned to callback function.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">String</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">string</span> string to validate for HTML content
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Mixed</span> DOM object if found, else <span class="value">false</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">					
+							<code>Util.isStringHTML('&lt;div class=&quot;scene&quot;&gt;manipulator&lt;/div&gt;');</code>
+							<p>Returns HTML object.</p>
+						</div>
+
+						<div class="example">
+							<code>Util.isStringHTML('{"name":"manipulator"}');</code>
+							<p>Returns <span class="value">false</span>.</p>
+						</div>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<!-- list javascript functions used by function -->
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.substr</li>
+								<li>String.trim</li>
+								<li>String.match</li>
+								<li>try ... catch</li>
+								<li>document.createElement</li>
+								<li>document.childNodes</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<!-- list manipulator functions used by function -->
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
 			<!--div class="function" id="Util.stringOr">
 				<div class="header">
 					<h3>Util.stringOr</h3>

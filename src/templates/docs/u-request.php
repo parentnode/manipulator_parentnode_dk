@@ -37,16 +37,19 @@
 						<p>Make a server request using XMLHttpRequest with GET, POST, PUT or PATCH or &lt;script&gt; injection in &lt;head&gt;.</p>
 						<p>Responses are validated using Util.isStringJSON and Util.isStringHTML before being returned to callback function.</p>
 						<p>
-							Makes callback to node.response(response, [request_id]) when valid response is received. Declare this function
+							Makes callback to node.response(response, request_id) when valid response is received. Declare this function
 							on <span class="var">node</span> to receive callback. <span class="var">response</span> parameter will
 							be DOM- or JSON-object, or text-string. DOM-object has <span class="var">response.isHTML</span> variable declared. JSON-object has
 							<span class="var">response.isJSON</span> variable declared, to make testing for response type easier.
 						</p>
 						<p>
-							Makes callback to node.responseError(request) if request fails - on security exceptions, page not found or server error. 
-							Declare this function on <span class="var">node</span> to receive callback. <span class="var">request</span>
-							is the XMLHTTPRequest object used to attempt the request. If error is exception, the exception can be found in
-							request.exception.
+							Makes callback to node.responseError(response, request_id) if request fails - on security exceptions, page not found, timeout or server error. 
+							Declare this function on <span class="var">node</span> to receive callback. If node.responseError is not declared, 
+							response error will be returned to node.response.
+						</p>
+						<p>
+							A request object, containing all request settings, is mapped to <span class="var">node[request_id]</span>. This object
+							will also contain information about exceptions and if timeout occured.
 						</p>
 						<p>
 							See <a href="/docs/u-form#Util.Form.getParams">Util.Form.getParams</a> to know more about retrieving values from a form.
@@ -82,7 +85,7 @@
 										<dd>
 											POST, GET, PUT, PATCH, SCRIPT - default GET. SCRIPT causes a script injection in &lt;head&gt;
 											and responder must wrap result in callback function, which is appended to url as <span class="var">callback</span>.
-											Default: GET.
+											Default: <span class="value">GET</span>.
 										</dd>
 										<dt><span class="value">data</span></dt>
 										<dd>
@@ -91,7 +94,9 @@
 											appended to url. When using POST, PUT or PATCH a JSON object will be sent as a JSON-string.
 										</dd>
 										<dt><span class="value">async</span></dt>
-										<dd>Send async - default false. Does not apply to SCRIPT injection.</dd>
+										<dd>Send async - default <span class="value">true</span>. Does not apply to SCRIPT injection.</dd>
+										<dt><span class="value">timeout</span></dt>
+										<dd>Add timeout to request - default <span class="value">none</span>. Does not apply to synchronous requests.</dd>
 										<dt><span class="value">headers</span></dt>
 										<dd>
 											JSON object containing additional headers to include in request.<br />Note: Safari 4 converts all 
@@ -100,8 +105,16 @@
 											if depending on custom headers.<br />
 											Headers cannot be used with SCRIPT injection.
 										</dd>
+										<dt><span class="value">credentials</span></dt>
+										<dd>Make the request with credentials, default <span class="value">false</span></dd>
+										<dt><span class="value">responseType</span></dt>
+										<dd>Set responseType for request, default <span class="value">text</span></dd>
+
 										<dt><span class="value">callback</span></dt>
-										<dd>Response callback function name, default: response</dd>
+										<dd>Response callback function name, default: <span class="value">response</span></dd>
+										<dt><span class="value">error_callback</span></dt>
+										<dd>Response error callback function name, default: <span class="value">responseError</span></dd>
+
 										<dt><span class="value">jsonp_callback</span></dt>
 										<dd>
 											Jsonp requests callback function name parameter. Appended to request in case receiving
@@ -207,9 +220,11 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 							<ul>
 								<li>XMLHttpRequest/ActiveXObject</li>
 								<li>String.match</li>
+								<li>String.replace</li>
 								<li>String.trim</li>
 								<li>String.substr</li>
 								<li>try ... catch</li>
+								<li>Number</li>
 								<li>Number.toString</li>
 								<li>JSON.parse</li>
 								<li>JSON.stringify</li>
@@ -222,179 +237,12 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 							<ul>
 								<li>Util.querySelector</li>
 								<li>Util.appendElement</li>
+								<li>Util.randomString</li>
+								<li>Util.isStringHTML</li>
+								<li>Util.isStringJSON</li>
+								<li>Util.Timer</li>
+								<li>Util.Events</li>
 							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="Util.isStringJSON">
-				<div class="header">
-					<h3>Util.isStringJSON</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.isStringJSON</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.isStringJSON</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Mixed</span> = 
-								Util.isStringJSON(
-									<span class="type">String</span> <span class="var">string</span> 
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Checks if string contains JSON object. If string contains JSON, JSON-object is returned, and object.isJSON is added to object.</p>
-						<p>Note: This test is automatically performed on all request responses before being returned to callback function.</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">String</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">string</span> string to validate for JSON content
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Mixed</span> JSON object if found, else <span class="value">false</span></p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-
-						<div class="example">
-							<code>Util.isStringJSON('{"name":"manipulator"}');</code>
-							<p>Returns JSON object.</p>
-						</div>
-
-						<div class="example">
-							<code>Util.isStringJSON('manipulator');</code>
-							<p>Returns <span class="value">false</span>.</p>
-						</div>
-
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<!-- list javascript functions used by function -->
-							<h5>JavaScript</h5>
-							<ul>
-								<li>String.substr</li>
-								<li>String.trim</li>
-								<li>String.match</li>
-								<li>try ... catch</li>
-								<li>JSON.parse</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
-							<h5>Manipulator</h5>
-							<p>none</p>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-
-			<div class="function" id="Util.isStringHTML">
-				<div class="header">
-					<h3>Util.isStringHTML</h3>
-				</div>
-				<div class="body">
-					<div class="definition">
-						<h4>Definition</h4>
-						<dl class="definition">
-							<dt class="name">Name</dt>
-							<dd class="name">Util.isStringHTML</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.isStringHTML</dd>
-							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Mixed</span> = 
-								Util.isStringHTML(
-									<span class="type">String</span> <span class="var">string</span> 
-								);
-							</dd>
-						</dl>
-					</div>
-
-					<div class="description">
-						<h4>Description</h4>
-						<p>Checks if string contains DOM object, also knows as HTML. If string contains HTML, DOM-object is returned, and object.isHTML is added to object.</p>
-						<p>Note: This test is automatically performed on all request responses before being returned to callback function.</p>
-					</div>
-
-					<div class="parameters">
-						<h4>Parameters</h4>
-
-						<dl class="parameters">
-							<dt><span class="var">String</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">string</span> string to validate for HTML content
-								</div>
-							</dd>
-						</dl>
-					</div>
-
-					<div class="return">
-						<h4>Returns</h4>
-						<p><span class="type">Mixed</span> DOM object if found, else <span class="value">false</span></p>
-					</div>
-
-					<div class="examples">
-						<h4>Examples</h4>
-
-						<div class="example">					
-							<code>Util.isStringHTML('&lt;div class=&quot;scene&quot;&gt;manipulator&lt;/div&gt;');</code>
-							<p>Returns HTML object.</p>
-						</div>
-
-						<div class="example">
-							<code>Util.isStringHTML('{"name":"manipulator"}');</code>
-							<p>Returns <span class="value">false</span>.</p>
-						</div>
-					</div>
-
-					<div class="uses">
-						<h4>Uses</h4>
-
-						<div class="javascript">
-							<!-- list javascript functions used by function -->
-							<h5>JavaScript</h5>
-							<ul>
-								<li>String.substr</li>
-								<li>String.trim</li>
-								<li>String.match</li>
-								<li>try ... catch</li>
-								<li>document.createElement</li>
-								<li>document.childNodes</li>
-							</ul>
-						</div>
-
-						<div class="manipulator">
-							<!-- list manipulator functions used by function -->
-							<h5>Manipulator</h5>
-							<p>none</p>
 						</div>
 
 					</div>
@@ -448,6 +296,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-string.js</span>
+					<span class="file">u-events.js</span>
 				</dd>
 
 				<dt>desktop</dt>
@@ -455,6 +304,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-request.js</span> +
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-string.js</span>
+					<span class="file">u-events.js</span>
 				</dd>
 
 				<dt>desktop_ie10</dt>
@@ -463,6 +313,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-string.js</span>
+					<span class="file">u-events.js</span>
 				</dd>
 
 				<dt>desktop_ie9</dt>
@@ -471,6 +322,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-dom.js</span> +
 					<span class="file">u-dom-desktop_ie10.js</span> + 
 					<span class="file">u-string.js</span>
+					<span class="file">u-events.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>
@@ -482,6 +334,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 					<span class="file">u-dom-desktop_light.js</span> +
 					<span class="file">u-string.js</span> +
 					<span class="file">u-string-desktop_light.js</span>
+					<span class="file">u-events.js</span>
 				</dd>
 
 				<dt>tablet</dt>
