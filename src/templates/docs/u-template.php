@@ -44,8 +44,20 @@
 							based on <span class="var">template</span>. 
 						</p>
 						<p>
-							If JSON (Object or string) is passed as template, it creates new Array of JSON Object 
+							If JSON (Object or string) is passed as template, it creates new Array of JSON Objects 
 							from <span class="var">json</span> based on <span class="var">template</span>. 
+						</p>
+						<p>
+							If plain String is passed as template, it creates a combined string, with the values from 
+							<span class="var">json</span>.
+						</p>
+						<p class="note">
+							If <span class="var">json</span> contains values of type <span class="type">Object</span>, 
+							<span class="type">Number</span>, <span class="type">Boolean</span> or <span class="type">null</span>,
+							these maintain the same type <strong>only when</strong> <span class="var">template</span> is also JSON.
+							If <span class="var">template</span> is HTML, HTML string or plain string, these types will 
+							naturally be returned as a text-representation. In this case <span class="type">null</span>
+							becomes an emptry string.
 						</p>
 					</div>
 
@@ -74,7 +86,7 @@
 							<dt><span class="var">json</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">JSON</span> Array of JSON objects to use as values.
+									<span class="type">JSON</span> JSON object or Array of JSON objects to use as values.
 								</div>
 							</dd>
 							<dt><span class="var">_options</span></dt>
@@ -99,10 +111,25 @@
 					<div class="return">
 						<h4>Returns</h4>
 						<p>
-							<span class="type">ChildNodes|Array|JSON</span> 
-							If HTML is passed as <span class="template">template</span> it returns list of created nodes as ChildNodes reference or Array of nodes if the 
+							<span class="type">ChildNodes|Array|String</span> 
+						</p>
+						<p>
+							If HTML is passed as <span class="var">template</span> it returns list of created nodes as ChildNodes reference or Array of nodes if the 
 							<span class="var">append</span> option is used to append nodes automatically.
-							If JSON is passed as <span class="template">template</span> it returns Array of JSON Objects.
+						</p>
+						<p>
+							If JSON is passed as <span class="var">template</span> it returns an Array of JSON Objects.
+						</p>
+						<p>
+							If String is passed as <span class="var">template</span>, a combined String is returned.
+						</p>
+						<p class="note">
+							If <span class="var">json</span> contains values of type <span class="type">Object</span>, 
+							<span class="type">Number</span>, <span class="type">Boolean</span> or <span class="type">null</span>,
+							these maintain the same type <strong>only when</strong> <span class="var">template</span> is also JSON.
+							If <span class="var">template</span> is HTML, HTML string or plain string, these types will 
+							naturally be returned as a text-representation. In this case <span class="type">null</span>
+							becomes an emptry string.
 						</p>
 					</div>
 
@@ -196,9 +223,10 @@
 						<div class="example">
 							<h5>JSON conversion</h5>
 							<code>var template = {
-	"name":{res1},
-	"description":{res2},
-	"url":{res3}
+	"name":"{res1}",
+	"description":"{res2}",
+	"url":"{res3}"
+	"saved":"{res4}"
 };
 
 var data = [
@@ -206,6 +234,7 @@ var data = [
 		"res1":"Manipulator",
 		"res2":"JavaScript framework",
 		"res3":"http://manipulator.parentnode.dk"
+		"res4":true,
 		"meta":{
 			"key":"{1231-BFED-12312-21231}",
 			"signature":"Xew-12345"
@@ -215,6 +244,7 @@ var data = [
 		"res1":"Detector",
 		"res2":"Device detection"
 		"res3":"http://detector.parentnode.dk"
+		"res4":false,
 		"meta":{
 			"key":"{1231-BFED-12312-21231}",
 			"signature":"Xew-12345"
@@ -229,12 +259,14 @@ var new_json = u.template(template, data);
 	{
 		"name":"Manipulator",
 		"description":"JavaScript framework",
-		"url":"http://manipulator.parentnode.dk"
+		"url":"http://manipulator.parentnode.dk",
+		"saved":true
 	},
 	{
 		"name":"Detector",
 		"description":"Device detection"
-		"url":"http://detector.parentnode.dk"
+		"url":"http://detector.parentnode.dk",
+		"saved":false
 	}
 ];</code>
 						</div>

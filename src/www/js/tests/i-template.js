@@ -9,14 +9,14 @@ Util.Objects["template"] = new function() {
 		// templates
 		var tem_string = 'string {text} string';
 
-		var tem_string_json = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":{boolean}, "number":{number}, "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":{object}}';
-		var tem_string_json_quoted = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":"{object}"}';
-		var tem_object = {"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "object":"{object}"};
+		var tem_string_json = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":{boolean}, "number":{number}, "string_boolean":"{string_boolean}", "string_number":"{string_number}", "maybe_null":"{maybe_null}", "object":{object}}';
+		var tem_string_json_quoted = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "maybe_null":"{maybe_null}", "object":"{object}"}';
+		var tem_object = {"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "maybe_null":"{maybe_null}", "object":"{object}"};
 
-		var tem_string_html = '<li><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span></li>';
-		var tem_html = u.ae(document.createElement("ul"), "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span>'})
+		var tem_string_html = '<li><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span><span class="maybe_null">{maybe_null}</span></li>';
+		var tem_html = u.ae(document.createElement("ul"), "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span><span class="maybe_null">{maybe_null}</span>'})
 
-		var tem_string_html_table = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td><td><input type="text" value="{boolean}" /></td><td class="number">{number}</td><td class="string_number">{string_number}</td><td class="string_boolean">{string_boolean}</td></tr>';
+		var tem_string_html_table = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td><td><input type="text" value="{boolean}" /></td><td class="number">{number}</td><td class="string_number">{string_number}</td><td class="string_boolean">{string_boolean}</td><td class="maybe_null">{maybe_null}</td></tr>';
 
 		// value sets
 		var set_void_array = [];
@@ -34,6 +34,7 @@ Util.Objects["template"] = new function() {
 				"number":1,
 				"string_boolean":"false",
 				"string_number":"1",
+				"maybe_null":null,
 				"object": {
 					"name":"object 1"
 				}
@@ -49,6 +50,7 @@ Util.Objects["template"] = new function() {
 				"number":2,
 				"string_boolean":"true",
 				"string_number":"2",
+				"maybe_null":"Not null",
 				"object": {
 					"name":"object 2"
 				}
@@ -64,6 +66,7 @@ Util.Objects["template"] = new function() {
 				"number":3,
 				"string_boolean":"false",
 				"string_number":"3",
+				"maybe_null":"Not null",
 				"object": {
 					"name":"object 3"
 				}
@@ -79,6 +82,7 @@ Util.Objects["template"] = new function() {
 				"number":4,
 				"string_boolean":"true",
 				"string_number":"4",
+				"maybe_null":null,
 				"object": {
 					"name":"object 4"
 				}
@@ -94,6 +98,7 @@ Util.Objects["template"] = new function() {
 				"number":3,
 				"string_boolean":"false",
 				"string_number":"5",
+				"maybe_null":"Not null",
 				"object": {
 					"name":"object 5"
 				}
@@ -105,6 +110,23 @@ Util.Objects["template"] = new function() {
 		var i, node;
 		var result;
 
+
+		// result = u.template(tem_string_html, set_array_objects[0]);
+		// console.log(result);
+		// if(typeof(result) == "object" && result.length == 1 &&
+		// 	u.qs("input", result[0]).value == "false" &&
+		// 	u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
+		// 	u.text(u.qs("a", result[0])) === "Martin" &&
+		// 	u.text(u.qs("span.number", result[0])) === "1" &&
+		// 	u.text(u.qs("span.string_number", result[0])) === "1"
+		// ) {
+		// 	u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
+		// }
+		// else {
+		// 	u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, object): error"});
+		// }
+		//
+		// return;
 
 		// STRING TEMPLATE
 		result = u.template(tem_string, set_void_string);
@@ -192,10 +214,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -209,10 +232,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json_quoted, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -225,10 +249,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -237,6 +262,7 @@ Util.Objects["template"] = new function() {
 			result[1].text === "Martin \"2\"" &&
 			result[1].boolean === true &&
 			result[1].number === 2 &&
+			result[1].maybe_null !== null &&
 			result[1].string_boolean === "true" &&
 			result[1].string_number === "2" &&
 			result[1].object.name === "object 2" &&
@@ -249,10 +275,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json_quoted, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -261,6 +288,7 @@ Util.Objects["template"] = new function() {
 			result[1].text === "Martin \"2\"" &&
 			result[1].boolean === true &&
 			result[1].number === 2 &&
+			result[1].maybe_null !== null &&
 			result[1].string_boolean === "true" &&
 			result[1].string_number === "2" &&
 			result[1].object.name === "object 2" &&
@@ -309,10 +337,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_object, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -325,10 +354,11 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_object, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 8 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
+			result[0].maybe_null === null &&
 			result[0].string_boolean === "false" &&
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
@@ -337,6 +367,7 @@ Util.Objects["template"] = new function() {
 			result[1].text === "Martin \"2\"" &&
 			result[1].boolean === true &&
 			result[1].number === 2 &&
+			result[1].maybe_null !== null &&
 			result[1].string_boolean === "true" &&
 			result[1].string_number === "2" &&
 			result[1].object.name === "object 2" &&
@@ -390,7 +421,8 @@ Util.Objects["template"] = new function() {
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("span.number", result[0])) === "1" &&
-			u.text(u.qs("span.string_number", result[0])) === "1"
+			u.text(u.qs("span.string_number", result[0])) === "1" &&
+			u.text(u.qs("span.maybe_null", result[0])) === ""
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
 		}
@@ -404,15 +436,17 @@ Util.Objects["template"] = new function() {
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("span.number", result[0])) === "1" &&
-			u.text(u.qs("span.string_number", result[0])) === "1"
-			
+			u.text(u.qs("span.string_number", result[0])) === "1" &&
+			u.text(u.qs("span.maybe_null", result[0])) === ""
+
 			&&
 
 			u.qs("input", result[1]).value == "true" &&
 			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
 			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
 			u.text(u.qs("span.number", result[1])) === "2" &&
-			u.text(u.qs("span.string_number", result[1])) === "2"
+			u.text(u.qs("span.string_number", result[1])) === "2" &&
+			u.text(u.qs("span.maybe_null", result[1])) === "Not null"
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, array of objects): correct"});
 		}
@@ -462,7 +496,8 @@ Util.Objects["template"] = new function() {
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("span.number", result[0])) === "1" &&
-			u.text(u.qs("span.string_number", result[0])) === "1"
+			u.text(u.qs("span.string_number", result[0])) === "1" &&
+			u.text(u.qs("span.maybe_null", result[0])) === ""
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
 		}
@@ -476,15 +511,17 @@ Util.Objects["template"] = new function() {
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("span.number", result[0])) === "1" &&
-			u.text(u.qs("span.string_number", result[0])) === "1"
-			
+			u.text(u.qs("span.string_number", result[0])) === "1" &&
+			u.text(u.qs("span.maybe_null", result[0])) === ""
+
 			&&
 
 			u.qs("input", result[1]).value == "true" &&
 			u.qs("img", result[1]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-400x250.png" &&
 			u.text(u.qs("a", result[1])) === "Martin \"2\"" &&
 			u.text(u.qs("span.number", result[1])) === "2" &&
-			u.text(u.qs("span.string_number", result[1])) === "2"
+			u.text(u.qs("span.string_number", result[1])) === "2" &&
+			u.text(u.qs("span.maybe_null", result[1])) === "Not null"
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, array of objects): correct"});
 		}
@@ -504,7 +541,7 @@ Util.Objects["template"] = new function() {
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("span.number", result[0])) === "1" &&
 			u.text(u.qs("span.string_number", result[0])) === "1"
-			
+
 			&&
 
 			u.qs("input", result[1]).value == "true" &&
@@ -528,7 +565,7 @@ Util.Objects["template"] = new function() {
 			u.text(u.qs("a", result[0])) === "Martin" &&
 			u.text(u.qs("td.number", result[0])) === "1" &&
 			u.text(u.qs("td.string_number", result[0])) === "1"
-			
+
 			&&
 
 			u.qs("input", result[1]).value == "true" &&
