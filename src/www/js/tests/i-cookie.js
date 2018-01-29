@@ -9,32 +9,35 @@ Util.Objects["cookie"] = new function() {
 		var cookie_value4 = "-.alu/æøåve:_";
 
 
+		var regex_xStorage = new RegExp(cookie_value1);
+		var regex_cookie = new RegExp(encodeURIComponent(cookie_value1));
+
+		// Real old school cookies
+
 		// save test cookie
-		u.saveCookie("test", cookie_value1);
-		var regex = new RegExp(encodeURIComponent(cookie_value1));
+		u.saveCookie("test", cookie_value1, {force:true});
 
 		// set cookie on root to validate path settings are handled correctly
-		u.saveCookie("test", cookie_value2, {"path":"/"});
-
+		u.saveCookie("test", cookie_value2, {path:"/", force:true});
 
 		// save cookie
-		if(regex.test(document.cookie)) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie: correct"});
+		if(regex_cookie.test(document.cookie)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie (forced): correct"});
 			div.test_results["u.saveCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"u.saveCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.saveCookie (forced): error"});
 			div.test_results["u.saveCookie"] = false;
 		}
 
 
 		// get cookie
 		if(u.getCookie("test") == cookie_value1) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.getCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.getCookie (forced): correct"});
 			div.test_results["u.getCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"u.getCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.getCookie (forced): error"});
 			div.test_results["u.getCookie"] = false;
 		}
 
@@ -50,13 +53,95 @@ Util.Objects["cookie"] = new function() {
 		var no_cookie = u.getCookie("test");
 		
 		if(root_cookie == cookie_value2 && !no_cookie) {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteCookie: correct"});
+			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteCookie (forced): correct"});
 			div.test_results["u.deleteCookie"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteCookie: error"});
+			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteCookie (forced): error"});
 			div.test_results["u.deleteCookie"] = false;
 		}
+
+
+		// localStorage "cookie"
+		// save test cookie
+		u.saveCookie("test", cookie_value1, {"expires":false});
+		// saved cookie
+		if(typeof(window.localStorage) == "object" && regex_xStorage.test(window.localStorage.test)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie (localStorage/cookie): correct"});
+			div.test_results["u.saveCookie"] = true;
+		}
+		else if(typeof(window.localStorage) != "object" && regex_cookie.test(document.cookie)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie (localStorage/cookie): correct - fallback to cookie"});
+			div.test_results["u.saveCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.saveCookie (localStorage/cookie): error"});
+			div.test_results["u.saveCookie"] = false;
+		}
+
+		// get cookie
+		if(u.getCookie("test") == cookie_value1) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.getCookie (localStorage/cookie): correct"});
+			div.test_results["u.getCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.getCookie (localStorage/cookie): error"});
+			div.test_results["u.getCookie"] = false;
+		}
+
+		// delete cookie
+		u.deleteCookie("test");
+		if(!u.getCookie("test")) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteCookie (localStorage/cookie): correct"});
+			div.test_results["u.deleteCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteCookie (localStorage/cookie): error"});
+			div.test_results["u.deleteCookie"] = false;
+		}
+
+
+
+		// sessionStorage "cookie"
+		// save test cookie
+		u.saveCookie("test", cookie_value1);
+
+		// save cookie
+		if(typeof(window.sessionStorage) == "object" && regex_xStorage.test(window.sessionStorage.test)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie (sessionStorage/cookie): correct"});
+			div.test_results["u.saveCookie"] = true;
+		}
+		else if(typeof(window.sessionStorage) != "object" && regex_cookie.test(document.cookie)) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.saveCookie (sessionStorage/cookie): correct - fallback to cookie"});
+			div.test_results["u.saveCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.saveCookie (sessionStorage/cookie): error"});
+			div.test_results["u.saveCookie"] = false;
+		}
+
+		// get cookie
+		if(u.getCookie("test") == cookie_value1) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.getCookie (sessionStorage/cookie): correct"});
+			div.test_results["u.getCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.getCookie (sessionStorage/cookie): error"});
+			div.test_results["u.getCookie"] = false;
+		}
+
+
+		// delete cookie
+		u.deleteCookie("test");
+		if(!u.getCookie("test")) {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.deleteCookie (sessionStorage/cookie): correct"});
+			div.test_results["u.deleteCookie"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.deleteCookie (sessionStorage/cookie): error"});
+			div.test_results["u.deleteCookie"] = false;
+		}
+
 
 
 

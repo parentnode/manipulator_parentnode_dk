@@ -2,6 +2,11 @@
 	<h1>Cookie</h1>
 	<p>Basic cookie functions. Get, save, eat.</p>
 	<p>
+		The cookie is a bit of a pseudo term in this context. "Cookies" will be saved in localStorage or sessionStorage, if
+		available, to lessen request overhead – real cookies are being sent back and forth for each request. The
+		storage method can be forced to real cookies if so desired. 
+	</p>
+	<p>
 		In addition to regular cookies, Manipulator includes a simple way of mapping a cookie to a DOM node, allowing you to
 		create a sort of Node memory, ie. if you want to remember the state of a node (open, closed, selected, entered text).
 		These cookies are called nodeCookies.
@@ -37,7 +42,14 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Save cookie. Use session cookies as default. Use options to set expiry and path.</p>
+						<p>
+							Save cookie. Uses session cookies via sessionStorage as default. If <span class="var">expires</span> is not 
+							<span class="value">true</span>, localStorage is used.
+						</p>
+						<p>
+							Use <span class="var">force</span> option to force the use of real cookies. For real cookies
+							you can use options to set detailed expiry and path.
+						</p>
 					</div>
 
 					<div class="parameters">
@@ -66,11 +78,13 @@
 									<dl class="options">
 										<dt><span class="value">path</span></dt>
 										<dd>
-											path to save cookie with - default is current path 
+											path to save cookie with - default is current path. Only applicable for real cookies.
 										</dd>
 										<dt><span class="value">expires</span></dt>
 										<dd>
-											Expiry date like, "Tue, 05-Apr-2020 05:00:00 GMT"
+											Expiry date like, "Tue, 05-Apr-2020 05:00:00 GMT". Specific expiry date only 
+											applicable for real cookies. 
+											For localStorage/sessionStorage only expires = true/false can be used.
 										</dd>
 									</dl>
 								</div>
