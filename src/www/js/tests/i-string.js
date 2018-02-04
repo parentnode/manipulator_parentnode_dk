@@ -107,6 +107,28 @@ Util.Objects["string"] = new function() {
 			div.test_results["u.lcfirst"] = false;
 		}
 
+		// isStringJSON
+		var test_string = '{"test":"hest"}';
+		if(u.isStringJSON(test_string) && u.isStringJSON(test_string).test == "hest") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.isStringJSON: correct"});
+			div.test_results["u.isStringJSON"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.isStringJSON: error"});
+			div.test_results["u.isStringJSON"] = false;
+		}
+
+		// isStringHTML
+		var test_string = '<div class="test">hest</div>';
+		if(u.isStringHTML(test_string) && u.qs(".test", u.isStringHTML(test_string)).innerHTML == "hest") {
+			u.ae(div, "div", {"class":"testpassed", "html":"u.isStringHTML: correct"});
+			div.test_results["u.isStringHTML"] = true;
+		}
+		else {
+			u.ae(div, "div", {"class":"testfailed", "html":"u.isStringHTML: error"});
+			div.test_results["u.isStringHTML"] = false;
+		}
+
 	}
 
 }

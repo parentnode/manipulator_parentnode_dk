@@ -35,7 +35,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>Make a server request using XMLHttpRequest with GET, POST, PUT or PATCH or &lt;script&gt; injection in &lt;head&gt;.</p>
-						<p>Responses are validated using Util.isStringJSON and Util.isStringHTML before being returned to callback function.</p>
+						<p>Response is validated before being returned to callback function, to make sure response callback always receives something useful.</p>
 						<p>
 							Makes callback to node.response(response, request_id) when valid response is received. Declare this function
 							on <span class="var">node</span> to receive callback. <span class="var">response</span> parameter will

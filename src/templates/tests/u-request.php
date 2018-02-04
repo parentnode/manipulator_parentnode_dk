@@ -9,6 +9,7 @@ $this->headerIncludes(array(
 
 	<div class="tests i:request method:post">
 
+
 		<h2>POSTs</h2>
 		<div class="test waiting method:post">
 			<form name="testform" action="" method="">
@@ -96,6 +97,34 @@ $this->headerIncludes(array(
 			<span>http://manipulator.proxy/ajax/post-cors.php</span>
 		</div>
 
+		<div class="test waiting method:post responseType:document">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, responseType=document, to HTML: correct" />
+			</form>
+			<span>/ajax/post.php</span>
+		</div>
+
+		<div class="test waiting method:post send:json responseType:json">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, responseType=json, to JSON, send JSON: correct" />
+			</form>
+			<span>/ajax/post_json.json.php</span>
+		</div>
+
+		<div class="test waiting method:post responseType:blob">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, responseType=blob, to Blob: correct" />
+			</form>
+			<span>/ajax/post.blob.php</span>
+		</div>
+
+		<div class="test waiting method:post responseType:arraybuffer">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, responseType=arraybuffer, to ArrayBuffer: correct" />
+			</form>
+			<span>/ajax/post.arraybuffer.php</span>
+		</div>
+
 
 		<h2>GETs</h2>
 		<div class="test waiting method:get">
@@ -169,6 +198,15 @@ $this->headerIncludes(array(
 				<input type="hidden" name="test" value="SCRIPT, param URL, to JSONP with delay, 100 timeout" />
 			</form>
 			<span>/ajax/script.jsonp.timeout.php</span>
+		</div>
+
+
+		<h2>404</h2>
+		<div class="test waiting shouldfail:true">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, to 404: correct" />
+			</form>
+			<span>/ajax/post.404.php</span>
 		</div>
 
 	</div>
