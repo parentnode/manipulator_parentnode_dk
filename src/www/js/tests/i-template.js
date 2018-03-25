@@ -13,7 +13,7 @@ Util.Objects["template"] = new function() {
 		var tem_string_json_quoted = '{"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "maybe_null":"{maybe_null}", "object":"{object}"}';
 		var tem_object = {"url":"{url}", "image":"{image}", "text":"{text}", "boolean":"{boolean}", "number":"{number}", "string_boolean":"{string_boolean}", "string_number":"{string_number}", "maybe_null":"{maybe_null}", "object":"{object}"};
 
-		var tem_string_html = '<li><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span><span class="maybe_null">{maybe_null}</span></li>';
+		var tem_string_html = '<li class="is_{boolean}"><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span><span class="maybe_null">{maybe_null}</span></li>';
 		var tem_html = u.ae(document.createElement("ul"), "li", {"class":"template", "html":'<a href="{url}"><img src="{image}" alt="{alt}" />{text}</a><img src="{image_extra}" alt="extra" /><input type="text" value="{boolean}" /><span class="number">{number}</span><span class="string_number">{string_number}</span><span class="string_boolean">{string_boolean}</span><span class="maybe_null">{maybe_null}</span>'})
 
 		var tem_string_html_table = '<tr><td><a href="{url}"><img src="{image}" alt="{alt}" />{text}</a></td><td><input type="text" value="{boolean}" /></td><td class="number">{number}</td><td class="string_number">{string_number}</td><td class="string_boolean">{string_boolean}</td><td class="maybe_null">{maybe_null}</td></tr>';
@@ -103,30 +103,13 @@ Util.Objects["template"] = new function() {
 					"name":"object 5"
 				}
 			},
-			
+
 		];
 
 
 		var i, node;
 		var result;
 
-
-		// result = u.template(tem_string_html, set_array_objects[0]);
-		// console.log(result);
-		// if(typeof(result) == "object" && result.length == 1 &&
-		// 	u.qs("input", result[0]).value == "false" &&
-		// 	u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
-		// 	u.text(u.qs("a", result[0])) === "Martin" &&
-		// 	u.text(u.qs("span.number", result[0])) === "1" &&
-		// 	u.text(u.qs("span.string_number", result[0])) === "1"
-		// ) {
-		// 	u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_html, object): correct"});
-		// }
-		// else {
-		// 	u.ae(div, "div", {"class":"testfailed", "html":"u.template(tem_string_html, object): error"});
-		// }
-		//
-		// return;
 
 		// STRING TEMPLATE
 		result = u.template(tem_string, set_void_string);
@@ -214,7 +197,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -223,7 +206,7 @@ Util.Objects["template"] = new function() {
 			result[0].string_number === "1" &&
 			result[0].object.name === "object 1" &&
 			result[0].image === "/img/test-350x350.jpg"
-			
+
 		) {
 			u.ae(div, "div", {"class":"testpassed", "html":"u.template(tem_string_json, object): correct"});
 		}
@@ -232,7 +215,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json_quoted, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -249,7 +232,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -275,7 +258,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_json_quoted, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -337,7 +320,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_object, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 1 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -354,7 +337,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_object, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 && 
+		if(typeof(result) == "object" && result.length == 5 && Object.keys(result[0]).length == 9 &&
 			result[0].text === "Martin" &&
 			result[0].boolean === false &&
 			result[0].number === 1 &&
@@ -416,7 +399,8 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_html, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && 
+		if(typeof(result) == "object" && result.length == 1 &&
+			u.hc(result[0], "is_false") &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
@@ -431,7 +415,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_string_html, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && 
+		if(typeof(result) == "object" && result.length == 5 &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
@@ -491,7 +475,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_html, set_array_objects[0]);
-		if(typeof(result) == "object" && result.length == 1 && 
+		if(typeof(result) == "object" && result.length == 1 &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
@@ -506,7 +490,7 @@ Util.Objects["template"] = new function() {
 		}
 
 		result = u.template(tem_html, set_array_objects);
-		if(typeof(result) == "object" && result.length == 5 && 
+		if(typeof(result) == "object" && result.length == 5 &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
@@ -535,7 +519,7 @@ Util.Objects["template"] = new function() {
 
 		var ul = u.ae(div, "ul", {"class":"appendtest"});
 		result = u.template(tem_html, set_array_objects, {"append":ul});
-		if(typeof(result) == "object" && result.length == 5 && 
+		if(typeof(result) == "object" && result.length == 5 &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
@@ -559,7 +543,7 @@ Util.Objects["template"] = new function() {
 
 		var table = u.ae(div, "table", {"class":"appendtest"});
 		result = u.template(tem_string_html_table, set_array_objects, {"append":table});
-		if(typeof(result) == "object" && result.length == 5 && 
+		if(typeof(result) == "object" && result.length == 5 &&
 			u.qs("input", result[0]).value == "false" &&
 			u.qs("img", result[0]).src.replace(location.protocol+"//"+document.domain, "") == "/img/test-350x350.jpg" &&
 			u.text(u.qs("a", result[0])) === "Martin" &&
