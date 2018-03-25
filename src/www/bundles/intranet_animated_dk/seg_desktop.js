@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.2+-axpoint Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-02-04 11:57:05
+Manipulator v0.9.2-intranet.animated.dk Copyright 2018 http://manipulator.parentnode.dk
+js-merged @ 2018-03-12 02:57:21
 */
 
 /*seg_desktop_include.js*/
@@ -507,44 +507,6 @@ Util.cookieReference = function(node, _options) {
 }
 
 
-/*u-date.js*/
-Util.date = function(format, timestamp, months) {
-	var date = timestamp ? new Date(timestamp) : new Date();
-	if(isNaN(date.getTime())) {
-		if(new Date(timestamp.replace(/ /, "T"))) {
-			date = new Date(timestamp.replace(/ /, "T"));
-		}
-		else {
-			if(!timestamp.match(/[A-Z]{3}\+[0-9]{4}/)) {
-				if(timestamp.match(/ \+[0-9]{4}/)) {
-					date = new Date(timestamp.replace(/ (\+[0-9]{4})/, " GMT$1"));
-				}
-			}
-		}
-		if(isNaN(date.getTime())) {
-			date = new Date();
-		}
-	}
-	var tokens = /d|j|m|n|F|Y|G|H|i|s/g;
-	var chars = new Object();
-	chars.j = date.getDate();
-	chars.d = (chars.j > 9 ? "" : "0") + chars.j;
-	chars.n = date.getMonth()+1;
-	chars.m = (chars.n > 9 ? "" : "0") + chars.n;
-	chars.F = months ? months[date.getMonth()] : "";
-	chars.Y = date.getFullYear();
-	chars.G = date.getHours();
-	chars.H = (chars.G > 9 ? "" : "0") + chars.G;
-	var i = date.getMinutes();
-	chars.i = (i > 9 ? "" : "0") + i;
-	var s = date.getSeconds();
-	chars.s = (s > 9 ? "" : "0") + s;
-	return format.replace(tokens, function (_) {
-		return _ in chars ? chars[_] : _.slice(1, _.length - 1);
-	});
-};
-
-
 /*u-dom.js*/
 Util.querySelector = u.qs = function(query, scope) {
 	scope = scope ? scope : document;
@@ -953,7 +915,7 @@ Util.inNodeList = function(node, list) {
 	}
 	return false;
 }
-Util.nodeWithin = u.nw = function(node, scope) {
+u.contains = Util.nodeWithin = u.nw = function(node, scope) {
 	if(scope != node) {
 		if(scope.contains(node)) {
 			return true
@@ -961,28 +923,11 @@ Util.nodeWithin = u.nw = function(node, scope) {
 	}
 	return false;
 }
-
-
-/*u-easings.js*/
-u.easings = new function() {
-	this["ease-in"] = function(progress) {
-		return Math.pow((progress*this.duration) / this.duration, 3);
+u.containsOrIs = function(node, scope) {
+	if(scope == node || u.contains(node, scope)) {
+		return true
 	}
-	this["linear"] = function(progress) {
-		return progress;
-	}
-	this["ease-out"] = function(progress) {
-		return 1 - Math.pow(1 - ((progress*this.duration) / this.duration), 3);
-	}
-	this["linear"] = function(progress) {
-		return (progress*this.duration) / this.duration;
-	}
-	this["ease-in-out"] = function(progress) {
-		if((progress*this.duration) > (this.duration / 2)) {
-			return 1 - Math.pow(1 - ((progress*this.duration) / this.duration), 3);
-		}
-		return Math.pow((progress*this.duration) / this.duration, 3);
-	}
+	return false;
 }
 
 /*u-events.js*/
@@ -1838,6 +1783,1387 @@ u.e.swipe = function(node, boundaries, _options) {
 }
 
 
+/*u-form.js*/
+Util.Form = u.f = new function() {
+	this.customInit = {};
+	this.customValidate = {};
+	this.customSend = {};
+	this.customHintPosition = {};
+	this.init = function(_form, _options) {
+		var i, j, field, action, input, hidden_field;
+		if(_form.nodeName.toLowerCase() != "form") {
+			_form.native_form = u.pn(_form, {"include":"form"});
+			if(!_form.native_form) {
+				u.bug("there is no form in this document??");
+				return;
+			}
+		}
+		else {
+			_form.native_form = _form;
+		}
+		_form._focus_z_index = 50;
+		_form._hover_z_index = 49;
+		_form._validation = true;
+		_form._debug_init = false;
+		if(typeof(_options) == "object") {
+			var _argument;
+			for(_argument in _options) {
+				switch(_argument) {
+					case "validation"       : _form._validation      = _options[_argument]; break;
+					case "focus_z"          : _form._focus_z_index   = _options[_argument]; break;
+					case "debug"            : _form._debug_init      = _options[_argument]; break;
+				}
+			}
+		}
+		_form.native_form.onsubmit = function(event) {
+			if(event.target._form) {
+				return false;
+			}
+		}
+		_form.native_form.setAttribute("novalidate", "novalidate");
+		_form.DOMsubmit = _form.native_form.submit;
+		_form.submit = this._submit;
+		_form.DOMreset = _form.native_form.reset;
+		_form.reset = this._reset;
+		_form.fields = {};
+		_form.actions = {};
+		_form.error_fields = {};
+		_form.labelstyle = u.cv(_form, "labelstyle");
+		var fields = u.qsa(".field", _form);
+		for(i = 0; field = fields[i]; i++) {
+			field._base_z_index = u.gcs(field, "z-index");
+			field._help = u.qs(".help", field);
+			field._hint = u.qs(".hint", field);
+			field._error = u.qs(".error", field);
+			field._indicator = u.ae(field, "div", {"class":"indicator"});
+			if(typeof(u.f.fixFieldHTML) == "function") {
+				u.f.fixFieldHTML(field);
+			}
+			field._initialized = false;
+			var custom_init;
+			for(custom_init in this.customInit) {
+				if(u.hc(field, custom_init)) {
+					this.customInit[custom_init](_form, field);
+					field._initialized = true;
+				}
+			}
+			if(!field._initialized) {
+				if(u.hc(field, "string|email|tel|number|integer|password|date|datetime")) {
+					field._input = u.qs("input", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					field._input.val = this._value;
+					u.e.addEvent(field._input, "keyup", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					this.inputOnEnter(field._input);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "text")) {
+					field._input = u.qs("textarea", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					field._input.val = this._value;
+					if(u.hc(field, "autoexpand")) {
+						var current_height = parseInt(u.gcs(field._input, "height"));
+						var current_value = field._input.val();
+						field._input.value = "";
+						u.as(field._input, "overflow", "hidden");
+						field._input.autoexpand_offset = 0;
+						if(parseInt(u.gcs(field._input, "height")) != field._input.scrollHeight) {
+							field._input.autoexpand_offset = field._input.scrollHeight - parseInt(u.gcs(field._input, "height"));
+						}
+						field._input.value = current_value;
+						field._input.setHeight = function() {
+							var textarea_height = parseInt(u.gcs(this, "height"));
+							if(this.val()) {
+								if(u.browser("webkit") || u.browser("firefox", ">=29")) {
+									if(this.scrollHeight - this.autoexpand_offset > textarea_height) {
+										u.a.setHeight(this, this.scrollHeight);
+									}
+								}
+								else if(u.browser("opera") || u.browser("explorer")) {
+									if(this.scrollHeight > textarea_height) {
+										u.a.setHeight(this, this.scrollHeight);
+									}
+								}
+								else {
+									u.a.setHeight(this, this.scrollHeight);
+								}
+							}
+						}
+						u.e.addEvent(field._input, "keyup", field._input.setHeight);
+						field._input.setHeight();
+					}
+					u.e.addEvent(field._input, "keyup", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "select")) {
+					field._input = u.qs("select", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					field._input.val = this._value_select;
+					u.e.addEvent(field._input, "change", this._updated);
+					u.e.addEvent(field._input, "keyup", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "checkbox|boolean")) {
+					field._input = u.qs("input[type=checkbox]", field);
+					field._input._form = _form;
+					field._input.field = field;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					_form.fields[field._input.name] = field._input;
+					field._input.val = this._value_checkbox;
+					if(u.browser("explorer", "<=8")) {
+						field._input.pre_state = field._input.checked;
+						field._input._changed = this._changed;
+						field._input._updated = this._updated;
+						field._input._update_checkbox_field = this._update_checkbox_field;
+						field._input._clicked = function(event) {
+							if(this.checked != this.pre_state) {
+								this._changed(window.event);
+								this._updated(window.event);
+								this._update_checkbox_field(window.event);
+							}
+							this.pre_state = this.checked;
+						}
+						u.e.addEvent(field._input, "click", field._input._clicked);
+					}
+					else {
+						u.e.addEvent(field._input, "change", this._changed);
+						u.e.addEvent(field._input, "change", this._updated);
+						u.e.addEvent(field._input, "change", this._update_checkbox_field);
+					}
+					this.inputOnEnter(field._input);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "radiobuttons")) {
+					field._inputs = u.qsa("input", field);
+					field._input = field._inputs[0];
+					_form.fields[field._input.name] = field._input;
+					for(j = 0; input = field._inputs[j]; j++) {
+						input.field = field;
+						input._form = _form;
+						input._label = u.qs("label[for='"+input.id+"']", field);
+						input.val = this._value_radiobutton;
+						if(u.browser("explorer", "<=8")) {
+							input.pre_state = input.checked;
+							input._changed = this._changed;
+							input._updated = this._updated;
+							input._clicked = function(event) {
+								var i, input;
+								if(this.checked != this.pre_state) {
+									this._changed(window.event);
+									this._updated(window.event);
+								}
+								for(i = 0; input = this.field._input[i]; i++) {
+									input.pre_state = input.checked;
+								}
+							}
+							u.e.addEvent(input, "click", input._clicked);
+						}
+						else {
+							u.e.addEvent(input, "change", this._changed);
+							u.e.addEvent(input, "change", this._updated);
+						}
+						this.inputOnEnter(input);
+						this.activateInput(input);
+					}
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "files")) {
+					field._input = u.qs("input", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					u.e.addEvent(field._input, "change", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					u.e.addEvent(field._input, "focus", this._focus);
+					u.e.addEvent(field._input, "blur", this._blur);
+					if(u.e.event_pref == "mouse") {
+						u.e.addEvent(field._input, "dragenter", this._focus);
+						u.e.addEvent(field._input, "dragleave", this._blur);
+						u.e.addEvent(field._input, "mouseenter", this._mouseenter);
+						u.e.addEvent(field._input, "mouseleave", this._mouseleave);
+					}
+					u.e.addEvent(field._input, "blur", this._validate);
+					field._input.val = this._value_file;
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "tags")) {
+					field._input = u.qs("input", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					field._input.val = this._value;
+					u.e.addEvent(field._input, "keyup", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					this.inputOnEnter(field._input);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else if(u.hc(field, "prices")) {
+					field._input = u.qs("input", field);
+					field._input._form = _form;
+					field._input.field = field;
+					_form.fields[field._input.name] = field._input;
+					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
+					field._input.val = this._value;
+					u.e.addEvent(field._input, "keyup", this._updated);
+					u.e.addEvent(field._input, "change", this._changed);
+					this.inputOnEnter(field._input);
+					this.activateInput(field._input);
+					this.validate(field._input);
+				}
+				else {
+					u.bug("UNKNOWN FIELD IN FORM INITIALIZATION:" + u.nodeId(field));
+				}
+			}
+		}
+		var hidden_fields = u.qsa("input[type=hidden]", _form);
+		for(i = 0; hidden_field = hidden_fields[i]; i++) {
+			if(!_form.fields[hidden_field.name]) {
+				_form.fields[hidden_field.name] = hidden_field;
+				hidden_field._form = _form;
+				hidden_field.val = this._value;
+			}
+		}
+		var actions = u.qsa(".actions li input[type=button],.actions li input[type=submit],.actions li input[type=reset],.actions li a.button", _form);
+		for(i = 0; action = actions[i]; i++) {
+				action._form = _form;
+			this.activateButton(action);
+		}
+		if(_form._debug_init) {
+			u.bug(u.nodeId(_form) + ", fields:");
+			u.xInObject(_form.fields);
+			u.bug(u.nodeId(_form) + ", actions:");
+			u.xInObject(_form.actions);
+		}
+	}
+	this._reset = function (event, iN) {
+		for (name in this.fields) {
+			if (this.fields[name] && this.fields[name].field && this.fields[name].type != "hidden" && !this.fields[name].getAttribute("readonly")) {
+				this.fields[name].used = false;
+				this.fields[name].val("");
+			}
+		}
+	}
+	this._submit = function(event, iN) {
+		for(name in this.fields) {
+			if(this.fields[name] && this.fields[name].field && typeof(this.fields[name].val) == "function") {
+				this.fields[name].used = true;
+				u.f.validate(this.fields[name]);
+			}
+		}
+		if(!Object.keys(this.error_fields).length) {
+			if(typeof(this.preSubmitted) == "function") {
+				this.preSubmitted(iN);
+			}
+			if(typeof(this.submitted) == "function") {
+				this.submitted(iN);
+			}
+			else {
+				for(name in this.fields) {
+					if(this.fields[name] && this.fields[name].default_value && typeof(this.fields[name].val) == "function" && !this.fields[name].val()) {
+						if(this.fields[name].nodeName.match(/^(input|textarea)$/i)) {
+							this.fields[name].value = "";
+						}
+					}
+				}
+				this.DOMsubmit();
+			}
+		}
+	}
+	this._value = function(value) {
+		if(value !== undefined) {
+			this.value = value;
+			if(value !== this.default_value) {
+				u.rc(this, "default");
+				if(this.pseudolabel) {
+					u.as(this.pseudolabel, "display", "none");
+				}
+			}
+			u.f.validate(this);
+		}
+		return (this.value != this.default_value) ? this.value : "";
+	}
+	this._value_radiobutton = function(value) {
+		var i, option;
+		if(value !== undefined) {
+			for(i = 0; option = this.field._inputs[i]; i++) {
+				if(option.value == value || (option.value == "true" && value) || (option.value == "false" && value === false)) {
+					option.checked = true;
+					u.f.validate(this);
+				}
+				else {
+					option.checked = false;
+				}
+			}
+		}
+		else {
+			for(i = 0; option = this.field._inputs[i]; i++) {
+				if(option.checked) {
+					return option.value;
+				}
+			}
+		}
+		return "";
+	}
+	this._value_checkbox = function(value) {
+		if(value !== undefined) {
+			if(value) {
+				this.checked = true
+				u.ac(this.field, "checked");
+			}
+			else {
+				this.checked = false;
+				u.rc(this.field, "checked");
+			}
+			u.f.validate(this);
+		}
+		else {
+			if(this.checked) {
+				return this.value;
+			}
+		}
+		return "";
+	}
+	this._value_select = function(value) {
+		if(value !== undefined) {
+			var i, option;
+			for(i = 0; option = this.options[i]; i++) {
+				if(option.value == value) {
+					this.selectedIndex = i;
+					u.f.validate(this);
+					return i;
+				}
+			}
+			if (value === "") {
+				this.selectedIndex = -1;
+				u.f.validate(this);
+				return -1;
+			}
+			return false;
+		}
+		else {
+			return (this.selectedIndex >= 0 && this.default_value != this.options[this.selectedIndex].value) ? this.options[this.selectedIndex].value : "";
+		}
+	}
+	this._value_file = function(value) {
+		if(value !== undefined) {
+			this.value = value;
+			if (value === "") {
+				this.value = null;
+			}
+		}
+		else {
+			if(this.value && this.files && this.files.length) {
+				var i, file, files = [];
+				for(i = 0; file = this.files[i]; i++) {
+					files.push(file);
+				}
+				return files;
+			}
+			else if(this.value) {
+				return this.value;
+			}
+			else if(u.hc(this, "uploaded")){
+				return true;
+			}
+			return "";
+		}
+	}
+	this.inputOnEnter = function(node) {
+		node.keyPressed = function(event) {
+			if(this.nodeName.match(/input/i) && (event.keyCode == 40 || event.keyCode == 38)) {
+				this._submit_disabled = true;
+			}
+			else if(this.nodeName.match(/input/i) && this._submit_disabled && (
+				event.keyCode == 46 || 
+				(event.keyCode == 39 && u.browser("firefox")) || 
+				(event.keyCode == 37 && u.browser("firefox")) || 
+				event.keyCode == 27 || 
+				event.keyCode == 13 || 
+				event.keyCode == 9 ||
+				event.keyCode == 8
+			)) {
+				this._submit_disabled = false;
+			}
+			else if(event.keyCode == 13 && !this._submit_disabled) {
+				u.e.kill(event);
+				this.blur();
+				this._form.submitInput = this;
+				this._form.submitButton = false;
+				this._form.submit(event, this);
+			}
+		}
+		u.e.addEvent(node, "keydown", node.keyPressed);
+	}
+	this.buttonOnEnter = function(node) {
+		node.keyPressed = function(event) {
+			if(event.keyCode == 13 && !u.hc(this, "disabled") && typeof(this.clicked) == "function") {
+				u.e.kill(event);
+				this.clicked(event);
+				// 
+				// 
+			}
+		}
+		u.e.addEvent(node, "keydown", node.keyPressed);
+	}
+	this._changed = function(event) {
+		this.used = true;
+		if(typeof(this.changed) == "function") {
+			this.changed(this);
+		}
+		else if(this.field._input && typeof(this.field._input.changed) == "function") {
+			this.field._input.changed(this);
+		}
+		if(typeof(this.field.changed) == "function") {
+			this.field.changed(this);
+		}
+		if(typeof(this._form.changed) == "function") {
+			this._form.changed(this);
+		}
+	}
+	this._updated = function(event) {
+		if(event.keyCode != 9 && event.keyCode != 13 && event.keyCode != 16 && event.keyCode != 17 && event.keyCode != 18) {
+			if(this.used || u.hc(this.field, "error")) {
+				u.f.validate(this);
+			}
+			if(typeof(this.updated) == "function") {
+				this.updated(this);
+			}
+			else if(this.field._input && typeof(this.field._input.updated) == "function") {
+				this.field._input.updated(this);
+			}
+			if(typeof(this.field.updated) == "function") {
+				this.field.updated(this);
+			}
+			if(typeof(this._form.updated) == "function") {
+				this._form.updated(this);
+			}
+		}
+	}
+	this._update_checkbox_field = function(event) {
+		if(this.checked) {
+			u.ac(this.field, "checked");
+		}
+		else {
+			u.rc(this.field, "checked");
+		}
+	}
+	this._validate = function(event) {
+		u.f.validate(this);
+	}
+	this._mouseenter = function(event) {
+		u.ac(this.field, "hover");
+		u.ac(this, "hover");
+		u.as(this.field, "zIndex", this.field._input._form._hover_z_index);
+		u.f.positionHint(this.field);
+	}
+	this._mouseleave = function(event) {
+		u.rc(this.field, "hover");
+		u.rc(this, "hover");
+		u.as(this.field, "zIndex", this.field._base_z_index);
+		u.f.positionHint(this.field);
+	}
+	this._focus = function(event) {
+		this.field.is_focused = true;
+		this.is_focused = true;
+		u.ac(this.field, "focus");
+		u.ac(this, "focus");
+		u.as(this.field, "zIndex", this._form._focus_z_index);
+		u.f.positionHint(this.field);
+		if(typeof(this.focused) == "function") {
+			this.focused();
+		}
+		else if(this.field._input && typeof(this.field._input.focused) == "function") {
+			this.field._input.focused(this);
+		}
+		if(typeof(this._form.focused) == "function") {
+			this._form.focused(this);
+		}
+	}
+	this._blur = function(event) {
+		this.field.is_focused = false;
+		this.is_focused = false;
+		u.rc(this.field, "focus");
+		u.rc(this, "focus");
+		u.as(this.field, "zIndex", this.field._base_z_index);
+		u.f.positionHint(this.field);
+		this.used = true;
+		if(typeof(this.blurred) == "function") {
+			this.blurred();
+		}
+		else if(this.field._input && typeof(this.field._input.blurred) == "function") {
+			this.field._input.blurred(this);
+		}
+		if(typeof(this._form.blurred) == "function") {
+			this._form.blurred(this);
+		}
+	}
+	this._button_focus = function(event) {
+		u.ac(this, "focus");
+		if(typeof(this.focused) == "function") {
+			this.focused();
+		}
+		if(typeof(this._form.focused) == "function") {
+			this._form.focused(this);
+		}
+	}
+	this._button_blur = function(event) {
+		u.rc(this, "focus");
+		if(typeof(this.blurred) == "function") {
+			this.blurred();
+		}
+		if(typeof(this._form.blurred) == "function") {
+			this._form.blurred(this);
+		}
+	}
+	this._changed_state = function() {
+		u.f.updateDefaultState(this);
+	}
+	this.positionHint = function(field) {
+		if(field._help) {
+			var custom_hint_position;
+			for(custom_hint_position in this.customHintPosition) {
+				if(u.hc(field, custom_hint_position)) {
+					this.customHintPosition[custom_hint_position](field._form, field);
+					return;
+				}
+			}
+			var input_middle, help_top;
+ 			if(u.hc(field, "html")) {
+				input_middle = field._editor.offsetTop + (field._editor.offsetHeight / 2);
+			}
+			else {
+				input_middle = field._input.offsetTop + (field._input.offsetHeight / 2);
+			}
+			help_top = input_middle - field._help.offsetHeight / 2;
+			u.as(field._help, "top", help_top + "px");
+		}
+	}
+	this.activateInput = function(iN) {
+		u.e.addEvent(iN, "focus", this._focus);
+		u.e.addEvent(iN, "blur", this._blur);
+		if(u.e.event_pref == "mouse") {
+			u.e.addEvent(iN, "mouseenter", this._mouseenter);
+			u.e.addEvent(iN, "mouseleave", this._mouseleave);
+		}
+		u.e.addEvent(iN, "blur", this._validate);
+		if(iN._form.labelstyle == "inject") {
+			if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
+				iN.default_value = u.text(iN._label);
+				u.e.addEvent(iN, "focus", this._changed_state);
+				u.e.addEvent(iN, "blur", this._changed_state);
+				if(iN.type.match(/number|integer/)) {
+					iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
+					iN.pseudolabel.iN = iN;
+					u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
+					u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
+					u.ce(iN.pseudolabel)
+					iN.pseudolabel.inputStarted = function(event) {
+						u.e.kill(event);
+						this.iN.focus();
+					}
+				}
+				u.f.updateDefaultState(iN);
+			}
+		}
+		else {
+			iN.default_value = "";
+		}
+	}
+	this.activateButton = function(action) {
+		if(action.type && action.type == "submit" || action.type == "reset") {
+			action.onclick = function(event) {
+				u.e.kill(event ? event : window.event);
+			}
+		}
+		u.ce(action);
+		if(!action.clicked) {
+			action.clicked = function(event) {
+				u.e.kill(event);
+				if(!u.hc(this, "disabled")) {
+					if(this.type && this.type.match(/submit/i)) {
+						this._form._submit_button = this;
+						this._form._submit_input = false;
+						this._form.submit(event, this);
+					}
+					else if (this.type && this.type.match(/reset/i)) {
+						this._form._submit_button = false;
+						this._form._submit_input = false;
+						this._form.reset(event, this);
+					}
+					else {
+						location.href = this.url;
+					}
+				}
+			}
+		}
+		this.buttonOnEnter(action);
+		var action_name = action.name ? action.name : action.parentNode.className;
+		if(action_name) {
+			action._form.actions[action_name] = action;
+		}
+		if(typeof(u.k) == "object" && u.hc(action, "key:[a-z0-9]+")) {
+			u.k.addKey(action, u.cv(action, "key"));
+		}
+		u.e.addEvent(action, "focus", this._button_focus);
+		u.e.addEvent(action, "blur", this._button_blur);
+	}
+	this.updateDefaultState = function(iN) {
+		if(iN.is_focused || iN.val() !== "") {
+			u.rc(iN, "default");
+			if(iN.val() === "") {
+				iN.val("");
+			}
+			if(iN.pseudolabel) {
+				u.as(iN.pseudolabel, "display", "none");
+			}
+		}
+		else {
+			if(iN.val() === "") {
+				u.ac(iN, "default");
+				if(iN.pseudolabel) {
+					iN.val(iN.default_value);
+					u.as(iN.pseudolabel, "display", "block");
+				}
+				else {
+					iN.val(iN.default_value);
+				}
+			}
+		}
+	}
+	this.fieldError = function(iN) {
+		u.rc(iN, "correct");
+		u.rc(iN.field, "correct");
+		if(iN.used || iN.val() !== "") {
+			u.ac(iN, "error");
+			u.ac(iN.field, "error");
+			this.positionHint(iN.field);
+			iN._form.error_fields[iN.name] = true;
+			this.updateFormValidationState(iN);
+		}
+	}
+	this.fieldCorrect = function(iN) {
+		if(iN.val() !== "") {
+			u.ac(iN, "correct");
+			u.ac(iN.field, "correct");
+			u.rc(iN, "error");
+			u.rc(iN.field, "error");
+		}
+		else {
+			u.rc(iN, "correct");
+			u.rc(iN.field, "correct");
+			u.rc(iN, "error");
+			u.rc(iN.field, "error");
+		}
+		delete iN._form.error_fields[iN.name];
+		this.updateFormValidationState(iN);
+	}
+	this.checkFormValidation = function(form) {
+		if(Object.keys(form.error_fields).length) {
+			return false;
+		}
+		var x, field;
+		for(x in form.fields) {
+			input = form.fields[x];
+			if(input.field && u.hc(form.fields[x].field, "required") && !u.hc(form.fields[x].field, "correct")) {
+				return false;
+			}
+		}
+		return true;
+	}
+	this.updateFormValidationState = function(iN) {
+		if(this.checkFormValidation(iN._form)) {
+			if(typeof(iN.validationPassed) == "function") {
+				iN.validationPassed();
+			}
+			if(typeof(iN.field.validationPassed) == "function") {
+				iN.field.validationPassed();
+			}
+			if(typeof(iN._form.validationPassed) == "function") {
+				iN._form.validationPassed();
+			}
+			return true;
+		}
+		else {
+			if(typeof(iN.validationFailed) == "function") {
+				iN.validationFailed(iN._form.error_fields);
+			}
+			if(typeof(iN.field.validationFailed) == "function") {
+				iN.field.validationFailed(iN._form.error_fields);
+			}
+			if(typeof(iN._form.validationFailed) == "function") {
+				iN._form.validationFailed(iN._form.error_fields);
+			}
+			return false;
+		}
+	}
+	this.validate = function(iN) {
+		if(!iN._form._validation || !iN._form.field) {
+			return true;
+		}
+		var min, max, pattern;
+		var validated = false;
+		if(!u.hc(iN.field, "required") && iN.val() === "") {
+			this.fieldCorrect(iN);
+			return true;
+		}
+		else if(u.hc(iN.field, "required") && iN.val() === "") {
+			this.fieldError(iN);
+			return false;
+		}
+		var custom_validate;
+		for(custom_validate in u.f.customValidate) {
+			if(u.hc(iN.field, custom_validate)) {
+				u.f.customValidate[custom_validate](iN);
+				validated = true;
+			}
+		}
+		if(!validated) {
+			if(u.hc(iN.field, "password")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 8;
+				max = max ? max : 20;
+				pattern = iN.getAttribute("pattern");
+				if(
+					iN.val().length >= min && 
+					iN.val().length <= max && 
+					(!pattern || iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "number")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 0;
+				max = max ? max : 99999999999999999999999999999;
+				pattern = iN.getAttribute("pattern");
+				if(
+					!isNaN(iN.val()) && 
+					iN.val() >= min && 
+					iN.val() <= max && 
+					(!pattern || iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "integer")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 0;
+				max = max ? max : 99999999999999999999999999999;
+				pattern = iN.getAttribute("pattern");
+				if(
+					!isNaN(iN.val()) && 
+					Math.round(iN.val()) == iN.val() && 
+					iN.val() >= min && 
+					iN.val() <= max && 
+					(!pattern || iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "tel")) {
+				pattern = iN.getAttribute("pattern");
+				if(
+					!pattern && iN.val().match(/^([\+0-9\-\.\s\(\)]){5,18}$/) ||
+					(pattern && iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "email")) {
+				if(
+					!pattern && iN.val().match(/^([^<>\\\/%$])+\@([^<>\\\/%$])+\.([^<>\\\/%$]{2,20})$/) ||
+					(pattern && iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "text")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 1;
+				max = max ? max : 10000000;
+				pattern = iN.getAttribute("pattern");
+				if(
+					iN.val().length >= min && 
+					iN.val().length <= max && 
+					(!pattern || iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "date")) {
+				pattern = iN.getAttribute("pattern");
+				if(
+					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2})$/) ||
+					(pattern && iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "datetime")) {
+				pattern = iN.getAttribute("pattern");
+				if(
+					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2} [\d]{2}[\-\/\ \:]{1}[\d]{2}[\-\/\ \:]{0,1}[\d]{0,2})$/) ||
+					(pattern && iN.val().match(pattern))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "files")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 1;
+				max = max ? max : 10000000;
+				if(
+					u.hc(iN, "uploaded") ||
+					(iN.val().length >= min && 
+					iN.val().length <= max)
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "select")) {
+				if(iN.val() !== "") {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "checkbox|boolean|radiobuttons")) {
+				if(iN.val() !== "") {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "string")) {
+				min = Number(u.cv(iN.field, "min"));
+				max = Number(u.cv(iN.field, "max"));
+				min = min ? min : 1;
+				max = max ? max : 255;
+				pattern = iN.getAttribute("pattern");
+				if(
+					iN.val().length >= min &&
+					iN.val().length <= max && 
+					(!pattern || iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "tags")) {
+				if(
+					!pattern && iN.val().match(/\:/) ||
+					(pattern && iN.val().match("^"+pattern+"$"))
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+			else if(u.hc(iN.field, "prices")) {
+				if(
+					!isNaN(iN.val())
+				) {
+					this.fieldCorrect(iN);
+				}
+				else {
+					this.fieldError(iN);
+				}
+			}
+		}
+		if(u.hc(iN.field, "error")) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+}
+u.f.getParams = function(_form, _options) {
+	var send_as = "params";
+	var ignore_inputs = "ignoreinput";
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "ignore_inputs"    : ignore_inputs     = _options[_argument]; break;
+				case "send_as"          : send_as           = _options[_argument]; break;
+			}
+		}
+	}
+	var i, input, select, textarea, param, params;
+	if(send_as == "formdata" && (typeof(window.FormData) == "function" || typeof(window.FormData) == "object")) {
+		params = new FormData();
+	}
+	else {
+		if(send_as == "formdata") {
+			send_as == "params";
+		}
+		params = new Object();
+		params.append = function(name, value, filename) {
+			this[name] = value;
+		}
+	}
+	if(_form._submit_button && _form._submit_button.name) {
+		params.append(_form._submit_button.name, _form._submit_button.value);
+	}
+	var inputs = u.qsa("input", _form);
+	var selects = u.qsa("select", _form)
+	var textareas = u.qsa("textarea", _form)
+	for(i = 0; input = inputs[i]; i++) {
+		if(!u.hc(input, ignore_inputs)) {
+			if((input.type == "checkbox" || input.type == "radio") && input.checked) {
+				if(typeof(input.val) == "function") {
+					params.append(input.name, input.val());
+				}
+				else {
+					params.append(input.name, input.value);
+				}
+			}
+			else if(input.type == "file") {
+				var f, file, files;
+				if(typeof(input.val) == "function") {
+					files = input.val();
+				}
+				else {
+					files = input.value;
+				}
+				if(files) {
+					for(f = 0; file = files[f]; f++) {
+						params.append(input.name, file, file.name);
+					}
+				}
+				else {
+					params.append(input.name, "");
+				}
+			}
+			else if(!input.type.match(/button|submit|reset|file|checkbox|radio/i)) {
+				if(typeof(input.val) == "function") {
+					params.append(input.name, input.val());
+				}
+				else {
+					params.append(input.name, input.value);
+				}
+			}
+		}
+	}
+	for(i = 0; select = selects[i]; i++) {
+		if(!u.hc(select, ignore_inputs)) {
+			if(typeof(select.val) == "function") {
+				params.append(select.name, select.val());
+			}
+			else {
+				params.append(select.name, select.options[select.selectedIndex].value);
+			}
+		}
+	}
+	for(i = 0; textarea = textareas[i]; i++) {
+		if(!u.hc(textarea, ignore_inputs)) {
+			if(typeof(textarea.val) == "function") {
+				params.append(textarea.name, textarea.val());
+			}
+			else {
+				params.append(textarea.name, textarea.value);
+			}
+		}
+	}
+	if(send_as && typeof(this.customSend[send_as]) == "function") {
+		return this.customSend[send_as](params, _form);
+	}
+	else if(send_as == "json") {
+		return u.f.convertNamesToJsonObject(params);
+	}
+	else if(send_as == "formdata") {
+		return params;
+	}
+	else if(send_as == "object") {
+		delete params.append;
+		return params;
+	}
+	else {
+		var string = "";
+		for(param in params) {
+			if(typeof(params[param]) != "function") {
+				string += (string ? "&" : "") + param + "=" + encodeURIComponent(params[param]);
+			}
+		}
+		return string;
+	}
+}
+u.f.convertNamesToJsonObject = function(params) {
+ 	var indexes, root, indexes_exsists, param;
+	var object = new Object();
+	for(param in params) {
+	 	indexes_exsists = param.match(/\[/);
+		if(indexes_exsists) {
+			root = param.split("[")[0];
+			indexes = param.replace(root, "");
+			if(typeof(object[root]) == "undefined") {
+				object[root] = new Object();
+			}
+			object[root] = this.recurseName(object[root], indexes, params[param]);
+		}
+		else {
+			object[param] = params[param];
+		}
+	}
+	return object;
+}
+u.f.recurseName = function(object, indexes, value) {
+	var index = indexes.match(/\[([a-zA-Z0-9\-\_]+)\]/);
+	var current_index = index[1];
+	indexes = indexes.replace(index[0], "");
+ 	if(indexes.match(/\[/)) {
+		if(object.length !== undefined) {
+			var i;
+			var added = false;
+			for(i = 0; i < object.length; i++) {
+				for(exsiting_index in object[i]) {
+					if(exsiting_index == current_index) {
+						object[i][exsiting_index] = this.recurseName(object[i][exsiting_index], indexes, value);
+						added = true;
+					}
+				}
+			}
+			if(!added) {
+				temp = new Object();
+				temp[current_index] = new Object();
+				temp[current_index] = this.recurseName(temp[current_index], indexes, value);
+				object.push(temp);
+			}
+		}
+		else if(typeof(object[current_index]) != "undefined") {
+			object[current_index] = this.recurseName(object[current_index], indexes, value);
+		}
+		else {
+			object[current_index] = new Object();
+			object[current_index] = this.recurseName(object[current_index], indexes, value);
+		}
+	}
+	else {
+		object[current_index] = value;
+	}
+	return object;
+}
+
+
+/*u-form-builder.js*/
+u.f.customBuild = {};
+u.f.addForm = function(node, _options) {
+	var form_name = "js_form";
+	var form_action = "#";
+	var form_method = "post";
+	var form_class = "";
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "name"			: form_name				= _options[_argument]; break;
+				case "action"		: form_action			= _options[_argument]; break;
+				case "method"		: form_method			= _options[_argument]; break;
+				case "class"		: form_class			= _options[_argument]; break;
+			}
+		}
+	}
+	var form = u.ae(node, "form", {"class":form_class, "name": form_name, "action":form_action, "method":form_method});
+	return form;
+}
+u.f.addFieldset = function(node, _options) {
+	var fieldset_class = "";
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "class"			: fieldset_class			= _options[_argument]; break;
+			}
+		}
+	}
+	return u.ae(node, "fieldset", {"class":fieldset_class});
+}
+u.f.addField = function(node, _options) {
+	var field_name = "js_name";
+	var field_label = "Label";
+	var field_type = "string";
+	var field_value = "";
+	var field_options = [];
+	var field_checked = false;
+	var field_class = "";
+	var field_id = "";
+	var field_max = false;
+	var field_min = false;
+	var field_disabled = false;
+	var field_readonly = false;
+	var field_required = false;
+	var field_pattern = false;
+	var field_error_message = "There is an error in your input";
+	var field_hint_message = "";
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "name"					: field_name			= _options[_argument]; break;
+				case "label"				: field_label			= _options[_argument]; break;
+				case "type"					: field_type			= _options[_argument]; break;
+				case "value"				: field_value			= _options[_argument]; break;
+				case "options"				: field_options			= _options[_argument]; break;
+				case "checked"				: field_checked			= _options[_argument]; break;
+				case "class"				: field_class			= _options[_argument]; break;
+				case "id"					: field_id				= _options[_argument]; break;
+				case "max"					: field_max				= _options[_argument]; break;
+				case "min"					: field_min				= _options[_argument]; break;
+				case "disabled"				: field_disabled		= _options[_argument]; break;
+				case "readonly"				: field_readonly		= _options[_argument]; break;
+				case "required"				: field_required		= _options[_argument]; break;
+				case "pattern"				: field_pattern			= _options[_argument]; break;
+				case "error_message"		: field_error_message	= _options[_argument]; break;
+				case "hint_message"			: field_hint_message	= _options[_argument]; break;
+			}
+		}
+	}
+	var custom_build;
+	if(field_type in u.f.customBuild) {
+		return u.f.customBuild[field_type](node, _options);
+	}
+	field_id = field_id ? field_id : "input_"+field_type+"_"+field_name;
+	field_disabled = !field_disabled ? (field_class.match(/(^| )disabled( |$)/) ? "disabled" : false) : "disabled";
+	field_readonly = !field_readonly ? (field_class.match(/(^| )readonly( |$)/) ? "readonly" : false) : "readonly";
+	field_required = !field_required ? (field_class.match(/(^| )required( |$)/) ? true : false) : true;
+	field_class += field_disabled ? (!field_class.match(/(^| )disabled( |$)/) ? " disabled" : "") : "";
+	field_class += field_readonly ? (!field_class.match(/(^| )readonly( |$)/) ? " readonly" : "") : "";
+	field_class += field_required ? (!field_class.match(/(^| )required( |$)/) ? " required" : "") : "";
+	field_class += field_min ? (!field_class.match(/(^| )min:[0-9]+( |$)/) ? " min:"+field_min : "") : "";
+	field_class += field_max ? (!field_class.match(/(^| )max:[0-9]+( |$)/) ? " max:"+field_max : "") : "";
+	if (field_type == "hidden") {
+		return u.ae(node, "input", {"type":"hidden", "name":field_name, "value":field_value, "id":field_id});
+	}
+	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
+	var attributes = {};
+	if(field_type == "string") {
+		field_max = field_max ? field_max : 255;
+		attributes = {
+			"type":"text", 
+			"id":field_id, 
+			"value":field_value, 
+			"name":field_name, 
+			"maxlength":field_max, 
+			"minlength":field_min,
+			"pattern":field_pattern,
+			"readonly":field_readonly,
+			"disabled":field_disabled
+		};
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		u.ae(field, "input", u.f.verifyAttributes(attributes));
+	}
+	else if(field_type == "email" || field_type == "tel" || field_type == "password") {
+		field_max = field_max ? field_max : 255;
+		attributes = {
+			"type":field_type, 
+			"id":field_id, 
+			"value":field_value, 
+			"name":field_name, 
+			"maxlength":field_max, 
+			"minlength":field_min,
+			"pattern":field_pattern,
+			"readonly":field_readonly,
+			"disabled":field_disabled
+		};
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		u.ae(field, "input", u.f.verifyAttributes(attributes));
+	}
+	else if(field_type == "number" || field_type == "integer" || field_type == "date" || field_type == "datetime") {
+		attributes = {
+			"type":field_type, 
+			"id":field_id, 
+			"value":field_value, 
+			"name":field_name, 
+			"max":field_max, 
+			"min":field_min,
+			"pattern":field_pattern,
+			"readonly":field_readonly,
+			"disabled":field_disabled
+		};
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		u.ae(field, "input", u.f.verifyAttributes(attributes));
+	}
+	else if(field_type == "checkbox") {
+		attributes = {
+			"type":field_type, 
+			"id":field_id, 
+			"value":field_value ? field_value : "true", 
+			"name":field_name, 
+			"disabled":field_disabled,
+			"checked":field_checked
+		};
+		u.ae(field, "input", {"name":field_name, "value":"false", "type":"hidden"});
+		u.ae(field, "input", u.f.verifyAttributes(attributes));
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+	}
+	else if(field_type == "text") {
+		attributes = {
+			"id":field_id, 
+			"html":field_value, 
+			"name":field_name, 
+			"maxlength":field_max, 
+			"minlength":field_min,
+			"pattern":field_pattern,
+			"readonly":field_readonly,
+			"disabled":field_disabled
+		};
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		u.ae(field, "textarea", u.f.verifyAttributes(attributes));
+	}
+	else if(field_type == "select") {
+		attributes = {
+			"id":field_id, 
+			"name":field_name, 
+			"disabled":field_disabled
+		};
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		var select = u.ae(field, "select", u.f.verifyAttributes(attributes));
+		if(field_options) {
+			var i, option;
+			for(i = 0; option = field_options[i]; i++) {
+				if(option.value == field_value) {
+					u.ae(select, "option", {"value":option.value, "html":option.text, "selected":"selected"});
+				}
+				else {
+					u.ae(select, "option", {"value":option.value, "html":option.text});
+				}
+			}
+		}
+	}
+	else if(field_type == "radiobuttons") {
+		u.ae(field, "label", {"html":field_label});
+		if(field_options) {
+			var i, option;
+			for(i = 0; option = field_options[i]; i++) {
+				var div = u.ae(field, "div", {"class":"item"});
+				if(option.value == field_value) {
+					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name, "checked":"checked"});
+					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
+				}
+				else {
+					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name});
+					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
+				}
+			}
+		}
+	}
+	else if(field_type == "files") {
+		u.ae(field, "label", {"for":field_id, "html":field_label});
+		u.ae(field, "input", {"id":field_id, "name":field_name, "type":"file"});
+	}
+	else {
+		u.bug("input type not implemented")
+	}
+	if(field_hint_message || field_error_message) {
+		var help = u.ae(field, "div", {"class":"help"});
+		if (field_hint_message) {
+			u.ae(help, "div", { "class": "hint", "html": field_hint_message });
+		}
+		if(field_error_message) {
+			u.ae(help, "div", { "class": "error", "html": field_error_message });
+		}
+	}
+	return field;
+}
+u.f.verifyAttributes = function(attributes) {
+	for(attribute in attributes) {
+		if(attributes[attribute] === undefined || attributes[attribute] === false || attributes[attribute] === null) {
+			delete attributes[attribute];
+		}
+	}
+	return attributes;
+}
+u.f.addAction = function(node, _options) {
+	var action_type = "submit";
+	var action_name = "js_name";
+	var action_value = "";
+	var action_class = "";
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "type"			: action_type			= _options[_argument]; break;
+				case "name"			: action_name			= _options[_argument]; break;
+				case "value"		: action_value			= _options[_argument]; break;
+				case "class"		: action_class			= _options[_argument]; break;
+			}
+		}
+	}
+	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, {"include":"ul"});
+	if(!p_ul || !u.hc(p_ul, "actions")) {
+		if(node.nodeName.toLowerCase() == "form") {
+			p_ul = u.qs("ul.actions", node);
+		}
+		p_ul = p_ul ? p_ul : u.ae(node, "ul", {"class":"actions"});
+	}
+	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, {"include":"li"});
+	if(!p_li || p_ul != p_li.parentNode) {
+		p_li = u.ae(p_ul, "li", {"class":action_name});
+	}
+	else {
+		p_li = node;
+	}
+	var action = u.ae(p_li, "input", {"type":action_type, "class":action_class, "value":action_value, "name":action_name})
+	return action;
+}
+
+
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
@@ -1895,136 +3221,6 @@ Util.pageScrollY = u.scrollY = function() {
 }
 
 
-/*u-history.js*/
-Util.History = u.h = new function() {
-	this.popstate = ("onpopstate" in window);
-	this.callbacks = [];
-	this.is_listening = false;
-	this.navigate = function(url, node) {
-		if(this.popstate) {
-			history.pushState({}, url, url);
-			this.callback(url);
-		}
-		else {
-			location.hash = u.h.getCleanUrl(url);
-		}
-	}
-	this.callback = function(url) {
-		var i, recipient;
-		for(i = 0; recipient = this.callbacks[i]; i++) {
-			if(typeof(recipient.node[recipient.callback]) == "function") {
-				recipient.node[recipient.callback](url);
-			}
-		}
-	}
-	this.removeEvent = function(node, _options) {
-		var callback_urlchange = "navigate";
-		if(typeof(_options) == "object") {
-			var argument;
-			for(argument in _options) {
-				switch(argument) {
-					case "callback"		: callback_urlchange		= _options[argument]; break;
-				}
-			}
-		}
-		var i, recipient;
-		for(i = 0; recipient = this.callbacks[i]; i++) {
-			if(recipient.node == node && recipient.callback == callback_urlchange) {
-				this.callbacks.splice(i, 1);
-				break;
-			}
-		}
-	}
-	this.addEvent = function(node, _options) {
-		var callback_urlchange = "navigate";
-		if(typeof(_options) == "object") {
-			var argument;
-			for(argument in _options) {
-				switch(argument) {
-					case "callback"		: callback_urlchange		= _options[argument]; break;
-				}
-			}
-		}
-		if(!this.is_listening) {
-			this.is_listening = true;
-			if(this.popstate) {
-				u.e.addEvent(window, "popstate", this._urlChanged);
-			}
-			else if("onhashchange" in window && !u.browser("explorer", "<=7")) {
-				u.e.addEvent(window, "hashchange", this._hashChanged);
-			}
-			else {
-				u.h._current_hash = window.location.hash;
-				window.onhashchange = this._hashChanged;
-				setInterval(
-					function() {
-						if(window.location.hash !== u.h._current_hash) {
-							u.h._current_hash = window.location.hash;
-							window.onhashchange();
-						}
-					}, 200
-				);
-			}
-		}
-		this.callbacks.push({"node":node, "callback":callback_urlchange});
-	}
-	this._urlChanged = function(event) {
-		var url = u.h.getCleanUrl(location.href);
-		if(event.state || (!event.state && event.path)) {
-			u.h.callback(url);
-		}
-		else {
-			history.replaceState({}, url, url);
-		}
-	}
-	this._hashChanged = function(event) {
-		if(!location.hash || !location.hash.match(/^#\//)) {
-			location.hash = "#/"
-			return;
-		}
-		var url = u.h.getCleanHash(location.hash);
-		u.h.callback(url);
-	}
-	this.trail = [];
-	this.addToTrail = function(url, node) {
-		this.trail.push({"url":url, "node":node});
-	}
-	this.getCleanUrl = function(string, levels) {
-		string = string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0];
-		if(!levels) {
-			return string;
-		}
-		else {
-			var i, return_string = "";
-			var path = string.split("/");
-			levels = levels > path.length-1 ? path.length-1 : levels;
-			for(i = 1; i <= levels; i++) {
-				return_string += "/" + path[i];
-			}
-			return return_string;
-		}
-	}
-	this.getCleanHash = function(string, levels) {
-		string = string.replace("#", "");
-		if(!levels) {
-			return string;
-		}
-		else {
-			var i, return_string = "";
-			var hash = string.split("/");
-			levels = levels > hash.length-1 ? hash.length-1 : levels;
-			for(i = 1; i <= levels; i++) {
-				return_string += "/" + hash[i];
-			}
-			return return_string;
-		}
-	}
-	this.resolveCurrentUrl = function() {
-		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
-	}
-}
-
-
 /*u-init.js*/
 Util.Objects = u.o = new Object();
 Util.init = function(scope) {
@@ -2036,66 +3232,6 @@ Util.init = function(scope) {
 			u.rc(node, "i:"+object);
 			if(object && typeof(u.o[object]) == "object") {
 				u.o[object].init(node);
-			}
-		}
-	}
-}
-
-
-/*u-keyboard.js*/
-Util.Keyboard = u.k = new function() {
-	this.shortcuts = {};
-	this.onkeydownCatcher = function(event) {
-		u.k.catchKey(event);
-	}
-	this.addKey = function(node, key, _options) {
-		node.callback_keyboard = "clicked";
-		node.metakey_required = true;
-		if(typeof(_options) == "object") {
-			var argument;
-			for(argument in _options) {
-				switch(argument) {
-					case "callback"		: node.callback_keyboard	= _options[argument]; break;
-					case "metakey"		: node.metakey_required		= _options[argument]; break;
-				}
-			}
-		}
-		if(!this.shortcuts.length) {
-			u.e.addEvent(document, "keydown", this.onkeydownCatcher);
-		}
-		if(!this.shortcuts[key.toString().toUpperCase()]) {
-			this.shortcuts[key.toString().toUpperCase()] = new Array();
-		}
-		this.shortcuts[key.toString().toUpperCase()].push(node);
-	}
-	this.catchKey = function(event) {
-		event = event ? event : window.event;
-		var key = String.fromCharCode(event.keyCode);
-		if(event.keyCode == 27) {
-			key = "ESC";
-		}
-		if(this.shortcuts[key]) {
-			var nodes, node, i;
-			nodes = this.shortcuts[key];
-			for(i = 0; node = nodes[i]; i++) {
-				if(u.nodeWithin(node, document.body)) {
-					if(node.offsetHeight && ((event.ctrlKey || event.metaKey) || (!node.metakey_required || key == "ESC"))) {
-						u.e.kill(event);
-						if(typeof(node[node.callback_keyboard]) == "function") {
-							node[node.callback_keyboard](event);
-						}
-					}
-				}
-				else {
-					this.shortcuts[key].splice(i, 1);
-					if(!this.shortcuts[key].length) {
-						delete this.shortcuts[key];
-						break;
-					}
-					else {
-						i--;
-					}
-				}
 			}
 		}
 	}
@@ -2116,246 +3252,6 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
-
-/*u-navigation.js*/
-u.navigation = function(_options) {
-	var navigation_node = page;
-	var callback_navigate = "_navigate";
-	var initialization_scope = page.cN;
-	if(typeof(_options) == "object") {
-		var argument;
-		for(argument in _options) {
-			switch(argument) {
-				case "callback"       : callback_navigate           = _options[argument]; break;
-				case "node"           : navigation_node             = _options[argument]; break;
-				case "scope"          : initialization_scope        = _options[argument]; break;
-			}
-		}
-	}
-	window._man_nav_path = window._man_nav_path ? window._man_nav_path : u.h.getCleanUrl(location.href, 1);
-	navigation_node._navigate = function(url) {
-		url = u.h.getCleanUrl(url);
-		u.stats.pageView(url);
-		if(
-			!window._man_nav_path || 
-			(!u.h.popstate && window._man_nav_path != u.h.getCleanHash(location.hash, 1)) || 
-			(u.h.popstate && window._man_nav_path != u.h.getCleanUrl(location.href, 1))
-		) {
-			if(this.cN && typeof(this.cN.navigate) == "function") {
-				this.cN.navigate(url);
-			}
-		}
-		else {
-			if(this.cN.scene && this.cN.scene.parentNode && typeof(this.cN.scene.navigate) == "function") {
-				this.cN.scene.navigate(url);
-			}
-			else if(this.cN && typeof(this.cN.navigate) == "function") {
-				this.cN.navigate(url);
-			}
-		}
-		if(!u.h.popstate) {
-			window._man_nav_path = u.h.getCleanHash(location.hash, 1);
-		}
-		else {
-			window._man_nav_path = u.h.getCleanUrl(location.href, 1);
-		}
-	}
-	if(location.hash.length && location.hash.match(/^#!/)) {
-		location.hash = location.hash.replace(/!/, "");
-	}
-	var callback_after_init = false;
-	if(!this.is_initialized) {
-		this.is_initialized = true;
-		if(!u.h.popstate) {
-			if(location.hash.length < 2) {
-				window._man_nav_path = u.h.getCleanUrl(location.href);
-				u.h.navigate(window._man_nav_path);
-				u.init(initialization_scope);
-			}
-			else if(location.hash.match(/^#\//) && u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href)) {
-				callback_after_init = u.h.getCleanHash(location.hash);
-			}
-			else {
-				u.init(initialization_scope);
-			}
-		}
-		else {
-			if(u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href) && location.hash.match(/^#\//)) {
-				window._man_nav_path = u.h.getCleanHash(location.hash);
-				u.h.navigate(window._man_nav_path);
-				callback_after_init = window._man_nav_path;
-			}
-			else {
-				u.init(initialization_scope);
-			}
-		}
-		var random_string = u.randomString(8);
-		if(callback_after_init) {
-			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});u.h.callback("'+callback_after_init+'");}');
-		}
-		else {
-			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});}');
-		}
-		u.t.setTimer(navigation_node, "_initNavigation_"+random_string, 100);
-	}
-	else {
-		u.h.callbacks.push({"node":navigation_node, "callback":callback_navigate});
-	}
-}
-
-
-/*u-preloader.js*/
-u.preloader = function(node, files, _options) {
-	var callback_preloader_loaded = "loaded";
-	var callback_preloader_loading = "loading";
-	var callback_preloader_waiting = "waiting";
-	node._callback_min_delay = 0;
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "loaded"               : callback_preloader_loaded       = _options[_argument]; break;
-				case "loading"              : callback_preloader_loading      = _options[_argument]; break;
-				case "waiting"              : callback_preloader_waiting      = _options[_argument]; break;
-				case "callback_min_delay"   : node._callback_min_delay              = _options[_argument]; break;
-			}
-		}
-	}
-	if(!u._preloader_queue) {
-		u._preloader_queue = document.createElement("div");
-		u._preloader_processes = 0;
-		if(u.e && u.e.event_support == "touch") {
-			u._preloader_max_processes = 1;
-		}
-		else {
-			u._preloader_max_processes = 2;
-		}
-	}
-	if(node && files) {
-		var entry, file;
-		var new_queue = u.ae(u._preloader_queue, "ul");
-		new_queue._callback_loaded = callback_preloader_loaded;
-		new_queue._callback_loading = callback_preloader_loading;
-		new_queue._callback_waiting = callback_preloader_waiting;
-		new_queue._node = node;
-		new_queue._files = files;
-		new_queue.nodes = new Array();
-		new_queue._start_time = new Date().getTime();
-		for(i = 0; file = files[i]; i++) {
-			entry = u.ae(new_queue, "li", {"class":"waiting"});
-			entry.i = i;
-			entry._queue = new_queue
-			entry._file = file;
-		}
-		u.ac(node, "waiting");
-		if(typeof(node[new_queue._callback_waiting]) == "function") {
-			node[new_queue._callback_waiting](new_queue.nodes);
-		}
-	}
-	u._queueLoader();
-	return u._preloader_queue;
-}
-u._queueLoader = function() {
-	if(u.qs("li.waiting", u._preloader_queue)) {
-		while(u._preloader_processes < u._preloader_max_processes) {
-			var next = u.qs("li.waiting", u._preloader_queue);
-			if(next) {
-				if(u.hc(next._queue._node, "waiting")) {
-					u.rc(next._queue._node, "waiting");
-					u.ac(next._queue._node, "loading");
-					if(typeof(next._queue._node[next._queue._callback_loading]) == "function") {
-						next._queue._node[next._queue._callback_loading](next._queue.nodes);
-					}
-				}
-				u._preloader_processes++;
-				u.rc(next, "waiting");
-				u.ac(next, "loading");
-				if(next._file.match(/png|jpg|gif|svg/)) {
-					next.loaded = function(event) {
-						this.image = event.target;
-						this._image = this.image;
-						this._queue.nodes[this.i] = this;
-						u.rc(this, "loading");
-						u.ac(this, "loaded");
-						u._preloader_processes--;
-						if(!u.qs("li.waiting,li.loading", this._queue)) {
-							u.rc(this._queue._node, "loading");
-							if(typeof(this._queue._node[this._queue._callback_loaded]) == "function") {
-								this._queue._node[this._queue._callback_loaded](this._queue.nodes);
-							}
-							// 
-						}
-						u._queueLoader();
-					}
-					u.loadImage(next, next._file);
-				}
-				else if(next._file.match(/mp3|aac|wav|ogg/)) {
-					next.loaded = function(event) {
-						console.log(event);
-						this._queue.nodes[this.i] = this;
-						u.rc(this, "loading");
-						u.ac(this, "loaded");
-						u._preloader_processes--;
-						if(!u.qs("li.waiting,li.loading", this._queue)) {
-							u.rc(this._queue._node, "loading");
-							if(typeof(this._queue._node[this._queue._callback_loaded]) == "function") {
-								this._queue._node[this._queue._callback_loaded](this._queue.nodes);
-							}
-						}
-						u._queueLoader();
-					}
-					if(typeof(u.audioPlayer) == "function") {
-						next.audioPlayer = u.audioPlayer();
-						next.load(next._file);
-					}
-					else {
-						u.bug("You need u.audioPlayer to preload MP3s");
-					}
-				}
-				else {
-				}
-			}
-			else {
-				break
-			}
-		}
-	}
-}
-u.loadImage = function(node, src) {
-	var image = new Image();
-	image.node = node;
-	u.ac(node, "loading");
-    u.e.addEvent(image, 'load', u._imageLoaded);
-	u.e.addEvent(image, 'error', u._imageLoadError);
-	image.src = src;
-}
-u._imageLoaded = function(event) {
-	u.rc(this.node, "loading");
-	if(typeof(this.node.loaded) == "function") {
-		this.node.loaded(event);
-	}
-}
-u._imageLoadError = function(event) {
-	u.rc(this.node, "loading");
-	u.ac(this.node, "error");
-	if(typeof(this.node.loaded) == "function" && typeof(this.node.failed) != "function") {
-		this.node.loaded(event);
-	}
-	else if(typeof(this.node.failed) == "function") {
-		this.node.failed(event);
-	}
-}
-u._imageLoadProgress = function(event) {
-	u.bug("progress")
-	if(typeof(this.node.progress) == "function") {
-		this.node.progress(event);
-	}
-}
-u._imageLoadDebug = function(event) {
-	u.bug("event:" + event.type);
-	u.xInObject(event);
-}
-
 
 /*u-request.js*/
 Util.createRequestObject = function() {
@@ -2600,112 +3496,6 @@ Util.validateResponse = function(HTTPRequest){
 }
 
 
-/*u-scrollto.js*/
-u.scrollTo = function(node, _options) {
-	node.callback_scroll_to = "scrolledTo";
-	node.callback_scroll_cancelled = "scrolledToCancelled";
-	var offset_y = 0;
-	var offset_x = 0;
-	var scroll_to_x = 0;
-	var scroll_to_y = 0;
-	var to_node = false;
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "callback"             : node.callback_scroll_to           = _options[_argument]; break;
-				case "callback_cancelled"   : node.callback_scroll_cancelled    = _options[_argument]; break;
-				case "offset_y"             : offset_y                           = _options[_argument]; break;
-				case "offset_x"             : offset_x                           = _options[_argument]; break;
-				case "node"              : to_node                               = _options[_argument]; break;
-				case "x"                    : scroll_to_x                        = _options[_argument]; break;
-				case "y"                    : scroll_to_y                        = _options[_argument]; break;
-				case "scrollIn"             : scrollIn                           = _options[_argument]; break;
-			}
-		}
-	}
-	if(to_node) {
-		node._to_x = u.absX(to_node);
-		node._to_y = u.absY(to_node);
-	}
-	else {
-		node._to_x = scroll_to_x;
-		node._to_y = scroll_to_y;
-	}
-	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
-	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
-	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
-		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
-	}
-	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
-		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
-	}
-	node._to_x = node._to_x < 0 ? 0 : node._to_x;
-	node._to_y = node._to_y < 0 ? 0 : node._to_y;
-	node._x_scroll_direction = node._to_x - u.scrollX();
-	node._y_scroll_direction = node._to_y - u.scrollY();
-	node._scroll_to_x = u.scrollX();
-	node._scroll_to_y = u.scrollY();
-	node.scrollToHandler = function(event) {
-		u.t.resetTimer(this.t_scroll);
-		this.t_scroll = u.t.setTimer(this, this._scrollTo, 50);
-	}
-	u.e.addEvent(node, "scroll", node.scrollToHandler);
-	node.cancelScrollTo = function() {
-		u.t.resetTimer(this.t_scroll);
-		u.e.removeEvent(this, "scroll", this.scrollToHandler);
-		this._scrollTo = null;
-	}
-	node.IEScrollFix = function(s_x, s_y) {
-		if(!u.browser("ie")) {
-			return false;
-		}
-		else if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
-			return true;
-		}
-	}
-	node._scrollTo = function(start) {
-		var s_x = u.scrollX();
-		var s_y = u.scrollY();
-		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.IEScrollFix(s_x, s_y)) {
-			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
-				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/4);
-			}
-			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
-				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/4);
-			}
-			else {
-				this._scroll_to_x = this._to_x;
-			}
-			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
-				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/4);
-			}
-			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
-				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/4);
-			}
-			else {
-				this._scroll_to_y = this._to_y;
-			}
-			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
-				this.cancelScrollTo();
-				this.scrollTo(this._to_x, this._to_y);
-				if(typeof(this[this.callback_scroll_to]) == "function") {
-					this[this.callback_scroll_to]();
-				}
-				return;
-			}
-			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
-		}
-		else {
-			this.cancelScrollTo();
-			if(typeof(this[this.callback_scroll_cancelled]) == "function") {
-				this[this.callback_scroll_cancelled]();
-			}
-		}	
-	}
-	node._scrollTo();
-}
-
 /*u-string.js*/
 Util.cutString = function(string, length) {
 	var matches, match, i;
@@ -2821,58 +3611,6 @@ Util.isStringHTML = function(string) {
 		catch(exception) {}
 	}
 	return false;
-}
-
-
-/*u-svg.js*/
-Util.svg = function(svg_object) {
-	var svg, shape, svg_shape;
-	if(svg_object.name && u._svg_cache && u._svg_cache[svg_object.name]) {
-		svg = u._svg_cache[svg_object.name].cloneNode(true);
-	}
-	if(!svg) {
-		svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-		for(shape in svg_object.shapes) {
-			Util.svgShape(svg, svg_object.shapes[shape]);
-		}
-		if(svg_object.name) {
-			if(!u._svg_cache) {
-				u._svg_cache = {};
-			}
-			u._svg_cache[svg_object.name] = svg.cloneNode(true);
-		}
-	}
-	if(svg_object.title) {
-		svg.setAttributeNS(null, "title", svg_object.title);
-	}
-	if(svg_object["class"]) {
-		svg.setAttributeNS(null, "class", svg_object["class"]);
-	}
-	if(svg_object.width) {
-		svg.setAttributeNS(null, "width", svg_object.width);
-	}
-	if(svg_object.height) {
-		svg.setAttributeNS(null, "height", svg_object.height);
-	}
-	if(svg_object.id) {
-		svg.setAttributeNS(null, "id", svg_object.id);
-	}
-	if(svg_object.node) {
-		svg.node = svg_object.node;
-	}
-	if(svg_object.node) {
-		svg_object.node.appendChild(svg);
-	}
-	return svg;
-}
-Util.svgShape = function(svg, svg_object) {
-	svg_shape = document.createElementNS("http://www.w3.org/2000/svg", svg_object["type"]);
-	svg_object["type"] = null;
-	delete svg_object["type"];
-	for(detail in svg_object) {
-		svg_shape.setAttributeNS(null, detail, svg_object[detail]);
-	}
-	return svg.appendChild(svg_shape);
 }
 
 
@@ -3156,59 +3894,3 @@ Util.getVar = function(param, url) {
 	}
 }
 
-
-/*u-dom-desktop_ie10.js*/
-if(false && document.documentMode <= 10) {
-	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
-		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
-			if(attributes) {
-				var attribute;
-				for(attribute in attributes) {
-					if(!attribute.match(/^(value|html)$/)) {
-						node.setAttribute(attribute, attributes[attribute]);
-					}
-				}
-			}
-			node = _parent.appendChild(node);
-			if(attributes) {
-				if(attributes["value"]) {
-					node.value = attributes["value"];
-				}
-				if(attributes["html"]) {
-					node.innerHTML = attributes["html"];
-				}
-			}
-			return node;
-		}
-		catch(exception) {
-			u.exception("u.ae (desktop_ie10)", arguments, exception);
-		}
-	}
-	Util.insertElement = u.ie = function(_parent, node_type, attributes) {
-		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
-			if(attributes) {
-				var attribute;
-				for(attribute in attributes) {
-					if(!attribute.match(/^(value|html)$/)) {
-						node.setAttribute(attribute, attributes[attribute]);
-					}
-				}
-			}
-			node = _parent.insertBefore(node, _parent.firstChild);
-			if(attributes) {
-				if(attributes["value"]) {
-					node.value = attributes["value"];
-				}
-				if(attributes["html"]) {
-					node.innerHTML = attributes["html"];
-				}
-			}
-			return node;
-		}
-		catch(exception) {
-			u.exception("u.ie (desktop_ie10)", arguments, exception);
-		}
-	}
-}
