@@ -85,7 +85,9 @@ Util.Objects["test_e"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
-		for(node in objects) {
+		for(i in objects) {
+
+			node = objects[i];
 
 			if(node.a != node.b) {
 				test += Math.pow(33, 3) * Math.sqrt(777)/10000;
@@ -117,6 +119,43 @@ Util.Objects["test_f"] = new function() {
 
 }
 
+Util.Objects["test_g"] = new function() {
+	this.run = function() {
+
+		var test = 0;
+		objects.forEach(function(node) {
+
+			if(node.a != node.b) {
+				test += Math.pow(33, 3) * Math.sqrt(777)/10000;
+			}
+
+			
+		});
+
+		return test;
+	}
+
+}
+
+Util.Objects["test_h"] = new function() {
+	this.run = function() {
+
+		var test = 0;
+		var i = 0;
+		while(node = objects[i++]) {
+
+			if(node.a != node.b) {
+				test += Math.pow(33, 3) * Math.sqrt(777)/10000;
+			}
+
+		};
+
+		return test;
+	}
+
+}
+
+
 
 function loopTest(id) {
 	
@@ -124,7 +163,7 @@ function loopTest(id) {
 	for(i = 0; i < iterations; i++) {
 		result += u.o[id].run();
 	}
-
+	console.log("id:" + id + ", " + result);
 	return result;
 } 
 
@@ -166,6 +205,14 @@ Util.Objects["test"] = new function() {
 
 		var t7 = new Date().getTime();
 
+		var result = loopTest("test_g");
+
+		var t8 = new Date().getTime();
+
+		var result = loopTest("test_h");
+
+		var t9 = new Date().getTime();
+
 
 		
 		u.ae(div, "div", {"class":"test", "html":"Auto assignment ("+object_count+" objects, "+iterations+" loops): " + (t2-t1) + "ms"})
@@ -174,6 +221,9 @@ Util.Objects["test"] = new function() {
 		u.ae(div, "div", {"class":"test", "html":"No assignment, but lenght assignment ("+object_count+" objects, "+iterations+" loops): " + (t5-t4) + "ms"})
 		u.ae(div, "div", {"class":"test", "html":"for ... in ("+object_count+" objects, "+iterations+" loops): " + (t6-t5) + "ms"})
 		u.ae(div, "div", {"class":"test", "html":"all var in for ("+object_count+" objects, "+iterations+" loops): " + (t7-t6) + "ms"})
+		u.ae(div, "div", {"class":"test", "html":"foreach ("+object_count+" objects, "+iterations+" loops): " + (t8-t7) + "ms"})
+		u.ae(div, "div", {"class":"test", "html":"while ("+object_count+" objects, "+iterations+" loops): " + (t9-t8) + "ms"})
+
 	}
 
 }

@@ -17,7 +17,7 @@ $page->pageTitle("Login");
 
 if(is_array($action) && count($action)) {
 
-	if(count($action) == 1 && $action[0] == "forgot_password") {
+	if(count($action) == 1 && $action[0] == "forgot") {
 
 		$page->page(array(
 			"templates" => "pages/forgot_password.php"
