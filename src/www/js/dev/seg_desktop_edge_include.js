@@ -41,6 +41,9 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-media.js?cb=1"></script>');
 
 
+document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-tween.js"></script>');
+
+
 document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
 document.write('<script type="text/javascript" src="/js/dev/desktop/i-page.js"></script>');
 document.write('<script type="text/javascript" src="/js/dev/desktop/i-scene.js"></script>');
