@@ -3,7 +3,6 @@
 // local segmentation
 $segments_config["www"] = array(
 	
-	"desktop_edge"  => "desktop",
 	"desktop"       => "desktop",
 	"desktop_ie11"  => "desktop",
 	"desktop_ie10"  => "desktop",
@@ -27,7 +26,6 @@ $segments_config["www"] = array(
 // local segmentation
 $segments_config["dev"] = array(
 	
-	"desktop_edge"  => "desktop_edge",
 	"desktop"       => "desktop",
 	"desktop_ie11"  => "desktop_ie11",
 	"desktop_ie10"  => "desktop_ie10",
