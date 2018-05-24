@@ -2,7 +2,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u.js"></
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-debug.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-audio.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom.js"></script>');
@@ -23,6 +22,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-histor
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-keyboard.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-media.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.js"></script>');
@@ -37,7 +37,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-templa
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-textscaler.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
 
 
 document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
