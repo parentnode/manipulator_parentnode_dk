@@ -1,9 +1,9 @@
 /*
-Manipulator v0.9.2-janitor Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-06-29 09:57:38
+Manipulator v0.9.2-full Copyright 2017 http://manipulator.parentnode.dk
+js-merged @ 2018-06-29 04:40:03
 */
 
-/*seg_smartphone_include.js*/
+/*seg_desktop_include.js*/
 
 /*u.js*/
 if(!u || !Util) {
