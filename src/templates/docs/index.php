@@ -25,7 +25,7 @@
 
 		<h2>Library Index</h2>
 		<h3>Core modules</h3>
-		<ul class="library">
+		<ul class="library core">
 			<li>
 				<h3><a href="/docs/u-array">Arrays</a></h3>
 				<p>Array prototypes for older browsers</p>
@@ -74,7 +74,7 @@
 
 
 		<h3>Extension modules</h3>
-		<ul class="library">
+		<ul class="library extension">
 			<li>
 				<h3><a href="/docs/u-animation">Animation</a></h3>
 				<p>CSS3 transitions with fallback.</p>

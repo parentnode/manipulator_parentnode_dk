@@ -38,7 +38,33 @@ Util.Objects["front"] = new function() {
 
 		scene.build = function() {
 //			u.bug("scene.build:" + u.nodeId(this));
+			this.div_bundle_builder = u.ae(this, "div", {"class":"bundle_builder"});
 
+			this.div_bundle_builder.response = function(response) {
+				var coreModules = u.qsa(".library.core > li", response);
+				var ul_coreModules = u.ae(this, "ul", {"class":"coreModules"});
+
+				for(var i = 0; i < coreModules.length; i++) {
+					u.ae(ul_coreModules, coreModules[i]);
+					u.e.hover(coreModules[i], {"delay":"0"});
+
+					coreModules[i].over = function() {
+						var description = this.children[1];
+						u.a.transition(description, "all 0.2s ease-in");
+						u.a.translate(description, 0, 6);
+						u.a.opacity(description, 1);
+					}
+					
+					coreModules[i].out = function() {
+						var description = this.children[1];
+						u.a.transition(description, "all 0.2s ease-in");
+						u.a.translate(description, 0, 0);
+						u.a.opacity(description, 0);
+					}
+				}
+			}
+			
+			u.request(this.div_bundle_builder, "/docs");
 		}
 
 
