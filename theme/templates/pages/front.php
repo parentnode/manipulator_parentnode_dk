@@ -62,8 +62,9 @@
 
 			<h2>Want to contribute?</h2>
 			<p>
-				We always need help. Send an email to 
-				<a href="mailto:contribute@parentnode.dk">contribute@parentnode.dk</a> to join the team.
+				parentNode is hosting events and meetups at think.dk regularly. Check out 
+				<a href="https://think.dk/events">our event schedule</a> and come by for a chat or send an email to 
+				<a href="mailto:contribute@parentnode.dk">contribute@parentnode.dk</a> and join our team.
 			</p>
 
 		</div>
