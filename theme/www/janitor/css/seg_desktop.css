@@ -6,11 +6,27 @@
 /*s-fonts.css*/
 @font-face {
 	font-family: 'OpenSans';
-	src: url('/janitor/admin/fonts/opensans-regular-webfont.woff') format('woff'),
-		 url('/janitor/admin/fonts/opensans-regular-webfont.ttf') format('truetype'),
-		 url('/janitor/admin/fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
+	src: url('/janitor/admin/css/fonts/opensans-regular-webfont.woff') format('woff'),
+		 url('/janitor/admin/css/fonts/opensans-regular-webfont.ttf') format('truetype'),
+		 url('/janitor/admin/css/fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
 	font-weight: normal;
 	font-style: normal;
+}
+@font-face {
+	font-family: 'OpenSans';
+	src: url('/janitor/admin/css/fonts/opensans-bold-webfont.woff') format('woff'),
+		 url('/janitor/admin/css/fonts/opensans-bold-webfont.ttf') format('truetype'),
+		 url('/janitor/admin/css/fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'OpenSans';
+	src: url('/janitor/admin/css/fonts/opensans-italic-webfont.woff') format('woff'),
+		 url('/janitor/admin/css/fonts/opensans-italic-webfont.ttf') format('truetype'),
+		 url('/janitor/admin/css/fonts/opensans-italic-webfont.svg#open_sansitalic') format('svg');
+	font-weight: normal;
+	font-style: italic;
 }
 
 
@@ -19,44 +35,39 @@
 	-webkit-text-size-adjust: none;
 }
 html {height: 100%;}
-body {background: #ffffff; margin: 0; min-height: 100%; overflow-y: scroll; background-color: #f5f7f8;}
-h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {color: #313942; padding: 0; margin: 0; line-height: 1em; font-weight: normal;}
+body {margin: 0; min-height: 100%; overflow-y: scroll; background-color: #f5f7f8;}
+h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {color: #313942; padding: 0; margin: 0;}
+h1, h2, h3, h4, h5, h6, p, li, span, a, form, dd, dt {line-height: 1em; font-weight: normal;}
 ul {list-style: none;}
 a {text-decoration: none; cursor: pointer;}
 a:hover {}
 img {border: 0; display: block;}
 form, fieldset, label, input, select, textarea {color: #313942; padding: 0; margin: 0; font-weight: normal;}
-input, select, textarea {font-size: 1.077rem;}
 fieldset {border: none;}
+input, select, textarea {font-size: 14px;}
 input, textarea {outline: none;}
 a, span {font-size: inherit; font-family: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; color: inherit; text-transform: inherit;}
-h1 {padding: 20px 30px; text-transform: uppercase; font-size: 2rem;}
-h2 {padding: 0 30px 10px; font-size: 1.3rem;}
-h3 {padding: 0 30px 10px; font-size: 1.2rem;}
+h1 {padding: 20px 30px; text-transform: uppercase; font-size: 26px;}
+h2 {padding: 0 30px 10px; font-size: 17px;}
+h3 {padding: 0 30px 10px; font-size: 14px;}
 h4 {padding: 0 30px;}
 h5 {padding: 0 30px;}
 h6 {padding: 0 30px;}
 p {padding: 0 30px 25px; color: #7d848c; line-height: 1.38em;} 
 ul {font-size: 0;}
-li {display: inline-block; vertical-align: top; color: #7d848c; font-size: 0.923rem;}
+li {display: inline-block; vertical-align: top; color: #7d848c; font-size: 12px;}
 dl {font-size: 0;} 
 dd, 
-dt {color: #7d848c; display: inline-block; vertical-align: top; font-size: 0.923rem;}
-.c {clear: both; font-size: 0;}
-.c400, .c300, .c266, .c200, .c150, .c133, .c100, .c75, .c50 {display: inline-block; min-height: 10px; vertical-align: top;}
-.c400 {width: 100%;}
-.c300 {width: 75%;}
-.c266 {width: 66%;}
-.c200 {width: 50%;}
-.c133 {width: 34%;}
-.c100 {width: 25%;}
-#page {position: relative; margin-left: 230px;}
+dt {color: #7d848c; display: inline-block; vertical-align: top; font-size: 12px;}
+#page {position: relative; margin-left: 30px;}
 
 
 /*s-header.css*/
-#header {background-color: #313942; position: fixed; top: 0; left: 0; width: 230px; height: 100%;}
+#header {background-color: #313942; position: fixed; z-index: 200; top: 0; left: 0; width: 30px; height: 100%; overflow: hidden;}
 #header .janitor {display: block; background-color: #64ad8e; height: 140px; padding: 0;}
 #header .janitor li.front {display: block; color: #ffffff; padding: 20px; text-transform: uppercase; font-size: 18px;}
+#header .janitor li.front a {white-space: nowrap; opacity: 0;}
+#header .janitor li.front a span {display: inline-block; vertical-align: top;}
 #page > .servicenavigation {display: block; padding: 0; position: absolute; top: 0px; right: 30px;}
 #page > .servicenavigation li.navigation {display: none;}
 #page > .servicenavigation li.help {display: none;}
@@ -65,33 +76,19 @@ dt {color: #7d848c; display: inline-block; vertical-align: top; font-size: 0.923
 #page > .servicenavigation li:last-child:after {content: "";}
 #page > .servicenavigation li a {display: inline-block; vertical-align: top;}
 #page > .servicenavigation li a:hover {text-decoration: underline;}
-#navigation {}
+#navigation {opacity: 0; width: 230px; overflow: auto; height: calc(100% - 140px);}
 #navigation ul li {color: #8c9399; display: block; text-transform: uppercase;}
+#navigation ul li:hover {color: #ffffff;}
 #navigation ul li a {display: block; padding: 14px 20px 15px;}
-#navigation ul:not(.sections) > li {font-size: 12px; border-bottom: 1px solid #404a56;}
-#navigation ul:not(.sections) > li:hover {color: #ffffff;}
-#navigation > ul.sections {}
-#navigation > ul.sections > li {overflow: hidden;}
-#navigation > ul.sections h3 {color: #8c9399; padding: 14px 20px 15px; font-size: 13px; position: relative; border-bottom: 1px solid #404a56;}
-#navigation > ul.sections h3 svg {position: absolute; top: 15px; right: 20px; stroke: #8c9399; stroke-width: 2px;}
-#navigation > ul.sections h3:hover {color: #ffffff;}
-#navigation > ul.sections ul {}
-#navigation > ul.sections ul li {padding-left: 20px;}
-body.page #navigation .page a,
-body.post #navigation .post a,
-body.photocollection #navigation .photocollection a,
-body.todo #navigation .todo a,
-body.qna #navigation .qna a,
-body.todolist #navigation .todo a,
-body.wish #navigation .wish a,
-body.wishlist #navigation .wish a,
-body.profile #navigation .profile a,
-body.navigation #navigation .navigation a,
-body.shop #navigation .shop a,
-body.tags #navigation .tags a,
-body.user #navigation .user a,
-body.logs #navigation .logs a,
-body.usergroup #navigation .user a {padding-left: 35px; color: #ffffff;}
+#navigation > ul.navigation {}
+#navigation > ul.navigation > li {overflow: hidden; border-bottom: 1px solid #404a56;}
+#navigation > ul.navigation h3 {color: #cccccc; padding: 11px 20px 12px; font-size: 10px; position: relative; }
+#navigation > ul.navigation h3 svg {position: absolute; top: 11px; right: 20px; stroke: #8c9399; stroke-width: 2px;}
+#navigation > ul.navigation h3:hover {color: #ffffff;}
+#navigation > ul.navigation ul {}
+#navigation > ul.navigation ul li {padding-left: 20px; border-top: 1px solid #404a56;}
+#navigation > ul.navigation > li.empty {display: none;}
+#navigation li.selected a {padding-left: 35px; color: #ffffff;}
 
 
 /*s-content.css*/
@@ -99,207 +96,267 @@ body.usergroup #navigation .user a {padding-left: 35px; color: #ffffff;}
 #content a {text-decoration: underline;}
 #content .link {cursor: pointer;}
 #content .scene {position: relative; min-height: 200px;}
-#content .scene > h1 {height: 46px; padding-bottom: 0; background: #ffffff;}
-#content .scene > h1+h2 {height: 24px; padding-bottom: 0; background: #ffffff; font-size: 14px; margin-top: -24px;}
-#content .scene h1 + ul.actions {border-bottom: 1px solid #bbbbbb; padding: 25px 30px 0; height: 49px; background: #ffffff;}
-#content .scene h1 + h2 + ul.actions {border-bottom: 1px solid #bbbbbb; padding: 15px 30px 0; height: 49px; background: #ffffff;}
+#content .scene > h1 {height: 46px; border-bottom: 1px solid #bbbbbb; padding-bottom: 74px; background: #ffffff;}
+#content .scene > h1 + h2 {height: 24px; padding-bottom: 0; font-size: 14px; height: 90px; margin: -90px 0 0;}
+#content .scene h1 + ul.actions {padding: 0 30px; height: 49px; margin: -49px 0 0;}
+#content .scene h1 + h2 + ul.actions {padding: 0 30px; height: 49px; margin: -49px 0 0;}
 #content .scene h1 + ul.actions li,
 #content .scene h1 + h2 + ul.actions li {padding-bottom: 0;}
-#content .scene h2 {padding: 10px 30px 11px;}
+#content .scene > ul.actions li.delete,
+#content .scene > ul.actions li.unpaid,
+#content .scene > ul.actions li.duplicate {float: right; padding: 0 0 10px 10px;}
+#content .scene h1 + p,
+#content .scene h1 + h3,
+#content .scene h1 + h2 + p,
+#content .scene h1 + h2 + h3,
+#content .scene h1 + ul.actions + p,
+#content .scene h1 + ul.actions + h3,
+#content .scene h1 + h2 + ul.actions + p,
+#content .scene h1 + h2 + ul.actions + h3 {padding-top: 20px;}
+#content .scene p {width: 500px;}
+#content .scene ul.items p {width: auto;}
+#content .scene p.note {font-style: italic;}
 #content ul.list {padding: 21px 30px;}
 #content ul.list li {display: block;}
-#content dl.list {padding: 21px 30px; width: 600px;}
-#content dl.list dt,
-#content dl.list dd {padding: 5px 0; border-bottom: 1px solid #dbdfe5; height: 14px;}
-#content dl.list dt {width: 100px;}
-#content dl.list dt:after {content: ":";}
-#content dl.list dd {width: 170px; margin: 0 30px 0 0;}
+#content dl.info {overflow: hidden; padding: 0 30px 6px;}
+#content dl.info dt {float: left; clear: left;}
+#content dl.info dt:after {content: ":\00a0";}
+#content dl.info dd {float: left; clear: right; padding: 0 0 3px; color: #313942;}
+#content dl.info dd.waiting,
+#content dl.info dd.partial {color: orange;}
+#content dl.info dd.pending,
+#content dl.info dd.unpaid,
+#content dl.info dd.unshipped {color: #df0000;}
+#content dl.info dd.complete,
+#content dl.info dd.paid,
+#content dl.info dd.shipped {color: green;}
 #content .scene > ul.actions {padding-bottom: 20px; padding-top: 20px; text-align: left;}
 #content .scene > ul.actions li {padding: 0 10px 10px 0;}
+#content .scene ul.tabs {background-color: #dedede; border-top: 1px solid #bbbbbb;}
+#content .scene > ul.tabs {border: none;}
+#content .scene ul.tabs li {border-right: 1px solid #dedede;}
+#content .scene ul.tabs li a {display: block; text-decoration: none; padding: 15px 25px; }
+#content .scene ul.tabs li.selected {background-color: #f5f7f8; color: #313942;}
+#content .scene li.comment ul.info {padding: 0 30px;}
+#content .scene li.comment ul.info li {display: inline-block; vertical-align: top;}
+#content .scene li.comment ul.info li.user:after {content: ",\00a0";}
+#content .scene li.comment p.comment {color: #313942; padding-bottom: 10px;}
 #content .scene > div.prices {padding: 10px 0 20px; border-bottom: 1px solid #bbbbbb;}
-#content .todo * {color: orange !important;}
-#content .warning, #content .warning * {color: orange !important;}
+#content .scene li.pricedetails ul.info {padding: 0 30px;}
+#content .scene li.pricedetails ul.info li {display: inline-block; vertical-align: top;}
+#content .system_todo, #content .system_todo * {color: orange !important;}
+#content .system_warning, #content .system_warning * {color: orange !important;}
 #content .system_error, #content .system_error * {color: red !important;}
-#content .scene.login h1 {padding-bottom: 74px; border-bottom: 1px solid #bbbbbb;}
 #content .scene.login form {padding-top: 30px;}
+#content .scene.login form li.forgot {padding-top: 6px; padding-left: 15px;}
 
 /*s-footer.css*/
 #footer {text-align: right; font-size: 0; padding: 10px 20px; position: fixed; z-index: 100; bottom: 0; right: 0; background-color: rgba(255,255,255,0.5);}
-#footer .servicenavigation {display: inline-block;}
-#footer .servicenavigation .copyright {white-space: nowrap;}
+#footer .servicenavigation {display: none;}
+#footer p {white-space: nowrap; padding: 0;}
 
 /*s-login_overlay.css*/
 #login_overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 10000;}
-#login_overlay .scene {margin: 100px auto 0; width: 300px; position: relative; padding: 50px; background: #ffffff;}
-#login_overlay .scene h1 {padding-left: 0;}
-#login_overlay .field {padding: 0 3px 15px; position: relative; font-size: 0;}
-#login_overlay .field label {display: none;}
-#login_overlay .field input {width: 286px; height: 24px; padding: 2px 6px; color: #333333; box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; display: inline-block; vertical-align: top; border-radius: 3px; margin: 2px; outline: none; position: relative; z-index: 10;}
-#login_overlay .field.focus input {margin: 0; border: 3px solid #5c5c5c;}
-#login_overlay .field input.default {color: #aaaaaa;}
-#login_overlay .field.required .indicator {position: absolute; top: 4px; left: 315px; width: 25px; height: 25px; background: transparent url(/janitor/admin/img//bg_icons.png) no-repeat 0 -292px;}
-#login_overlay .field.correct .indicator {background-position: 0 -320px;}
-#login_overlay .field.error input {margin: 0; border: 3px solid #f8c9bb;}
-#login_overlay ul.actions {padding: 0;}
-#login_overlay ul.actions li {width: auto; height: auto; display: inline-block; padding: 0 0 10px; vertical-align: top;}
-#login_overlay ul.actions input.button {width: auto; height: 26px; padding: 3px 12px;}
-@media all and (-webkit-min-device-pixel-ratio:0) {#login_overlay ul.actions input.button {padding-bottom: 5px;}}
-#login_overlay ul.actions input.button {background-color: #8c9399; color: #ffffff; border: none; cursor: pointer; border-radius: 3px;}
-#login_overlay ul.actions input.button.primary {background-color: #64ad8e;}
-#login_overlay ul.actions input.button.primary:hover {background-color: #313942;}
-#login_overlay .field div.help {position: absolute; left: 335px; top: 0; width: 200px;}
-#login_overlay .field div.error,
-#login_overlay .field div.hint {display: none; padding: 5px; border-radius: 3px;}
-#login_overlay .field div.error {border: 1px solid #efdb8f; color: #a27366; background: #f8c9bb; margin-top: -3px;}
-#login_overlay .field.error div.error {display: block;}
-#login_overlay .field div.hint {z-index: 9; border: 1px solid #c8e183; color: #5d7731; background: #c8e183;}
-#login_overlay .field.focus div.hint {display: block;}
+#login_overlay form {margin: 100px auto 0; width: 300px; position: relative; padding: 50px; background: #ffffff;}
+ {padding-left: 2px; padding-right: 2px;}
+#login_overlay .field {padding: 0 0 15px;}
+#login_overlay .field input {width: 286px;
+ }
+#login_overlay .field.required .indicator {}
+#login_overlay div.field div.help {left: 330px;}
+#login_overlay ul.actions {padding: 0 2px;}
+#login_overlay ul.actions li {padding: 0;}
+#login_overlay li.forgot {display: none;}
 #login_overlay p {display: none;}
 
 
 /*s-form.css*/
-#content form {}
-#content fieldset {border: none; display: block;}
-#content .field {padding: 0 28px 10px; position: relative; font-size: 0; z-index: 1;}
-#content label {display: none;}
-#content .field input,
-#content .field select,
-#content .field textarea {box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; display: inline-block; vertical-align: top; border-radius: 3px; margin: 2px; outline: none; position: relative; z-index: 1;}
-#content .field input {width: 366px; height: 24px; padding: 2px 6px;}
-#content .field select {width: 381px; height: 33px; color: #333333; padding: 5px 3px 2px 2px;}
-#content .field select option {padding: 5px 3px 2px 6px;}
+form {}
+fieldset {border: none; display: block;}
+div.field {padding: 0 28px 10px; position: relative; font-size: 0; z-index: 1;}
+div.field label {display: none; padding-left: 2px;}
+div.field input,
+div.field select,
+div.field textarea {box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; display: inline-block; vertical-align: top; border-radius: 3px; margin: 2px; outline: none; position: relative; z-index: 1;}
+div.field input {width: 366px; height: 24px; padding: 2px 6px;}
+div.field select {width: 381px; height: 30px; color: #333333; padding: 3px 3px 4px 2px;}
+div.field select option {padding: 3px 3px 4px 6px;}
 @media all and (-webkit-min-device-pixel-ratio:0) {
-	#content .field select {width: 380px; height: 31px; padding: 2px 3px 2px 7px;
-		background: #ffffff url(/janitor/admin/img/bg_icons.png) no-repeat 360px -976px;
+	div.field select {width: 380px; height: 30px; padding: 2px 3px 2px 7px;
+		background: #ffffff url(/janitor/admin/img/bg_icons.png) no-repeat right -20px top -978px;
 		-webkit-appearance: none;
 	}
 }
-#content .field textarea {width: 372px; height: 80px; overflow: auto; padding: 6px 0 2px 6px; }
-#content .field.short textarea {height: 40px;}
-#content .field textarea.autoexpand {width: 366px; padding: 6px 6px 2px; overflow: hidden;}
-#content .field .pseudolabel {position: absolute; font-size: 1.077rem; display: inline-block; padding: 5px 6px; z-index: 2;}
-#content .field.checkbox,
-#content .field.boolean {padding-bottom: 15px;}
-#content .field.checkbox input,
-#content .field.boolean input {display: inline-block; vertical-align: top; width: auto; height: auto; padding: 0; margin: 1px 10px 0 3px; border: 0;}
-#content .field.checkbox label,
-#content .field.boolean label {width: auto; display: inline-block; vertical-align: top; font-size: 1.077rem; line-height: 1em;}
-#content .field.radiobuttons {padding-bottom: 15px;}
-#content .field.radiobuttons > label {display: block; font-size: 1.077rem; line-height: 1em; padding: 0 0 0 3px;}
-#content .field.radiobuttons > label:after {content: ":";}
-#content .field.radiobuttons div.item {padding: 8px 0 0;}
-#content .field.radiobuttons div.item input {width: auto; height: auto; padding: 0; margin: 1px 10px 0 3px; border: 0;}
-#content .field.radiobuttons div.item label {font-size: 1.077rem; line-height: 1em; display: inline-block; vertical-align: top; text-align: left; width: auto;}
-#content .field.files {border: 3px dashed #dedede; width: 374px; display: inline-block; vertical-align: top; border-radius: 5px; position: relative; padding: 0; margin: 2px 30px 20px;}
-#content .field.files input[type="file"] {opacity: 0; width: 374px; border: none; height: 60px; margin: 0; padding: 0;
+div.field textarea {width: 372px; height: 80px; overflow: auto; padding: 6px 0 2px 6px; }
+div.field.short textarea {height: 40px;}
+div.field textarea.autoexpand {width: 366px; padding: 6px 6px 2px; overflow: hidden;}
+div.field .pseudolabel {position: absolute; font-size: 1.077rem; display: inline-block; padding: 8px 6px; z-index: 2;}
+div.field.paragraph label {display: inline-block; vertical-align: top; line-height: 1.38em;} 
+div.field.paragraph label:after {content: ":";}
+div.field.paragraph p {display: inline-block; vertical-align: top; padding: 0 0 0 2px;} 
+div.field.list label {} 
+div.field.checkbox,
+div.field.boolean {padding-bottom: 15px;}
+div.field.checkbox input,
+div.field.boolean input {display: inline-block; vertical-align: top; width: auto; height: auto; padding: 0; margin: 1px 10px 0 3px; border: 0;}
+div.field.checkbox label,
+div.field.boolean label {width: auto; display: inline-block; vertical-align: top; font-size: 1.077rem; line-height: 1em;}
+div.field.radiobuttons {padding-bottom: 15px;}
+div.field.radiobuttons > label {display: block; font-size: 1.077rem; line-height: 1em; padding: 0 0 0 3px;}
+div.field.radiobuttons > label:after {content: ":";}
+div.field.radiobuttons div.item {padding: 8px 0 0;}
+div.field.radiobuttons div.item input {width: auto; height: auto; padding: 0; margin: 1px 10px 0 3px; border: 0;}
+div.field.radiobuttons div.item label {font-size: 1.077rem; line-height: 1em; display: inline-block; vertical-align: top; text-align: left; width: auto;}
+div.field input[type="integer"],
+div.field input[type="number"] {
+	-moz-appearance: textfield;
+}
+div.field input[type="integer"]::-webkit-inner-spin-button,
+div.field input[type="integer"]::-webkit-outer-spin-button,
+div.field input[type="number"]::-webkit-inner-spin-button,
+div.field input[type="number"]::-webkit-outer-spin-button {margin: 0;
+	-webkit-appearance: none;
+}
+div.field.files {border: 3px dashed #dedede; width: 374px; display: inline-block; vertical-align: top; border-radius: 5px; position: relative; padding: 0; margin: 2px 30px 20px;}
+div.field.files input[type="file"] {opacity: 0; width: 374px; border: none; height: 60px; margin: 0; padding: 0;
 	font-size: 130px;
 }
-#content .field.files label {display: block; position: absolute; width: 120px; left: 50%; padding: 1px 4px 3px; margin: 20px 0 0 -60px; text-align: center; border-radius: 6px; background: #dedede;}
-#content .field.files.loading label {display: none;}
-#content .field.files.loading {background: transparent url(/janitor/admin/img/gx_loader.gif) no-repeat center center;}
-#content .field.location {}
-#content .field.location div.location {padding-bottom: 2px;}
-#content .field.location div.latitude {padding-right: 2px;}
-#content .field.location div.latitude,
-#content .field.location div.longitude {display: inline-block; vertical-align: top;}
-#content .field.location div.latitude input,
-#content .field.location div.longitude input {width: 173px;}
-#content .field.location.geolocation div.geolocation {width: 30px; height: 30px; display: inline-block; vertical-align: top; cursor: pointer;
+div.field.files label {display: block; position: absolute; width: 120px; left: 50%; padding: 1px 4px 3px; margin: 20px 0 0 -60px; text-align: center; border-radius: 6px; background: #dedede;}
+div.field.files.loading label {display: none;}
+div.field.files.loading {background: transparent url(/janitor/admin/img/gx_loader.gif) no-repeat center center;}
+div.field.location {}
+div.field.location div.location {padding-bottom: 2px;}
+div.field.location div.latitude {padding-right: 2px;}
+div.field.location div.latitude,
+div.field.location div.longitude {display: inline-block; vertical-align: top;}
+div.field.location div.latitude input,
+div.field.location div.longitude input {width: 173px;}
+div.field.location.geolocation div.geolocation {width: 30px; height: 30px; display: inline-block; vertical-align: top; cursor: pointer;
 	background: transparent url(/janitor/admin/img/gx_geolocation.png) no-repeat 5px 8px;
 }
-#content .field.location.geolocation div.latitude input,
-#content .field.location.geolocation div.longitude input {width: 158px;}
+div.field.location.geolocation div.latitude input,
+div.field.location.geolocation div.longitude input {width: 158px;}
 iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; left: 0; z-index: 100; border: 1px solid #666666; background-color: #ffffff;}
-#content .field.focus input,
-#content .field.focus textarea {margin: 0;}
-#content .field.focus select {padding: 4px 3px 1px 0px;}
+div.field.focus input,
+div.field.focus textarea {margin: 0;}
+div.field.focus select {padding: 1px 3px 4px 0px;}
 @media all and (-webkit-min-device-pixel-ratio:0) {
-	#content .field.focus select {padding: 2px 3px 3px 5px;
-		background-position: 358px -979px;
+	div.field.focus select {padding: 3px 3px 2px 5px;
+		background-position: right -22px top -980px;
 	}
 }
-#content .field.focus input,
-#content .field.focus select,
-#content .field.focus textarea {border: 3px solid #5c5c5c;}
-#content .field.radiobuttons.focus input,
-#content .field.checkbox.focus input,
-#content .field.boolean.focus input {margin: 1px 10px 0 3px; border: none;}
-#content .field.location.focus input {margin: 2px; border: 1px solid #dcdcdc;}
-#content .field.location.focus input.focus {margin: 0; border: 3px solid #5c5c5c;}
-#content .field.files.focus {border-color: #c8e183;}
-#content .field.files.focus input[type="file"] {margin: 0; border: none;}
-#content .field.files.focus label {background-color: #c8e183;}
-#content .field input.default,
-#content .field select.default,
-#content .field textarea.default,
-#content .field .pseudolabel {color: #aaaaaa;}
-#content .field .indicator {position: absolute; top: 4px; left: 420px; width: 25px; height: 25px;}
-#content .field.required .indicator {
-	background: transparent url(/janitor/admin/img//bg_icons.png) no-repeat 0 -292px;
+div.field.focus input,
+div.field.focus select,
+div.field.focus textarea {border: 3px solid #5c5c5c;}
+div.field.radiobuttons.focus input,
+div.field.checkbox.focus input,
+div.field.boolean.focus input {margin: 1px 10px 0 3px; border: none;}
+div.field.location.focus input {margin: 2px; border: 1px solid #dcdcdc;}
+div.field.location.focus input.focus {margin: 0; border: 3px solid #5c5c5c;}
+div.field.files.focus {border-color: #c8e183;}
+div.field.files.focus input[type="file"] {margin: 0; border: none;}
+div.field.files.focus label {background-color: #c8e183;}
+div.field input.default,
+div.field select.default,
+div.field textarea.default,
+div.field .pseudolabel {color: #aaaaaa;}
+div.field .indicator {position: absolute; top: 4px; left: 420px; width: 25px; height: 25px;}
+div.field.required .indicator {
+	background: transparent url(/janitor/admin/img/bg_icons.png) no-repeat 0 -292px;
 }
-#content .field.text.required .indicator {background-position: 0 -296px;}
-#content .field.radiobuttons .indicator,
-#content .field.checkbox .indicator,
-#content .field.boolean .indicator {top: -5px;}
-#content .field.files .indicator {left: 387px; top: -1px;}
-#content .field.correct .indicator {background-position: 0 -320px;}
-#content .field.text.correct .indicator {background-position: 0 -321px;}
-#content .field.error input,
-#content .field.error textarea {margin: 0;}
-#content .field.error select {padding: 3px 3px 2px 0px;}
-#content .field.error input,
-#content .field.error select,
-#content .field.error textarea {border: 3px solid #f8c9bb;}
+div.field.text.required .indicator {background-position: 0 -296px;}
+div.field.radiobuttons .indicator,
+div.field.checkbox .indicator,
+div.field.boolean .indicator {top: -5px;}
+div.field.files .indicator {left: 387px; top: -1px;}
+div.field.correct .indicator {background-position: 0 -320px;}
+div.field.text.correct .indicator {background-position: 0 -321px;}
+div.field.error input,
+div.field.error textarea {margin: 0;}
+div.field.error select {padding: 3px 3px 2px 0px;}
+div.field.error input,
+div.field.error select,
+div.field.error textarea {border: 3px solid #f8c9bb;}
 @media all and (-webkit-min-device-pixel-ratio:0) {
-	#content .field.error select {padding: 2px 3px 3px 5px;
-		background-position: 358px -979px;
+	div.field.error select {padding: 3px 3px 2px 5px;
+		background-position: right -22px top -980px;
 	}
 }
-#content .field.radiobuttons.error input,
-#content .field.checkbox.error input,
-#content .field.boolean.error input {margin: 1px 10px 0 3px; border: none;}
-#content .field.location.error input {margin: 2px; border: 1px solid #dcdcdc;}
-#content .field.location.error input.error {margin: 0; border: 3px solid #f8c9bb;}
-#content .field.files.error {border-color: #f8c9bb;}
-#content ul.actions {padding: 0 25px;}
-#content ul.actions li {width: auto; height: auto; display: inline-block; padding: 0 5px 10px; vertical-align: top;}
-#content ul.actions input.button {width: auto; height: 26px; padding: 3px 12px;}
-@media all and (-webkit-min-device-pixel-ratio:0) {
-	#content ul.actions input.button {padding-bottom: 4px;}
+div.field.error .pseudolabel {padding: 10px 8px;}
+div.field.radiobuttons.error input,
+div.field.checkbox.error input,
+div.field.boolean.error input {margin: 1px 10px 0 3px; border: none;}
+div.field.location.error input {margin: 2px; border: 1px solid #dcdcdc;}
+div.field.location.error input.error {margin: 0; border: 3px solid #f8c9bb;}
+div.field.files.error {border-color: #f8c9bb;}
+ul.actions {padding: 0 25px;}
+ul.actions li {width: auto; height: auto; display: inline-block; padding: 0 5px 10px; vertical-align: top;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
+ul.actions input.button {width: auto; height: 26px; padding: 3px 10px;}
+@media all and (-webkit-min-device-pixel-ratio:0) {
+	ul.actions input.button {padding-bottom: 4px;
+		-webkit-appearance: none;
+	}
+}
+ul.actions a.button,
 #content ul.actions a.button {display: block; text-decoration: none; height: 14px; padding: 5px 12px 7px;}
-#content ul.actions input.button,
+ul.actions input.button,
+ul.actions a.button,
 #content ul.actions a.button {font-size: 1rem; line-height: 1.2em; background-color: #8c9399; color: #ffffff; border: none; cursor: pointer; border-radius: 3px;}
-#content ul.actions input.button:hover,
+ul.actions input.button:hover,
+ul.actions a.button:hover,
 #content ul.actions a.button:hover {background-color: #313942;}
-#content ul.actions input.button.primary,
+ul.actions input.button.primary,
+ul.actions a.button.primary,
 #content ul.actions a.button.primary {background-color: #64ad8e;}
-#content ul.actions input.button.primary:hover,
+ul.actions input.button.primary:hover,
+ul.actions a.button.primary:hover,
 #content ul.actions a.button.primary:hover {background-color: #313942;}
-#content ul.actions input.button.secondary,
+.submitting input.button,
+.submitting a.button,
+#content .submitting a.button {padding-left: 40px !important;
+	background-image: url(/janitor/admin/img/gx_loader.gif);
+	background-position: 9px 7px;
+	background-repeat: no-repeat;
+}
+ul.actions input.button.secondary,
+ul.actions a.button.secondary,
 #content ul.actions a.button.secondary {background-color: #fecd60; color: #9f742c;}
-#content ul.actions input.button.secondary:hover,
+ul.actions input.button.secondary:hover,
+ul.actions a.button.secondary:hover,
 #content ul.actions a.button.secondary:hover {background-color: #fed76e;}
-#content ul.actions li.status input.button {font-size: 0; height: 26px; width: 26px;}
-#content ul.actions li.status form.disable input.button {background-color: #f4f5f5; border-left: 3px solid #8c9399; border-top: 3px solid #8c9399; border-right: 30px solid #8c9399; border-bottom: 3px solid #8c9399;}
-#content ul.actions li.status form.enable input.button {background-color: #f4f5f5; border-right: 3px solid orange; border-top: 3px solid orange; border-left: 30px solid orange; border-bottom: 3px solid orange;}
+#content ul.actions li.status input.button {font-size: 0; height: 26px; width: 26px; padding: 3px 12px;}
+#content ul.actions li.status form.disable input.button {background-color: #f4f5f5; border-left: 3px solid #8c9399; border-top: 3px solid #8c9399; border-right: 27px solid #8c9399; border-bottom: 3px solid #8c9399;}
+#content ul.actions li.status form.enable input.button {background-color: #f4f5f5; border-right: 3px solid orange; border-top: 3px solid orange; border-left: 27px solid orange; border-bottom: 3px solid orange;}
 #content ul.actions li.status form.disable:after {content: "ON"; font-size: 10px; font-weight: 700; color: #8c9399; display: block; width: 20px; height: 20px; position: relative; top: -19px; left: 6px;}
-#content ul.actions li.status form.enable:after {content: "OFF"; font-size: 10px; font-weight: 700; color: orange; display: block; width: 20px; height: 20px; position: relative; top: -19px; left: 32px;}
+#content ul.actions li.status form.enable:after {content: "OFF"; font-size: 10px; font-weight: 700; color: orange; display: block; width: 20px; height: 20px; position: relative; top: -19px; left: 29px;}
 #content ul.actions li.status.enabled form.enable {display: none;}
 #content ul.actions li.status.disabled form.disable {display: none;}
-#content form input.button.delete.confirm {color: #ffffff; background-color: #df0000;}
-#content form input.button.delete.confirm:hover {}
-#content form input.button.disabled,
-#content form input.button.disabled:hover {cursor: default !important; color: #aaaaaa !important; background-color: #eeeeee !important;}
-#content .field div.help {position: absolute; left: 455px; top: 0; width: 200px;}
-#content .field.files div.help {left: 422px;}
-#content .field div.error,
-#content .field div.hint {display: none; padding: 5px; border-radius: 3px; font-size: 12px;}
-#content .field div.error {border: 1px solid #bbbbbb; color: #a27366; background: #f8c9bb; margin-top: -3px;}
-#content .field.error div.error {display: block;}
-#content .field div.hint {z-index: 9; border: 1px solid #bbbbbb; color: #5d7731; background: #c8e183;}
-#content .field.focus div.hint,
-#content .field.hover div.hint {display: block;}
+#content ul.actions form input.button.confirm,
+#content ul.actions form input.button.confirm:hover {color: #ffffff; background-color: #df0000;}
+#content ul.actions form input.button.loading,
+#content ul.actions form input.button.loading:hover {padding-left: 35px; background-color: #8c9399; background-image: url(/janitor/admin/img/gx_loader.gif); background-position: 10px center; background-repeat: no-repeat;}
+ul.actions a.button.disabled,
+#content ul.actions a.button.disabled,
+ul.actions input.button.disabled,
+ul.actions a.button.disabled:hover,
+#content ul.actions a.button.disabled:hover,
+ul.actions input.button.disabled:hover {cursor: default !important; color: #aaaaaa !important; background-color: #eeeeee !important;}
+div.field div.help {position: absolute; left: 455px; top: 0; width: 200px; line-height: 1.2em;}
+div.field.files div.help {left: 422px;}
+div.field div.error,
+div.field div.hint {display: none; padding: 5px; border-radius: 3px; font-size: 12px;}
+div.field div.error {border: 1px solid #bbbbbb; color: #a27366; background: #f8c9bb;}
+div.field.error div.error {display: block;}
+div.field div.hint {z-index: 9; border: 1px solid #bbbbbb; color: #5d7731; background: #c8e183;}
+div.field.focus div.hint,
+div.field.hover div.hint {display: block;}
+div.field.error div.hint {border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
+div.field.focus div.hint+div.error,
+div.field.hover div.hint+div.error {border-top-left-radius: 0; border-top-right-radius: 0; border-top: none;}
 #content .field.html {border-top: 1px solid #dedede; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #dedede; margin-bottom: 10px; z-index: 3;}
 #content .field.html div.help {left: 555px;}
 #content .field.html.optionsshown {z-index: 60 !important;}
@@ -313,9 +370,10 @@ iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; 
 #content .field.html div.html_editor_hint .open,
 #content .field.html div.html_editor_hint .close {font-size: 1rem; line-height: 1em; cursor: pointer; vertical-align: top; margin: 3px 3px 0; border-radius: 13px; background-color: #313942; padding: 6px 10px 7px; color: #ffffff; margin: 10px 0 20px; text-align: center;}
 #content .field.html > textarea {display: none;}
-#content .field.html > textarea.show {display: block; height: 200px; width: 472px;}
+#content .field.html.focus > textarea {margin: 2px; border: 1px solid #dcdcdc;}
+#content .field.html > textarea.show {display: block; height: 200px; width: 470px;}
 #content .field.html > label {display: block;  width: 477px;}
-#content .field.html > label span {font-size: 0.723em; float: right; padding: 3px 0 0; cursor: pointer;}
+#content .field.html > label span {font-size: 0.723em; float: right; padding: 1px 0 0; cursor: pointer;}
 #content .field.html > .indicator {top: 33px;}
 #content .field.html .viewer {display: none;}
 #content .field.html .editor { width: 482px; position: relative; z-index: 3;}
@@ -327,12 +385,22 @@ iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; 
 #content .field.html ul.options.show li {display: inline-block; position: relative; top: -26px; left: 26px;}
 #content .field.html .editor div.tag {margin: 0 0 1px; padding: 0 0 0 30px; background-color: #dcdcdc; position: relative; border-radius: 3px; border: 2px solid #f5f7f8;}
 #content .field.html .editor div.dragged {z-index: 15;}
-#content .field.html .editor div.tag .drag {display: none; position: absolute; top: 0px; left: -20px; border-top-left-radius: 15px; border-bottom-left-radius: 15px; background: #dedede; width: 30px; height: 30px; cursor: move;}
+#content .field.html .editor div.tag .drag {display: none; position: absolute; top: 0px; left: -20px; border-top-left-radius: 15px; border-bottom-left-radius: 15px; background: #dedede; width: 30px; height: 30px; cursor: move;
+	background: #dedede url(/janitor/admin/img/bg_icons.png) no-repeat 6px -93px;
+}
 #content .field.html .editor div.tag:hover .drag {display: block;}
 #content .field.html .editor div.tag .remove {display: none; position: absolute; top: 0px; right: -15px; border-radius: 15px; background: #dedede; width: 30px; height: 30px; cursor: pointer;
 	background: #dedede url(/janitor/admin/img/bg_icons.png) no-repeat 8px -42px;
 }
 #content .field.html .editor div.tag:hover .remove {display: block;}
+#content .field.html .editor div.tag .classname {display: none; position: absolute; top: 0px; right: -45px; border-radius: 15px; background: #dedede; width: 30px; height: 30px; cursor: pointer;}
+#content .field.html .editor div.tag .classname.open {width: auto; display: block;}
+#content .field.html .editor div.tag .classname span {display: inline-block; vertical-align: top; font-size: 10px; padding-top: 8px; padding-left: 6px;}
+#content .field.html .editor div.tag .classname form {margin: 0; display: inline-block; vertical-align: top;}
+#content .field.html .editor div.tag .classname form .field {padding: 0 12px 0 3px;}
+#content .field.html .editor div.tag .classname form .field input {height: 20px; width: 100px;}
+#content .field.html .editor div.tag .classname form .field.focus input {border: 1px solid #dedede; margin: 2px;}
+#content .field.html .editor div.tag:hover .classname {display: block;}
 #content .field.html .editor div.tag ul.type {display: block; z-index: 5; position: absolute; width: 30px; top: 0px; left: 0px; padding: 0;}
 #content .field.html .editor div.tag ul.type li {display: none; text-transform: uppercase; padding: 9px 4px; text-align: center; font-size: 11px; cursor: default;}
 #content .field.html .editor div.tag ul.type.clickable li {cursor: pointer;}
@@ -348,7 +416,10 @@ iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; 
 #content .field.html .editor div.tag div.text {display: inline-block; vertical-align: top; width: 434px; height: auto; padding: 4px 6px; line-height: 1.375em; border-radius: 3px; background-color: #F5F7F8; color: #333333; box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; min-height: 20px; outline: none;}
 #content .field.html .editor div.tag div.text em,
 #content .field.html .editor div.tag div.text strong,
-#content .field.html .editor div.tag div.text a {background-color: rgba(255, 0, 0, 0.3); cursor: default; font-size: inherit;}
+#content .field.html .editor div.tag div.text a,
+#content .field.html .editor div.tag div.text span,
+#content .field.html .editor div.tag div.text sup {background-color: rgba(255, 0, 0, 0.3); cursor: default; font-size: inherit;}
+#content .field.html .editor div.tag div.text sup {line-height: 1em; font-size: 11px;}
 #content .field.html .editor div.tag.focus {background-color: #5c5c5c; padding: 0 0 0 30px; border: 2px solid #5c5c5c;}
 #content .field.html .editor div.tag.focus div.text {border-color: #5c5c5c;}
 #content .field.html .editor div.tag.focus .drag {background-color: #5c5c5c; top: -2px;}
@@ -389,16 +460,17 @@ iframe#geolocationmap {width: 300px; height: 300px; position: absolute; top: 0; 
 #content .field.html .editor div.tag.vimeo.focus .text,
 #content .field.html .editor div.tag.youtube.focus .text {color: #333333;}
 body #selection_options {z-index: 1100; position: absolute; background-color: #F5F7F8; border: 3px solid #5c5c5c; margin: 0px 0 0 10px; padding: 15px; border-radius: 5px;}
-body #selection_options h3 {padding: 10px 0 10px; text-align: left; font-size: 13px; margin-top: 10px; border-top: 1px solid #5c5c5c;}
+body #selection_options h3 {padding: 0 0 10px; text-align: left; font-size: 13px;}
+body #selection_options ul.options + form {margin-top: 10px; border-top: 1px solid #5c5c5c; padding-top: 10px;}
 body #selection_options li {display: block; font-size: 13px; padding: 5px 0; cursor: pointer;}
 body #selection_options li.link {text-decoration: underline;}
 body #selection_options li.em {font-style: italic;}
 body #selection_options li.strong {font-weight: 700;}
-body #selection_options .field {margin-left: -2px;}
+body #selection_options .field {margin-left: -2px; padding: 0 0 5px;}
 body #selection_options .field label {display: none;}
 body #selection_options .field input {color: #333333; box-shadow: inset 0 1px 2px #dedede; background: #ffffff; border: 1px solid #dcdcdc; display: inline-block; vertical-align: top; border-radius: 3px; margin: 2px; outline: none; position: relative; z-index: 10; width: 150px; height: 24px; padding: 2px 6px;}
-body #selection_options .field.checkbox input {width: auto;}
-body #selection_options .field.checkbox label {display: inline-block; vertical-align: top; padding: 4px 0 0 3px;}
+body #selection_options .field.checkbox input {width: auto; height: auto; margin-top: 5px;}
+body #selection_options .field.checkbox label {display: inline-block; vertical-align: top; font-size: 13px; padding: 5px 0 0 3px;}
 body #selection_options .field input.default {color: #cccccc;}
 body #selection_options .field input.focus {}
 body #selection_options ul.actions {padding: 10px 0 0;}
@@ -413,6 +485,7 @@ body #selection_options ul.actions a.button {background-color: #8c9399; color: #
 body #selection_options ul.actions input.button:hover,
 body #selection_options ul.actions a.button:hover {background-color: #313942;}
 .delete_selection {position: absolute; z-index: 1150; top: 0; left: 0; border-radius: 8px; width: 14px; height: 14px; font-size: 10px; line-height: 14px; text-align: center; background: #ffffff; border: 1px solid #000000; cursor: pointer;}
+.edit_selection {position: absolute; z-index: 1150; top: 0; left: 0; border-radius: 8px; width: 14px; height: 14px; font-size: 10px; line-height: 14px; text-align: center; background: #ffffff; border: 1px solid #000000; cursor: pointer;}
 
 
 /*s-notifications.css*/
@@ -423,190 +496,289 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 
 
 /*s-tags.css*/
-#content ul.tags {padding: 10px 125px 16px 25px;}
-#content ul.tags li {display: inline-block; vertical-align: top; margin: 3px; border-radius: 13px; background-color: #313942; padding: 6px 10px 7px; color: #ffffff; font-size: 0;}
-#content ul.tags li.add {padding: 6px 7px 7px 8px; cursor: pointer; width: 10px; text-align: center;}
+#content ul.tags {padding: 0 125px 4px 30px;}
+#content ul.tags li {display: inline-block; vertical-align: top; margin: 0 6px 6px 0; border-radius: 12px; background-color: #313942; padding: 4px 7px 6px; color: #ffffff; font-size: 0;}
+#content ul.tags li.add {padding: 4px 4px 6px; cursor: pointer; width: 13px; text-align: center;}
 #content ul.tags li.add:hover {background-color: #64ad8e;}
-#content ul.tags li span {font-size: 0.923rem; line-height: 1em;}
+#content ul.tags li span {font-size: 11px; line-height: 1em; color: #ffffff;}
 #content ul.tags li span.context {text-transform: uppercase;}
 #content ul.tags li span.context:after {content: ":";}
 #content ul.tags li span.value {}
-#content ul.tags li.add {font-size: 0.923rem;}
+#content ul.tags li.add {font-size: 11px;}
 #content .scene > div.tags {padding: 0; border-bottom: 1px solid #aaaaaa; overflow: hidden;}
-#content .scene > div.tags ul.tags {padding: 0 125px 20px 25px;}
-#content div.tags fieldset {display: inline-block; vertical-align: top;}
-#content div.tags fieldset .field {padding-right: 12px; padding-bottom: 0;}
-#content div.tags fieldset .field input[type=text] {width: 262px;}
-#content div.tags .actions {display: inline-block; vertical-align: top; padding: 0;}
-#content div.tags .actions li {padding-left: 0;}
-#content div.tags .actions li input {margin-top: 4px;}
-#content .addtags ul.tags li {cursor: pointer;}
-#content .addtags ul.tags li:hover,
-#content .addtags ul.tags li.add:hover {background-color: #df0000;}
-#content .addtags div.tagoptions ul.tags {display: block;}
+#content .scene > div.tags ul.tags {padding: 0 125px 14px 30px;}
+#content div.tagoptions fieldset {display: inline-block; vertical-align: top;}
+#content div.tagoptions fieldset .field {padding-right: 12px;}
+#content div.tagoptions fieldset .field input[type=text] {width: 262px;}
+#content div.tagoptions ul.actions {display: inline-block; vertical-align: top; padding: 0;}
+#content div.tagoptions ul.actions li {padding-left: 0;}
+#content div.tagoptions ul.actions li input {margin-top: 4px;}
+#content .edittags ul.tags li {cursor: pointer;}
+#content .edittags ul.tags li:hover,
+#content .edittags ul.tags li.add:hover {background-color: #df0000; color: #ffffff;}
+#content .edittags div.tagoptions ul.tags {display: block;}
 #content div.tagoptions ul.tags {position: relative; z-index: 10; display: none;}
 #content div.tagoptions ul.tags li {background-color: #dedede;}
+#content div.tagoptions ul.tags li span {color: #333333;}
 #content div.tagoptions ul.tags li:hover {background-color: #64ad8e;}
-#content div.tagoptions .field {}
-#content div.sortable div.tagoptions .field {padding-left: 56px;}
-#content div.tagoptions input {height: 16px; font-size: 12px;}
-#content .scene.tagList h1 {border-bottom: 1px solid #dedede; padding-bottom: 74px;}
-#content .scene.tagList h1 + p {padding-top: 16px;}
-#content .scene.tagList ul.items > li h3 {padding: 16px 30px;}
+#content div.tagoptions ul.tags li:hover span {color: #ffffff;}
+#content div.all_items div.tagoptions {padding-top: 8px;}
+#content div.all_items ul.items > li div.tagoptions ul.actions {position: static; right: auto; top: auto;}
+#content div.all_items ul.items > li div.tagoptions ul.actions li {padding-top: 1px;}
+#content div.sortable div.tagoptions .field {padding-left: 48px;}
 #content .scene.tagList ul.items > li.unused {background: orange;}
-#content .scene.tagList ul.items > li > h3 > span {font-size: 12px;}
-#content .scene.tagEdit ul.tag_items {padding: 16px 30px;}
-#content .scene.tagEdit ul.tag_items li {display: block; padding: 2px 0;}
-#content .scene.tagEdit ul.tag_items dt {display: none;}
-#content .scene.tagEdit ul.tag_items dd.name {font-weight: bold; padding: 0 15px 0 0;}
-#content .scene.tagEdit ul.tag_items dd.name a {font-weight: bold;}
-#content .scene.tagEdit ul.tag_items dd.itemtype:after {content: "/";}
+#content .scene.tagList ul.items > li h3 span {font-size: 12px;}
 
 
 /*s-shop.css*/
-#content .defaultView > .actions li.delete {float: right; padding: 0 0 10px 10px;}
-#content .defaultList.cartList ul.items > li h3 {padding-bottom: 16px;}
-#content .defaultList.cartList ul.items > li ul.products {display: none;}
-#content .defaultView.cartView ul.products {padding: 0 30px;}
-#content .defaultView.cartView ul.products li {display: block;}
-#content .defaultList.orderList ul.items > li dl.details {padding: 3px 30px 16px; display: block;}
-#content .defaultList.orderList ul.items > li dl.details dt {display: none;}
-#content .defaultList.orderList ul.items > li dl.details dd.name,
-#content .defaultList.orderList ul.items > li dl.details dd.price {display: none;}
-#content .defaultList.orderList ul.items > li dl.details dd.email:after {content: ",\00a0";}
-#content .defaultView.orderView dl.list {padding-top: 3px;}
-#content .defaultView.orderView dl.list dt {width: 200px;}
-#content .defaultView.orderView dl.list dt:after {content: ":";}
-#content .defaultView.orderView dl.list dd {width: 370px; margin: 0 30px 0 0;}
-#content .defaultView.orderView ul.list {padding-top: 3px;}
-#content .defaultView.orderView ul.list li {display: block; overflow: hidden; border-bottom: 1px solid #dedede;}
-#content .defaultView.orderView ul.list li span {display: inline-block; vertical-align: top; padding: 9px 15px 0 0;}
-#content .defaultView.orderView ul.list li span.title {width: 400px; padding-bottom: 9px; word-wrap: break-word;}
-#content .defaultView.orderView ul.list li span.price_piece {width: 200px;}
-#content .defaultView.orderView ul.list li span.price {float: right; padding-right: 0px;}
+#content .scene.shopList ul.tabs li.waiting {color: orange;}
+#content .scene.shopList ul.tabs li.pending {color: red;}
+#content .scene.shopList ul.tabs li.complete {color: green;}
+#content .scene.shopList ul.items > li dl.info dt.price {display: none;}
+#content .scene.shopList ul.items > li dl.info dd.price {position: absolute; top: 10px; right: 100px; font-size: 26px;}
+#content .scene.shopView > ul.actions li.invoice {float: right; padding: 0 0 10px 10px;}
+#content .scene.shopView > ul.actions li.creditnote {float: right; padding: 0 0 10px 10px;}
+#content .scene.shopView > ul.actions li.ship {float: right; padding: 0 0 10px 10px;}
+#content .scene.shopView > ul.actions li.pay {float: right; padding: 0 0 10px 10px;}
+#content .scene.shopView > div > h2 + form {display: none; padding-top: 10px; padding-bottom: 10px;}
+#content .scene.shopView > div > h2 > span {color: #7d848c; cursor: pointer;}
+#content .scene.shopView > div > h2 > span:before {content: "\00a0-\00a0";}
+#content .scene.shopView > div > dl.info,
+#content .scene.shopView div.payments dl.info {padding-top: 3px; padding-right: 0; padding-bottom: 25px; width: 370px;}
+#content .scene.shopView > div > dl.info dt,
+#content .scene.shopView > div > dl.info dd, 
+#content .scene.shopView div.payments dl.info dt,
+#content .scene.shopView div.payments dl.info dd {padding: 5px 0; border-bottom: 1px solid #dbdfe5; height: 14px;}
+#content .scene.shopView > div > dl.info dt,
+#content .scene.shopView div.payments dl.info dt {width: 120px; float: none;}
+#content .scene.shopView > div > dl.info dd,
+#content .scene.shopView div.payments dl.info dd {width: 250px; margin: 0; float: none;}
+#content .scene.shopView div.basics,
+#content .scene.shopView div.contact,
+#content .scene.shopView div.delivery,
+#content .scene.shopView div.billing {border-bottom: 1px solid #bbbbbb;}
+#content .scene.shopView > div.togglable > h2 > span {display: none;}
+#content .scene.shopView > div.togglable.open > h2 > span {display: inline-block;}
+#content .scene.shopView div.all_items {border-bottom: 1px solid #bbbbbb;}
+#content .scene.shopView div.all_items p {padding-bottom: 25px;}
+#content .scene.shopView div.all_items > p + ul.items {display: none;}
+#content .scene.shopView ul.items li h3 {font-size: 0; overflow: hidden; padding-right: 30px; padding-top: 3px; padding-bottom: 3px;}
+#content .scene.shopView ul.items li h3 span {font-size: 14px; line-height: 1em; padding: 9px 5px 5px 0; display: inline-block; vertical-align: top;}
+#content .scene.shopView ul.items li h3 span.total_price {float: right;  padding: 8px 0; display: inline-block; font-size: 16px;}
+#content .scene.shopView ul.items li h3 form {display: inline-block; vertical-align: top; position: relative;}
+#content .scene.shopView ul.items li h3 form div.field {padding: 0;}
+#content .scene.shopView ul.items li h3 form div.field .indicator {display: none;}
+#content .scene.shopView ul.items li h3 form div.field .help {left: 47px; display: none;}
+#content .scene.shopView ul.items li h3 form div.field input {height: 22px; width: 25px; text-align: right;}
+#content .scene.shopView ul.items li h3 form > ul.actions {padding: 0; right: 45px;}
+#content .scene.shopView ul.items li h3 form > ul.actions li {padding: 8px 0 0;}
+#content .scene.shopView ul.items li h3 form > ul.actions input.button {width: 16px; height: 16px; padding: 0; text-indent: -9999px; border-radius: 15px;
+	background-image: url(/janitor/admin/img/gx_refresh.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#content .scene.shopView ul.items li ul.actions {padding-top: 2px;}
+#content .scene.cartView {}
+#content .scene.cartView div.all_items > ul.actions {padding-top: 10px; padding-bottom: 25px;}
+#content .scene.cartView div.all_items > ul.actions li {padding-bottom: 0px;}
+#content .scene.cartView ul.items li h3 {padding-right: 110px;}
+#content .scene.cartView div.order {border-bottom: 1px solid #bbbbbb;}
+#content .scene.cartView div.order ul.actions {padding-bottom: 15px;}
+#content .scene.orderView {}
+#content .scene.orderView div.orderstatus h2.waiting {color: orange;}
+#content .scene.orderView div.orderstatus h2.pending {color: #df0000;}
+#content .scene.orderView div.orderstatus h2.complete {color: green;}
+#content .scene.orderView div.all_items > ul.items {padding-bottom: 25px;}
+#content .scene.orderView div.orderstatus {border-bottom: 1px solid #bbbbbb;}
+#content .scene.orderView div.comment {border-bottom: 1px solid #bbbbbb;}
+#content .scene.orderView div.payments {border-bottom: 1px solid #bbbbbb; border-bottom: 1px solid #bbbbbb;}
+#content .scene.orderView div.payments h3 {padding-bottom: 15px;}
+#content .scene.orderView div.payments ul.actions {padding-bottom: 15px;}
+#content .scene.paymentList ul.items > li dl.info dd.price {right: 140px;}
+#content .scene.newPayment div.basics {border-top: 1px solid #bbbbbb;}
+#content .scene.newPayment div.charge,
+#content .scene.newPayment div.reminder,
+#content .scene.newPayment div.register {border-bottom: 1px solid #bbbbbb;}
+#content .scene.newPayment > div ul.actions {padding-bottom: 15px;}
+#content .scene.newPayment > div ul.actions li {}
+#content .scene.newPayment > div.charge ul.actions {overflow: hidden;}
+#content .scene.newPayment > div.charge ul.actions li {float: left; clear: both;}
+#content .scene.newPayment div.reminder ul.info {padding: 0 30px 25px;}
+#content .scene.newPayment div.reminder ul.info li {padding: 0 0 3px; display: block;}
+body.invoice {background: #ffffff;}
+body.invoice #navigation,
+body.invoice #header,
+body.invoice #footer,
+body.invoice #page > ul.servicenavigation {display: none;}
+body.invoice #page {margin: 0;}
+body.invoice #content {margin: 50px 0;}
+body.invoice #content div.scene ul.info {padding: 0 30px;}
+body.invoice #content div.scene ul.info li {display: block; padding: 0 0 2px; font-size: 14px;}
+body.invoice #content div.scene .basics {text-align: right;}
+body.invoice #content div.scene .basics h1 {padding-bottom: 5px;}
+body.invoice #content div.scene .basics ul.info li.cvr {padding-top: 10px;}
+body.invoice #content div.scene .basics h2 {padding-top: 25px;}
+body.invoice #content div.scene .basics dl.info {padding: 10px 30px;}
+body.invoice #content div.scene .basics dl.info dt {font-weight: 700;}
+body.invoice #content div.scene .basics dl.info dd,
+body.invoice #content div.scene .basics dl.info dt {display: block; float: none; padding: 0 0 5px;}
+body.invoice #content div.scene .buyer ul.info {padding-bottom: 20px;}
+body.invoice #content div.scene .all_items {padding-top: 20px;}
+body.invoice #content div.scene .all_items ul.items li h3 {padding-right: 30px;}
+body.invoice #content div.scene .all_items ul.items li h3 span {font-size: 14px; line-height: 1em; padding: 9px 5px 5px 0; display: inline-block; vertical-align: top;}
+body.invoice #content div.scene .all_items ul.items li h3 span.total_price {float: right; padding: 8px 0; display: inline-block; font-size: 16px;}
+body.invoice #content div.scene .all_items ul.items li.order_total {font-size: 20px; padding: 20px 30px 5px; border-bottom: none;}
+body.invoice #content div.scene .all_items ul.items li.order_vat {font-size: 14px; padding: 0 30px 20px;}
+body.invoice #content div.scene .all_items ul.items li span.amount {float: right;}
 
 
 /*s-user.css*/
-#content .defaultList.userList ul.items > li h3 {padding-bottom: 16px;}
-#content .defaultList.userList .userGroups {background-color: #dedede;}
-#content .defaultList.userList .userGroups li {padding: 15px 30px; border-right: 1px solid #dedede;}
-#content .defaultList.userList .userGroups li a {text-decoration: none;}
-#content .defaultList.userList .userGroups li.selected {background-color: #f5f7f8; color: #aaaaaa;}
-#content .defaultEdit.userEdit .views {background-color: #dedede;}
-#content .defaultEdit.userEdit .views li {padding: 15px 30px; border-right: 1px solid #dedede;}
-#content .defaultEdit.userEdit .views li a {text-decoration: none;}
-#content .defaultEdit.userEdit .views li.selected {background-color: #f5f7f8; color: #313942;}
-#content .scene.userEdit > div.usernames {padding: 0 0 10px 0; border-bottom: 1px solid #bbbbbb;}
-#content .scene.userEdit > div.usernames form.email {padding-bottom: 10px; border-bottom: 1px solid #dedede;}
-#content .scene.userEdit > div.usernames form.mobile {padding-top: 20px;}
-#content .scene.userEdit > div.usernames .actions {text-align: left;}
-#content .scene.userEdit > div.usernames .actions li {padding: 0 5px 10px;}
-#content .scene.userEdit > div.password {padding: 0 0 10px 0; border-bottom: 1px solid #bbbbbb;}
+#content .defaultList.userList > ul.actions li.online {float: right; padding: 0 0 10px 10px;}
+#content .defaultList.userList > ul.actions li.unconfirmed_accounts {float: right; padding: 0 0 10px 10px;}
+#content .defaultEdit.userEdit > ul.actions li.cancel {float: right; padding: 0 0 10px 10px;}
+#content .scene.userEdit > div.usernames {border-bottom: 1px solid #bbbbbb;}
+#content .scene.userEdit > div.usernames form.email {font-size: 0;}
+#content .scene.userEdit > div.usernames form.mobile {padding-bottom: 15px; font-size: 0;}
+#content .scene.userEdit > div.usernames .actions {text-align: left; display: inline-block; vertical-align: top; padding: 4px 0;}
+#content .scene.userEdit > div.usernames .actions li {padding: 0;}
+#content .scene.userEdit > div.usernames .actions li input.button {padding-top: 4px;}
+#content .scene.userEdit > div.usernames fieldset {display: inline-block; vertical-align: top;}
+#content .scene.userEdit > div.usernames fieldset .field {padding-right: 5px;}
+#content .scene.userEdit > div.usernames fieldset .field input {width: 250px;}
+#content .scene.userEdit > div.password {border-bottom: 1px solid #bbbbbb;}
 #content .scene.userEdit > div.password div.password_state {}
+#content .scene.userEdit > div.password div.password_state a {text-decoration: underline;}
 #content .scene.userEdit > div.password div.password_state .password_missing {display: block;}
 #content .scene.userEdit > div.password div.password_state .password_set {display: none;}
 #content .scene.userEdit > div.password div.password_state.set .password_missing {display: none;}
 #content .scene.userEdit > div.password div.password_state.set .password_set {display: block;}
 #content .scene.userEdit > div.password div.new_password {display: none;}
 #content .scene.userEdit > div.password .actions {text-align: left;}
-#content .scene.userEdit > div.password .actions li {padding: 0 5px 10px;}
-#content .scene.userEdit > div.apitoken {padding: 0 0 10px 0; border-bottom: 1px solid #bbbbbb;}
-#content .scene.userEdit > div.apitoken form {display: inline-block; vertical-align: top;}
+#content .scene.userEdit > div.password .actions li {padding: 0 5px 25px;}
+#content .scene.userEdit > div.apitoken {border-bottom: 1px solid #bbbbbb;}
+#content .scene.userEdit > div.apitoken form {display: inline-block; vertical-align: top; padding-bottom: 15px;}
 #content .scene.userEdit > div.apitoken form.renew ul.actions {padding-right: 0;}
 #content .scene.userEdit > div.apitoken form.disable ul.actions {padding-left: 0;}
-#content .scene.userEdit > div.addresses {padding: 0 0 10px 0; border-bottom: 1px solid #bbbbbb;}
+#content .scene.userEdit > div.addresses {border-bottom: 1px solid #bbbbbb;}
 #content .scene.userEdit > div.addresses ul.addresses {padding: 0 30px;}
 #content .scene.userEdit > div.addresses ul.addresses > li {display: inline-block; vertical-align: top; width: 250px; margin-right: 30px; margin-bottom: 20px; height: 150px; padding: 0 0 20px; border-bottom: 1px solid #dedede; position: relative;}
 #content .scene.userEdit > div.addresses ul.addresses > li h3 {padding: 0 0 5px;}
 #content .scene.userEdit > div.addresses ul.addresses > li div {padding: 0 0 3px;}
 #content .scene.userEdit > div.addresses ul.addresses > li .actions {position: absolute; bottom: 0; left: 0; padding: 0;}
 #content .scene.userEdit > div.addresses ul.addresses > li .actions li {padding-left: 0;}
-#content .scene.userEdit > div.newsletters {padding: 0 0 10px 0; border-bottom: 1px solid #bbbbbb;}
-#content .scene.userEdit > div.newsletters ul.newsletters {padding: 0 30px 10px;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li {display: block; padding: 0 0 10px;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li h3 {padding: 4px 0 0; display: inline-block; vertical-align: top;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li ul.actions {padding: 0 10px 0 0; display: inline-block; vertical-align: top;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li ul.actions li {padding: 0;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li ul.actions li input {width: 100px; text-align: center;}
-#content .scene.userEdit > div.newsletters > ul.actions {padding-top: 20px; border-top: 1px solid #dedede;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li.subscribed li.subscribe {display: none;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li.subscribed li.delete {display: inline-block;}
-#content .scene.userEdit > div.newsletters ul.newsletters > li li.delete {display: none;}
+#content .scene.userEdit > div.addresses > .actions {padding-bottom: 15px;}
+#content .scene.defaultList > div.maillists {border-bottom: 1px solid #bbbbbb;}
+#content .scene.defaultList > div.maillists h2 {padding-top: 10px;}
+#content .scene.defaultList > div.maillists ul.maillists {padding: 0 30px 10px;}
+#content .scene.defaultList > div.maillists ul.maillists > li {display: block; padding: 0 0 10px;}
+#content .scene.defaultList > div.maillists ul.maillists > li h3 {padding: 4px 0 0; display: inline-block; vertical-align: top;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions {padding: 0 10px 0 0; display: inline-block; vertical-align: top;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li {padding: 0;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li input {font-size: 0; height: 26px; width: 26px; padding: 3px 12px;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li.unsubscribe input.button {background-color: #f4f5f5; border-left: 3px solid #8c9399; border-top: 3px solid #8c9399; border-right: 27px solid #8c9399; border-bottom: 3px solid #8c9399;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li.subscribe input.button {background-color: #f4f5f5; border-right: 3px solid orange; border-top: 3px solid orange; border-left: 27px solid orange; border-bottom: 3px solid orange;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li.unsubscribe form:after {content: "ON"; font-size: 10px; font-weight: 700; color: #8c9399; display: block; width: 20px; height: 20px; position: relative; top: -19px; left: 6px;}
+#content .scene.defaultList > div.maillists ul.maillists > li ul.actions li.subscribe form:after {content: "OFF"; font-size: 10px; font-weight: 700; color: orange; display: block; width: 20px; height: 20px; position: relative; top: -19px; left: 29px;}
+#content .scene.defaultList > div.maillists > ul.actions {padding-top: 20px; border-top: 1px solid #dedede;}
+#content .scene.defaultList > div.maillists ul.maillists > li.subscribed li.subscribe {display: none;}
+#content .scene.defaultList > div.maillists ul.maillists > li.subscribed li.unsubscribe {display: inline-block;}
+#content .scene.defaultList > div.maillists ul.maillists > li li.unsubscribe {display: none;}
 #content .defaultEdit.accessEdit > div.access {padding: 20px 0;}
 #content .defaultEdit.accessEdit > div.access ul.points {padding: 0 0 20px;}
 #content .defaultEdit.accessEdit > div.access ul.points li {display: block;}
+#content .defaultEdit.accessEdit > div.access ul.points li .field {padding-bottom: 10px;}
 #content .defaultEdit.accessEdit > div.access ul.points li.action {border-top: 1px solid #dedede; padding: 10px 0 0;}
-#content .defaultList.usergroupList ul.items > li h3 {padding-bottom: 16px;}
-#content .defaultEdit.usergroupEdit > ul.actions li.access {float: right;}
-#content .defaultList.userContentList h2 {padding-top: 20px; border-bottom: 1px solid #dedede;}
+#content .defaultEdit.usergroupEdit > ul.actions li.access {float: right; padding-right: 0;}
 #content .defaultList.userContentList div.all_items {padding-bottom: 20px;}
-#content .defaultList.userContentList ul.items > li h3 {padding-bottom: 16px;}
-#content .defaultList.userContentList ul.items > li h3 br {display: none;}
-#content .defaultList.userContentList .views {background-color: #dedede;}
-#content .defaultList.userContentList .views li {padding: 15px 30px; border-right: 1px solid #dedede;}
-#content .defaultList.userContentList .views li a {text-decoration: none;}
-#content .defaultList.userContentList .views li.selected {background-color: #f5f7f8; color: #aaaaaa;}
+#content .defaultList.userOrderList div.all_items {padding-bottom: 20px;}
+#content .defaultNew.userSubscriptions .item {padding-top: 10px;}
+#content .defaultNew.userSubscriptions .item p {padding-bottom: 3px;}
+#content .defaultList.userSubscriptions dd.price.default {text-decoration: line-through;}
+#content .defaultList.userSubscriptions dt.price,
+#content .defaultList.userSubscriptions dd.price {padding-top: 5px;}
+#content .defaultList.userSubscriptions dd.price+dt.price,
+#content .defaultList.userSubscriptions dd.price+dt.price+dd.price {padding-top: 0;}
+#content .defaultList.userSubscriptions dt.membership {display: none;}
+#content .defaultList.userSubscriptions dd.membership {color: green; clear: left; padding-top: 5px;}
+#content .defaultView.userMembership > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
+#content .defaultView.userMembership div.item {position: relative; border-bottom: 1px solid #bbbbbb;}
+#content .defaultView.userMembership div.item h3 {padding-bottom: 20px; font-size: 28px;}
+#content .defaultView.userMembership div.item dl {margin-top: -5px; padding-bottom: 30px;}
+#content .defaultView.userMembership div.item dd.price.default {text-decoration: line-through;}
+#content .defaultView.userMembership div.item dt.price,
+#content .defaultView.userMembership div.item dd.price {padding-top: 5px;}
+#content .defaultView.userMembership div.item dd.price+dt.price,
+#content .defaultView.userMembership div.item dd.price+dt.price+dd.price {padding-top: 0;}
+#content .defaultView.userMembership div.item dt.membership {display: none;}
+#content .defaultView.userMembership div.item dd.membership {color: #df0000; clear: left; padding-top: 5px;}
+#content .defaultView.userMembership div.item dt.payment_method,
+#content .defaultView.userMembership div.item dd.payment_method {padding-top: 5px;}
+#content .defaultView.userMembership div.item ul.actions {padding-bottom: 15px;}
+#content .defaultView.userMembership div.orders {border-bottom: 1px solid #bbbbbb;}
+#content .defaultView.userMembership div.orders ul.items {padding-bottom: 25px;}
+#content .defaultView.userMembership div.change {border-bottom: 1px solid #bbbbbb;}
+#content .defaultView.userMembership div.change div.option {padding-bottom: 30px;}
+#content .defaultView.userMembership div.change div.option h3 {padding-bottom: 10px; font-size: 18px;}
+#content .defaultView.userMembership div.change div.option p {padding-bottom: 10px;}
+#content .defaultView.userMembership div.cancel {border-bottom: 1px solid #bbbbbb;}
+#content .defaultView.userMembership div.cancel ul.actions {padding-bottom: 15px;}
+#content .defaultEdit.userMember ul.actions li.user {float: right; padding: 0 0 10px 10px;}
+#content .defaultEdit.userMember div.orders {border-bottom: 1px solid #bbbbbb;}
+#content .defaultEdit.userMember div.orders ul.items {padding-bottom: 25px;}
 #content .defaultList.userContentList div.comments ul.items > li {}
-#content .defaultList.userContentList div.comments ul.items > li ul.info {padding: 0 30px 5px;}
-#content .defaultList.userContentList div.comments ul.items > li ul.info li {display: inline-block; vertical-align: top;}
-#content .defaultList.userContentList div.comments ul.items > li ul.info li.user:after {content: ",\00a0";}
-#content .defaultList.userContentList div.comments ul.items > li p.comment {color: #313942; padding-bottom: 15px;}
-#content .scene.profileEdit h1,
-#content .scene.profileContentList h1 {border-bottom: 1px solid #dedede; padding-bottom: 74px;}
+#content .defaultList.usersNotVerified > ul.actions li.remind {float: right; padding: 0 0 10px 10px;}
+#content .defaultList.maillistList > ul.actions li.download {float: right; padding: 0 0 10px 10px;}
 #content .scene.profileEdit div.password label {display: block; padding-left: 3px;}
 #content .scene.profileEdit div.password .indicator {top: 20px;}
+#content .scene.profileEdit div.cancellation {border-bottom: 1px solid #bbbbbb;}
+#content .scene.profileEdit div.cancellation div.field.password {display: none;}
+#content .scene.profileEdit div.cancellation ul.actions {padding-bottom: 15px;}
+#content .scene.profileEdit div.cancellation ul.actions input.button.confirm,
+#content .scene.profileEdit div.cancellation ul.actions input.button.confirm:hover {color: #ffffff; background-color: #df0000;}
+
 
 /*s-logs.css*/
 #content .defaultList.logList h1 {padding-bottom: 74px; border-bottom: 1px solid #bbbbbb;}
 #content .defaultList.logList ul.items > li ul.loglines li {padding: 0 30px; display: block;}
 
 /*s-navigations.css*/
-#content .defaultList.navigationsList ul.items > li h3 {padding-bottom: 16px;}
 #content .defaultEdit.navigationNodeEdit form > fieldset,
 #content .defaultNew.navigationNodeNew form > fieldset {padding-bottom: 15px;}
 #content .defaultNew.navigationNodeNew fieldset h3,
 #content .defaultEdit.navigationNodeEdit fieldset h3 {border-top: 1px solid #aaaaaa; font-size: 0.8em; margin: 5px 0 20px; padding-bottom: 10px; padding-top: 7px; text-transform: uppercase;}
-#content .defaultEdit.navigationEdit div.nodes ul.nodes {
-	border-top: 1px solid #dedede; 
-	margin-bottom: -1px;
-}
-#content .defaultEdit.navigationEdit div.nodes > ul.nodes li ul.nodes {
-}
-#content .defaultEdit.navigationEdit div.nodes > ul.nodes > li {}
-#content .defaultEdit.navigationEdit ul.nodes > li {padding: 0; display: block; position: relative; z-index: 1; border-bottom: 1px solid #dedede;}
-#content .defaultEdit.navigationEdit ul.nodes > li div.drag {width: 30px; height: 30px; position: absolute; top: 1px; left: 20px; background: transparent url(/janitor/admin/img//bg_icons2.png) no-repeat 10px -440px; cursor: move;}
-#content .defaultEdit.navigationEdit ul.nodes > li h3 {padding: 10px 20px 10px 0; display: inline-block; vertical-align: bottom; font-size: 14px;}
-#content .defaultEdit.navigationEdit ul.nodes > li h3 {margin-left: 60px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li h3 {margin-left: 60px; padding-left: 30px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li li h3 {margin-left: 90px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li li li h3 {margin-left: 120px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li li li li h3 {margin-left: 150px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li li li li li h3 {margin-left: 180px;}
-#content .defaultEdit.navigationEdit ul.nodes > li li h3 {
+#content .defaultEdit.navigationEdit .sortable ul.items li ul.items { border-top: 1px solid #dedede; margin-bottom: -1px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li h3 {padding: 10px 20px 10px 0; display: inline-block; vertical-align: bottom;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li.item li.item h3 {margin-left: 30px; padding-left: 40px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li.item li.item li.item h3 {margin-left: 50px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li.item li.item li.item li.item h3 {margin-left: 70px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li.item li.item li.item li.item li h3 {margin-left: 90px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li.item li.item li.item li.item li.item li.item h3 {margin-left: 110px;}
+#content .defaultEdit.navigationEdit .sortable ul.items > li li h3 {
 	background-image: url(/janitor/admin/img//bg_angle.png);
-	background-position: 11px 10px;
+	background-position: 23px 10px;
 	background-color: transparent;
 	background-repeat: no-repeat;
 }
-#content .defaultEdit.navigationEdit ul.nodes > li span {padding: 10px 10px 10px 0; display: inline-block; vertical-align: bottom;}
-#content .defaultEdit.navigationEdit ul.nodes > li {
-}
-#content .defaultEdit.navigationEdit ul.nodes > li.hover {background: red !important;}
-#content .defaultEdit.navigationEdit ul.nodes > li.dragged {
+#content div.all_items ul.items > li.item:hover {background-color: transparent;}
+#content .defaultEdit.navigationEdit ul.items > li span {padding: 10px 10px 10px 0; display: inline-block; vertical-align: bottom;}
+#content .defaultEdit.navigationEdit ul.items > li.hover {background: red !important;}
+#content .defaultEdit.navigationEdit ul.items > li.dragged {
 	z-index: 3;
 }
-#content .defaultEdit.navigationEdit ul.nodes > li.dragged .drag {background-image: none;}
-#content .defaultEdit.navigationEdit ul.nodes li ul.actions {
-	position: absolute; top: 5px; right: 0;
-}
-#content .defaultEdit.navigationEdit ul.nodes li ul.actions a.button {font-size: 0.87em; height: 10px;}
-#content .defaultEdit.navigationEdit ul.nodes li ul.actions input.button {font-size: 0.87em; height: 22px;}
+#content .defaultEdit.navigationEdit ul.items > li.dragged .drag {background-image: none;}
 
 
 /*s-front.css*/
-#content .scene.front h1 {padding-bottom: 74px; border-bottom: 1px solid #bbbbbb;}
 #content .scene.front > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
-#content .scene.front div.todos {border-top: 1px solid #bbbbbb; padding-bottom: 10px;}
+#content .scene.front > div {border-bottom: 1px solid #bbbbbb; padding-bottom: 10px;}
+#content .scene.front div.orders ul.orders {}
+#content .scene.front div.orders ul.orders li {width: 25%; text-align: center;}
+#content .scene.front div.orders ul.orders li h3 a {display: block;}
+#content .scene.front div.orders ul.orders li h3 span {display: block; font-size: 50px; line-height: 60px;}
+#content .scene.front div.members ul.members {}
+#content .scene.front div.members ul.members li {width: 25%; text-align: center;}
+#content .scene.front div.members ul.members li h3 a {display: block;}
+#content .scene.front div.members ul.members li h3 span {display: block; font-size: 50px; line-height: 60px;}
 #content .scene.front div.todos ul.todos {}
 #content .scene.front div.todos ul.todos > li.todo {position: relative; border-bottom: 1px solid #dedede; display: block; padding: 0 0 10px; margin-bottom: 10px;}
 #content .scene.front div.todos ul.todos > li.todo:last-child {border: none;}
@@ -621,13 +793,12 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content .scene.front div.todos ul.todos dd.overdue,
 #content .scene.front div.todos ul.todos dd.high {color: #df0000 !important;}
 #content .scene.front div.todos ul.todos ul.tags {padding: 0; position: absolute; right: 30px; top: 0;}
-#content .scene.front div.qnas {position: relative; border-top: 1px solid #bbbbbb; padding-bottom: 15px;}
+#content .scene.front div.qnas {position: relative; border-bottom: 1px solid #bbbbbb; padding-bottom: 15px;}
 #content .scene.front div.qnas ul.qnas {}
 #content .scene.front div.qnas ul.qnas > li.qna {position: relative; border-bottom: 1px solid #dedede; display: block; padding: 0 0 10px; margin-bottom: 10px;}
 #content .scene.front div.qnas ul.qnas > li.qna:last-child {border: none;}
 #content .scene.front div.qnas ul.qnas h3 {font-size: 14px; padding-bottom: 3px;}
-#content .scene.front div.qnas ul.qnas ul.tags {padding: 0; position: absolute; right: 30px; top: -7px;}
-
+#content .scene.front div.qnas ul.qnas p {padding-bottom: 0;}
 
 /*s-default_list.css*/
 #content div.all_items > h2,
@@ -640,44 +811,70 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content div.disabled_items {border-bottom: 1px solid #dedede; margin-bottom: 20px;}
 #content div.enabled_items > p,
 #content div.disabled_items > p {padding-top: 20px;}
-#content div.all_items ul.items > li {display: block; position: relative; border-bottom: 1px solid #dedede;}
+#content div.all_items > h2 + ul.items,
+#content div.all_items > p + ul.items {border-top: 1px solid #dedede;}
+#content div.all_items ul.items > li {display: block; position: relative; border-bottom: 1px solid #dedede; overflow: hidden;}
 #content div.all_items ul.items > li:hover {background-color: #edf0f2;}
-#content div.all_items ul.items > li h3 {padding: 16px 30px 0px 30px;}
-#content div.all_items ul.items > li.image {background-repeat: no-repeat; min-height: 100px; padding-left: 160px; background-position: 0px center;}
-#content div.all_items ul.items > li.audio {padding-left: 80px;}
-#content div.all_items ul.items > li.audio div.audioplayer {position: absolute; top: 16px; left: 30px; width: 50px; height: 50px; 
+#content div.all_items ul.items > li h3 {padding: 10px 250px 10px 30px;}
+#content div.all_items.images ul.items > li {background-repeat: no-repeat; background-position: 0px center;}
+#content div.all_items.audios ul.items > li {}
+#content div.all_items.audios ul.items > li div.audioplayer {z-index: 10; position: absolute; top: 7px; left: 25px; width: 20px; height: 20px; 
+	background: transparent url(/janitor/admin/img/bg_bn_play_small.png) no-repeat 0px 0px;
+}
+#content div.all_items.audios ul.items > li.playing div.audioplayer {background-position: 0px -100px;}
+#content div.all_items.videos ul.items > li {}
+#content div.all_items.videos ul.items > li div.videoplayer {z-index: 10; position: absolute; top: 10px; left: 20px; width: 50px; height: 50px; 
 	background: transparent url(/janitor/admin/img/bg_bn_play_medium.png) no-repeat 0px 0px;
 }
-#content div.all_items ul.items > li.playing div.audioplayer {background-position: 0px -100px;}
-#content div.all_items ul.items > li.video {padding-left: 80px;}
-#content div.all_items ul.items > li.video div.videoplayer {position: absolute; top: 16px; left: 30px; width: 50px; height: 50px; 
-	background: transparent url(/janitor/admin/img/bg_bn_play_medium.png) no-repeat 0px 0px;
-}
-#content div.all_items ul.items > li.playing div.videoplayer {background-position: 0px -100px;}
-#content div.all_items ul.items > li .description {display: none;}
-#content div.all_items ul.items > li dl {overflow: hidden; padding: 3px 30px;
-}
-#content div.all_items ul.items > li dt {float: left; clear: left;}
-#content div.all_items ul.items > li dt:after {content: ":\00a0";}
-#content div.all_items ul.items > li dd {float: left;clear: right; padding: 0 0 3px;}
-#content div.all_items ul.items > li .actions {position: absolute; top: 0px; padding: 0; right: 20px;}
-#content div.all_items ul.items > li .actions li {padding: 10px 0 10px 10px;}
-#content div.all_items div.filter {text-align: right; padding: 10px 20px; background: #f5f7f8; border-bottom: 1px solid #bbbbbb; position: relative;}
+#content div.all_items.videos ul.items > li.playing div.videoplayer {background-position: 0px -100px;}
+#content div.all_items ul.items > li .description {padding-bottom: 10px; margin-top: -5px; font-size: 12px; line-height: 1em;}
+#content div.all_items ul.items > li dl.info {margin-top: -5px;}
+#content div.all_items ul.items > li ul.actions {position: absolute; top: 0px; padding: 0; right: 30px;}
+#content p + div.all_items {border-top: 1px solid #bbbbbb;}
+#content div.all_items ul.items > li ul.actions li {padding: 5px 0 5px 5px;}
+#content div.all_items ul.items > li ul.actions li a.button {padding: 4px 12px 6px;}
+#content div.all_items ul.items > li ul.actions li input.button {height: 24px;}
+#content div.all_items ul.items > li dl.info+ul.actions li,
+#content div.all_items ul.items > li ul.info+ul.actions li,
+#content div.all_items ul.items > li p+ul.actions li,
+#content div.all_items ul.items > li ul.tags+ul.actions li {padding-top: 10px;}
+#content div.all_items div.filter {padding: 10px 0 4px; min-height: 28px; background: #f5f7f8; border-bottom: 1px solid #bbbbbb; position: relative; overflow: hidden;}
+#content div.all_items div.filter ul.tags {padding-bottom: 0; padding-right: 150px;}
+#content div.all_items div.filter ul.tags li {font-size: 12px; background-color: #dedede; color: #333333; cursor: pointer;}
+#content div.all_items div.filter ul.tags li.selected,
+#content div.all_items div.filter ul.tags li:hover {background-color: #313942; color: #ffffff;}
 #content div.all_items div.filter.filtering {background: red;}
-#content div.all_items div.filter .field {padding: 0;}
-#content div.all_items div.filter .field label {display: inline-block; vertical-align: top; padding: 3px 4px; color: #aaaaaa;}
+#content div.all_items div.filter form {position: absolute; right: 30px; top: 9px;}
+#content div.all_items div.filter .field {padding: 0 0 6px;}
 #content div.all_items div.filter .field input {width: 100px; height: 16px; font-size: 12px;}
+#content div.all_items.sortable ul.items > li.item div.drag {width: 30px; height: 30px; position: absolute; top: 0px; left: 15px; background: transparent url(/janitor/admin/img//bg_icons2.png) no-repeat 10px -440px; cursor: move;}
 #content div.all_items.sortable ul.items > li.item h3,
-#content div.all_items.sortable ul.items > li.item p {padding-left: 60px;}
-#content div.all_items.sortable ul.items > li.item div.drag {width: 30px; height: 30px; position: absolute; top: 8px; left: 20px; background: transparent url(/janitor/admin/img//bg_icons2.png) no-repeat 10px -440px; cursor: move;}
-#content div.all_items.sortable ul.items > li.item ul.tags {padding-left: 55px;}
-#content div.all_items.sortable ul.items > li.item dl {padding-left: 60px;}
-#content div.all_items.sortable ul.items > li.image {padding-left: 190px; background-position: 60px center;}
+#content div.all_items.sortable ul.items > li.item p,
+#content div.all_items.sortable ul.items > li.item ul.tags,
+#content div.all_items.sortable ul.items > li.item dl {padding-left: 50px;}
+#content div.all_items.sortable.images ul.items > li.item h3,
+#content div.all_items.sortable.images ul.items > li.item p,
+#content div.all_items.sortable.images ul.items > li.item ul.tags,
+#content div.all_items.sortable.images ul.items > li.item dl {padding-left: 55px;}
+#content div.all_items.sortable.audios ul.items > li.item h3,
+#content div.all_items.sortable.audios ul.items > li.item p,
+#content div.all_items.sortable.audios ul.items > li.item ul.tags,
+#content div.all_items.sortable.audios ul.items > li.item dl {padding-left: 35px;}
+#content div.all_items.sortable.videos ul.items > li.item h3,
+#content div.all_items.sortable.videos ul.items > li.item p,
+#content div.all_items.sortable.videos ul.items > li.item ul.tags,
+#content div.all_items.sortable.videos ul.items > li.item dl {padding-left: 55px;}
+#content div.all_items.sortable.images ul.items > li {background-position: 50px center;}
+#content div.all_items.sortable.audios ul.items > li div.audioplayer {left: 55px;}
+#content div.all_items.sortable.videos ul.items > li div.videoplayer {left: 45px;}
 
 
 /*s-default_edit.css*/
-#content .defaultEdit > .actions li.delete {float: right; padding: 0 0 10px 10px;}
-#content .scene.defaultEdit > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
+#content .scene > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
+#content .scene div.togglable {overflow: hidden;}
+#content .scene div.togglable.open {overflow: visible;}
+#content .scene div.togglable > h2 {position: relative;}
+#content .scene div.togglable > h2 svg {position: absolute; top: 7px; right: 25px; stroke: #313942; stroke-width: 3px;}
 #content .scene.defaultEdit > div.status {border-bottom: 1px solid #bbbbbb;}
 #content .scene.defaultEdit > div.status .actions {padding: 0;}
 #content .scene.defaultEdit > div.status .actions li.status {display: block; padding: 10px 0px; text-align: right; height: 27px;}
@@ -691,19 +888,7 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content .scene.defaultEdit > div.item {padding: 0; border-bottom: 1px solid #bbbbbb;}
 #content .scene.defaultEdit > div.item .actions {text-align: left; padding-bottom: 10px;}
 #content .scene.defaultEdit > div.item .actions li {padding: 0 5px 10px;}
-#content .scene.defaultEdit > div.prices {padding: 20px 0;}
-#content .scene.defaultEdit > div.prices .field input[type=text] {width: 262px;}
-#content .scene.defaultEdit > div.prices fieldset {display: inline-block; vertical-align: top;}
-#content .scene.defaultEdit > div.prices fieldset .field {padding-right: 12px;}
-#content .scene.defaultEdit > div.prices .actions {display: inline-block; vertical-align: top; padding: 0;}
-#content .scene.defaultEdit > div.prices .actions li {padding-left: 0;}
-#content .scene.defaultEdit > div.prices .actions li input {margin-top: 4px;}
-#content .scene.defaultEdit > div.prices ul.prices {padding: 0 30px;}
-#content .scene.defaultEdit > div.prices ul.prices li {font-size: 0; display: block; padding-bottom: 3px;}
-#content .scene.defaultEdit > div.prices ul.prices li h3 {display: inline-block; vertical-align: top; padding: 0 5px 0 0; line-height: 20px;}
-#content .scene.defaultEdit > div.prices ul.prices li form {display: inline-block; vertical-align: top;}
-#content .scene.defaultEdit > div.prices ul.prices li input.delete {padding: 0; margin: 0; line-height: 20px; cursor: pointer; color: #999999; text-decoration: underline; box-shadow: none; text-shadow: none; border: none; background: none; border-radius: 0;}
-#content .scene.defaultEdit > div.prices ul.prices li input.delete:hover {color: #000000;}
+#content .scene.defaultEdit > div.owner {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
 #content .scene.defaultEdit > div.media {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
 #content .scene.defaultEdit > div.media form.upload {text-align: left; position: relative; z-index: 2;}
 #content .scene.defaultEdit > div.media form.upload .actions {display: none;}
@@ -755,18 +940,51 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content .scene.defaultEdit > div.comments {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
 #content .scene.defaultEdit > div.comments ul.comments {border-top: 1px solid #dedede; padding-top: 15px;}
 #content .scene.defaultEdit > div.comments ul.comments > li {display: block; border-bottom: 1px solid #dedede; margin-bottom: 15px; position: relative;}
-#content .scene.defaultEdit > div.comments ul.comments > li ul.info {padding: 0 30px 5px;}
-#content .scene.defaultEdit > div.comments ul.comments > li ul.info li {display: inline-block; vertical-align: top;}
-#content .scene.defaultEdit > div.comments ul.comments > li ul.info li.user:after {content: ",\00a0";}
-#content .scene.defaultEdit > div.comments ul.comments > li p.comment {color: #313942; padding-bottom: 15px;}
 #content .scene.defaultEdit > div.comments ul.comments > li > ul.actions {position: absolute; top: 0; right: 0;}
 #content .scene.defaultEdit > div.comments ul.comments > li > ul.actions li {display: inline-block; vertical-align: top;}
-#content .scene.defaultEdit > div.comments > form {padding-bottom: 10px; padding-top: 5px;}
-#content .scene.defaultEdit > div.todos {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
-#content .scene.defaultEdit > div.todos ul.todos {list-style: disc; list-style-position: outside; margin-left: 15px; padding: 0 0 20px 30px;}
-#content .scene.defaultEdit > div.todos ul.todos > li {display: list-item;}
-#content .scene.defaultEdit > div.todos ul.todos > li {color: #313942 !important; padding-bottom: 7px;}
-#content .scene.defaultEdit > div.todos ul.todos > li a {color: #313942 !important;}
+#content .scene.defaultEdit > div.comments > form,
+#content .scene.defaultEdit > div.comments li.comment > form {padding-bottom: 10px; padding-top: 5px;}
+#content .scene.defaultEdit > div.prices {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
+#content .scene.defaultEdit > div.prices > form {padding-bottom: 10px; padding-top: 5px;}
+#content .scene.defaultEdit > div.prices .field {display: inline-block; vertical-align: top; padding-right: 5px;}
+#content .scene.defaultEdit > div.prices .field .indicator {display: none;}
+#content .scene.defaultEdit > div.prices .field.currency,
+#content .scene.defaultEdit > div.prices .field.vatrate,
+#content .scene.defaultEdit > div.prices .field.type,
+#content .scene.defaultEdit > div.prices .field.quantity {padding-left: 0;}
+#content .scene.defaultEdit > div.prices .field.quantity {display: none;}
+#content .scene.defaultEdit > div.prices .field.price .help {left: 610px;}
+#content .scene.defaultEdit > div.prices .field.currency .help {left: 489px;}
+#content .scene.defaultEdit > div.prices .field.vatrate .help {left: 425px;}
+#content .scene.defaultEdit > div.prices .field.type .help {left: 341px;}
+#content .scene.defaultEdit > div.prices .field.quantity .help {left: 197px;}
+#content .scene.defaultEdit > div.prices .field.price input[type=text] {width: 70px;}
+#content .scene.defaultEdit > div.prices .field.currency select {width: 55px;}
+#content .scene.defaultEdit > div.prices .field.vatrate select {width: 75px;}
+#content .scene.defaultEdit > div.prices .field.type select {width: 135px;}
+#content .scene.defaultEdit > div.prices .field.quantity input {width: 30px;}
+#content .scene.defaultEdit > div.prices fieldset {display: inline-block; vertical-align: top; font-size: 0;}
+#content .scene.defaultEdit > div.prices > form .actions {display: inline-block; vertical-align: top; padding: 0;}
+#content .scene.defaultEdit > div.prices > form .actions li {padding-left: 0;}
+#content .scene.defaultEdit > div.prices > form .actions li input {margin-top: 4px;}
+#content .scene.defaultEdit > div.prices ul.prices {padding: 0 0 15px;}
+#content .scene.defaultEdit > div.prices ul.prices li.pricedetails {display: block; position: relative; border-bottom: 1px solid #dedede;}
+#content .scene.defaultEdit > div.prices ul.prices li.pricedetails ul.info li {display: inline-block; vertical-align: top; padding: 10px 5px 10px 0; line-height: 1em;}
+#content .scene.defaultEdit > div.prices ul.prices li.pricedetails ul.info li.offer:before,
+#content .scene.defaultEdit > div.prices ul.prices li.pricedetails ul.info li.bulk:before {content: "- ";}
+#content .scene.defaultEdit > div.prices ul.prices > li > ul.actions {position: absolute; top: 3px; right: 0;}
+#content .scene.defaultEdit > div.subscription_method {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
+#content .scene.defaultEdit > div.subscription_method dl.info {padding-bottom: 20px;}
+#content .scene.defaultEdit > div.subscription_method ul.actions.change {padding-bottom: 10px;}
+#content .scene.defaultEdit > div.subscription_method div.change_subscription_method {display: none;}
+#content .scene.defaultEdit > div.subscription_method form {padding-bottom: 10px; padding-top: 5px;}
+#content .scene.defaultEdit > div.subscription_method .field select {width: 275px;}
+#content .scene.defaultEdit > div.subscription_method fieldset {display: inline-block; vertical-align: top;}
+#content .scene.defaultEdit > div.subscription_method fieldset .field {padding-right: 12px;}
+#content .scene.defaultEdit > div.subscription_method form .actions {display: inline-block; vertical-align: top; padding: 0;}
+#content .scene.defaultEdit > div.subscription_method form .actions li {padding-left: 0;}
+#content .scene.defaultEdit > div.subscription_method form .actions li input {margin-top: 4px;}
+#content .scene.defaultEdit > div.readstates {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
 #content .scene.defaultEdit > div.qnas {padding: 0; border-bottom: 1px solid #bbbbbb; position: relative;}
 #content .scene.defaultEdit > div.qnas ul.qnas {}
 #content .scene.defaultEdit > div.qnas ul.qnas > li ul.info {padding: 0 30px 0px;}
@@ -774,9 +992,6 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 #content .scene.defaultEdit > div.qnas ul.qnas > li ul.info li.user:after {content: ",\00a0";}
 #content .scene.defaultEdit > div.qnas ul.qnas > li {display: block; border-top: 1px solid #dedede; position: relative; padding-bottom: 8px; padding-top: 15px;}
 #content .scene.defaultEdit > div.qnas ul.qnas > li p {padding-bottom: 7px;}
-#content .scene.defaultEdit div.togglable {overflow: hidden;}
-#content .scene.defaultEdit div.togglable h2 {position: relative;}
-#content .scene.defaultEdit div.togglable h2 svg {position: absolute; top: 7px; right: 20px; stroke: #313942; stroke-width: 3px;}
 
 
 /*s-default_new.css*/
@@ -788,33 +1003,30 @@ body #selection_options ul.actions a.button:hover {background-color: #313942;}
 /*s-itemtypes.css*/
 #content .scene.todoList div.item {padding: 0 0 20px; border-bottom: 1px solid #aaaaaa;}
 #content .scene.todoList > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
-#content .scene.todolistList ul.items > li h3,
-#content .scene.todolistEdit div.todos ul.items > li h3 {padding-bottom: 10px; padding-right: 250px;}
-#content .scene.todolistEdit div.todos ul.items > li p.description {padding-bottom: 6px; display: block;}
-#content .scene.todolistEdit div.todos ul.items > li dl {padding-bottom: 20px;}
 #content .scene.todolistEdit div.todos ul.items > li dt {color: #313942;}
 #content .scene.todolistEdit div.todos ul.items > li dd.overdue,
 #content .scene.todolistEdit div.todos ul.items > li dd.high {color: #df0000;}
 #content .scene.todoList div.todolists {padding: 0 0 50px; border-bottom: 1px solid #aaaaaa;}
-#content .scene.todoList ul.items > li h3 {padding-bottom: 10px; padding-right: 250px;}
-#content .scene.todoList ul.items > li p.description {padding-bottom: 6px; display: block;}
 #content .scene.todoList ul.items > li dt {color: #313942;}
 #content .scene.todoList ul.items > li dd.overdue,
 #content .scene.todoList ul.items > li dd.high {color: #df0000;}
-#content div.todos .states {background-color: #dedede; border-top: 1px solid #bbbbbb;}
-#content div.todos .states li {padding: 15px 30px; border-right: 1px solid #dedede;}
-#content div.todos .states li a {text-decoration: none;}
-#content div.todos .states li.selected {background-color: #f5f7f8; color: #313942;}
-#content .qnaList ul.items > li p {padding-bottom: 0px; padding-right: 220px;}
 #content .scene.wishList div.item {padding: 0 0 20px; border-bottom: 1px solid #aaaaaa;}
 #content .scene.wishList > div > h2 {font-size: 0.8em; text-transform: uppercase; padding-top: 7px; padding-bottom: 10px; margin: 0 0 20px;}
-#content .scene.wishlistList ul.items > li h3,
-#content .scene.wishList div.wishlists ul.items > li h3 {padding-bottom: 16px;}
 #content .scene.wishList div.wishlists {padding: 0 0 50px; border-bottom: 1px solid #aaaaaa;}
-#content .scene.wishList ul.items > li dl {display: block; padding: 5px 30px;}
 #content .scene.wishList ul.items > li dl dt.reserved {display: none;}
 #content .scene.wishList ul.items > li dl dd.reserved {font-size: 14px;}
-
+#content .scene.eventList ul.items > li.past {background: #dddddd;}
+#content .scene.messageList > ul.actions li.maillists {float: right; padding: 0 0 10px 10px;}
+#content .scene.messageList > div.system {border-bottom: 1px solid #aaaaaa;}
+#content .scene.messageList > div.dynamic {padding-bottom: 30px; border-bottom: 1px solid #aaaaaa;}
+#content .scene.messageEdit ul.receipt {padding: 0 30px 20px; margin: 0 0 0 10px; list-style: disc;}
+#content .scene.messageEdit ul.receipt li {display: list-item; font-size: 15px; padding-bottom: 7px;}
+#content .scene.newSystemMessage fieldset.values {padding-top: 10px;}
+#content .scene.newSystemMessage fieldset.values h3 span.recipient {font-style: italic;}
+#content .scene.newSystemMessage ul.receipt {padding: 0 30px; margin: 0 0 0 10px; list-style: disc;}
+#content .scene.newSystemMessage ul.receipt li {display: list-item; font-size: 15px; padding-bottom: 7px;}
+#content .scene.cacheList div.details {display: none;}
+#content .scene.cacheList li.show div.details {display: block;}
 
 
 /*s-content.css*/
