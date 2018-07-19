@@ -1,9 +1,9 @@
 /*
-Manipulator v0.9.2-lsb Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-07-15 09:19:48
+Manipulator v0.9.2-teisbruno_com Copyright 2016 http://manipulator.parentnode.dk
+js-merged @ 2018-07-17 01:39:09
 */
 
-/*seg_smartphone_include.js*/
+/*seg_tablet_include.js*/
 
 /*u.js*/
 if(!u || !Util) {
@@ -1412,373 +1412,6 @@ u.e.removeWindowEndEvent = function(node, id) {
 }
 
 
-/*u-events-movements.js*/
-u.e.resetDragEvents = function(node) {
-	node._moves_pick = 0;
-	this.removeEvent(node, "mousemove", this._pick);
-	this.removeEvent(node, "touchmove", this._pick);
-	this.removeEvent(node, "mousemove", this._drag);
-	this.removeEvent(node, "touchmove", this._drag);
-	this.removeEvent(node, "mouseup", this._drop);
-	this.removeEvent(node, "touchend", this._drop);
-	this.removeEvent(node, "mouseout", this._drop_out);
-	this.removeEvent(node, "mouseover", this._drop_over);
-	this.removeEvent(node, "mousemove", this._scrollStart);
-	this.removeEvent(node, "touchmove", this._scrollStart);
-	this.removeEvent(node, "mousemove", this._scrolling);
-	this.removeEvent(node, "touchmove", this._scrolling);
-	this.removeEvent(node, "mouseup", this._scrollEnd);
-	this.removeEvent(node, "touchend", this._scrollEnd);
-}
-u.e.overlap = function(node, boundaries, strict) {
-	if(boundaries.constructor.toString().match("Array")) {
-		var boundaries_start_x = Number(boundaries[0]);
-		var boundaries_start_y = Number(boundaries[1]);
-		var boundaries_end_x = Number(boundaries[2]);
-		var boundaries_end_y = Number(boundaries[3]);
-	}
-	else if(boundaries.constructor.toString().match("HTML")) {
-		var boundaries_start_x = u.absX(boundaries) - u.absX(node);
-		var boundaries_start_y =  u.absY(boundaries) - u.absY(node);
-		var boundaries_end_x = Number(boundaries_start_x + boundaries.offsetWidth);
-		var boundaries_end_y = Number(boundaries_start_y + boundaries.offsetHeight);
-	}
-	var node_start_x = Number(node._x);
-	var node_start_y = Number(node._y);
-	var node_end_x = Number(node_start_x + node.offsetWidth);
-	var node_end_y = Number(node_start_y + node.offsetHeight);
-	if(strict) {
-		if(node_start_x >= boundaries_start_x && node_start_y >= boundaries_start_y && node_end_x <= boundaries_end_x && node_end_y <= boundaries_end_y) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	} 
-	else if(node_end_x < boundaries_start_x || node_start_x > boundaries_end_x || node_end_y < boundaries_start_y || node_start_y > boundaries_end_y) {
-		return false;
-	}
-	return true;
-}
-u.e.drag = function(node, boundaries, _options) {
-	node.e_drag_options = _options ? _options : {};
-	node.e_drag = true;
-	if(node.childNodes.length < 2 && node.innerHTML.trim() == "") {
-		node.innerHTML = "&nbsp;";
-	}
-	node.distance_to_pick = 2;
-	node.drag_strict = true;
-	node.drag_elastica = 0;
-	node.drag_dropout = true;
-	node.show_bounds = false;
-	node.callback_picked = "picked";
-	node.callback_moved = "moved";
-	node.callback_dropped = "dropped";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "strict"			: node.drag_strict			= _options[_argument]; break;
-				case "elastica"			: node.drag_elastica		= Number(_options[_argument]); break;
-				case "dropout"			: node.drag_dropout			= _options[_argument]; break;
-				case "show_bounds"		: node.show_bounds			= _options[_argument]; break; 
-				case "vertical_lock"	: node.vertical_lock		= _options[_argument]; break;
-				case "horizontal_lock"	: node.horizontal_lock		= _options[_argument]; break;
-				case "callback_picked"	: node.callback_picked		= _options[_argument]; break;
-				case "callback_moved"	: node.callback_moved		= _options[_argument]; break;
-				case "callback_dropped"	: node.callback_dropped		= _options[_argument]; break;
-			}
-		}
-	}
-	if((boundaries.constructor && boundaries.constructor.toString().match("Array")) || (boundaries.scopeName && boundaries.scopeName != "HTML")) {
-		node.start_drag_x = Number(boundaries[0]);
-		node.start_drag_y = Number(boundaries[1]);
-		node.end_drag_x = Number(boundaries[2]);
-		node.end_drag_y = Number(boundaries[3]);
-	}
-	else if((boundaries.constructor && boundaries.constructor.toString().match("HTML")) || (boundaries.scopeName && boundaries.scopeName == "HTML")) {
-		node.start_drag_x = u.absX(boundaries) - u.absX(node);
-		node.start_drag_y = u.absY(boundaries) - u.absY(node);
-		node.end_drag_x = node.start_drag_x + boundaries.offsetWidth;
-		node.end_drag_y = node.start_drag_y + boundaries.offsetHeight;
-		// 	
-		// 	
-		// 	
-		// 	
-		// 	
-		// 	
-		// 	
-	}
-	if(node.show_bounds) {
-		var debug_bounds = u.ae(document.body, "div", {"class":"debug_bounds"})
-		debug_bounds.style.position = "absolute";
-		debug_bounds.style.background = "red"
-		debug_bounds.style.left = (u.absX(node) + node.start_drag_x - 1) + "px";
-		debug_bounds.style.top = (u.absY(node) + node.start_drag_y - 1) + "px";
-		debug_bounds.style.width = (node.end_drag_x - node.start_drag_x) + "px";
-		debug_bounds.style.height = (node.end_drag_y - node.start_drag_y) + "px";
-		debug_bounds.style.border = "1px solid white";
-		debug_bounds.style.zIndex = 9999;
-		debug_bounds.style.opacity = .5;
-		if(document.readyState && document.readyState == "interactive") {
-			debug_bounds.innerHTML = "WARNING - injected on DOMLoaded"; 
-		}
-		u.bug("node: "+u.nodeId(node)+" in (" + u.absX(node) + "," + u.absY(node) + "), (" + (u.absX(node)+node.offsetWidth) + "," + (u.absY(node)+node.offsetHeight) +")");
-		u.bug("boundaries: (" + node.start_drag_x + "," + node.start_drag_y + "), (" + node.end_drag_x + ", " + node.end_drag_y + ")");
-	}
-	node._x = node._x ? node._x : 0;
-	node._y = node._y ? node._y : 0;
-	node.locked = ((node.end_drag_x - node.start_drag_x == node.offsetWidth) && (node.end_drag_y - node.start_drag_y == node.offsetHeight));
-	node.only_vertical = (node.vertical_lock || (!node.locked && node.end_drag_x - node.start_drag_x == node.offsetWidth));
-	node.only_horizontal = (node.horizontal_lock || (!node.locked && node.end_drag_y - node.start_drag_y == node.offsetHeight));
-	u.e.addStartEvent(node, this._inputStart);
-}
-u.e._pick = function(event) {
-	var init_speed_x = Math.abs(this.start_event_x - u.eventX(event));
-	var init_speed_y = Math.abs(this.start_event_y - u.eventY(event));
-	if(
-		(init_speed_x > init_speed_y && this.only_horizontal) || 
-		(init_speed_x < init_speed_y && this.only_vertical) ||
-		(!this.only_vertical && !this.only_horizontal)) {
-		if((init_speed_x > this.distance_to_pick || init_speed_y > this.distance_to_pick)) {
-			u.e.resetNestedEvents(this);
-			u.e.kill(event);
-			if(u.hasFixedParent(this)) {
-				this.has_fixed_parent = true;
-			}
-			else {
-				this.has_fixed_parent = false;
-			}
-			this.move_timestamp = event.timeStamp;
-			this.move_last_x = this._x;
-			this.move_last_y = this._y;
-			if(u.hasFixedParent(this)) {
-				this.start_input_x = u.eventX(event) - this._x - u.scrollX(); 
-				this.start_input_y = u.eventY(event) - this._y - u.scrollY();
-			}
-			else {
-				this.start_input_x = u.eventX(event) - this._x; 
-				this.start_input_y = u.eventY(event) - this._y;
-			}
-			this.current_xps = 0;
-			this.current_yps = 0;
-			u.a.transition(this, "none");
-			u.e.addMoveEvent(this, u.e._drag);
-			u.e.addEndEvent(this, u.e._drop);
-			if(typeof(this[this.callback_picked]) == "function") {
-				this[this.callback_picked](event);
-			}
-			if(this.drag_dropout && event.type.match(/mouse/)) {
-				// 	
-				// 	
-				// 	
-				// 	
-				// 	
-				// 
-				// 
-				// 	
-				this._dropOutDrag = u.e._drag;
-				this._dropOutDrop = u.e._drop;
-				u.e.addOutEvent(this, u.e._drop_out);
-			}
-		}
-	}
-}
-u.e._drag = function(event) {
-	if(this.has_fixed_parent) {
-		this.current_x = u.eventX(event) - this.start_input_x - u.scrollX();
-		this.current_y = u.eventY(event) - this.start_input_y - u.scrollY();
-	}
-	else {
-		this.current_x = u.eventX(event) - this.start_input_x;
-		this.current_y = u.eventY(event) - this.start_input_y;
-	}
-	this.current_xps = Math.round(((this.current_x - this.move_last_x) / (event.timeStamp - this.move_timestamp)) * 1000);
-	this.current_yps = Math.round(((this.current_y - this.move_last_y) / (event.timeStamp - this.move_timestamp)) * 1000);
-	this.move_timestamp = event.timeStamp;
-	this.move_last_x = this.current_x;
-	this.move_last_y = this.current_y;
-	if(!this.locked && this.only_vertical) {
-		this._y = this.current_y;
-	}
-	else if(!this.locked && this.only_horizontal) {
-		this._x = this.current_x;
-	}
-	else if(!this.locked) {
-		this._x = this.current_x;
-		this._y = this.current_y;
-	}
-	if(this.e_swipe) {
-		if(this.only_horizontal) {
-			if(this.current_xps < 0) {
-				this.swiped = "left";
-			}
-			else {
-				this.swiped = "right";
-			}
-		}
-		else if(this.only_vertical) {
-			if(this.current_yps < 0) {
-				this.swiped = "up";
-			}
-			else {
-				this.swiped = "down";
-			}
-		}
-		else {
-			if(Math.abs(this.current_xps) > Math.abs(this.current_yps)) {
-				if(this.current_xps < 0) {
-					this.swiped = "left";
-				}
-				else {
-					this.swiped = "right";
-				}
-			}
-			else if(Math.abs(this.current_xps) < Math.abs(this.current_yps)) {
-				if(this.current_yps < 0) {
-					this.swiped = "up";
-				}
-				else {
-					this.swiped = "down";
-				}
-			}
-		}
-	}
-	if(!this.locked) {
-		if(u.e.overlap(this, [this.start_drag_x, this.start_drag_y, this.end_drag_x, this.end_drag_y], true)) {
-			u.a.translate(this, this._x, this._y);
-		}
-		else if(this.drag_elastica) {
-			this.swiped = false;
-			this.current_xps = 0;
-			this.current_yps = 0;
-			var offset = false;
-			if(!this.only_vertical && this._x < this.start_drag_x) {
-				offset = this._x < this.start_drag_x - this.drag_elastica ? - this.drag_elastica : this._x - this.start_drag_x;
-				this._x = this.start_drag_x;
-				this.current_x = this._x + offset + (Math.round(Math.pow(offset, 2)/this.drag_elastica));
-			}
-			else if(!this.only_vertical && this._x + this.offsetWidth > this.end_drag_x) {
-				offset = this._x + this.offsetWidth > this.end_drag_x + this.drag_elastica ? this.drag_elastica : this._x + this.offsetWidth - this.end_drag_x;
-				this._x = this.end_drag_x - this.offsetWidth;
-				this.current_x = this._x + offset - (Math.round(Math.pow(offset, 2)/this.drag_elastica));
-			}
-			else {
-				this.current_x = this._x;
-			}
-			if(!this.only_horizontal && this._y < this.start_drag_y) {
-				offset = this._y < this.start_drag_y - this.drag_elastica ? - this.drag_elastica : this._y - this.start_drag_y;
-				this._y = this.start_drag_y;
-				this.current_y = this._y + offset + (Math.round(Math.pow(offset, 2)/this.drag_elastica));
-			}
-			else if(!this.horizontal && this._y + this.offsetHeight > this.end_drag_y) {
-				offset = (this._y + this.offsetHeight > this.end_drag_y + this.drag_elastica) ? this.drag_elastica : (this._y + this.offsetHeight - this.end_drag_y);
-				this._y = this.end_drag_y - this.offsetHeight;
-				this.current_y = this._y + offset - (Math.round(Math.pow(offset, 2)/this.drag_elastica));
-			}
-			else {
-				this.current_y = this._y;
-			}
-			if(offset) {
-				u.a.translate(this, this.current_x, this.current_y);
-			}
-		}
-		else {
-			this.swiped = false;
-			this.current_xps = 0;
-			this.current_yps = 0;
-			if(this._x < this.start_drag_x) {
-				this._x = this.start_drag_x;
-			}
-			else if(this._x + this.offsetWidth > this.end_drag_x) {
-				this._x = this.end_drag_x - this.offsetWidth;
-			}
-			if(this._y < this.start_drag_y) {
-				this._y = this.start_drag_y;
-			}
-			else if(this._y + this.offsetHeight > this.end_drag_y) { 
-				this._y = this.end_drag_y - this.offsetHeight;
-			}
-			u.a.translate(this, this._x, this._y);
-		}
-	}
-	if(typeof(this[this.callback_moved]) == "function") {
-		this[this.callback_moved](event);
-	}
-}
-u.e._drop = function(event) {
-	u.e.resetEvents(this);
-	if(this.e_swipe && this.swiped) {
-		this.e_swipe_options.eventAction = "Swiped "+ this.swiped;
-		u.stats.event(this, this.e_swipe_options);
-		if(this.swiped == "left" && typeof(this.swipedLeft) == "function") {
-			this.swipedLeft(event);
-		}
-		else if(this.swiped == "right" && typeof(this.swipedRight) == "function") {
-			this.swipedRight(event);
-		}
-		else if(this.swiped == "down" && typeof(this.swipedDown) == "function") {
-			this.swipedDown(event);
-		}
-		else if(this.swiped == "up" && typeof(this.swipedUp) == "function") {
-			this.swipedUp(event);
-		}
-	}
-	else if(!this.drag_strict && !this.locked) {
-		this.current_x = Math.round(this._x + (this.current_xps/2));
-		this.current_y = Math.round(this._y + (this.current_yps/2));
-		if(this.only_vertical || this.current_x < this.start_drag_x) {
-			this.current_x = this.start_drag_x;
-		}
-		else if(this.current_x + this.offsetWidth > this.end_drag_x) {
-			this.current_x = this.end_drag_x - this.offsetWidth;
-		}
-		if(this.only_horizontal || this.current_y < this.start_drag_y) {
-			this.current_y = this.start_drag_y;
-		}
-		else if(this.current_y + this.offsetHeight > this.end_drag_y) {
-			this.current_y = this.end_drag_y - this.offsetHeight;
-		}
-		this.transitioned = function() {
-			this.transitioned = null;
-			u.a.transition(this, "none");
-			if(typeof(this.projected) == "function") {
-				this.projected(event);
-			}
-		}
-		if(this.current_xps || this.current_yps) {
-			u.a.transition(this, "all 1s cubic-bezier(0,0,0.25,1)");
-		}
-		else {
-			u.a.transition(this, "all 0.2s cubic-bezier(0,0,0.25,1)");
-		}
-		u.a.translate(this, this.current_x, this.current_y);
-	}
-	if(this.e_drag && !this.e_swipe) {
-		this.e_drag_options.eventAction = u.stringOr(this.e_drag_options.eventAction, "Dropped");
-		u.stats.event(this, this.e_drag_options);
-	}
-	if(typeof(this[this.callback_dropped]) == "function") {
-		this[this.callback_dropped](event);
-	}
-}
-u.e._drop_out = function(event) {
-	this._drop_out_id = u.randomString();
-	document["_DroppedOutNode" + this._drop_out_id] = this;
-	eval('document["_DroppedOutMove' + this._drop_out_id + '"] = function(event) {document["_DroppedOutNode' + this._drop_out_id + '"]._dropOutDrag(event);}');
-	eval('document["_DroppedOutOver' + this._drop_out_id + '"] = function(event) {u.e.removeEvent(document, "mousemove", document["_DroppedOutMove' + this._drop_out_id + '"]);u.e.removeEvent(document, "mouseup", document["_DroppedOutEnd' + this._drop_out_id + '"]);u.e.removeEvent(document["_DroppedOutNode' + this._drop_out_id + '"], "mouseover", document["_DroppedOutOver' + this._drop_out_id + '"]);}');
-	eval('document["_DroppedOutEnd' + this._drop_out_id + '"] = function(event) {u.e.removeEvent(document, "mousemove", document["_DroppedOutMove' + this._drop_out_id + '"]);u.e.removeEvent(document, "mouseup", document["_DroppedOutEnd' + this._drop_out_id + '"]);u.e.removeEvent(document["_DroppedOutNode' + this._drop_out_id + '"], "mouseover", document["_DroppedOutOver' + this._drop_out_id + '"]);document["_DroppedOutNode' + this._drop_out_id + '"]._dropOutDrop(event);}');
-	u.e.addEvent(document, "mousemove", document["_DroppedOutMove" + this._drop_out_id]);
-	u.e.addEvent(this, "mouseover", document["_DroppedOutOver" + this._drop_out_id]);
-	u.e.addEvent(document, "mouseup", document["_DroppedOutEnd" + this._drop_out_id]);
-}
-u.e.swipe = function(node, boundaries, _options) {
-	node.e_swipe_options = _options ? _options : {};
-	node.e_swipe = true;
-	u.e.drag(node, boundaries, _options);
-}
-
-
 /*u-form.js*/
 Util.Form = u.f = new function() {
 	this.customInit = {};
@@ -2899,269 +2532,6 @@ u.f.recurseName = function(object, indexes, value) {
 }
 
 
-/*u-form-builder.js*/
-u.f.customBuild = {};
-u.f.addForm = function(node, _options) {
-	var form_name = "js_form";
-	var form_action = "#";
-	var form_method = "post";
-	var form_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "name"			: form_name				= _options[_argument]; break;
-				case "action"		: form_action			= _options[_argument]; break;
-				case "method"		: form_method			= _options[_argument]; break;
-				case "class"		: form_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var form = u.ae(node, "form", {"class":form_class, "name": form_name, "action":form_action, "method":form_method});
-	return form;
-}
-u.f.addFieldset = function(node, _options) {
-	var fieldset_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "class"			: fieldset_class			= _options[_argument]; break;
-			}
-		}
-	}
-	return u.ae(node, "fieldset", {"class":fieldset_class});
-}
-u.f.addField = function(node, _options) {
-	var field_name = "js_name";
-	var field_label = "Label";
-	var field_type = "string";
-	var field_value = "";
-	var field_options = [];
-	var field_checked = false;
-	var field_class = "";
-	var field_id = "";
-	var field_max = false;
-	var field_min = false;
-	var field_disabled = false;
-	var field_readonly = false;
-	var field_required = false;
-	var field_pattern = false;
-	var field_error_message = "There is an error in your input";
-	var field_hint_message = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "name"					: field_name			= _options[_argument]; break;
-				case "label"				: field_label			= _options[_argument]; break;
-				case "type"					: field_type			= _options[_argument]; break;
-				case "value"				: field_value			= _options[_argument]; break;
-				case "options"				: field_options			= _options[_argument]; break;
-				case "checked"				: field_checked			= _options[_argument]; break;
-				case "class"				: field_class			= _options[_argument]; break;
-				case "id"					: field_id				= _options[_argument]; break;
-				case "max"					: field_max				= _options[_argument]; break;
-				case "min"					: field_min				= _options[_argument]; break;
-				case "disabled"				: field_disabled		= _options[_argument]; break;
-				case "readonly"				: field_readonly		= _options[_argument]; break;
-				case "required"				: field_required		= _options[_argument]; break;
-				case "pattern"				: field_pattern			= _options[_argument]; break;
-				case "error_message"		: field_error_message	= _options[_argument]; break;
-				case "hint_message"			: field_hint_message	= _options[_argument]; break;
-			}
-		}
-	}
-	var custom_build;
-	if(field_type in u.f.customBuild) {
-		return u.f.customBuild[field_type](node, _options);
-	}
-	field_id = field_id ? field_id : "input_"+field_type+"_"+field_name;
-	field_disabled = !field_disabled ? (field_class.match(/(^| )disabled( |$)/) ? "disabled" : false) : "disabled";
-	field_readonly = !field_readonly ? (field_class.match(/(^| )readonly( |$)/) ? "readonly" : false) : "readonly";
-	field_required = !field_required ? (field_class.match(/(^| )required( |$)/) ? true : false) : true;
-	field_class += field_disabled ? (!field_class.match(/(^| )disabled( |$)/) ? " disabled" : "") : "";
-	field_class += field_readonly ? (!field_class.match(/(^| )readonly( |$)/) ? " readonly" : "") : "";
-	field_class += field_required ? (!field_class.match(/(^| )required( |$)/) ? " required" : "") : "";
-	field_class += field_min ? (!field_class.match(/(^| )min:[0-9]+( |$)/) ? " min:"+field_min : "") : "";
-	field_class += field_max ? (!field_class.match(/(^| )max:[0-9]+( |$)/) ? " max:"+field_max : "") : "";
-	if (field_type == "hidden") {
-		return u.ae(node, "input", {"type":"hidden", "name":field_name, "value":field_value, "id":field_id});
-	}
-	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
-	var attributes = {};
-	if(field_type == "string") {
-		field_max = field_max ? field_max : 255;
-		attributes = {
-			"type":"text", 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "email" || field_type == "tel" || field_type == "password") {
-		field_max = field_max ? field_max : 255;
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "number" || field_type == "integer" || field_type == "date" || field_type == "datetime") {
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"max":field_max, 
-			"min":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "checkbox") {
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value ? field_value : "true", 
-			"name":field_name, 
-			"disabled":field_disabled,
-			"checked":field_checked
-		};
-		u.ae(field, "input", {"name":field_name, "value":"false", "type":"hidden"});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-	}
-	else if(field_type == "text") {
-		attributes = {
-			"id":field_id, 
-			"html":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "textarea", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "select") {
-		attributes = {
-			"id":field_id, 
-			"name":field_name, 
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		var select = u.ae(field, "select", u.f.verifyAttributes(attributes));
-		if(field_options) {
-			var i, option;
-			for(i = 0; option = field_options[i]; i++) {
-				if(option.value == field_value) {
-					u.ae(select, "option", {"value":option.value, "html":option.text, "selected":"selected"});
-				}
-				else {
-					u.ae(select, "option", {"value":option.value, "html":option.text});
-				}
-			}
-		}
-	}
-	else if(field_type == "radiobuttons") {
-		u.ae(field, "label", {"html":field_label});
-		if(field_options) {
-			var i, option;
-			for(i = 0; option = field_options[i]; i++) {
-				var div = u.ae(field, "div", {"class":"item"});
-				if(option.value == field_value) {
-					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name, "checked":"checked"});
-					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
-				}
-				else {
-					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name});
-					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
-				}
-			}
-		}
-	}
-	else if(field_type == "files") {
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", {"id":field_id, "name":field_name, "type":"file"});
-	}
-	else {
-		u.bug("input type not implemented")
-	}
-	if(field_hint_message || field_error_message) {
-		var help = u.ae(field, "div", {"class":"help"});
-		if (field_hint_message) {
-			u.ae(help, "div", { "class": "hint", "html": field_hint_message });
-		}
-		if(field_error_message) {
-			u.ae(help, "div", { "class": "error", "html": field_error_message });
-		}
-	}
-	return field;
-}
-u.f.verifyAttributes = function(attributes) {
-	for(attribute in attributes) {
-		if(attributes[attribute] === undefined || attributes[attribute] === false || attributes[attribute] === null) {
-			delete attributes[attribute];
-		}
-	}
-	return attributes;
-}
-u.f.addAction = function(node, _options) {
-	var action_type = "submit";
-	var action_name = "js_name";
-	var action_value = "";
-	var action_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "type"			: action_type			= _options[_argument]; break;
-				case "name"			: action_name			= _options[_argument]; break;
-				case "value"		: action_value			= _options[_argument]; break;
-				case "class"		: action_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, {"include":"ul"});
-	if(!p_ul || !u.hc(p_ul, "actions")) {
-		if(node.nodeName.toLowerCase() == "form") {
-			p_ul = u.qs("ul.actions", node);
-		}
-		p_ul = p_ul ? p_ul : u.ae(node, "ul", {"class":"actions"});
-	}
-	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, {"include":"li"});
-	if(!p_li || p_ul != p_li.parentNode) {
-		p_li = u.ae(p_ul, "li", {"class":action_name});
-	}
-	else {
-		p_li = node;
-	}
-	var action = u.ae(p_li, "input", {"type":action_type, "class":action_class, "value":action_value, "name":action_name})
-	return action;
-}
-
-
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
@@ -3236,6 +2606,136 @@ Util.init = function(scope) {
 }
 
 
+/*u-history.js*/
+Util.History = u.h = new function() {
+	this.popstate = ("onpopstate" in window);
+	this.callbacks = [];
+	this.is_listening = false;
+	this.navigate = function(url, node) {
+		if(this.popstate) {
+			history.pushState({}, url, url);
+			this.callback(url);
+		}
+		else {
+			location.hash = u.h.getCleanUrl(url);
+		}
+	}
+	this.callback = function(url) {
+		var i, recipient;
+		for(i = 0; recipient = this.callbacks[i]; i++) {
+			if(typeof(recipient.node[recipient.callback]) == "function") {
+				recipient.node[recipient.callback](url);
+			}
+		}
+	}
+	this.removeEvent = function(node, _options) {
+		var callback_urlchange = "navigate";
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "callback"		: callback_urlchange		= _options[argument]; break;
+				}
+			}
+		}
+		var i, recipient;
+		for(i = 0; recipient = this.callbacks[i]; i++) {
+			if(recipient.node == node && recipient.callback == callback_urlchange) {
+				this.callbacks.splice(i, 1);
+				break;
+			}
+		}
+	}
+	this.addEvent = function(node, _options) {
+		var callback_urlchange = "navigate";
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "callback"		: callback_urlchange		= _options[argument]; break;
+				}
+			}
+		}
+		if(!this.is_listening) {
+			this.is_listening = true;
+			if(this.popstate) {
+				u.e.addEvent(window, "popstate", this._urlChanged);
+			}
+			else if("onhashchange" in window && !u.browser("explorer", "<=7")) {
+				u.e.addEvent(window, "hashchange", this._hashChanged);
+			}
+			else {
+				u.h._current_hash = window.location.hash;
+				window.onhashchange = this._hashChanged;
+				setInterval(
+					function() {
+						if(window.location.hash !== u.h._current_hash) {
+							u.h._current_hash = window.location.hash;
+							window.onhashchange();
+						}
+					}, 200
+				);
+			}
+		}
+		this.callbacks.push({"node":node, "callback":callback_urlchange});
+	}
+	this._urlChanged = function(event) {
+		var url = u.h.getCleanUrl(location.href);
+		if(event.state || (!event.state && event.path)) {
+			u.h.callback(url);
+		}
+		else {
+			history.replaceState({}, url, url);
+		}
+	}
+	this._hashChanged = function(event) {
+		if(!location.hash || !location.hash.match(/^#\//)) {
+			location.hash = "#/"
+			return;
+		}
+		var url = u.h.getCleanHash(location.hash);
+		u.h.callback(url);
+	}
+	this.trail = [];
+	this.addToTrail = function(url, node) {
+		this.trail.push({"url":url, "node":node});
+	}
+	this.getCleanUrl = function(string, levels) {
+		string = string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0];
+		if(!levels) {
+			return string;
+		}
+		else {
+			var i, return_string = "";
+			var path = string.split("/");
+			levels = levels > path.length-1 ? path.length-1 : levels;
+			for(i = 1; i <= levels; i++) {
+				return_string += "/" + path[i];
+			}
+			return return_string;
+		}
+	}
+	this.getCleanHash = function(string, levels) {
+		string = string.replace("#", "");
+		if(!levels) {
+			return string;
+		}
+		else {
+			var i, return_string = "";
+			var hash = string.split("/");
+			levels = levels > hash.length-1 ? hash.length-1 : levels;
+			for(i = 1; i <= levels; i++) {
+				return_string += "/" + hash[i];
+			}
+			return return_string;
+		}
+	}
+	this.resolveCurrentUrl = function() {
+		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
+	}
+}
+
+
 /*u-math.js*/
 Util.random = function(min, max) {
 	return Math.round((Math.random() * (max - min)) + min);
@@ -3250,6 +2750,93 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
+
+/*u-navigation.js*/
+u.navigation = function(_options) {
+	var navigation_node = page;
+	var callback_navigate = "_navigate";
+	var initialization_scope = page.cN;
+	if(typeof(_options) == "object") {
+		var argument;
+		for(argument in _options) {
+			switch(argument) {
+				case "callback"       : callback_navigate           = _options[argument]; break;
+				case "node"           : navigation_node             = _options[argument]; break;
+				case "scope"          : initialization_scope        = _options[argument]; break;
+			}
+		}
+	}
+	window._man_nav_path = window._man_nav_path ? window._man_nav_path : u.h.getCleanUrl(location.href, 1);
+	navigation_node._navigate = function(url) {
+		url = u.h.getCleanUrl(url);
+		u.stats.pageView(url);
+		if(
+			!window._man_nav_path || 
+			(!u.h.popstate && window._man_nav_path != u.h.getCleanHash(location.hash, 1)) || 
+			(u.h.popstate && window._man_nav_path != u.h.getCleanUrl(location.href, 1))
+		) {
+			if(this.cN && typeof(this.cN.navigate) == "function") {
+				this.cN.navigate(url);
+			}
+		}
+		else {
+			if(this.cN.scene && this.cN.scene.parentNode && typeof(this.cN.scene.navigate) == "function") {
+				this.cN.scene.navigate(url);
+			}
+			else if(this.cN && typeof(this.cN.navigate) == "function") {
+				this.cN.navigate(url);
+			}
+		}
+		if(!u.h.popstate) {
+			window._man_nav_path = u.h.getCleanHash(location.hash, 1);
+		}
+		else {
+			window._man_nav_path = u.h.getCleanUrl(location.href, 1);
+		}
+	}
+	if(location.hash.length && location.hash.match(/^#!/)) {
+		location.hash = location.hash.replace(/!/, "");
+	}
+	var callback_after_init = false;
+	if(!this.is_initialized) {
+		this.is_initialized = true;
+		if(!u.h.popstate) {
+			if(location.hash.length < 2) {
+				window._man_nav_path = u.h.getCleanUrl(location.href);
+				u.h.navigate(window._man_nav_path);
+				u.init(initialization_scope);
+			}
+			else if(location.hash.match(/^#\//) && u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href)) {
+				callback_after_init = u.h.getCleanHash(location.hash);
+			}
+			else {
+				u.init(initialization_scope);
+			}
+		}
+		else {
+			if(u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href) && location.hash.match(/^#\//)) {
+				window._man_nav_path = u.h.getCleanHash(location.hash);
+				u.h.navigate(window._man_nav_path);
+				callback_after_init = window._man_nav_path;
+			}
+			else {
+				u.init(initialization_scope);
+			}
+		}
+		var random_string = u.randomString(8);
+		if(callback_after_init) {
+			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});u.h.callback("'+callback_after_init+'");}');
+		}
+		else {
+			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});}');
+		}
+		u.t.setTimer(navigation_node, "_initNavigation_"+random_string, 100);
+	}
+	else {
+		u.h.callbacks.push({"node":navigation_node, "callback":callback_navigate});
+	}
+}
+
 
 /*u-preloader.js*/
 u.preloader = function(node, files, _options) {
@@ -3958,128 +3545,6 @@ Util.vendorPrefix = function() {
 	return Util.vendor_prefix;
 }
 
-
-/*u-scrollto.js*/
-u.scrollTo = function(node, _options) {
-	node.callback_scroll_to = "scrolledTo";
-	node.callback_scroll_cancelled = "scrolledToCancelled";
-	var offset_y = 0;
-	var offset_x = 0;
-	var scroll_to_x = 0;
-	var scroll_to_y = 0;
-	var to_node = false;
-	node._force_scroll_to = false;
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "callback"             : node.callback_scroll_to            = _options[_argument]; break;
-				case "callback_cancelled"   : node.callback_scroll_cancelled     = _options[_argument]; break;
-				case "offset_y"             : offset_y                           = _options[_argument]; break;
-				case "offset_x"             : offset_x                           = _options[_argument]; break;
-				case "node"                 : to_node                            = _options[_argument]; break;
-				case "x"                    : scroll_to_x                        = _options[_argument]; break;
-				case "y"                    : scroll_to_y                        = _options[_argument]; break;
-				case "scrollIn"             : scrollIn                           = _options[_argument]; break;
-				case "force"                : node._force_scroll_to              = _options[_argument]; break;
-			}
-		}
-	}
-	if(to_node) {
-		node._to_x = u.absX(to_node);
-		node._to_y = u.absY(to_node);
-	}
-	else {
-		node._to_x = scroll_to_x;
-		node._to_y = scroll_to_y;
-	}
-	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
-	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
-	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
-		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
-	}
-	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
-		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
-	}
-	node._to_x = node._to_x < 0 ? 0 : node._to_x;
-	node._to_y = node._to_y < 0 ? 0 : node._to_y;
-	node._x_scroll_direction = node._to_x - u.scrollX();
-	node._y_scroll_direction = node._to_y - u.scrollY();
-	node._scroll_to_x = u.scrollX();
-	node._scroll_to_y = u.scrollY();
-	node.ignoreWheel = function(event) {
-		u.e.kill(event);
-	}
-	if(node._force_scroll_to) {
-		u.e.addEvent(node, "wheel", node.ignoreWheel);
-	}
-	node.scrollToHandler = function(event) {
-		u.t.resetTimer(this.t_scroll);
-		this.t_scroll = u.t.setTimer(this, this._scrollTo, 50);
-	}
-	u.e.addEvent(node, "scroll", node.scrollToHandler);
-	node.cancelScrollTo = function() {
-		if(!this._force_scroll_to) {
-			u.t.resetTimer(this.t_scroll);
-			u.e.removeEvent(this, "scroll", this.scrollToHandler);
-			this._scrollTo = null;
-		}
-	}
-	node.scrollToFinished = function() {
-		u.t.resetTimer(this.t_scroll);
-		u.e.removeEvent(this, "scroll", this.scrollToHandler);
-		u.e.removeEvent(this, "wheel", this.ignoreWheel);
-		this._scrollTo = null;
-	}
-	node.IEScrollFix = function(s_x, s_y) {
-		if(!u.browser("ie")) {
-			return false;
-		}
-		else if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
-			return true;
-		}
-	}
-	node._scrollTo = function(start) {
-		var s_x = u.scrollX();
-		var s_y = u.scrollY();
-		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.IEScrollFix(s_x, s_y)) {
-			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
-				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/4);
-			}
-			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
-				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/4);
-			}
-			else {
-				this._scroll_to_x = this._to_x;
-			}
-			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
-				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/4);
-			}
-			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
-				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/4);
-			}
-			else {
-				this._scroll_to_y = this._to_y;
-			}
-			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
-				this.scrollToFinished();
-				this.scrollTo(this._to_x, this._to_y);
-				if(typeof(this[this.callback_scroll_to]) == "function") {
-					this[this.callback_scroll_to]();
-				}
-				return;
-			}
-			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
-		}
-		else {
-			this.cancelScrollTo();
-			if(typeof(this[this.callback_scroll_cancelled]) == "function") {
-				this[this.callback_scroll_cancelled]();
-			}
-		}	
-	}
-	node._scrollTo();
-}
 
 /*u-timer.js*/
 Util.Timer = u.t = new function() {

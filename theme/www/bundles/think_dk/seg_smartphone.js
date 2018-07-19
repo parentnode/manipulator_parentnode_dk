@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.2-lsb Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-07-15 09:19:48
+Manipulator v0.9.2-think_dk Copyright 2018 http://manipulator.parentnode.dk
+js-merged @ 2018-07-19 11:32:00
 */
 
 /*seg_smartphone_include.js*/
@@ -512,6 +512,44 @@ Util.cookieReference = function(node, _options) {
 }
 
 
+/*u-date.js*/
+Util.date = function(format, timestamp, months) {
+	var date = timestamp ? new Date(timestamp) : new Date();
+	if(isNaN(date.getTime())) {
+		if(new Date(timestamp.replace(/ /, "T"))) {
+			date = new Date(timestamp.replace(/ /, "T"));
+		}
+		else {
+			if(!timestamp.match(/[A-Z]{3}\+[0-9]{4}/)) {
+				if(timestamp.match(/ \+[0-9]{4}/)) {
+					date = new Date(timestamp.replace(/ (\+[0-9]{4})/, " GMT$1"));
+				}
+			}
+		}
+		if(isNaN(date.getTime())) {
+			date = new Date();
+		}
+	}
+	var tokens = /d|j|m|n|F|Y|G|H|i|s/g;
+	var chars = new Object();
+	chars.j = date.getDate();
+	chars.d = (chars.j > 9 ? "" : "0") + chars.j;
+	chars.n = date.getMonth()+1;
+	chars.m = (chars.n > 9 ? "" : "0") + chars.n;
+	chars.F = months ? months[date.getMonth()] : "";
+	chars.Y = date.getFullYear();
+	chars.G = date.getHours();
+	chars.H = (chars.G > 9 ? "" : "0") + chars.G;
+	var i = date.getMinutes();
+	chars.i = (i > 9 ? "" : "0") + i;
+	var s = date.getSeconds();
+	chars.s = (s > 9 ? "" : "0") + s;
+	return format.replace(tokens, function (_) {
+		return _ in chars ? chars[_] : _.slice(1, _.length - 1);
+	});
+};
+
+
 /*u-dom.js*/
 Util.querySelector = u.qs = function(query, scope) {
 	scope = scope ? scope : document;
@@ -960,6 +998,46 @@ u.containsOrIs = function(node, scope) {
 		return true
 	}
 	return false;
+}
+
+/*u-easings.js*/
+u.easings = new function() {
+	this["ease-in"] = function(progress) {
+		return Math.pow((progress), 3);
+	}
+	this["linear"] = function(progress) {
+		return progress;
+	}
+	this["ease-out"] = function(progress) {
+		return 1 - Math.pow(1 - ((progress)), 3);
+	}
+	this["linear"] = function(progress) {
+		return (progress);
+	}
+	this["ease-in-out-veryslow"] = function(progress) {
+		if(progress > 0.5) {
+			return 4*Math.pow((progress-1),3)+1;
+		}
+		return 4*Math.pow(progress,3);  
+	}
+	this["ease-in-out"] = function(progress) {
+		if(progress > 0.5) {
+			return 1 - Math.pow(1 - ((progress)), 2);
+		}
+		return Math.pow((progress), 2);
+	}
+	this["ease-out-slow"] = function(progress) {
+		return 1 - Math.pow(1 - ((progress)), 2);
+	}
+	this["ease-in-slow"] = function(progress) {
+		return Math.pow((progress), 2);
+	}
+	this["ease-in-veryslow"] = function(progress) {
+		return Math.pow((progress), 1.5);
+	}
+	this["ease-in-fast"] = function(progress) {
+		return Math.pow((progress), 4);
+	}
 }
 
 /*u-events.js*/
@@ -3219,6 +3297,136 @@ Util.pageScrollY = u.scrollY = function() {
 }
 
 
+/*u-history.js*/
+Util.History = u.h = new function() {
+	this.popstate = ("onpopstate" in window);
+	this.callbacks = [];
+	this.is_listening = false;
+	this.navigate = function(url, node) {
+		if(this.popstate) {
+			history.pushState({}, url, url);
+			this.callback(url);
+		}
+		else {
+			location.hash = u.h.getCleanUrl(url);
+		}
+	}
+	this.callback = function(url) {
+		var i, recipient;
+		for(i = 0; recipient = this.callbacks[i]; i++) {
+			if(typeof(recipient.node[recipient.callback]) == "function") {
+				recipient.node[recipient.callback](url);
+			}
+		}
+	}
+	this.removeEvent = function(node, _options) {
+		var callback_urlchange = "navigate";
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "callback"		: callback_urlchange		= _options[argument]; break;
+				}
+			}
+		}
+		var i, recipient;
+		for(i = 0; recipient = this.callbacks[i]; i++) {
+			if(recipient.node == node && recipient.callback == callback_urlchange) {
+				this.callbacks.splice(i, 1);
+				break;
+			}
+		}
+	}
+	this.addEvent = function(node, _options) {
+		var callback_urlchange = "navigate";
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "callback"		: callback_urlchange		= _options[argument]; break;
+				}
+			}
+		}
+		if(!this.is_listening) {
+			this.is_listening = true;
+			if(this.popstate) {
+				u.e.addEvent(window, "popstate", this._urlChanged);
+			}
+			else if("onhashchange" in window && !u.browser("explorer", "<=7")) {
+				u.e.addEvent(window, "hashchange", this._hashChanged);
+			}
+			else {
+				u.h._current_hash = window.location.hash;
+				window.onhashchange = this._hashChanged;
+				setInterval(
+					function() {
+						if(window.location.hash !== u.h._current_hash) {
+							u.h._current_hash = window.location.hash;
+							window.onhashchange();
+						}
+					}, 200
+				);
+			}
+		}
+		this.callbacks.push({"node":node, "callback":callback_urlchange});
+	}
+	this._urlChanged = function(event) {
+		var url = u.h.getCleanUrl(location.href);
+		if(event.state || (!event.state && event.path)) {
+			u.h.callback(url);
+		}
+		else {
+			history.replaceState({}, url, url);
+		}
+	}
+	this._hashChanged = function(event) {
+		if(!location.hash || !location.hash.match(/^#\//)) {
+			location.hash = "#/"
+			return;
+		}
+		var url = u.h.getCleanHash(location.hash);
+		u.h.callback(url);
+	}
+	this.trail = [];
+	this.addToTrail = function(url, node) {
+		this.trail.push({"url":url, "node":node});
+	}
+	this.getCleanUrl = function(string, levels) {
+		string = string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0];
+		if(!levels) {
+			return string;
+		}
+		else {
+			var i, return_string = "";
+			var path = string.split("/");
+			levels = levels > path.length-1 ? path.length-1 : levels;
+			for(i = 1; i <= levels; i++) {
+				return_string += "/" + path[i];
+			}
+			return return_string;
+		}
+	}
+	this.getCleanHash = function(string, levels) {
+		string = string.replace("#", "");
+		if(!levels) {
+			return string;
+		}
+		else {
+			var i, return_string = "";
+			var hash = string.split("/");
+			levels = levels > hash.length-1 ? hash.length-1 : levels;
+			for(i = 1; i <= levels; i++) {
+				return_string += "/" + hash[i];
+			}
+			return return_string;
+		}
+	}
+	this.resolveCurrentUrl = function() {
+		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
+	}
+}
+
+
 /*u-init.js*/
 Util.Objects = u.o = new Object();
 Util.init = function(scope) {
@@ -3230,6 +3438,66 @@ Util.init = function(scope) {
 			u.rc(node, "i:"+object);
 			if(object && typeof(u.o[object]) == "object") {
 				u.o[object].init(node);
+			}
+		}
+	}
+}
+
+
+/*u-keyboard.js*/
+Util.Keyboard = u.k = new function() {
+	this.shortcuts = {};
+	this.onkeydownCatcher = function(event) {
+		u.k.catchKey(event);
+	}
+	this.addKey = function(node, key, _options) {
+		node.callback_keyboard = "clicked";
+		node.metakey_required = true;
+		if(typeof(_options) == "object") {
+			var argument;
+			for(argument in _options) {
+				switch(argument) {
+					case "callback"		: node.callback_keyboard	= _options[argument]; break;
+					case "metakey"		: node.metakey_required		= _options[argument]; break;
+				}
+			}
+		}
+		if(!this.shortcuts.length) {
+			u.e.addEvent(document, "keydown", this.onkeydownCatcher);
+		}
+		if(!this.shortcuts[key.toString().toUpperCase()]) {
+			this.shortcuts[key.toString().toUpperCase()] = new Array();
+		}
+		this.shortcuts[key.toString().toUpperCase()].push(node);
+	}
+	this.catchKey = function(event) {
+		event = event ? event : window.event;
+		var key = String.fromCharCode(event.keyCode);
+		if(event.keyCode == 27) {
+			key = "ESC";
+		}
+		if(this.shortcuts[key]) {
+			var nodes, node, i;
+			nodes = this.shortcuts[key];
+			for(i = 0; node = nodes[i]; i++) {
+				if(u.nodeWithin(node, document.body)) {
+					if(node.offsetHeight && ((event.ctrlKey || event.metaKey) || (!node.metakey_required || key == "ESC"))) {
+						u.e.kill(event);
+						if(typeof(node[node.callback_keyboard]) == "function") {
+							node[node.callback_keyboard](event);
+						}
+					}
+				}
+				else {
+					this.shortcuts[key].splice(i, 1);
+					if(!this.shortcuts[key].length) {
+						delete this.shortcuts[key];
+						break;
+					}
+					else {
+						i--;
+					}
+				}
 			}
 		}
 	}
@@ -3250,6 +3518,93 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
+
+/*u-navigation.js*/
+u.navigation = function(_options) {
+	var navigation_node = page;
+	var callback_navigate = "_navigate";
+	var initialization_scope = page.cN;
+	if(typeof(_options) == "object") {
+		var argument;
+		for(argument in _options) {
+			switch(argument) {
+				case "callback"       : callback_navigate           = _options[argument]; break;
+				case "node"           : navigation_node             = _options[argument]; break;
+				case "scope"          : initialization_scope        = _options[argument]; break;
+			}
+		}
+	}
+	window._man_nav_path = window._man_nav_path ? window._man_nav_path : u.h.getCleanUrl(location.href, 1);
+	navigation_node._navigate = function(url) {
+		url = u.h.getCleanUrl(url);
+		u.stats.pageView(url);
+		if(
+			!window._man_nav_path || 
+			(!u.h.popstate && window._man_nav_path != u.h.getCleanHash(location.hash, 1)) || 
+			(u.h.popstate && window._man_nav_path != u.h.getCleanUrl(location.href, 1))
+		) {
+			if(this.cN && typeof(this.cN.navigate) == "function") {
+				this.cN.navigate(url);
+			}
+		}
+		else {
+			if(this.cN.scene && this.cN.scene.parentNode && typeof(this.cN.scene.navigate) == "function") {
+				this.cN.scene.navigate(url);
+			}
+			else if(this.cN && typeof(this.cN.navigate) == "function") {
+				this.cN.navigate(url);
+			}
+		}
+		if(!u.h.popstate) {
+			window._man_nav_path = u.h.getCleanHash(location.hash, 1);
+		}
+		else {
+			window._man_nav_path = u.h.getCleanUrl(location.href, 1);
+		}
+	}
+	if(location.hash.length && location.hash.match(/^#!/)) {
+		location.hash = location.hash.replace(/!/, "");
+	}
+	var callback_after_init = false;
+	if(!this.is_initialized) {
+		this.is_initialized = true;
+		if(!u.h.popstate) {
+			if(location.hash.length < 2) {
+				window._man_nav_path = u.h.getCleanUrl(location.href);
+				u.h.navigate(window._man_nav_path);
+				u.init(initialization_scope);
+			}
+			else if(location.hash.match(/^#\//) && u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href)) {
+				callback_after_init = u.h.getCleanHash(location.hash);
+			}
+			else {
+				u.init(initialization_scope);
+			}
+		}
+		else {
+			if(u.h.getCleanHash(location.hash) != u.h.getCleanUrl(location.href) && location.hash.match(/^#\//)) {
+				window._man_nav_path = u.h.getCleanHash(location.hash);
+				u.h.navigate(window._man_nav_path);
+				callback_after_init = window._man_nav_path;
+			}
+			else {
+				u.init(initialization_scope);
+			}
+		}
+		var random_string = u.randomString(8);
+		if(callback_after_init) {
+			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});u.h.callback("'+callback_after_init+'");}');
+		}
+		else {
+			eval('navigation_node._initNavigation_'+random_string+' = function() {u.h.addEvent(this, {"callback":"'+callback_navigate+'"});}');
+		}
+		u.t.setTimer(navigation_node, "_initNavigation_"+random_string, 100);
+	}
+	else {
+		u.h.callbacks.push({"node":navigation_node, "callback":callback_navigate});
+	}
+}
+
 
 /*u-preloader.js*/
 u.preloader = function(node, files, _options) {
@@ -3647,6 +4002,128 @@ Util.validateResponse = function(HTTPRequest){
 }
 
 
+/*u-scrollto.js*/
+u.scrollTo = function(node, _options) {
+	node.callback_scroll_to = "scrolledTo";
+	node.callback_scroll_cancelled = "scrolledToCancelled";
+	var offset_y = 0;
+	var offset_x = 0;
+	var scroll_to_x = 0;
+	var scroll_to_y = 0;
+	var to_node = false;
+	node._force_scroll_to = false;
+	if(typeof(_options) == "object") {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "callback"             : node.callback_scroll_to            = _options[_argument]; break;
+				case "callback_cancelled"   : node.callback_scroll_cancelled     = _options[_argument]; break;
+				case "offset_y"             : offset_y                           = _options[_argument]; break;
+				case "offset_x"             : offset_x                           = _options[_argument]; break;
+				case "node"                 : to_node                            = _options[_argument]; break;
+				case "x"                    : scroll_to_x                        = _options[_argument]; break;
+				case "y"                    : scroll_to_y                        = _options[_argument]; break;
+				case "scrollIn"             : scrollIn                           = _options[_argument]; break;
+				case "force"                : node._force_scroll_to              = _options[_argument]; break;
+			}
+		}
+	}
+	if(to_node) {
+		node._to_x = u.absX(to_node);
+		node._to_y = u.absY(to_node);
+	}
+	else {
+		node._to_x = scroll_to_x;
+		node._to_y = scroll_to_y;
+	}
+	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
+	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
+	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
+		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
+	}
+	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
+		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
+	}
+	node._to_x = node._to_x < 0 ? 0 : node._to_x;
+	node._to_y = node._to_y < 0 ? 0 : node._to_y;
+	node._x_scroll_direction = node._to_x - u.scrollX();
+	node._y_scroll_direction = node._to_y - u.scrollY();
+	node._scroll_to_x = u.scrollX();
+	node._scroll_to_y = u.scrollY();
+	node.ignoreWheel = function(event) {
+		u.e.kill(event);
+	}
+	if(node._force_scroll_to) {
+		u.e.addEvent(node, "wheel", node.ignoreWheel);
+	}
+	node.scrollToHandler = function(event) {
+		u.t.resetTimer(this.t_scroll);
+		this.t_scroll = u.t.setTimer(this, this._scrollTo, 50);
+	}
+	u.e.addEvent(node, "scroll", node.scrollToHandler);
+	node.cancelScrollTo = function() {
+		if(!this._force_scroll_to) {
+			u.t.resetTimer(this.t_scroll);
+			u.e.removeEvent(this, "scroll", this.scrollToHandler);
+			this._scrollTo = null;
+		}
+	}
+	node.scrollToFinished = function() {
+		u.t.resetTimer(this.t_scroll);
+		u.e.removeEvent(this, "scroll", this.scrollToHandler);
+		u.e.removeEvent(this, "wheel", this.ignoreWheel);
+		this._scrollTo = null;
+	}
+	node.IEScrollFix = function(s_x, s_y) {
+		if(!u.browser("ie")) {
+			return false;
+		}
+		else if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
+			return true;
+		}
+	}
+	node._scrollTo = function(start) {
+		var s_x = u.scrollX();
+		var s_y = u.scrollY();
+		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.IEScrollFix(s_x, s_y)) {
+			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
+				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/4);
+			}
+			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
+				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/4);
+			}
+			else {
+				this._scroll_to_x = this._to_x;
+			}
+			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
+				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/4);
+			}
+			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
+				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/4);
+			}
+			else {
+				this._scroll_to_y = this._to_y;
+			}
+			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
+				this.scrollToFinished();
+				this.scrollTo(this._to_x, this._to_y);
+				if(typeof(this[this.callback_scroll_to]) == "function") {
+					this[this.callback_scroll_to]();
+				}
+				return;
+			}
+			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
+		}
+		else {
+			this.cancelScrollTo();
+			if(typeof(this[this.callback_scroll_cancelled]) == "function") {
+				this[this.callback_scroll_cancelled]();
+			}
+		}	
+	}
+	node._scrollTo();
+}
+
 /*u-string.js*/
 Util.cutString = function(string, length) {
 	var matches, match, i;
@@ -3762,6 +4239,58 @@ Util.isStringHTML = function(string) {
 		catch(exception) {}
 	}
 	return false;
+}
+
+
+/*u-svg.js*/
+Util.svg = function(svg_object) {
+	var svg, shape, svg_shape;
+	if(svg_object.name && u._svg_cache && u._svg_cache[svg_object.name]) {
+		svg = u._svg_cache[svg_object.name].cloneNode(true);
+	}
+	if(!svg) {
+		svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		for(shape in svg_object.shapes) {
+			Util.svgShape(svg, svg_object.shapes[shape]);
+		}
+		if(svg_object.name) {
+			if(!u._svg_cache) {
+				u._svg_cache = {};
+			}
+			u._svg_cache[svg_object.name] = svg.cloneNode(true);
+		}
+	}
+	if(svg_object.title) {
+		svg.setAttributeNS(null, "title", svg_object.title);
+	}
+	if(svg_object["class"]) {
+		svg.setAttributeNS(null, "class", svg_object["class"]);
+	}
+	if(svg_object.width) {
+		svg.setAttributeNS(null, "width", svg_object.width);
+	}
+	if(svg_object.height) {
+		svg.setAttributeNS(null, "height", svg_object.height);
+	}
+	if(svg_object.id) {
+		svg.setAttributeNS(null, "id", svg_object.id);
+	}
+	if(svg_object.node) {
+		svg.node = svg_object.node;
+	}
+	if(svg_object.node) {
+		svg_object.node.appendChild(svg);
+	}
+	return svg;
+}
+Util.svgShape = function(svg, svg_object) {
+	svg_shape = document.createElementNS("http://www.w3.org/2000/svg", svg_object["type"]);
+	svg_object["type"] = null;
+	delete svg_object["type"];
+	for(detail in svg_object) {
+		svg_shape.setAttributeNS(null, detail, svg_object[detail]);
+	}
+	return svg.appendChild(svg_shape);
 }
 
 
@@ -3959,126 +4488,153 @@ Util.vendorPrefix = function() {
 }
 
 
-/*u-scrollto.js*/
-u.scrollTo = function(node, _options) {
-	node.callback_scroll_to = "scrolledTo";
-	node.callback_scroll_cancelled = "scrolledToCancelled";
-	var offset_y = 0;
-	var offset_x = 0;
-	var scroll_to_x = 0;
-	var scroll_to_y = 0;
-	var to_node = false;
-	node._force_scroll_to = false;
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "callback"             : node.callback_scroll_to            = _options[_argument]; break;
-				case "callback_cancelled"   : node.callback_scroll_cancelled     = _options[_argument]; break;
-				case "offset_y"             : offset_y                           = _options[_argument]; break;
-				case "offset_x"             : offset_x                           = _options[_argument]; break;
-				case "node"                 : to_node                            = _options[_argument]; break;
-				case "x"                    : scroll_to_x                        = _options[_argument]; break;
-				case "y"                    : scroll_to_y                        = _options[_argument]; break;
-				case "scrollIn"             : scrollIn                           = _options[_argument]; break;
-				case "force"                : node._force_scroll_to              = _options[_argument]; break;
+/*u-textscaler.js*/
+u.textscaler = function(node, _settings) {
+	if(typeof(_settings) != "object") {
+		_settings = {
+			"*":{
+				"unit":"rem",
+				"min_size":1,
+				"min_width":200,
+				"min_height":200,
+				"max_size":40,
+				"max_width":3000,
+				"max_height":2000
 			}
-		}
+		};
 	}
-	if(to_node) {
-		node._to_x = u.absX(to_node);
-		node._to_y = u.absY(to_node);
-	}
-	else {
-		node._to_x = scroll_to_x;
-		node._to_y = scroll_to_y;
-	}
-	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
-	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
-	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
-		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
-	}
-	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
-		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
-	}
-	node._to_x = node._to_x < 0 ? 0 : node._to_x;
-	node._to_y = node._to_y < 0 ? 0 : node._to_y;
-	node._x_scroll_direction = node._to_x - u.scrollX();
-	node._y_scroll_direction = node._to_y - u.scrollY();
-	node._scroll_to_x = u.scrollX();
-	node._scroll_to_y = u.scrollY();
-	node.ignoreWheel = function(event) {
-		u.e.kill(event);
-	}
-	if(node._force_scroll_to) {
-		u.e.addEvent(node, "wheel", node.ignoreWheel);
-	}
-	node.scrollToHandler = function(event) {
-		u.t.resetTimer(this.t_scroll);
-		this.t_scroll = u.t.setTimer(this, this._scrollTo, 50);
-	}
-	u.e.addEvent(node, "scroll", node.scrollToHandler);
-	node.cancelScrollTo = function() {
-		if(!this._force_scroll_to) {
-			u.t.resetTimer(this.t_scroll);
-			u.e.removeEvent(this, "scroll", this.scrollToHandler);
-			this._scrollTo = null;
-		}
-	}
-	node.scrollToFinished = function() {
-		u.t.resetTimer(this.t_scroll);
-		u.e.removeEvent(this, "scroll", this.scrollToHandler);
-		u.e.removeEvent(this, "wheel", this.ignoreWheel);
-		this._scrollTo = null;
-	}
-	node.IEScrollFix = function(s_x, s_y) {
-		if(!u.browser("ie")) {
-			return false;
-		}
-		else if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
-			return true;
-		}
-	}
-	node._scrollTo = function(start) {
-		var s_x = u.scrollX();
-		var s_y = u.scrollY();
-		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.IEScrollFix(s_x, s_y)) {
-			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
-				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/4);
-			}
-			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
-				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/4);
-			}
-			else {
-				this._scroll_to_x = this._to_x;
-			}
-			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
-				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/4);
-			}
-			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
-				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/4);
-			}
-			else {
-				this._scroll_to_y = this._to_y;
-			}
-			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
-				this.scrollToFinished();
-				this.scrollTo(this._to_x, this._to_y);
-				if(typeof(this[this.callback_scroll_to]) == "function") {
-					this[this.callback_scroll_to]();
+	node.text_key = u.randomString(8);
+	u.ac(node, node.text_key);
+	node.text_settings = JSON.parse(JSON.stringify(_settings));
+	node.scaleText = function() {
+		var tag;
+		for(tag in this.text_settings) {
+			var settings = this.text_settings[tag];
+			var width_wins = false;
+			var height_wins = false;
+			if(settings.width_factor && settings.height_factor) {
+				if(window._man_text._height - settings.min_height < window._man_text._width - settings.min_width) {
+					height_wins = true;
 				}
-				return;
+				else {
+					width_wins = true;
+				}
 			}
-			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
+			if(settings.width_factor && !height_wins) {
+				if(settings.min_width <= window._man_text._width && settings.max_width >= window._man_text._width) {
+					var font_size = settings.min_size + (settings.size_factor * (window._man_text._width - settings.min_width) / settings.width_factor);
+					settings.css_rule.style.setProperty("font-size", font_size + settings.unit, "important");
+				}
+				else if(settings.max_width < window._man_text._width) {
+					settings.css_rule.style.setProperty("font-size", settings.max_size + settings.unit, "important");
+				}
+				else if(settings.min_width > window._man_text._width) {
+					settings.css_rule.style.setProperty("font-size", settings.min_size + settings.unit, "important");
+				}
+			}
+			else if(settings.height_factor) {
+				if(settings.min_height <= window._man_text._height && settings.max_height >= window._man_text._height) {
+					var font_size = settings.min_size + (settings.size_factor * (window._man_text._height - settings.min_height) / settings.height_factor);
+					settings.css_rule.style.setProperty("font-size", font_size + settings.unit, "important");
+				}
+				else if(settings.max_height < window._man_text._height) {
+					settings.css_rule.style.setProperty("font-size", settings.max_size + settings.unit, "important");
+				}
+				else if(settings.min_height > window._man_text._height) {
+					settings.css_rule.style.setProperty("font-size", settings.min_size + settings.unit, "important");
+				}
+			}
+		}
+	}
+	node.cancelTextScaling = function() {
+		u.e.removeEvent(window, "resize", window._man_text.scale);
+	}
+	if(!window._man_text) {
+		var man_text = {};
+		man_text.nodes = [];
+		var style_tag = document.createElement("style");
+		style_tag.setAttribute("media", "all")
+		style_tag.setAttribute("type", "text/css")
+		man_text.style_tag = u.ae(document.head, style_tag);
+		man_text.style_tag.appendChild(document.createTextNode(""))
+		window._man_text = man_text;
+		window._man_text._width = u.browserW();
+		window._man_text._height = u.browserH();
+		window._man_text.scale = function() {
+			var _width = u.browserW();
+			var _height = u.browserH();
+			window._man_text._width = u.browserW();
+			window._man_text._height = u.browserH();
+			var i, node;
+			for(i = 0; node = window._man_text.nodes[i]; i++) {
+				if(node.parentNode) { 
+					node.scaleText();
+				}
+				else {
+					window._man_text.nodes.splice(window._man_text.nodes.indexOf(node), 1);
+					if(!window._man_text.nodes.length) {
+						u.e.removeEvent(window, "resize", window._man_text.scale);
+						window._man_text = false;
+						break;
+					}
+				}
+			}
+		}
+		u.e.addEvent(window, "resize", window._man_text.scale);
+		window._man_text.precalculate = function() {
+			var i, node, tag;
+			for(i = 0; node = window._man_text.nodes[i]; i++) {
+				if(node.parentNode) { 
+					var settings = node.text_settings;
+					for(tag in settings) {
+						if(settings[tag].max_width && settings[tag].min_width) {
+							settings[tag].width_factor = settings[tag].max_width-settings[tag].min_width;
+						}
+						else if(node._man_text.max_width && node._man_text.min_width) {
+							settings[tag].max_width = node._man_text.max_width;
+							settings[tag].min_width = node._man_text.min_width;
+							settings[tag].width_factor = node._man_text.max_width-node._man_text.min_width;
+						}
+						else {
+							settings[tag].width_factor = false;
+						}
+						if(settings[tag].max_height && settings[tag].min_height) {
+							settings[tag].height_factor = settings[tag].max_height-settings[tag].min_height;
+						}
+						else if(node._man_text.max_height && node._man_text.min_height) {
+							settings[tag].max_height = node._man_text.max_height;
+							settings[tag].min_height = node._man_text.min_height;
+							settings[tag].height_factor = node._man_text.max_height-node._man_text.min_height;
+						}
+						else {
+							settings[tag].height_factor = false;
+						}
+						settings[tag].size_factor = settings[tag].max_size-settings[tag].min_size;
+						if(!settings[tag].unit) {
+							settings[tag].unit = node._man_text.unit;
+						}
+					}
+				}
+			}
+		}
+	}
+	var tag;
+	node._man_text = {};
+	for(tag in node.text_settings) {
+		if(tag == "min_height" || tag == "max_height" || tag == "min_width" || tag == "max_width" || tag == "unit" || tag == "ref") {
+			node._man_text[tag] = node.text_settings[tag];
+			node.text_settings[tag] = null;
+			delete node.text_settings[tag];
 		}
 		else {
-			this.cancelScrollTo();
-			if(typeof(this[this.callback_scroll_cancelled]) == "function") {
-				this[this.callback_scroll_cancelled]();
-			}
-		}	
+			selector = "."+node.text_key + ' ' + tag + ' ';
+			node.css_rules_index = window._man_text.style_tag.sheet.insertRule(selector+'{}', 0);
+			node.text_settings[tag].css_rule = window._man_text.style_tag.sheet.cssRules[0];
+		}
 	}
-	node._scrollTo();
+	window._man_text.nodes.push(node);
+	window._man_text.precalculate();
+	node.scaleText();
 }
 
 /*u-timer.js*/

@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.2-lsb Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-07-15 09:19:48
+Manipulator v0.9.2-dukkepartiet_dk Copyright 2018 http://manipulator.parentnode.dk
+js-merged @ 2018-07-12 11:20:29
 */
 
 /*seg_smartphone_include.js*/
@@ -510,6 +510,44 @@ Util.cookieReference = function(node, _options) {
 	}
 	return ref;
 }
+
+
+/*u-date.js*/
+Util.date = function(format, timestamp, months) {
+	var date = timestamp ? new Date(timestamp) : new Date();
+	if(isNaN(date.getTime())) {
+		if(new Date(timestamp.replace(/ /, "T"))) {
+			date = new Date(timestamp.replace(/ /, "T"));
+		}
+		else {
+			if(!timestamp.match(/[A-Z]{3}\+[0-9]{4}/)) {
+				if(timestamp.match(/ \+[0-9]{4}/)) {
+					date = new Date(timestamp.replace(/ (\+[0-9]{4})/, " GMT$1"));
+				}
+			}
+		}
+		if(isNaN(date.getTime())) {
+			date = new Date();
+		}
+	}
+	var tokens = /d|j|m|n|F|Y|G|H|i|s/g;
+	var chars = new Object();
+	chars.j = date.getDate();
+	chars.d = (chars.j > 9 ? "" : "0") + chars.j;
+	chars.n = date.getMonth()+1;
+	chars.m = (chars.n > 9 ? "" : "0") + chars.n;
+	chars.F = months ? months[date.getMonth()] : "";
+	chars.Y = date.getFullYear();
+	chars.G = date.getHours();
+	chars.H = (chars.G > 9 ? "" : "0") + chars.G;
+	var i = date.getMinutes();
+	chars.i = (i > 9 ? "" : "0") + i;
+	var s = date.getSeconds();
+	chars.s = (s > 9 ? "" : "0") + s;
+	return format.replace(tokens, function (_) {
+		return _ in chars ? chars[_] : _.slice(1, _.length - 1);
+	});
+};
 
 
 /*u-dom.js*/
@@ -2899,269 +2937,6 @@ u.f.recurseName = function(object, indexes, value) {
 }
 
 
-/*u-form-builder.js*/
-u.f.customBuild = {};
-u.f.addForm = function(node, _options) {
-	var form_name = "js_form";
-	var form_action = "#";
-	var form_method = "post";
-	var form_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "name"			: form_name				= _options[_argument]; break;
-				case "action"		: form_action			= _options[_argument]; break;
-				case "method"		: form_method			= _options[_argument]; break;
-				case "class"		: form_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var form = u.ae(node, "form", {"class":form_class, "name": form_name, "action":form_action, "method":form_method});
-	return form;
-}
-u.f.addFieldset = function(node, _options) {
-	var fieldset_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "class"			: fieldset_class			= _options[_argument]; break;
-			}
-		}
-	}
-	return u.ae(node, "fieldset", {"class":fieldset_class});
-}
-u.f.addField = function(node, _options) {
-	var field_name = "js_name";
-	var field_label = "Label";
-	var field_type = "string";
-	var field_value = "";
-	var field_options = [];
-	var field_checked = false;
-	var field_class = "";
-	var field_id = "";
-	var field_max = false;
-	var field_min = false;
-	var field_disabled = false;
-	var field_readonly = false;
-	var field_required = false;
-	var field_pattern = false;
-	var field_error_message = "There is an error in your input";
-	var field_hint_message = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "name"					: field_name			= _options[_argument]; break;
-				case "label"				: field_label			= _options[_argument]; break;
-				case "type"					: field_type			= _options[_argument]; break;
-				case "value"				: field_value			= _options[_argument]; break;
-				case "options"				: field_options			= _options[_argument]; break;
-				case "checked"				: field_checked			= _options[_argument]; break;
-				case "class"				: field_class			= _options[_argument]; break;
-				case "id"					: field_id				= _options[_argument]; break;
-				case "max"					: field_max				= _options[_argument]; break;
-				case "min"					: field_min				= _options[_argument]; break;
-				case "disabled"				: field_disabled		= _options[_argument]; break;
-				case "readonly"				: field_readonly		= _options[_argument]; break;
-				case "required"				: field_required		= _options[_argument]; break;
-				case "pattern"				: field_pattern			= _options[_argument]; break;
-				case "error_message"		: field_error_message	= _options[_argument]; break;
-				case "hint_message"			: field_hint_message	= _options[_argument]; break;
-			}
-		}
-	}
-	var custom_build;
-	if(field_type in u.f.customBuild) {
-		return u.f.customBuild[field_type](node, _options);
-	}
-	field_id = field_id ? field_id : "input_"+field_type+"_"+field_name;
-	field_disabled = !field_disabled ? (field_class.match(/(^| )disabled( |$)/) ? "disabled" : false) : "disabled";
-	field_readonly = !field_readonly ? (field_class.match(/(^| )readonly( |$)/) ? "readonly" : false) : "readonly";
-	field_required = !field_required ? (field_class.match(/(^| )required( |$)/) ? true : false) : true;
-	field_class += field_disabled ? (!field_class.match(/(^| )disabled( |$)/) ? " disabled" : "") : "";
-	field_class += field_readonly ? (!field_class.match(/(^| )readonly( |$)/) ? " readonly" : "") : "";
-	field_class += field_required ? (!field_class.match(/(^| )required( |$)/) ? " required" : "") : "";
-	field_class += field_min ? (!field_class.match(/(^| )min:[0-9]+( |$)/) ? " min:"+field_min : "") : "";
-	field_class += field_max ? (!field_class.match(/(^| )max:[0-9]+( |$)/) ? " max:"+field_max : "") : "";
-	if (field_type == "hidden") {
-		return u.ae(node, "input", {"type":"hidden", "name":field_name, "value":field_value, "id":field_id});
-	}
-	var field = u.ae(node, "div", {"class":"field "+field_type+" "+field_class});
-	var attributes = {};
-	if(field_type == "string") {
-		field_max = field_max ? field_max : 255;
-		attributes = {
-			"type":"text", 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "email" || field_type == "tel" || field_type == "password") {
-		field_max = field_max ? field_max : 255;
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "number" || field_type == "integer" || field_type == "date" || field_type == "datetime") {
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value, 
-			"name":field_name, 
-			"max":field_max, 
-			"min":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "checkbox") {
-		attributes = {
-			"type":field_type, 
-			"id":field_id, 
-			"value":field_value ? field_value : "true", 
-			"name":field_name, 
-			"disabled":field_disabled,
-			"checked":field_checked
-		};
-		u.ae(field, "input", {"name":field_name, "value":"false", "type":"hidden"});
-		u.ae(field, "input", u.f.verifyAttributes(attributes));
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-	}
-	else if(field_type == "text") {
-		attributes = {
-			"id":field_id, 
-			"html":field_value, 
-			"name":field_name, 
-			"maxlength":field_max, 
-			"minlength":field_min,
-			"pattern":field_pattern,
-			"readonly":field_readonly,
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "textarea", u.f.verifyAttributes(attributes));
-	}
-	else if(field_type == "select") {
-		attributes = {
-			"id":field_id, 
-			"name":field_name, 
-			"disabled":field_disabled
-		};
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		var select = u.ae(field, "select", u.f.verifyAttributes(attributes));
-		if(field_options) {
-			var i, option;
-			for(i = 0; option = field_options[i]; i++) {
-				if(option.value == field_value) {
-					u.ae(select, "option", {"value":option.value, "html":option.text, "selected":"selected"});
-				}
-				else {
-					u.ae(select, "option", {"value":option.value, "html":option.text});
-				}
-			}
-		}
-	}
-	else if(field_type == "radiobuttons") {
-		u.ae(field, "label", {"html":field_label});
-		if(field_options) {
-			var i, option;
-			for(i = 0; option = field_options[i]; i++) {
-				var div = u.ae(field, "div", {"class":"item"});
-				if(option.value == field_value) {
-					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name, "checked":"checked"});
-					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
-				}
-				else {
-					u.ae(div, "input", {"value":option.value, "id":field_id+"-"+i, "type":"radio", "name":field_name});
-					u.ae(div, "label", {"for":field_id+"-"+i, "html":option.text});
-				}
-			}
-		}
-	}
-	else if(field_type == "files") {
-		u.ae(field, "label", {"for":field_id, "html":field_label});
-		u.ae(field, "input", {"id":field_id, "name":field_name, "type":"file"});
-	}
-	else {
-		u.bug("input type not implemented")
-	}
-	if(field_hint_message || field_error_message) {
-		var help = u.ae(field, "div", {"class":"help"});
-		if (field_hint_message) {
-			u.ae(help, "div", { "class": "hint", "html": field_hint_message });
-		}
-		if(field_error_message) {
-			u.ae(help, "div", { "class": "error", "html": field_error_message });
-		}
-	}
-	return field;
-}
-u.f.verifyAttributes = function(attributes) {
-	for(attribute in attributes) {
-		if(attributes[attribute] === undefined || attributes[attribute] === false || attributes[attribute] === null) {
-			delete attributes[attribute];
-		}
-	}
-	return attributes;
-}
-u.f.addAction = function(node, _options) {
-	var action_type = "submit";
-	var action_name = "js_name";
-	var action_value = "";
-	var action_class = "";
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "type"			: action_type			= _options[_argument]; break;
-				case "name"			: action_name			= _options[_argument]; break;
-				case "value"		: action_value			= _options[_argument]; break;
-				case "class"		: action_class			= _options[_argument]; break;
-			}
-		}
-	}
-	var p_ul = node.nodeName.toLowerCase() == "ul" ? node : u.pn(node, {"include":"ul"});
-	if(!p_ul || !u.hc(p_ul, "actions")) {
-		if(node.nodeName.toLowerCase() == "form") {
-			p_ul = u.qs("ul.actions", node);
-		}
-		p_ul = p_ul ? p_ul : u.ae(node, "ul", {"class":"actions"});
-	}
-	var p_li = node.nodeName.toLowerCase() == "li" ? node : u.pn(node, {"include":"li"});
-	if(!p_li || p_ul != p_li.parentNode) {
-		p_li = u.ae(p_ul, "li", {"class":action_name});
-	}
-	else {
-		p_li = node;
-	}
-	var action = u.ae(p_li, "input", {"type":action_type, "class":action_class, "value":action_value, "name":action_name})
-	return action;
-}
-
-
 /*u-geometry.js*/
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
@@ -3958,128 +3733,6 @@ Util.vendorPrefix = function() {
 	return Util.vendor_prefix;
 }
 
-
-/*u-scrollto.js*/
-u.scrollTo = function(node, _options) {
-	node.callback_scroll_to = "scrolledTo";
-	node.callback_scroll_cancelled = "scrolledToCancelled";
-	var offset_y = 0;
-	var offset_x = 0;
-	var scroll_to_x = 0;
-	var scroll_to_y = 0;
-	var to_node = false;
-	node._force_scroll_to = false;
-	if(typeof(_options) == "object") {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "callback"             : node.callback_scroll_to            = _options[_argument]; break;
-				case "callback_cancelled"   : node.callback_scroll_cancelled     = _options[_argument]; break;
-				case "offset_y"             : offset_y                           = _options[_argument]; break;
-				case "offset_x"             : offset_x                           = _options[_argument]; break;
-				case "node"                 : to_node                            = _options[_argument]; break;
-				case "x"                    : scroll_to_x                        = _options[_argument]; break;
-				case "y"                    : scroll_to_y                        = _options[_argument]; break;
-				case "scrollIn"             : scrollIn                           = _options[_argument]; break;
-				case "force"                : node._force_scroll_to              = _options[_argument]; break;
-			}
-		}
-	}
-	if(to_node) {
-		node._to_x = u.absX(to_node);
-		node._to_y = u.absY(to_node);
-	}
-	else {
-		node._to_x = scroll_to_x;
-		node._to_y = scroll_to_y;
-	}
-	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
-	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
-	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
-		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
-	}
-	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
-		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
-	}
-	node._to_x = node._to_x < 0 ? 0 : node._to_x;
-	node._to_y = node._to_y < 0 ? 0 : node._to_y;
-	node._x_scroll_direction = node._to_x - u.scrollX();
-	node._y_scroll_direction = node._to_y - u.scrollY();
-	node._scroll_to_x = u.scrollX();
-	node._scroll_to_y = u.scrollY();
-	node.ignoreWheel = function(event) {
-		u.e.kill(event);
-	}
-	if(node._force_scroll_to) {
-		u.e.addEvent(node, "wheel", node.ignoreWheel);
-	}
-	node.scrollToHandler = function(event) {
-		u.t.resetTimer(this.t_scroll);
-		this.t_scroll = u.t.setTimer(this, this._scrollTo, 50);
-	}
-	u.e.addEvent(node, "scroll", node.scrollToHandler);
-	node.cancelScrollTo = function() {
-		if(!this._force_scroll_to) {
-			u.t.resetTimer(this.t_scroll);
-			u.e.removeEvent(this, "scroll", this.scrollToHandler);
-			this._scrollTo = null;
-		}
-	}
-	node.scrollToFinished = function() {
-		u.t.resetTimer(this.t_scroll);
-		u.e.removeEvent(this, "scroll", this.scrollToHandler);
-		u.e.removeEvent(this, "wheel", this.ignoreWheel);
-		this._scrollTo = null;
-	}
-	node.IEScrollFix = function(s_x, s_y) {
-		if(!u.browser("ie")) {
-			return false;
-		}
-		else if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
-			return true;
-		}
-	}
-	node._scrollTo = function(start) {
-		var s_x = u.scrollX();
-		var s_y = u.scrollY();
-		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.IEScrollFix(s_x, s_y)) {
-			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
-				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/4);
-			}
-			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
-				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/4);
-			}
-			else {
-				this._scroll_to_x = this._to_x;
-			}
-			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
-				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/4);
-			}
-			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
-				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/4);
-			}
-			else {
-				this._scroll_to_y = this._to_y;
-			}
-			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
-				this.scrollToFinished();
-				this.scrollTo(this._to_x, this._to_y);
-				if(typeof(this[this.callback_scroll_to]) == "function") {
-					this[this.callback_scroll_to]();
-				}
-				return;
-			}
-			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
-		}
-		else {
-			this.cancelScrollTo();
-			if(typeof(this[this.callback_scroll_cancelled]) == "function") {
-				this[this.callback_scroll_cancelled]();
-			}
-		}	
-	}
-	node._scrollTo();
-}
 
 /*u-timer.js*/
 Util.Timer = u.t = new function() {
