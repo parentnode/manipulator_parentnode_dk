@@ -1,6 +1,6 @@
 Util.Objects["scene"] = new function() {
 	this.init = function(scene) {
-		u.bug("scene init:" + u.nodeId(scene))
+		u.bug("scene init:", scene);
 		
 
 		scene.resized = function() {
