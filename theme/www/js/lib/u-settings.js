@@ -10,12 +10,3 @@ u.translations["en"] = {};
 
 u.translations["en"]["build-headline"] = "Build a Manipulator bundle now";
 u.translations["en"]["build-intro"] = "Select the Manipulator modules you want to include in your bundle.";
-
-
-// dynamic text
-u.txt = {};
-
-// terms
-u.txt["terms-headline"] = "We love <br />cookies and privacy";
-u.txt["terms-accept"] = "Accept";
-u.txt["terms-details"] = "Details";
