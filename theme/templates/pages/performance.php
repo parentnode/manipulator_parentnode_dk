@@ -103,7 +103,7 @@
 	.testzone {padding: 0 50px 20px;}
 </style>
 	
-<div class="scene speed">
+<div class="scene speed i:scene">
 
 	<div class="article" itemscope itemtype="http://schema.org/Article">
 		<h1 itemprop="headline">Performance</h1>
