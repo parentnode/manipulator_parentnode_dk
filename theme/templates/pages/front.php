@@ -1,4 +1,4 @@
-<div class="scene front i:front">
+<div class="scene front i:scene">
 
 	<div class="article i:article" itemscope itemtype="http://schema.org/Article">
 		<h1 itemprop="headline">If manipulation is required ...</h1>

@@ -33,7 +33,6 @@ Util.Objects["front"] = new function() {
 				{"family":"PT Serif", "weight":"normal", "style":"normal"}
 			]);
 
-			u.showScene(this);
 		}
 
 
