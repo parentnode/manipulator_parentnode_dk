@@ -1,4 +1,4 @@
-<div class="scene tests">
+<div class="scene tests i:scene">
 	<h1>Tests</h1>
 	<p>Tests for the Manipulator library</p>
 	
