@@ -10,16 +10,21 @@ $this->headerIncludes(array(
 
 	<div class="tests i:events">
 
-		<h2>Click and hold events</h2>
+		<h2>Simple click test (right/left click)</h2>
+		<div class="click_me">click me</div>
+
+		<hr />
+
+		<h2>Nested click and hold events</h2>
 		<p>
 			Test is based on a set of nested divs, each with it's own click event. 
 			Click on each div and track the events outputted to the screen. No click, hold or dblclick
 			should envoke anything except the exact action. No bubbling can occur.
 		</p>
-		<div class="level1">Level 1, click-event
-			<div class="level2">Level 2, click-, hold-, dblclick-event
-				<div class="level3">Level 3, click-even
-					<div class="level4">Level 4, click-event</div>
+		<div class="level1"><span>Level 1, click-event</span>
+			<div class="level2"><span>Level 2, click-, hold-, dblclick-event</span>
+				<div class="level3"><span>Level 3, click-event</span>
+					<div class="level4"><span>Level 4, click-event</span></div>
 				</div>
 			</div>
 		</div>
