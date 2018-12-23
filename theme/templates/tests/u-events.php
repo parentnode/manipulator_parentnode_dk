@@ -13,7 +13,8 @@ $this->headerIncludes(array(
 		<h2>Simple click test (right/left click)</h2>
 		<p>
 			Click and rightclick the purple box – a small panel will occur with info, indicating how the 
-			interaction was registered. (note: all interaction starts with a inputStarted).
+			interaction was registered. Note: all interaction starts with one inputStarted, followed by one clicked/rightclicked. 
+			If ONE interaction causes TWO click events to occur, you have found an error.
 		</p>
 		<p>
 			Extended test: Push mouse button down on the purple box, and then move mouse outside the 
