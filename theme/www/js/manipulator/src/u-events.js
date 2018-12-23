@@ -19,14 +19,14 @@ Util.Events = u.e = new function() {
 
 	// auto-choose default event type
 	// support for dual input sources
-    if ((obj(document.ontouchmove) && obj(document.ontouchmove)) || (fun(document.ontouchmove) && fun(document.ontouchmove))) {
+    if (navigator.userAgent.match(/Windows/i) && ((obj(document.ontouchmove) && obj(document.ontouchmove)) || (fun(document.ontouchmove) && fun(document.ontouchmove)))) {
         this.event_support = "multi";
     }
-    else if (obj(document.onmousemove) || fun(document.onmousemove)) {
-		this.event_support = "mouse";
+    else if (obj(document.ontouchmove) || fun(document.ontouchmove)) {
+		this.event_support = "touch";
 	}
 	else {
-		this.event_support = "touch";
+		this.event_support = "mouse";
 	}
 
 	// console.log(this.event_support);
