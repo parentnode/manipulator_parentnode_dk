@@ -1,4 +1,4 @@
-#content .scene div.tests div.click_me {width: 100px; height: 50px; background: purple; color: white;}
+#content .scene div.tests div.click_me {width: 100px; height: 50px; background: purple; color: white; text-indent: -9999px;}
 
 #content .scene div.tests div.level1,
 #content .scene div.tests div.level1 {}

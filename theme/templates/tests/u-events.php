@@ -11,6 +11,14 @@ $this->headerIncludes(array(
 	<div class="tests i:events">
 
 		<h2>Simple click test (right/left click)</h2>
+		<p>
+			Click and rightclick the purple box – a small panel will occur with info, indicating how the 
+			interaction was registered. (note: all interaction starts with a inputStarted).
+		</p>
+		<p>
+			Extended test: Push mouse button down on the purple box, and then move mouse outside the 
+			purple area before letting go of the button. That should effectively cancel the click/rightclick event.
+		</p>
 		<div class="click_me">click me</div>
 
 		<hr />
