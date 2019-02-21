@@ -496,3 +496,95 @@ Util.Objects["swipe2"] = new function() {
 	}
 
 }
+
+
+
+Util.Objects["dynamic"] = new function() {
+	this.init = function(div) {
+
+		div.debug = u.ae(div, "div", {"class":"debug"});
+		div.addDebug = function(message) {
+			this.debug.innerHTML += message + "<br>";
+			this.debug.scrollTop = this.debug.scrollTop + 25;
+		}
+
+
+		// ARRAY BOUNDARIES
+		div.boundary = u.qs("div.boundary", div);
+
+		div.dragme = u.qs("div.dragme", div);
+		div.dragme.div = div;
+
+		var portrait = u.qs("li.portrait", div);
+		portrait.div = div;
+		u.ce(portrait);
+		portrait.clicked = function() {
+			u.ac(this.div.boundary, "portrait");
+
+			u.rc(this.div.boundary, "landscape");
+			u.rc(this.div.boundary, "all");
+
+			u.e.setDragBoundaries(this.div.dragme, this.div.boundary);
+			u.e.setDragPosition(this.div.dragme, 0, 0);
+		}
+
+		var landscape = u.qs("li.landscape", div);
+		landscape.div = div;
+		u.ce(landscape);
+		landscape.clicked = function() {
+			u.ac(this.div.boundary, "landscape");
+
+			u.rc(this.div.boundary, "portrait");
+			u.rc(this.div.boundary, "all");
+
+			u.e.setDragBoundaries(this.div.dragme, this.div.boundary);
+			u.e.setDragPosition(this.div.dragme, 0, 0);
+		}
+
+		var all = u.qs("li.all", div);
+		all.div = div;
+		u.ce(all);
+		all.clicked = function() {
+			u.ac(this.div.boundary, "all");
+
+			u.rc(this.div.boundary, "landscape");
+			u.rc(this.div.boundary, "portrait");
+			
+			u.e.setDragBoundaries(this.div.dragme, this.div.boundary);
+			u.e.setDragPosition(this.div.dragme, 0, 0);
+		}
+
+		var no = u.qs("li.no", div);
+		no.div = div;
+		u.ce(no);
+		no.clicked = function() {
+			u.rc(this.div.boundary, "landscape");
+			u.rc(this.div.boundary, "portrait");
+			u.rc(this.div.boundary, "all");
+
+			u.e.setDragBoundaries(this.div.dragme, this.div.boundary);
+			u.e.setDragPosition(this.div.dragme, 0, 0);
+		}
+
+
+		div.dragme.ready = function(event) {
+			this.div.addDebug(this.className + ": ready ("+this._x+", "+this._y+")");
+		}
+
+		div.dragme.picked = function(event) {
+			this.div.addDebug(this.className + ": picked");
+		}
+		div.dragme.moved = function(event) {
+			this.div.addDebug(this.className + ": moved ("+this._x+", "+this._y+")");
+		}
+		div.dragme.dropped = function(event) {
+			this.div.addDebug(this.className + ": dropped");
+		}
+
+		// u.e.drag(div.dragme, [0, div.boundary.offsetHeight - div.dragme.offsetHeight, div.boundary.offsetWidth, div.boundary.offsetHeight], {"strict":false});
+
+		u.e.drag(div.dragme, div.boundary, {"strict":false, "overflow":"scroll"});
+
+	}
+
+}
