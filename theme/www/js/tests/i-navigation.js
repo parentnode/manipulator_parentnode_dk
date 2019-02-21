@@ -95,7 +95,7 @@ Util.Objects["navigation"] = new function() {
 		for(i = 0; link = links[i]; i++) {
 			u.ce(link);
 			link.clicked = function() {
-				u.h.navigate(this.url, this);
+				u.h.navigate(this.url, this, u.cv(this, "silent"));
 			}
 		}
 

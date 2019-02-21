@@ -240,6 +240,7 @@ u.h.removeEvent(node, {"callback":"urlChanged"});</code>
 								Util.History.navigate(
 									<span class="type">String</span> <span class="var">url</span> 
 									[, <span class="type">Node</span> <span class="var">node</span> ]
+									[, <span class="type">Boolean</span> <span class="var">silent</span> ]
 								);
 							</dd>
 						</dl>
@@ -248,7 +249,8 @@ u.h.removeEvent(node, {"callback":"urlChanged"});</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Force browser Location update and invoke all registered eventlisteners, passing the new location url.
+							Force browser Location update and invoke all registered eventlisteners, passing the new location url –
+							unless the silent parameter is true, in which case no callback are made.
 						</p>
 					</div>
 
@@ -266,6 +268,12 @@ u.h.removeEvent(node, {"callback":"urlChanged"});</code>
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> Node associated with the change 
+								</div>
+							</dd>
+							<dt><span class="var">silent</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Boolean</span> Default false. Set to true to skip callbacks. 
 								</div>
 							</dd>
 						</dl>

@@ -49,7 +49,7 @@ Util.Objects["callbacks"] = new function() {
 
 
 		// CHAINED CALLBACK
-		div.e1 = u.ae(div, "div", {"class":"e1 testfailed", "html":"node.transitioned (chained): waiting"});
+		div.e1 = u.ae(div, "div", {"class":"e1 testfailed", "html":"node.transitioned (chained using callback): waiting"});
 		div.e1.called_back = 0;
 		div.e1.step1 = function(event) {
 			this.called_back++;
@@ -60,20 +60,20 @@ Util.Objects["callbacks"] = new function() {
 		div.e1.step2 = function(event) {
 			this.called_back++;
 
-			u.a.transition(this, "all 0.2s ease-in", "step3");
-			u.a.translate(div.e1, 200, 0);
+			u.a.transition(this, "all 0.2s ease-in", this.step3);
+			u.a.translate(this, 200, 0);
 		}
 		div.e1.step3 = function(event) {
 			this.called_back++;
 
 			u.a.transition(this, "all 0.2s ease-out", "step4");
-			u.a.translate(div.e1, 190, 0);
+			u.a.translate(this, 190, 0);
 		}
 		div.e1.step4 = function(event) {
 			this.called_back++;
 
 			u.a.transition(this, "all 0.2s ease-in", "step5");
-			u.a.translate(div.e1, 200, 0);
+			u.a.translate(this, 200, 0);
 		}
 		div.e1.step5 = function(event) {
 			this.called_back++;
@@ -81,15 +81,14 @@ Util.Objects["callbacks"] = new function() {
 				if(
 					this.called_back == 5 &&
 					checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 0px, 0px)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
-					checkTransition(this) &&
-					!this.step5
+					checkTransition(this)
 				) {
 					u.tc(this, "testfailed", "testpassed");
 					this.innerHTML = this.innerHTML.replace("waiting", "correct");
 				}
 			}
 			u.a.transition(this, "all 0.2s ease-in-out 0.5s");
-			u.a.translate(div.e1, 0, 0);
+			u.a.translate(this, 0, 0);
 		}
 
 		// start chain
@@ -98,6 +97,58 @@ Util.Objects["callbacks"] = new function() {
 		u.a.translate(div.e1, 200, 0);
 
 
+
+		// CHAINED TRANSITIONED
+		div.e2 = u.ae(div, "div", {"class":"e2 testfailed", "html":"node.transitioned (chained using transitioned): waiting"});
+		div.e2.called_back = 0;
+		div.e2.transitioned = function(event) {
+			this.called_back++;
+
+
+			this.transitioned = function(event) {
+				this.called_back++;
+
+				this.transitioned = function(event) {
+					this.called_back++;
+
+					this.transitioned = function(event) {
+						this.called_back++;
+
+						this.transitioned = function(event) {
+							this.called_back++;
+							this.transitioned = function() {
+								if(
+									this.called_back == 5 &&
+									checkValues(this, "transform", ["matrix(1, 0, 0, 1, 0, 0)","matrix(1, 0, 0, 1, 0px, 0px)","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)"]) &&
+									checkTransition(this)
+								) {
+									u.tc(this, "testfailed", "testpassed");
+									this.innerHTML = this.innerHTML.replace("waiting", "correct");
+								}
+							}
+							u.a.transition(this, "all 0.2s ease-in-out 0.5s");
+							u.a.translate(this, 0, 0);
+						}
+						u.a.transition(this, "all 0.2s ease-in");
+						u.a.translate(this, 200, 0);
+					}
+					u.a.transition(this, "all 0.2s ease-out");
+					u.a.translate(this, 190, 0);
+				}
+				u.a.transition(this, "all 0.2s ease-in");
+				u.a.translate(this, 200, 0);
+			}
+
+			u.a.transition(this, "all 0.2s ease-out");
+			u.a.translate(this, 180, 0);
+
+		}
+
+		// start chain
+		u.a.translate(div.e2, 0, 0);
+		u.a.transition(div.e2, "all 0.5s ease-in");
+		u.a.translate(div.e2, 200, 0);
+		
 
 		// CHAINED CALLBACK WITH MULTIPLE TRANSITIONS
 		// div.e2 = u.ae(div, "div", {"class":"e2", "html":"chained callback with multiple transitions (not finished)"});
@@ -150,6 +201,26 @@ Util.Objects["callbacks"] = new function() {
 		// u.a.setOpacity(div.e2, 1);
 
 
+		// U.ASS with transition
+		div.e4 = u.ae(div, "div", {"class":"e4 testfailed", "html":"node.transitioned (u.ass): waiting"});
+		div.e4.transitioned = function(event) {
+			if(
+				checkValues(this, "opacity", [1]) &&
+				checkTransition(this)
+			) {
+				u.tc(this, "testfailed", "testpassed");
+				this.innerHTML = this.innerHTML.replace("waiting", "correct");
+			}
+		}
+
+		// start chain
+		u.ass(div.e4, {
+			opacity: 0,
+		});
+		u.ass(div.e4, {
+			transition: "all 1s ease-in",
+			opacity: 1,
+		});
 	}
 }
 
