@@ -73,7 +73,7 @@
 										<dt><span class="value">Node</span></dt>
 										<dd>Node used as boundaries</dd>
 										<dt><span class="value">Array</span></dt>
-										<dd>Array containing left, top, righ, bottom coordinates to be used as boundaries</dd>
+										<dd>Array containing left, top, right, bottom coordinates to be used as boundaries</dd>
 									</dl>
 								</div>
 							</dd>
@@ -88,13 +88,17 @@
 									<dl class="options">
 										<!-- specific options -->
 										<dt><span class="value">strict</span></dt>
-										<dd>Default true, Node will follow mouse strictly. If false, node will be projected to end coordinates based on drag speed.</dd>
+										<dd>Default <span class="value">true</span>, Node will follow mouse strictly. If false, node will be projected to end coordinates based on drag speed.</dd>
+										<dt><span class="value">overflow</span></dt>
+										<dd>Default <span class="value">false</span>, Boundaries state outer moving limit. If set to <span class="value">scroll</span>, node will be perceived as a scrollable element – and dragging will only be applied if the draggable element is bigger than the boundaries.</dd>
 										<dt><span class="value">elastica</span></dt>
 										<dd>Elastic boundaries allowing you to drag node over boundaries and snapping back on drop</dd>
 										<dt><span class="value">dropout</span></dt>
 										<dd>Drop node if mouseout event occurs while dragging</dd>
 										<dt><span class="value">show_bounds</span></dt>
 										<dd>Show boundaries - for debugging your boundaries</dd>
+										<dt><span class="value">ready</span></dt>
+										<dd>ready event custom callback function name</dd>
 										<dt><span class="value">picked</span></dt>
 										<dd>picked event custom callback function name</dd>
 										<dt><span class="value">moved</span></dt>
@@ -127,6 +131,8 @@
 					<div class="callbacks">
 						<h4>Callbacks</h4>
 						<dl class="callbacks">
+							<dt>node.ready(event)</dt>
+							<dd>when drag options are setup up</dd>
 							<dt>node.picked(event)</dt>
 							<dd>when mousedown or touchstart event occurs</dd>
 							<dt>node.moved(event)</dt>
@@ -165,6 +171,20 @@
 	}
 &lt;/script&gt;</code>
 							<p>Enable dragging of div.node inside div.scene.</p>
+						</div>
+						
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;node&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var scene = u.querySelector(".scene");
+	var node = u.querySelector(".node");
+
+	u.e.drag(node, scene, {"overflow":"scroll"});
+&lt;/script&gt;</code>
+							<p>Enable scrolling of div.node inside div.scene – if node is larger than scene.</p>
 						</div>
 					</div>
 
@@ -547,6 +567,193 @@
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Events.setDragBoundaries">
+				<div class="header">
+					<h3>Util.Events.setDragBoundaries</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Events.setDragBoundaries</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.e.setDragBoundaries</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Events.setDragBoundaries(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">Mixed</span> <span class="var">boundaries</span>
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Set drag boundaries for node. This can be used to update drag boundaries if conditions change during user interaction.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to set boundaries for
+								</div>
+							</dd>
+							<dt><span class="var">boundaries</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Mixed</span> Array or Node to use as drag boundaries
+								</div>
+								<!-- optional details -->
+								<div class="details">
+									<!-- write parameter details -->
+									<h5>Options</h5>
+									<dl class="options">
+										<!-- specific options -->
+										<dt><span class="value">Node</span></dt>
+										<dd>Node used as boundaries</dd>
+										<dt><span class="value">Array</span></dt>
+										<dd>Array containing left, top, right, bottom coordinates to be used as boundaries</dd>
+									</dl>
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>&lt;div class=&quot;scene&quot;&gt;
+	&lt;div class=&quot;node&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var scene = u.querySelector(".scene");
+	var node = u.querySelector(".node");
+
+	u.e.setDragBoundaries(node, scene);
+&lt;/script&gt;</code>
+							<p>Update drag boundaries for <span class="var">node</span>, using curent size of <span class="var">scene</span>.</p>
+						</div>
+
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>document.constructor</li>
+								<li>document.constructor.toString</li>
+								<li>String.match</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<p>none</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="function" id="Util.Events.setDragPosition">
+				<div class="header">
+					<h3>Util.Events.setDragPosition</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.Events.setDragPosition</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.e.setDragPosition</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Void</span> = 
+								Util.Events.setDragPosition(
+									<span class="type">Node</span> <span class="var">node</span>, 
+									<span class="type">Integer</span> <span class="var">x</span>, 
+									<span class="type">Integer</span> <span class="var">y</span>
+								);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>Set drag position for node. This can be used to set (or reset) the current position of <span class="var">node</span>.</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to set boundaries for
+								</div>
+							</dd>
+							<dt><span class="var">x</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> x-coordinate to move node to
+								</div>
+							</dd>
+							<dt><span class="var">y</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Integer</span> y-coordinate to move node to
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p><span class="type">Void</span></p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>none</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.a.translate</li>
+							</ul>
 						</div>
 
 					</div>
