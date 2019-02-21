@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-sanctumananda Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-02-21 14:28:13
+js-merged @ 2019-02-21 17:32:12
 */
 
 /*seg_smartphone_include.js*/
@@ -232,12 +232,17 @@ Util.Animation = u.a = new function() {
 		return this._transition_end_event_name;
 	}
 	this._transitioned = function(event) {
-		u.e.removeEvent(event.target, u.a.transitionEndEventName(), u.a._transitioned);
-		u.a.transition(event.target, "none");
-		if(event.target == this && fun(this.transitioned)) {
-			this.transitioned(event);
-			this.transitioned = null;
+		if(event.target == this) {
+			u.e.removeEvent(event.target, u.a.transitionEndEventName(), u.a._transitioned);
+			u.a.transition(event.target, "none");
+			if(fun(this.transitioned)) {
+				this.transitioned(event);
+				this.transitioned = null;
+			}
 		}
+		// 
+		// 
+		// 
 	}
 	this.removeTransform = function(node) {
 		u.as(node, "transform", "none");
