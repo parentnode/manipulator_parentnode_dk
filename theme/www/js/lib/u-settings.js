@@ -3,6 +3,7 @@ u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork
 
 u.ga_account = 'UA-49740096-1';
 u.ga_domain = 'manipulator.parentnode.dk';
+u.gapi_key = "AIzaSyAVqnYpqFln-qAYsp5rkEGs84mrhmGQB_I";
 
 // TODO: move to txt array
 u.translations = {};
