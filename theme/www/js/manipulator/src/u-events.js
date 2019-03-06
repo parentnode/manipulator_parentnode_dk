@@ -18,7 +18,7 @@ Util.Events = u.e = new function() {
 	// Windows with touch screen has dual input and no event bubble between types
 
 	// auto-choose default event type
-	// support for dual input sources
+	// support for dual input sources on windows only (everywhere else native implementation handles dual support)
     if (navigator.userAgent.match(/Windows/i) && ((obj(document.ontouchmove) && obj(document.ontouchmove)) || (fun(document.ontouchmove) && fun(document.ontouchmove)))) {
         this.event_support = "multi";
     }
@@ -340,7 +340,7 @@ Util.Events = u.e = new function() {
 		// only act on left click (or equivalent)
 		// button property is 0 for left click - also works as fallback support
 		if(!event.button) {
-			u.bug("left click:", this);
+			// u.bug("left click:", this);
 
 			// ordinary click events
 			if(this.e_click || this.e_dblclick || this.e_hold) {
@@ -405,7 +405,7 @@ Util.Events = u.e = new function() {
 
 		// Right click
 		else if(event.button === 2) {
-			u.bug("right click:", this);
+			// u.bug("right click:", this);
 
 			// listning for right click
 			if(this.e_rightclick) {
