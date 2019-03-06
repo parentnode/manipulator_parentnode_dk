@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
-asset-builder @ 2019-01-09 11:08:40
+asset-builder @ 2019-03-06 18:14:26
 */
 
 /*seg_mobile_include.js*/
@@ -3412,6 +3412,7 @@ u.site_name = "Manipulator";
 u.github_fork = {"url":"https://github.com/parentnode/manipulator", "text":"Fork me on GitHub"};
 u.ga_account = 'UA-49740096-1';
 u.ga_domain = 'manipulator.parentnode.dk';
+u.gapi_key = "AIzaSyAVqnYpqFln-qAYsp5rkEGs84mrhmGQB_I";
 u.translations = {};
 u.translations["en"] = {};
 u.translations["en"]["build-headline"] = "Build a Manipulator bundle now";
