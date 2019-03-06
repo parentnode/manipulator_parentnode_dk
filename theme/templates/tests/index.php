@@ -51,6 +51,8 @@
 	<h2>Speed/performance</h2>
 	<ul class="other">
 		<li><a href="/tests/u-speed-functions">function declarations</a></li>
+		<li><a href="/tests/u-speed-node_contains">node contains</a></li>
+		<li><a href="/tests/u-speed-for_loop">for loops</a></li>
 	</ul>
 
 	<!--h2>Missing tests</h2>

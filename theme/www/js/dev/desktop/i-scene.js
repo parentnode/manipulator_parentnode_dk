@@ -4,18 +4,18 @@ Util.Objects["scene"] = new function() {
 		
 
 		scene.resized = function() {
-//			u.bug("scene.resized:" + u.nodeId(this));
+			// u.bug("scene.resized:", this);
 
 			// refresh dom
 			//this.offsetHeight;
 		}
 
 		scene.scrolled = function() {
-//			u.bug("scrolled:" + u.nodeId(this))
+			// u.bug("scrolled:", this);
 		}
 
 		scene.ready = function() {
-//			u.bug("scene.ready:" + u.nodeId(this));
+			// u.bug("scene.ready:", this);
 
 			page.cN.scene = this;
 
