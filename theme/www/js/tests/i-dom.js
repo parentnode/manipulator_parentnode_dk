@@ -231,11 +231,12 @@ Util.Objects["dom"] = new function() {
 		node = u.appendElement(div, "div", {"html":"u.setClass: error"});
 		node.className = "before";
 		svg = u.appendElement(div, "svg");
+		svg.className.baseVal = "before";
 
 		var old_html_class = u.setClass(node, "test_headline");
-		var old_svg_class = u.setClass(svg, "before");
+		var old_svg_class = u.setClass(svg, "test_headline");
 
-		if(node.className == "test_headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "before")) {
+		if(node.className == "test_headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline")) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.setClass: correct"});
 			div.test_results["u.setClass"] = true;
 		}
@@ -251,17 +252,17 @@ Util.Objects["dom"] = new function() {
 		svg.className.baseVal = "test_headline type1";
 
 		if(
-			(u.hasClass(svg, "test_headline") == true || typeof(SVGElement) == "undefined") && 
-			(u.hasClass(svg, "headline") == false || typeof(SVGElement) == "undefined") && 
-			(u.hasClass(svg, "type[0-1]") == true || typeof(SVGElement) == "undefined") && 
-			(u.hasClass(svg, "type[2-9]") == false || typeof(SVGElement) == "undefined") && 
+			(u.hasClass(svg, "test_headline") == true || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "headline") == false || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "type[0-1]") == true || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "type[2-9]") == false || typeof(SVGElement) == "undefined") &&
 
-			u.hasClass(node, "headline") == false && 
-			u.hasClass(node, "test|headline") == false && 
-			u.hasClass(node, "test_headline|fisk") == true && 
-			u.hasClass(node, "test_headline") == true && 
-			u.hasClass(node, "test_headline2") == false && 
-			u.hasClass(node, "2test_headline") == false && 
+			u.hasClass(node, "headline") == false &&
+			u.hasClass(node, "test|headline") == false &&
+			u.hasClass(node, "test_headline|fisk") == true &&
+			u.hasClass(node, "test_headline") == true &&
+			u.hasClass(node, "test_headline2") == false &&
+			u.hasClass(node, "2test_headline") == false &&
 			u.hasClass(node, "test|type[0-1]") == true &&
 			u.hasClass(node, "type[0-1]") == true &&
 			u.hasClass(node, "type[2-9]") == false
@@ -284,7 +285,6 @@ Util.Objects["dom"] = new function() {
 
 		u.addClass(svg, "test");
 		u.addClass(svg, "test1");
-		// u.addClass(svg, "hej");
 
 		if(node.className == "test_headline headline:example headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test test1")) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.addClass: correct"});
@@ -303,8 +303,8 @@ Util.Objects["dom"] = new function() {
 		u.removeClass(node, "bye|test|farewell|later");
 		u.removeClass(node, "test\:[0-2]+");
 
-		u.removeClass(svg, "test[0-1]+");
-		u.removeClass(svg, "type[2-9]");
+		u.removeClass(svg, "test[0-1]+", true);
+		u.removeClass(svg, "type[2-9]+", true);
 
 		if(node.className == "test_headline headline:example test:3 test1 my:test" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test")) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.removeClass: correct"});
@@ -318,11 +318,13 @@ Util.Objects["dom"] = new function() {
 
 		// toggleClass
 		node = u.appendElement(div, "div", {"html":"u.toggleClass: error"});
-		node.className = "test_headline";
-		svg.className.baseVal = "test_headline";
+		u.setClass(node, "test_headline");
+		u.setClass(svg, "test_headline");
 
-		u.toggleClass(node, "test_headline", old_html_class);
-		u.toggleClass(svg, "test_headline", old_svg_class);
+
+		u.toggleClass(node, "test_headline", old_html_class, true);
+		u.toggleClass(svg, "test_headline", old_svg_class, true);
+
 		if(node.className == old_html_class && (typeof(SVGElement) == "undefined" || svg.className.baseVal == old_svg_class)) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.toggleClass: correct"});
 			div.test_results["u.toggleClass"] = true;
@@ -403,7 +405,7 @@ Util.Objects["dom"] = new function() {
 
 		// contains
 		node = u.appendElement(div, "div", {"html":"u.contains: error"});
-		if(u.contains(node, div) && !u.contains(div, node)) {
+		if(u.contains(div, node) && !u.contains(node, div)) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.contains: correct"});
 			div.test_results["u.nw"] = true;
 		}
@@ -415,7 +417,7 @@ Util.Objects["dom"] = new function() {
 
 		// containsOrIs
 		node = u.appendElement(div, "div", {"html":"u.containsOrIs: error"});
-		if(u.containsOrIs(node, div) && !u.containsOrIs(div, node) && u.containsOrIs(div, div)) {
+		if(u.containsOrIs(div, node) && !u.containsOrIs(node, div) && u.containsOrIs(div, div)) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.containsOrIs: correct"});
 			div.test_results["u.nw"] = true;
 		}
