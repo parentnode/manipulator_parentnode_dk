@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-sanctumananda Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-03-04 12:43:47
+js-merged @ 2019-03-05 14:26:28
 */
 
 /*seg_smartphone_include.js*/
@@ -2387,8 +2387,8 @@ Util.validateResponse = function(HTTPRequest){
 
 /*u-scrollto.js*/
 u.scrollTo = function(node, _options) {
-	node.callback_scroll_to = "scrolledTo";
-	node.callback_scroll_cancelled = "scrolledToCancelled";
+	node._callback_scroll_to = "scrolledTo";
+	node._callback_scroll_cancelled = "scrolledToCancelled";
 	var offset_y = 0;
 	var offset_x = 0;
 	var scroll_to_x = 0;
@@ -2399,8 +2399,8 @@ u.scrollTo = function(node, _options) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
-				case "callback"             : node.callback_scroll_to            = _options[_argument]; break;
-				case "callback_cancelled"   : node.callback_scroll_cancelled     = _options[_argument]; break;
+				case "callback"             : node._callback_scroll_to            = _options[_argument]; break;
+				case "callback_cancelled"   : node._callback_scroll_cancelled     = _options[_argument]; break;
 				case "offset_y"             : offset_y                           = _options[_argument]; break;
 				case "offset_x"             : offset_x                           = _options[_argument]; break;
 				case "node"                 : to_node                            = _options[_argument]; break;
@@ -2421,87 +2421,91 @@ u.scrollTo = function(node, _options) {
 	}
 	node._to_x = offset_x ? node._to_x - offset_x : node._to_x;
 	node._to_y = offset_y ? node._to_y - offset_y : node._to_y;
-	if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
-		node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
+	if (Util.support("scrollBehavior")) {
+		var test = node.scrollTo({top:node._to_y, left:node._to_x, behavior: 'smooth'});
 	}
-	if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
-		node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
-	}
-	node._to_x = node._to_x < 0 ? 0 : node._to_x;
-	node._to_y = node._to_y < 0 ? 0 : node._to_y;
-	node._x_scroll_direction = node._to_x - u.scrollX();
-	node._y_scroll_direction = node._to_y - u.scrollY();
-	node._scroll_to_x = u.scrollX();
-	node._scroll_to_y = u.scrollY();
-	node.ignoreWheel = function(event) {
-		u.e.kill(event);
-	}
-	if(node._force_scroll_to) {
-		u.e.addEvent(node, "wheel", node.ignoreWheel);
-	}
-	node.scrollToHandler = function(event) {
-		u.t.resetTimer(this.t_scroll);
-		this.t_scroll = u.t.setTimer(this, this._scrollTo, 25);
-	}
-	u.e.addEvent(node, "scroll", node.scrollToHandler);
-	node.cancelScrollTo = function() {
-		if(!this._force_scroll_to) {
+	else {
+		if(node._to_y > (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH()) {
+			node._to_y = (node == window ? document.body.scrollHeight : node.scrollHeight)-u.browserH();
+		}
+		if(node._to_x > (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW()) {
+			node._to_x = (node == window ? document.body.scrollWidth : node.scrollWidth)-u.browserW();
+		}
+		node._to_x = node._to_x < 0 ? 0 : node._to_x;
+		node._to_y = node._to_y < 0 ? 0 : node._to_y;
+		node._x_scroll_direction = node._to_x - u.scrollX();
+		node._y_scroll_direction = node._to_y - u.scrollY();
+		node._scroll_to_x = u.scrollX();
+		node._scroll_to_y = u.scrollY();
+		node._ignoreWheel = function(event) {
+			u.e.kill(event);
+		}
+		if(node._force_scroll_to) {
+			u.e.addEvent(node, "wheel", node._ignoreWheel);
+		}
+		node._scrollToHandler = function(event) {
 			u.t.resetTimer(this.t_scroll);
-			u.e.removeEvent(this, "scroll", this.scrollToHandler);
+			this.t_scroll = u.t.setTimer(this, this._scrollTo, 25);
+		}
+		node._cancelScrollTo = function() {
+			if(!this._force_scroll_to) {
+				u.t.resetTimer(this.t_scroll);
+				this._scrollTo = null;
+			}
+		}
+		node._scrollToFinished = function() {
+			u.t.resetTimer(this.t_scroll);
+			u.e.removeEvent(this, "wheel", this._ignoreWheel);
 			this._scrollTo = null;
 		}
-	}
-	node.scrollToFinished = function() {
-		u.t.resetTimer(this.t_scroll);
-		u.e.removeEvent(this, "scroll", this.scrollToHandler);
-		u.e.removeEvent(this, "wheel", this.ignoreWheel);
-		this._scrollTo = null;
-	}
-	node.ZoomScrollFix = function(s_x, s_y) {
-		if((s_y == this._scroll_to_y && (s_x == this._scroll_to_x+1 || s_x == this._scroll_to_x-1)) ||	(s_x == this._scroll_to_x && (s_y == this._scroll_to_y+1 || s_y == this._scroll_to_y-1))) {
-			return true;
+		node._ZoomScrollFix = function(s_x, s_y) {
+			if(Math.abs(this._scroll_to_y - s_y) <= 2 && Math.abs(this._scroll_to_x - s_x) <= 2) {
+				return true;
+			}
+			return false;
 		}
-	}
-	node._scrollTo = function(start) {
-		var s_x = u.scrollX();
-		var s_y = u.scrollY();
-		if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this.ZoomScrollFix(s_x, s_y)) {
-			if(this._x_scroll_direction > 0 && this._to_x > s_x) {
-				this._scroll_to_x = Math.ceil(s_x + (this._to_x - s_x)/8);
-			}
-			else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
-				this._scroll_to_x = Math.floor(s_x - (s_x - this._to_x)/8);
-			}
-			else {
-				this._scroll_to_x = this._to_x;
-			}
-			if(this._y_scroll_direction > 0 && this._to_y > s_y) {
-				this._scroll_to_y = Math.ceil(s_y + (this._to_y - s_y)/8);
-			}
-			else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
-				this._scroll_to_y = Math.floor(s_y - (s_y - this._to_y)/8);
-			}
-			else {
-				this._scroll_to_y = this._to_y;
-			}
-			if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
-				this.scrollToFinished();
-				this.scrollTo(this._to_x, this._to_y);
-				if(fun(this[this.callback_scroll_to])) {
-					this[this.callback_scroll_to]();
+		node._scrollTo = function(start) {
+			var s_x = u.scrollX();
+			var s_y = u.scrollY();
+			if((s_y == this._scroll_to_y && s_x == this._scroll_to_x) || this._force_scroll_to || this._ZoomScrollFix(s_x, s_y)) {
+				if(this._x_scroll_direction > 0 && this._to_x > s_x) {
+					this._scroll_to_x = Math.ceil(this._scroll_to_x + (this._to_x - this._scroll_to_x)/6);
 				}
-				return;
+				else if(this._x_scroll_direction < 0 && this._to_x < s_x) {
+					this._scroll_to_x = Math.floor(this._scroll_to_x - (this._scroll_to_x - this._to_x)/6);
+				}
+				else {
+					this._scroll_to_x = this._to_x;
+				}
+				if(this._y_scroll_direction > 0 && this._to_y > s_y) {
+					this._scroll_to_y = Math.ceil(this._scroll_to_y + (this._to_y - this._scroll_to_y)/6);
+				}
+				else if(this._y_scroll_direction < 0 && this._to_y < s_y) {
+					this._scroll_to_y = Math.floor(this._scroll_to_y - (this._scroll_to_y - this._to_y)/6);
+				}
+				else {
+					this._scroll_to_y = this._to_y;
+				}
+				if(this._scroll_to_x == this._to_x && this._scroll_to_y == this._to_y) {
+					this._scrollToFinished();
+					this.scrollTo(this._to_x, this._to_y);
+					if(fun(this[this._callback_scroll_to])) {
+						this[this._callback_scroll_to]();
+					}
+					return;
+				}
+				this.scrollTo(this._scroll_to_x, this._scroll_to_y);
+				this._scrollToHandler();
 			}
-			this.scrollTo(this._scroll_to_x, this._scroll_to_y);
+			else {
+				this._cancelScrollTo();
+				if(fun(this[this._callback_scroll_cancelled])) {
+					this[this._callback_scroll_cancelled]();
+				}
+			}	
 		}
-		else {
-			this.cancelScrollTo();
-			if(fun(this[this.callback_scroll_cancelled])) {
-				this[this.callback_scroll_cancelled]();
-			}
-		}	
+		node._scrollTo();
 	}
-	node._scrollTo();
 }
 
 /*u-string.js*/
