@@ -36,6 +36,7 @@
 		<li class="test"><a href="/tests/u-flash">Flash</a></li>
 		<li class="test"><a href="/tests/u-form">Form</a></li>
 		<li class="test"><a href="/tests/u-googleanalytics">Google Analytics</a></li>
+		<li class="test"><a href="/tests/u-googlemaps">Google Maps</a></li>
 		<li class="test"><a href="/tests/u-history">History</a></li>
 		<li class="test"><a href="/tests/u-keyboard">Keyboard</a></li>
 		<li class="test"><a href="/tests/u-media">Media</a></li>
@@ -62,7 +63,6 @@
 	<h2>Beta tests</h2>
 	<ul class="beta">
 		<li class="test"><a href="/tests/u-fontsready">* Fontsready (started)</a></li>
-		<li class="test"><a href="/tests/u-gridmaster">* Googlemaps (started)</a></li>
 		<li class="test"><a href="/tests/u-gridmaster">* Gridmaster (started)</a></li>
 		<li class="test"><a href="/tests/u-sequence">* Sequence (not started)</a></li>
 		<li class="test"><a href="/tests/u-animation-to">* Animation-to (started)</a></li>
