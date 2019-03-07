@@ -138,7 +138,13 @@
 				<dt>desktop</dt>
 				<dd><span class="file">u-.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-.js</span></dd>
+
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -147,10 +153,13 @@
 				<dt>tablet</dt>
 				<dd><span class="file">u-.js</span></dd>
 
+				<dt>tablet_light</dt>
+				<dd><span class="file">u-.js</span></dd>
+
 				<dt>tv</dt>
 				<dd><span class="file">u-.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-.js</span></dd>
 	
 				<dt>mobile</dt>
