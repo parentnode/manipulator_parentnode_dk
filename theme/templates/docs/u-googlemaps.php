@@ -154,7 +154,12 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>for ... in</li>
+								<li>switch ... case</li>
+								<li>while ...</li>
+								<li>google.maps.LatLng (Google Maps API)</li>
+								<li>google.maps.Map (Google Maps API)</li>
+								<li>google.maps.event.addListener (Google Maps API)</li>
 							</ul>
 						</div>
 
@@ -162,7 +167,7 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>Util.appendElement</li>
 							</ul>
 						</div>
 
@@ -289,7 +294,12 @@ div.loaded = function() {
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>for ... in</li>
+								<li>switch ... case</li>
+								<li>for ... in</li>
+								<li>google.maps.Marker (Google Maps API)</li>
+								<li>google.maps.LatLng (Google Maps API)</li>
+								<li>google.maps.event.addListener (Google Maps API)</li>
 							</ul>
 						</div>
 
@@ -297,7 +307,7 @@ div.loaded = function() {
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -400,6 +410,7 @@ div.loaded = function() {
 }
 							</code>
 						</div>
+					</div>
 
 					<div class="uses">
 						<h4>Uses</h4>
@@ -408,7 +419,8 @@ div.loaded = function() {
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>for ... in</li>
+								<li>switch ... case</li>
 							</ul>
 						</div>
 
@@ -416,7 +428,8 @@ div.loaded = function() {
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>Util.randomString</li>
+								<li>Util.Timer.setTimer</li>
 							</ul>
 						</div>
 
@@ -482,6 +495,7 @@ div.loaded = function() {
 }
 							</code>
 						</div>
+					</div>
 
 					<div class="uses">
 						<h4>Uses</h4>
@@ -490,7 +504,8 @@ div.loaded = function() {
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>google.maps.InfoWindow (Google Maps API)</li>
+								<li>google.maps.event.addListener (Google Maps API)</li>
 							</ul>
 						</div>
 
@@ -498,7 +513,7 @@ div.loaded = function() {
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -508,7 +523,6 @@ div.loaded = function() {
 			</div>
 
 
-						
 			<div class="function" id="Util.googlemaps.showInfoWindow">
 				<div class="header">
 					<h3>Util.googlemaps.showInfoWindow</h3>
@@ -587,6 +601,7 @@ div.loaded = function() {
 }
 							</code>
 						</div>
+					</div>
 
 					<div class="uses">
 						<h4>Uses</h4>
@@ -595,7 +610,7 @@ div.loaded = function() {
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -603,7 +618,7 @@ div.loaded = function() {
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -675,6 +690,7 @@ div.loaded = function() {
 }
 							</code>
 						</div>
+					</div>
 
 					<div class="uses">
 						<h4>Uses</h4>
@@ -683,7 +699,7 @@ div.loaded = function() {
 							<!-- list javascript functions used by function -->
 							<h5>JavaScript</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -691,7 +707,7 @@ div.loaded = function() {
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
-								<li>_function_</li>
+								<li>None</li>
 							</ul>
 						</div>
 
@@ -743,31 +759,37 @@ div.loaded = function() {
 				<!-- specify which files are required for which segments -->
 				<!-- add todo class if segment is not tested yet -->
 				<dt>desktop</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span></dd>
 
-				<dt>desktop_ie</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span></dd>
+
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span>+ <span class="file">u-dom_ie10.js</span></dd>
+
+				<dt>desktop_ie9</dt>
+				<dd>Not supported</dd>
 
 				<dt>desktop_light</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dd>Not supported</dd>
 
 				<dt>tablet</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span></dd>
+
+				<dt>tablet_light</dt>
+				<dd>Not supported</dd>
 
 				<dt>tv</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dd>Not tested</dd>
 
-				<dt>mobile_touch</dt>
-				<dd><span class="file">u-.js</span></dd>
+				<dt>smartphone</dt>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span></dd>
 	
 				<dt>mobile</dt>
-				<dd>not tested</dd>
+				<dd>Not supported</dd>
 	
 				<dt>mobile_light</dt>
-				<dd>not tested</dd>
-
-				<dt>basic</dt>
-				<dd>not supported</dd>
+				<dd>Not supported</dd>
 			</dl>
 		</div>
 	</div>
