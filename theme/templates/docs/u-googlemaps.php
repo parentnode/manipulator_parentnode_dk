@@ -765,7 +765,7 @@ div.loaded = function() {
 				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span></dd>
 
 				<dt>desktop_ie10</dt>
-				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span>+ <span class="file">u-dom_ie10.js</span></dd>
+				<dd><span class="file">u-string.js</span> + <span class="file">u-timer.js</span> + <span class="file">u-dom.js</span> + <span class="file">u-dom_ie.js</span></dd>
 
 				<dt>desktop_ie9</dt>
 				<dd>Not supported</dd>
