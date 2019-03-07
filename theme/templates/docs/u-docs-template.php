@@ -167,9 +167,6 @@
 	
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
-
-				<dt>basic</dt>
-				<dd>not supported</dd>
 			</dl>
 		</div>
 	</div>
