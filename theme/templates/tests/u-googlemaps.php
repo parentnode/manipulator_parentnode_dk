@@ -23,8 +23,9 @@ $this->headerIncludes(array(
 	<div class="map i:googlemaps"></div>
 
 	<h2>Customized map</h2>
-	<p>Map has been with initialized options and custom removable marker (click). <br>
-		The textbox above the marker is an infowindow, which should hide on marker.mouseover and reappear on marker.mouseout.
+	<p>
+		Map has been with initialized options and custom removable marker (click). <br>
+		The textbox above the marker is an infowindow, which should become hidden on marker.mouseover and reappear on marker.mouseout. <br>
 	</p>
 	<p>Below is a list of options all have been set with an options object:</p>
 	<ul>

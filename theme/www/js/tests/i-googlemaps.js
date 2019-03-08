@@ -80,11 +80,11 @@ Util.Objects["googlemapsAdvanced"] = new function() {
 			u.bug("map loaded", this);
 
 			// Create marker
-			var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179], {"info":"hey"});
+			var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179], {"info":"test", "icon":"/img/logo-small.png"});
 
 			// Create info window
 			u.googlemaps.infoWindow(div)
-			u.googlemaps.showInfoWindow(div, marker, "parentNode");
+			u.googlemaps.showInfoWindow(div, marker, "<h3>Header</h3><p>Paragraph</p>");
 
 			// Marker click handler
 			u.e.addEvent(marker, "click", marker.clicked);

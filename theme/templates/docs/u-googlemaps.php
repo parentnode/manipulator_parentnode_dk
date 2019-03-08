@@ -76,7 +76,7 @@
 										<dd>Default <span class="value">10</span>, Specifies which zoom level to start at</dd>
 
 										<dt><span class="value">scrollwheel</span></dt>
-										<dd>Default <span class="value">true</span>, Disable or enable scrollwheel funcionality</dd>
+										<dd>Default <span class="value">true</span>, Disable or enable scrollwheel zoom</dd>
 
 										<dt><span class="value">streetview</span></dt>
 										<dd>Default <span class="value">false</span>, Disable or enable streetview funcionality</dd>
@@ -280,7 +280,7 @@ u.googlemaps.map(div, [55.700716,12.44179]);
 
 div.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, 
-		[55.720716, 12.46179], {"icon":custom_icon, "label":"Hello world"}
+		[55.720716, 12.46179], {"icon":/img/custom_icon.png, "label":"Hello world"}
 	);
 }
 							</code>
@@ -570,7 +570,7 @@ div.loaded = function() {
 							<dt><span class="var">content</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">String</span> The content of the infowindow
+									<span class="type">String</span> The content of the infowindow, you can put HTML in here
 								</div>
 							</dd>
 						</dl>
@@ -596,7 +596,7 @@ div.loaded = function() {
 
 	u.ce(marker);
 	marker.clicked = function() {
-		u.googlemaps.showInfoWindow(this.g_map, this, "Hello world");
+		u.googlemaps.showInfoWindow(this.g_map, this, "&lt;h1&gt;Hello world&lt;/h1&gt;&lt;p&gt;I'm alive!&lt;/p&gt;");
 	}
 }
 							</code>
