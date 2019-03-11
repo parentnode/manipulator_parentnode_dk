@@ -105,22 +105,22 @@
 						<div class="example">
 							<p>Default map</p>
 							<code>
-	div.APIloaded = function() {
-		// Invoked when the googlemaps API from google is loaded
-	}
-	div.loaded = function() {
-		// Invoked once the map has been created
-	}
-							
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+map.APIloaded = function() {
+	// Invoked when the googlemaps API from google is loaded
+}
+map.loaded = function() {
+	// Invoked once the map has been created
+}
+
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 							</code>
 						</div>
 
 						<div class="example">
 							<p>Customized map</p>
 							<code>
-var div = u.qs("div");
+var map = u.qs("div");
 var theme = [
 	{
 		"featureType": "all",
@@ -142,7 +142,7 @@ var theme = [
 	}
 ];
 
-u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableUI":true});
+u.googlemaps.map(map, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableUI":true});
 							</code>
 						</div>
 					</div>
@@ -190,7 +190,7 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 							<dt class="name">Name</dt>
 							<dd class="name">Util.googlemaps.addMarker</dd>
 							<dt class="syntax">Syntax</dt>
-							<dd class="syntax"><span class="type">Node</span> = 
+							<dd class="syntax"><span class="type">Object</span> = 
 							Util.googlemaps.addMarker(
 									<span class="type">Node</span> <span class="var">map</span> 
 									, <span class="type">Array</span> <span class="var">coordinates </span>
@@ -202,7 +202,7 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Add marker to a map</p>
+						<p>Add marker to a map, returned object is from Google Maps.</p>
 					</div>
 
 					<div class="parameters">
@@ -253,7 +253,7 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 
 					<div class="return">
 						<h4>Returns</h4>
-						<p><span class="type">Node</span></p>
+						<p><span class="type">Object</span></p>
 					</div>
 
 					<div class="examples">
@@ -262,23 +262,38 @@ u.googlemaps.map(div, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 						<div class="example">
 							<p>Adding a marker</p>
 							<code>
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
-	u.googlemaps.addMarker(this, [55.720716, 12.46179]);
+map.loaded = function() {
+	var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179]);
+
+	marker.clicked() = function() {
+		// Called when clicked
+	}
+
+	marker.entered() = function() {
+		// Called when input hovers over marker
+	}
+
+	marker.exited() = function() {
+		// Called when input leaves marker
+	}
 }
+
+
+
 							</code>
 						</div>
 
 						<div class="example">
 							<p>Adding a customized marker</p>
 							<code>
-var div = u.qs("div");
+var map = u.qs("div");
 var custom_icon = "icon.png";
-u.googlemaps.map(div, [55.700716,12.44179]);
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
+map.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, 
 		[55.720716, 12.46179], {"icon":/img/custom_icon.png, "label":"Hello world"}
 	);
@@ -397,13 +412,12 @@ div.loaded = function() {
 						<div class="example">
 							<p>Removing a marker on click</p>
 							<code>
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
+map.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179]);
 
-	u.ce(marker);
 	marker.clicked = function() {
 		u.googlemaps.removeMarker(this.g_map, this);
 	}
@@ -487,10 +501,10 @@ div.loaded = function() {
 
 						<div class="example">
 							<code>
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
+map.loaded = function() {
 	u.googlemaps.infoWindow(this);
 }
 							</code>
@@ -546,7 +560,7 @@ div.loaded = function() {
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Show infowindow above a marker</p>
+						<p>Show infowindow above a marker. An infowindow is a box above a marker containing content.</p>
 					</div>
 
 					<div class="parameters">
@@ -588,13 +602,12 @@ div.loaded = function() {
 						<div class="example">
 							<p>Show infowindow when marker is clicked</p>
 							<code>
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
+map.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179]);
 
-	u.ce(marker);
 	marker.clicked = function() {
 		u.googlemaps.showInfoWindow(this.g_map, this, "&lt;h1&gt;Hello world&lt;/h1&gt;&lt;p&gt;I'm alive!&lt;/p&gt;");
 	}
@@ -677,13 +690,12 @@ div.loaded = function() {
 						<div class="example">
 							<p>Hide infowindow when marker is clicked</p>
 							<code>
-var div = u.qs("div");
-u.googlemaps.map(div, [55.700716,12.44179]);
+var map = u.qs("div");
+u.googlemaps.map(map, [55.700716,12.44179]);
 
-div.loaded = function() {
+map.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179]);
 
-	u.ce(marker);
 	marker.clicked = function() {
 		u.googlemaps.hideInfoWindow(this.g_map, this, "Hello world");
 	}
