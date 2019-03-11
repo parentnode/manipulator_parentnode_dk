@@ -235,9 +235,6 @@ u.googlemaps.map(map, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 									<h5>Options</h5>
 									<dl class="options">
 										<!-- specific options -->
-										<dt><span class="value">info</span></dt>
-										<dd>Default <span class="value">false</span>, ???</dd>
-
 										<dt><span class="value">icon</span></dt>
 										<dd>Add a custom icon via URL</dd>
 
