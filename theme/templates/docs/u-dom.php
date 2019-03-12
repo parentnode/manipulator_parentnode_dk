@@ -2875,7 +2875,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							True if <span class="var">node</span> is same node or a child of <span class="var">scope</span> - or false if not.
 						</p>
@@ -2887,7 +2887,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

@@ -95,7 +95,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -148,7 +148,7 @@ u.googlemaps.map(map, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -249,7 +249,7 @@ u.googlemaps.map(map, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Object</span></p>
 					</div>
 
@@ -300,7 +300,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -399,7 +399,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -424,7 +424,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -489,7 +489,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -509,7 +509,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -589,7 +589,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -614,7 +614,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -677,7 +677,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -702,7 +702,7 @@ map.loaded = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
