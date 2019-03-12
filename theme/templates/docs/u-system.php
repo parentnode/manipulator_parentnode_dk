@@ -88,7 +88,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							If scope is stated, function returns boolean (true for match, false for mismatch), 
 							if only model is stated function returns version on match, false on mismatch.
@@ -116,7 +116,7 @@
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -179,7 +179,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Boolean</span> Whether the browser supports the CSS-property.</p>
 					</div>
 
@@ -193,7 +193,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -271,7 +271,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Mixed - version number or boolean is current OS matches <span class="var">os</span>.</p>
 					</div>
 
@@ -290,7 +290,7 @@
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

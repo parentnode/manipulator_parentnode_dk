@@ -58,7 +58,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns matching node.</p>
 					</div>
 
@@ -86,7 +86,7 @@ u.querySelector(".link", content_node);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -157,7 +157,7 @@ u.querySelector(".link", content_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns a <span class="type">NodeList</span> containing the nodes that match the specified group of selectors.</p>
 					</div>
 
@@ -177,7 +177,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -249,7 +249,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>First Node which matches the identifier</p>
 					</div>
 
@@ -295,7 +295,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -367,7 +367,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							Returns all elements with matching classname from scope<br/>
 							If no matches, return elements with tagname from scope
@@ -389,7 +389,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -468,7 +468,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>The parentNode of node, matching node_type if specified</p>
 					</div>
 
@@ -506,7 +506,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -583,7 +583,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns previous sibling or false if none is found</p>
 					</div>
 
@@ -620,7 +620,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -697,7 +697,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns next sibling or false if none found</p>
 					</div>
 
@@ -734,7 +734,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -811,7 +811,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns Array of childNodes or false if none found</p>
 					</div>
 
@@ -834,7 +834,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -937,7 +937,7 @@ u.querySelectorAll("li.item", list_node);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns the added <span class="type">Node</span></p>
 					</div>
 
@@ -975,7 +975,7 @@ u.ae(header, nav);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1078,7 +1078,7 @@ u.ae(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Returns the inserted <span class="type">Node</span></p>
 					</div>
 
@@ -1115,7 +1115,7 @@ u.ie(header, nav);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1210,7 +1210,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							The wrapping <span class="type">Node</span>
 						</p>
@@ -1242,7 +1242,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1337,7 +1337,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							The wrapping <span class="type">Node</span>
 						</p>
@@ -1369,7 +1369,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1430,7 +1430,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							The textContent of the node - equivalent to node.textContent.
 						</p>
@@ -1455,7 +1455,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1553,7 +1553,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>The node</p>
 					</div>
 
@@ -1602,7 +1602,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1681,7 +1681,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>The value of classVar var_name if it exists, else false.</p>
 					</div>
 
@@ -1704,7 +1704,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1774,7 +1774,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>ClassName before update</p>
 					</div>
 
@@ -1800,7 +1800,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1868,7 +1868,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							<span class="var">true</span> if the element has the classname, <span class="var">false</span> if  not
 						</p>
@@ -1929,7 +1929,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2010,7 +2010,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>node className after new <span class="var">classame</span> has been added</p>
 					</div>
 
@@ -2036,7 +2036,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2116,7 +2116,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>The new className of node, after <span class="var">classame</span> has been removed</p>
 					</div>
 
@@ -2160,7 +2160,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2252,7 +2252,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Node classname after toggling classes.</p>
 					</div>
 
@@ -2312,7 +2312,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2415,7 +2415,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							Void - does not return anything, because it is impossible to tell if browser executed the update the given
 							property as expected.
@@ -2440,7 +2440,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2531,7 +2531,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							Void - does not return anything, because it is impossible to tell if browser supports the given 
 							styles.
@@ -2556,7 +2556,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2632,7 +2632,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							The value of the specified property.
 						</p>
@@ -2657,7 +2657,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2720,7 +2720,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							True if <span class="var">node</span> has fixed parent - or false if not.
 						</p>
@@ -2732,7 +2732,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -2801,7 +2801,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not. 
 							It also returns false if node IS scope (as opposed to Node.contains).
@@ -2814,7 +2814,7 @@ u.ie(header, nav);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
