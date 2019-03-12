@@ -3,198 +3,198 @@ Util.Objects["dom"] = new function() {
 
 		div.test_results = {};
 
-		var node, nodes, wrap_node;
+		var node, nodes, wrap_node, svg;
 
 
 		// querySelector
-		if(u.qs("#qstest > h3 span").innerHTML == "querySelector") {
-			u.ac(u.qs("#qstest"), "testpassed");
-			u.qs("#qstest").innerHTML = "u.qs: correct";
-			div.test_results["u.qs"] = true;
+		if(u.querySelector("#qstest > h3 span").innerHTML == "querySelector") {
+			u.addClass(u.querySelector("#qstest"), "testpassed");
+			u.querySelector("#qstest").innerHTML = "u.querySelector: correct";
+			div.test_results["u.querySelector"] = true;
 		}
 		else {
-			u.ac(u.qs("#qstest"), "testpassed");
-			div.test_results["u.qs"] = false;
+			u.addClass(u.querySelector("#qstest"), "testpassed");
+			div.test_results["u.querySelector"] = false;
 		}
 
 
 		// querySelectorAll
-		if(u.qsa("#content #qstest, #content .qsatest").length == 2) {
-			u.ac(u.qsa("#content #qstest, #content .qsatest")[1], "testpassed");
-			u.qsa("#content #qstest, #content .qsatest")[1].innerHTML = "u.qsa: correct";
-			div.test_results["u.qsa"] = true;
+		if(u.querySelectorAll("#content #qstest, #content .qsatest").length == 2) {
+			u.addClass(u.querySelectorAll("#content #qstest, #content .qsatest")[1], "testpassed");
+			u.querySelectorAll("#content #qstest, #content .qsatest")[1].innerHTML = "u.querySelectorAll: correct";
+			div.test_results["u.querySelectorAll"] = true;
 		}
 		else {
-			u.ac(u.qs(".qsatest"), "testfailed");
-			div.test_results["u.qsa"] = false;
+			u.addClass(u.querySelector(".qsatest"), "testfailed");
+			div.test_results["u.querySelectorAll"] = false;
 		}
 
 
 		// getElement
-		if(u.ge("type:1", div).innerHTML == "getElement") {
-			u.ge("type:1", div).parentNode.className = "testpassed";
-			u.ge("type:1", div).parentNode.innerHTML = "u.ge: correct";
-			div.test_results["u.ge"] = true;
+		if(u.getElement("type:1", div).innerHTML == "getElement") {
+			u.getElement("type:1", div).parentNode.className = "testpassed";
+			u.getElement("type:1", div).parentNode.innerHTML = "u.getElement: correct";
+			div.test_results["u.getElement"] = true;
 		}
 		else {
-			u.ac(u.qs(".getest"), "testfailed");
-			div.test_results["u.ge"] = false;
+			u.addClass(u.querySelector(".getest"), "testfailed");
+			div.test_results["u.getElement"] = false;
 		}
 
 
 		// getElements
-		nodes = u.ges("type\:[3-4]", div)
+		nodes = u.getElements("type\:[3-4]", div)
 		if(nodes.length == 2) {
 			nodes[0].className = "testpassed";
-			nodes[0].innerHTML = "u.ges: correct";
-			div.test_results["u.ges"] = true;
+			nodes[0].innerHTML = "u.getElements: correct";
+			div.test_results["u.getElements"] = true;
 		}
 		else {
-			u.ac(u.qs(".gestest"), "testfailed");
-			div.test_results["u.ges"] = false;
+			u.addClass(u.querySelector(".gestest"), "testfailed");
+			div.test_results["u.getElements"] = false;
 		}
 
 
 		// parent node
-		var pn_span = u.qs(".parentnode ul li span", div);
+		var pn_span = u.querySelector(".parentnode ul li span", div);
 		if(
-			"li" == u.nodeId(u.pn(pn_span)).toLowerCase() &&
-			"ul.u2" == u.nodeId(u.pn(pn_span, {"exclude":"li"})).toLowerCase() &&
-			"ul.u1" == u.nodeId(u.pn(pn_span, {"include":"ul.u1"})).toLowerCase() &&
-			u.pn(pn_span, {"include":"div"}).className == "parentnode"
+			(u.parentNode(pn_span).className == "" && u.parentNode(pn_span) == pn_span.parentNode) &&
+			(u.parentNode(pn_span, {"exclude":"li"}).className == "u2" && u.parentNode(pn_span, {"exclude":"li"}) == pn_span.parentNode.parentNode) &&
+			(u.parentNode(pn_span, {"include":"ul.u1"}).className == "u1" && u.parentNode(pn_span, {"include":"ul.u1"}) == pn_span.parentNode.parentNode.parentNode.parentNode) &&
+			u.parentNode(pn_span, {"include":"div"}).className == "parentnode"
 			
 		) {
-			u.pn(u.qs(".parentnode ul li span", div), {"include":"div"}).innerHTML = "u.pn: correct";
-			u.ac(u.qs("div.parentnode"), "testpassed");
-			div.test_results["u.pn"] = true;
+			u.parentNode(u.querySelector(".parentnode ul li span", div), {"include":"div"}).innerHTML = "u.parentNode: correct";
+			u.addClass(u.querySelector("div.parentnode"), "testpassed");
+			div.test_results["u.parentNode"] = true;
 		}
 		else {
-			u.ac(u.qs("div.parentnode"), "testfailed");
-			div.test_results["u.pn"] = false;
+			u.addClass(u.querySelector("div.parentnode"), "testfailed");
+			div.test_results["u.parentNode"] = false;
 		}
 
 
 		// ns + ps
 		// nextSibling
-		var ns_li = u.qs("div.ns .start", div);
-		var ns_div = u.qs("div.ns div.c1", div);
+		var ns_li = u.querySelector("div.ns .start", div);
+		var ns_div = u.querySelector("div.ns div.c1", div);
 		if(
-			"li.nons" == u.nodeId(u.ns(ns_li)).toLowerCase() &&
-			"li.jens" == u.nodeId(u.ns(ns_li, {"exclude":".nons"})).toLowerCase() &&
-			"li.end" == u.nodeId(u.ns(ns_li, {"exclude":".nons","include":".end"})).toLowerCase() &&
-			"span.c1" == u.nodeId(u.ns(ns_div)).toLowerCase() &&
-			"span.c2" == u.nodeId(u.ns(ns_div, {"include":".c2"})).toLowerCase() &&
-			"div.c2" == u.nodeId(u.ns(ns_div, {"exclude":"span"})).toLowerCase() &&
-			"span.c2" == u.nodeId(u.ns(ns_div, {"include":"span.c2"})).toLowerCase()
+			u.nextSibling(ns_li).className == "nons" &&
+			u.nextSibling(ns_li, {"exclude":".nons"}).className == "jens" &&
+			u.nextSibling(ns_li, {"exclude":".nons","include":".end"}).className == "end" &&
+			(u.nextSibling(ns_div).className == "c1" && u.nextSibling(ns_div).nodeName.toLowerCase() == "span") &&
+			(u.nextSibling(ns_div, {"include":".c2"}).className == "c2" && u.nextSibling(ns_div, {"include":".c2"}).nodeName.toLowerCase() == "span") &&
+			(u.nextSibling(ns_div, {"exclude":"span"}).className == "c2" && u.nextSibling(ns_div, {"exclude":"span"}).nodeName.toLowerCase() == "div") &&
+			(u.nextSibling(ns_div, {"include":"span.c2"}).className == "c2" && u.nextSibling(ns_div, {"include":"span.c2"}).nodeName.toLowerCase() == "span")
 		) {
-			u.ac(u.qs("div.ns"), "testpassed");
-			u.qs("div.ns").innerHTML = "u.ns: correct";
-			div.test_results["u.ns"] = true;
+			u.addClass(u.querySelector("div.ns"), "testpassed");
+			u.querySelector("div.ns").innerHTML = "u.nextSibling: correct";
+			div.test_results["u.nextSibling"] = true;
 		}
 		else {
-			u.ac(u.qs("div.ns"), "testfailed");
-			div.test_results["u.ns"] = false;
+			u.addClass(u.querySelector("div.ns"), "testfailed");
+			div.test_results["u.nextSibling"] = false;
 		}
 
 
 		// previousSibling
-		var ps_li = u.qs("div.ps .start", div);
-		var ps_div = u.qs("div.ps div.c2", div);
+		var ps_li = u.querySelector("div.ps .start", div);
+		var ps_div = u.querySelector("div.ps div.c2", div);
 		if(
-			"li.nops" == u.nodeId(u.ps(ps_li)).toLowerCase() &&
-			"li.jeps" == u.nodeId(u.ps(ps_li, {"exclude":".nops"})).toLowerCase() &&
-			"li.end" == u.nodeId(u.ps(ps_li, {"exclude":".nops","include":".end"})).toLowerCase() &&
-			"span.c2" == u.nodeId(u.ps(ps_div)).toLowerCase() &&
-			"span.c1" == u.nodeId(u.ps(ps_div, {"include":".c1"})).toLowerCase() &&
-			"div.c1" == u.nodeId(u.ps(ps_div, {"exclude":"span"})).toLowerCase() &&
-			"ul" == u.nodeId(u.ps(ps_div, {"exclude":"span,div"})).toLowerCase() &&
-			"span.c1" == u.nodeId(u.ps(ps_div, {"include":"span.c1"})).toLowerCase()
+			(u.previousSibling(ps_li).className == "nops" && u.previousSibling(ps_li).nodeName.toLowerCase() == "li") &&
+			(u.previousSibling(ps_li, {"exclude":".nops"}).className == "jeps" && u.previousSibling(ps_li, {"exclude":".nops"}).nodeName.toLowerCase() == "li") &&
+			(u.previousSibling(ps_li, {"exclude":".nops","include":".end"}).className == "end" && u.previousSibling(ps_li, {"exclude":".nops","include":".end"}).nodeName.toLowerCase() == "li") &&
+			(u.previousSibling(ps_div).className == "c2" && u.previousSibling(ps_div).nodeName.toLowerCase() == "span") &&
+			(u.previousSibling(ps_div, {"include":".c1"}).className == "c1" && u.previousSibling(ps_div, {"include":".c1"}).nodeName.toLowerCase() == "span") &&
+			(u.previousSibling(ps_div, {"exclude":"span"}).className == "c1" && u.previousSibling(ps_div, {"exclude":"span"}).nodeName.toLowerCase() == "div") &&
+			(u.previousSibling(ps_div, {"exclude":"span,div"}).className == "" && u.previousSibling(ps_div, {"exclude":"span,div"}).nodeName.toLowerCase() == "ul") &&
+			(u.previousSibling(ps_div, {"include":"span.c1"}).className == "c1" && u.previousSibling(ps_div, {"include":"span.c1"}).nodeName.toLowerCase() == "span")
 		) {
-			u.qs("div.ps").innerHTML = "u.ps: correct";
-			u.ac(u.qs("div.ps"), "testpassed");
-			div.test_results["u.ps"] = true;
+			u.querySelector("div.ps").innerHTML = "u.previousSibling: correct";
+			u.addClass(u.querySelector("div.ps"), "testpassed");
+			div.test_results["u.previousSibling"] = true;
 		}
 		else {
-			u.ac(u.qs("div.ps"), "testfailed");
-			div.test_results["u.ps"] = false;
+			u.addClass(u.querySelector("div.ps"), "testfailed");
+			div.test_results["u.previousSibling"] = false;
 		}
 
 
 		// childNodes
-		node = u.qs("div.cn", div);
+		node = u.querySelector("div.cn", div);
 		if(
-			u.cn(node, {"include":"span"}).length == 3 &&
-			u.cn(node, {"include":".c1"}).length == 2 &&
-			u.cn(node, {"include":"div.c1"}).length == 1 &&
-			u.cn(node, {"exclude":"span"}).length == 4 &&
-			u.cn(node, {"exclude":"span.c1"}).length == 6
+			u.childNodes(node, {"include":"span"}).length == 3 &&
+			u.childNodes(node, {"include":".c1"}).length == 2 &&
+			u.childNodes(node, {"include":"div.c1"}).length == 1 &&
+			u.childNodes(node, {"exclude":"span"}).length == 4 &&
+			u.childNodes(node, {"exclude":"span.c1"}).length == 6
 		) {
-			u.qs("div.cn").innerHTML = "u.cn: correct";
-			u.ac(u.qs("div.cn"), "testpassed");
-			div.test_results["u.cn"] = true;
+			u.querySelector("div.cn").innerHTML = "u.childNodes: correct";
+			u.addClass(u.querySelector("div.cn"), "testpassed");
+			div.test_results["u.childNodes"] = true;
 		}
 		else {
-			u.ac(u.qs("div.cn"), "testfailed");
-			div.test_results["u.cn"] = false;
+			u.addClass(u.querySelector("div.cn"), "testfailed");
+			div.test_results["u.childNodes"] = false;
 		}
 
 
 		// appendElement
-		node = u.ae(div, "div", {"class":"testpassed", "html":"u.ae: "});
-		if(node == u.qsa("div", div)[u.qsa("div", div).length-1]) {
+		node = u.appendElement(div, "div", {"class":"testpassed", "html":"u.appendElement: "});
+		if(node == u.querySelectorAll("div", div)[u.querySelectorAll("div", div).length-1]) {
 			node.innerHTML += "correct";
-			div.test_results["u.ae"] = true;
+			div.test_results["u.appendElement"] = true;
 		}
 		else {
 			node.className = "error";
-			div.test_results["u.ae"] = false;
+			div.test_results["u.appendElement"] = false;
 		}
 
 
 		// insertElement
-		node = u.ie(div, "div", {"class":"testfailed", "html":"u.ie: "});
-		if(node == u.qs("div", div)) {
-			u.ae(div, node, {"class":"testpassed"});
+		node = u.insertElement(div, "div", {"class":"testfailed", "html":"u.insertElement: "});
+		if(node == u.querySelector("div", div)) {
+			u.appendElement(div, node, {"class":"testpassed"});
 			node.innerHTML += "correct";
-			div.test_results["u.ie"] = true;
+			div.test_results["u.insertElement"] = true;
 		}
 		else {
-			div.test_results["u.ie"] = false;
+			div.test_results["u.insertElement"] = false;
 		}
 
 
 		// wrap element
-		node = u.ae(div, "div", {"class":"testfailed", "html":"u.we: error"});
-		wrap_node = u.we(node, "div", {"class":"testpassed"});
-		node = u.qs("div", wrap_node);
+		node = u.appendElement(div, "div", {"class":"testfailed", "html":"u.wrapElement: error"});
+		wrap_node = u.wrapElement(node, "div", {"class":"testpassed"});
+		node = u.querySelector("div", wrap_node);
 		node.className = "";
-		if(node.parentNode == wrap_node && node.innerHTML == "u.we: error") {
-			node.innerHTML = "u.we: correct";
-			div.test_results["u.we"] = true;
+		if(node.parentNode == wrap_node && node.innerHTML == "u.wrapElement: error") {
+			node.innerHTML = "u.wrapElement: correct";
+			div.test_results["u.wrapElement"] = true;
 		}
 		else {
-			div.test_results["u.we"] = false;
+			div.test_results["u.wrapElement"] = false;
 		}
 
 
 		// wrap content
-		node = u.ae(div, "div", {"class":"wc"});
-		u.ae(node, "div", {"class":"testfailed", "html":"u.wc: error"});
-		wrap_node = u.wc(node, "div", {"class":"testpassed"});
+		node = u.appendElement(div, "div", {"class":"wc"});
+		u.appendElement(node, "div", {"class":"testfailed", "html":"u.wrapContent: error"});
+		wrap_node = u.wrapContent(node, "div", {"class":"testpassed"});
 		if(wrap_node.parentNode == node && wrap_node.childNodes.length == 1) {
-			wrap_node.innerHTML = "u.wc: correct";
+			wrap_node.innerHTML = "u.wrapContent: correct";
 			node.className = "testpassed";
-			div.test_results["u.wc"] = true;
+			div.test_results["u.wrapContent"] = true;
 		}
 		else {
-			div.test_results["u.wc"] = false;
+			div.test_results["u.wrapContent"] = false;
 		}
 
 
 		// node.textContent
-		var text = u.text(u.qs(".textcontent", div));
+		var text = u.text(u.querySelector(".textcontent", div));
 		if(text.trim() == "node.textContent") {
-			u.ae(div, u.qs(".textcontent", div), {"class":"testpassed", "html":"u.text: correct"})
+			u.appendElement(div, u.querySelector(".textcontent", div), {"class":"testpassed", "html":"u.text: correct"})
 			div.test_results["u.text"] = true;
 		}
 		else {
@@ -203,184 +203,226 @@ Util.Objects["dom"] = new function() {
 
 
 		// clickableElement
-		node = u.qs(".ce", div);
-		u.ce(node);
-		if(!u.qs("a", node).href && node.url == "http://index/") {
-			node.innerHTML = "u.ce: correct";
-			u.ac(node, "testpassed");
-			div.test_results["u.ce"] = true;
+		node = u.querySelector(".ce", div);
+		u.clickableElement(node);
+		if(!u.querySelector("a", node).href && node.url == "http://index/") {
+			node.innerHTML = "u.clickableElement: correct";
+			u.addClass(node, "testpassed");
+			div.test_results["u.clickableElement"] = true;
 		}
 		else {
-			u.ac(node, "testfailed");
-			div.test_results["u.ce"] = false;
+			u.addClass(node, "testfailed");
+			div.test_results["u.clickableElement"] = false;
 		}
 
 
 		// classVar
-		if(u.cv(u.qs("#qstest"), "type") == "cv") {
-			u.ae(div, "div", {"class":"testpassed", "html":"u.cv: correct"});
-			div.test_results["u.cv"] = true;
+		if(u.classVar(u.querySelector("#qstest"), "type") == "cv") {
+			u.appendElement(div, "div", {"class":"testpassed", "html":"u.classVar: correct"});
+			div.test_results["u.classVar"] = true;
 		}
 		else {
-			u.ae(div, "div", {"class":"testfailed", "html":"u.cv: error"});
-			div.test_results["u.cv"] = false;
+			u.appendElement(div, "div", {"class":"testfailed", "html":"u.classVar: error"});
+			div.test_results["u.classVar"] = false;
 		}
 
 
 		// setClass
-		node = u.ae(div, "div", {"html":"u.sc: error"});
+		node = u.appendElement(div, "div", {"html":"u.setClass: error"});
 		node.className = "before";
-		var old_class = u.setClass(node, "test_headline");
-		if(node.className == "test_headline") {
-			u.ae(div, node, {"class":"testpassed", "html":"u.sc: correct"});
-			div.test_results["u.sc"] = true;
+		svg = u.appendElement(div, "svg");
+		svg.className.baseVal = "before";
+
+		var old_html_class = u.setClass(node, "test_headline");
+		var old_svg_class = u.setClass(svg, "test_headline");
+
+		if(node.className == "test_headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline")) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.setClass: correct"});
+			div.test_results["u.setClass"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.sc: error"});
-			div.test_results["u.sc"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.setClass: error"});
+			div.test_results["u.setClass"] = false;
 		}
 
 
 		// hasClass
-		node = u.ae(div, "div", {"html":"u.hc: error"});
+		node = u.appendElement(div, "div", {"html":"u.hasClass: error"});
 		node.className = "test_headline type1";
+		svg.className.baseVal = "test_headline type1";
+
 		if(
-			u.hc(node, "headline") == false && 
-			u.hc(node, "test|headline") == false && 
-			u.hc(node, "test_headline|fisk") == true && 
-			u.hc(node, "test_headline") == true && 
-			u.hc(node, "test_headline2") == false && 
-			u.hc(node, "2test_headline") == false && 
-			u.hc(node, "type[0-1]") == true
+			(u.hasClass(svg, "test_headline") == true || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "headline") == false || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "type[0-1]") == true || typeof(SVGElement) == "undefined") &&
+			(u.hasClass(svg, "type[2-9]") == false || typeof(SVGElement) == "undefined") &&
+
+			u.hasClass(node, "headline") == false &&
+			u.hasClass(node, "test|headline") == false &&
+			u.hasClass(node, "test_headline|fisk") == true &&
+			u.hasClass(node, "test_headline") == true &&
+			u.hasClass(node, "test_headline2") == false &&
+			u.hasClass(node, "2test_headline") == false &&
+			u.hasClass(node, "test|type[0-1]") == true &&
+			u.hasClass(node, "type[0-1]") == true &&
+			u.hasClass(node, "type[2-9]") == false
 		) {
-			u.ae(div, node, {"class":"testpassed", "html":"u.hc: correct"});
-			div.test_results["u.hc"] = true;
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.hasClass: correct"});
+			div.test_results["u.hasClass"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.hc: error"});
-			div.test_results["u.hc"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.hasClass: error"});
+			div.test_results["u.hasClass"] = false;
 		}
 
 
 		// addClass
-		node = u.ae(div, "div", {"html":"u.ac: error"});
+		node = u.appendElement(div, "div", {"html":"u.addClass: error"});
 		node.className = "test_headline";
 		u.addClass(node, "headline:example");
 		u.addClass(node, "headline");
 		u.addClass(node, "headline");
-		if(node.className == "test_headline headline:example headline") {
-			u.ae(div, node, {"class":"testpassed", "html":"u.ac: correct"});
-			div.test_results["u.ac"] = true;
+
+		u.addClass(svg, "test");
+		u.addClass(svg, "test1");
+
+		if(node.className == "test_headline headline:example headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test test1")) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.addClass: correct"});
+			div.test_results["u.addClass"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.ac: error"});
-			div.test_results["u.ac"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.addClass: error"});
+			div.test_results["u.addClass"] = false;
 		}
 
 
 		// removeClass
-		node = u.ae(div, "div", {"html":"u.rc: error"});
-		node.className = "test_headline test:1 headline headline:example test:2 test:3 bye farewell later headline";
+		node = u.appendElement(div, "div", {"html":"u.removeClass: error"});
+		node.className = "test_headline test:1 test headline headline:example test:2 test:3 test1 bye farewell later headline my:test";
 		u.removeClass(node, "headline");
-		u.removeClass(node, "bye|farewell|later");
+		u.removeClass(node, "bye|test|farewell|later");
 		u.removeClass(node, "test\:[0-2]+");
-		if(node.className == "test_headline headline:example test:3") {
-			u.ae(div, node, {"class":"testpassed", "html":"u.rc: correct"});
-			div.test_results["u.rc"] = true;
+
+		u.removeClass(svg, "test[0-1]+", true);
+		u.removeClass(svg, "type[2-9]+", true);
+
+		if(node.className == "test_headline headline:example test:3 test1 my:test" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test")) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.removeClass: correct"});
+			div.test_results["u.removeClass"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.rc: error"});
-			div.test_results["u.rc"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.removeClass: error"});
+			div.test_results["u.removeClass"] = false;
 		}
 
 
 		// toggleClass
-		node = u.ae(div, "div", {"html":"u.tc: error"});
-		node.className = "test_headline";
-		u.toggleClass(node, "test_headline", old_class);
-		if(node.className == old_class) {
-			u.ae(div, node, {"class":"testpassed", "html":"u.tc: correct"});
-			div.test_results["u.tc"] = true;
+		node = u.appendElement(div, "div", {"html":"u.toggleClass: error"});
+		u.setClass(node, "test_headline");
+		u.setClass(svg, "test_headline");
+
+
+		u.toggleClass(node, "test_headline", old_html_class, true);
+		u.toggleClass(svg, "test_headline", old_svg_class, true);
+
+		if(node.className == old_html_class && (typeof(SVGElement) == "undefined" || svg.className.baseVal == old_svg_class)) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.toggleClass: correct"});
+			div.test_results["u.toggleClass"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.tc: error"});
-			div.test_results["u.tc"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.toggleClass: error"});
+			div.test_results["u.toggleClass"] = false;
 		}
+
+		// Clean up after svg test
+		svg.parentNode.removeChild(svg);
 
 
 		// applyStyle
-		node = u.ae(div, "div", {"html":"u.as: error"});
+		node = u.appendElement(div, "div", {"html":"u.applyStyle: error"});
 		var org_display = node.style.display;
 		node.style.display == "block";
 		u.as(node, "display", "none");
 		if(node.style.display == "none") {
 			u.as(node, "display", org_display);
-			u.ae(div, node, {"class":"testpassed", "html":"u.as: correct"});
-			div.test_results["u.ass"] = true;
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.applyStyle: correct"});
+			div.test_results["u.applyStyle"] = true;
 		}
 		else {
 			node.style.display = org_display;
-			u.ae(div, node, {"class":"testfailed", "html":"u.as: error"});
-			div.test_results["u.as"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.applyStyle: error"});
+			div.test_results["u.applyStyle"] = false;
 		}
 
 
 		// applyStyles
-		node = u.ae(div, "div", {"html":"u.ass: error"});
+		node = u.appendElement(div, "div", {"html":"u.applyStyles: error"});
 		var org_display = node.style.display;
 		node.style.display == "block";
 		u.ass(node, {"display":"inline", "width":"100px"});
 		if(node.style.display == "inline" && node.style.width == "100px") {
 			u.ass(node, {"display":"block", "width":"auto"});
-			u.ae(div, node, {"class":"testpassed", "html":"u.ass: correct"});
-			div.test_results["u.ass"] = true;
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.applyStyles: correct"});
+			div.test_results["u.applyStyles"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"u.ass: error"});
-			div.test_results["u.ass"] = false;
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.applyStyles: error"});
+			div.test_results["u.applyStyles"] = false;
 		}
 
 
 		// getComputedStyle
-		var gcs_node = u.ae(div, "div");
+		var gcs_node = u.appendElement(div, "div");
 		u.as(gcs_node, "backgroundColor", "#ff0000");
 		u.as(gcs_node, "height", "1px");
 		if(u.gcs(gcs_node, "background-color") == "#ff0000" || u.gcs(gcs_node, "background-color") == "rgb(255, 0, 0)" && u.gcs(gcs_node, "height") == "1px") {
 			gcs_node.parentNode.removeChild(gcs_node);
-			u.ae(div, "div", {"class":"testpassed", "html":"u.gcs: correct"});
-			div.test_results["u.gcs"] = true;
+			u.appendElement(div, "div", {"class":"testpassed", "html":"u.getComputedStyle: correct"});
+			div.test_results["u.getComputedStyle"] = true;
 		}
 		else {
 			gcs_node.parentNode.removeChild(gcs_node);
-			u.ae(div, "div", {"class":"testfailed", "html":"u.gcs: error"});
-			div.test_results["u.gcs"] = false;
+			u.appendElement(div, "div", {"class":"testfailed", "html":"u.getComputedStyle: error"});
+			div.test_results["u.getComputedStyle"] = false;
 		}
 
 
 		// hasFixedParent
-		var hfp_node = u.ae(div, "div");
-		var hfp_child = u.ae(hfp_node, "div");
+		var hfp_node = u.appendElement(div, "div");
+		var hfp_child = u.appendElement(hfp_node, "div");
 		u.as(hfp_node, "position", "fixed");
 		if(u.hfp(hfp_child) && !u.hfp(hfp_node)) {
 			hfp_node.parentNode.removeChild(hfp_node);
-			u.ae(div, "div", {"class":"testpassed", "html":"u.hasFixedParent: correct"});
+			u.appendElement(div, "div", {"class":"testpassed", "html":"u.hasFixedParent: correct"});
 			div.test_results["u.hasFixedParent"] = true;
 		}
 		else {
 			hfp_node.parentNode.removeChild(hfp_node);
-			u.ae(div, "div", {"class":"testfailed", "html":"hasFixedParent: error"});
+			u.appendElement(div, "div", {"class":"testfailed", "html":"hasFixedParent: error"});
 			div.test_results["u.hasFixedParent"] = false;
 		}
 
 
-		// nodeWithin
-		node = u.ae(div, "div", {"html":"u.nw: error"});
-		if(u.nodeWithin(node, div) && !u.nodeWithin(div, node)) {
-			u.ae(div, node, {"class":"testpassed", "html":"u.nw: correct"});
+		// contains
+		node = u.appendElement(div, "div", {"html":"u.contains: error"});
+		if(u.contains(div, node) && !u.contains(node, div)) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.contains: correct"});
 			div.test_results["u.nw"] = true;
 		}
 		else {
-			u.ae(div, node, {"class":"testfailed", "html":"nw: error"});
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.contains: error"});
+			div.test_results["u.nw"] = false;
+		}
+
+
+		// containsOrIs
+		node = u.appendElement(div, "div", {"html":"u.containsOrIs: error"});
+		if(u.containsOrIs(div, node) && !u.containsOrIs(node, div) && u.containsOrIs(div, div)) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.containsOrIs: correct"});
+			div.test_results["u.nw"] = true;
+		}
+		else {
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.containsOrIs: error"});
 			div.test_results["u.nw"] = false;
 		}
 

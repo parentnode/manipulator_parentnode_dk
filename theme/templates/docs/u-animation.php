@@ -35,7 +35,7 @@
 								Util.Animation.transition(
 									<span class="type">Node</span> <span class="var">node</span>, 
 									<span class="type">String</span> <span class="var">transition</span>
-									<span class="type">Mixed</span> <span class="var">callback</span>
+									<span class="type">Mixed</span> <span class="var">custom_callback</span>
 								);
 							</dd>
 						</dl>
@@ -45,15 +45,15 @@
 						<h4>Description</h4>
 						<p>
 							Set CSS3 transition for node, with timer-based fallback for browsers with no CSS transition support. 
-							Declare node.transitioned to receive callback, when transition is done. Transitions (and declared callback functions) 
+							Declare node.transitioned to receive callback, when transition is done. Transitions and default callback
 							are automatically removed when done.
 						</p>
 						<p>
 							The transition duration in milliseconds, is stored in node.duration.
 						</p>
 						<p>
-							Pass a <span class="var">callback</span> parameter with a function reference or name of function
-							to be invoked when transition is done.
+							Optionally pass a <span class="var">custom_callback</span> parameter with a function reference or name of function
+							to be invoked on node when transition is done.
 						</p>
 						<p>
 							Automatically adds vendor prefix (like Moz, webkit, ms or O).
@@ -76,11 +76,11 @@
 									<span class="type">String</span> transition to apply to node
 								</div>
 							</dd>
-							<dt><span class="var">callback</span></dt>
+							<dt><span class="var">custom_callback</span></dt>
 							<dd>
 								<div class="summary">
-									<span class="type">Mixed</span> Optional function reference or name of function to be 
-									executed when transition is done
+									<span class="type">Mixed</span> Optional custom function reference or name of function to be 
+									executed when transition is done.
 								</div>
 							</dd>
 						</dl>

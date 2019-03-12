@@ -127,3 +127,44 @@
 /* SWIPE ON LI */
 #content .scene div.tests.swipe ul.imagesli {width: 60%; height: 200px; position: relative; margin: 0 auto;}
 #content .scene div.tests.swipe ul.imagesli li {position: absolute; top: 0; left: 0; width: 100%; height: 200px; border-radius: 15px; background-color: gray; border: 4px solid black; text-align: center;}
+
+
+
+
+/* DYNAMIC BOUNDARIES */
+#content .scene div.tests.dynamic div.boundary {position: relative; height: 200px; background: firebrick; overflow: hidden;}
+#content .scene div.tests.dynamic div.dragme {position: absolute; top: 0; left: 0; width: 100%; height: 50px; 
+	background: linear-gradient(to bottom, deepskyblue 0%,darkslateblue 100%);
+}
+#content .scene div.tests.dynamic div.boundary.landscape div.dragme {
+	background: linear-gradient(to right, deepskyblue 0%,darkslateblue 100%);
+}
+
+#content .scene div.tests.dynamic div.dragme span {display: block;}
+#content .scene div.tests.dynamic div.boundary div.dragme span:first-child::after {
+	content: " - but nothing happens";
+}
+
+#content .scene div.tests.dynamic ul.info li.portrait {background: DarkGoldenRod; color: white;}
+#content .scene div.tests.dynamic ul.info li.landscape {background: Aqua;}
+#content .scene div.tests.dynamic ul.info li.all {background: DarkSalmon;}
+#content .scene div.tests.dynamic ul.info li.no {background: MidnightBlue; color: white;}
+
+
+#content .scene div.tests.dynamic div.boundary.portrait {width: 200px; margin: auto;}
+#content .scene div.tests.dynamic div.boundary.portrait div.dragme {height: 400px;}
+#content .scene div.tests.dynamic div.boundary.portrait div.dragme span:first-child::after {
+	content: " up and down";
+}
+
+#content .scene div.tests.dynamic div.boundary.landscape {width: 200px; margin: auto;}
+#content .scene div.tests.dynamic div.boundary.landscape div.dragme {width: 600px;}
+#content .scene div.tests.dynamic div.boundary.landscape div.dragme span:first-child::after {
+	content: " sideways";
+}
+
+#content .scene div.tests.dynamic div.boundary.all {width: 200px; margin: auto;}
+#content .scene div.tests.dynamic div.boundary.all div.dragme {width: 600px; height: 400px;}
+#content .scene div.tests.dynamic div.boundary.all div.dragme span:first-child::after {
+	content: " in any direction";
+}

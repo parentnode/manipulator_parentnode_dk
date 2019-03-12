@@ -2753,23 +2753,21 @@ u.ie(header, nav);</code>
 				</div>
 			</div>
 
-			<div class="function" id="Util.nodeWithin">
+			<div class="function" id="Util.contains">
 				<div class="header">
-					<h3>Util.nodeWithin</h3>
+					<h3>Util.contains</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.nodeWithin</dd>
-							<dt class="shorthand">Shorthand</dt>
-							<dd class="shorthand">u.nw</dd>
+							<dd class="name">Util.contains</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Boolean</span> = 
-								Util.nodeWithin(
-									<span class="type">Node</span> <span class="var">node</span>,
-									<span class="type">Node</span> <span class="var">scope</span>
+								Util.contains(
+									<span class="type">Node</span> <span class="var">scope</span>,
+									<span class="type">Node</span> <span class="var">node</span>
 								)
 							</dd>
 						</dl>
@@ -2785,16 +2783,16 @@ u.ie(header, nav);</code>
 					<div class="parameters">
 						<h4>Parameters</h4>
 						<dl class="parameters">
+							<dt><span class="var">scope</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> scope to check if node is inside
+								</div>
+							</dd>
 							<dt><span class="var">node</span></dt>
 							<dd>
 								<div class="summary">
 									<span class="type">Node</span> node to check
-								</div>
-							</dd>
-							<dt><span class="var">scope</span></dt>
-							<dd>
-								<div class="summary">
-									<span class="type">Node</span> scope to check
 								</div>
 							</dd>
 						</dl>
@@ -2803,8 +2801,7 @@ u.ie(header, nav);</code>
 					<div class="return">
 						<h4>Return values</h4>
 						<p>
-							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not. 
-							It also returns false if node IS scope (as opposed to Node.contains).
+							True if <span class="var">node</span> is a child of <span class="var">scope</span> - or false if not.
 						</p>
 					</div>
 
@@ -2826,6 +2823,82 @@ u.ie(header, nav);</code>
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<p>Nothing</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.containsOrIs">
+				<div class="header">
+					<h3>Util.containsOrIs</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.containsOrIs</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Boolean</span> = 
+								Util.containsOrIs(
+									<span class="type">Node</span> <span class="var">scope</span>,
+									<span class="type">Node</span> <span class="var">node</span>
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Check if <span class="var">node</span> is OR is within (is a child of) <span class="var">scope</span>.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">scope</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> scope to check if node is inside
+								</div>
+							</dd>
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to check
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Returns</h4>
+						<p>
+							True if <span class="var">node</span> is same node or a child of <span class="var">scope</span> - or false if not.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="uses">
+						<h4>Uses</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>Nothing</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.contains</li>
+							</ul>
 						</div>
 
 					</div>

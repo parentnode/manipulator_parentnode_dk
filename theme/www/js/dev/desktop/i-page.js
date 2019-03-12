@@ -33,7 +33,7 @@ Util.Objects["page"] = new function() {
 
 		// global resize handler 
 		page.resized = function() {
-			u.bug("page resized")
+			u.bug("page resized");
 
 			// adjust content height
 			page.browser_h = u.browserH();
@@ -54,6 +54,7 @@ Util.Objects["page"] = new function() {
 
 		// global scroll handler 
 		page.scrolled = function() {
+			u.bug("page scrolled");
 
 			page.scrolled_y = u.scrollY();
 

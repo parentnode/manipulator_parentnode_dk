@@ -189,6 +189,31 @@ $this->headerIncludes(array(
 		</div>
 	</div>
 
+	<hr />
+
+	<div class="tests i:dynamic dynamic">
+
+		<h2>Drag-scroll on dynamically sized element</h2>
+		<p>
+			This test is regarding using u.e.drag to make an element scrollable inside another element
+		<p>Applying drag option to element where both element and container might change size – by manually updating drag boundaries when size changes</p>
+
+		<div class="boundary">
+			<div class="dragme">
+				<span>Drag me</span>
+			</div>
+		</div>
+
+		<ul class="info">
+			<li class="portrait">Portrait overflow (scrolling up and down)</li>
+			<li class="landscape">Landscape overflow (scrolling sideways)</li>
+			<li class="all">All overflow (scrolling to all sides)</li>
+			<li class="no">No overflow (no scrolling)</li>
+		</ul>
+
+	</div>
+
+
 <? endif;?>
 
 </div>

@@ -35,6 +35,7 @@ $this->headerIncludes(array(
 			<li><a href="/content-2">/content-2</a></li>
 			<li><a href="/content-2/scene">/content-2/scene</a></li>
 			<li><a href="/content-2/scene/param">/content-2/scene/param</a></li>
+			<li class="silent:1"><a href="/content-2/scene/param/silent">/content-2/scene/param/silent (silent)</a></li>
 		</ul>
 
 		<h2>Current location</h2>

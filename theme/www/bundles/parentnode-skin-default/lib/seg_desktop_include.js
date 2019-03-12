@@ -20,4 +20,4 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie10.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie.js"></script>');
