@@ -80,12 +80,10 @@ Util.Objects["googlemapsAdvanced"] = new function() {
 			u.bug("map loaded", this);
 
 			// Create marker
-			var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179], {"info":"test", "icon":"/img/logo-small.png", "title":"hey", "snippet":"hey"});
-			console.log(marker);
+			var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179], {"info":"test", "icon":"/img/logo-small.png", "label":"Hover me!"});
 			
 			// Create info window
 			u.googlemaps.infoWindow(div)
-			u.googlemaps.showInfoWindow(div, marker, "<h3>Header</h3><p>Paragraph</p>");
 
 			// Marker click handler
 			marker.clicked = function() {
@@ -93,7 +91,11 @@ Util.Objects["googlemapsAdvanced"] = new function() {
 			}
 
 			marker.entered = function() {
-				u.googlemaps.hideInfoWindow(this.g_map);
+				u.googlemaps.showInfoWindow(div, marker, "<h3>Header</h3><p>Paragraph</p>");
+			}
+
+			marker.exited = function() {
+				u.googlemaps.hideInfoWindow(div);
 			}
 
 		}
