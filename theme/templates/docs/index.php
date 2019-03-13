@@ -112,6 +112,10 @@
 				<p>Built-in Google Analytics tracking.</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-googlemaps">Google Maps</a></h3>
+				<p>Google Maps module.</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-history">History</a></h3>
 				<p>Browser history for Ajax based navigation.</p>
 			</li>

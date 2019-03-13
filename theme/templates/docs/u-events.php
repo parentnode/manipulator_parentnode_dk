@@ -99,7 +99,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -138,7 +138,7 @@ node.held = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -231,7 +231,7 @@ node.held = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -270,7 +270,7 @@ node.clicked = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -364,7 +364,7 @@ node.clicked = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -403,7 +403,7 @@ node.dblclicked = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -494,7 +494,7 @@ node.dblclicked = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -524,7 +524,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -587,7 +587,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -603,7 +603,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -680,7 +680,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -703,7 +703,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -780,7 +780,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -803,7 +803,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -873,7 +873,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -896,7 +896,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -962,7 +962,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -972,7 +972,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1039,7 +1039,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1049,7 +1049,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1115,7 +1115,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1125,7 +1125,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1196,7 +1196,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1206,7 +1206,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1272,7 +1272,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1282,7 +1282,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1348,7 +1348,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1358,7 +1358,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1425,7 +1425,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1435,7 +1435,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1508,7 +1508,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1518,7 +1518,7 @@ node.out = function(event) {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

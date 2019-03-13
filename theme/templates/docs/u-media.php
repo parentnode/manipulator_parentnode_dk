@@ -71,7 +71,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							<span class="type">node</span> <span class="htmltag">DIV.videoplayer</span> (videoPlayer) containing 
 							<span class="htmltag">video</span>.
@@ -93,7 +93,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -155,7 +155,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							<span class="type">node</span> <span class="htmltag">DIV.audioplayer</span> (audioPlayer) containing 
 							<span class="htmltag">audio</span>.
@@ -177,7 +177,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -295,7 +295,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							<span class="type">node</span> <span class="htmltag">DIV.audioplayer</span> containing 
 							<span class="htmltag">audio</span>-tag or <span class="type">node</span> <span class="htmltag">DIV.videoplayer</span> containing 
@@ -358,7 +358,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -492,7 +492,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -528,7 +528,7 @@ player.ready = function() {
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -589,7 +589,7 @@ player.ready = function() {
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Promise</span> returned by audio.play or video.play.</p>
 					</div>
 
@@ -611,7 +611,7 @@ player.play(1);
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -736,7 +736,7 @@ player.play(1);
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Promise</span> returned by audio.play or video.play.</p>
 					</div>
 
@@ -756,7 +756,7 @@ player.loadAndPlay("/assets/video/1.mov");</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -802,7 +802,7 @@ player.loadAndPlay("/assets/video/1.mov");</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -825,7 +825,7 @@ player.pause();
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -871,7 +871,7 @@ player.pause();
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -894,7 +894,7 @@ player.stop();
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -940,7 +940,7 @@ player.stop();
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -950,7 +950,7 @@ player.stop();
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -994,7 +994,7 @@ player.stop();
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -1004,7 +1004,7 @@ player.stop();
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

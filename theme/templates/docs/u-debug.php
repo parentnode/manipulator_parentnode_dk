@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">String</span> node identification based on best available id for node.</p>
 					</div>
 
@@ -66,7 +66,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -180,7 +180,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span> Outputs message to screen.</p>
 					</div>
 
@@ -206,7 +206,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -292,7 +292,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span> Object content is outputted to screen via Util.bug</p>
 					</div>
 
@@ -306,7 +306,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -380,7 +380,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Void</span></p>
 					</div>
 
@@ -390,7 +390,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -440,7 +440,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Boolean</span> Debug url returns true, else false.</p>
 					</div>
 
@@ -450,7 +450,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->

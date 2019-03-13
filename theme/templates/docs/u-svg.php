@@ -65,7 +65,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Node</span> SVG</p>
 					</div>
 
@@ -93,7 +93,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -171,7 +171,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Node</span> SVG</p>
 					</div>
 
@@ -194,7 +194,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

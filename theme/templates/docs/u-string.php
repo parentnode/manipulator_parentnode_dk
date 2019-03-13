@@ -55,7 +55,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>The cut string.</p>
 					</div>
 
@@ -70,7 +70,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -130,7 +130,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>A random string consisting of letters</p>
 					</div>
 
@@ -145,7 +145,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -195,7 +195,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>A unique UUID string</p>
 					</div>
 
@@ -210,7 +210,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -283,7 +283,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>A string padded to length using prefix</p>
 					</div>
 
@@ -303,7 +303,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -367,7 +367,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Either <span class="var">either</span> (if not undefined or null) or <span class="var">or</span></p>
 					</div>
 
@@ -387,7 +387,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -443,7 +443,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">String</span> string with first letter in uppercase</p>
 					</div>
 
@@ -457,7 +457,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -517,7 +517,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">String</span> string with first letter in lowercase</p>
 					</div>
 
@@ -531,7 +531,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -589,7 +589,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Normalized string</p>
 					</div>
 
@@ -604,7 +604,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -670,7 +670,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Quantity specific string, pluralized if needed.</p>
 					</div>
 
@@ -685,7 +685,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -742,7 +742,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Mixed</span> JSON object if found, else <span class="value">false</span></p>
 					</div>
 
@@ -762,7 +762,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -828,7 +828,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">Mixed</span> DOM object if found, else <span class="value">false</span></p>
 					</div>
 
@@ -847,7 +847,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -923,7 +923,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Either <span class="var">string</span> or <span class="var">or</span></p>
 					</div>
 
@@ -943,7 +943,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -989,7 +989,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Trimmed string</p>
 					</div>
 
@@ -1004,7 +1004,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
@@ -1063,7 +1063,7 @@ u.cutString(string, 10);</code>
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>Substring of string</p>
 					</div>
 
@@ -1083,7 +1083,7 @@ u.cutString(string, 10);</code>
 					</div>
 				
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

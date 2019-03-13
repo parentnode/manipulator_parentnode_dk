@@ -91,7 +91,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p>
 							<span class="type">ChildNodes|Array|JSON</span> 
 							If HTML is passed as <span class="template">template</span> it returns list of created nodes as ChildNodes reference or Array of nodes if the 
@@ -235,7 +235,7 @@ var new_json = u.template(template, data);
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>

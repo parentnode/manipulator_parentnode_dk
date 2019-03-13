@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="return">
-						<h4>Returns</h4>
+						<h4>Return values</h4>
 						<p><span class="type">_type_</span> _returnsummary_</p>
 					</div>
 
@@ -76,7 +76,7 @@
 					</div>
 
 					<div class="uses">
-						<h4>Uses</h4>
+						<h4>Dependencies</h4>
 
 						<div class="javascript">
 							<!-- list javascript functions used by function -->
@@ -138,7 +138,13 @@
 				<dt>desktop</dt>
 				<dd><span class="file">u-.js</span></dd>
 
-				<dt>desktop_ie</dt>
+				<dt>desktop_ie11</dt>
+				<dd><span class="file">u-.js</span></dd>
+
+				<dt>desktop_ie10</dt>
+				<dd><span class="file">u-.js</span></dd>
+
+				<dt>desktop_ie9</dt>
 				<dd><span class="file">u-.js</span></dd>
 
 				<dt>desktop_light</dt>
@@ -147,10 +153,13 @@
 				<dt>tablet</dt>
 				<dd><span class="file">u-.js</span></dd>
 
+				<dt>tablet_light</dt>
+				<dd><span class="file">u-.js</span></dd>
+
 				<dt>tv</dt>
 				<dd><span class="file">u-.js</span></dd>
 
-				<dt>mobile_touch</dt>
+				<dt>smartphone</dt>
 				<dd><span class="file">u-.js</span></dd>
 	
 				<dt>mobile</dt>
@@ -158,9 +167,6 @@
 	
 				<dt>mobile_light</dt>
 				<dd>not tested</dd>
-
-				<dt>basic</dt>
-				<dd>not supported</dd>
 			</dl>
 		</div>
 	</div>
