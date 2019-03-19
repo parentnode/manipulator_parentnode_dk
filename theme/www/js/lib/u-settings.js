@@ -5,9 +5,8 @@ u.ga_account = 'UA-49740096-1';
 u.ga_domain = 'manipulator.parentnode.dk';
 u.gapi_key = "AIzaSyAVqnYpqFln-qAYsp5rkEGs84mrhmGQB_I";
 
-// TODO: move to txt array
-u.translations = {};
-u.translations["en"] = {};
 
-u.translations["en"]["build-headline"] = "Build a Manipulator bundle now";
-u.translations["en"]["build-intro"] = "Select the Manipulator modules you want to include in your bundle.";
+// TODO: move to txt array
+
+u.txt["build-headline"] = "Build a Manipulator bundle now";
+u.txt["build-intro"] = "Select the Manipulator modules you want to include in your bundle.";
