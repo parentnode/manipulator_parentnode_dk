@@ -283,10 +283,12 @@ Util.Objects["dom"] = new function() {
 		u.addClass(node, "headline");
 		u.addClass(node, "headline");
 
+		u.addClass(node, "headline my ass");
+
 		u.addClass(svg, "test");
 		u.addClass(svg, "test1");
 
-		if(node.className == "test_headline headline:example headline" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test test1")) {
+		if(node.className == "test_headline headline:example headline my ass" && (typeof(SVGElement) == "undefined" || svg.className.baseVal == "test_headline type1 test test1")) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.addClass: correct"});
 			div.test_results["u.addClass"] = true;
 		}
