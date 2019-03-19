@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2+-axpoint Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2019-03-19 11:09:14
+js-merged @ 2019-03-19 12:54:41
 */
 
 /*seg_desktop_include.js*/
@@ -11,6 +11,7 @@ if(!u || !Util) {
 	u.version = "0.9.2";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
+	u.txt = function(index) {return index;}
 }
 function fun(v) {return (typeof(v) === "function")}
 function obj(v) {return (typeof(v) === "object")}
@@ -874,7 +875,10 @@ Util.hasClass = u.hc = function(node, classname) {
 	return false;
 }
 Util.addClass = u.ac = function(node, classname, dom_update) {
-	node.classList.add(classname);
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
+	}
 	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
@@ -2886,189 +2890,9 @@ Util.Timer = u.t = new function() {
 }
 
 
-/*u-template.js*/
-u.template = function(template, json, _options) {
-	var string = "";
-	var template_string = "";
-	var clone, container, item_template, dom, node_list, type_template, type_parent;
-	var append_to_node = false;
-	if (obj(_options)) {
-		var _argument;
-		for (_argument in _options) {
-			switch (_argument) {
-				case "append": 	append_to_node = _options[_argument];			break;
-			}
-		}
-	}
-	if(obj(template) && typeof(template.nodeName) != "undefined") {
-		type_template = "HTML";
-	}
-	else if(obj(template) && JSON.stringify(template)) {
-		type_template = "JSON";
-	}
-	else if(str(template) && template.match(/^(\{|\[)/)) {
-		type_template = "JSON_STRING";
-	}
-	else if(str(template) && template.match(/^<.+>$/)) {
-		type_template = "HTML_STRING";
-	}
-	else if(str(template)) {
-		type_template = "STRING";
-	}
-	if(type_template == "HTML_STRING" || type_template == "HTML") {
-		if(type_template == "HTML") {
-			clone = template.cloneNode(true);
-			u.rc(clone, "template");
-			if(template.nodeName == "LI") {
-				type_parent = "ul";
-				container = document.createElement(type_parent);
-			}
-			else if(template.nodeName == "TR") {
-				type_parent = "table";
-				container = document.createElement("table").appendChild(document.createElement("tbody"));
-			}
-			else {
-				type_parent = "div";
-				container = document.createElement("div");
-			}
-			container.appendChild(clone);
-			template_string = container.innerHTML;
-			template_string = template_string.replace(/href\=\"([^\"]+)\"/g, function(string) {return decodeURIComponent(string);});
-			template_string = template_string.replace(/src\=\"([^\"]+)\"/g, function(string) {return decodeURIComponent(string);});
-		}
-		else {
-			if(template.match(/^<li/i)) {
-				type_parent = "ul";
-			}
-			else if(template.match(/^<tr/i)) {
-				type_parent = "table";
-			}
-			else {
-				type_parent = "div";
-			}
-			template_string = template;
-		}
-	}
-	else if(type_template == "JSON") {
-		template_string = JSON.stringify(template).replace(/^{/g, "MAN_JSON_START").replace(/}$/g, "MAN_JSON_END");
-	}
-	else if(type_template == "JSON_STRING") {
-		template_string = template.replace(/^{/g, "MAN_JSON_START").replace(/}$/g, "MAN_JSON_END");
-	}
-	else if(type_template == "STRING") {
-		template_string = template;
-	}
-	if(obj(json) && ((json.length == undefined && Object.keys(json).length) || json.length)) {
-		if(json.length) {
-			for(_item in json) {
-				if(json.hasOwnProperty(_item)) {
-					item_template = template_string;
-	// 					
-	// 
-	// 
-	// 
-	// 					
-	// 
-	// 
-					string += item_template.replace(/\{(.+?)\}/g, function(string) {
-						var key = string.toString().replace(/[\{\}]/g, "");
-						if(str(json[_item][key]) && json[_item][key]) {
-							return json[_item][key].toString().replace(/(\\|\"|\')/g, "\\$1").replace(/\n/, "\\n");
-						}
-						else if(typeof(json[_item][key]) == "number") {
-							return "MAN_NUM" + json[_item][key] + "MAN_NUM";
-						}
-						else if(typeof(json[_item][key]) == "boolean") {
-							return "MAN_BOOL" + json[_item][key] + "MAN_BOOL";
-						}
-						else if(json[_item][key] === null) {
-							return "MAN_NULL";
-						}
-						else if(obj(json[_item][key])) {
-							return "MAN_OBJ" + JSON.stringify(json[_item][key]).replace(/(\"|\')/g, "\\$1") + "MAN_OBJ";
-						}
-						else {
-							return "";
-						}
-					});
-				}
-			}
-		}
-		else {
-			string += template_string.replace(/\{(.+?)\}/g, function(string) {
-				var key = string.toString().replace(/[\{\}]/g, "");
-				if(str(json[key]) && json[key]) {
-					return json[key].replace(/(\\|\"|\')/g, "\\$1").replace(/\n/, "\\n");
-				}
-				else if(typeof(json[key]) == "number") {
-					return "MAN_NUM" + json[key] + "MAN_NUM";
-				}
-				else if(typeof(json[key]) == "boolean") {
-					return "MAN_BOOL" + json[key] + "MAN_BOOL";
-				}
-				else if(json[key] === null) {
-					return "MAN_NULL";
-				}
-				else if(obj(json[key])) {
-					return "MAN_OBJ" + JSON.stringify(json[key]).replace(/(\"|\')/g, "\\$1") + "MAN_OBJ";
-				}
-				else {
-					return "";
-				}
-			});
-		}
-	}
-	if(type_template == "HTML_STRING" || type_template == "HTML") {
-		string = string.replace(/MAN_(BOOL|NUM)(.+?(?=MAN_(BOOL|NUM)))MAN_(BOOL|NUM)/g, "$2");
-		string = string.replace(/MAN_NULL/g, "");
-		string = string.replace(/MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ/g, function(string) {
-			string = string.replace(/MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ/g, "$1");
-			return string.replace(/\\(\\|"|')/g, "$1");
-		});
-		string = string.replace(/\\(\\|"|')/g, "$1");
-		if(type_parent == "table") {
-			dom = document.createElement("div");
-			dom.innerHTML = "<table><tbody>"+string+"</tbody></table>";
-			dom = u.qs("tbody", dom);
-		}
-		else {
-			dom = document.createElement(type_parent);
-			dom.innerHTML = string;
-		}
-		if(append_to_node) {
-			node_list = [];
-			while(dom.childNodes.length) {
-				node_list.push(u.ae(append_to_node, dom.childNodes[0]));
-			}
-			return node_list;
-		}
-		return dom.childNodes;
-	}
-	else if(type_template == "JSON_STRING" || type_template == "JSON") {
-		string = string.replace(/[\"]?MAN_(BOOL|NUM)(.+?(?=MAN_(BOOL|NUM)))MAN_(BOOL|NUM)[\"]?/g, "$2");
-		string = string.replace(/[\"]?MAN_NULL[\"]?/g, "null");
-		string = string.replace(/[\"]?MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ[\"]?/g, function(string) {
-			string = string.replace(/[\"]?MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ[\"]?/g, "$1");
-			return string.replace(/\\("|')/g, "$1");
-		});
-		return eval("["+string.replace(/MAN_JSON_START/g, "{").replace(/MAN_JSON_END/g, "},")+"]");
-	}
-	else if(type_template == "STRING") {
-		string = string.replace(/MAN_(BOOL|NUM)(.+?(?=MAN_(BOOL|NUM)))MAN_(BOOL|NUM)/g, "$2");
-		string = string.replace(/MAN_NULL/g, "");
-		string = string.replace(/MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ/g, function(string) {
-			string = string.replace(/MAN_OBJ(.+?(?=MAN_OBJ))MAN_OBJ/g, "$1");
-			return string.replace(/\\(\\|"|')/g, "$1");
-		});
-		return string.replace(/\\(\\|"|')/g, "$1");
-	}
-}
-
-
 /*u-txt.js*/
 u.txt = function(index) {
 	if(!u.translations) {
-		u.bug("Should load translations for:", document.documentElement.lang);
 	}
 	if(index == "assign") {
 		u.bug("USING RESERVED INDEX: assign");
@@ -3083,6 +2907,20 @@ u.txt = function(index) {
 u.txt["assign"] = function(obj) {
 	for(x in obj) {
 		u.txt[x] = obj[x];
+	}
+}
+
+
+/*u-url.js*/
+Util.getVar = function(param, url) {
+	var string = url ? url.split("#")[0] : location.search;
+	var regexp = new RegExp("[\&\?\b]{1}"+param+"\=([^\&\b]+)");
+	var match = string.match(regexp);
+	if(match && match.length > 1) {
+		return match[1];
+	}
+	else {
+		return "";
 	}
 }
 
