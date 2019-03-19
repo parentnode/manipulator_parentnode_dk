@@ -29,15 +29,13 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
-//document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
-//document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-template.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-textscaler.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-txt.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
-// document.write('<script type="text/javascript" src="/js/manipulator/src/u-video.js"></script>');
 
 
 //document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_light.js"></script>');
