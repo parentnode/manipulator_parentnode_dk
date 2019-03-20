@@ -42,7 +42,7 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Add DOM Ready event. Uses DOMContentLoaded if supported by browser, or falls back to 
+							Add DOM Ready event. dependencies DOMContentLoaded if supported by browser, or falls back to 
 							regular document.onload event. <span class="var">action</span> is executed on window object.
 						</p>
 						<p class="note">
@@ -75,7 +75,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -146,7 +146,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -231,7 +231,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -316,7 +316,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -394,7 +394,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -472,7 +472,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -550,7 +550,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -628,7 +628,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -706,7 +706,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -784,7 +784,7 @@
 						<p>none</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

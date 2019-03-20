@@ -6,7 +6,7 @@
 		This page/flow controller is designed for full rendering control.
 	</p>
 	<p>
-		Uses Util.History for browser History and Location control. 
+		dependencies Util.History for browser History and Location control. 
 		Seamless fallback to location.hash and Legacy translation between #/ and real url paths for support
 		for links shared between different generation browsers.
 	</p>
@@ -108,7 +108,7 @@
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

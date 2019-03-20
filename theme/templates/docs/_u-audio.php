@@ -137,7 +137,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -261,7 +261,7 @@ player.load("/media/audio/audio_1.mp3");</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -344,7 +344,7 @@ player.play(1);
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -467,7 +467,7 @@ player.loadAndPlay("/media/audio/audio_1.mp3");</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -531,12 +531,12 @@ player.pause();
 </code>
 							<p>
 								Injects audio into <span class="htmltag">div.scene</span> and loads "/media/audio/audio_1.mp3", 
-								starts playback at 1sec, and pauses immidately.
+								starts playback at 1sec, and padependencies immidately.
 							</p>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -605,7 +605,7 @@ player.stop();
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -661,7 +661,7 @@ player.stop();
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -715,7 +715,7 @@ player.stop();
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

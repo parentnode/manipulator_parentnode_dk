@@ -114,7 +114,7 @@ u.t.setTimer(node, node.timerDone, 500, "hello");</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -189,7 +189,7 @@ u.t.resetTimer(node.timer_id);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -256,7 +256,7 @@ u.t.resetTimer(node.timer_id);</code>
 
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -355,7 +355,7 @@ u.t.setInterval(node, node.intervalDone, 500);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -428,7 +428,7 @@ u.t.resetInterval(interval_id);</code>
 						<p>callbackFunction never trigered, we reset interval.</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -489,7 +489,7 @@ u.t.resetInterval(interval_id);</code>
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

@@ -85,7 +85,7 @@ u.querySelector(".link", content_node);</code>
 
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -176,7 +176,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -294,7 +294,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -388,7 +388,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -505,7 +505,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -619,7 +619,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -733,7 +733,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -833,7 +833,7 @@ u.querySelectorAll("li.item", list_node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -974,7 +974,7 @@ u.ae(header, nav);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1114,7 +1114,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1241,7 +1241,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1368,7 +1368,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1454,7 +1454,7 @@ u.ie(header, nav);</code>
 
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1601,7 +1601,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1703,7 +1703,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1799,7 +1799,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1928,7 +1928,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2035,7 +2035,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2159,7 +2159,7 @@ u.ie(header, nav);</code>
 
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2311,7 +2311,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2377,7 +2377,7 @@ u.ie(header, nav);</code>
 							applied transition to timed execution for fallback.
 						</p>
 						<p>
-							It uses u.vendorProperty to ensure correct vendor prefix is added to the property.
+							It dependencies u.vendorProperty to ensure correct vendor prefix is added to the property.
 						</p>
 					</div>
 
@@ -2439,7 +2439,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2499,7 +2499,7 @@ u.ie(header, nav);</code>
 							applied transition to timed execution for fallback.
 						</p>
 						<p>
-							It uses u.vendorProperty to ensure correct vendor prefix is added to the property.
+							It dependencies u.vendorProperty to ensure correct vendor prefix is added to the property.
 						</p>
 					</div>
 
@@ -2555,7 +2555,7 @@ u.ie(header, nav);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2603,7 +2603,7 @@ u.ie(header, nav);</code>
 						</p>
 						<p>
 							Accepts both JS and CSS syntax properties. Ie: backgroundImage or background-image.
-							It uses u.vendorProperty to ensure correct vendor prefix is added to the property.
+							It dependencies u.vendorProperty to ensure correct vendor prefix is added to the property.
 						</p>
 						<p>
 							Note: Some older browsers returns the specified value, whereas newer browser return the computed value, 
@@ -2656,7 +2656,7 @@ u.ie(header, nav);</code>
 
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2731,7 +2731,7 @@ u.ie(header, nav);</code>
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2810,7 +2810,7 @@ u.ie(header, nav);</code>
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -2886,7 +2886,7 @@ u.ie(header, nav);</code>
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
