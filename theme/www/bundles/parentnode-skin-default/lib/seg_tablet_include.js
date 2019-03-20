@@ -19,3 +19,6 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-string
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-txt.js"></script>');
