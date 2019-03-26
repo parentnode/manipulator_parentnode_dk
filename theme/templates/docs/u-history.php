@@ -102,7 +102,7 @@ u.h.addEvent(node, {"callback":"urlChanged"});</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -203,7 +203,7 @@ u.h.removeEvent(node, {"callback":"urlChanged"});</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -298,7 +298,7 @@ u.h.navigate("http://manipulator.parentnode.dk", node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -374,7 +374,7 @@ u.h.navigate("http://manipulator.parentnode.dk", node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -460,7 +460,7 @@ u.h.navigate("http://manipulator.parentnode.dk", node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -548,7 +548,7 @@ u.h.navigate("http://manipulator.parentnode.dk", node);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

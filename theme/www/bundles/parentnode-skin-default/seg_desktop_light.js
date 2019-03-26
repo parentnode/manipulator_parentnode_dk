@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-full Copyright 2017 http://manipulator.parentnode.dk
-js-merged @ 2019-03-11 12:09:07
+js-merged @ 2019-03-20 11:29:42
 */
 
 /*seg_desktop_light_include.js*/
@@ -11,6 +11,7 @@ if(!u || !Util) {
 	u.version = "0.9.2";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
+	u.txt = function(index) {return index;}
 }
 function fun(v) {return (typeof(v) === "function")}
 function obj(v) {return (typeof(v) === "object")}
@@ -601,7 +602,7 @@ Util.setClass = u.sc = function(node, classname, dom_update) {
 		old_class = node.className;
 		node.className = classname;
 	}
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 	return old_class;
 }
 Util.hasClass = u.hc = function(node, classname) {
@@ -624,8 +625,11 @@ Util.hasClass = u.hc = function(node, classname) {
 	return false;
 }
 Util.addClass = u.ac = function(node, classname, dom_update) {
-	node.classList.add(classname);
-	dom_update = (!dom_update) || (node.offsetTop);
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
+	}
+	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
 Util.removeClass = u.rc = function(node, classname, dom_update) {
@@ -641,7 +645,7 @@ Util.removeClass = u.rc = function(node, classname, dom_update) {
 			node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
 		}
 	}
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
 Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
@@ -657,12 +661,12 @@ Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
 			u.rc(node, _classname);
 		}
 	}
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
 Util.applyStyle = u.as = function(node, property, value, dom_update) {
 	node.style[u.vendorProperty(property)] = value;
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 Util.applyStyles = u.ass = function(node, styles, dom_update) {
 	if(styles) {
@@ -676,7 +680,7 @@ Util.applyStyles = u.ass = function(node, styles, dom_update) {
 			}
 		}
 	}
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 Util.getComputedStyle = u.gcs = function(node, property) {
 	var dom_update = node.offsetHeight;
@@ -2962,6 +2966,27 @@ Util.Timer = u.t = new function() {
 }
 
 
+/*u-txt.js*/
+u.txt = function(index) {
+	if(!u.translations) {
+	}
+	if(index == "assign") {
+		u.bug("USING RESERVED INDEX: assign");
+		return "";
+	}
+	if(u.txt[index]) {
+		return u.txt[index];
+	}
+	u.bug("MISSING TEXT: "+index);
+	return "";
+}
+u.txt["assign"] = function(obj) {
+	for(x in obj) {
+		u.txt[x] = obj[x];
+	}
+}
+
+
 /*u-array-desktop_light.js*/
 if(!Array.prototype.unshift || new Array(1,2).unshift(0) != 3) {
 	Array.prototype.unshift = function(a) {
@@ -3004,7 +3029,103 @@ if(!Object.keys) {
 	};
 }
 
-/*u-dom-desktop_ie10.js*/
+/*u-dom-desktop_ie.js*/
+if(false && document.documentMode <= 10) {
+	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
+		try {
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
+			if(attributes) {
+				var attribute;
+				for(attribute in attributes) {
+					if(!attribute.match(/^(value|html)$/)) {
+						node.setAttribute(attribute, attributes[attribute]);
+					}
+				}
+			}
+			node = _parent.appendChild(node);
+			if(attributes) {
+				if(attributes["value"]) {
+					node.value = attributes["value"];
+				}
+				if(attributes["html"]) {
+					node.innerHTML = attributes["html"];
+				}
+			}
+			return node;
+		}
+		catch(exception) {
+			u.exception("u.ae (desktop_ie10)", arguments, exception);
+		}
+	}
+	Util.insertElement = u.ie = function(_parent, node_type, attributes) {
+		try {
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
+			if(attributes) {
+				var attribute;
+				for(attribute in attributes) {
+					if(!attribute.match(/^(value|html)$/)) {
+						node.setAttribute(attribute, attributes[attribute]);
+					}
+				}
+			}
+			node = _parent.insertBefore(node, _parent.firstChild);
+			if(attributes) {
+				if(attributes["value"]) {
+					node.value = attributes["value"];
+				}
+				if(attributes["html"]) {
+					node.innerHTML = attributes["html"];
+				}
+			}
+			return node;
+		}
+		catch(exception) {
+			u.exception("u.ie (desktop_ie10)", arguments, exception);
+		}
+	}
+}
+if(document.documentMode <= 11 && ((false) || ("-ms-scroll-limit" in document.documentElement.style && "-ms-ime-align" in document.documentElement.style))) {
+	Util.hasClass = u.hc = function(node, classname) {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+		if(node instanceof SVGElement) {
+			if(regexp.test(node.className.baseVal)) {
+				return true;
+			}
+		}
+		else {
+			if(regexp.test(node.className)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	Util.addClass = u.ac = function(node, classname, dom_update) {
+		var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$)");
+		if(node instanceof SVGElement) {
+			if(!regexp.test(node.className.baseVal)) {
+				node.className.baseVal += node.className.baseVal ? " " + classname : classname;
+			}
+		}
+		else {
+			if(!regexp.test(node.className)) {
+				node.className += node.className ? " " + classname : classname;
+			}
+		}
+		dom_update = (!dom_update) || (node.offsetTop);
+		return node.className;
+	}
+	Util.removeClass = u.rc = function(node, classname, dom_update) {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(?=[\\s]|$)", "g");
+		if(node instanceof SVGElement) {
+			node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+		}
+		else {
+			node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+		}
+		dom_update = (!dom_update) || (node.offsetTop);
+		return node.className;
+	}
+}
 
 
 /*u-dom-desktop_light.js*/

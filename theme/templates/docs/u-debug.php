@@ -65,7 +65,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -205,7 +205,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -305,7 +305,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -351,7 +351,7 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Uses u.bug to generate standard exception output.</p>
+						<p>dependencies u.bug to generate standard exception output.</p>
 					</div>
 
 					<div class="parameters">
@@ -389,7 +389,7 @@
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -449,7 +449,7 @@
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

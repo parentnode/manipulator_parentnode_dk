@@ -83,7 +83,7 @@
 									<dl class="options">
 										<dt><span class="value">method</span></dt>
 										<dd>
-											POST, GET, PUT, PATCH, SCRIPT - default GET. SCRIPT causes a script injection in &lt;head&gt;
+											POST, GET, PUT, PATCH, SCRIPT - default GET. SCRIPT cadependencies a script injection in &lt;head&gt;
 											and responder must wrap result in callback function, which is appended to url as <span class="var">callback</span>.
 											Default: <span class="value">GET</span>.
 										</dd>
@@ -211,7 +211,7 @@ u.request(node, "http://someotherdomain.com/jsonp", {"method":"POST"});</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

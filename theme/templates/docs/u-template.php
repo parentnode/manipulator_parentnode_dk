@@ -272,7 +272,7 @@ var new_json = u.template(template, data);
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

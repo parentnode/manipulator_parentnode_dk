@@ -147,7 +147,7 @@ u.googlemaps.map(map, [55.700716,12.44179], {"zoom":6, "styles":theme, "disableU
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -299,7 +299,7 @@ map.loaded = function() {
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -423,7 +423,7 @@ map.loaded = function() {
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -508,7 +508,7 @@ map.loaded = function() {
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -613,7 +613,7 @@ map.loaded = function() {
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -701,7 +701,7 @@ map.loaded = function() {
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

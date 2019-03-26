@@ -69,7 +69,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -144,7 +144,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -209,7 +209,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -302,7 +302,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -386,7 +386,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -456,7 +456,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -530,7 +530,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -603,7 +603,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -678,13 +678,13 @@ u.cutString(string, 10);</code>
 						<h4>Examples</h4>
 
 						<div class="example">
-							<code>u.pluralize(houses.length, "house", "houses");</code>
+							<code>u.pluralize(hodependencies.length, "house", "hodependencies");</code>
 	
-							<p>If houses.length is 1, then it returns <span class="value">1 house</span>. If houses.length is 2, it returns <span class="value">2 houses</span>.</p>
+							<p>If hodependencies.length is 1, then it returns <span class="value">1 house</span>. If hodependencies.length is 2, it returns <span class="value">2 hodependencies</span>.</p>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -761,7 +761,7 @@ u.cutString(string, 10);</code>
 
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -846,7 +846,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -942,7 +942,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1003,7 +1003,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1082,7 +1082,7 @@ u.cutString(string, 10);</code>
 						</div>
 					</div>
 				
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">

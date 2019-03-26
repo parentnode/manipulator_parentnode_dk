@@ -113,7 +113,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -171,7 +171,7 @@
 							work on already absolute positioned nodes.
 						</p>
 						<p>
-							Uses translate3d if browser supports it, because it is hardware accelerated by more browsers.
+							dependencies translate3d if browser supports it, because it is hardware accelerated by more browsers.
 						</p>
 						<p>
 							A translated node stores its translate values in node._x and node._y.
@@ -222,7 +222,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -319,7 +319,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -425,7 +425,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -518,7 +518,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -608,7 +608,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -696,7 +696,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -791,7 +791,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -879,7 +879,7 @@
 						</div>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -961,7 +961,7 @@
 						<p>No examples.</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1034,7 +1034,7 @@
 						<p>No examples.</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1076,7 +1076,7 @@
 						<p>
 							Check for CSS3 3D-translation support. 3D-translation is hardware accelerated in more browsers, so it 
 							makes a good choice even for 2D-translations. The u.a.translate function of this library automatically
-							uses 3D-translations if available.
+							dependencies 3D-translations if available.
 						</p>
 					</div>
 
@@ -1095,7 +1095,7 @@
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
@@ -1187,7 +1187,7 @@
 						<p>No examples</p>
 					</div>
 
-					<div class="uses">
+					<div class="dependencies">
 						<h4>Dependencies</h4>
 
 						<div class="javascript">
