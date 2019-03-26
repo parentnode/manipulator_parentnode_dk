@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-boyespellerberg Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-03-18 12:29:09
+js-merged @ 2019-03-21 12:57:45
 */
 
 /*seg_tablet_include.js*/
@@ -11,6 +11,7 @@ if(!u || !Util) {
 	u.version = "0.9.2";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
+	u.txt = function(index) {return index;}
 }
 function fun(v) {return (typeof(v) === "function")}
 function obj(v) {return (typeof(v) === "object")}
@@ -836,7 +837,10 @@ Util.hasClass = u.hc = function(node, classname) {
 	return false;
 }
 Util.addClass = u.ac = function(node, classname, dom_update) {
-	node.classList.add(classname);
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
+	}
 	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
@@ -983,6 +987,74 @@ u.easings = new function() {
 	}
 	this["ease-in-fast"] = function(progress) {
 		return Math.pow((progress), 4);
+	}
+	this["easeOutQuad"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+		t /= d;
+		return -c * t*(t-2) + b;
+	};
+	this["easeOutCubic"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+		t /= d;
+		t--;
+		return c*(t*t*t + 1) + b;
+	};
+	this["easeOutQuint"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+		t /= d;
+		t--;
+		return c*(t*t*t*t*t + 1) + b;
+	};
+	this["easeInOutSine"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+		return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+	};
+	this["easeInOutElastic"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+		return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
+	}
+	this["easeOutBounce"] = function (progress) {
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+			if ((t/=d) < (1/2.75)) {
+				return c*(7.5625*t*t) + b;
+			} else if (t < (2/2.75)) {
+				return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+			} else if (t < (2.5/2.75)) {
+				return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+			} else {
+				return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+			}
+	}
+	this["easeInBack"] = function (progress) {
+		var s = 1.70158;
+		d = 1;
+		b = 0;
+		c = progress;
+		t = progress;
+			return c*(t/=d)*t*((s+1)*t - s) + b;
 	}
 }
 
@@ -2738,7 +2810,10 @@ Util.Timer = u.t = new function() {
 /*u-txt.js*/
 u.txt = function(index) {
 	if(!u.translations) {
-		u.bug("Should load translations for:", document.documentElement.lang);
+	}
+	if(index == "assign") {
+		u.bug("USING RESERVED INDEX: assign");
+		return "";
 	}
 	if(u.txt[index]) {
 		return u.txt[index];
@@ -2746,6 +2821,12 @@ u.txt = function(index) {
 	u.bug("MISSING TEXT: "+index);
 	return "";
 }
+u.txt["assign"] = function(obj) {
+	for(x in obj) {
+		u.txt[x] = obj[x];
+	}
+}
+
 
 /*u-url.js*/
 Util.getVar = function(param, url) {

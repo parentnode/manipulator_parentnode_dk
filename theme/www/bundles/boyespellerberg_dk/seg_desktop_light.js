@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-boyespellerberg Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-03-18 12:29:09
+js-merged @ 2019-03-21 12:57:44
 */
 
 /*seg_desktop_light_include.js*/
@@ -11,6 +11,7 @@ if(!u || !Util) {
 	u.version = "0.9.2";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
+	u.txt = function(index) {return index;}
 }
 function fun(v) {return (typeof(v) === "function")}
 function obj(v) {return (typeof(v) === "object")}
@@ -624,7 +625,10 @@ Util.hasClass = u.hc = function(node, classname) {
 	return false;
 }
 Util.addClass = u.ac = function(node, classname, dom_update) {
-	node.classList.add(classname);
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
+	}
 	dom_update = (dom_update === false) || (node.offsetTop);
 	return node.className;
 }
@@ -1939,7 +1943,10 @@ Util.Timer = u.t = new function() {
 /*u-txt.js*/
 u.txt = function(index) {
 	if(!u.translations) {
-		u.bug("Should load translations for:", document.documentElement.lang);
+	}
+	if(index == "assign") {
+		u.bug("USING RESERVED INDEX: assign");
+		return "";
 	}
 	if(u.txt[index]) {
 		return u.txt[index];
@@ -1947,6 +1954,12 @@ u.txt = function(index) {
 	u.bug("MISSING TEXT: "+index);
 	return "";
 }
+u.txt["assign"] = function(obj) {
+	for(x in obj) {
+		u.txt[x] = obj[x];
+	}
+}
+
 
 /*u-url.js*/
 Util.getVar = function(param, url) {
