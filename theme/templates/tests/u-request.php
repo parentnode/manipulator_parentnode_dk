@@ -125,6 +125,14 @@ $this->headerIncludes(array(
 			<span>/ajax/post.arraybuffer.php</span>
 		</div>
 
+		<div class="test waiting method:post redirect:true">
+			<form name="testform" action="" method="">
+				<input type="hidden" name="test" value="POST, redirect: correct" />
+				<input type="hidden" name="redirect_to" value="/ajax/post-redirected.php" />
+			</form>
+			<span>/ajax/post-redirect.php</span>
+		</div>
+
 
 		<h2>GETs</h2>
 		<div class="test waiting method:get">
@@ -185,7 +193,7 @@ $this->headerIncludes(array(
 			</form>
 			<span>/ajax/script.jsonp.php?test=error</span>
 		</div>
-
+ 
 		<div class="test waiting method:script">
 			<form name="testform" action="" method="">
 				<input type="hidden" name="test" value="SCRIPT, to JSONP outside domain: correct" />

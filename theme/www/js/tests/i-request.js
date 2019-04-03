@@ -28,6 +28,7 @@ Util.Objects["request"] = new function() {
 				node.div = this;
 
 				node.response = function(response, request_id) {
+					
 					// u.bug("response:" + this.__url);
 					// console.log(response);
 					// console.log(typeof(response));
@@ -49,7 +50,7 @@ Util.Objects["request"] = new function() {
 
 					}
 					// responseText html
-					else if(!this.shouldtimeout && response.isHTML && !this[request_id].request_url.match(/\.json/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
+					else if(!this.shouldtimeout && response.isHTML && !this[request_id].request_url.match(/\.json|\-redirect/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
 						u.ac(this, "testpassed");
 						this.innerHTML = u.qs(".test", response).innerHTML
 
@@ -105,6 +106,16 @@ Util.Objects["request"] = new function() {
 						u.ac(this, "testpassed");
 
 						div.test_results["u.request ("+div.getTestData(this)+")"] = true;
+					}
+					// responseType arraybuffer
+					else if(!this.shouldtimeout && response.isHTML && this.__redirect == "true" && this[request_id].request_url.match(/\-redirect/i) && typeof(response) == "object" 
+					// && this[request_id].response_url === u.qs("input[name=redirect]", this).value
+					) {
+						u.ac(this, "testpassed");
+						this.innerHTML = u.qs(".test", response).innerHTML
+
+						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
+
 					}
 					else {
 
@@ -171,6 +182,8 @@ Util.Objects["request"] = new function() {
 				node.__headers = u.cv(node, "headers");
 				node.__response_type = u.cv(node, "responseType");
 				node.__credentials = u.cv(node, "credentials");
+
+				node.__redirect = u.cv(node, "redirect");
 
 				node.shouldfail = u.cv(node, "shouldfail");
 				node.shouldtimeout = u.cv(node, "shouldtimeout");

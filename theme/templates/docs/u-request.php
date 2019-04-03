@@ -49,7 +49,7 @@
 						</p>
 						<p>
 							A request object, containing all request settings, is mapped to <span class="var">node[request_id]</span>. This object
-							will also contain information about exceptions and if timeout occured.
+							will also contain information about exceptions and if timeout occurred.
 						</p>
 						<p>
 							See <a href="/docs/u-form#Util.Form.getParams">Util.Form.getParams</a> to know more about retrieving values from a form.
