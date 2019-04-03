@@ -427,7 +427,14 @@ Util.setClass = u.sc = function(node, classname, dom_update) {
 	// Special case for SVGs
 	if(node instanceof SVGElement) {
 		old_class = node.className.baseVal;
-		node.className.baseVal = classname;
+
+		// NOTE: Chrome from v61 has a bug where class attribute on SVGs is not updated
+		// when mixing use of baseVal and classList to add or remove classes
+		// – issue appears to have been introduced when classList.replace was implemented
+		// node.className.baseVal = classname;
+
+		// Setting class on SVG with setAttribute fixes the problem
+		node.setAttribute("class", classname);
 	}
 	// HTML
 	else {
@@ -436,8 +443,8 @@ Util.setClass = u.sc = function(node, classname, dom_update) {
 	}
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
-	
+	dom_update = (dom_update === false) || (node.offsetTop);
+
 	// return replaced classname
 	return old_class;
 }
@@ -474,10 +481,13 @@ Util.hasClass = u.hc = function(node, classname) {
 Util.addClass = u.ac = function(node, classname, dom_update) {
 
 	// Add class
-	node.classList.add(classname);
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
+	}
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 
 	// return updated classname
 	return node.className;
@@ -498,7 +508,14 @@ Util.removeClass = u.rc = function(node, classname, dom_update) {
 		// Replace pattern and fix any doublespaces
 		// Special case for SVGs
 		if(node instanceof SVGElement) {
-			node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+
+			// NOTE: Chrome from v61 has a bug where class attribute on SVGs is not updated
+			// when mixing use of baseVal and classList to add or remove classes
+			// – issue appears to have been introduced when classList.replace was implemented
+			// node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+
+			// Setting class on SVG with setAttribute fixes the problem
+			node.setAttribute("class", node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " "));
 		}
 		// HTML
 		else {
@@ -507,7 +524,7 @@ Util.removeClass = u.rc = function(node, classname, dom_update) {
 	}
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 
 	// return updated classname
 	return node.className;
@@ -542,7 +559,7 @@ Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
 	}
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 
 	// return updated classname
 	return node.className;
@@ -557,7 +574,7 @@ Util.applyStyle = u.as = function(node, property, value, dom_update) {
 	node.style[u.vendorProperty(property)] = value;
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 
 // apply styles
@@ -578,7 +595,11 @@ Util.applyStyles = u.ass = function(node, styles, dom_update) {
 	}
 
 	// force dom update (performance killer, but will make rendering more detailed)
-	dom_update = (!dom_update) || (node.offsetTop);
+	// default false
+	// dom_update = (!dom_update) || (node.offsetTop);
+
+	// default true
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 
 
@@ -607,8 +628,8 @@ Util.hasFixedParent = u.hfp = function(node) {
 }
 
 
-// is node within scope
-u.contains = function(node, scope) {
+// Does scope contain node
+u.contains = function(scope, node) {
 
 	if(scope != node) {
 		if(scope.contains(node)) {
@@ -620,9 +641,9 @@ u.contains = function(node, scope) {
 }
 
 // is node equal to or withing scope
-u.containsOrIs = function(node, scope) {
+u.containsOrIs = function(scope, node) {
 
-	if(scope == node || u.contains(node, scope)) {
+	if(scope == node || u.contains(scope, node)) {
 		return true
 	}
 	return false;
