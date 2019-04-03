@@ -26,7 +26,7 @@ Util.Events = u.e = new function() {
 		this.event_support = "touch";
 	}
 	else {
-		this.event_support = "touch";
+		this.event_support = "mouse";
 	}
 
 	console.log(this.event_support);
