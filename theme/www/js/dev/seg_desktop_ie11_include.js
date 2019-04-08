@@ -18,6 +18,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-g
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-googlemaps.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-keyboard.js"></script>');

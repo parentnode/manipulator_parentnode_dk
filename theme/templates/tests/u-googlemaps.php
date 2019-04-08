@@ -1,7 +1,5 @@
 <?php
 $this->headerIncludes(array(
-	"/js/manipulator/src/beta-u-googlemaps.js",
-
 	"/js/tests/i-googlemaps.js",
 	"/css/tests/s-googlemaps.css"
 ));
@@ -9,6 +7,10 @@ $this->headerIncludes(array(
 
 <div class="scene i:scene">
 	<h1>Google Maps</h1>
+
+<? if(preg_match("/desktop_ie9|desktop_light|tv|mobile_light|mobile|tablet_light|seo/", $this->segment(array("type" => "dev")))): ?>
+	<p class="nosupport">NOT SUPPORTED in <?= $this->segment(array("type" => "dev")) ?></p>
+<? else: ?>
 
 	<h2>Default map</h2>
 	<p>Map has been initialized without options and default marker.</p>
@@ -36,6 +38,8 @@ $this->headerIncludes(array(
 		<li>disableUI:true</li>
 	</ul>
 	<div class="map i:googlemapsAdvanced"></div>
+
+<? endif;?>
 
 </div>
 <div class="comments"></div>
