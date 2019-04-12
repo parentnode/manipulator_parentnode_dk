@@ -2684,7 +2684,7 @@ Util.getVar = function(param, url) {
 }
 
 
-/*u-dom-desktop_ie10.js*/
+/*u-dom-desktop_ie.js*/
 if(false && document.documentMode <= 10) {
 	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 		try {

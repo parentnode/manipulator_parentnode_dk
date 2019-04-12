@@ -35,7 +35,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation-desktop_ie9.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-array-desktop_light.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie10.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry-desktop_light.js"></script>');

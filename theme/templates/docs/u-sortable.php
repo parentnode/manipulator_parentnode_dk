@@ -337,7 +337,7 @@
 				<dd>
 					<span class="file">u-sortable.js</span> + 
 					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_ie10.js</span> + 
+					<span class="file">u-dom-desktop_ie.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-events-browser.js</span>
@@ -347,7 +347,7 @@
 				<dd>
 					<span class="file">u-sortable.js</span> + 
 					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_ie10.js</span> + 
+					<span class="file">u-dom-desktop_ie.js</span> + 
 					<span class="file">u-geometry.js</span> + 
 					<span class="file">u-events.js</span> + 
 					<span class="file">u-events-browser.js</span>

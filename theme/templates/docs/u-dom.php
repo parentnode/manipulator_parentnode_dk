@@ -2924,7 +2924,7 @@ u.ie(header, nav);</code>
 			<div class="files support">
 				<h3>Segment support files</h3>
 				<ul>
-					<li><span class="file">u-dom-desktop_ie10.js</span></li>
+					<li><span class="file">u-dom-desktop_ie.js</span></li>
 					<li><span class="file">u-dom-desktop_light.js</span></li>
 				</ul>
 			</div>
@@ -2950,13 +2950,13 @@ u.ie(header, nav);</code>
 				<dt>desktop_ie10</dt>
 				<dd>
 					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_ie10.js</span>
+					<span class="file">u-dom-desktop_ie.js</span>
 				</dd>
 
 				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_ie10.js</span>
+					<span class="file">u-dom-desktop_ie.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>

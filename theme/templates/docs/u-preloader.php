@@ -193,7 +193,7 @@ u.preloader(node, ["file.jpg", "file2.jpg", "file3.jpg"]);</code>
 				<dd>
 					<span class="file">u-preloader.js</span> + 
 					<span class="file">u-dom.js</span> +
-					<span class="file">u-dom-desktop_ie10.js</span> + 
+					<span class="file">u-dom-desktop_ie.js</span> + 
 					<span class="file">u-events.js</span>
 				</dd>
 
@@ -201,7 +201,7 @@ u.preloader(node, ["file.jpg", "file2.jpg", "file3.jpg"]);</code>
 				<dd>
 					<span class="file">u-preloader.js</span> + 
 					<span class="file">u-dom.js</span> +
-					<span class="file">u-dom-desktop_ie10.js</span> + 
+					<span class="file">u-dom-desktop_ie.js</span> + 
 					<span class="file">u-events.js</span>
 				</dd>
 

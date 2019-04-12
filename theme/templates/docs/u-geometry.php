@@ -1010,14 +1010,14 @@
 				<dd>
 					<span class="file">u-geometry.js</span> +
 					<span class="file">u-dom.js</span> +
-					<span class="file">u-dom-desktop_ie10.js</span>
+					<span class="file">u-dom-desktop_ie.js</span>
 				</dd>
 
 				<dt>desktop_ie9</dt>
 				<dd>
 					<span class="file">u-geometry.js</span> +
 					<span class="file">u-dom.js</span> + 
-					<span class="file">u-dom-desktop_ie10.js</span>
+					<span class="file">u-dom-desktop_ie.js</span>
 				</dd>
 
 				<dt>desktop_light</dt>

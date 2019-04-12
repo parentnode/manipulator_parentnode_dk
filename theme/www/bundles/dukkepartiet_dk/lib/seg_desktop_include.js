@@ -18,4 +18,4 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-system
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie10.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie.js"></script>');
