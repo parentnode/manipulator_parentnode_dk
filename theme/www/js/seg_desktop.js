@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.1 Copyright 2016 http://manipulator.parentnode.dk
-asset-builder @ 2019-04-12 12:23:03
+asset-builder @ 2019-04-23 22:53:18
 */
 
 /*seg_desktop_include.js*/
@@ -2305,7 +2305,7 @@ Util.Form = u.f = new function() {
 				min = Number(u.cv(iN.field, "min"));
 				max = Number(u.cv(iN.field, "max"));
 				min = min ? min : 8;
-				max = max ? max : 20;
+				max = max ? max : 255;
 				pattern = iN.getAttribute("pattern");
 				compare_to = iN.getAttribute("data-compare-to");
 				if(
@@ -4808,32 +4808,6 @@ u.injectGeolocation = function(node) {
 }
 
 
-/*u-settings.js*/
-u.txt["share"] = "Share this page";
-u.txt["share-info-headline"] = "(How do I share?)";
-u.txt["share-info-txt"] = "We have not included social media plugins on this site, because they are frequently abused to collect data about you. Also we don't want to promote some channels over others. Instead, just copy the link and share it wherever you find relevant.";
-u.txt["share-info-ok"] = "OK";
-u.txt["readmore"] = "Read more.";
-u.txt["readstate-not_read"] = "Click to mark as read";
-u.txt["readstate-read"] = "Read";
-u.txt["add_comment"] = "Add comment";
-u.txt["comment"] = "Comment";
-u.txt["cancel"] = "Cancel";
-u.txt["login_to_comment"] = '<a href="/login">Login</a> or <a href="/signup">Sign up</a> to add comments.';
-u.txt["relogin"] = "Your session timed out - please login to continue.";
-u.txt["terms-headline"] = "We love <br />cookies and privacy";
-u.txt["terms-accept"] = "Accept";
-u.txt["terms-details"] = "Details";
-u.txt["smartphone-switch-headline"] = "Hello curious";
-u.txt["smartphone-switch-text"] = [
-	"If you are looking for a mobile version of this site, using an actual mobile phone is a better starting point.",
-	"We care about our endusers and <em>one-size fits one device</em>, the parentNode way, provides an optimized user experience with a smaller footprint, because it doesn't come with all sizes included.",
-	"But, since it is our mission to accommodate users, feel free to switch to the Smartphone segment and see if it serves your purpose better for the moment. We'll make sure to leave you with an option to return back to the Desktop segment.",
-];
-u.txt["smartphone-switch-bn-hide"] = "Hide";
-u.txt["smartphone-switch-bn-switch"] = "Go to Smartphone version";
-
-
 /*i-login.js*/
 Util.Objects["login"] = new function() {
 	this.init = function(scene) {
@@ -4848,6 +4822,7 @@ Util.Objects["login"] = new function() {
 			this._form.fields["username"].focus();
 			page.cN.scene = this;
 			u.showScene(this);
+			page.acceptCookies();
 			page.resized();
 		}
 		scene.ready();
@@ -5133,19 +5108,17 @@ u.fontsReady = function(node, fonts, _options) {
 	var loadkey = u.randomString(8);
 	if(window["_man_fonts_"].fontApi) {
 		window["_man_fonts_"+loadkey] = {};
-		window["_man_fonts_"+loadkey].t_timeout = u.t.setTimer(window["_man_fonts_"+loadkey], "checkFontsStatus", max_time);
 	}
 	else {
 		window["_man_fonts_"+loadkey] = u.ae(document.body, "div");
 		window["_man_fonts_"+loadkey].basenodes = {};
 	}
 	window["_man_fonts_"+loadkey].nodes = [];
+	window["_man_fonts_"+loadkey].t_timeout = u.t.setTimer(window["_man_fonts_"+loadkey], "fontCheckTimeout", max_time);
 	window["_man_fonts_"+loadkey].loadkey = loadkey;
 	window["_man_fonts_"+loadkey].callback_node = node;
-	window["_man_fonts_"+loadkey].callback_name = callback_loaded;
+	window["_man_fonts_"+loadkey].callback_loaded = callback_loaded;
 	window["_man_fonts_"+loadkey].callback_timeout = callback_timeout;
-	window["_man_fonts_"+loadkey].max_time = max_time;
-	window["_man_fonts_"+loadkey].start_time = new Date().getTime();
 	for(i = 0; i < fonts.length; i++) {
 		font = fonts[i];
 		font.style = font.style || "normal";
@@ -5160,8 +5133,8 @@ u.fontsReady = function(node, fonts, _options) {
 			node = {};
 		}
 		else {
-			if(!window["_man_fonts_"+loadkey].basenodes[font.style+font.weight]) {
-				window["_man_fonts_"+loadkey].basenodes[font.style+font.weight] = u.ae(window["_man_fonts_"+loadkey], "span", {"html":"I'm waiting for your fonts to load!","style":"font-family: Times !important; font-style: "+font.style+" !important; font-weight: "+font.weight+" !important; font-size: "+font.size+" !important; line-height: 1em !important; opacity: 0 !important;"});
+			if(!window["_man_fonts_"+loadkey].basenodes[u.normalize(font.style+font.weight)]) {
+				window["_man_fonts_"+loadkey].basenodes[u.normalize(font.style+font.weight)] = u.ae(window["_man_fonts_"+loadkey], "span", {"html":"I'm waiting for your fonts to load!","style":"font-family: Times !important; font-style: "+font.style+" !important; font-weight: "+font.weight+" !important; font-size: "+font.size+" !important; line-height: 1em !important; opacity: 0 !important;"});
 			}
 			node = u.ae(window["_man_fonts_"+loadkey], "span", {"html":"I'm waiting for your fonts to load!","style":"font-family: '"+font.family+"', Times !important; font-style: "+font.style+" !important; font-weight: "+font.weight+" !important; font-size: "+font.size+" !important; line-height: 1em !important; opacity: 0 !important;"});
 		}
@@ -5191,11 +5164,36 @@ u.fontsReady = function(node, fonts, _options) {
 					}
 				}.bind(node));
 			}
-			else {
-			}
 		}
 		if(fun(this.checkFontsStatus)) {
 			this.checkFontsStatus();
+		}
+	}
+	window["_man_fonts_"+loadkey].checkFontsFallback = function() {
+		var basenode, i, node;
+		for(i = 0; i < this.nodes.length; i++) {
+			node = this.nodes[i];
+			basenode = this.basenodes[u.normalize(node.font_style+node.font_weight)];
+			if(node.offsetWidth != basenode.offsetWidth || node.offsetHeight != basenode.offsetHeight) {
+				window["_man_fonts_"].fonts[node.font_id].status = "loaded";
+			}
+		}
+		this.t_fallback = u.t.setTimer(this, "checkFontsFallback", 30);
+		if(fun(this.checkFontsStatus)) {
+			this.checkFontsStatus();
+		}
+	}
+	window["_man_fonts_"+loadkey].fontCheckTimeout = function(event) {
+		u.t.resetTimer(this.t_fallback);
+		delete window["_man_fonts_"+this.loadkey];
+		if(this.parentNode) {
+			this.parentNode.removeChild(this);
+		}
+		if(fun(this.callback_node[this.callback_timeout])) {
+			this.callback_node[this.callback_timeout](this.nodes);
+		}
+		else if(fun(this.callback_node[this.callback_loaded])) {
+			this.callback_node[this.callback_loaded](this.nodes);
 		}
 	}
 	window["_man_fonts_"+loadkey].checkFontsStatus = function(event) {
@@ -5203,51 +5201,23 @@ u.fontsReady = function(node, fonts, _options) {
 		for(i = 0; i < this.nodes.length; i++) {
 			node = this.nodes[i];
 			if(window["_man_fonts_"].fonts[node.font_id].status == "waiting") {
-				if(this.start_time + this.max_time <= new Date().getTime()) {
-					if(fun(this.callback_node[this.callback_timeout])) {
-						this.callback_node[this.callback_timeout]();
-					}
-					else if(fun(this.callback_node[this.callback_name])) {
-						this.callback_node[this.callback_name]();
-					}
-					u.t.resetTimer(this.t_timeout);
-					delete window["_man_fonts_"+this.loadkey];
-				}
 				return;
 			}
 		}
-		if(fun(this.callback_node[this.callback_name])) {
-			this.callback_node[this.callback_name]();
-		}
 		u.t.resetTimer(this.t_timeout);
+		u.t.resetTimer(this.t_fallback);
 		delete window["_man_fonts_"+this.loadkey];
-	}
-	window["_man_fonts_"+loadkey].checkFontsFallback = function() {
-		var basenode, i, node, loaded = 0;
-		for(i = 0; i < this.nodes.length; i++) {
-			node = this.nodes[i];
-			basenode = this.basenodes[node.font_style+node.font_weight];
-			if(node.offsetWidth != basenode.offsetWidth || node.offsetHeight != basenode.offsetHeight) {
-				loaded++;
-			}
-		}
-		if(loaded == this.nodes.length) {
-			if(fun(this.callback_node[this.callback_name])) {
-				this.callback_node[this.callback_name]();
-			}
+		if(this.parentNode) {
 			this.parentNode.removeChild(this);
 		}
-		else {
-			if(this.start_time + this.max_time > new Date().getTime()) {
-				u.t.setTimer(this, "checkfonts", 30);
+		if(fun(this.callback_node[this.callback_loaded])) {
+			if(this.fontApi) {
+				this.callback_node[this.callback_loaded](this.nodes);
 			}
 			else {
-				if(fun(this.callback_node[this.callback_timeout])) {
-					this.callback_node[this.callback_timeout]();
-				}
-				else if(fun(this.callback_node[this.callback_name])) {
-					this.callback_node[this.callback_name]();
-				}
+				setTimeout(function() {
+					this.callback_node[this.callback_loaded](this.nodes); 
+				}.bind(this), 250);
 			}
 		}
 	}
