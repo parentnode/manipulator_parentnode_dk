@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.2-sanctumananda Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-04-26 14:41:57
+js-merged @ 2019-04-30 19:14:15
 */
 
 /*seg_desktop_include.js*/
@@ -1264,6 +1264,7 @@ Util.Events = u.e = new function() {
 			}
 			if(this.e_drag || this.e_swipe) {
 				u.e.addMoveEvent(this, u.e._pick);
+				u.e.addEndEvent(this, u.e._cancelPick);
 			}
 			if(this.e_scroll) {
 				u.e.addMoveEvent(this, u.e._scrollStart);
@@ -1551,8 +1552,9 @@ u.e.resetDragEvents = function(node) {
 	this.removeEvent(node, "touchmove", this._drag);
 	this.removeEvent(node, "mouseup", this._drop);
 	this.removeEvent(node, "touchend", this._drop);
-	this.removeEvent(node, "mouseout", this._drop_out);
-	this.removeEvent(node, "mouseover", this._drop_over);
+	this.removeEvent(node, "mouseup", this._cancelPick);
+	this.removeEvent(node, "touchend", this._cancelPick);
+	this.removeEvent(node, "mouseout", this._dropOut);
 	this.removeEvent(node, "mousemove", this._scrollStart);
 	this.removeEvent(node, "touchmove", this._scrollStart);
 	this.removeEvent(node, "mousemove", this._scrolling);
@@ -1675,7 +1677,7 @@ u.e._pick = function(event) {
 				// 	
 				this._dropOutDrag = u.e._drag;
 				this._dropOutDrop = u.e._drop;
-				u.e.addOutEvent(this, u.e._drop_out);
+				u.e.addOutEvent(this, u.e._dropOut);
 			}
 		}
 	}
@@ -1706,7 +1708,7 @@ u.e._drag = function(event) {
 	}
 	if(this.e_swipe) {
 		if(this.only_horizontal) {
-			if(this.current_xps < 0) {
+			if(this.current_xps < 0 || this.current_xps === 0 && this.current_x < 0) {
 				this.swiped = "left";
 			}
 			else {
@@ -1714,7 +1716,7 @@ u.e._drag = function(event) {
 			}
 		}
 		else if(this.only_vertical) {
-			if(this.current_yps < 0) {
+			if(this.current_yps < 0 || this.current_yps === 0 && this.current_y < 0) {
 				this.swiped = "up";
 			}
 			else {
@@ -1856,7 +1858,7 @@ u.e._drop = function(event) {
 		this[this.callback_dropped](event);
 	}
 }
-u.e._drop_out = function(event) {
+u.e._dropOut = function(event) {
 	this._drop_out_id = u.randomString();
 	document["_DroppedOutNode" + this._drop_out_id] = this;
 	eval('document["_DroppedOutMove' + this._drop_out_id + '"] = function(event) {document["_DroppedOutNode' + this._drop_out_id + '"]._dropOutDrag(event);}');
@@ -1865,6 +1867,12 @@ u.e._drop_out = function(event) {
 	u.e.addEvent(document, "mousemove", document["_DroppedOutMove" + this._drop_out_id]);
 	u.e.addEvent(this, "mouseover", document["_DroppedOutOver" + this._drop_out_id]);
 	u.e.addEvent(document, "mouseup", document["_DroppedOutEnd" + this._drop_out_id]);
+}
+u.e._cancelPick = function(event) {
+	u.e.resetDragEvents(this);
+	if(fun(this.pickCancelled)) {
+		this.pickCancelled(event);
+	}
 }
 u.e.setDragBoundaries = function(node, boundaries) {
 	if((boundaries.constructor && boundaries.constructor.toString().match("Array")) || (boundaries.scopeName && boundaries.scopeName != "HTML")) {
@@ -1901,7 +1909,7 @@ u.e.setDragBoundaries = function(node, boundaries) {
 		if(document.readyState && document.readyState == "interactive") {
 			debug_bounds.innerHTML = "WARNING - injected on DOMLoaded"; 
 		}
-		u.bug("node: "+u.nodeId(node)+" in (" + u.absX(node) + "," + u.absY(node) + "), (" + (u.absX(node)+node.offsetWidth) + "," + (u.absY(node)+node.offsetHeight) +")");
+		u.bug("node: ", node, " in (" + u.absX(node) + "," + u.absY(node) + "), (" + (u.absX(node)+node.offsetWidth) + "," + (u.absY(node)+node.offsetHeight) +")");
 		u.bug("boundaries: (" + node.start_drag_x + "," + node.start_drag_y + "), (" + node.end_drag_x + ", " + node.end_drag_y + ")");
 	}
 	node._x = node._x ? node._x : 0;
