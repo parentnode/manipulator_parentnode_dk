@@ -744,7 +744,7 @@ map.loaded = function() {
 				<h3>Main file</h3>
 				<ul>
 					<!-- specify main js file (like: u-dom.js) -->
-					<li><span class="file">u-googlemap.js</span></li>
+					<li><span class="file">u-googlemaps.js</span></li>
 				</ul>
 			</div>
 
