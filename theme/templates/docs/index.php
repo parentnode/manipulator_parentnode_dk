@@ -132,6 +132,10 @@
 				<p>Ajax navigation controller.</p>
 			</li>
 			<li>
+				<h3><a href="/docs/u-overlay">Overlay</a></h3>
+				<p>Inject a customizable overlay.</p>
+			</li>
+			<li>
 				<h3><a href="/docs/u-period">Period</a></h3>
 				<p>Time period formatting.</p>
 			</li>

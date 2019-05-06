@@ -1,0 +1,48 @@
+*:focus {outline: none;}
+
+.legend {padding: 0 0 30px 50px;}
+.legend > p {width: 250px; margin: 0 0 5px; padding: 5px 9px; border-radius: 4px;}
+.red {background-color: red;}
+.green {background-color: green}
+.blue {background-color: blue; color: #ffffff;}
+.beige {background-color: beige;}
+
+#content .scene ul > li {padding-left: 50px;}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: green;
+}
+.overlay .close {
+	position: absolute;
+	right: 0;
+	top: 0px;
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	cursor: pointer;
+}
+
+.overlay .header {
+	background-color: beige;
+	cursor: move;
+}
+
+.overlay.content_scroll .content {
+	overflow-y: scroll;
+}
+
+
+.overlay.nodrag .header,
+.overlay.fullsize .header {
+	cursor: default;
+}
+
+.overlay .overflow {
+	height: 450px;
+	width: 250px;
+	margin: 0 auto;
+	background-color: blue;
+}
