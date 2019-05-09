@@ -28,7 +28,7 @@ Util.Objects["request"] = new function() {
 				node.div = this;
 
 				node.response = function(response, request_id) {
-					
+
 					// u.bug("response:" + this.__url);
 					// console.log(response);
 					// console.log(typeof(response));
@@ -78,7 +78,7 @@ Util.Objects["request"] = new function() {
 						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
 					}
 					// responseType blob
-					else if(!this.shouldtimeout && this.__response_type == "blob" && this[request_id].request_url.match(/\.blob/i) && typeof(response) == "object" && response.type == "text/html") {
+					else if(!this.shouldtimeout && this.__response_type == "blob" && this[request_id].request_url.match(/\.blob/i) && typeof(response) == "object" && response.type.match(/^text\/html/i)) {
 
 						// read blob and inject html
 						this.FileReader = new FileReader();
@@ -119,7 +119,7 @@ Util.Objects["request"] = new function() {
 					}
 					else {
 
-						u.bug("error:" + response.isJSON + ":" + this[request_id].request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value);
+						u.bug("error:" + response.isJSON + ":" + this[request_id].request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value, response.type);
 
 						u.ac(this, "testfailed");
 						this.innerHTML += " - async:" + u.cv(this, "async") + " - method:" + u.cv(this, "method") + " - send:" + u.cv(this, "send") + " - timeout:" + u.cv(this, "timeout") + " - request invalid";
@@ -131,8 +131,8 @@ Util.Objects["request"] = new function() {
 				}
 
 				node.responseError = function(response, request_id) {
-					u.bug("error response:" + this.__url)
-					console.log(response)
+					// u.bug("error response:" + this.__url)
+					// console.log(response)
 
 					u.rc(this, "waiting");
 
@@ -218,7 +218,7 @@ Util.Objects["request"] = new function() {
 				}
 
 //				u.bug("request:" + node.__url);
-//				console.log(settings);
+				// console.log(settings);
 				u.request(node, node.__url, settings);
 
 			}
