@@ -1,5 +1,5 @@
 
-/*seg_tablet_include.js*/
+/*seg_smartphone_include.js*/
 
 /*u.js*/
 if(!u || !Util) {
@@ -1689,6 +1689,8 @@ u.e._drag = function(event) {
 	}
 	this.current_xps = Math.round(((this.current_x - this.move_last_x) / (event.timeStamp - this.move_timestamp)) * 1000);
 	this.current_yps = Math.round(((this.current_y - this.move_last_y) / (event.timeStamp - this.move_timestamp)) * 1000);
+	this.last_x_distance_travelled = (this.current_xps) ? this.current_x - this.move_last_x : this.last_x_distance_travelled;
+	this.last_y_distance_travelled = (this.current_yps) ? this.current_y - this.move_last_y : this.last_y_distance_travelled;
 	this.move_timestamp = event.timeStamp;
 	this.move_last_x = this.current_x;
 	this.move_last_y = this.current_y;
@@ -1704,7 +1706,7 @@ u.e._drag = function(event) {
 	}
 	if(this.e_swipe) {
 		if(this.only_horizontal) {
-			if(this.current_xps < 0 || this.current_xps === 0 && this.current_x < 0) {
+			if(this.current_xps < 0 || this.current_xps === 0 && this.last_x_distance_travelled < 0) {
 				this.swiped = "left";
 			}
 			else {
@@ -1712,7 +1714,7 @@ u.e._drag = function(event) {
 			}
 		}
 		else if(this.only_vertical) {
-			if(this.current_yps < 0 || this.current_yps === 0 && this.current_y < 0) {
+			if(this.current_yps < 0 || this.current_yps === 0 && this.last_y_distance_travelled < 0) {
 				this.swiped = "up";
 			}
 			else {
@@ -3545,6 +3547,107 @@ Util.History = u.h = new function() {
 	this.resolveCurrentUrl = function() {
 		return !location.hash ? this.getCleanUrl(location.href) : this.getCleanHash(location.hash);
 	}
+}
+
+
+/*u-overlay.js*/
+u.overlay = function (_options) {
+	var title = "Overlay";
+	var drag = true;
+	var width = 400;
+	var height = 400;
+	var content_scroll = false;
+	var classname = "";
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "title"       : title          = _options[_argument]; break;
+				case "drag"        : drag           = _options[_argument]; break;
+				case "class"       : classname      = _options[_argument]; break;
+				case "width"       : width          = _options[_argument]; break;
+				case "height"      : height         = _options[_argument]; break;
+				case "content_scroll" : content_scroll    = _options[_argument]; break;
+			}
+		}
+	}
+	if (width > 500) {
+		classname = " large " + classname;
+	}
+	else {
+		classname = " small " + classname;
+	}
+	if (content_scroll) {
+		classname += "content_scroll"
+	}
+	var overlay = u.ae(document.body, "div", {"class": "overlay" + classname, "tabindex":"-1"});
+	u.ass(overlay, {
+		"width": width + "px",
+		"height": height + "px",
+		"left": ((u.browserW() - width) / 2) + "px",
+		"top": ((u.browserH() - height) / 2) + "px",
+	});
+	overlay.protection = u.ae(document.body, "div", {"class": "overlay_protection"});
+	if (window._overlay_stack_index) {
+		u.ass(overlay.protection, { "z-index": window._overlay_stack_index});
+		u.ass(overlay, { "z-index": window._overlay_stack_index + 1 });
+	}
+	window._overlay_stack_index = Number(u.gcs(overlay, "z-index")) + 2;
+	u.as(document.body, "overflow", "hidden");
+	overlay._resized = function (event) {
+		u.ass(this, {
+			"left": ((u.browserW() - this.w) / 2) + "px",
+			"top": ((u.browserH() - this.h) / 2) + "px",
+		});
+		u.ass(this.div_content, {
+			"height": ((this.offsetHeight - this.div_header.offsetHeight) - this.div_footer.offsetHeight) + "px"
+		});
+		if(fun(this.resized)) {
+			this.resized(event);
+		}
+	}
+	u.e.addWindowEvent(overlay, "resize", "_resized");
+	overlay.div_header = u.ae(overlay, "div", {class:"header"});
+	overlay.div_header.h2 = u.ae(overlay.div_header, "h2", {html: title});
+	overlay.div_header.overlay = overlay;
+	overlay.div_content = u.ae(overlay, "div", {class: "content"});
+	overlay.div_content.overlay = overlay;
+	overlay.div_footer = u.ae(overlay, "div", {class: "footer"});
+	overlay.div_footer.overlay = overlay;
+	overlay.w = width;
+	overlay.h = height;
+	if (drag) {
+		u.e.drag(overlay.div_header, overlay.div_header);
+		overlay._x = 0;
+		overlay._y = 0;
+		overlay.div_header.moved = function (event) {
+			var new_x = this.overlay._x + this.current_x;
+			var new_y = this.overlay._y + this.current_y;
+			u.ass(this.overlay, {
+				"transform": "translate(" + new_x + "px, " + new_y + "px)",
+			});
+		}
+		overlay.div_header.dropped = function (event) {
+			this.overlay._x += this.current_x;
+			this.overlay._y += this.current_y;
+		}
+	}
+	overlay.close = function (event) {
+		u.as(document.body, "overflow", "auto");
+		document.body.removeChild(this);
+		document.body.removeChild(this.protection);
+		if (fun (this.closed)) {
+			this.closed(event);
+		}
+	}
+	overlay.x_close = u.ae(overlay.div_header, "div", {class: "close"});
+	overlay.x_close.overlay = overlay;
+	u.ce(overlay.x_close);
+	overlay.x_close.clicked = function (event) {
+		this.overlay.close(event);
+	}
+	overlay._resized();
+	return overlay;
 }
 
 

@@ -41,6 +41,7 @@
 		<li class="test"><a href="/tests/u-keyboard">Keyboard</a></li>
 		<li class="test"><a href="/tests/u-media">Media</a></li>
 		<li class="test"><a href="/tests/u-navigation">Navigation</a></li>
+		<li class="test"><a href="/tests/u-overlay">Overlay</a></li>
 		<li class="test"><a href="/tests/u-popup">Popup</a></li>
 		<li class="test"><a href="/tests/u-scrollto">ScrollTo</a></li>
 		<li class="test"><a href="/tests/u-sortable">Sortable (started)</a></li>
