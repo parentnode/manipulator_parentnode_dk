@@ -1,5 +1,5 @@
 /*
-asset-builder @ 2019-05-14 11:16:07
+asset-builder @ 2019-05-14 12:04:35
 */
 
 /*seg_tablet_include.css*/
@@ -766,6 +766,7 @@ ul.actions a.button.primary,
 
 
 /*s-pages-active.css*/
-#content ul.actions input.button.primary:active,
-#content ul.actions a.button.primary:active {background-color: #9b001c;}
-
+#content ul.actions input.button.primary:hover,
+#content ul.actions a.button.primary:hover,
+#content .scene .pagination .next:hover,
+#content .scene .pagination .previous:hover {background-color: #9b001c;}
