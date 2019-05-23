@@ -17,8 +17,8 @@
 #content .scene.older .actions {padding-bottom: 0; padding-top: 0; border: none;}
 
 /* CHANGELOG */
-#content .scene.changelog ul.changes {list-style-position: outside; margin-left: 15px; width: 485px; list-style-type: disc;}
-#content .scene.changelog ul.changes li {font-size: 14px; padding-bottom: 7px; padding-left: 3px;}
+#content .scene.changelog ul.changes {list-style-position: outside; margin-left: 15px; list-style-type: disc;}
+#content .scene.changelog ul.changes li {font-size: 13px; padding-bottom: 7px; padding-left: 3px;}
 
 /* MILESTONES */
 #content .scene.milestones div.todolists ul.todolists {list-style: none; padding-left: 0; padding-right: 0; margin: 0;}
