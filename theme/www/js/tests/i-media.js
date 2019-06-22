@@ -10,6 +10,7 @@ Util.Objects["mediaAutoplay"] = new function() {
 
 
 		div.player.ready = function() {
+			u.bug("ready")
 
 			u.ae(this.div, "div", {html:"Autoplay:" + this.can_autoplay});
 			u.ae(this.div, "div", {html:"Autoplay, muted:" + this.can_autoplay_muted});
