@@ -409,11 +409,11 @@ Util.Objects["dom"] = new function() {
 		node = u.appendElement(div, "div", {"html":"u.contains: error"});
 		if(u.contains(div, node) && !u.contains(node, div)) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.contains: correct"});
-			div.test_results["u.nw"] = true;
+			div.test_results["u.contains"] = true;
 		}
 		else {
 			u.appendElement(div, node, {"class":"testfailed", "html":"u.contains: error"});
-			div.test_results["u.nw"] = false;
+			div.test_results["u.contains"] = false;
 		}
 
 
@@ -421,11 +421,25 @@ Util.Objects["dom"] = new function() {
 		node = u.appendElement(div, "div", {"html":"u.containsOrIs: error"});
 		if(u.containsOrIs(div, node) && !u.containsOrIs(node, div) && u.containsOrIs(div, div)) {
 			u.appendElement(div, node, {"class":"testpassed", "html":"u.containsOrIs: correct"});
-			div.test_results["u.nw"] = true;
+			div.test_results["u.containsOrIs"] = true;
 		}
 		else {
 			u.appendElement(div, node, {"class":"testfailed", "html":"u.containsOrIs: error"});
-			div.test_results["u.nw"] = false;
+			div.test_results["u.containsOrIs"] = false;
+		}
+
+
+		// elementMatches
+		node = u.appendElement(div, "div", {"class":"test1 test2 test3"});
+		
+		var match = u.elementMatches(node, ".test1.test2");
+		if(u.elementMatches(node, ".test1.test2") && !u.elementMatches(node, ".test1.test4")) {
+			u.appendElement(div, node, {"class":"testpassed", "html":"u.elementMatches: correct"});
+			div.test_results["u.elementMatches"] = true;
+		}
+		else {
+			u.appendElement(div, node, {"class":"testfailed", "html":"u.elementMatches: error"});
+			div.test_results["u.elementMatches"] = false;
 		}
 
 

@@ -2905,6 +2905,84 @@ u.ie(header, nav);</code>
 				</div>
 			</div>
 
+			<div class="function" id="Util.elementMatches">
+				<div class="header">
+					<h3>Util.elementMatches</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.elementMatches</dd>
+							<dt class="shorthand">Shorthand</dt>
+							<dd class="shorthand">u.em</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax"><span class="type">Boolean</span> = 
+								Util.elementMatches(
+									<span class="type">Node</span> <span class="var">node</span>,
+									<span class="type">String</span> <span class="var">selector</span>
+								)
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Check if <span class="var">selector</span> matches <span class="var">node</span>.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">node</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">Node</span> node to check selector against
+								</div>
+							</dd>
+							<dt><span class="var">selector</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> selector string to check
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Return values</h4>
+						<p>
+							True if <span class="var">selector</span> matches <span class="var">node</span> - or false if not.
+						</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+						<p>No examples</p>
+					</div>
+
+					<div class="dependencies">
+						<h4>Dependencies</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<p>Element.matches</p>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.nodeInList</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
