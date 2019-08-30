@@ -1,9 +1,54 @@
-#content .scene div.tests .simple {padding: 0 0 30px; border-bottom: 1px solid #000000; margin: 0 0 30px;}
-#content .scene div.tests .complex {border-bottom: 1px solid #000000; margin: 0 0 30px;}
-#content .scene div.tests .complex p {padding-left: 0; padding-right: 0;}
-#content .scene div.tests .sortable {list-style: none;}
-#content .scene div.tests .sortable li {padding: 10px; margin: 1px; border: 1px solid #dedede; color: #dedede;}
-#content .scene div.tests .simple li,
-#content .scene div.tests .sortable li.draggable {color: red; border: 1px solid red; cursor: move;}
+#content .scene div.tests > div.interactive {padding: 0 0 30px; border-bottom: 1px solid #000000; margin: 0 0 30px;}
 
-#content .scene div.tests li.target {background: green;}
+#content .scene div.tests ul.actions {padding-left: 0; padding-right: 0;}
+
+
+
+#content .scene div.tests ul.sortable {list-style: none; padding-bottom: 10px;}
+#content .scene div.tests ul.sortable > li {padding: 10px; margin: 1px; color: red; border: 1px solid red; cursor: move; 
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+#content .scene div.tests > ul.sortable li ul.passive li {padding: 10px; margin: 1px; border-color: #dedede; background: none; color: #dedede;}
+#content .scene div.tests > ul.sortable > li > ul.sortable > li {background: red; color: white;}
+#content .scene div.tests ul.sortable li.shadow {background: white;}
+#content .scene div.tests ul li.dragged {background: green;}
+
+#content .scene div.tests ul.passive li {padding: 10px; margin: 1px; border: 1px solid #dedede; color: #dedede;}
+
+
+
+#content .scene div.tests div.simple_horizontal ul li {display: inline-block; vertical-align: top;}
+
+#content .scene div.tests div.simple_multiline ul {width: 400px;}
+#content .scene div.tests div.simple_multiline ul li {display: inline-block; vertical-align: top;}
+
+#content .scene div.tests div.complex_nested h3 {padding-top: 0; padding-bottom: 0;}
+
+#content .scene div.tests div.complex_nested h3,
+#content .scene div.tests div.complex_nested li {font-size: 17px; line-height: 1.25em;}
+
+#content .scene div.tests div.complex_nested_css1 ul.target li {padding: 10px;}
+
+#content .scene div.tests div.complex_nested_css2 ul {padding: 0; margin: 0;}
+#content .scene div.tests div.complex_nested_css2 > ul {padding: 0; margin: 0 0 30px;}
+#content .scene div.tests div.complex_nested_css2 li {position: relative; padding: 0; margin: 0; border: none;  background: white; display: block;}
+#content .scene div.tests div.complex_nested_css2 li li h3 {padding-left: 40px;}
+#content .scene div.tests div.complex_nested_css2 li li li h3 {padding-left: 70px;}
+#content .scene div.tests div.complex_nested_css2 li li li li h3 {padding-left: 100px;}
+#content .scene div.tests div.complex_nested_css2 li li li li li h3 {padding-left: 130px;}
+#content .scene div.tests div.complex_nested_css2 li li li li li li h3 {padding-left: 160px;}
+#content .scene div.tests div.complex_nested_css2 li li li li li li li h3 {padding-left: 190px;}
+#content .scene div.tests div.complex_nested_css2 h3 {padding: 10px; border-bottom: 1px solid black; margin: 0;}
+#content .scene div.tests div.complex_nested_css2 li.dragged h3 {background: lightgray;}
+#content .scene div.tests div.complex_nested_css2 li.shadow {opacity: 0.8; z-index: 100;}
+#content .scene div.tests div.complex_nested_css2 ul.t3 li {display: inline-block;}
+
+
+#content .scene div.tests div.node-relations ul {display: none;}
+#content .scene div.tests div.node-order ul {display: none;}
+#content .scene div.tests div.node-position ul {display: none;}
+#content .scene div.tests div.node-relation ul {display: none;}
+
