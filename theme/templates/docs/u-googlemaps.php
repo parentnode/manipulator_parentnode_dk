@@ -265,15 +265,15 @@ u.googlemaps.map(map, [55.700716,12.44179]);
 map.loaded = function() {
 	var marker = u.googlemaps.addMarker(this, [55.720716, 12.46179]);
 
-	marker.clicked() = function() {
+	marker.clicked = function() {
 		// Called when clicked
 	}
 
-	marker.entered() = function() {
+	marker.entered = function() {
 		// Called when input hovers over marker
 	}
 
-	marker.exited() = function() {
+	marker.exited = function() {
 		// Called when input leaves marker
 	}
 }
