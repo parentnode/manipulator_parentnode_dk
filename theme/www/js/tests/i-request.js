@@ -210,11 +210,18 @@ Util.Objects["request"] = new function() {
 					settings.credentials = node.__credentials;
 				}
 				if(node.__headers) {
-					var h = node.__headers.split(":");
-					if(h.length > 1) {
-						settings.headers = {};
+					var header_sets = node.__headers.split(",");
+					settings.headers = {};
+
+					for(var i = 0; i < header_sets.length; i++) {
+						var h = header_sets[i].split(":");
 						settings.headers[h[0]] = h[1];
 					}
+
+					// if(h.length > 1) {
+					// 	settings.headers = {};
+					// 	settings.headers[h[0]] = h[1];
+					// }
 				}
 
 //				u.bug("request:" + node.__url);
