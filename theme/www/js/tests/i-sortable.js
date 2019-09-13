@@ -239,7 +239,6 @@
 				else {
 					u.ae(node_order, "div", {"class":"testfailed", "html":"scope.getNodeOrder: error"});
 				}
-				u.bug(JSON.stringify(structure));
 			}
 
 
@@ -296,7 +295,6 @@
 
 				var item_4 = u.qs(".item_4", node_relation)
 				var relation = node_relation.getNodeRelation(item_4);
-				u.bug("relation", relation)
 				if(relation == 3) {
 					u.ae(node_relation, "div", {"class":"testpassed", "html":"scope.getNodeRelation: correct"});
 				}
