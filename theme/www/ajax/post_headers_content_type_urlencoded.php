@@ -8,29 +8,19 @@ if(isset($read_access) && $read_access) {
 // get headers
 $headers = apache_request_headers();
 
-$post = file_get_contents("php://input");
-$vars = explode("&", $post);
-//print_r($vars);
+$_test = isset($_POST["test"]) ? $_POST["test"] : "";
+$_headers = isset($_POST["headers"]) ? $_POST["headers"] : "";
 
-if(count($vars) == 2) {
-
-	$_test = urldecode(preg_replace("/test=/", "", $vars[0]));
-	$_headers = urldecode(preg_replace("/headers=/", "", $vars[1]));
-	// print $_test."<br>\n";
-	// print $_headers."<br>\n";
-//
-// print_r($headers);
+if($_test && $_headers) {
 
 	list($header, $value) = explode(",", $_headers);
 
-//	print $header ." , ". $value;
 	if($_test && (
 			(isset($headers[$header]) && $headers[$header] == $value) || 
 			(isset($headers[strtolower($header)]) && $headers[strtolower($header)] == $value) || 
 			(isset($headers[ucwords(strtolower($header))]) && $headers[ucwords(strtolower($header))] == $value)
 		)
-			) {
-?>
+	) { ?>
 <div class="test"><?= $_test ?></div>
 <?
 	exit();

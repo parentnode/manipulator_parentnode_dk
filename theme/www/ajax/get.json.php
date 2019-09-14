@@ -5,7 +5,8 @@ if(isset($read_access) && $read_access) {
 }
 
 
-$test = $_GET["test"];
+$test = isset($_GET["test"]) ? $_GET["test"] : "";
+
 if($test) {
 ?>
 {"test":"<?= $test ?>"}

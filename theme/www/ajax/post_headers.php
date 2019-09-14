@@ -5,19 +5,35 @@ if(isset($read_access) && $read_access) {
 }
 
 
+function testHeaders($headers, $_headers) {
+
+
+	foreach($_headers as $_header) {
+
+		list($header, $value) = explode(":", $_header);
+
+		if(
+			!(isset($headers[$header]) && $headers[$header] == $value) && 
+			!(isset($headers[strtolower($header)]) && $headers[strtolower($header)] == $value) && 
+			!(isset($headers[ucwords(strtolower($header))]) && $headers[ucwords(strtolower($header))] == $value)
+			
+		) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 // get headers
 $headers = apache_request_headers();
-$test = $_POST["test"];
-list($header, $value) = explode(",", $_POST["headers"]);
+$_test = isset($_POST["test"]) ? $_POST["test"] : "";
+$_headers = explode(",", isset($_POST["headers"]) ? $_POST["headers"] : "");
 
-if($test && (
-			(isset($headers[$header]) && $headers[$header] == $value) || 
-			(isset($headers[strtolower($header)]) && $headers[strtolower($header)] == $value) || 
-			(isset($headers[ucwords(strtolower($header))]) && $headers[ucwords(strtolower($header))] == $value)
-		)
-	) {
+
+if($_test && testHeaders($headers, $_headers)) {
 ?>
-<div class="test"><?= $test ?></div>
+<div class="test"><?= $_test ?></div>
 <?
 }
 else {

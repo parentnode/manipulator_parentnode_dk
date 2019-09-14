@@ -18,6 +18,7 @@ Util.Objects["request"] = new function() {
 			return test_data_part.join(", ");
 		}
 		//u.bug_console_only = false;
+
 		// do one test at the time - making this many requests simultaneous will freeze most browsers and test will fail
 		div.performNextTest = function() {
 
@@ -28,155 +29,49 @@ Util.Objects["request"] = new function() {
 				node.div = this;
 
 				node.response = function(response, request_id) {
+					// u.bug("response", response);
 
-					// u.bug("response:" + this.__url);
-					// console.log(response);
-					// console.log(typeof(response));
-					// console.log(this[request_id])
-					// u.bug("request_id:" + request_id);
-					// u.bug("this[request_id].request_url:" + this[request_id].request_url);
-	//				console.log(u.qs("input", this))
-	//				return;
 
 					u.rc(this, "waiting");
 
-					// catch timeout response on request that should not time out
-					if(this.timeout && !u.qs("input", this)) {
-
-						u.ac(this, "testfailed");
-						this.innerHTML += " - async:" + u.cv(this, "async") + " - method:" + u.cv(this, "method") + " - send:" + u.cv(this, "send") + " - timeout:" + u.cv(this, "timeout") + " - responded twice";
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = false;
-
+					if(this.div.responseHandlers[this.id]) {
+						this.div.responseHandlers[this.id](this, response, request_id);
 					}
-					// responseText html
-					else if(!this.shouldtimeout && response.isHTML && !this[request_id].request_url.match(/\.json|\-redirect/i) && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
-						u.ac(this, "testpassed");
-						this.innerHTML = u.qs(".test", response).innerHTML
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-					}
-					// responseText json
-					else if(!this.shouldtimeout && response.isJSON && this[request_id].request_url.match(/.json/i) && response.test == u.qs("input", this).value) {
-						u.ac(this, "testpassed");
-						this.innerHTML = response.test;
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-					}
-					// responseType document
-					else if(!this.shouldtimeout && this.__response_type == "document" && !this[request_id].request_url.match(/\.json/i) && response.documentElement && u.qs(".test", response) && u.qs(".test", response).innerHTML == u.qs("input", this).value) {
-						u.ac(this, "testpassed");
-						this.innerHTML = u.qs(".test", response).innerHTML
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-					}
-					// responseType json
-					else if(!this.shouldtimeout && this.__response_type == "json" && this[request_id].request_url.match(/\.json/i) && typeof(response) == "object" && response.test == u.qs("input", this).value) {
-						u.ac(this, "testpassed");
-						this.innerHTML = response.test;
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-					}
-					// responseType blob
-					else if(!this.shouldtimeout && this.__response_type == "blob" && this[request_id].request_url.match(/\.blob/i) && typeof(response) == "object" && response.type.match(/^text\/html/i)) {
-
-						// read blob and inject html
-						this.FileReader = new FileReader();
-						this.FileReader.node = this;
-						this.FileReader.addEventListener("loadend", function() {
-							this.node.innerHTML = this.result;
-							u.ac(this.node, "testpassed");
-						});
-						this.FileReader.readAsText(response);
-
-						div.test_results["u.request ("+div.getTestData(this)+")"] = true;
-					}
-					// responseType arraybuffer
-					else if(!this.shouldtimeout && this.__response_type == "arraybuffer" && this[request_id].request_url.match(/\.arraybuffer/i) && typeof(response) == "object") {
-
-						var string = "";
-						// convert arraybuffer to array
-						var uInt8Array = new Uint8Array(response);
-						for(i = 0; i < uInt8Array.length; i++) {
-							// concatenate string
-							string += String.fromCharCode(uInt8Array[i]);
-						}
-
-						this.innerHTML = string;
-						u.ac(this, "testpassed");
-
-						div.test_results["u.request ("+div.getTestData(this)+")"] = true;
-					}
-					// responseType arraybuffer
-					else if(!this.shouldtimeout && response.isHTML && this.__redirect == "true" && this[request_id].request_url.match(/\-redirect/i) && typeof(response) == "object" 
-					// && this[request_id].response_url === u.qs("input[name=redirect]", this).value
-					) {
-						u.ac(this, "testpassed");
-						this.innerHTML = u.qs(".test", response).innerHTML
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-
-					}
+					// error-error handling – test responders not set up correctly
 					else {
-
-						u.bug("error:" + response.isJSON + ":" + this[request_id].request_url.match(/.json/i) + ":" + response.test + ":" + u.qs("input", this).value, response.type);
-
 						u.ac(this, "testfailed");
-						this.innerHTML += " - async:" + u.cv(this, "async") + " - method:" + u.cv(this, "method") + " - send:" + u.cv(this, "send") + " - timeout:" + u.cv(this, "timeout") + " - request invalid";
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = false;
+						this.innerHTML = "error-error - TEST ID: " + this.id + ", test responders not set up correctly";
+						this.div.test_results["u.request ("+this.div.getTestData(this)+") "] = false;
 					}
-
 					this.div.performNextTest();
+					return;
+
 				}
 
 				node.responseError = function(response, request_id) {
-					// u.bug("error response:" + this.__url)
-					// console.log(response)
+					// u.bug("error response:" + this.__url, response, this[request_id]);
 
 					u.rc(this, "waiting");
 
-					// console.log(this[request_id])
-					// console.log(this)
 
-					if(this.shouldfail) {
-
-						if(response.status == 404 && this.__url.match(/\.404/i)) {
-							u.ac(this, "testpassed");
-							this.innerHTML = "Requesting non-existing page, returns error 404";
-						}
-						else if(response.status === 0 && this.__url.match(/^http/) && !this.__credentials) {
-							u.ac(this, "testpassed");
-							this.innerHTML = "This request is supposed to fail, XMLHTTPRequest outside domain: ";
-						}
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
+					if(this.div.responseErrorHandlers[this.id]) {
+						this.div.responseErrorHandlers[this.id](this, response, request_id);
 					}
-					else if(this.shouldtimeout) {
-						u.ac(this, "testpassed");
-						this.innerHTML = "This request is supposed to timeout";
-
-						div.test_results["u.request ("+div.getTestData(this)+") "] = true;
-					}
+					// error-error handling – test responders not set up correctly
 					else {
 						u.ac(this, "testfailed");
-						div.test_results["u.request ("+div.getTestData(this)+") "] = false;
-						
-						if(response.exception) {
-							this.innerHTML = " EXCEPTION: " + response.exception;
-						}
-						else {
-							this.innerHTML = (u.cv(this, "async") ? " - async " : " - ") + u.cv(this, "method") + " request invalid";
-						}
+						this.innerHTML = "error-error - test responders not set up correctly";
+						this.div.test_results["u.request ("+this.div.getTestData(this)+") "] = false;
 					}
-
 					this.div.performNextTest();
+					return;
+
 				}
 
 				node._span = u.qs("span", node);
 				node.__url = node._span.innerHTML;
 				node.__method = u.cv(node, "method");
-				node.__data = u.f.getParams(node, (u.cv(node, "send") ? ({"send_as":u.cv(node, "send")}) : ""));
+				node.__data = u.f.getFormData(node, (u.cv(node, "send") ? ({"format":u.cv(node, "send")}) : ""));
 				node.__async = u.cv(node, "async") == "false" ? false : true;
 				node.__timeout = u.cv(node, "timeout") ? Number(u.cv(node, "timeout")) : false;
 				node.__headers = u.cv(node, "headers");
@@ -185,9 +80,6 @@ Util.Objects["request"] = new function() {
 
 				node.__redirect = u.cv(node, "redirect");
 
-				node.shouldfail = u.cv(node, "shouldfail");
-				node.shouldtimeout = u.cv(node, "shouldtimeout");
-				node.shouldnottimeout = (node.timeout && !node.shouldtimeout);
 
 
 				var settings = {};
@@ -208,6 +100,13 @@ Util.Objects["request"] = new function() {
 				}
 				if(node.__credentials) {
 					settings.credentials = node.__credentials;
+					// pass credentials flag to PHP, to enable setting appropriate CORS header for test
+					if(obj(settings.data)) {
+						settings.data.append("credentials", 1);
+					}
+					else {
+						settings.data += "&credentials=1"
+					}
 				}
 				if(node.__headers) {
 					var header_sets = node.__headers.split(",");
@@ -218,21 +117,729 @@ Util.Objects["request"] = new function() {
 						settings.headers[h[0]] = h[1];
 					}
 
-					// if(h.length > 1) {
-					// 	settings.headers = {};
-					// 	settings.headers[h[0]] = h[1];
-					// }
 				}
 
-//				u.bug("request:" + node.__url);
-				// console.log(settings);
+				// u.bug("request:" + node.__url, settings);
 				u.request(node, node.__url, settings);
 
 			}
 
 		}
 
+
+
+		div.responseHandlers = {};
+		div.responseErrorHandlers = {};
+
+
+		// Plain POST, response HTML
+		div.responseHandlers["t0"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST JSON, response json
+		div.responseHandlers["t10"] = function(node, response, request_id) {
+
+			if(response.isJSON && 
+				node[request_id].request_url.match(/.json/i) && 
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST params, response JSON
+		div.responseHandlers["t20"] = function(node, response, request_id) {
+
+			if(response.isJSON && 
+				node[request_id].request_url.match(/.json/i) && 
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST params, response JSON, SYNCHRONOUS
+		div.responseHandlers["t30"] = function(node, response, request_id) {
+
+			if(response.isJSON && 
+				node[request_id].request_url.match(/.json/i) && 
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST FormData, response HTML
+		div.responseHandlers["t40"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, response HTML
+		div.responseHandlers["t50"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, header content-type urlencoded
+		div.responseHandlers["t60"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST JSON, header content-type JSON
+		div.responseHandlers["t70"] = function(node, response, request_id) {
+
+			if(response.isHTML &&
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, custom header
+		div.responseHandlers["t80"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, multiple custom header
+		div.responseHandlers["t90"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, timeout failed
+		div.responseErrorHandlers["t100"] = function(node, response, request_id) {
+			
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to timeout";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, timeout passed
+		div.responseHandlers["t110"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, no CORS, no credentials
+		div.responseErrorHandlers["t120"] = function(node, response, request_id) {
+			
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to fail, XMLHTTPRequest outside domain";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, CORS allowed, with credentials
+		div.responseHandlers["t130"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, CORS allowed, no credentials
+		div.responseHandlers["t140"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, CORS allowed, with credentials, disallowed header
+		div.responseErrorHandlers["t150"] = function(node, response, request_id) {
+			
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to fail, XMLHTTPRequest Preflight, with credentials BUT disallowed header outside domain";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, CORS allowed, no credentials, disallowed header
+		div.responseErrorHandlers["t160"] = function(node, response, request_id) {
+			
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to fail, XMLHTTPRequest Preflight, no credentials BUT disallowed header outside domain";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, CORS allowed, with credentials, granted header
+		div.responseHandlers["t170"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST JSON, CORS allowed, with credentials, granted header
+		div.responseHandlers["t180"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST JSON, CORS allowed, no credentials, granted header
+		div.responseHandlers["t190"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, responseType document
+		div.responseHandlers["t200"] = function(node, response, request_id) {
+
+			if(response.documentElement && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, responseType JSON
+		div.responseHandlers["t210"] = function(node, response, request_id) {
+
+			if(typeof(response) == "object" &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, responseType Blob
+		div.responseHandlers["t220"] = function(node, response, request_id) {
+
+			if(typeof(response) == "object" &&
+				response.type.match(/^text\/html/i) 
+			) {
+
+				// read blob and inject html
+				node.FileReader = new FileReader();
+				node.FileReader.node = node;
+
+				node.FileReader.addEventListener("loadend", function() {
+					u.ac(this.node, "testpassed");
+					this.node.innerHTML = this.result;
+				});
+
+				node.FileReader.addEventListener("error", function() {
+					u.ac(this.node, "testfailed");
+					this.node.innerHTML += " ERROR IN TEST ID: " + this.node.id;
+				});
+				node.FileReader.readAsText(response);
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain POST, responseType arraybuffer
+		div.responseHandlers["t230"] = function(node, response, request_id) {
+
+			if(typeof(response) == "object" &&
+				response.byteLength == 55 
+			) {
+
+				var string = "";
+				// convert arraybuffer to array
+				var uInt8Array = new Uint8Array(response);
+				for(i = 0; i < uInt8Array.length; i++) {
+					// concatenate string
+					string += String.fromCharCode(uInt8Array[i]);
+				}
+
+				u.ac(node, "testpassed");
+				node.innerHTML = string;
+
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain POST, Redirect
+		div.responseHandlers["t240"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// Plain GET, response HTML
+		div.responseHandlers["t1000"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain GET, response JSON
+		div.responseHandlers["t1010"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain GET, response HTML, ASYNC
+		div.responseHandlers["t1020"] = function(node, response, request_id) {
+
+			if(response.isHTML && 
+				u.qs(".test", response) && 
+				u.qs(".test", response).innerHTML == u.qs("input", node).value
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = u.qs(".test", response).innerHTML;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain GET, response JSON, custom header
+		div.responseHandlers["t1030"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// Plain GET, timeout failed
+		div.responseErrorHandlers["t1040"] = function(node, response, request_id) {
+
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to timeout";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+		// SCRIPT, response JSON
+		div.responseHandlers["t10000"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// SCRIPT with param, response JSON
+		div.responseHandlers["t10010"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// SCRIPT with param, response JSON
+		div.responseHandlers["t10020"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// SCRIPT with param, response JSON
+		div.responseHandlers["t10030"] = function(node, response, request_id) {
+
+			if(response.isJSON &&
+				u.qs("input", node) &&
+				response.test == u.qs("input", node).value 
+			) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = response.test;
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// SCRIPT with param, response JSON
+		div.responseErrorHandlers["t10040"] = function(node, response, request_id) {
+
+			if(response.error && response.status === 0) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to timeout";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+		// POST to 404
+		div.responseErrorHandlers["t100000"] = function(node, response, request_id) {
+
+			if(response.error && response.status === 404) {
+
+				u.ac(node, "testpassed");
+				node.innerHTML = "This request is supposed to timeout";
+			}
+			else {
+
+				u.ac(node, "testfailed");
+				node.innerHTML += " ERROR IN TEST ID: " + node.id;
+			}
+
+		}
+
+
+
+
+		// Start test loop
 		div.performNextTest();
+
+
 
 	}
 
