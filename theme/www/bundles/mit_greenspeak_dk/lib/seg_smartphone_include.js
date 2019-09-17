@@ -22,6 +22,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-scroll
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-template.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-textscaler.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
