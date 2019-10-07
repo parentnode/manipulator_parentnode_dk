@@ -11,11 +11,15 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-events
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.js"></script>');
 
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation-desktop_light.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor-desktop_light.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-location-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-tags-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-prices-desktop_light.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-format-json.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');

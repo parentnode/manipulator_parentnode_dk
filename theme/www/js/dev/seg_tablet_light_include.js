@@ -14,8 +14,17 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-flash.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-custom.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-geolocation.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-htmleditor.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-location.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-tags.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-prices.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-labelstyle-inject.js"></script>');
+
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-format-json.js"></script>');
+
+// document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-fix-simple_form.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
