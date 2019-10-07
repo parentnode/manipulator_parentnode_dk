@@ -1,9 +1,24 @@
-/*#content .scene div.tests form {padding: 10px 0 5px; margin: 0 -20px 20px	; border: 1px dashed green;}*/
 
-#content .scene div.tests form h3 {font-size: 16px;}
-#content .scene div.tests form h4 {font-size: 14px;}
+/* FORMATS TEST */
+#content .scene div.tests form.combinedformats {display: none;}
 
-/*#content .scene div.tests form .field {margin-left: -28px;}
-#content .scene div.tests form .field.files {margin-left: 20px;}
-*/#content .scene div.tests form .actions {padding: 0 20px;}
 
+#content .scene div.tests form.combined {
+	position: relative;
+	margin-bottom: 50px;
+}
+
+
+#content .scene div.tests form.combined {
+	position: relative;
+	margin-bottom: 50px;
+}
+
+/* MAKE DEBUG OUTPUT STICKY FOR BETTER INSPECTION */
+#content form.combined.fixed div.debug {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+}
