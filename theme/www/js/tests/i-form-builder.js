@@ -379,68 +379,68 @@ Util.Objects["formbuilder"] = new function() {
 		u.f.init(form);
 
 		// set focus+blur on email field to test error class
-		form.fields["name_email"].focus();
-		form.fields["name_email"].blur();
+		form.inputs["name_email"].focus();
+		form.inputs["name_email"].blur();
 
-		form.fields["name_text"].focus();
-		form.fields["name_text"].blur();
-		form.fields["name_text"].val("value_text_too_long");
+		form.inputs["name_text"].focus();
+		form.inputs["name_text"].blur();
+		form.inputs["name_text"].val("value_text_too_long");
 
-		form.fields["name_checkbox"].val("value_checkbox");
+		form.inputs["name_checkbox"].val("value_checkbox");
 
 
-		u.bug("focus:" + form.fields["name_checkbox"].val())
+		u.bug("focus:" + form.inputs["name_checkbox"].val())
 
 		// IE6 debugging
-		// u.bug(form.fields["name_password"].field.innerHTML)
+		// u.bug(form.inputs["name_password"].field.innerHTML)
 		// u.ae(form, "div", {"for":"me", "id":"idd"});
 		// u.bug("query:" + u.qs("[for='me']"))
-		// u.bug(form.fields["name_string"]._label + ", " + form.fields["name_password"]._label);
+		// u.bug(form.inputs["name_string"].label + ", " + form.inputs["name_password"].label);
 
 		if(
-			form.fields["name_string"] == input_string.input &&
-			form.fields["name_string"].field == input_string.field &&
-			form.fields["name_string"]._label == input_string.label &&
-			form.fields["name_string"].val() == "value_string" &&
+			form.inputs["name_string"] == input_string.input &&
+			form.inputs["name_string"].field == input_string.field &&
+			form.inputs["name_string"].label == input_string.label &&
+			form.inputs["name_string"].val() == "value_string" &&
 
-			form.fields["name_email"] == input_email.input &&
-			form.fields["name_email"].field == input_email.field &&
-			form.fields["name_email"]._label == input_email.label &&
-			form.fields["name_email"].val() == "value_email" &&
+			form.inputs["name_email"] == input_email.input &&
+			form.inputs["name_email"].field == input_email.field &&
+			form.inputs["name_email"].label == input_email.label &&
+			form.inputs["name_email"].val() == "value_email" &&
 			u.hc(input_email.field, "error") &&
 
-			form.fields["name_password"] == input_password.input &&
-			form.fields["name_password"].field == input_password.field &&
-			form.fields["name_password"]._label == input_password.label &&
-			form.fields["name_password"].val() == "value_password" &&
+			form.inputs["name_password"] == input_password.input &&
+			form.inputs["name_password"].field == input_password.field &&
+			form.inputs["name_password"].label == input_password.label &&
+			form.inputs["name_password"].val() == "value_password" &&
 
 
-			form.fields["name_checkbox"] == input_checkbox.input &&
-			form.fields["name_checkbox"].field == input_checkbox.field &&
-			form.fields["name_checkbox"]._label == input_checkbox.label &&
-			form.fields["name_checkbox"].val() == "value_checkbox" &&
+			form.inputs["name_checkbox"] == input_checkbox.input &&
+			form.inputs["name_checkbox"].field == input_checkbox.field &&
+			form.inputs["name_checkbox"].label == input_checkbox.label &&
+			form.inputs["name_checkbox"].val() == "value_checkbox" &&
 
-			form.fields["name_text"] == input_text.input &&
-			form.fields["name_text"].field == input_text.field &&
-			form.fields["name_text"]._label == input_text.label &&
-			form.fields["name_text"].val() == "value_text_too_long" &&
+			form.inputs["name_text"] == input_text.input &&
+			form.inputs["name_text"].field == input_text.field &&
+			form.inputs["name_text"].label == input_text.label &&
+			form.inputs["name_text"].val() == "value_text_too_long" &&
 			u.hc(input_text.field, "error") &&
 
 
-			form.fields["name_select"] == input_select.input &&
-			form.fields["name_select"].field == input_select.field &&
-			form.fields["name_select"]._label == input_select.label &&
-			form.fields["name_select"].val() == "value_2" &&
+			form.inputs["name_select"] == input_select.input &&
+			form.inputs["name_select"].field == input_select.field &&
+			form.inputs["name_select"].label == input_select.label &&
+			form.inputs["name_select"].val() == "value_2" &&
 
-			form.fields["name_radiobuttons"].field._inputs[0] == input_radiobuttons.inputs[0] &&
-			form.fields["name_radiobuttons"].field == input_radiobuttons.field &&
-			form.fields["name_radiobuttons"]._label == input_radiobuttons.labels[1] &&
-			form.fields["name_radiobuttons"].field._inputs[0]._label == input_radiobuttons.labels[1] &&
-			form.fields["name_radiobuttons"].val() == "value_2" &&
+			form.inputs["name_radiobuttons"].field.inputs[0] == input_radiobuttons.inputs[0] &&
+			form.inputs["name_radiobuttons"].field == input_radiobuttons.field &&
+			form.inputs["name_radiobuttons"].label == input_radiobuttons.labels[1] &&
+			form.inputs["name_radiobuttons"].field.inputs[0].label == input_radiobuttons.labels[1] &&
+			form.inputs["name_radiobuttons"].val() == "value_2" &&
 
-			form.fields["name_files"] == input_files.input &&
-			form.fields["name_files"].field == input_files.field &&
-			form.fields["name_files"]._label == input_files.label &&
+			form.inputs["name_files"] == input_files.input &&
+			form.inputs["name_files"].field == input_files.field &&
+			form.inputs["name_files"].label == input_files.label &&
 
 			form.actions["name_submit"] == submit &&
 			form.actions["name_button"] == button
