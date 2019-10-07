@@ -1,8 +1,5 @@
-
 Util.Objects["formIndividual"] = new function() {
 	this.init = function(div) {
-
-//		u.bug_console_only = false;
 
 
 		var forms = u.qsa("form", div);
@@ -16,23 +13,25 @@ Util.Objects["formIndividual"] = new function() {
 			}
 
 
+
+
 			u.f.init(form);
 
 			// get field reference
-			for(x in form.fields) {
-				if(u.hc(form.fields[x].field, "required")) {
-					var field_required = form.fields[x].field;
+			for(x in form.inputs) {
+				if(u.hc(form.inputs[x].field, "required")) {
+					var field_required = form.inputs[x].field;
 				}
 				else {
-					var field = form.fields[x].field;
+					var field = form.inputs[x].field;
 				}
 			}
 
 			form.submitted = function(input) {
 
 				var params = u.f.getParams(this, {"send_as":"json"});
-				for(x in this.fields) {
-					if(this.fields[x].val() != params[x]) {
+				for(x in this.inputs) {
+					if(this.inputs[x].val() != params[x]) {
 						this.addDebug("form.submitted: error");
 					}
 				}
@@ -47,29 +46,31 @@ Util.Objects["formIndividual"] = new function() {
 			form.validationFailed = function(iNs) {
 				this.addDebug("form.validationFailed:" + iNs);
 				for(x in iNs) {
-					this.addDebug("input failed: value=" + this.fields[x].val().replace(/</g, "&lt;").replace(/>/g, "&gt;") + ", field:" + u.nodeId(this.fields[x]));
+					this.addDebug("input failed: value=" + this.inputs[x].val().replace(/</g, "&lt;").replace(/>/g, "&gt;") + ", field:" + u.nodeId(this.inputs[x]));
 				}
 			}
 
 			form.updated = function(iN) {
-				this.addDebug("form.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+				this.addDebug("form.updated:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 			}
 			form.changed = function(iN) {
-				this.addDebug("form.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+				this.addDebug("form.changed:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 			}
 
-			field.updated = function(iN) {
-				iN._form.addDebug("field.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
-			}
-			field.changed = function(iN) {
-				iN._form.addDebug("field.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
-			}
-			field_required.updated = function(iN) {
-				iN._form.addDebug("required field.updated:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
-			}
-			field_required.changed = function(iN) {
-				iN._form.addDebug("required field.changed:" + u.nodeId(iN) + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
-			}
+
+
+			// field.updated = function(iN) {
+			// 	iN._form.addDebug("field.updated:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			// }
+			// field.changed = function(iN) {
+			// 	iN._form.addDebug("field.changed:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			// }
+			// field_required.updated = function(iN) {
+			// 	iN._form.addDebug("required field.updated:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			// }
+			// field_required.changed = function(iN) {
+			// 	iN._form.addDebug("required field.changed:" + iN.className + " = " + iN.val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+			// }
 
 		}
 
@@ -77,50 +78,6 @@ Util.Objects["formIndividual"] = new function() {
 }
 
 
-Util.Objects["formCombined"] = new function() {
-	this.init = function(div) {
-
-		var form = u.qs("form", div);
-
-		form.debug = u.ae(form, "div", {"class":"debug"});
-		form.addDebug = function(message) {
-			this.debug.innerHTML += message + "<br>";
-			this.debug.scrollTop = this.debug.scrollTop + 25;
-		}
-
-
-		u.f.init(form);
-		form.submitted = function(input) {
-
-			var params = u.f.getParams(this, {"send_as":"json"});
-			for(x in this.fields) {
-				if(this.fields[x].val() != params[x]) {
-					this.addDebug("form.submitted: error");
-				}
-			}
-
-			this.addDebug("form.submitted: correct");
-		}
-
-		form.updated = function(iN) {
-			this.addDebug("form.updated:" + u.nodeId(iN) + " = " + iN.val());
-		}
-		form.changed = function(iN) {
-			this.addDebug("form.changed:" + u.nodeId(iN) + " = " + iN.val());
-		}
-
-		form.validationPassed = function() {
-			this.addDebug("form.validationPassed");
-		}
-		form.validationFailed = function(iNs) {
-			this.addDebug("form.validationFailed:" + iNs);
-			for(x in iNs) {
-				this.addDebug("input failed: value=" + this.fields[x].val() + ", field:" + u.nodeId(this.fields[x]));
-			}
-		}
-
-	}
-}
 
 
 	Util.Objects["_test1"] = new function() {
@@ -158,92 +115,92 @@ Util.Objects["formCombined"] = new function() {
 //				u.bug("validationFailed:" + u.nodeId(this));
 			}
 
-			form.fields["string_required"].val("");
-			form.fields["string_required"].updated = function() {
+			form.inputs["string_required"].val("");
+			form.inputs["string_required"].updated = function() {
 				u.bug("string_required updated:" + this.val())
 			}
-			form.fields["string_required"].changed = function() {
+			form.inputs["string_required"].changed = function() {
 				u.bug("string_required changed:" + this.val())
 			}
-			form.fields["string_required"].focused = function() {
+			form.inputs["string_required"].focused = function() {
 				u.bug("string_required focused")
 			}
-			form.fields["string_required"].blurred = function() {
+			form.inputs["string_required"].blurred = function() {
 				u.bug("string_required blurred")
 			}
 
 
 			// Number
-			form.fields["number_required"].val(123);
-			form.fields["number_required"].updated = function() {
+			form.inputs["number_required"].val(123);
+			form.inputs["number_required"].updated = function() {
 				u.bug("number_required updated:" + this.val())
 			}
-			form.fields["number_required"].changed = function() {
+			form.inputs["number_required"].changed = function() {
 				u.bug("number_required changed:" + this.val())
 			}
-			form.fields["number_required"].focused = function() {
+			form.inputs["number_required"].focused = function() {
 				u.bug("number_required focused")
 			}
-			form.fields["number_required"].blurred = function() {
+			form.inputs["number_required"].blurred = function() {
 				u.bug("number_required blurred")
 			}
 
 
 			// CHECKBOX
-			// form.fields["checkbox_required"].val(true);
-			// form.fields["checkbox_required"].updated = function() {
+			// form.inputs["checkbox_required"].val(true);
+			// form.inputs["checkbox_required"].updated = function() {
 			// 	u.bug("checkbox_required updated:" + this.val())
 			// }
-			// form.fields["checkbox_required"].changed = function() {
+			// form.inputs["checkbox_required"].changed = function() {
 			// 	u.bug("checkbox_required changed:" + this.val())
 			// }
-			// form.fields["checkbox_required"].focused = function() {
+			// form.inputs["checkbox_required"].focused = function() {
 			// 	u.bug("checkbox_required focused")
 			// }
-			// form.fields["checkbox_required"].blurred = function() {
+			// form.inputs["checkbox_required"].blurred = function() {
 			// 	u.bug("checkbox_required blurred")
 			// }
 
 
 			// RADIO BUTTON
-			form.fields["radio_required"].val();
-			form.fields["radio_required"].updated = function(input) {
+			form.inputs["radio_required"].val();
+			form.inputs["radio_required"].updated = function(input) {
 				u.bug("radio_required updated:" + this.val() + ", happeded on:" + u.nodeId(input) + ", this.used:" + this.used)
 			}
-			form.fields["radio_required"].changed = function(input) {
+			form.inputs["radio_required"].changed = function(input) {
 				u.bug("radio_required changed:" + this.val() + ", happeded on:" + u.nodeId(input))
 			}
-			form.fields["radio_required"].focused = function(input) {
+			form.inputs["radio_required"].focused = function(input) {
 				u.bug("radio_required focused:" + this.val() + ", happeded on:" + u.nodeId(input))
 			}
-			form.fields["radio_required"].blurred = function(input) {
+			form.inputs["radio_required"].blurred = function(input) {
 				u.bug("radio_required blurred:" + this.val() + ", happeded on:" + u.nodeId(input))
 			}
 
 
-			// form.fields["select_required"].updated = function() {
+			// form.inputs["select_required"].updated = function() {
 			// 	u.bug("select_required updated:" + this.val() + ", this.used:" + this.used)
 			// }
-			// form.fields["select_required"].changed = function() {
+			// form.inputs["select_required"].changed = function() {
 			// 	u.bug("select_required changed:" + this.val())
 			// }
-			// form.fields["select_required"].focused = function() {
+			// form.inputs["select_required"].focused = function() {
 			// 	u.bug("select_required focused:" + this.val())
 			// }
-			// form.fields["select_required"].blurred = function() {
+			// form.inputs["select_required"].blurred = function() {
 			// 	u.bug("select_required blurred:" + this.val())
 			// }
 
-			// form.fields["customfield_required"].updated = function() {
+			// form.inputs["customfield_required"].updated = function() {
 			// 	u.bug("customfield_required updated:" + this.val() + ", this.used:" + this.used)
 			// }
-			// form.fields["customfield_required"].changed = function() {
+			// form.inputs["customfield_required"].changed = function() {
 			// 	u.bug("customfield_required changed:" + this.val())
 			// }
-			// form.fields["customfield_required"].focused = function() {
+			// form.inputs["customfield_required"].focused = function() {
 			// 	u.bug("customfield_required focused:" + this.val())
 			// }
-			// form.fields["customfield_required"].blurred = function() {
+			// form.inputs["customfield_required"].blurred = function() {
 			// 	u.bug("customfield_required blurred:" + this.val())
 			// }
 
@@ -251,21 +208,21 @@ Util.Objects["formCombined"] = new function() {
 			form.actions["button_name"].clicked = function(event) {
 //				u.bug("button clicked:" + u.nodeId(this));
 
-				this.form.fields["string_required"].val("auto complete string");
-				this.form.fields["email_required"].val("auto@complete.email");
-				this.form.fields["text_required"].val("auto complete text");
-				this.form.fields["select_required"].val("option_2");
+				this.form.inputs["string_required"].val("auto complete string");
+				this.form.inputs["email_required"].val("auto@complete.email");
+				this.form.inputs["text_required"].val("auto complete text");
+				this.form.inputs["select_required"].val("option_2");
 
-				this.form.fields["number_required"].val(123.5);
-				this.form.fields["tel_required"].val("+45 123-456");
-				this.form.fields["integer_required"].val(123);
-				this.form.fields["password_required"].val("password");
+				this.form.inputs["number_required"].val(123.5);
+				this.form.inputs["tel_required"].val("+45 123-456");
+				this.form.inputs["integer_required"].val(123);
+				this.form.inputs["password_required"].val("password");
 
-				this.form.fields["boolean_required"].val(true);
-				this.form.fields["checkbox_required"].val(true);
-				this.form.fields["radio_required"].val(true);
+				this.form.inputs["boolean_required"].val(true);
+				this.form.inputs["checkbox_required"].val(true);
+				this.form.inputs["radio_required"].val(true);
 
-//				this.form.fields["customfield_required"].val("customfield");
+//				this.form.inputs["customfield_required"].val("customfield");
 
 				var params = u.f.getParams(this.form);
 				u.request(this.form, "/ajax/showall.php", {"params":params, "method":"get"});
@@ -323,10 +280,10 @@ Util.Objects["formCombined"] = new function() {
 			if(
 				form._test_params &&
 				form._test_params.test2_string1 == undefined &&
-				form._test_params.test2_string2 == form.fields["test2_string2"].val() &&
-				form._test_params.test2_string3 == form.fields["test2_string3"].val() &&
+				form._test_params.test2_string2 == form.inputs["test2_string2"].val() &&
+				form._test_params.test2_string3 == form.inputs["test2_string3"].val() &&
 				form._test_params.test2_string4 == undefined &&
-				form._test_params.test2_string5 == form.fields["test2_string5"].val()
+				form._test_params.test2_string5 == form.inputs["test2_string5"].val()
 
 				) {
 					u.bug("Test2 form - submit passed", "green");
@@ -368,13 +325,13 @@ Util.Objects["formCombined"] = new function() {
 
 			if(
 				form._test_params &&
-				form._test_params.name == form.fields["name"].val() &&
-				form._test_params.apps["app1"]["id"] == form.fields["apps[app1][id]"].val() &&
-				form._test_params.apps["app1"]["name"] == form.fields["apps[app1][name]"].val() &&
-				form._test_params.apps["app2"]["id"] == form.fields["apps[app2][id]"].val() &&
+				form._test_params.name == form.inputs["name"].val() &&
+				form._test_params.apps["app1"]["id"] == form.inputs["apps[app1][id]"].val() &&
+				form._test_params.apps["app1"]["name"] == form.inputs["apps[app1][name]"].val() &&
+				form._test_params.apps["app2"]["id"] == form.inputs["apps[app2][id]"].val() &&
 				form._test_params.apps["app2"]["test"] == undefined &&
-				form._test_params.apps["app3"]["id"]["gas"]["hund"]["trold"] == form.fields["apps[app3][id][gas][hund][trold]"].val() &&
-				form._test_params.apps["app4"] == form.fields["apps[app4]"].val()
+				form._test_params.apps["app3"]["id"]["gas"]["hund"]["trold"] == form.inputs["apps[app3][id][gas][hund][trold]"].val() &&
+				form._test_params.apps["app4"] == form.inputs["apps[app4]"].val()
 				) {
 					u.bug("Test4 form - submit passed", "green");
 			}
