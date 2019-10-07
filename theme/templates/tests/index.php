@@ -14,6 +14,7 @@
 		<li class="test"><a href="/tests/u-debug">Debug</a></li>
 		<li class="test"><a href="/tests/u-dom">DOM</a></li>
 		<li class="test"><a href="/tests/u-form-builder">Form builder</a></li>
+		<li class="test"><a href="/tests/u-form-formats">Form, data formats</a></li>
 		<li class="test"><a href="/tests/u-geometry">Geometry</a></li>
 		<li class="test"><a href="/tests/u-init">Init</a></li>
 		<li class="test"><a href="/tests/u-math">Math</a></li>
@@ -34,7 +35,8 @@
 		<li class="test"><a href="/tests/u-events-movements">Movements events (drag, swipe)</a></li>
 		<li class="test"><a href="/tests/u-events-browser">Browser events</a></li>
 		<li class="test"><a href="/tests/u-flash">Flash</a></li>
-		<li class="test"><a href="/tests/u-form">Form</a></li>
+		<li class="test"><a href="/tests/u-form-combined">Form (Combined)</a></li>
+		<li class="test"><a href="/tests/u-form-individual">Form (Individual inputs)</a></li>
 		<li class="test"><a href="/tests/u-googleanalytics">Google Analytics</a></li>
 		<li class="test"><a href="/tests/u-googlemaps">Google Maps</a></li>
 		<li class="test"><a href="/tests/u-history">History</a></li>
