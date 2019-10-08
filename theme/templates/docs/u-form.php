@@ -1,17 +1,34 @@
 <div class="scene docpage i:docpage">
 	<h1>Form</h1>
 	<p>
-		Advanced form controller and API. Grants full control of the HTML form elements.
+		Advanced form controller and UI API. Grants you full control of the HTML form elements and enables you
+		to build perfect form interfaces for your users.
 	</p>
 	<p>
-		Full type validation, and event callbacks for any user interaction.
+		It includes a full spectrum type validation (string, number, integer, tel, email, text, select, radiobuttons, 
+		checkbox, password, date, datetime, files, location and HTML editor), min and max values, patterns 
+		and a neat "compare to" property, allowing you to easily create validated "re-type you email/password/string" 
+		inputs.
 	</p>
 	<p>
-		Helper methods to customize form design and interaction responses.
+		The form module adds and removes interaction (<em>hover</em>, <em>focus</em>) and validation (<em>correct</em>, 
+		<em>error</em>, <em>default</em>) classes for your convenience and dispatches event 
+		callbacks for any user interaction (<em>changed</em>, <em>updated</em>, <em>preSubmitted</em>, <em>submitted</em>, <em>resat</em>, <em>focused</em>,
+		<em>blurred</em>, <em>validationPassed</em>, <em>validationFailed</em>) – you decide the level for control by defining the callback methods you need.
 	</p>
 	<p>
-		Util.Form is based on the <a href="http://templator.parentnode.dk/docs/form" target="_blank">Templator HTML Form syntax</a>, 
+		The modular design and the helper methods allow you to customize form design and interaction responses to meet
+		any design request.
+	</p>
+	<p>
+		Util.Form is based on the <a href="https://templator.parentnode.dk/docs/form" target="_blank">Templator HTML Form syntax</a>, 
 		ensuring full HTML fallback when no JavaScript is available.
+	</p>
+	<p>
+		In Util.Form we are working with terms, such as <em>form</em> (the form or pseudo form), <em>field</em> (the div that
+		wraps an input/label/hint collection), <em>inputs</em> (the actual HTML inputs) and <em>actions</em> (HTML buttons and links).
+		In addition a <em>field</em> can (and should) contain a <em>help</em> element, with a <em>hint</em> and an <em>error</em> message.
+		See <a href="https://templator.parentnode.dk/docs/form" target="_blank">Templator HTML Form</a> for more information.
 	</p>
 
 	<div class="section functions">
@@ -35,7 +52,8 @@
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Void</span> = 
 								Util.Form.init(
-									<span class="type">Node</span> <span class="var">form</span> 
+									<span class="type">Node</span> <span class="var">form</span>
+									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
 							</dd>
 						</dl>
@@ -44,91 +62,45 @@
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Initialize form, extending it with realtime validation, state classes and event callbacks.
-							An initialized form consists of a form, fields (inputs etc.) and actions (buttons), 
-							and provides some collections to help you access any form component with ease.
+							Initialize a form, extending it with realtime validation, state classes and event callbacks.
+							An initialized form consists of a form, inputs and actions (buttons), 
+							and provides some element collections to help you access any form component with ease.
 						</p>
 						<p>
-							Can also be used on partial form, if wrapping node is passed instead of outer form. This makes
-							it extra useful in frameworks which dictate a global form element (like .NET).
+							Initially a form input will have <em>used</em> state. Only inputs that have been interacted with
+							will show <em>error</em> states, as the user should not be reprimanded for untouched required inputs.
+							When user interacts with field, the <em>correct</em> state will be applied when validation passes.
+							The <em>error</em> state will only be applied after an input has lost focus the first time OR when the
+							form is submitted.
 						</p>
 						<p>
-							"focus", "error" and "correct" classes are added/removed from field and input when state changes.
+							Upon initialization all fields are bulk validated and a callback to <em>validationPassed</em>
+							or <em>validationFailed</em> will be dispatched, if the form either failed or passed 
+							validation. Note, a form with partially un-used inputs will not pass validation, nor necessarily
+							fail validation. When initialization is complete a <em>ready</em> callback is dispatched for form.
 						</p>
-
-						<h5>Form</h5>
-						<dl>
-							<dt>form.fields</dt>
-							<dd>Collection of fields in form.</dd>
-							<dt>form.actions</dt>
-							<dd>Collection of named actions in form.</dd>
-						</dl>
-
-						<h5>Field</h5>
-						<dl>
-							<dt>field._input</dt>
-							<dd>Reference to field input/inputs</dd>
-							<dt>field._hint</dt>
-							<dd>Reference to field hint</dd>
-							<dt>field._error</dt>
-							<dd>Reference to field error</dd>
-						</dl>
-
-						<h5>Input</h5>
-						<dl>
-							<dt>input._label</dt>
-							<dd>Reference to input label</dd>
-							<dt>input.field</dt>
-							<dd>Reference to input field</dd>
-							<dt>input.val(optional value)</dt>
-							<dd>
-								Function to get/set input value. Works with all types of fields. If value 
-								is passed, value will be set. If no value is passed, current value will be 
-								returned.
-							</dd>
-						</dl>
-
-						<h5>Action</h5>
-						<dl>
-							<dt>action._input</dt>
-							<dd>Reference to action input/a</dd>
-						</dl>
-
-
-						<p>Util.Form comes with a range of default field types:</p>
-						<dl>
-							<dt>string</dt>
-							<dd>Input type="text". Must be string. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
-
-							<dt>text</dt>
-							<dd>Textarea. Must be string. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
-
-							<dt>email</dt>
-							<dd>Input type="email". Must be valid email syntax.</dd>
-
-							<dt>password</dt>
-							<dd>Input type="password". Must be between 8 and 20 chars. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
-
-							<dt>numeric</dt>
-							<dd>Input type="number". Must be numeric. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
-
-							<dt>integer</dt>
-							<dd>Input type="number". Must be integer. Optional min:length, max:length and pattern:regexp classes to specify min and max length and pattern of string.</dd>
-
-							<dt>tel</dt>
-							<dd>Input type="number". Must be telephone (.-+ 0-9) and between 5 and 16 chars.</dd>
-
-							<dt>select</dt>
-							<dd>Select field with options.</dd>
-
-							<dt>checkbox</dt>
-							<dd>Input type="checkbox".</dd>
-
-							<dt>radio_buttons</dt>
-							<dd>Input type="radio".</dd>
-						</dl>
-
-						<p>Can be extended with custom input-initializations and -validations as well as custom ways of sending data.</p>
+						<p>
+							Any field can be made <em>required</em> simply by adding a <em>required</em> class to the field. 
+							Upon validation the presence of the <em>required</em> class is checked, and you can switch between
+							<em>required</em> and <em>not required</em> simply by adding or removing the class. In addition 
+							a mix of classes and input attributes are used to provide additional validation information. See the
+							<em>Input types</em> section below for more information.
+						</p>
+						<p>
+							An <em>indicator</em> (*) element is automatically added to all fields. This should be hidden for 
+							non-required fields using CSS. This is done so, because the field may change <em>required</em> state during
+							interaction, and thus it is convenient that they are always injected.
+						</p>
+						<p>
+							<em>Util.Form.init</em> can also be used on a partial form (a pseudo form), as any HTML node can be passed instead 
+							of the actual outer form. This makes it extra useful in frameworks which dictate a global 
+							form element (like .NET).
+						</p>
+						<p>
+							<em>focus</em>, <em>hover</em>, <em>error</em>, <em>correct</em> and <em>default</em> classes are 
+							added/removed from fields and inputs when their state changes, to allow you to easily add styling
+							of the different input states.
+						</p>
 
 					</div>
 
@@ -142,6 +114,51 @@
 									<span class="type">Node</span> Form to initialize
 								</div>
 							</dd>
+							<dt><span class="var">_options</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">JSON</span> Optional, JSON _options
+								</div>
+								<div class="details">
+									<h5>Options</h5>
+									<dl class="options">
+										<dt><span class="value">validation</span></dt>
+										<dd>Should the form inputs be validated. Default true.</dd>
+										<dt><span class="value">focus_z</span></dt>
+										<dd>Custom <em>zIndex</em> for focused fields. Default 50.</dd>
+
+										<dt><span class="value">label_style</span></dt>
+										<dd>Custom label style for inputs. See custom extensions below for more information.</dd>
+
+										<dt><span class="value">callback_ready</span></dt>
+										<dd>Name of callback method when form is ready. Default <em>ready</em>.</dd>
+										<dt><span class="value">callback_submitted</span></dt>
+										<dd>Name of callback method when form is submitted. Default <em>submitted</em>.</dd>
+										<dt><span class="value">callback_pre_submitted</span></dt>
+										<dd>Name of callback method before form is submitted. Default <em>preSubmitted</em>.</dd>
+										<dt><span class="value">callback_resat</span></dt>
+										<dd>Name of callback method when form is resat. Default <em>resat</em>.</dd>
+
+										<dt><span class="value">callback_updated</span></dt>
+										<dd>Name of callback method when form or input is updated. Default <em>updated</em>.</dd>
+										<dt><span class="value">callback_changed</span></dt>
+										<dd>Name of callback method when form or input is changed. Default <em>changed</em>.</dd>
+										<dt><span class="value">callback_blurred</span></dt>
+										<dd>Name of callback method when form or input is blurred. Default <em>blurred</em>.</dd>
+										<dt><span class="value">callback_focused</span></dt>
+										<dd>Name of callback method when form or input is focused. Default <em>focused</em>.</dd>
+
+										<dt><span class="value">callback_validation_failed</span></dt>
+										<dd>Name of callback method when form or input failed validation. Default <em>validationFailed</em>.</dd>
+										<dt><span class="value">callback_validation_passed</span></dt>
+										<dd>Name of callback method when form or input passed validation. Default <em>validationPassed</em>.</dd>
+
+
+										<dt><span class="value">debug</span></dt>
+										<dd>Output form element collections to console on initialization.</dd>
+									</dl>
+								</div>
+							</dd>
 						</dl>
 					</div>
 
@@ -150,44 +167,298 @@
 						<p><span class="type">Void</span></p>
 					</div>
 
+					<div class="properties">
+						<h4>Extended properties</h4>
+						<p>The form elements are indexed and made available on form, fields, inputs and actions as follows:</p>
+						<h5>Form</h5>
+						<dl>
+							<dt>form.inputs</dt>
+							<dd>Collection of inputs in form.</dd>
+							<dt>form.actions</dt>
+							<dd>
+								Collection of named actions in form. If action doesn't have a name attribute, then then
+								wrapping <span class="htmltag">li</span> classname will be used for naming action.
+							</dd>
+						</dl>
+
+						<h5>Field</h5>
+						<dl>
+							<dt>field._form</dt>
+							<dd>Reference to form or pseudo form. As the <em>form</em> property is reserved, we are using _form.</dd>
+							<dt>field.input</dt>
+							<dd>Reference to primary field input</dd>
+							<dt>field.inputs</dt>
+							<dd>Array of references to all field inputs for fields with multiple inputs, such as radiobuttons.</dd>
+							<dt>field.label</dt>
+							<dd>Reference to field's primary label.</dd>
+							<dt>field.indicator</dt>
+							<dd>
+								Reference to field's required indicator. See custom extensions below for more information.
+							</dd>
+							<dt>field.help</dt>
+							<dd>Reference to field help element.</dd>
+							<dt>field.hint</dt>
+							<dd>Reference to field hint element.</dd>
+							<dt>field.error</dt>
+							<dd>Reference to field error element.</dd>
+							<dt>field.type</dt>
+							<dd>String representation of field type.</dd>
+						</dl>
+
+						<h5>Input</h5>
+						<dl>
+							<dt>input._form</dt>
+							<dd>Reference to form or pseudo form. As the <em>form</em> property is reserved, we are using _form.</dd>
+							<dt>input.label</dt>
+							<dd>Reference to input label (not available for hidden inputs).</dd>
+							<dt>input.field</dt>
+							<dd>Reference to input field (not available for hidden inputs).</dd>
+						</dl>
+
+						<h5>Action</h5>
+						<dl>
+							<dt>action._form</dt>
+							<dd>Reference to form or pseudo form. As the <em>form</em> property is reserved, we are using _form.</dd>
+						</dl>
+					</div>
+
+					<div class="methods">
+						<h4>Extended methods</h4>
+						<p>
+							The form elements are extended with convenient helper methods to make form handling more
+							consistent and cross type/browser safe.
+						</p>
+
+						<h5>Form</h5>
+						<dl>
+							<dt>form.submit</dt>
+							<dd>
+								Validate all fields and submit form if validation passes.
+							</dd>
+							<dt>form.DOMsubmit</dt>
+							<dd>
+								Perform a native form submit.
+							</dd>
+							<dt>form.reset</dt>
+							<dd>
+								Reset all fields to their initial state.
+							</dd>
+							<dt>form.DOMreset</dt>
+							<dd>
+								Perform a native form reset.
+							</dd>
+							<dt>form.getData</dt>
+							<dd>
+								Shorthand method for getting form data set. See Util.Form.getFormData below for details
+								and note that when invoking this method directly on form, you should omit passing the form argument.
+							</dd>
+						</dl>
+
+						<h5>Input</h5>
+						<dl>
+							<dt>input.val([value])</dt>
+							<dd>
+								Function to get/set input value. Works with all types of inputs. If value 
+								is passed, value will be set for input. If no value is passed, current value will be 
+								returned.
+							</dd>
+						</dl>
+					</div>
+
+					<div class="inputtypes">
+						<h4>Input types</h4>
+						<p>
+							Util.Form comes with a range of default field/input types. The initialization of each field
+							relies on the presence of a type class, as listed below. Any field can be made <em>required</em>
+							simply by adding a <em>required</em> class to the field. Additional validation rules can be 
+							specified using classVars or attributes on the input element as specified below.
+						</p>
+						<dl>
+							<dt>string</dt>
+							<dd>
+								String input (input type="text"). Must be string. Optional min:[length] and max:[length] can be added as classVars on field. 
+								Default min length is 1, default max length is 255.
+								Regex pattern can be added using the pattern attribute.
+								Add a <em>data-compare-to</em> attribute to input containing the name of other input, to require 
+								both inputs to have same value. Useful for "re-type your xyz"-type fields.
+							</dd>
+
+							<dt>text</dt>
+							<dd>
+								Multiline text input (textarea). Must be string. Optional min:[length] and max:[length] can be added as classVars on field. 
+								Default min length is 1, default max length is 10000000.
+								Regex pattern can be added using the pattern attribute.
+							 </dd>
+
+							<dt>email</dt>
+							<dd>
+								Email input (input type="email"). Must be valid email syntax.
+								Alternate regex pattern can be added using the pattern attribute.
+								Add a <em>data-compare-to</em> attribute to input containing the name of other input, to require 
+								both inputs to have same value. Useful for "re-type your email"-type fields.
+							</dd>
+
+							<dt>password</dt>
+							<dd>
+								Password input (input type="password"). Must be between 8 and 20 chars. 
+								Optional min:[length] and max:[length] can be added as classVars on field.
+								Regex pattern can be added using the pattern attribute.
+								Add a <em>data-compare-to</em> attribute to input containing the name of other input, to require 
+								both inputs to have same value. Useful for "re-type your password"-type fields.
+							</dd>
+
+							<dt>numeric</dt>
+							<dd>
+								Numeric input (input type="number"). Must be numeric (integer or decimal number). 
+								Optional min:[value] and max:[value] can be added as classVars on field. Note that for 
+								numeric inputs min and max refers to the numeric value, not the length of the input.
+								Regex pattern can be added using the pattern attribute.
+							</dd>
+
+							<dt>integer</dt>
+							<dd>
+								Integer input (input type="number"). Must be integer. 
+								Optional min:[value] and max:[value] can be added as classVars on field. Note that for 
+								integer inputs min and max refers to the numeric value, not the length of the input.
+							</dd>
+
+							<dt>tel</dt>
+							<dd>
+								Phone input (input type="number"). Must be telephone (.-+ 0-9) and between 5 and 16 chars.
+								Alternate regex pattern can be added using the pattern attribute.
+								Add a <em>data-compare-to</em> attribute to input containing the name of other input, to require 
+								both inputs to have same value. Useful for "re-type your phonenumber"-type fields.
+							</dd>
+
+							<dt>select</dt>
+							<dd>
+								Dropdown/Select input with multiple options (select).
+							</dd>
+
+							<dt>checkbox</dt>
+							<dd>
+								Checkbox input (input type="checkbox").
+							</dd>
+
+							<dt>radio_buttons</dt>
+							<dd>
+								Radiobutton input (input type="radio").
+							</dd>
+
+							<dt>date</dt>
+							<dd>
+								Date input (input type="date").
+								Optional min:[date] and max:[date] can be added as classVars on field. Note that for 
+								date inputs min and max refers to dates, not the length of the input.
+								Regex pattern can be added using the pattern attribute.
+							</dd>
+
+							<dt>datetime</dt>
+							<dd>
+								Date AND time input (input type="datetime").
+								Optional min:[date[time]] and max:[date[time]] can be added as classVars on field. Note that for 
+								date inputs min and max refers to dates, not the length of the input. Time can be omitted when stating min 
+								and max properties.
+								Regex pattern can be added using the pattern attribute.
+							</dd>
+
+							<dt>files</dt>
+							<dd>
+								File upload (input type="file").
+								Optional min:[count] and max:[count] can be added as classVars on field. Note that for 
+								file inputs min and max refers to file count, not the length of the input. 
+								Allowed files can be specified using the <em>accept</em> attribute on the input.
+								Regex pattern can be added using the pattern attribute.
+							</dd>
+
+							<dt>location</dt>
+							<dd>
+								Location with geo coordinates and map-picker.
+								This field consists of three inputs. One for the location name, one for latitude and
+								one for longitude. All three must be valid if any of them are filled out.
+								Note: This input type requires that you include u-form-field-location. Also remember
+								to add your Google API key (u.gapi_key = #API_KEY#) to enable map-picker.
+							</dd>
+
+							<dt>html</dt>
+							<dd>
+								HTML editor with strict semantic formatting controls. This editor has been designed to
+								prioritize SEO and design over "free form editing".
+								Note: This input type requires that you include u-form-field-html. In addition the build-in file
+								and media upload functionality, requires additional backend services (happily provided by Janitor).
+							</dd>
+						</dl>
+
+					</div>
+
 					<div class="callbacks">
 						<h4>Callbacks</h4>
+						<p>
+							An extensive set of callback are dispatched to give you full control of form behaviour
+							 – just declare the appropriate callback methods on either form, input or action.
+						</p>
+						<h5>Form</h5>
 						<dl>
 							<dt>form.focused(input)</dt>
-							<dd>when form gets focus</dd>
+							<dd>When form input gets focus.</dd>
 							<dt>form.blurred(input)</dt>
-							<dd>when form loses focus</dd>
+							<dd>When form input loses focus.</dd>
+
 							<dt>form.updated(input)</dt>
-							<dd>when form is updated</dd>
+							<dd>When form input is updated.</dd>
 							<dt>form.changed(input)</dt>
-							<dd>when form is changed</dd>
+							<dd>When form input is changed.</dd>
 
 							<dt>form.submitted(input)</dt>
-							<dd>when form is submitted - if callback function is not declared, form will be submitted as regular HTML form.</dd>
+							<dd>When form is submitted - if callback function is not declared, form will be submitted as regular HTML form.</dd>
+							<dt>form.preSubmitted(input)</dt>
+							<dd>Just before form submission is executed - last chance before sending data.</dd>
+							<dt>form.resat(input)</dt>
+							<dd>When form is reset.</dd>
 
 							<dt>form.validationFailed(JSON errors)</dt>
-							<dd>when form validation fails - sends errors object, containing names of all failed inputs</dd>
-
+							<dd>When form validation fails - sends errors object, containing names of all failed inputs.</dd>
 							<dt>form.validationPassed()</dt>
-							<dd>when form validation is passed - form contains no errors</dd>
-
-							<dt>input.updated</dt>
-							<dd>when input is updated</dd>
-							<dt>input.changed</dt>
-							<dd>when input is changed</dd>
-							<dt>input.focused</dt>
-							<dd>when input gets focus</dd>
-							<dt>input.blurred</dt>
-							<dd>when input loses focus</dd>
-							<dt>input.validationFailed</dt>
-							<dd>when input failes validation</dd>
-
-							<dt>action.focused</dt>
-							<dd>when action gets focus</dd>
-							<dt>action.blurred</dt>
-							<dd>when action loses focus</dd>
-	
+							<dd>When form validation is passed - form contains no errors.</dd>
 						</dl>
+
+						<h5>Input</h5>
+						<dl>
+							<dt>input.updated(input)</dt>
+							<dd>When input is updated.</dd>
+							<dt>input.changed(input)</dt>
+							<dd>When input is changed.</dd>
+
+							<dt>input.focused(input)</dt>
+							<dd>When input gets focus.</dd>
+							<dt>input.blurred(input)</dt>
+							<dd>When input loses focus.</dd>
+
+							<dt>input.validationFailed()</dt>
+							<dd>When input failed validation.</dd>
+							<dt>input.validationPassed()</dt>
+							<dd>When input passed validation.</dd>
+						</dl>
+
+						<h5>Action</h5>
+						<dl>
+							<dt>action.focused(action)</dt>
+							<dd>When action gets focus.</dd>
+							<dt>action.blurred(action)</dt>
+							<dd>When action loses focus.</dd>
+						</dl>
+					</div>
+
+					<div class="extensions">
+						<h5>Extension modules</h5>
+						<p>
+							The default form behaviour can be modified by defining your own custom modifiers or initializers.
+							This allows you to build new input types, custom validations, label styles/behaviours, hint positioning, HTML pre-processors
+							as well as custom ways of compiling data on submit.
+						</p>
+						<p>
+							Please refer to <em>u-form-custom.js</em> for examples.
+						</p>
 					</div>
 
 
@@ -199,8 +470,13 @@
 	&lt;fieldset&gt;
 
 		&lt;div class=&quot;field string required&quot;&gt;
-			&lt;label for=&quot;input_id&quot;&gt;String, required&lt;/label&gt;
-			&lt;input type=&quot;text&quot; name=&quot;string_required&quot; id=&quot;input_id&quot; /&gt;
+			&lt;label for=&quot;input_string_id&quot;&gt;String, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;string_required&quot; id=&quot;input_string_id&quot; pattern="[a-f]+" /&gt;
+		&lt;/div&gt;
+
+		&lt;div class=&quot;field integer required min:2 max:10&quot;&gt;
+			&lt;label for=&quot;input_integer_id&quot;&gt;Integer, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;integer_required&quot; id=&quot;input_integer_id&quot; /&gt;
 		&lt;/div&gt;
 
 	&lt;/fieldset&gt;
@@ -216,27 +492,27 @@
 
 	u.f.init(form);
 	
-	form.changed = function() {
-		// callback for form changed
+	form.changed = function(input) {
+		// callback for form changed (input has changed)
 	}
 
 
 	// returns input value
-	form.fields["string_required"]._input.val();
+	form.inputs["string_required"].input.val();
 
 	// set input value to "test"
-	form.fields["string_required"]._input.val("test");
+	form.inputs["string_required"].input.val("test");
 
 
-	form.fields["string_required"]._input.updated = function() {
-		// callback for input value updated
+	form.inputs["string_required"].input.updated = function(input) {
+		// callback for input value updated (input was updated)
 	}
 
-	form.actions["submit_name"].focused = function() {
+	form.actions["submit_name"].focused = function(action) {
 		// callback for button focus
 	}
 	
-	form.submitted = function() {
+	form.submitted = function(action) {
 		// callback for form submit
 	}
 
@@ -282,6 +558,7 @@
 								<li>Util.addClass</li>
 								<li>Util.removeClass</li>
 								<li>Util.applyStyle</li>
+								<li>Util.applyStyles</li>
 								<li>Util.getComputedStyle</li>
 								<li>Util.clickableElement</li>
 								<li>Util.Event.kill</li>
