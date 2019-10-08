@@ -137,11 +137,11 @@ Util.Objects["formCombined"] = new function() {
 				form.inputs[input].focused = function() {
 					this._form.addDebug("input.focused:" + this.name);
 				}
-				form.inputs[input].inputValidationPassed = function() {
-					this._form.addDebug("input.inputValidationPassed:" + this.name);
+				form.inputs[input].validationPassed = function() {
+					this._form.addDebug("input.validationPassed:" + this.name);
 				}
-				form.inputs[input].inputValidationFailed = function() {
-					this._form.addDebug("input.inputValidationFailed:" + this.name);
+				form.inputs[input].validationFailed = function() {
+					this._form.addDebug("input.validationFailed:" + this.name);
 				}
 			}
 		}
