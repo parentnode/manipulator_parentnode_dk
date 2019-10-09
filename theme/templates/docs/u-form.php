@@ -443,9 +443,9 @@
 						<h5>Action</h5>
 						<dl>
 							<dt>action.focused(action)</dt>
-							<dd>When action gets focus.</dd>
+							<dd>When button gets focus.</dd>
 							<dt>action.blurred(action)</dt>
-							<dd>When action loses focus.</dd>
+							<dd>When button loses focus.</dd>
 						</dl>
 					</div>
 
@@ -538,11 +538,22 @@
 								<li>typeof</li>
 								<li>String.replace</li>
 								<li>String.match</li>
-								<li>Switch ... case</li>
+								<li>String.toLowerCase</li>
+								<li>Array.push</li>
+								<li>Object.keys</li>
+								<li>switch...case</li>
+								<li>for...in</li>
 								<li>parseInt</li>
 								<li>Event.keyCode</li>
-								<li>document.parentNode</li>
-								<li>document.setAttribute</li>
+								<li>Event.metaKey</li>
+								<li>Event.ctrlKey</li>
+								<li>Element.setAttribute</li>
+								<li>Element.getAttribute</li>
+								<li>Element.insertBefore</li>
+								<li>Document.parentNode</li>
+								<li>Document.setAttribute</li>
+								<li>JSON.parse</li>
+								<li>JSON.stringify</li>
 							</ul>
 						</div>
 
@@ -550,10 +561,15 @@
 							<!-- list manipulator functions used by function -->
 							<h5>Manipulator</h5>
 							<ul>
+								<li>fun</li>
+								<li>obj</li>
+								<li>Util.normalize</li>
 								<li>Util.browser</li>
 								<li>Util.querySelector</li>
 								<li>Util.querySelectorAll</li>
 								<li>Util.appendElement</li>
+								<li>Util.parentNode</li>
+								<li>Util.classVar</li>
 								<li>Util.hasClass</li>
 								<li>Util.addClass</li>
 								<li>Util.removeClass</li>
@@ -563,6 +579,10 @@
 								<li>Util.clickableElement</li>
 								<li>Util.Event.kill</li>
 								<li>Util.Event.addEvent</li>
+								<li>Util.Event.event_support</li>
+								<li>Util.Timer.setTimer</li>
+								
+								<li>Util.Timer.resetTimer</li>
 							</ul>
 						</div>
 
@@ -572,19 +592,19 @@
 			</div>
 
 
-			<div class="function" id="Util.Form.getParams">
+			<div class="function" id="Util.Form.getFormData">
 				<div class="header">
-					<h3>Util.Form.getParams</h3>
+					<h3>Util.Form.getFormData</h3>
 				</div>
 				<div class="body">
 					<div class="definition">
 						<h4>Definition</h4>
 						<dl class="definition">
 							<dt class="name">Name</dt>
-							<dd class="name">Util.Form.getParams</dd>
+							<dd class="name">Util.Form.getFormData</dd>
 							<dt class="syntax">Syntax</dt>
 							<dd class="syntax"><span class="type">Mixed</span> = 
-								Util.Form.getParams(
+								Util.Form.getFormData(
 									<span class="type">Node</span> <span class="var">form</span> 
 									[, <span class="type">JSON</span> <span class="var">_options</span> ]
 								);
@@ -594,7 +614,10 @@
 
 					<div class="description">
 						<h4>Description</h4>
-						<p>Get name/value pairs from all inputs in <span class="var">form</span>.</p>
+						<p>Get name/value pairs from all inputs in <span class="var">form</span> – structured as you please.</p>
+						<p>
+							Note, this methods is also mapped to any initialized form as <em>form.getData(_options)</em>. When invoked
+							directly on form, the <span class="var">form</span> argument is omitted.
 					</div>
 
 					<div class="parameters">
@@ -615,10 +638,16 @@
 								<div class="details">
 									<h5>Options</h5>
 									<dl class="options">
-										<dt><span class="value">send_as</span></dt>
-										<dd>Define type of returned object. Default to regular GET string. Optional formdata, JSON, Object or custom type offered through u.f.customSend[send_as].</dd>
+										<dt><span class="value">format</span></dt>
+										<dd>
+											Define type of returned object. Defaults to <span class="value">formdata</span> for segment 
+											<em>desktop</em> and <span class="value">params</span> for segment <em>desktop_light</em>. 
+											Optional <span class="value">params</span>, <span class="value">formdata</span>, 
+											<span class="value">object</span> – or any custom type offered through the u.f.customDataFormat[format]
+											extension. You can easily write your own.
+										</dd>
 										<dt><span class="value">ignore_inputs</span></dt>
-										<dd>Input classes to be ignored when collecting data</dd>
+										<dd>Input classes to be ignored when collecting data.</dd>
 									</dl>
 								</div>
 							</dd>
@@ -627,7 +656,7 @@
 
 					<div class="return">
 						<h4>Return values</h4>
-						<p><span class="type">Mixed</span> Default GET string, otherwise object as specified in send_as setting.</p>
+						<p><span class="type">Mixed</span> Default GET string, otherwise object as specified in format setting.</p>
 					</div>
 
 					<div class="examples">
@@ -651,10 +680,37 @@
 
 &lt;script&gt;
 	var form = u.querySelector("form");
-	u.f.getParams(form);
+	u.f.getParams(form, {format:"params"});
 &lt;/script&gt;</code>
 							<p>Returns string_required=test1&amp;string_not_required=test2
 
+						</div>
+
+						<div class="example">
+							<code>&lt;form name=&quot;test_form&quot; action=&quot;action&quot; method=&quot;get&quot;&gt;
+	&lt;fieldset&gt;
+
+		&lt;div class=&quot;field string required&quot;&gt;
+			&lt;label for=&quot;input1_id&quot;&gt;String, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;string_required&quot; id=&quot;input1_id&quot; value=&quot;test1&quot; /&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;field string required&quot;&gt;
+			&lt;label for=&quot;input2_id&quot;&gt;String, required&lt;/label&gt;
+			&lt;input type=&quot;text&quot; name=&quot;string_not_required&quot; id=&quot;input2_id&quot; value=&quot;test2&quot; /&gt;
+		&lt;/div&gt;
+
+	&lt;/fieldset&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+	var form = u.querySelector("form");
+	u.f.getParams(form, {format:"object"});
+&lt;/script&gt;</code>
+							<p>Returns JSON object like:</p>
+							<code>{
+	"string_required":"test1",
+	"string_not_required":"test2"
+}</code>
 						</div>
 					</div>
 
@@ -664,15 +720,18 @@
 						<div class="javascript">
 							<h5>JavaScript</h5>
 							<ul>
-								<li>typeof</li>
-								<li>Switch ... case</li>
+								<li>Switch...case</li>
+								<li>for...in</li>
 								<li>encodeURIComponent</li>
+								<li>String.match</li>
 							</ul>
 						</div>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<ul>
+								<li>obj</li>
+								<li>fun</li>
 								<li>Util.querySelectorAll</li>
 								<li>Util.hasClass</li>
 							</ul>
@@ -704,7 +763,7 @@
 				<h3>Segment support files</h3>
 				<ul>
 					<!-- specify segment support js files (like: u-dom-desktop_light.js) -->
-					<li>none</li>
+					<li><span class="file">u-form-desktop_light.js</span></li>
 				</ul>
 			</div>
 
@@ -717,32 +776,91 @@
 		</div>
 		<div class="body">
 			<dl class="segments">
-				<dt>desktop_edge</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dt>desktop</dt>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>desktop_ie11</dt>
-				<dd><span class="file">u-form.js</span></dd>
-
-				<dt>desktop</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>desktop_ie10</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>desktop_ie9</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form-desktop_light.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_ie.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>desktop_light</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form-desktop_light.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-events-desktop_light.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_light.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-string-desktop_light.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>tablet</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>tablet_light</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>smartphone</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 	
 				<dt>mobile</dt>
 				<dd>not tested</dd>
@@ -751,7 +869,17 @@
 				<dd>not tested</dd>
 
 				<dt>tv</dt>
-				<dd><span class="file">u-form.js</span></dd>
+				<dd>
+					<span class="file">u-form-desktop_light.js</span> +
+					<span class="file">u-events.js</span> +
+					<span class="file">u-events-desktop_light.js</span> +
+					<span class="file">u-dom.js</span> +
+					<span class="file">u-dom-desktop_light.js</span> +
+					<span class="file">u-timer.js</span> +
+					<span class="file">u-string.js</span> +
+					<span class="file">u-string-desktop_light.js</span> +
+					<span class="file">u-system.js</span>
+				</dd>
 
 				<dt>seo</dt>
 				<dd>not supported</dd>
