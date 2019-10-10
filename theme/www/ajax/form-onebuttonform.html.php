@@ -1,0 +1,1 @@
+<div><?= json_encode($_POST) ?></div>

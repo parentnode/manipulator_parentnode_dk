@@ -35,6 +35,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.j
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-media.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-overlay.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-object.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-period.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-popup.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
