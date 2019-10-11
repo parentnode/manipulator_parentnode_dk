@@ -44,5 +44,13 @@ Util.Objects["scrollto"] = new function() {
 				u.scrollTo(window, {"node":to, "offset_x":parseInt(u.gcs(div, "padding-left")), "offset_y":100});
 			}
 		}
+		
+		window.scrollToCancelled = function() {
+			u.bug("scrollToCancelled");
+		}
+
+		window.scrolledTo = function() {
+			u.bug("scrolledTo");
+		}
 	}
 }
