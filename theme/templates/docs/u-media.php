@@ -306,27 +306,27 @@
 					<div class="callbacks">
 						<h4>Callbacks</h4>
 						<dl>
-							<dt>mediaPlayer.ready(event)</dt>
+							<dt>player.ready(event)</dt>
 							<dd>when autoplay detection is done.</dd>
-							<dt>mediaPlayer.loading(event)</dt>
+							<dt>player.loading(event)</dt>
 							<dd>when data is loading</dd>
-							<dt>mediaPlayer.canplaythrough(event)</dt>
+							<dt>player.canplaythrough(event)</dt>
 							<dd>when enough data is loaded to perform uninterrupted playback</dd>
-							<dt>mediaPlayer.playing(event)</dt>
+							<dt>player.playing(event)</dt>
 							<dd>when playback is begun</dd>
-							<dt>mediaPlayer.paused(event)</dt>
+							<dt>player.paused(event)</dt>
 							<dd>when playback is paused</dd>
-							<dt>mediaPlayer.stalled(event)</dt>
+							<dt>player.stalled(event)</dt>
 							<dd>when playback is stalling</dd>
-							<dt>mediaPlayer.error(event)</dt>
+							<dt>player.error(event)</dt>
 							<dd>On playback error</dd>
-							<dt>mediaPlayer.ended(event)</dt>
+							<dt>player.ended(event)</dt>
 							<dd>when playback has ended</dd>
-							<dt>mediaPlayer.loadedmetadata(event)</dt>
+							<dt>player.loadedmetadata(event)</dt>
 							<dd>when metadata is loaded (duration, title, etc.)</dd>
-							<dt>mediaPlayer.loadeddata(event)</dt>
+							<dt>player.loadeddata(event)</dt>
 							<dd>when entire source is loaded</dd>
-							<dt>mediaPlayer.timeupdate(event)</dt>
+							<dt>player.timeupdate(event)</dt>
 							<dd>when playback time is updated</dd>	
 						</dl>
 					</div>
@@ -335,7 +335,7 @@
 						<h4>Examples</h4>
 
 						<div class="example">
-							<code>var player = u.mediaPlayer();</code>
+							<code>var player = u.player();</code>
 							<p>Returns simple <span class="htmltag">div.videoplayer</span></p>
 						</div>
 

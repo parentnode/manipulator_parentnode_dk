@@ -416,7 +416,7 @@
 							<dt>form.resat(input)</dt>
 							<dd>When form is reset.</dd>
 
-							<dt>form.validationFailed(JSON errors)</dt>
+							<dt>form.validationFailed(JSON)</dt>
 							<dd>When form validation fails - sends errors object, containing names of all failed inputs.</dd>
 							<dt>form.validationPassed()</dt>
 							<dd>When form validation is passed - form contains no errors.</dd>

@@ -34,6 +34,7 @@
 						<h4>Description</h4>
 						<p>Scroll node to position of <span class="htmltag">node</span> or specified x,y coordinate.</p>
 						<p>Cancels scroll animation if user attempts to scroll midway.</p>
+						<p>Method used native scrollTo with behaviour:smooth if available.</p>
 					</div>
 
 					<div class="parameters">
@@ -57,7 +58,7 @@
 										<dt><span class="value">callback</span></dt>
 										<dd>Name of callback function on successful scroll (default: scrolledTo)</dd>
 										<dt><span class="value">callback_cancelled</span></dt>
-										<dd>Name of callback function on cancelled scroll (default: scrolledToCancelled)</dd>
+										<dd>Name of callback function on cancelled scroll (default: scrollToCancelled)</dd>
 										<dt><span class="value">node</span></dt>
 										<dd>Node to scroll to</dd>
 										<dt><span class="value">x</span></dt>
@@ -81,10 +82,11 @@
 
 					<div class="callbacks">
 						<h4>Callbacks</h4>
+						<p>Note: Callbacks are not fired when using native scrollTo with behaviour:smooth.</p>
 						<dl>
-							<dt>window.scrolledTo(event)</dt>
+							<dt>window.scrolledTo()</dt>
 							<dd>when scrolling is done successfully</dd>
-							<dt>window.scrolledToCancelled(event)</dt>
+							<dt>window.scrollToCancelled()</dt>
 							<dd>If scrolling was interupted</dd>
 						</dl>
 					</div>
