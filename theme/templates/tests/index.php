@@ -15,7 +15,6 @@
 		<li class="test"><a href="/tests/u-dom">DOM</a></li>
 		<li class="test"><a href="/tests/u-form-builder">Form builder</a></li>
 		<li class="test"><a href="/tests/u-form-formats">Form, data formats</a></li>
-		<li class="test"><a href="/tests/u-form-onebuttonform">Form, oneButtonForm (beta)</a></li>
 		<li class="test"><a href="/tests/u-geometry">Geometry</a></li>
 		<li class="test"><a href="/tests/u-init">Init</a></li>
 		<li class="test"><a href="/tests/u-math">Math</a></li>
@@ -66,6 +65,8 @@
 
 	<h2>Beta tests</h2>
 	<ul class="beta">
+		<li class="test"><a href="/tests/u-renderview">renderView (beta)</a></li>
+		<li class="test"><a href="/tests/u-form-onebuttonform">Form, oneButtonForm (beta)</a></li>
 		<li class="test"><a href="/tests/u-fontsready">* Fontsready (started)</a></li>
 		<li class="test"><a href="/tests/u-gridmaster">* Gridmaster (started)</a></li>
 		<li class="test"><a href="/tests/u-sequence">* Sequence (not started)</a></li>
