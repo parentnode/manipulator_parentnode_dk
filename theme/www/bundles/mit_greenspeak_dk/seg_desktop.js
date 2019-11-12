@@ -4,7 +4,7 @@
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = "0.9.2";
+	u.version = "0.9.3";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
 	u.txt = function(index) {return index;}
@@ -168,7 +168,6 @@ Util.Animation = u.a = new function() {
 		return this._support3d;
 	}
 	this.transition = function(node, transition, callback) {
-		u.bug("add transition:", node, transition, callback);
 		try {
 			var duration = transition.match(/[0-9.]+[ms]+/g);
 			if(duration) {
@@ -2011,8 +2010,6 @@ Util.Form = u.f = new function() {
 		_form._callback_changed = "changed";
 		_form._callback_blurred = "blurred";
 		_form._callback_focused = "focused";
-		_form._callback_input_validation_failed = "inputValidationFailed";
-		_form._callback_input_validation_passed = "inputValidationPassed";
 		_form._callback_validation_failed = "validationFailed";
 		_form._callback_validation_passed = "validationPassed";
 		if(obj(_options)) {
@@ -2031,8 +2028,6 @@ Util.Form = u.f = new function() {
 					case "callback_changed"         : _form._callback_changed          = _options[_argument]; break;
 					case "callback_blurred"         : _form._callback_blurred          = _options[_argument]; break;
 					case "callback_focused"         : _form._callback_focused          = _options[_argument]; break;
-					case "callback_input_validation_failed"   : _form._callback_input_validation_failed    = _options[_argument]; break;
-					case "callback_input_validation_passed"   : _form._callback_input_validation_passed    = _options[_argument]; break;
 					case "callback_validation_failed"         : _form._callback_validation_failed          = _options[_argument]; break;
 					case "callback_validation_passed"         : _form._callback_validation_passed          = _options[_argument]; break;
 				}
@@ -2112,6 +2107,7 @@ Util.Form = u.f = new function() {
 		}
 		if(!field._custom_initialized) {
 			if(u.hc(field, "string|email|tel|number|integer|password|date|datetime")) {
+				field.type = field.className.match(/(?:^|\b)(string|email|tel|number|integer|password|date|datetime)(?:\b|$)/)[0];
 				field.input = u.qs("input", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
@@ -2123,46 +2119,25 @@ Util.Form = u.f = new function() {
 				this.activateInput(field.input);
 			}
 			else if(u.hc(field, "text")) {
+				field.type = "text";
 				field.input = u.qs("textarea", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
 				field.input.field = field;
 				field.input.val = this._value;
 				if(u.hc(field, "autoexpand")) {
-					var current_height = parseInt(u.gcs(field.input, "height"));
-					var current_value = field.input.value;
-					field.input.value = "";
-					u.as(field.input, "overflow", "hidden");
-					field.input.autoexpand_offset = 0;
-					if(parseInt(u.gcs(field.input, "height")) != field.input.scrollHeight) {
-						field.input.autoexpand_offset = field.input.scrollHeight - parseInt(u.gcs(field.input, "height"));
-					}
-					field.input.value = current_value;
+					u.ass(field.input, {
+						"overflow": "hidden"
+					});
 					field.input.setHeight = function() {
-						var textarea_height = parseInt(u.gcs(this, "height"));
-						if(this.val()) {
-							if(u.browser("webkit") || u.browser("firefox", ">=29")) {
-								if(this.scrollHeight - this.autoexpand_offset > textarea_height) {
-									u.ass(this, {
-										"height":this.scrollHeight + "px"
-									});
-								}
-							}
-							else if(u.browser("opera") || u.browser("explorer")) {
-								if(this.scrollHeight > textarea_height) {
-									u.ass(this, {
-										"height":this.scrollHeight + "px"
-									});
-								}
-							}
-							else {
-								u.ass(this, {
-									"height":this.scrollHeight + "px"
-								});
-							}
-						}
+						u.ass(this, {
+							height: "auto"
+						});
+						u.ass(this, {
+							height: (this.scrollHeight) + "px"
+						});
 					}
-					u.e.addEvent(field.input, "keyup", field.input.setHeight);
+					u.e.addEvent(field.input, "input", field.input.setHeight);
 					field.input.setHeight();
 				}
 				u.e.addEvent(field.input, "keyup", this._updated);
@@ -2170,6 +2145,7 @@ Util.Form = u.f = new function() {
 				this.activateInput(field.input);
 			}
 			else if(u.hc(field, "select")) {
+				field.type = "select";
 				field.input = u.qs("select", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
@@ -2181,11 +2157,13 @@ Util.Form = u.f = new function() {
 				this.activateInput(field.input);
 			}
 			else if(u.hc(field, "checkbox|boolean")) {
+				field.type = field.className.match(/(?:^|\b)(checkbox|boolean)(?:\b|$)/)[0];
 				field.input = u.qs("input[type=checkbox]", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
 				field.input.field = field;
 				field.input.val = this._value_checkbox;
+				u.f._update_checkbox_field.bind(field.input)();
 				u.e.addEvent(field.input, "change", this._changed);
 				u.e.addEvent(field.input, "change", this._updated);
 				u.e.addEvent(field.input, "change", this._update_checkbox_field);
@@ -2193,6 +2171,7 @@ Util.Form = u.f = new function() {
 				this.activateInput(field.input);
 			}
 			else if(u.hc(field, "radiobuttons")) {
+				field.type = "radiobuttons";
 				field.inputs = u.qsa("input", field);
 				field.input = field.inputs[0];
 				for(j = 0; j < field.inputs.length; j++) {
@@ -2208,20 +2187,28 @@ Util.Form = u.f = new function() {
 				}
 			}
 			else if(u.hc(field, "files")) {
+				field.type = "files";
 				field.input = u.qs("input", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
 				field.input.field = field;
 				field.input.val = this._value_file;
-				field.input.addFile = this._add_file;
-				field.input.removeFile = this._remove_file;
-				field.filelist = u.ae(field, "ul", {"class":"filelist"});
+				field.filelist = u.qs("ul.filelist", field);
+				if(!field.filelist) {
+					field.filelist = u.ae(field, "ul", {"class":"filelist"});
+					field.insertBefore(field.help, field.filelist);
+				}
+				field.filelist.field = field;
+				field.uploaded_files = u.qsa("li.uploaded", field.filelist);
+				this._update_filelist.bind(field.input)();
 				u.e.addEvent(field.input, "change", this._updated);
 				u.e.addEvent(field.input, "change", this._changed);
 				if(u.e.event_support != "touch") {
 					u.e.addEvent(field.input, "dragenter", this._focus);
 					u.e.addEvent(field.input, "dragleave", this._blur);
+					u.e.addEvent(field.input, "drop", this._blur);
 				}
+				u.e.addEvent(field.input, "change", this._update_filelist);
 				this.activateInput(field.input);
 			}
 			else {
@@ -2318,12 +2305,11 @@ Util.Form = u.f = new function() {
 		if(value !== undefined) {
 			if(value) {
 				this.checked = true
-				u.ac(this.field, "checked");
 			}
 			else {
 				this.checked = false;
-				u.rc(this.field, "checked");
 			}
+			u.f._update_checkbox_field.bind(this)();
 			u.f.validate(this);
 		}
 		if(this.checked) {
@@ -2352,10 +2338,13 @@ Util.Form = u.f = new function() {
 	}
 	this._value_file = function(value) {
 		if(value !== undefined) {
-			u.bug('ADDING VALUES MANUALLY TO INPUT type="file" IS NOT SUPPORTED');
-			if (value === "") {
+			if(value === "") {
 				this.value = null;
 			}
+			else {
+				u.bug('ADDING VALUES MANUALLY TO INPUT type="file" IS NOT SUPPORTED IN JAVASCRIPT');
+			}
+			u.f._update_filelist.bind(this)();
 			u.f.validate(this);
 		}
 		if(this.files && this.files.length) {
@@ -2369,7 +2358,7 @@ Util.Form = u.f = new function() {
 		else if(!this.files && this.value) {
 			return this.value;
 		}
-		else if(u.hc(this, "uploaded")){
+		else if(this.field.uploaded_files && this.field.uploaded_files.length){
 			return true;
 		}
 		return "";
@@ -2407,6 +2396,34 @@ Util.Form = u.f = new function() {
 			u.rc(this.field, "checked");
 		}
 	}
+	this._update_filelist = function(event) {
+		var i;
+		var files = this.val();
+		this.field.filelist.innerHTML = "";
+		u.ae(this.field.filelist, "li", {html:this.field.hint ? u.text(this.field.hint) : u.text(this.label), class:"label"})
+		if(files && files.length) {
+			u.ac(this.field, "has_new_files");
+			var i;
+			for(i = 0; i < files.length; i++) {
+				u.ae(this.field.filelist, "li", {html:files[i].name, class:"new"})
+			}
+			if(this.multiple) {
+				for(i = 0; i < this.field.uploaded_files.length; i++) {
+					u.ae(this.field.filelist, this.field.uploaded_files[i]);
+				}
+			}
+		}
+		else if(this.field.uploaded_files && this.field.uploaded_files.length) {
+			u.rc(this.field, "has_new_files");
+			var i;
+			for(i = 0; i < this.field.uploaded_files.length; i++) {
+				u.ae(this.field.filelist, this.field.uploaded_files[i]);
+			}
+		}
+		else {
+			u.rc(this.field, "has_new_files");
+		}
+	}
 	this._mouseenter = function(event) {
 		u.ac(this.field, "hover");
 		u.ac(this, "hover");
@@ -2427,7 +2444,7 @@ Util.Form = u.f = new function() {
 		u.as(this.field, "zIndex", this._form._focus_z_index);
 		u.f.positionHint(this.field);
 		if(fun(this[this._form._callback_focused])) {
-			this[this._form._callback_focused]();
+			this[this._form._callback_focused](this);
 		}
 		else if(fun(this.field.input[this._form._callback_focused])) {
 			this.field.input[this._form._callback_focused](this);
@@ -2445,7 +2462,7 @@ Util.Form = u.f = new function() {
 		u.f.positionHint(this.field);
 		this._used = true;
 		if(fun(this[this._form._callback_blurred])) {
-			this[this._form._callback_blurred]();
+			this[this._form._callback_blurred](this);
 		}
 		else if(fun(this.field.input[this._form._callback_blurred])) {
 			this.field.input[this._form._callback_blurred](this);
@@ -2457,7 +2474,7 @@ Util.Form = u.f = new function() {
 	this._button_focus = function(event) {
 		u.ac(this, "focus");
 		if(fun(this[this._form._callback_focused])) {
-			this[this._form._callback_focused]();
+			this[this._form._callback_focused](this);
 		}
 		if(fun(this._form[this._form._callback_focused])) {
 			this._form[this._form._callback_focused](this);
@@ -2466,7 +2483,7 @@ Util.Form = u.f = new function() {
 	this._button_blur = function(event) {
 		u.rc(this, "focus");
 		if(fun(this[this._form._callback_blurred])) {
-			this[this._form._callback_blurred]();
+			this[this._form._callback_blurred](this);
 		}
 		if(fun(this._form[this._form._callback_blurred])) {
 			this._form[this._form._callback_blurred](this);
@@ -2534,7 +2551,6 @@ Util.Form = u.f = new function() {
 		u.ce(action);
 		if(!action.clicked) {
 			action.clicked = function(event) {
-				u.e.kill(event);
 				if(!u.hc(this, "disabled")) {
 					if(this.type && this.type.match(/submit/i)) {
 						this._form._submit_button = this;
@@ -2588,6 +2604,50 @@ Util.Form = u.f = new function() {
 			});
 		}
 	}
+	this.updateFilelistStatus = function(form, response) {
+		if(form && form.inputs && response && response.cms_status == "success" && response.cms_object && response.cms_object.mediae) {
+			var mediae = JSON.parse(JSON.stringify(response.cms_object.mediae));
+			var filelists = u.qsa("div.field.files ul.filelist", form);
+			var i, j, k, filelist, old_files, old_file, new_files, new_files;
+			for(i = 0; i < filelists.length; i++) {
+				filelist = filelists[i];
+				new_files = u.qsa("li.new", filelist);
+				if(new_files.length) {
+					old_files = u.qsa("li.uploaded", filelist);
+					if(old_files.length) {
+						for(j in mediae) {
+							media = mediae[j];
+							if(media.variant.match("^" + filelist.field.input.name.replace(/\[\]$/, "") + "(\-|$)")) {
+								for(k = 0; k < old_files.length; k++) {
+									old_file = old_files[k];
+									if(u.cv(old_file, "media_id") == media.id) {
+										delete mediae[j];
+									}
+								}
+							}
+						}
+					}
+					if(Object.keys(mediae).length) {
+						for(j in mediae) {
+							media = mediae[j];
+							if(media.variant.match("^"+filelist.field.input.name.replace(/\[\]$/, "")+"(\-|$)")) {
+								for(k = 0; k < new_files.length; k++) {
+									new_file = new_files[k];
+									if(u.text(new_file) == media.name || u.text(new_file)+".zip" == media.name) {
+										new_file.innerHTML = media.name;
+										u.rc(new_file, "new");
+										u.ac(new_file, "uploaded media_id:"+media.id+" variant:"+media.variant+" format:"+media.format+" width:"+media.width+" height:"+media.height);
+										delete mediae[j];
+									}
+								}
+							}
+						}
+					}
+				}
+				filelist.field.uploaded_files = u.qsa("li.uploaded", filelist);
+			}
+		}
+	}
 	this.inputHasError = function(iN) {
 		u.rc(iN, "correct");
 		u.rc(iN.field, "correct");
@@ -2608,7 +2668,7 @@ Util.Form = u.f = new function() {
 			iN.has_error = true;
 			this.updateInputValidationState(iN);
 		}
-		else if(iN.has_error && !iN._used) {
+		else if(!iN._used) {
 			delete iN._form._error_inputs[iN.name];
 			u.rc(iN, "error");
 			u.rc(iN.field, "error");
@@ -2638,11 +2698,11 @@ Util.Form = u.f = new function() {
 		}
 	}
 	this.updateInputValidationState = function(iN) {
-		if(iN.has_error && fun(iN[iN._form._callback_input_validation_failed])) {
-			iN[iN._form._callback_input_validation_failed]();
+		if(iN.has_error && fun(iN[iN._form._callback_validation_failed])) {
+			iN[iN._form._callback_validation_failed]();
 		}
-		else if(iN.is_correct && fun(iN[iN._form._callback_input_validation_passed])) {
-			iN[iN._form._callback_input_validation_passed]();
+		else if(iN.is_correct && fun(iN[iN._form._callback_validation_passed])) {
+			iN[iN._form._callback_validation_passed]();
 		}
 		this.updateFormValidationState(iN._form);
 	}
@@ -2684,9 +2744,10 @@ Util.Form = u.f = new function() {
 		if(!iN._form._validation || !iN.field) {
 			return true;
 		}
-		var min, max, pattern, compare_to;
+		var min, max, pattern;
 		var validated = false;
-		if(!u.hc(iN.field, "required") && iN.val() === "") {
+		var compare_to = iN.getAttribute("data-compare-to");
+		if(!u.hc(iN.field, "required") && iN.val() === "" && (!compare_to || iN._form.inputs[compare_to].val() === "")) {
 			this.inputIsCorrect(iN);
 			return true;
 		}
@@ -2708,7 +2769,6 @@ Util.Form = u.f = new function() {
 				min = min ? min : 8;
 				max = max ? max : 255;
 				pattern = iN.getAttribute("pattern");
-				compare_to = iN.getAttribute("data-compare-to");
 				if(
 					iN.val().length >= min && 
 					iN.val().length <= max && 
@@ -2716,9 +2776,15 @@ Util.Form = u.f = new function() {
 					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
 					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
 					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "number")) {
@@ -2760,10 +2826,9 @@ Util.Form = u.f = new function() {
 			}
 			else if(u.hc(iN.field, "tel")) {
 				pattern = iN.getAttribute("pattern");
-				compare_to = iN.getAttribute("data-compare-to");
 				if(
 					(
-						!pattern && iN.val().match(/^([\+0-9\-\.\s\(\)]){5,18}$/)
+						(!pattern && iN.val().match(/^([\+0-9\-\.\s\(\)]){5,18}$/))
 						||
 						(pattern && iN.val().match("^"+pattern+"$"))
 					)
@@ -2771,27 +2836,38 @@ Util.Form = u.f = new function() {
 					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
 					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
 					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "email")) {
-				compare_to = iN.getAttribute("data-compare-to");
 				pattern = iN.getAttribute("pattern");
 				if(
 					(
-						!pattern && iN.val().match(/^([^<>\\\/%$])+\@([^<>\\\/%$])+\.([^<>\\\/%$]{2,20})$/)
-						 ||
+						(!pattern && iN.val().match(/^([^<>\\\/%$])+\@([^<>\\\/%$])+\.([^<>\\\/%$]{2,20})$/))
+						||
 						(pattern && iN.val().match("^"+pattern+"$"))
 					)
 					&&
 					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
 					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
 					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "text")) {
@@ -2812,10 +2888,17 @@ Util.Form = u.f = new function() {
 				}
 			}
 			else if(u.hc(iN.field, "date")) {
+				min = u.cv(iN.field, "min");
+				max = u.cv(iN.field, "max");
 				pattern = iN.getAttribute("pattern");
 				if(
-					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2})$/) ||
-					(pattern && iN.val().match("^"+pattern+"$"))
+					(!min || new Date(decodeURIComponent(min)) <= new Date(iN.val())) &&
+					(!max || new Date(decodeURIComponent(max)) >= new Date(iN.val())) &&
+					(
+						(!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2})$/))
+						||
+						(pattern && iN.val().match("^"+pattern+"$"))
+					)
 				) {
 					this.inputIsCorrect(iN);
 				}
@@ -2824,10 +2907,17 @@ Util.Form = u.f = new function() {
 				}
 			}
 			else if(u.hc(iN.field, "datetime")) {
+				min = u.cv(iN.field, "min");
+				max = u.cv(iN.field, "max");
 				pattern = iN.getAttribute("pattern");
 				if(
-					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2} [\d]{2}[\-\/\ \:]{1}[\d]{2}[\-\/\ \:]{0,1}[\d]{0,2})$/) ||
-					(pattern && iN.val().match(pattern))
+					(!min || new Date(decodeURIComponent(min)) <= new Date(iN.val())) &&
+					(!max || new Date(decodeURIComponent(max)) >= new Date(iN.val())) &&
+					(
+						(!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2} [\d]{2}[\-\/\ \:]{1}[\d]{2}[\-\/\ \:]{0,1}[\d]{0,2})$/))
+						||
+						(pattern && iN.val().match(pattern))
+					)
 				) {
 					this.inputIsCorrect(iN);
 				}
@@ -2840,10 +2930,22 @@ Util.Form = u.f = new function() {
 				max = Number(u.cv(iN.field, "max"));
 				min = min ? min : 1;
 				max = max ? max : 10000000;
+				pattern = iN.getAttribute("accept");
+				var i, value = iN.val(), files = [];
+				if(iN.field.uploaded_files && iN.field.uploaded_files.length) {
+					for(i = 0; i < iN.field.uploaded_files.length; i++) {
+						files.push("." + u.cv(iN.field.uploaded_files[i], "format").toLowerCase());
+					}
+				}
+				if(value && value.length) {
+					for(i = 0; i < value.length; i++) {
+						files.push(value[i].name.substring(value[i].name.lastIndexOf(".")).toLowerCase());
+					}
+				}
 				if(
-					u.hc(iN, "uploaded") ||
-					(iN.val().length >= min && 
-					iN.val().length <= max)
+					(files.length >= min && files.length <= max)
+					&&
+					(!pattern || files.every(function(v) {return pattern.split(",").indexOf(v) !== -1}))
 				) {
 					this.inputIsCorrect(iN);
 				}
@@ -2877,11 +2979,19 @@ Util.Form = u.f = new function() {
 					iN.val().length >= min &&
 					iN.val().length <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$"))
+					&&
+					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
 					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
 					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 		}
@@ -2893,7 +3003,7 @@ Util.Form = u.f = new function() {
 		}
 	}
 	this.getFormData = this.getParams = function(_form, _options) {
-		var format = "params";
+		var format = "formdata";
 		var ignore_inputs = "ignoreinput";
 		if(obj(_options)) {
 			var _argument;
@@ -3579,7 +3689,7 @@ u.navigation = function(_options) {
 	}
 	window._man_nav_path = window._man_nav_path ? window._man_nav_path : u.h.getCleanUrl(location.href, 1);
 	navigation_node._navigate = function(url) {
-		url = u.h.getCleanUrl(url);
+		var clean_url = u.h.getCleanUrl(url);
 		u.stats.pageView(url);
 		if(
 			!window._man_nav_path || 
@@ -3587,15 +3697,15 @@ u.navigation = function(_options) {
 			(u.h.popstate && window._man_nav_path != u.h.getCleanUrl(location.href, 1))
 		) {
 			if(this.cN && fun(this.cN.navigate)) {
-				this.cN.navigate(url);
+				this.cN.navigate(clean_url, url);
 			}
 		}
 		else {
 			if(this.cN.scene && this.cN.scene.parentNode && fun(this.cN.scene.navigate)) {
-				this.cN.scene.navigate(url);
+				this.cN.scene.navigate(clean_url, url);
 			}
 			else if(this.cN && fun(this.cN.navigate)) {
-				this.cN.navigate(url);
+				this.cN.navigate(clean_url, url);
 			}
 		}
 		if(!u.h.popstate) {
@@ -4053,7 +4163,7 @@ Util.validateResponse = function(HTTPRequest){
 /*u-scrollto.js*/
 u.scrollTo = function(node, _options) {
 	node._callback_scroll_to = "scrolledTo";
-	node._callback_scroll_cancelled = "scrolledToCancelled";
+	node._callback_scroll_cancelled = "scrollToCancelled";
 	var offset_y = 0;
 	var offset_x = 0;
 	var scroll_to_x = 0;
