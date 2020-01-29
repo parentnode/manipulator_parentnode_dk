@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-parentnode-skin-default Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-11-05 01:27:08
+js-merged @ 2020-01-29 08:47:12
 */
 
 /*seg_seo_include.js*/
