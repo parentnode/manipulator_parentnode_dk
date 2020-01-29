@@ -571,8 +571,7 @@ u.cutString(string, 10);</code>
 					<div class="description">
 						<h4>Description</h4>
 						<p>
-							Normalizes string by lowercasing and replacing any special chars and spaces with - (hyphens). Removes any double or trailing 
-							hyphens before returning string.
+							Normalizes string by replacing known special chars with a-z equivalent, ie. Æ becomes AE.
 						</p>
 					</div>
 
@@ -598,8 +597,7 @@ u.cutString(string, 10);</code>
 
 						<div class="example">
 							<code>u.normalize("København er så lækker");</code>
-	
-							<p>returns <span class="value">k-benhavn-er-s-l-kker</span></p>
+							<p>returns <span class="value">Koebenhavn er saa laekker</span></p>
 						</div>
 					</div>
 				
@@ -608,13 +606,158 @@ u.cutString(string, 10);</code>
 
 						<div class="javascript">
 							<h5>JavaScript</h5>
-							<p>String.toLowerCase</p>
+							<p>RegExp</p>
 							<p>String.replace</p>
 						</div>
 
 						<div class="manipulator">
 							<h5>Manipulator</h5>
 							<p>none</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.superNormalize">
+				<div class="header">
+					<h3>Util.superNormalize</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.superNormalize</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.superNormalize(string);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Normalizes string with u.normalize and then lowercasing and replacing any special chars and spaces with - (hyphens). Removes any double or trailing 
+							hyphens before returning string.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to superNormalize
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Return values</h4>
+						<p>Normalized string</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.superNormalize("København er så lækker");</code>
+							<p>returns <span class="value">koebenhavn-er-saa-laekker</span></p>
+						</div>
+					</div>
+				
+					<div class="dependencies">
+						<h4>Dependencies</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>String.toLowerCase</li>
+								<li>String.replace</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.normalize</li>
+								<li>u.stripTags</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="function" id="Util.stripTags">
+				<div class="header">
+					<h3>Util.stripTags</h3>
+				</div>
+				<div class="body">
+					<div class="definition">
+						<h4>Definition</h4>
+						<dl class="definition">
+							<dt class="name">Name</dt>
+							<dd class="name">Util.stripTags</dd>
+							<dt class="syntax">Syntax</dt>
+							<dd class="syntax">String =
+								Util.stripTags(string);
+							</dd>
+						</dl>
+					</div>
+
+					<div class="description">
+						<h4>Description</h4>
+						<p>
+							Remove any HTML tags from string.
+						</p>
+					</div>
+
+					<div class="parameters">
+						<h4>Parameters</h4>
+						<dl class="parameters">
+							<dt><span class="var">string</span></dt>
+							<dd>
+								<div class="summary">
+									<span class="type">String</span> String to strip tags from
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="return">
+						<h4>Return values</h4>
+						<p>String without any HTML tags</p>
+					</div>
+
+					<div class="examples">
+						<h4>Examples</h4>
+
+						<div class="example">
+							<code>u.stripTags("<strong>København</strong> er så <a href="/">lækker</a>");</code>
+							<p>returns <span class="value">København er så lækker</span></p>
+						</div>
+					</div>
+				
+					<div class="dependencies">
+						<h4>Dependencies</h4>
+
+						<div class="javascript">
+							<h5>JavaScript</h5>
+							<ul>
+								<li>document.createElement</li>
+							</ul>
+						</div>
+
+						<div class="manipulator">
+							<h5>Manipulator</h5>
+							<ul>
+								<li>u.text</li>
+							</ul>
 						</div>
 
 					</div>
