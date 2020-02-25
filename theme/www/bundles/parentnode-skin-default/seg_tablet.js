@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-parentnode-skin-default Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2020-02-08 20:05:48
+js-merged @ 2020-02-25 17:15:49
 */
 
 /*seg_tablet_include.js*/
@@ -3087,9 +3087,10 @@ Util.request = function(node, url, _options) {
 						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 				node[request_id].HTTPRequest.send("");
 			}
-			else if(node[request_id].request_method.match(/POST|PUT|PATCH/i)) {
+			else if(node[request_id].request_method.match(/POST|PUT|PATCH|DELETE/i)) {
 				var params;
 				if(obj(node[request_id].request_data) && node[request_id].request_data.constructor.toString().match(/function Object/i)) {
 					params = JSON.stringify(node[request_id].request_data);
@@ -3116,6 +3117,7 @@ Util.request = function(node, url, _options) {
 						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 				node[request_id].HTTPRequest.send(params);
 			}
 		}
