@@ -383,7 +383,7 @@ Util.clickableElement = u.ce = function(node, _options) {
 				}
 
 				// meta key pressed
-				if(event && (event.metaKey || event.ctrlKey)) {
+				if(event && (event.metaKey || event.ctrlKey || (this._a && this._a.target))) {
 					window.open(this.url);
 				}
 				else {
@@ -650,7 +650,11 @@ u.containsOrIs = function(scope, node) {
 	return false;
 }
 
-
+// Does selector match element
+u.elementMatches = u.em = function(node, selector) {
+	return node.matches(selector);
+	
+}
 
 
 // FOR CONSIDERATION

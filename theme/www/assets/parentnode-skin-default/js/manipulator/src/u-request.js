@@ -133,13 +133,16 @@ Util.request = function(node, url, _options) {
 					}
 				}
 
+				// Standard request stamp
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
 				// send info
 				// some older browser (Firefox 3 in paticular) requires a parameter for send - an empty string is enough
 				node[request_id].HTTPRequest.send("");
 
 			}
 			// perform POST, PUT or PATCH request
-			else if(node[request_id].request_method.match(/POST|PUT|PATCH/i)) {
+			else if(node[request_id].request_method.match(/POST|PUT|PATCH|DELETE/i)) {
 //				u.bug("POST|PUT|PATCH request");
 
 				// stringify possible JSON object
@@ -193,7 +196,8 @@ Util.request = function(node, url, _options) {
 					}
 				}
 
-
+				// Standard request stamp
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 				// send params
 				node[request_id].HTTPRequest.send(params);
@@ -224,7 +228,7 @@ Util.request = function(node, url, _options) {
 				delete this.timedOut;
 				delete this.t_timeout;
 
-				Util.validateResponse({node: requestee.node, request_id: requestee.request_id});
+				Util.validateResponse({node: requestee.node, request_id: requestee.request_id, status:this.status});
 			}
 			node[request_id].t_timeout = u.t.setTimer(node[request_id], "timedOut", node[request_id].request_timeout, {node: node, request_id: request_id});
 		}
@@ -346,8 +350,7 @@ Util.evaluateResponseText = function(responseText) {
 // Simple validation of responseText
 // Makes callback to appropriate notifier
 Util.validateResponse = function(HTTPRequest){
-	// u.bug("validateResponse:");
-	// console.log(HTTPRequest);
+	// u.bug("validateResponse:", HTTPRequest);
 
 	var object = false;
 
