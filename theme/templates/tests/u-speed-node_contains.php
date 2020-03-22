@@ -97,7 +97,7 @@ u.contains_5 = function(node, scope) {
 }
 
 
-Util.Objects["test_a"] = new function() {
+Util.Modules["test_a"] = new function() {
 	this.run = function(div) {
 
 		if(
@@ -132,7 +132,7 @@ Util.Objects["test_a"] = new function() {
 	}
 }
 
-Util.Objects["test_b"] = new function() {
+Util.Modules["test_b"] = new function() {
 	this.run = function(div) {
 
 		if(
@@ -167,7 +167,7 @@ Util.Objects["test_b"] = new function() {
 	}
 }
 
-Util.Objects["test_c"] = new function() {
+Util.Modules["test_c"] = new function() {
 	this.run = function(div) {
 
 		if(
@@ -202,7 +202,7 @@ Util.Objects["test_c"] = new function() {
 	}
 }
 
-Util.Objects["test_d"] = new function() {
+Util.Modules["test_d"] = new function() {
 	this.run = function(div) {
 
 		if(
@@ -237,7 +237,7 @@ Util.Objects["test_d"] = new function() {
 	}
 }
 
-Util.Objects["test_e"] = new function() {
+Util.Modules["test_e"] = new function() {
 	this.run = function(div) {
 
 		if(
@@ -274,7 +274,7 @@ Util.Objects["test_e"] = new function() {
 
 
 
-Util.Objects["test"] = new function() {
+Util.Modules["test"] = new function() {
 	this.init = function(div) {
 		var i, node;
 

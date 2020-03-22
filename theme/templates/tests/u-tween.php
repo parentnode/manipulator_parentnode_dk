@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 
-	Util.Objects["test"] = new function() {
+	Util.Modules["test"] = new function() {
 		this.init = function(scene) {
 			var div = u.qs("div.demo");
 

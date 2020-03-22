@@ -10,7 +10,7 @@ $this->pageTitle("Initializer objects");
 </style>
 
 <script type="text/javascript">
-	Util.Objects["clickme"] = new function() {
+	Util.Modules["clickme"] = new function() {
 		this.init = function(node) {
 			Util.clickableElement(node);
 			node.clicked = function() {
@@ -41,11 +41,11 @@ $this->pageTitle("Initializer objects");
 				cross device UI variations without any changes to the backend generated HTML or creating cross device dependencies.
 			</p>
 			<p>
-				Initializers are stored in <em>Util.Objects</em>, also avaliable as <em>u.o</em>.
+				Initializers are stored in <em>Util.Modules</em>, also avaliable as <em>u.o</em>.
 			</p>
 
 			<p>This is what an initializer looks like:</p>
-			<code>Util.Objects["initializerExample"] = new function() {
+			<code>Util.Modules["initializerExample"] = new function() {
 	this.init = function(node) {
 
 		// your code here
@@ -58,7 +58,7 @@ $this->pageTitle("Initializer objects");
 
 			<p>
 				The combination of the above, will result in the <span class="htmltag">div</span> being passed to the
-				u.o.initializerExample.init function as <span class="var">node</span>.
+				u.m.initializerExample.init function as <span class="var">node</span>.
 			</p>
 
 			<p>
@@ -70,7 +70,7 @@ $this->pageTitle("Initializer objects");
 				A full example could look like this:
 			</p>
 
-			<code>Util.Objects["clickme"] = new function() {
+			<code>Util.Modules["clickme"] = new function() {
 	this.init = function(node) {
 
 		Util.clickableElement(node);

@@ -2,7 +2,7 @@
 $this->headerIncludes(array(
 	"/js/manipulator/src/beta-u-fontsready.js",
 
-	"/js/tests/i-fontsready.js",
+	"/js/tests/m-fontsready.js",
 ));
 ?>
 

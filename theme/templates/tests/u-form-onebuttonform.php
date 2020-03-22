@@ -1,6 +1,6 @@
 <?php
 $this->headerIncludes(array(
-	"/js/tests/i-form-onebuttonform.js",
+	"/js/tests/m-form-onebuttonform.js",
 	"/js/manipulator/src/beta-u-form-onebuttonform.js",
 	"/css/tests/s-form-onebuttonform.css"
 ));

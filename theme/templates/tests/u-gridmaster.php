@@ -29,7 +29,7 @@
 		]
 	}
 
-	Util.Objects["test1"] = new function() {
+	Util.Modules["test1"] = new function() {
 
 		this.init = function(scene) {
 
@@ -86,7 +86,7 @@
 		]
 	}
 
-	Util.Objects["test2"] = new function() {
+	Util.Modules["test2"] = new function() {
 
 		this.init = function(scene) {
 
@@ -140,7 +140,7 @@
 		]
 	}
 
-	Util.Objects["test3"] = new function() {
+	Util.Modules["test3"] = new function() {
 
 		this.init = function(scene) {
 

@@ -1,6 +1,6 @@
 <?php
 $this->headerIncludes(array(
-	"/js/tests/i-googleanalytics.js",
+	"/js/tests/m-googleanalytics.js",
 	"/js/manipulator/src/u-googleanalytics.js",
 	"/css/tests/s-googleanalytics.css"
 ));

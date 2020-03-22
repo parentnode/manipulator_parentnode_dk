@@ -56,5 +56,5 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/beta-u-v
 
 
 document.write('<script type="text/javascript" src="/js/lib/u-settings.js"></script>');
-document.write('<script type="text/javascript" src="/js/dev/mobile/i-page.js"></script>');
-document.write('<script type="text/javascript" src="/js/dev/mobile/i-scene.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/mobile/m-page.js"></script>');
+document.write('<script type="text/javascript" src="/js/dev/mobile/m-scene.js"></script>');

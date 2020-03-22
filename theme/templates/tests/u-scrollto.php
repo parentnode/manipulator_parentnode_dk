@@ -1,6 +1,6 @@
 <?php
 $this->headerIncludes(array(
-	"/js/tests/i-scrollto.js",
+	"/js/tests/m-scrollto.js",
 	"/css/tests/s-scrollto.css"
 ));
 ?>

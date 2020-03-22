@@ -13,7 +13,7 @@ var objects_array_complex = [];
 var objects = {};
 
 
-Util.Objects["test_a"] = new function() {
+Util.Modules["test_a"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -31,7 +31,7 @@ Util.Objects["test_a"] = new function() {
 }
 
 
-Util.Objects["test_b"] = new function() {
+Util.Modules["test_b"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -49,7 +49,7 @@ Util.Objects["test_b"] = new function() {
 
 }
 
-Util.Objects["test_c"] = new function() {
+Util.Modules["test_c"] = new function() {
 	this.run = function() {
 
 		var i, test = 0;
@@ -66,7 +66,7 @@ Util.Objects["test_c"] = new function() {
 
 }
 
-Util.Objects["test_d"] = new function() {
+Util.Modules["test_d"] = new function() {
 	this.run = function() {
 
 		var i, l = objects_array.length; test = 0;
@@ -83,7 +83,7 @@ Util.Objects["test_d"] = new function() {
 
 }
 
-Util.Objects["test_e"] = new function() {
+Util.Modules["test_e"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -102,7 +102,7 @@ Util.Objects["test_e"] = new function() {
 
 }
 
-Util.Objects["test_f"] = new function() {
+Util.Modules["test_f"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -121,7 +121,7 @@ Util.Objects["test_f"] = new function() {
 
 }
 
-Util.Objects["test_g"] = new function() {
+Util.Modules["test_g"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -139,7 +139,7 @@ Util.Objects["test_g"] = new function() {
 
 }
 
-Util.Objects["test_h"] = new function() {
+Util.Modules["test_h"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -160,7 +160,7 @@ Util.Objects["test_h"] = new function() {
 
 // TEST i and j is about iterating objects vs iteration array of objects
 // Is it faster to loop array of object, or object it self
-Util.Objects["test_i"] = new function() {
+Util.Modules["test_i"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -178,7 +178,7 @@ Util.Objects["test_i"] = new function() {
 
 }
 
-Util.Objects["test_j"] = new function() {
+Util.Modules["test_j"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -210,7 +210,7 @@ function loopTest(id) {
 } 
 
 
-Util.Objects["test"] = new function() {
+Util.Modules["test"] = new function() {
 	this.init = function(div) {
 		var i, node;
 

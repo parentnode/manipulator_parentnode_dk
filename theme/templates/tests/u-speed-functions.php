@@ -34,7 +34,7 @@ var test3 = function() {
 	}
 }
 
-	Util.Objects["test"] = new function() {
+	Util.Modules["test"] = new function() {
 
 		this.iterations = 1000000;
 

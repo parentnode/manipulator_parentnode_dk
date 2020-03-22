@@ -2,7 +2,7 @@
 $this->headerIncludes(array(
 	"/css/tests/s-form.css",
 	"/assets/parentnode-skin-default/css/lib/".$this->segment(array("type" => "www"))."/s-form.css",
-	"/js/tests/i-form-combined.js"
+	"/js/tests/m-form-combined.js"
 ));
 ?>
 

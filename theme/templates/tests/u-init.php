@@ -1,6 +1,6 @@
 <?php
 $this->headerIncludes(array(
-	"/js/tests/i-init.js"
+	"/js/tests/m-init.js"
 ));
 ?>
 

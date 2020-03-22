@@ -1,6 +1,6 @@
 <?php
 $this->headerIncludes(array(
-	"/js/tests/i-googlemaps.js",
+	"/js/tests/m-googlemaps.js",
 	"/css/tests/s-googlemaps.css"
 ));
 ?>

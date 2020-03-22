@@ -35,7 +35,7 @@ console.log("test6:" + test6);
 
 // TODO: REST IS COPIED DIRECTLY FROM FORLOOP-TEST
 
-Util.Objects["test_a"] = new function() {
+Util.Modules["test_a"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -53,7 +53,7 @@ Util.Objects["test_a"] = new function() {
 }
 
 
-Util.Objects["test_b"] = new function() {
+Util.Modules["test_b"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -71,7 +71,7 @@ Util.Objects["test_b"] = new function() {
 
 }
 
-Util.Objects["test_c"] = new function() {
+Util.Modules["test_c"] = new function() {
 	this.run = function() {
 
 		var i, test = 0;
@@ -88,7 +88,7 @@ Util.Objects["test_c"] = new function() {
 
 }
 
-Util.Objects["test_d"] = new function() {
+Util.Modules["test_d"] = new function() {
 	this.run = function() {
 
 		var i, l = objects.length; test = 0;
@@ -105,7 +105,7 @@ Util.Objects["test_d"] = new function() {
 
 }
 
-Util.Objects["test_e"] = new function() {
+Util.Modules["test_e"] = new function() {
 	this.run = function() {
 
 		var i, node, test = 0;
@@ -122,7 +122,7 @@ Util.Objects["test_e"] = new function() {
 
 }
 
-Util.Objects["test_f"] = new function() {
+Util.Modules["test_f"] = new function() {
 	this.run = function() {
 
 		var test = 0;
@@ -153,7 +153,7 @@ function loopTest(id) {
 } 
 
 
-Util.Objects["test"] = new function() {
+Util.Modules["test"] = new function() {
 	this.init = function(div) {
 		var i, node;
 

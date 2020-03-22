@@ -14,7 +14,7 @@
 	<p>
 		This is how you create a Manipulator Object:
 	</p>
-	<code>Util.Objects[&quot;object_name&quot;] = new Function() {
+	<code>Util.Modules[&quot;object_name&quot;] = new Function() {
 	this.init = function(node) {
 
 		// extend your node here
@@ -60,7 +60,7 @@
 						<h4>Description</h4>
 						<p>
 							Manipulator object initializer. Finds all nodes in scope, with classname <span class="value">i:[objectname]</span> 
-							and invokes Util.Objects[objectname].init(node) if available.
+							and invokes Util.Modules[objectname].init(node) if available.
 						</p>
 					</div>
 
@@ -94,7 +94,7 @@
 &lt;script&gt;
 	Util.init();
 &lt;/script&gt;</code>
-								<p>Finds div.header and invokes Util.Objects["header"].init(div.header), if it exists.</p> 
+								<p>Finds div.header and invokes Util.Modules["header"].init(div.header), if it exists.</p> 
 							</code>
 						</div>
 					</div>

@@ -30,7 +30,7 @@
 <script type="text/javascript">
 
 
-Util.Objects["basics1"] = new function() {
+Util.Modules["basics1"] = new function() {
 	this.init = function(basics_div) {
 		u.bug("init basics");
 
@@ -43,7 +43,7 @@ Util.Objects["basics1"] = new function() {
 	}
 }
 
-Util.Objects["callbacks1"] = new function() {
+Util.Modules["callbacks1"] = new function() {
 	this.init = function(callback_div) {
 		u.bug("init callbacks");
 
@@ -57,7 +57,7 @@ Util.Objects["callbacks1"] = new function() {
 
 
 
-Util.Objects["svgs"] = new function() {
+Util.Modules["svgs"] = new function() {
 	this.init = function(svgs_div) {
 		u.bug("init svgs");
 
