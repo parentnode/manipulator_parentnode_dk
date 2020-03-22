@@ -1,6 +1,6 @@
 /*
 MIT license, 2019 parentNode.dk
-asset-builder @ 2019-05-23 03:35:14
+asset-builder @ 2020-03-19 20:44:16
 */
 
 /*seg_desktop_include.js*/
@@ -8,7 +8,7 @@ asset-builder @ 2019-05-23 03:35:14
 /*seg_desktop.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = "0.9.2";
+	u.version = "0.9.3";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
 	u.txt = function(index) {return index;}
@@ -232,7 +232,7 @@ Util.Animation = u.a = new function() {
 				this.transitioned_before = this.transitioned;
 				this.transitioned(event);
 				if(this.transitioned === this.transitioned_before) {
-					this.transitioned = null;
+					delete this.transitioned;
 				}
 			}
 		}
@@ -793,7 +793,7 @@ Util.clickableElement = u.ce = function(node, _options) {
 				if(fun(node.preClicked)) {
 					node.preClicked();
 				}
-				if(event && (event.metaKey || event.ctrlKey)) {
+				if(event && (event.metaKey || event.ctrlKey || (this._a && this._a.target))) {
 					window.open(this.url);
 				}
 				else {
@@ -939,6 +939,9 @@ u.containsOrIs = function(scope, node) {
 		return true
 	}
 	return false;
+}
+u.elementMatches = u.em = function(node, selector) {
+	return node.matches(selector);
 }
 Util.insertAfter = u.ia = function(after_node, insert_node) {
 	var next_node = u.ns(after_node);
@@ -1490,8 +1493,8 @@ u.e.addWindowEvent = function(node, type, action) {
 }
 u.e.removeWindowEvent = function(node, type, id) {
 	u.e.removeEvent(window, type, window["_OnWindowEvent_callback_"+id]);
-	window["_OnWindowEvent_node_"+id] = null;
-	window["_OnWindowEvent_callback_"+id] = null;
+	delete window["_OnWindowEvent_node_"+id];
+	delete window["_OnWindowEvent_callback_"+id];
 }
 u.e.addWindowStartEvent = function(node, action) {
 	var id = u.randomString();
@@ -1507,9 +1510,9 @@ u.e.addWindowStartEvent = function(node, action) {
 }
 u.e.removeWindowStartEvent = function(node, id) {
 	u.e.removeStartEvent(window, window["_Onstart_callback_"+id]);
-	window["_Onstart_node_"+id]["_Onstart_callback_"+id] = null;
-	window["_Onstart_node_"+id] = null;
-	window["_Onstart_callback_"+id] = null;
+	delete window["_Onstart_node_"+id]["_Onstart_callback_"+id];
+	delete window["_Onstart_node_"+id];
+	delete window["_Onstart_callback_"+id];
 }
 u.e.addWindowMoveEvent = function(node, action) {
 	var id = u.randomString();
@@ -1525,9 +1528,9 @@ u.e.addWindowMoveEvent = function(node, action) {
 }
 u.e.removeWindowMoveEvent = function(node, id) {
 	u.e.removeMoveEvent(window, window["_Onmove_callback_" + id]);
-	window["_Onmove_node_"+ id]["_Onmove_callback_"+id] = null;
-	window["_Onmove_node_"+ id] = null;
-	window["_Onmove_callback_"+ id] = null;
+	delete window["_Onmove_node_"+ id]["_Onmove_callback_"+id];
+	delete window["_Onmove_node_"+ id];
+	delete window["_Onmove_callback_"+ id];
 }
 u.e.addWindowEndEvent = function(node, action) {
 	var id = u.randomString();
@@ -1543,17 +1546,19 @@ u.e.addWindowEndEvent = function(node, action) {
 }
 u.e.removeWindowEndEvent = function(node, id) {
 	u.e.removeEndEvent(window, window["_Onend_callback_" + id]);
-	window["_Onend_node_"+ id]["_Onend_callback_"+id] = null;
-	window["_Onend_node_"+ id] = null;
-	window["_Onend_callback_"+ id] = null;
+	delete window["_Onend_node_"+ id]["_Onend_callback_"+id];
+	delete window["_Onend_node_"+ id];
+	delete window["_Onend_callback_"+ id];
 }
 Util.Form = u.f = new function() {
 	this.customInit = {};
 	this.customValidate = {};
-	this.customSend = {};
+	this.customDataFormat = {};
 	this.customHintPosition = {};
+	this.customLabelStyle = {};
 	this.init = function(_form, _options) {
-		var i, j, field, action, input, hidden_field;
+		var i, j, field, action, input, hidden_input;
+		_form._bulk_operation = true;
 		if(_form.nodeName.toLowerCase() != "form") {
 			_form.native_form = u.pn(_form, {"include":"form"});
 			if(!_form.native_form) {
@@ -1565,19 +1570,41 @@ Util.Form = u.f = new function() {
 			_form.native_form = _form;
 		}
 		_form._focus_z_index = 50;
-		_form._hover_z_index = 49;
 		_form._validation = true;
-		_form._debug_init = false;
+		_form._debug = false;
+		_form._label_style = u.cv(_form, "labelstyle");
+		_form._callback_ready = "ready";
+		_form._callback_submitted = "submitted";
+		_form._callback_pre_submitted = "preSubmitted";
+		_form._callback_resat = "resat";
+		_form._callback_updated = "updated";
+		_form._callback_changed = "changed";
+		_form._callback_blurred = "blurred";
+		_form._callback_focused = "focused";
+		_form._callback_validation_failed = "validationFailed";
+		_form._callback_validation_passed = "validationPassed";
 		if(obj(_options)) {
 			var _argument;
 			for(_argument in _options) {
 				switch(_argument) {
-					case "validation"       : _form._validation      = _options[_argument]; break;
-					case "focus_z"          : _form._focus_z_index   = _options[_argument]; break;
-					case "debug"            : _form._debug_init      = _options[_argument]; break;
+					case "validation"               : _form._validation                = _options[_argument]; break;
+					case "debug"                    : _form._debug                     = _options[_argument]; break;
+					case "focus_z"                  : _form._focus_z_index             = _options[_argument]; break;
+					case "label_style"              : _form._label_style               = _options[_argument]; break;
+					case "callback_ready"           : _form._callback_ready            = _options[_argument]; break;
+					case "callback_submitted"       : _form._callback_submitted        = _options[_argument]; break;
+					case "callback_pre_submitted"   : _form._callback_pre_submitted    = _options[_argument]; break;
+					case "callback_resat"           : _form._callback_resat            = _options[_argument]; break;
+					case "callback_updated"         : _form._callback_updated          = _options[_argument]; break;
+					case "callback_changed"         : _form._callback_changed          = _options[_argument]; break;
+					case "callback_blurred"         : _form._callback_blurred          = _options[_argument]; break;
+					case "callback_focused"         : _form._callback_focused          = _options[_argument]; break;
+					case "callback_validation_failed"         : _form._callback_validation_failed          = _options[_argument]; break;
+					case "callback_validation_passed"         : _form._callback_validation_passed          = _options[_argument]; break;
 				}
 			}
 		}
+		_form._hover_z_index = _form._focus_z_index - 1;
 		_form.native_form.onsubmit = function(event) {
 			if(event.target._form) {
 				return false;
@@ -1588,266 +1615,224 @@ Util.Form = u.f = new function() {
 		_form.submit = this._submit;
 		_form.DOMreset = _form.native_form.reset;
 		_form.reset = this._reset;
-		_form.fields = {};
+		_form.getData = function(_options) {
+			return u.f.getFormData(this, _options);
+		}
+		_form.inputs = {};
 		_form.actions = {};
-		_form.error_fields = {};
-		_form.labelstyle = u.cv(_form, "labelstyle");
+		_form._error_inputs = {};
 		var fields = u.qsa(".field", _form);
 		for(i = 0; i < fields.length; i++) {
 			field = fields[i];
-			field._base_z_index = u.gcs(field, "z-index");
-			field._help = u.qs(".help", field);
-			field._hint = u.qs(".hint", field);
-			field._error = u.qs(".error", field);
-			field._indicator = u.ae(field, "div", {"class":"indicator"});
-			if(fun(u.f.fixFieldHTML)) {
-				u.f.fixFieldHTML(field);
-			}
-			field._initialized = false;
-			var custom_init;
-			for(custom_init in this.customInit) {
-				if(u.hc(field, custom_init)) {
-					this.customInit[custom_init](_form, field);
-					field._initialized = true;
-				}
-			}
-			if(!field._initialized) {
-				if(u.hc(field, "string|email|tel|number|integer|password|date|datetime")) {
-					field._input = u.qs("input", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					field._input.val = this._value;
-					u.e.addEvent(field._input, "keyup", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					this.inputOnEnter(field._input);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "text")) {
-					field._input = u.qs("textarea", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					field._input.val = this._value;
-					if(u.hc(field, "autoexpand")) {
-						var current_height = parseInt(u.gcs(field._input, "height"));
-						var current_value = field._input.val();
-						field._input.value = "";
-						u.as(field._input, "overflow", "hidden");
-						field._input.autoexpand_offset = 0;
-						if(parseInt(u.gcs(field._input, "height")) != field._input.scrollHeight) {
-							field._input.autoexpand_offset = field._input.scrollHeight - parseInt(u.gcs(field._input, "height"));
-						}
-						field._input.value = current_value;
-						field._input.setHeight = function() {
-							var textarea_height = parseInt(u.gcs(this, "height"));
-							if(this.val()) {
-								if(u.browser("webkit") || u.browser("firefox", ">=29")) {
-									if(this.scrollHeight - this.autoexpand_offset > textarea_height) {
-										u.a.setHeight(this, this.scrollHeight);
-									}
-								}
-								else if(u.browser("opera") || u.browser("explorer")) {
-									if(this.scrollHeight > textarea_height) {
-										u.a.setHeight(this, this.scrollHeight);
-									}
-								}
-								else {
-									u.a.setHeight(this, this.scrollHeight);
-								}
-							}
-						}
-						u.e.addEvent(field._input, "keyup", field._input.setHeight);
-						field._input.setHeight();
-					}
-					u.e.addEvent(field._input, "keyup", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "select")) {
-					field._input = u.qs("select", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					field._input.val = this._value_select;
-					u.e.addEvent(field._input, "change", this._updated);
-					u.e.addEvent(field._input, "keyup", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "checkbox|boolean")) {
-					field._input = u.qs("input[type=checkbox]", field);
-					field._input._form = _form;
-					field._input.field = field;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					_form.fields[field._input.name] = field._input;
-					field._input.val = this._value_checkbox;
-					if(u.browser("explorer", "<=8")) {
-						field._input.pre_state = field._input.checked;
-						field._input._changed = this._changed;
-						field._input._updated = this._updated;
-						field._input._update_checkbox_field = this._update_checkbox_field;
-						field._input._clicked = function(event) {
-							if(this.checked != this.pre_state) {
-								this._changed(window.event);
-								this._updated(window.event);
-								this._update_checkbox_field(window.event);
-							}
-							this.pre_state = this.checked;
-						}
-						u.e.addEvent(field._input, "click", field._input._clicked);
-					}
-					else {
-						u.e.addEvent(field._input, "change", this._changed);
-						u.e.addEvent(field._input, "change", this._updated);
-						u.e.addEvent(field._input, "change", this._update_checkbox_field);
-					}
-					this.inputOnEnter(field._input);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "radiobuttons")) {
-					field._inputs = u.qsa("input", field);
-					field._input = field._inputs[0];
-					_form.fields[field._input.name] = field._input;
-					for(j = 0; j < field._inputs.length; j++) {
-						input = field._inputs[j];
-						input.field = field;
-						input._form = _form;
-						input._label = u.qs("label[for='"+input.id+"']", field);
-						input.val = this._value_radiobutton;
-						if(u.browser("explorer", "<=8")) {
-							input.pre_state = input.checked;
-							input._changed = this._changed;
-							input._updated = this._updated;
-							input._clicked = function(event) {
-								var i, input;
-								if(this.checked != this.pre_state) {
-									this._changed(window.event);
-									this._updated(window.event);
-								}
-								for(i = 0; i < field._input.length; i++) {
-									input = this.field._input[i];
-									input.pre_state = input.checked;
-								}
-							}
-							u.e.addEvent(input, "click", input._clicked);
-						}
-						else {
-							u.e.addEvent(input, "change", this._changed);
-							u.e.addEvent(input, "change", this._updated);
-						}
-						this.inputOnEnter(input);
-						this.activateInput(input);
-					}
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "files")) {
-					field._input = u.qs("input", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					u.e.addEvent(field._input, "change", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					u.e.addEvent(field._input, "focus", this._focus);
-					u.e.addEvent(field._input, "blur", this._blur);
-					if(u.e.event_pref == "mouse") {
-						u.e.addEvent(field._input, "dragenter", this._focus);
-						u.e.addEvent(field._input, "dragleave", this._blur);
-						u.e.addEvent(field._input, "mouseenter", this._mouseenter);
-						u.e.addEvent(field._input, "mouseleave", this._mouseleave);
-					}
-					u.e.addEvent(field._input, "blur", this._validate);
-					field._input.val = this._value_file;
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "tags")) {
-					field._input = u.qs("input", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					field._input.val = this._value;
-					u.e.addEvent(field._input, "keyup", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					this.inputOnEnter(field._input);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else if(u.hc(field, "prices")) {
-					field._input = u.qs("input", field);
-					field._input._form = _form;
-					field._input.field = field;
-					_form.fields[field._input.name] = field._input;
-					field._input._label = u.qs("label[for='"+field._input.id+"']", field);
-					field._input.val = this._value;
-					u.e.addEvent(field._input, "keyup", this._updated);
-					u.e.addEvent(field._input, "change", this._changed);
-					this.inputOnEnter(field._input);
-					this.activateInput(field._input);
-					this.validate(field._input);
-				}
-				else {
-					u.bug("UNKNOWN FIELD IN FORM INITIALIZATION:" + u.nodeId(field));
-				}
-			}
+			u.f.initField(_form, field);
 		}
-		var hidden_fields = u.qsa("input[type=hidden]", _form);
-		for(i = 0; i < hidden_fields.length; i++) {
-			hidden_field = hidden_fields[i];
-			if(!_form.fields[hidden_field.name]) {
-				_form.fields[hidden_field.name] = hidden_field;
-				hidden_field._form = _form;
-				hidden_field.val = this._value;
+		var hidden_inputs = u.qsa("input[type=hidden]", _form);
+		for(i = 0; i < hidden_inputs.length; i++) {
+			hidden_input = hidden_inputs[i];
+			if(!_form.inputs[hidden_input.name]) {
+				_form.inputs[hidden_input.name] = hidden_input;
+				hidden_input._form = _form;
+				hidden_input.val = this._value;
 			}
 		}
 		var actions = u.qsa(".actions li input[type=button],.actions li input[type=submit],.actions li input[type=reset],.actions li a.button", _form);
 		for(i = 0; i < actions.length; i++) {
 			action = actions[i];
-				action._form = _form;
-			this.activateButton(action);
+			this.initButton(_form, action);
 		}
-		if(_form._debug_init) {
-			u.bug(u.nodeId(_form) + ", fields:");
-			u.xInObject(_form.fields);
-			u.bug(u.nodeId(_form) + ", actions:");
-			u.xInObject(_form.actions);
+		u.t.setTimer(_form, function() {
+			var validate_inputs = [];
+			for(input in this.inputs) {
+				if(this.inputs[input].field) {
+					validate_inputs.push(this.inputs[input]);
+				}
+			}
+			u.f.bulkValidate(validate_inputs);
+			if(_form._debug) {
+				u.bug(_form, "inputs:", _form.inputs, "actions:", _form.actions);
+			}
+			if(fun(this[this._callback_ready])) {
+				this[this._callback_ready]();
+			}
+		}, 100);
+	}
+	this.initField = function(_form, field) {
+		field._form = _form;
+		field._base_z_index = u.gcs(field, "z-index");
+		field.help = u.qs(".help", field);
+		field.hint = u.qs(".hint", field);
+		field.error = u.qs(".error", field);
+		field.label = u.qs("label", field);
+		field.indicator = u.ae(field, "div", {"class":"indicator"});
+		if(fun(u.f.fixFieldHTML)) {
+			u.f.fixFieldHTML(field);
+		}
+		field._custom_initialized = false;
+		var custom_init;
+		for(custom_init in this.customInit) {
+			if(u.hc(field, custom_init)) {
+				this.customInit[custom_init](field);
+				field._custom_initialized = true;
+				break;
+			}
+		}
+		if(!field._custom_initialized) {
+			if(u.hc(field, "string|email|tel|number|integer|password|date|datetime")) {
+				field.type = field.className.match(/(?:^|\b)(string|email|tel|number|integer|password|date|datetime)(?:\b|$)/)[0];
+				field.input = u.qs("input", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value;
+				u.e.addEvent(field.input, "keyup", this._updated);
+				u.e.addEvent(field.input, "change", this._changed);
+				this.inputOnEnter(field.input);
+				this.activateInput(field.input);
+			}
+			else if(u.hc(field, "text")) {
+				field.type = "text";
+				field.input = u.qs("textarea", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value;
+				if(u.hc(field, "autoexpand")) {
+					u.ass(field.input, {
+						"overflow": "hidden"
+					});
+					field.input.setHeight = function() {
+						u.ass(this, {
+							height: "auto"
+						});
+						u.ass(this, {
+							height: (this.scrollHeight) + "px"
+						});
+					}
+					u.e.addEvent(field.input, "input", field.input.setHeight);
+					field.input.setHeight();
+				}
+				u.e.addEvent(field.input, "keyup", this._updated);
+				u.e.addEvent(field.input, "change", this._changed);
+				this.activateInput(field.input);
+			}
+			else if(u.hc(field, "select")) {
+				field.type = "select";
+				field.input = u.qs("select", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value_select;
+				u.e.addEvent(field.input, "change", this._updated);
+				u.e.addEvent(field.input, "keyup", this._updated);
+				u.e.addEvent(field.input, "change", this._changed);
+				this.activateInput(field.input);
+			}
+			else if(u.hc(field, "checkbox|boolean")) {
+				field.type = field.className.match(/(?:^|\b)(checkbox|boolean)(?:\b|$)/)[0];
+				field.input = u.qs("input[type=checkbox]", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value_checkbox;
+				u.f._update_checkbox_field.bind(field.input)();
+				u.e.addEvent(field.input, "change", this._changed);
+				u.e.addEvent(field.input, "change", this._updated);
+				u.e.addEvent(field.input, "change", this._update_checkbox_field);
+				this.inputOnEnter(field.input);
+				this.activateInput(field.input);
+			}
+			else if(u.hc(field, "radiobuttons")) {
+				field.type = "radiobuttons";
+				field.inputs = u.qsa("input", field);
+				field.input = field.inputs[0];
+				for(j = 0; j < field.inputs.length; j++) {
+					input = field.inputs[j];
+					input._form = _form;
+					input.label = u.qs("label[for='"+input.id+"']", field);
+					input.field = field;
+					input.val = this._value_radiobutton;
+					u.e.addEvent(input, "change", this._changed);
+					u.e.addEvent(input, "change", this._updated);
+					this.inputOnEnter(input);
+					this.activateInput(input);
+				}
+			}
+			else if(u.hc(field, "files")) {
+				field.type = "files";
+				field.input = u.qs("input", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value_file;
+				field.filelist = u.qs("ul.filelist", field);
+				if(!field.filelist) {
+					field.filelist = u.ae(field, "ul", {"class":"filelist"});
+					field.insertBefore(field.help, field.filelist);
+				}
+				field.filelist.field = field;
+				field.uploaded_files = u.qsa("li.uploaded", field.filelist);
+				this._update_filelist.bind(field.input)();
+				u.e.addEvent(field.input, "change", this._update_filelist);
+				u.e.addEvent(field.input, "change", this._updated);
+				u.e.addEvent(field.input, "change", this._changed);
+				if(u.e.event_support != "touch") {
+					u.e.addEvent(field.input, "dragenter", this._focus);
+					u.e.addEvent(field.input, "dragleave", this._blur);
+					u.e.addEvent(field.input, "drop", this._blur);
+				}
+				this.activateInput(field.input);
+			}
+			else {
+				u.bug("UNKNOWN FIELD IN FORM INITIALIZATION:", field);
+			}
+		}
+		if(field.input) {
+			_form.inputs[field.input.name] = field.input;
+			if(!_form._bulk_operation) {
+				this.validate(field.input);
+			}
 		}
 	}
-	this._reset = function (event, iN) {
-		for (name in this.fields) {
-			if (this.fields[name] && this.fields[name].field && this.fields[name].type != "hidden" && !this.fields[name].getAttribute("readonly")) {
-				this.fields[name].used = false;
-				this.fields[name].val("");
+	this.initButton = function(_form, action) {
+		action._form = _form;
+		this.buttonOnEnter(action);
+		this.activateButton(action);
+	}
+	this._reset = function(event, iN) {
+		for (name in this.inputs) {
+			if (this.inputs[name] && this.inputs[name].field && this.inputs[name].type != "hidden" && !this.inputs[name].getAttribute("readonly")) {
+				this.inputs[name]._used = false;
+				this.inputs[name].val("");
+				if(fun(u.f.updateDefaultState)) {
+					u.f.updateDefaultState(this.inputs[name]);
+				}
 			}
+		}
+		if(fun(this[this._callback_resat])) {
+			this[this._callback_resat](iN);
 		}
 	}
 	this._submit = function(event, iN) {
-		for(name in this.fields) {
-			if(this.fields[name] && this.fields[name].field && fun(this.fields[name].val)) {
-				this.fields[name].used = true;
-				u.f.validate(this.fields[name]);
+		var validate_inputs = [];
+		for(name in this.inputs) {
+			if(this.inputs[name] && this.inputs[name].field && fun(this.inputs[name].val)) {
+				this.inputs[name]._used = true;
+				validate_inputs.push(this.inputs[name]);
 			}
 		}
-		if(!Object.keys(this.error_fields).length) {
-			if(fun(this.preSubmitted)) {
-				this.preSubmitted(iN);
+		u.f.bulkValidate(validate_inputs);
+		if(!Object.keys(this._error_inputs).length) {
+			if(fun(this[this._callback_pre_submitted])) {
+				this[this._callback_pre_submitted](iN);
 			}
-			if(fun(this.submitted)) {
-				this.submitted(iN);
+			if(fun(this[this._callback_submitted])) {
+				this[this._callback_submitted](iN);
 			}
 			else {
-				for(name in this.fields) {
-					if(this.fields[name] && this.fields[name].default_value && fun(this.fields[name].val) && !this.fields[name].val()) {
-						if(this.fields[name].nodeName.match(/^(input|textarea)$/i)) {
-							this.fields[name].value = "";
+				for(name in this.inputs) {
+					if(this.inputs[name] && this.inputs[name].default_value && this.inputs[name].nodeName.match(/^(input|textarea)$/i)) {
+						if(fun(this.inputs[name].val) && !this.inputs[name].val()) {
+							this.inputs[name].value = "";
 						}
 					}
 				}
@@ -1860,9 +1845,6 @@ Util.Form = u.f = new function() {
 			this.value = value;
 			if(value !== this.default_value) {
 				u.rc(this, "default");
-				if(this.pseudolabel) {
-					u.as(this.pseudolabel, "display", "none");
-				}
 			}
 			u.f.validate(this);
 		}
@@ -1871,8 +1853,8 @@ Util.Form = u.f = new function() {
 	this._value_radiobutton = function(value) {
 		var i, option;
 		if(value !== undefined) {
-			for(i = 0; i < this.field._inputs.length; i++) {
-				option = this.field._inputs[i];
+			for(i = 0; i < this.field.inputs.length; i++) {
+				option = this.field.inputs[i];
 				if(option.value == value || (option.value == "true" && value) || (option.value == "false" && value === false)) {
 					option.checked = true;
 					u.f.validate(this);
@@ -1882,12 +1864,10 @@ Util.Form = u.f = new function() {
 				}
 			}
 		}
-		else {
-			for(i = 0; i < this.field._inputs.length; i++) {
-				option = this.field._inputs[i];
-				if(option.checked) {
-					return option.value;
-				}
+		for(i = 0; i < this.field.inputs.length; i++) {
+			option = this.field.inputs[i];
+			if(option.checked) {
+				return option.value;
 			}
 		}
 		return "";
@@ -1896,18 +1876,15 @@ Util.Form = u.f = new function() {
 		if(value !== undefined) {
 			if(value) {
 				this.checked = true
-				u.ac(this.field, "checked");
 			}
 			else {
 				this.checked = false;
-				u.rc(this.field, "checked");
 			}
+			u.f._update_checkbox_field.bind(this)();
 			u.f.validate(this);
 		}
-		else {
-			if(this.checked) {
-				return this.value;
-			}
+		if(this.checked) {
+			return this.value;
 		}
 		return "";
 	}
@@ -1919,44 +1896,175 @@ Util.Form = u.f = new function() {
 				if(option.value == value) {
 					this.selectedIndex = i;
 					u.f.validate(this);
-					return i;
+					return this.options[this.selectedIndex].value;
 				}
 			}
 			if (value === "") {
 				this.selectedIndex = -1;
 				u.f.validate(this);
-				return -1;
+				return "";
 			}
-			return false;
 		}
-		else {
-			return (this.selectedIndex >= 0 && this.default_value != this.options[this.selectedIndex].value) ? this.options[this.selectedIndex].value : "";
-		}
+		return (this.selectedIndex >= 0 && this.default_value != this.options[this.selectedIndex].value) ? this.options[this.selectedIndex].value : "";
 	}
 	this._value_file = function(value) {
 		if(value !== undefined) {
-			this.value = value;
-			if (value === "") {
+			if(value === "") {
 				this.value = null;
+			}
+			else {
+				u.bug('ADDING VALUES MANUALLY TO INPUT type="file" IS NOT SUPPORTED IN JAVASCRIPT');
+			}
+			u.f._update_filelist.bind(this)();
+			u.f.validate(this);
+		}
+		if(this.files && this.files.length) {
+			var i, file, files = [];
+			for(i = 0; i < this.files.length; i++) {
+				file = this.files[i];
+				files.push(file);
+			}
+			return files;
+		}
+		else if(!this.files && this.value) {
+			return this.value;
+		}
+		else if(this.field.uploaded_files && this.field.uploaded_files.length){
+			return true;
+		}
+		return "";
+	}
+	this._changed = function(event) {
+		if(fun(this[this._form._callback_changed])) {
+			this[this._form._callback_changed](this);
+		}
+		else if(fun(this.field.input[this._form._callback_changed])) {
+			this.field.input[this._form._callback_changed](this);
+		}
+		if(fun(this._form[this._form._callback_changed])) {
+			this._form[this._form._callback_changed](this);
+		}
+	}
+	this._updated = function(event) {
+		if(event.keyCode != 9 && event.keyCode != 13 && event.keyCode != 16 && event.keyCode != 17 && event.keyCode != 18) {
+			u.f.validate(this);
+			if(fun(this[this._form._callback_updated])) {
+				this[this._form._callback_updated](this);
+			}
+			else if(fun(this.field.input[this._form._callback_updated])) {
+				this.field.input[this._form._callback_updated](this);
+			}
+			if(fun(this._form[this._form._callback_updated])) {
+				this._form[this._form._callback_updated](this);
+			}
+		}
+	}
+	this._update_checkbox_field = function(event) {
+		if(this.checked) {
+			u.ac(this.field, "checked");
+		}
+		else {
+			u.rc(this.field, "checked");
+		}
+	}
+	this._update_filelist = function(event) {
+		var i;
+		var files = this.val();
+		this.field.filelist.innerHTML = "";
+		u.ae(this.field.filelist, "li", {html:this.field.hint ? u.text(this.field.hint) : u.text(this.label), class:"label"})
+		if(files && files.length) {
+			u.ac(this.field, "has_new_files");
+			var i;
+			for(i = 0; i < files.length; i++) {
+				u.ae(this.field.filelist, "li", {html:files[i].name, class:"new"})
+			}
+			if(this.multiple) {
+				for(i = 0; i < this.field.uploaded_files.length; i++) {
+					u.ae(this.field.filelist, this.field.uploaded_files[i]);
+				}
+			}
+			else {
+				this.field.uploaded_files = [];
+			}
+		}
+		else if(this.field.uploaded_files && this.field.uploaded_files.length) {
+			u.rc(this.field, "has_new_files");
+			var i;
+			for(i = 0; i < this.field.uploaded_files.length; i++) {
+				u.ae(this.field.filelist, this.field.uploaded_files[i]);
 			}
 		}
 		else {
-			if(this.value && this.files && this.files.length) {
-				var i, file, files = [];
-				for(i = 0; i < this.files.length; i++) {
-					file = this.files[i];
-					files.push(file);
-				}
-				return files;
-			}
-			else if(this.value) {
-				return this.value;
-			}
-			else if(u.hc(this, "uploaded")){
-				return true;
-			}
-			return "";
+			u.rc(this.field, "has_new_files");
 		}
+	}
+	this._mouseenter = function(event) {
+		u.ac(this.field, "hover");
+		u.ac(this, "hover");
+		u.as(this.field, "zIndex", this._form._hover_z_index);
+		u.f.positionHint(this.field);
+	}
+	this._mouseleave = function(event) {
+		u.rc(this.field, "hover");
+		u.rc(this, "hover");
+		u.as(this.field, "zIndex", this.field._base_z_index);
+		u.f.positionHint(this.field);
+	}
+	this._focus = function(event) {
+		this.field.is_focused = true;
+		this.is_focused = true;
+		u.ac(this.field, "focus");
+		u.ac(this, "focus");
+		u.as(this.field, "zIndex", this._form._focus_z_index);
+		u.f.positionHint(this.field);
+		if(fun(this[this._form._callback_focused])) {
+			this[this._form._callback_focused](this);
+		}
+		else if(fun(this.field.input[this._form._callback_focused])) {
+			this.field.input[this._form._callback_focused](this);
+		}
+		if(fun(this._form[this._form._callback_focused])) {
+			this._form[this._form._callback_focused](this);
+		}
+	}
+	this._blur = function(event) {
+		this.field.is_focused = false;
+		this.is_focused = false;
+		u.rc(this.field, "focus");
+		u.rc(this, "focus");
+		u.as(this.field, "zIndex", this.field._base_z_index);
+		u.f.positionHint(this.field);
+		this._used = true;
+		if(fun(this[this._form._callback_blurred])) {
+			this[this._form._callback_blurred](this);
+		}
+		else if(fun(this.field.input[this._form._callback_blurred])) {
+			this.field.input[this._form._callback_blurred](this);
+		}
+		if(fun(this._form[this._form._callback_blurred])) {
+			this._form[this._form._callback_blurred](this);
+		}
+	}
+	this._button_focus = function(event) {
+		u.ac(this, "focus");
+		if(fun(this[this._form._callback_focused])) {
+			this[this._form._callback_focused](this);
+		}
+		if(fun(this._form[this._form._callback_focused])) {
+			this._form[this._form._callback_focused](this);
+		}
+	}
+	this._button_blur = function(event) {
+		u.rc(this, "focus");
+		if(fun(this[this._form._callback_blurred])) {
+			this[this._form._callback_blurred](this);
+		}
+		if(fun(this._form[this._form._callback_blurred])) {
+			this._form[this._form._callback_blurred](this);
+		}
+	}
+	this._validate = function(event) {
+		u.f.validate(this);
 	}
 	this.inputOnEnter = function(node) {
 		node.keyPressed = function(event) {
@@ -1993,165 +2101,16 @@ Util.Form = u.f = new function() {
 		}
 		u.e.addEvent(node, "keydown", node.keyPressed);
 	}
-	this._changed = function(event) {
-		this.used = true;
-		if(fun(this.changed)) {
-			this.changed(this);
-		}
-		else if(this.field._input && fun(this.field._input.changed)) {
-			this.field._input.changed(this);
-		}
-		if(fun(this.field.changed)) {
-			this.field.changed(this);
-		}
-		if(fun(this._form.changed)) {
-			this._form.changed(this);
-		}
-	}
-	this._updated = function(event) {
-		if(event.keyCode != 9 && event.keyCode != 13 && event.keyCode != 16 && event.keyCode != 17 && event.keyCode != 18) {
-			if(this.used || u.hc(this.field, "error")) {
-				u.f.validate(this);
-			}
-			if(fun(this.updated)) {
-				this.updated(this);
-			}
-			else if(this.field._input && fun(this.field._input.updated)) {
-				this.field._input.updated(this);
-			}
-			if(fun(this.field.updated)) {
-				this.field.updated(this);
-			}
-			if(fun(this._form.updated)) {
-				this._form.updated(this);
-			}
-		}
-	}
-	this._update_checkbox_field = function(event) {
-		if(this.checked) {
-			u.ac(this.field, "checked");
-		}
-		else {
-			u.rc(this.field, "checked");
-		}
-	}
-	this._validate = function(event) {
-		u.f.validate(this);
-	}
-	this._mouseenter = function(event) {
-		u.ac(this.field, "hover");
-		u.ac(this, "hover");
-		u.as(this.field, "zIndex", this.field._input._form._hover_z_index);
-		u.f.positionHint(this.field);
-	}
-	this._mouseleave = function(event) {
-		u.rc(this.field, "hover");
-		u.rc(this, "hover");
-		u.as(this.field, "zIndex", this.field._base_z_index);
-		u.f.positionHint(this.field);
-	}
-	this._focus = function(event) {
-		this.field.is_focused = true;
-		this.is_focused = true;
-		u.ac(this.field, "focus");
-		u.ac(this, "focus");
-		u.as(this.field, "zIndex", this._form._focus_z_index);
-		u.f.positionHint(this.field);
-		if(fun(this.focused)) {
-			this.focused();
-		}
-		else if(this.field._input && fun(this.field._input.focused)) {
-			this.field._input.focused(this);
-		}
-		if(fun(this._form.focused)) {
-			this._form.focused(this);
-		}
-	}
-	this._blur = function(event) {
-		this.field.is_focused = false;
-		this.is_focused = false;
-		u.rc(this.field, "focus");
-		u.rc(this, "focus");
-		u.as(this.field, "zIndex", this.field._base_z_index);
-		u.f.positionHint(this.field);
-		this.used = true;
-		if(fun(this.blurred)) {
-			this.blurred();
-		}
-		else if(this.field._input && fun(this.field._input.blurred)) {
-			this.field._input.blurred(this);
-		}
-		if(fun(this._form.blurred)) {
-			this._form.blurred(this);
-		}
-	}
-	this._button_focus = function(event) {
-		u.ac(this, "focus");
-		if(fun(this.focused)) {
-			this.focused();
-		}
-		if(fun(this._form.focused)) {
-			this._form.focused(this);
-		}
-	}
-	this._button_blur = function(event) {
-		u.rc(this, "focus");
-		if(fun(this.blurred)) {
-			this.blurred();
-		}
-		if(fun(this._form.blurred)) {
-			this._form.blurred(this);
-		}
-	}
-	this._changed_state = function() {
-		u.f.updateDefaultState(this);
-	}
-	this.positionHint = function(field) {
-		if(field._help) {
-			var custom_hint_position;
-			for(custom_hint_position in this.customHintPosition) {
-				if(u.hc(field, custom_hint_position)) {
-					this.customHintPosition[custom_hint_position](field._form, field);
-					return;
-				}
-			}
-			var input_middle, help_top;
- 			if(u.hc(field, "html")) {
-				input_middle = field._editor.offsetTop + (field._editor.offsetHeight / 2);
-			}
-			else {
-				input_middle = field._input.offsetTop + (field._input.offsetHeight / 2);
-			}
-			help_top = input_middle - field._help.offsetHeight / 2;
-			u.as(field._help, "top", help_top + "px");
-		}
-	}
 	this.activateInput = function(iN) {
 		u.e.addEvent(iN, "focus", this._focus);
 		u.e.addEvent(iN, "blur", this._blur);
-		if(u.e.event_pref == "mouse") {
+		if(u.e.event_support != "touch") {
 			u.e.addEvent(iN, "mouseenter", this._mouseenter);
 			u.e.addEvent(iN, "mouseleave", this._mouseleave);
 		}
 		u.e.addEvent(iN, "blur", this._validate);
-		if(iN._form.labelstyle == "inject") {
-			if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
-				iN.default_value = u.text(iN._label);
-				u.e.addEvent(iN, "focus", this._changed_state);
-				u.e.addEvent(iN, "blur", this._changed_state);
-				if(iN.type.match(/number|integer/)) {
-					iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
-					iN.pseudolabel.iN = iN;
-					u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
-					u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
-					u.ce(iN.pseudolabel)
-					iN.pseudolabel.inputStarted = function(event) {
-						u.e.kill(event);
-						this.iN.focus();
-					}
-				}
-				u.f.updateDefaultState(iN);
-			}
+		if(iN._form._label_style && fun(this.customLabelStyle[iN._form._label_style])) {
+			this.customLabelStyle[iN._form._label_style](iN);
 		}
 		else {
 			iN.default_value = "";
@@ -2160,33 +2119,41 @@ Util.Form = u.f = new function() {
 	this.activateButton = function(action) {
 		if(action.type && action.type == "submit" || action.type == "reset") {
 			action.onclick = function(event) {
-				u.e.kill(event ? event : window.event);
+				u.e.kill(event);
 			}
 		}
 		u.ce(action);
 		if(!action.clicked) {
 			action.clicked = function(event) {
-				u.e.kill(event);
 				if(!u.hc(this, "disabled")) {
 					if(this.type && this.type.match(/submit/i)) {
 						this._form._submit_button = this;
 						this._form._submit_input = false;
 						this._form.submit(event, this);
 					}
-					else if (this.type && this.type.match(/reset/i)) {
+					else if(this.type && this.type.match(/reset/i)) {
 						this._form._submit_button = false;
 						this._form._submit_input = false;
 						this._form.reset(event, this);
 					}
-					else {
-						location.href = this.url;
+					else if(this.url) {
+						if(event && (event.metaKey || event.ctrlKey)) {
+							window.open(this.url);
+						}
+						else {
+							if(obj(u.h) && u.h.is_listening) {
+								u.h.navigate(this.url, this);
+							}
+							else {
+								location.href = this.url;
+							}
+						}
 					}
 				}
 			}
 		}
-		this.buttonOnEnter(action);
-		var action_name = action.name ? action.name : action.parentNode.className;
-		if(action_name) {
+		var action_name = action.name ? action.name : (action.parentNode.className ? u.superNormalize(action.parentNode.className) : (action.value ? u.superNormalize(action.value) : u.superNormalize(u.text(action))));
+		if(action_name && !action._form.actions[action_name]) {
 			action._form.actions[action_name] = action;
 		}
 		if(obj(u.k) && u.hc(action, "key:[a-z0-9]+")) {
@@ -2195,107 +2162,171 @@ Util.Form = u.f = new function() {
 		u.e.addEvent(action, "focus", this._button_focus);
 		u.e.addEvent(action, "blur", this._button_blur);
 	}
-	this.updateDefaultState = function(iN) {
-		if(iN.is_focused || iN.val() !== "") {
-			u.rc(iN, "default");
-			if(iN.val() === "") {
-				iN.val("");
+	this.positionHint = function(field) {
+		if(field.help) {
+			var custom_hint_position;
+			for(custom_hint_position in this.customHintPosition) {
+				if(u.hc(field, custom_hint_position)) {
+					this.customHintPosition[custom_hint_position](field);
+					return;
+				}
 			}
-			if(iN.pseudolabel) {
-				u.as(iN.pseudolabel, "display", "none");
-			}
+			var input_middle = field.input.offsetTop + (field.input.offsetHeight / 2);
+			var help_top = input_middle - field.help.offsetHeight / 2;
+			u.ass(field.help, {
+				"top": help_top + "px"
+			});
 		}
-		else {
-			if(iN.val() === "") {
-				u.ac(iN, "default");
-				if(iN.pseudolabel) {
-					iN.val(iN.default_value);
-					u.as(iN.pseudolabel, "display", "block");
+	}
+	this.updateFilelistStatus = function(form, response) {
+		if(form && form.inputs && response && response.cms_status == "success" && response.cms_object && response.cms_object.mediae) {
+			var mediae = JSON.parse(JSON.stringify(response.cms_object.mediae));
+			var filelists = u.qsa("div.field.files ul.filelist", form);
+			var i, j, k, filelist, old_files, old_file, new_files, new_files;
+			for(i = 0; i < filelists.length; i++) {
+				filelist = filelists[i];
+				new_files = u.qsa("li.new", filelist);
+				if(new_files.length) {
+					old_files = u.qsa("li.uploaded", filelist);
+					if(old_files.length) {
+						for(j in mediae) {
+							media = mediae[j];
+							if(media.variant.match("^" + filelist.field.input.name.replace(/\[\]$/, "") + "(\-|$)")) {
+								for(k = 0; k < old_files.length; k++) {
+									old_file = old_files[k];
+									if(u.cv(old_file, "media_id") == media.id) {
+										delete mediae[j];
+									}
+								}
+							}
+						}
+					}
+					if(Object.keys(mediae).length) {
+						for(j in mediae) {
+							media = mediae[j];
+							if(media.variant.match("^"+filelist.field.input.name.replace(/\[\]$/, "")+"(\-|$)")) {
+								for(k = 0; k < new_files.length; k++) {
+									new_file = new_files[k];
+									if(u.text(new_file) == media.name || u.text(new_file)+".zip" == media.name) {
+										new_file.innerHTML = media.name;
+										u.rc(new_file, "new");
+										u.ac(new_file, "uploaded media_id:"+media.id+" variant:"+media.variant+" format:"+media.format+" width:"+media.width+" height:"+media.height);
+										delete mediae[j];
+									}
+								}
+							}
+						}
+					}
 				}
-				else {
-					iN.val(iN.default_value);
-				}
+				filelist.field.uploaded_files = u.qsa("li.uploaded", filelist);
 			}
 		}
 	}
-	this.fieldError = function(iN) {
+	this.inputHasError = function(iN) {
 		u.rc(iN, "correct");
 		u.rc(iN.field, "correct");
-		if(iN.used || iN.val() !== "") {
+		delete iN.is_correct;
+		if(iN.val() !== "") {
+			if(!iN.has_error && (iN._used || iN._form._bulk_operation)) {
+				iN._form._error_inputs[iN.name] = true;
+				u.ac(iN, "error");
+				u.ac(iN.field, "error");
+				iN.has_error = true;
+				this.updateInputValidationState(iN);
+			 }
+		}
+		else if(!iN.has_error && iN._used) {
+			iN._form._error_inputs[iN.name] = true;
 			u.ac(iN, "error");
 			u.ac(iN.field, "error");
-			this.positionHint(iN.field);
-			iN._form.error_fields[iN.name] = true;
-			this.updateFormValidationState(iN);
+			iN.has_error = true;
+			this.updateInputValidationState(iN);
 		}
-	}
-	this.fieldCorrect = function(iN) {
-		if(iN.val() !== "") {
-			u.ac(iN, "correct");
-			u.ac(iN.field, "correct");
+		else if(!iN._used) {
+			delete iN._form._error_inputs[iN.name];
 			u.rc(iN, "error");
 			u.rc(iN.field, "error");
+			delete iN.has_error;
 		}
-		else {
+		this.positionHint(iN.field);
+	}
+	this.inputIsCorrect = function(iN) {
+		u.rc(iN, "error");
+		u.rc(iN.field, "error");
+		delete iN.has_error;
+		delete iN._form._error_inputs[iN.name];
+		if(iN.val() !== "") {
+			if(!iN.is_correct) {
+				iN._used = true;
+				u.ac(iN, "correct");
+				u.ac(iN.field, "correct");
+				iN.is_correct = true;
+				this.updateInputValidationState(iN);
+			}
+		}
+		else if(iN.is_correct || iN.has_error) {
 			u.rc(iN, "correct");
 			u.rc(iN.field, "correct");
-			u.rc(iN, "error");
-			u.rc(iN.field, "error");
+			delete iN.is_correct;
+			this.updateInputValidationState(iN);
 		}
-		delete iN._form.error_fields[iN.name];
-		this.updateFormValidationState(iN);
 	}
-	this.checkFormValidation = function(form) {
-		if(Object.keys(form.error_fields).length) {
-			return false;
+	this.updateInputValidationState = function(iN) {
+		if(iN.has_error && fun(iN[iN._form._callback_validation_failed])) {
+			iN[iN._form._callback_validation_failed]();
 		}
-		var x, field;
-		for(x in form.fields) {
-			input = form.fields[x];
-			if(input.field && u.hc(form.fields[x].field, "required") && !u.hc(form.fields[x].field, "correct")) {
-				return false;
-			}
+		else if(iN.is_correct && fun(iN[iN._form._callback_validation_passed])) {
+			iN[iN._form._callback_validation_passed]();
 		}
-		return true;
+		this.updateFormValidationState(iN._form);
 	}
-	this.updateFormValidationState = function(iN) {
-		if(this.checkFormValidation(iN._form)) {
-			if(fun(iN.validationPassed)) {
-				iN.validationPassed();
+	this.updateFormValidationState = function(_form) {
+		if(!_form._bulk_operation) {
+			if(Object.keys(_form._error_inputs).length) {
+				_form._validation_state = "error";
+				if(_form._error_inputs !== _form._reference_error_inputs) {
+					if(fun(_form[_form._callback_validation_failed])) {
+						_form[_form._callback_validation_failed](_form._error_inputs);
+					}
+				}
 			}
-			if(fun(iN.field.validationPassed)) {
-				iN.field.validationPassed();
+			else if(u.qsa(".field.required", _form).length === u.qsa(".field.required.correct", _form).length) {
+				if(fun(_form[_form._callback_validation_passed]) && _form._validation_state !== "correct") {
+					_form[_form._callback_validation_passed]();
+				}
+				_form._validation_state = "correct";
 			}
-			if(fun(iN._form.validationPassed)) {
-				iN._form.validationPassed();
+			else {
+				_form._validation_state = "void";
 			}
-			return true;
+			_form._reference_error_inputs = JSON.parse(JSON.stringify(_form._error_inputs));
 		}
-		else {
-			if(fun(iN.validationFailed)) {
-				iN.validationFailed(iN._form.error_fields);
+	}
+	this.bulkValidate = function(inputs) {
+		if(inputs && inputs.length) {
+			var _form = inputs[0]._form;
+			_form._bulk_operation = true;
+			var i;
+			for(i = 0; i < inputs.length; i++) {
+				u.f.validate(inputs[i]);
 			}
-			if(fun(iN.field.validationFailed)) {
-				iN.field.validationFailed(iN._form.error_fields);
-			}
-			if(fun(iN._form.validationFailed)) {
-				iN._form.validationFailed(iN._form.error_fields);
-			}
-			return false;
+			_form._bulk_operation = false;
+			this.updateFormValidationState(_form);
 		}
 	}
 	this.validate = function(iN) {
 		if(!iN._form._validation || !iN.field) {
 			return true;
 		}
-		var min, max, pattern, compare_to;
+		var min, max, pattern;
 		var validated = false;
-		if(!u.hc(iN.field, "required") && iN.val() === "") {
-			this.fieldCorrect(iN);
+		var compare_to = iN.getAttribute("data-compare-to");
+		if(!u.hc(iN.field, "required") && iN.val() === "" && (!compare_to || iN._form.inputs[compare_to].val() === "")) {
+			this.inputIsCorrect(iN);
 			return true;
 		}
 		else if(u.hc(iN.field, "required") && iN.val() === "") {
-			this.fieldError(iN);
+			this.inputHasError(iN);
 			return false;
 		}
 		var custom_validate;
@@ -2312,17 +2343,22 @@ Util.Form = u.f = new function() {
 				min = min ? min : 8;
 				max = max ? max : 255;
 				pattern = iN.getAttribute("pattern");
-				compare_to = iN.getAttribute("data-compare-to");
 				if(
 					iN.val().length >= min && 
 					iN.val().length <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$")) &&
-					(!compare_to || iN.val() == iN._form.fields[compare_to].val())
+					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "number")) {
@@ -2337,10 +2373,10 @@ Util.Form = u.f = new function() {
 					iN.val() <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$"))
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "integer")) {
@@ -2356,46 +2392,56 @@ Util.Form = u.f = new function() {
 					iN.val() <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$"))
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "tel")) {
 				pattern = iN.getAttribute("pattern");
-				compare_to = iN.getAttribute("data-compare-to");
 				if(
 					(
-						!pattern && iN.val().match(/^([\+0-9\-\.\s\(\)]){5,18}$/)
+						(!pattern && iN.val().match(/^([\+0-9\-\.\s\(\)]){5,18}$/))
 						||
 						(pattern && iN.val().match("^"+pattern+"$"))
 					)
 					&&
-					(!compare_to || iN.val() == iN._form.fields[compare_to].val())
+					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "email")) {
-				compare_to = iN.getAttribute("data-compare-to");
 				pattern = iN.getAttribute("pattern");
 				if(
 					(
-						!pattern && iN.val().match(/^([^<>\\\/%$])+\@([^<>\\\/%$])+\.([^<>\\\/%$]{2,20})$/)
-						 ||
+						(!pattern && iN.val().match(/^([^<>\\\/%$])+\@([^<>\\\/%$])+\.([^<>\\\/%$]{2,20})$/))
+						||
 						(pattern && iN.val().match("^"+pattern+"$"))
 					)
 					&&
-					(!compare_to || iN.val() == iN._form.fields[compare_to].val())
+					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 			else if(u.hc(iN.field, "text")) {
@@ -2409,34 +2455,48 @@ Util.Form = u.f = new function() {
 					iN.val().length <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$"))
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "date")) {
+				min = u.cv(iN.field, "min");
+				max = u.cv(iN.field, "max");
 				pattern = iN.getAttribute("pattern");
 				if(
-					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2})$/) ||
-					(pattern && iN.val().match("^"+pattern+"$"))
+					(!min || new Date(decodeURIComponent(min)) <= new Date(iN.val())) &&
+					(!max || new Date(decodeURIComponent(max)) >= new Date(iN.val())) &&
+					(
+						(!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2})$/))
+						||
+						(pattern && iN.val().match("^"+pattern+"$"))
+					)
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "datetime")) {
+				min = u.cv(iN.field, "min");
+				max = u.cv(iN.field, "max");
 				pattern = iN.getAttribute("pattern");
 				if(
-					!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2} [\d]{2}[\-\/\ \:]{1}[\d]{2}[\-\/\ \:]{0,1}[\d]{0,2})$/) ||
-					(pattern && iN.val().match(pattern))
+					(!min || new Date(decodeURIComponent(min)) <= new Date(iN.val())) &&
+					(!max || new Date(decodeURIComponent(max)) >= new Date(iN.val())) &&
+					(
+						(!pattern && iN.val().match(/^([\d]{4}[\-\/\ ]{1}[\d]{2}[\-\/\ ][\d]{2} [\d]{2}[\-\/\ \:]{1}[\d]{2}[\-\/\ \:]{0,1}[\d]{0,2})$/))
+						||
+						(pattern && iN.val().match(pattern))
+					)
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "files")) {
@@ -2444,31 +2504,43 @@ Util.Form = u.f = new function() {
 				max = Number(u.cv(iN.field, "max"));
 				min = min ? min : 1;
 				max = max ? max : 10000000;
+				pattern = iN.getAttribute("accept");
+				var i, value = iN.val(), files = [];
+				if(iN.field.uploaded_files && iN.field.uploaded_files.length) {
+					for(i = 0; i < iN.field.uploaded_files.length; i++) {
+						files.push("." + u.cv(iN.field.uploaded_files[i], "format").toLowerCase());
+					}
+				}
+				if(value && value.length) {
+					for(i = 0; i < value.length; i++) {
+						files.push(value[i].name.substring(value[i].name.lastIndexOf(".")).toLowerCase());
+					}
+				}
 				if(
-					u.hc(iN, "uploaded") ||
-					(iN.val().length >= min && 
-					iN.val().length <= max)
+					(files.length >= min && files.length <= max)
+					&&
+					(!pattern || files.every(function(v) {return pattern.split(",").indexOf(v) !== -1}))
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "select")) {
 				if(iN.val() !== "") {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "checkbox|boolean|radiobuttons")) {
 				if(iN.val() !== "") {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
 				}
 				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
 				}
 			}
 			else if(u.hc(iN.field, "string")) {
@@ -2481,32 +2553,19 @@ Util.Form = u.f = new function() {
 					iN.val().length >= min &&
 					iN.val().length <= max && 
 					(!pattern || iN.val().match("^"+pattern+"$"))
+					&&
+					(!compare_to || iN.val() == iN._form.inputs[compare_to].val())
 				) {
-					this.fieldCorrect(iN);
+					this.inputIsCorrect(iN);
+					if(compare_to) {
+						this.inputIsCorrect(iN._form.inputs[compare_to]);
+					}
 				}
 				else {
-					this.fieldError(iN);
-				}
-			}
-			else if(u.hc(iN.field, "tags")) {
-				if(
-					!pattern && iN.val().match(/\:/) ||
-					(pattern && iN.val().match("^"+pattern+"$"))
-				) {
-					this.fieldCorrect(iN);
-				}
-				else {
-					this.fieldError(iN);
-				}
-			}
-			else if(u.hc(iN.field, "prices")) {
-				if(
-					!isNaN(iN.val())
-				) {
-					this.fieldCorrect(iN);
-				}
-				else {
-					this.fieldError(iN);
+					this.inputHasError(iN);
+					if(compare_to) {
+						this.inputHasError(iN._form.inputs[compare_to]);
+					}
 				}
 			}
 		}
@@ -2517,176 +2576,151 @@ Util.Form = u.f = new function() {
 			return true;
 		}
 	}
-}
-u.f.getParams = function(_form, _options) {
-	var send_as = "params";
-	var ignore_inputs = "ignoreinput";
-	if(obj(_options)) {
-		var _argument;
-		for(_argument in _options) {
-			switch(_argument) {
-				case "ignore_inputs"    : ignore_inputs     = _options[_argument]; break;
-				case "send_as"          : send_as           = _options[_argument]; break;
-			}
-		}
-	}
-	var i, input, select, textarea, param, params;
-	if(send_as == "formdata" && (fun(window.FormData) || obj(window.FormData))) {
-		params = new FormData();
-	}
-	else {
-		if(send_as == "formdata") {
-			send_as == "params";
-		}
-		params = new Object();
-		params.append = function(name, value, filename) {
-			this[name] = value;
-		}
-	}
-	if(_form._submit_button && _form._submit_button.name) {
-		params.append(_form._submit_button.name, _form._submit_button.value);
-	}
-	var inputs = u.qsa("input", _form);
-	var selects = u.qsa("select", _form)
-	var textareas = u.qsa("textarea", _form)
-	for(i = 0; i < inputs.length; i++) {
-		input = inputs[i];
-		if(!u.hc(input, ignore_inputs)) {
-			if((input.type == "checkbox" || input.type == "radio") && input.checked) {
-				if(fun(input.val)) {
-					params.append(input.name, input.val());
-				}
-				else {
-					params.append(input.name, input.value);
-				}
-			}
-			else if(input.type == "file") {
-				var f, file, files;
-				if(fun(input.val)) {
-					files = input.val();
-				}
-				else {
-					files = input.value;
-				}
-				if(files) {
-					for(f = 0; i < files.length; f++) {
-						file = files[f];
-						params.append(input.name, file, file.name);
-					}
-				}
-				else {
-					params.append(input.name, "");
-				}
-			}
-			else if(!input.type.match(/button|submit|reset|file|checkbox|radio/i)) {
-				if(fun(input.val)) {
-					params.append(input.name, input.val());
-				}
-				else {
-					params.append(input.name, input.value);
+	this.getFormData = this.getParams = function(_form, _options) {
+		var format = "formdata";
+		var ignore_inputs = "ignoreinput";
+		if(obj(_options)) {
+			var _argument;
+			for(_argument in _options) {
+				switch(_argument) {
+					case "ignore_inputs"    : ignore_inputs     = _options[_argument]; break;
+					case "format"           : format            = _options[_argument]; break;
 				}
 			}
 		}
-	}
-	for(i = 0; i < selects.length; i++) {
-		select = selects[i];
-		if(!u.hc(select, ignore_inputs)) {
-			if(fun(select.val)) {
-				params.append(select.name, select.val());
-			}
-			else {
-				params.append(select.name, select.options[select.selectedIndex].value);
-			}
-		}
-	}
-	for(i = 0; i < textareas.length; i++) {
-		textarea = textareas[i];
-		if(!u.hc(textarea, ignore_inputs)) {
-			if(fun(textarea.val)) {
-				params.append(textarea.name, textarea.val());
-			}
-			else {
-				params.append(textarea.name, textarea.value);
-			}
-		}
-	}
-	if(send_as && fun(this.customSend[send_as])) {
-		return this.customSend[send_as](params, _form);
-	}
-	else if(send_as == "json") {
-		return u.f.convertNamesToJsonObject(params);
-	}
-	else if(send_as == "formdata") {
-		return params;
-	}
-	else if(send_as == "object") {
-		delete params.append;
-		return params;
-	}
-	else {
-		var string = "";
-		for(param in params) {
-			if(!fun(params[param])) {
-				string += (string ? "&" : "") + param + "=" + encodeURIComponent(params[param]);
-			}
-		}
-		return string;
-	}
-}
-u.f.convertNamesToJsonObject = function(params) {
- 	var indexes, root, indexes_exsists, param;
-	var object = new Object();
-	for(param in params) {
-	 	indexes_exsists = param.match(/\[/);
-		if(indexes_exsists) {
-			root = param.split("[")[0];
-			indexes = param.replace(root, "");
-			if(typeof(object[root]) == "undefined") {
-				object[root] = new Object();
-			}
-			object[root] = this.recurseName(object[root], indexes, params[param]);
+		var i, input, select, textarea, param, params;
+		if(format == "formdata") {
+			params = new FormData();
 		}
 		else {
-			object[param] = params[param];
+			params = new Object();
+			params.append = function(name, value, filename) {
+				this[name] = filename || value;
+			}
 		}
-	}
-	return object;
-}
-u.f.recurseName = function(object, indexes, value) {
-	var index = indexes.match(/\[([a-zA-Z0-9\-\_]+)\]/);
-	var current_index = index[1];
-	indexes = indexes.replace(index[0], "");
- 	if(indexes.match(/\[/)) {
-		if(object.length !== undefined) {
-			var i;
-			var added = false;
-			for(i = 0; i < object.length; i++) {
-				for(exsiting_index in object[i]) {
-					if(exsiting_index == current_index) {
-						object[i][exsiting_index] = this.recurseName(object[i][exsiting_index], indexes, value);
-						added = true;
+		if(_form._submit_button && _form._submit_button.name) {
+			params.append(_form._submit_button.name, _form._submit_button.value);
+		}
+		var inputs = u.qsa("input", _form);
+		var selects = u.qsa("select", _form)
+		var textareas = u.qsa("textarea", _form)
+		for(i = 0; i < inputs.length; i++) {
+			input = inputs[i];
+			if(!u.hc(input, ignore_inputs)) {
+				if((input.type == "checkbox" || input.type == "radio") && input.checked) {
+					if(fun(input.val)) {
+						params.append(input.name, input.val());
+					}
+					else {
+						params.append(input.name, input.value);
+					}
+				}
+				else if(input.type == "file") {
+					var f, file, files;
+					if(fun(input.val)) {
+						files = input.val();
+					}
+					else if(input.files) {
+						files = input.files;
+					}
+					if(files && files.length) {
+						for(f = 0; f < files.length; f++) {
+							file = files[f];
+							params.append(input.name, file, file.name);
+						}
+					}
+					else {
+						params.append(input.name, (input.value || ""));
+					}
+				}
+				else if(!input.type.match(/button|submit|reset|file|checkbox|radio/i)) {
+					if(fun(input.val)) {
+						params.append(input.name, input.val());
+					}
+					else {
+						params.append(input.name, input.value);
 					}
 				}
 			}
-			if(!added) {
-				temp = new Object();
-				temp[current_index] = new Object();
-				temp[current_index] = this.recurseName(temp[current_index], indexes, value);
-				object.push(temp);
+		}
+		for(i = 0; i < selects.length; i++) {
+			select = selects[i];
+			if(!u.hc(select, ignore_inputs)) {
+				if(fun(select.val)) {
+					params.append(select.name, select.val());
+				}
+				else {
+					params.append(select.name, select.options[select.selectedIndex] ? select.options[select.selectedIndex].value : "");
+				}
 			}
 		}
-		else if(typeof(object[current_index]) != "undefined") {
-			object[current_index] = this.recurseName(object[current_index], indexes, value);
+		for(i = 0; i < textareas.length; i++) {
+			textarea = textareas[i];
+			if(!u.hc(textarea, ignore_inputs)) {
+				if(fun(textarea.val)) {
+					params.append(textarea.name, textarea.val());
+				}
+				else {
+					params.append(textarea.name, textarea.value);
+				}
+			}
+		}
+		if(format && fun(this.customDataFormat[format])) {
+			return this.customDataFormat[format](params, _form);
+		}
+		else if(format == "formdata") {
+			return params;
+		}
+		else if(format == "object") {
+			delete params.append;
+			return params;
 		}
 		else {
-			object[current_index] = new Object();
-			object[current_index] = this.recurseName(object[current_index], indexes, value);
+			var string = "";
+			for(param in params) {
+				if(!fun(params[param])) {
+					string += (string ? "&" : "") + param + "=" + encodeURIComponent(params[param]);
+				}
+			}
+			return string;
+		}
+	}
+}
+Util.Form.customLabelStyle["inject"] = function(iN) {
+	if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
+		iN.default_value = u.text(iN.label);
+		u.e.addEvent(iN, "focus", u.f._changed_state);
+		u.e.addEvent(iN, "blur", u.f._changed_state);
+		if(iN.type.match(/number|integer|password|datetime|date/)) {
+			iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
+			iN.pseudolabel.iN = iN;
+			u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
+			u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
+			u.ce(iN.pseudolabel)
+			iN.pseudolabel.inputStarted = function(event) {
+				u.e.kill(event);
+				this.iN.focus();
+			}
+		}
+		u.f.updateDefaultState(iN);
+	}
+}
+u.f._changed_state = function() {
+	u.f.updateDefaultState(this);
+}
+u.f.updateDefaultState = function(iN) {
+	if(iN.is_focused || iN.val() !== "") {
+		u.rc(iN, "default");
+		if(iN.val() === "") {
+			iN.val("");
 		}
 	}
 	else {
-		object[current_index] = value;
+		if(iN.val() === "") {
+			u.ac(iN, "default");
+			iN.val(iN.default_value);
+		}
 	}
-	return object;
 }
 Util.absoluteX = u.absX = function(node) {
 	if(node.offsetParent) {
@@ -2742,17 +2776,17 @@ Util.pageScrollX = u.scrollX = function() {
 Util.pageScrollY = u.scrollY = function() {
 	return window.pageYOffset;
 }
-Util.Objects = u.o = new Object();
+Util.Modules = u.m = new Object();
 Util.init = function(scope) {
-	var i, node, nodes, object;
+	var i, node, nodes, module;
 	scope = scope && scope.nodeName ? scope : document;
 	nodes = u.ges("i\:([_a-zA-Z0-9])+", scope);
 	for(i = 0; i < nodes.length; i++) {
 		node = nodes[i];
-		while((object = u.cv(node, "i"))) {
-			u.rc(node, "i:"+object);
-			if(object && obj(u.o[object])) {
-				u.o[object].init(node);
+		while((module = u.cv(node, "i"))) {
+			u.rc(node, "i:"+module);
+			if(module && obj(u.m[module])) {
+				u.m[module].init(node);
 			}
 		}
 	}
@@ -2769,6 +2803,15 @@ Util.hexToNum = function(hex) {
 Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
+}
+u.objectValues = function(obj) {
+	var key, values = [];
+	for(key in obj) {
+		if(obj.hasOwnProperty(key)) {
+			values.push(obj[key]);
+		}
+	}
+	return values;
 }
 u.preloader = function(node, files, _options) {
 	var callback_preloader_loaded = "loaded";
@@ -2992,9 +3035,10 @@ Util.request = function(node, url, _options) {
 						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 				node[request_id].HTTPRequest.send("");
 			}
-			else if(node[request_id].request_method.match(/POST|PUT|PATCH/i)) {
+			else if(node[request_id].request_method.match(/POST|PUT|PATCH|DELETE/i)) {
 				var params;
 				if(obj(node[request_id].request_data) && node[request_id].request_data.constructor.toString().match(/function Object/i)) {
 					params = JSON.stringify(node[request_id].request_data);
@@ -3021,6 +3065,7 @@ Util.request = function(node, url, _options) {
 						node[request_id].HTTPRequest.setRequestHeader(header, node[request_id].request_headers[header]);
 					}
 				}
+				node[request_id].HTTPRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 				node[request_id].HTTPRequest.send(params);
 			}
 		}
@@ -3039,7 +3084,7 @@ Util.request = function(node, url, _options) {
 				this.status = 0;
 				delete this.timedOut;
 				delete this.t_timeout;
-				Util.validateResponse({node: requestee.node, request_id: requestee.request_id});
+				Util.validateResponse({node: requestee.node, request_id: requestee.request_id, status:this.status});
 			}
 			node[request_id].t_timeout = u.t.setTimer(node[request_id], "timedOut", node[request_id].request_timeout, {node: node, request_id: request_id});
 		}
@@ -3166,7 +3211,7 @@ Util.validateResponse = function(HTTPRequest){
 }
 u.scrollTo = function(node, _options) {
 	node._callback_scroll_to = "scrolledTo";
-	node._callback_scroll_cancelled = "scrolledToCancelled";
+	node._callback_scroll_cancelled = "scrollToCancelled";
 	var offset_y = 0;
 	var offset_x = 0;
 	var scroll_to_x = 0;
@@ -3356,11 +3401,89 @@ Util.lowerCaseFirst = u.lcfirst = function(string) {
 	return string.replace(/^(.){1}/, function($1) {return $1.toLowerCase()});
 }
 Util.normalize = function(string) {
+	var table = {
+		'À':'A',  'à':'a',
+		'Á':'A',  'á':'a',
+		'Â':'A',  'â':'a',
+		'Ã':'A',  'ã':'a',
+		'Ä':'A',  'ä':'a',
+		'Å':'Aa', 'å':'aa',
+		'Æ':'Ae', 'æ':'ae',
+		'Ç':'C',  'ç':'c',
+		'Č':'C',  'ć':'c',
+		'Ć':'C',  'č':'c',
+		'Đ':'D',  'đ':'d',  'ð':'d',
+		'È':'E',  'è':'e',
+		'É':'E',  'é':'e',
+		'Ê':'E',  'ê':'e',
+		'Ë':'E',  'ë':'e',
+		'Ģ':'G',  'ģ':'g',
+		'Ğ':'G',  'ğ':'g',
+		'Ì':'I',  'ì':'i',
+		'Í':'I',  'í':'i',
+		'Î':'I',  'î':'i',
+		'Ï':'I',  'ï':'i',
+		'Ī':'I',  'ī':'i',
+		'Ķ':'K',  'ķ':'k',
+		'Ļ':'L',  'ļ':'l',
+		'Ñ':'N',  'ñ':'n',
+		'Ņ':'N',  'ņ':'n',
+		'Ò':'O',  'ò':'o',
+		'Ó':'O',  'ó':'o',
+		'Ô':'O',  'ô':'o',
+		'Õ':'O',  'õ':'o',
+		'Ö':'O',  'ö':'o',
+		'Ō':'O',  'ō':'o',
+		'Ø':'Oe', 'ø':'oe',
+		'Ŕ':'R',  'ŕ':'r',
+		'Š':'S',  'š':'s',
+		'Ş':'S',  'ş':'s',
+		'Ṩ':'S',  'ṩ':'s',
+		'Ù':'U',  'ù':'u',
+		'Ú':'U',  'ú':'u',
+		'Û':'U',  'û':'u',
+		'Ü':'U',  'ü':'u',
+		'Ū':'U',  'ū':'u',
+		'Ų':'U',  'ų':'u',
+		'Ŭ':'U',  'ŭ':'u',
+		'Ý':'Y',  'ý':'y',
+		'Ÿ':'Y',  'ÿ':'y',
+		'Ž':'Z',  'ž':'z',
+		'Þ':'B',  'þ':'b',
+		'ß':'Ss',
+		'@':' at ',
+		'&':'and',
+		'%':' percent',
+		'\\$':'USD',
+		'¥':'JPY',
+		'€':'EUR',
+		'£':'GBP',
+		'™':'trademark',
+		'©':'copyright',
+		'§':'s',
+		'\\*':'x',
+		'×':'x'
+	}
+	var char, regex;
+	for(char in table) {
+		regex = new RegExp(char, "g");
+		string = string.replace(regex, table[char]);
+	}
+	return string;
+}
+Util.superNormalize = function(string) {
+	string = u.normalize(string);
 	string = string.toLowerCase();
+	string = u.stripTags(string);
 	string = string.replace(/[^a-z0-9\_]/g, '-');
 	string = string.replace(/-+/g, '-');
 	string = string.replace(/^-|-$/g, '');
 	return string;
+}
+Util.stripTags = function(string) {
+	var node = document.createElement("div");
+	node.innerHTML = string;
+	return u.text(node);
 }
 Util.pluralize = function(count, singular, plural) {
 	if(count != 1) {
@@ -3720,17 +3843,27 @@ Util.History = u.h = new function() {
 	this.is_listening = false;
 	this.navigate = function(url, node, silent) {
 		silent = silent || false;
-		if(this.popstate) {
-			history.pushState({}, url, url);
-			if(!silent) {
-				this.callback(url);
+		if((!url.match(/^http[s]?\:\/\//) || url.match(document.domain)) && (!node || !node._a || !node._a.target)) {
+			if(this.popstate) {
+				history.pushState({}, url, url);
+				if(!silent) {
+					this.callback(url);
+				}
+			}
+			else {
+				if(silent) {
+					this.next_hash_is_silent = true;
+				}
+				location.hash = u.h.getCleanUrl(url);
 			}
 		}
 		else {
-			if(silent) {
-				this.next_hash_is_silent = true;
+			if(!node || !node._a || !node._a.target) {
+				location.href = url;
 			}
-			location.hash = u.h.getCleanUrl(url);
+			else {
+				window.open(this.url);
+			}
 		}
 	}
 	this.callback = function(url) {
@@ -3820,7 +3953,7 @@ Util.History = u.h = new function() {
 		this.trail.push({"url":url, "node":node});
 	}
 	this.getCleanUrl = function(string, levels) {
-		string = string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0];
+		string = string.replace(location.protocol+"//"+document.domain, "") ? string.replace(location.protocol+"//"+document.domain, "").match(/[^#$]+/)[0] : "/";
 		if(!levels) {
 			return string;
 		}
@@ -3869,7 +4002,7 @@ u.navigation = function(_options) {
 	}
 	window._man_nav_path = window._man_nav_path ? window._man_nav_path : u.h.getCleanUrl(location.href, 1);
 	navigation_node._navigate = function(url) {
-		url = u.h.getCleanUrl(url);
+		var clean_url = u.h.getCleanUrl(url);
 		u.stats.pageView(url);
 		if(
 			!window._man_nav_path || 
@@ -3877,15 +4010,15 @@ u.navigation = function(_options) {
 			(u.h.popstate && window._man_nav_path != u.h.getCleanUrl(location.href, 1))
 		) {
 			if(this.cN && fun(this.cN.navigate)) {
-				this.cN.navigate(url);
+				this.cN.navigate(clean_url, url);
 			}
 		}
 		else {
 			if(this.cN.scene && this.cN.scene.parentNode && fun(this.cN.scene.navigate)) {
-				this.cN.scene.navigate(url);
+				this.cN.scene.navigate(clean_url, url);
 			}
 			else if(this.cN && fun(this.cN.navigate)) {
-				this.cN.navigate(url);
+				this.cN.navigate(clean_url, url);
 			}
 		}
 		if(!u.h.popstate) {
@@ -4054,76 +4187,6 @@ if(document.documentMode && document.documentMode <= 11 && document.documentMode
 
 
 /*u-basics.js*/
-u.smartphoneSwitch = new function() {
-	this.state = 0;
-	this.init = function(node) {
-		this.callback_node = node;
-		this.event_id = u.e.addWindowEvent(this, "resize", this.resized);
-		this.resized();
-	}
-	this.resized = function() {
-		if(u.browserW() < 500 && !this.state) {
-			this.switchOn();
-		}
-		else if(u.browserW() > 500 && this.state) {
-			this.switchOff();
-		}
-	}
-	this.switchOn = function() {
-		if(!this.panel) {
-			this.state = true;
-			this.panel = u.ae(document.body, "div", {"id":"smartphone_switch"});
-			u.ass(this.panel, {
-				opacity: 0
-			});
-			u.ae(this.panel, "h1", {html:u.stringOr(u.txt["smartphone-switch-headline"], "Hello curious")});
-			if(u.txt["smartphone-switch-text"].length) {
-				for(i = 0; i < u.txt["smartphone-switch-text"].length; i++) {
-					u.ae(this.panel, "p", {html:u.txt["smartphone-switch-text"][i]});
-				}
-			}
-			var ul_actions = u.ae(this.panel, "ul", {class:"actions"});
-			var li; 
-			li = u.ae(ul_actions, "li", {class:"hide"});
-			var bn_hide = u.ae(li, "a", {class:"hide button", html:u.txt["smartphone-switch-bn-hide"]});
-			li = u.ae(ul_actions, "li", {class:"switch"});
-			var bn_switch = u.ae(li, "a", {class:"switch button primary", html:u.txt["smartphone-switch-bn-switch"]});
-			u.e.click(bn_switch);
-			bn_switch.clicked = function() {
-				u.saveCookie("smartphoneSwitch", "on");
-				location.href = location.href.replace(/[&]segment\=desktop|segment\=desktop[&]?/, "") + (location.href.match(/\?/) ? "&" : "?") + "segment=smartphone";
-			}
-			u.e.click(bn_hide);
-			bn_hide.clicked = function() {
-				u.e.removeWindowEvent(u.smartphoneSwitch, "resize", u.smartphoneSwitch.event_id);
-				u.smartphoneSwitch.switchOff();
-			}
-			u.a.transition(this.panel, "all 0.5s ease-in-out");
-			u.ass(this.panel, {
-				opacity: 1
-			});
-			if(this.callback_node && typeof(this.callback_node.smartphoneSwitchedOn) == "function") {
-				this.callback_node.smartphoneSwitchedOn();
-			}
-		}
-	}
-	this.switchOff = function() {
-		if(this.panel) {
-			this.state = false;
-			this.panel.transitioned = function() {
-				this.parentNode.removeChild(this);
-				delete u.smartphoneSwitch.panel;
-			}
-			u.a.transition(this.panel, "all 0.5s ease-in-out");
-			u.ass(this.panel, {
-				opacity: 0
-			});
-			if(this.callback_node && typeof(this.callback_node.smartphoneSwitchedOff) == "function") {
-				this.callback_node.smartphoneSwitchedOff();
-			}
-		}
-	}
-}
 u.showScene = function(scene) {
 	var i, node;
 	var nodes = u.cn(scene);
@@ -4162,16 +4225,39 @@ u.showScene = function(scene) {
 	}
 }
 u._stepA1 = function() {
+	var svg_icon = u.qs("svg", this);
+	if(svg_icon) {
+		this.removeChild(svg_icon);
+	}
 	this.innerHTML = this.innerHTML.replace(/[ ]?<br[ \/]?>[ ]?/, " <br /> ");
 	this.innerHTML = '<span class="word">'+this.innerHTML.split(" ").join('</span> <span class="word">')+'</span>'; 
 	var word_spans = u.qsa("span.word", this);
-	var i, span;
+	var i, span, letters, spanned_word;
 	for(i = 0; span = word_spans[i]; i++) {
 		if(span.innerHTML.match(/<br[ \/]?>/)) {
 			span.parentNode.replaceChild(document.createElement("br"), span);
 		}
 		else {
-			span.innerHTML = "<span>"+span.innerHTML.split("").join("</span><span>")+"</span>";
+			if(span.innerHTML.match(/&[a-zA-Z0-9#]+;/)) {
+				letters = span.innerHTML.split("");
+				span.innerHTML = "";
+				for(j = 0; j < letters.length; j++) {
+					if(letters[j] === "&") {
+						spanned_word = letters[j];
+						while(letters[++j] !== ";") {
+							spanned_word += letters[j];
+						}
+						spanned_word += letters[j];
+						span.innerHTML += "<span>" + spanned_word + "</span>";
+					}
+					else {
+						span.innerHTML += "<span>" + letters[j] + "</span>";
+					}
+				}
+			}
+			else {
+				span.innerHTML = "<span>"+span.innerHTML.split("").join("</span><span>")+"</span>";
+			}
 		}
 	}
 	this.spans = u.qsa("span:not(.word)", this);
@@ -4201,6 +4287,9 @@ u._stepA1 = function() {
 			}
 		}
 	}
+	if(svg_icon) {
+		this.appendChild(svg_icon);
+	}
 }
 u._stepA2 = function() {
 	if(this.spans) {
@@ -4221,11 +4310,13 @@ u.txt["share"] = "Share this page";
 u.txt["share-info-headline"] = "(How do I share?)";
 u.txt["share-info-txt"] = "We have not included social media plugins on this site, because they are frequently abused to collect data about you. Also we don't want to promote some channels over others. Instead, just copy the link and share it wherever you find relevant.";
 u.txt["share-info-ok"] = "OK";
-u.txt["readmore"] = "Read more.";
+u.txt["readmore"] = "Read more ...";
 u.txt["readstate-not_read"] = "Click to mark as read";
 u.txt["readstate-read"] = "Read";
 u.txt["add_comment"] = "Add comment";
 u.txt["comment"] = "Comment";
+u.txt["add_question"] = "Send question";
+u.txt["question"] = "Ask a question. Try to be precise :-)";
 u.txt["cancel"] = "Cancel";
 u.txt["login_to_comment"] = '<a href="/login">Login</a> or <a href="/signup">Sign up</a> to add comments.';
 u.txt["relogin"] = "Your session timed out - please login to continue.";
@@ -4242,10 +4333,156 @@ u.txt["smartphone-switch-bn-hide"] = "Hide";
 u.txt["smartphone-switch-bn-switch"] = "Go to Smartphone version";
 
 
+/*beta-u-fontsready.js*/
+u.fontsReady = function(node, fonts, _options) {
+	var callback_loaded = "fontsLoaded";
+	var callback_timeout = "fontsNotLoaded";
+	var max_time = 3000;
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "callback"					: callback_loaded		= _options[_argument]; break;
+				case "timeout"					: callback_timeout		= _options[_argument]; break;
+				case "max"						: max_time				= _options[_argument]; break;
+			}
+		}
+	}
+	window["_man_fonts_"] = window["_man_fonts_"] || {};
+	window["_man_fonts_"].fontApi = document.fonts && fun(document.fonts.check) ? true : false;
+	window["_man_fonts_"].fonts = window["_man_fonts_"].fonts || {};
+	var font, node, i;
+	if(typeof(fonts.length) == "undefined") {
+		font = fonts;
+		fonts = new Array();
+		fonts.push(font);
+	}
+	var loadkey = u.randomString(8);
+	if(window["_man_fonts_"].fontApi) {
+		window["_man_fonts_"+loadkey] = {};
+	}
+	else {
+		window["_man_fonts_"+loadkey] = u.ae(document.body, "div");
+		window["_man_fonts_"+loadkey].basenodes = {};
+	}
+	window["_man_fonts_"+loadkey].nodes = [];
+	window["_man_fonts_"+loadkey].t_timeout = u.t.setTimer(window["_man_fonts_"+loadkey], "fontCheckTimeout", max_time);
+	window["_man_fonts_"+loadkey].loadkey = loadkey;
+	window["_man_fonts_"+loadkey].callback_node = node;
+	window["_man_fonts_"+loadkey].callback_loaded = callback_loaded;
+	window["_man_fonts_"+loadkey].callback_timeout = callback_timeout;
+	for(i = 0; i < fonts.length; i++) {
+		font = fonts[i];
+		font.style = font.style || "normal";
+		font.weight = font.weight || "400";
+		font.size = font.size || "16px";
+		font.status = "waiting";
+		font.id = u.superNormalize(font.family+font.style+font.weight);
+		if(!window["_man_fonts_"].fonts[font.id]) {
+			window["_man_fonts_"].fonts[font.id] = font;
+		}
+		if(window["_man_fonts_"].fontApi) {
+			node = {};
+		}
+		else {
+			if(!window["_man_fonts_"+loadkey].basenodes[u.superNormalize(font.style+font.weight)]) {
+				window["_man_fonts_"+loadkey].basenodes[u.superNormalize(font.style+font.weight)] = u.ae(window["_man_fonts_"+loadkey], "span", {"html":"I'm waiting for your fonts to load!","style":"font-family: Times !important; font-style: "+font.style+" !important; font-weight: "+font.weight+" !important; font-size: "+font.size+" !important; line-height: 1em !important; opacity: 0 !important;"});
+			}
+			node = u.ae(window["_man_fonts_"+loadkey], "span", {"html":"I'm waiting for your fonts to load!","style":"font-family: '"+font.family+"', Times !important; font-style: "+font.style+" !important; font-weight: "+font.weight+" !important; font-size: "+font.size+" !important; line-height: 1em !important; opacity: 0 !important;"});
+		}
+		node.font_size = font.size;
+		node.font_family = font.family;
+		node.font_weight = font.weight;
+		node.font_style = font.style;
+		node.font_id = font.id;
+		node.loadkey = loadkey;
+		window["_man_fonts_"+loadkey].nodes.push(node);
+	}
+	window["_man_fonts_"+loadkey].checkFontsAPI = function() {
+		var i, node, font_string;
+		for(i = 0; i < this.nodes.length; i++) {
+			node = this.nodes[i];
+			if(window["_man_fonts_"].fonts[node.font_id] && window["_man_fonts_"].fonts[node.font_id].status == "waiting") {
+				font_string = node.font_style + " " + node.font_weight + " " + node.font_size + " " + node.font_family;
+				document.fonts.load(font_string).then(function(fontFaceSetEvent) {
+					if(fontFaceSetEvent && fontFaceSetEvent.length && fontFaceSetEvent[0].status == "loaded") {
+						window["_man_fonts_"].fonts[this.font_id].status = "loaded";
+					}
+					else {
+						window["_man_fonts_"].fonts[this.font_id].status = "failed";
+					}
+					if(window["_man_fonts_"+this.loadkey] && fun(window["_man_fonts_"+this.loadkey].checkFontsStatus)) {
+						window["_man_fonts_"+this.loadkey].checkFontsStatus();
+					}
+				}.bind(node));
+			}
+		}
+		if(fun(this.checkFontsStatus)) {
+			this.checkFontsStatus();
+		}
+	}
+	window["_man_fonts_"+loadkey].checkFontsFallback = function() {
+		var basenode, i, node;
+		for(i = 0; i < this.nodes.length; i++) {
+			node = this.nodes[i];
+			basenode = this.basenodes[u.superNormalize(node.font_style+node.font_weight)];
+			if(node.offsetWidth != basenode.offsetWidth || node.offsetHeight != basenode.offsetHeight) {
+				window["_man_fonts_"].fonts[node.font_id].status = "loaded";
+			}
+		}
+		this.t_fallback = u.t.setTimer(this, "checkFontsFallback", 30);
+		if(fun(this.checkFontsStatus)) {
+			this.checkFontsStatus();
+		}
+	}
+	window["_man_fonts_"+loadkey].fontCheckTimeout = function(event) {
+		u.t.resetTimer(this.t_fallback);
+		delete window["_man_fonts_"+this.loadkey];
+		if(this.parentNode) {
+			this.parentNode.removeChild(this);
+		}
+		if(fun(this.callback_node[this.callback_timeout])) {
+			this.callback_node[this.callback_timeout](this.nodes);
+		}
+		else if(fun(this.callback_node[this.callback_loaded])) {
+			this.callback_node[this.callback_loaded](this.nodes);
+		}
+	}
+	window["_man_fonts_"+loadkey].checkFontsStatus = function(event) {
+		var i, node;
+		for(i = 0; i < this.nodes.length; i++) {
+			node = this.nodes[i];
+			if(window["_man_fonts_"].fonts[node.font_id].status == "waiting") {
+				return;
+			}
+		}
+		u.t.resetTimer(this.t_timeout);
+		u.t.resetTimer(this.t_fallback);
+		delete window["_man_fonts_"+this.loadkey];
+		if(this.parentNode) {
+			this.parentNode.removeChild(this);
+		}
+		if(fun(this.callback_node[this.callback_loaded])) {
+			if(this.fontApi) {
+				this.callback_node[this.callback_loaded](this.nodes);
+			}
+			else {
+				setTimeout(function() {
+					this.callback_node[this.callback_loaded](this.nodes); 
+				}.bind(this), 250);
+			}
+		}
+	}
+	if(window["_man_fonts_"].fontApi) {
+		window["_man_fonts_"+loadkey].checkFontsAPI();
+	}
+	else {
+		window["_man_fonts_"+loadkey].checkFontsFallback();
+	}
+}
+
 /*beta-u-notifier.js*/
 u.notifier = function(node) {
-	u.bug_force = true;
-	u.bug("enable notifier");
 	var notifications = u.qs("div.notifications", node);
 	if(!notifications) {
 		node.notifications = u.ae(node, "div", {"id":"notifications"});
@@ -4308,7 +4545,7 @@ u.notifier = function(node) {
 				login.overlay = overlay;
 				u.ae(login, "input", {"type":"hidden", "name":"ajaxlogin", "value":"true"})
 				u.f.init(login);
-				login.fields["username"].focus();
+				login.inputs["username"].focus();
 				login.submitted = function() {
 					this.response = function(response) {
 						if(response.isJSON && response.cms_status == "success") {
@@ -4346,8 +4583,8 @@ u.notifier = function(node) {
 							}
 						}
 						else {
-							this.fields["username"].focus();
-							this.fields["password"].val("");
+							this.inputs["username"].focus();
+							this.inputs["password"].val("");
 							var error_message = u.qs(".errormessage", response);
 							if(error_message) {
 								this.overlay.node.notify({"isJSON":true, "cms_status":"error", "cms_message":error_message.innerHTML});
@@ -4357,7 +4594,7 @@ u.notifier = function(node) {
 							}
 						}
 					}
-					u.request(this, this.action, {"method":this.method, "params":u.f.getParams(this)});
+					u.request(this, this.action, {"method":this.method, "data":this.getData()});
 				}
 			}
 			else if(messages) {
@@ -4444,14 +4681,14 @@ u.smartphoneSwitch = new function() {
 	}
 }
 
-/*i-page.js*/
-u.bug_console_only = true;
-Util.Objects["page"] = new function() {
+/*m-page.js*/
+Util.Modules["page"] = new function() {
 	this.init = function(page) {
-		window.page = page;
 		u.bug_force = true;
 		u.bug("This site is built using the combined powers of body, mind and spirit. Well, and also Manipulator, Janitor and Detector");
-		u.bug("Visit https://parentnode.dk for more information");
+		if(document.domain !== "parentnode.dk") {
+			u.bug("Visit https://parentnode.dk for more information");
+		}
 		u.bug_force = false;
 		page.style_tag = document.createElement("style");
 		page.style_tag.setAttribute("media", "all");
@@ -4472,7 +4709,7 @@ Util.Objects["page"] = new function() {
 			if(page.available_height >= page.cN.offsetHeight) {
 				u.as(page.cN, "min-height", page.available_height+"px", false);
 			}
-			if(page.browser_w > 1300) {
+			if(page.browser_w > 1080) {
 				u.ac(page, "fixed");
 			}
 			else {
@@ -4484,58 +4721,83 @@ Util.Objects["page"] = new function() {
 			page.offsetHeight;
 		}
 		page.scrolled = function(event) {
-			page.scrolled_y = u.scrollY();
-			if(typeof(u.logoScroller) == "function") {
+			this.scrolled_y = u.scrollY();
+			if(fun(u.logoScroller)) {
 				u.logoScroller();
 			}
 			else {
-				if(page.scrolled_y < page.logo.top_offset) {
-					page.logo.is_reduced = false;
-					var reduce_font = (1-(page.logo.top_offset-page.scrolled_y)/page.logo.top_offset) * page.logo.font_size_gap;
-					page.logo.css_rule.style.setProperty("font-size", (page.logo.font_size-reduce_font)+"px", "important");
+				if(this.scrolled_y < this.logo.top_offset) {
+					this.logo.is_reduced = false;
+					var reduce_font = (1-(this.logo.top_offset-this.scrolled_y)/this.logo.top_offset) * this.logo.font_size_gap;
+					this.logo.css_rule.style.setProperty("font-size", (this.logo.font_size-reduce_font)+"px", "important");
 				}
-				else if(!page.logo.is_reduced) {
-					page.logo.is_reduced = true;
-					page.logo.css_rule.style.setProperty("font-size", (page.logo.font_size-page.logo.font_size_gap)+"px", "important");
+				else if(!this.logo.is_reduced) {
+					this.logo.is_reduced = true;
+					this.logo.css_rule.style.setProperty("font-size", (this.logo.font_size-this.logo.font_size_gap)+"px", "important");
 				}
 			}
-			if(page.nN.top_offset && page.scrolled_y < page.nN.top_offset) {
-				page.nN.is_reduced = false;
-				var factor = (1-(page.nN.top_offset-page.scrolled_y)/page.nN.top_offset);
-				var reduce_font = factor * page.nN.font_size_gap;
-				page.nN.list.css_rule.style.setProperty("font-size", (page.nN.font_size-reduce_font)+"px", "important");
-				var reduce_top = factor * page.nN.top_offset_gap;
-				page.nN.css_rule.style.setProperty("top", (page.nN.top_offset-reduce_top)+"px", "important");
+			if(this.nN.top_offset && this.scrolled_y < this.nN.top_offset) {
+				this.nN.is_reduced = false;
+				var factor = (1-(this.nN.top_offset-this.scrolled_y)/this.nN.top_offset);
+				var reduce_font = factor * this.nN.font_size_gap;
+				this.nN.list.css_rule.style.setProperty("font-size", (this.nN.font_size-reduce_font)+"px", "important");
+				var reduce_top = factor * this.nN.top_offset_gap;
+				this.nN.css_rule.style.setProperty("top", (this.nN.top_offset-reduce_top)+"px", "important");
 			}
-			else if(page.nN.top_offset && !page.nN.is_reduced) {
-				page.nN.is_reduced = true;
-				page.nN.list.css_rule.style.setProperty("font-size", (page.nN.font_size-page.nN.font_size_gap)+"px", "important");
-				page.nN.css_rule.style.setProperty("top", (page.nN.top_offset-page.nN.top_offset_gap)+"px", "important");
+			else if(this.nN.top_offset && !this.nN.is_reduced) {
+				this.nN.is_reduced = true;
+				this.nN.list.css_rule.style.setProperty("font-size", (this.nN.font_size-this.nN.font_size_gap)+"px", "important");
+				this.nN.css_rule.style.setProperty("top", (this.nN.top_offset-this.nN.top_offset_gap)+"px", "important");
 			}
-			if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
-				page.cN.scene.scrolled(event);
+			if(this.cN && this.cN.scene && typeof(this.cN.scene.scrolled) == "function") {
+				this.cN.scene.scrolled(event);
+			}
+		}
+		page.preload = function() {
+			if(fun(u.pagePreloader)) {
+				u.pagePreloader();
+			}
+			else {
+				u.fontsReady(this, [
+					{"family":"OpenSans", "weight":"normal", "style":"normal"},
+					{"family":"OpenSans", "weight":"bold", "style":"normal"},
+					{"family":"OpenSans", "weight":"normal", "style":"italic"},
+					{"family":"PT Serif", "weight":"normal", "style":"normal"}
+				], {"callback": "ready"});
 			}
 		}
 		page.ready = function() {
 			if(!this.is_ready) {
 				this.is_ready = true;
-				u.e.addEvent(window, "resize", page.resized);
-				u.e.addEvent(window, "scroll", page.scrolled);
-				if(typeof(u.notifier) == "function") {
+				u.e.addWindowEvent(this, "resize", this.resized);
+				u.e.addWindowEvent(this, "scroll", this.scrolled);
+				if(fun(u.notifier)) {
 					u.notifier(this);
 				}
-				if(typeof(u.smartphoneSwitch) == "object") {
+				if(obj(u.smartphoneSwitch)) {
 					u.smartphoneSwitch.init(this);
 				}
-				u.navigation();
+				if(fun(u.navigation)) {
+					u.navigation();
+				}
 				this.initHeader();
 				this.initNavigation();
 				this.initFooter();
 				this.resized();
+				this.scrolled();
+				if(!fun(this.cN.scene.revealPage)) {
+					this.revealPage();
+				}
+				this.cN.scene.ready();
 			}
 		}
-		page.cN.navigate = function(url) {
-			location.href = url;
+		page.cN.navigate = function(url, raw_url) {
+			if(raw_url) {
+				location.reload(true);
+			}
+			else {
+				location.href = url;
+			}
 		}
 		page.acceptCookies = function() {
 			if(u.terms_version && !u.getCookie(u.terms_version)) {
@@ -4646,21 +4908,52 @@ Util.Objects["page"] = new function() {
 				var github = u.ae(page.hN.service, "li", {"html":'<a href="'+u.github_fork.url+'">'+u.github_fork.text+'</a>', "class":"github"});
 				u.ce(github, {"type":"link"});
 			}
+			if(fun(u.logoInjected)) {
+				u.logoInjected();
+			}
 		}
-		page.initFooter = function() {
-			u.a.transition(page.fN, "all 0.5s ease-in");
+		page.initFooter = function() {}
+		page.revealPage = function() {
+			u.a.transition(page.hN, "all 0.3s ease-in");
+			u.ass(page.hN, {
+				"opacity":1
+			});
+			u.a.transition(page.nN, "all 0.3s ease-in");
+			u.ass(page.nN, {
+				"opacity":1
+			});
+			u.a.transition(page.fN, "all 0.3s ease-in");
 			u.ass(page.fN, {
 				"opacity":1
 			});
+			this.acceptCookies();
 		}
-		page.ready();
+		page.preload();
 	}
 }
 u.e.addDOMReadyEvent(u.init);
 
 
-/*i-scene.js*/
-Util.Objects["scene"] = new function() {
+/*m-login.js*/
+Util.Modules["login"] = new function() {
+	this.init = function(scene) {
+		scene.resized = function() {
+		}
+		scene.scrolled = function() {
+		}
+		scene.ready = function() {
+			this._form = u.qs("form", this);
+			u.f.init(this._form);
+			this._form.inputs["username"].focus();
+			u.showScene(this);
+		}
+		page.cN.scene = scene;
+	}
+}
+
+
+/*m-scene.js*/
+Util.Modules["scene"] = new function() {
 	this.init = function(scene) {
 		scene.resized = function() {
 			this.offsetHeight;
@@ -4668,20 +4961,16 @@ Util.Objects["scene"] = new function() {
 		scene.scrolled = function() {
 		}
 		scene.ready = function() {
-			page.cN.scene = this;
 			u.showScene(this);
-			page.acceptCookies();
-			page.resized();
 		}
-		scene.ready();
+		page.cN.scene = scene;
 	}
 }
 
 
-/*i-article.js*/
-Util.Objects["article"] = new function() {
+/*m-article.js*/
+Util.Modules["article"] = new function() {
 	this.init = function(article) {
-		u.bug("article init:", article);
 		article.csrf_token = article.getAttribute("data-csrf-token");
 		article.header = u.qs("h1,h2,h3", article);
 		article.header.article = article;
@@ -4707,30 +4996,38 @@ Util.Objects["article"] = new function() {
 					this._image.image = this;
 					this._image.src = queue[0].image.src;
 					if(this.node.article_list) {
-						this.node.article_list.correctScroll(this.node, this, -10);
+						this.node.article_list.correctScroll(this);
 					}
 					u.ce(this._image);
 					this._image.clicked = function() {
 						if(u.hc(this.image, "fullsize")) {
 							u.a.transition(this, "all 0.3s ease-in-out");
 							u.rc(this.image, "fullsize");
+							u.ass(this, {
+								width: "540px"
+							});
 							this.src = this.image._image_src;
 						}
 						else {
 							u.a.transition(this, "all 0.3s ease-in-out");
 							u.ac(this.image, "fullsize");
+							u.ass(this, {
+								width: (page.browser_w < 1080 ? page.browser_w : 1080) + "px"
+							});
 							if(this._fullsize_src) {
+								u.bug("this._fullsize_src:", this._fullsize_src);
 								this.src = this._fullsize_src;
 							}
 							else {
-								this._fullsize_width = 1300;
+								this._fullsize_width = 1080;
 								this._fullsize_src = "/images/" + this.image._id + "/" + (this.image._variant ? this.image._variant+"/" : "") + this._fullsize_width + "x." + this.image._format;
 								this.response = function() {
 									this.src = this._fullsize_src;
 								}
 								this.responseError = function() {
+									u.bug("error")
 									this._fullsize_width = this._fullsize_width-200;
-									this._fullsize_src = "/images/" + this._id + "/" + (this.image._variant ? this.image._variant+"/" : "") + this._fullsize_width + "x." + this.image._format;
+									this._fullsize_src = "/images/" + this.image._id + "/" + (this.image._variant ? this.image._variant+"/" : "") + this._fullsize_width + "x." + this.image._format;
 									u.request(this, this._fullsize_src);
 								}
 								u.request(this, this._fullsize_src);
@@ -4743,6 +5040,41 @@ Util.Objects["article"] = new function() {
 					});
 				}
 				u.preloader(image, [image._image_src]);
+			}
+		}
+		var video;
+		article._videos = u.qsa("div.youtube, div.vimeo", article);
+		for (i = 0; video = article._videos[i]; i++) {
+			video._src = u.cv(video, "video_id");
+			video._type = video._src.match(/youtube|youtu\.be/) ? "youtube" : "vimeo";
+			if (video._type == "youtube") {
+				video._id = video._src.match(/watch\?v\=/) ? video._src.split("?v=")[1] : video._src.split("/")[video._src.split("/").length-1];
+				video.iframe = u.ae(video, "iframe", {
+					src: 'https://www.youtube.com/embed/'+video._id+'?autoplay=false&loop=0&color=f0f0ee&modestbranding=1&rel=0&playsinline=1',
+					id: "ytplayer",
+					type: "text/html",
+					webkitallowfullscreen: true,
+					mozallowfullscreen: true,
+					allowfullscreen: true,
+					frameborder: 0,
+					allow: "autoplay",
+					sandbox:"allow-same-origin allow-scripts",
+					width: "100%",
+					height: 540 / 1.7777,
+				});
+			}
+			else {
+				video._id = video._src.split("/")[video._src.split("/").length-1];
+				video.iframe = u.ae(video, "iframe", {
+					src: 'https://player.vimeo.com/video/'+video._id+'?autoplay=false&loop=0&byline=0&portrait=0',
+					webkitallowfullscreen: true,
+					mozallowfullscreen: true,
+					allowfullscreen: true,
+					frameborder: 0,
+					sandbox:"allow-same-origin allow-scripts",
+					width: "100%",
+					height: 540 / 1.7777,
+				});
 			}
 		}
 		article.geolocation = u.qs("ul.geo", article);
@@ -4837,6 +5169,59 @@ u.injectGeolocation = function(node) {
 			u.ce(node.geolocation);
 			u.ac(node.geolocation, "active");
 		}
+	}
+}
+
+
+/*u-checkmark.js*/
+u.addCheckmark = function(node) {
+	node.checkmark = u.svg({
+		"name":"checkmark",
+		"node":node,
+		"class":"checkmark "+(node.current_readstate ? "read" : "not_read"),
+		"width":17,
+		"height":17,
+		"shapes":[
+			{
+				"type": "line",
+				"x1": 2,
+				"y1": 8,
+				"x2": 7,
+				"y2": 15
+			},
+			{
+				"type": "line",
+				"x1": 6,
+				"y1": 15,
+				"x2": 12,
+				"y2": 2
+			}
+		]
+	});
+	node.checkmark.hint_txt = (node.current_readstate ? (u.txt["readstate-read"] + ", " + u.date("Y-m-d H:i:s", node.current_readstate)) : u.txt["readstate-not_read"]),
+	node.checkmark.node = node;
+	u.e.hover(node.checkmark);
+	node.checkmark.over = function(event) {
+		this.hint = u.ae(document.body, "div", {"class":"hint", "html":this.hint_txt});
+		u.ass(this.hint, {
+			"top":(u.absY(this.parentNode)+parseInt(u.gcs(this, "top"))+(Number(this.getAttribute("height")))) + "px",
+			"left":(u.absX(this.parentNode)+parseInt(u.gcs(this, "left"))+Number(this.getAttribute("width"))) + "px"
+		});
+	}
+	node.checkmark.out = function(event) {
+		if(this.hint) {
+			this.hint.parentNode.removeChild(this.hint);
+			delete this.hint;
+		}
+	}
+}
+u.removeCheckmark = function(node) {
+	if(node.checkmark.hint) {
+		node.checkmark.hint.parentNode.removeChild(node.checkmark.hint);
+	}
+	if(node.checkmark) {
+		node.checkmark.parentNode.removeChild(node.checkmark);
+		node.checkmark = false;
 	}
 }
 
