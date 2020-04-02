@@ -17,8 +17,8 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-b
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-location-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html-desktop_light.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-tags-desktop_light.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-prices-desktop_light.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-tags.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-prices.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-format-json.js"></script>');
 
