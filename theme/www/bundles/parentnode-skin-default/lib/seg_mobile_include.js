@@ -21,5 +21,5 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-d
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry-desktop_light.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-json-desktop_light.js"></script>');
-
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-string-desktop_light.js"></script>');
 
