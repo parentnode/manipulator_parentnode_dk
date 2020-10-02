@@ -1,1 +1,0 @@
-Manipulator v0.9.2-lsb Copyright 2018 http://manipulator.parentnode.dk
