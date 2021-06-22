@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.3-forms-lsb-kampagne Copyright 2020 https://manipulator.parentnode.dk
-js-merged @ 2020-05-13 13:10:33
+Manipulator v0.9.3-forms-lsb-kampagne Copyright 2021 https://manipulator.parentnode.dk
+js-merged @ 2021-02-03 22:01:39
 */
 
 /*seg_universal_include.js*/
@@ -1061,6 +1061,407 @@ Util.Events = u.e = new function() {
 }
 
 
+/*u-events-movements.js*/
+u.e.resetDragEvents = function(node) {
+	node._moves_pick = 0;
+	this.removeEvent(node, "mousemove", this._pick);
+	this.removeEvent(node, "touchmove", this._pick);
+	this.removeEvent(node, "mousemove", this._drag);
+	this.removeEvent(node, "touchmove", this._drag);
+	this.removeEvent(node, "mouseup", this._drop);
+	this.removeEvent(node, "touchend", this._drop);
+	this.removeEvent(node, "mouseup", this._cancelPick);
+	this.removeEvent(node, "touchend", this._cancelPick);
+	this.removeEvent(node, "mouseout", this._dropOut);
+	this.removeEvent(node, "mousemove", this._scrollStart);
+	this.removeEvent(node, "touchmove", this._scrollStart);
+	this.removeEvent(node, "mousemove", this._scrolling);
+	this.removeEvent(node, "touchmove", this._scrolling);
+	this.removeEvent(node, "mouseup", this._scrollEnd);
+	this.removeEvent(node, "touchend", this._scrollEnd);
+}
+u.e.overlap = function(node, boundaries, strict) {
+	if(boundaries.constructor.toString().match("Array")) {
+		var boundaries_start_x = Number(boundaries[0]);
+		var boundaries_start_y = Number(boundaries[1]);
+		var boundaries_end_x = Number(boundaries[2]);
+		var boundaries_end_y = Number(boundaries[3]);
+	}
+	else if(boundaries.constructor.toString().match("HTML")) {
+		var boundaries_start_x = u.absX(boundaries) - u.absX(node);
+		var boundaries_start_y =  u.absY(boundaries) - u.absY(node);
+		var boundaries_end_x = Number(boundaries_start_x + boundaries.offsetWidth);
+		var boundaries_end_y = Number(boundaries_start_y + boundaries.offsetHeight);
+	}
+	var node_start_x = Number(node._x);
+	var node_start_y = Number(node._y);
+	var node_end_x = Number(node_start_x + node.offsetWidth);
+	var node_end_y = Number(node_start_y + node.offsetHeight);
+	if(strict) {
+		if(node_start_x >= boundaries_start_x && node_start_y >= boundaries_start_y && node_end_x <= boundaries_end_x && node_end_y <= boundaries_end_y) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	} 
+	else if(node_end_x < boundaries_start_x || node_start_x > boundaries_end_x || node_end_y < boundaries_start_y || node_start_y > boundaries_end_y) {
+		return false;
+	}
+	return true;
+}
+u.e.drag = function(node, boundaries, _options) {
+	node.e_drag_options = _options ? _options : {};
+	node.e_drag = true;
+	if(node.childNodes.length < 2 && node.innerHTML.trim() == "") {
+		node.innerHTML = "&nbsp;";
+	}
+	node.distance_to_pick = 2;
+	node.drag_strict = true;
+	node.drag_overflow = false;
+	node.drag_elastica = 0;
+	node.drag_dropout = true;
+	node.show_bounds = false;
+	node.callback_ready = "ready";
+	node.callback_picked = "picked";
+	node.callback_moved = "moved";
+	node.callback_dropped = "dropped";
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "strict"			: node.drag_strict			= _options[_argument]; break;
+				case "overflow"			: node.drag_overflow		= _options[_argument]; break;
+				case "elastica"			: node.drag_elastica		= Number(_options[_argument]); break;
+				case "dropout"			: node.drag_dropout			= _options[_argument]; break;
+				case "show_bounds"		: node.show_bounds			= _options[_argument]; break; 
+				case "vertical_lock"	: node.vertical_lock		= _options[_argument]; break;
+				case "horizontal_lock"	: node.horizontal_lock		= _options[_argument]; break;
+				case "callback_picked"	: node.callback_picked		= _options[_argument]; break;
+				case "callback_moved"	: node.callback_moved		= _options[_argument]; break;
+				case "callback_dropped"	: node.callback_dropped		= _options[_argument]; break;
+			}
+		}
+	}
+	u.e.setDragBoundaries(node, boundaries);
+	u.e.addStartEvent(node, this._inputStart);
+	if(fun(node[node.callback_ready])) {
+		node[node.callback_ready]();
+	}
+}
+u.e._pick = function(event) {
+	var init_speed_x = Math.abs(this.start_event_x - u.eventX(event));
+	var init_speed_y = Math.abs(this.start_event_y - u.eventY(event));
+	if(
+		(init_speed_x > init_speed_y && this.only_horizontal) || 
+		(init_speed_x < init_speed_y && this.only_vertical) ||
+		(!this.only_vertical && !this.only_horizontal)) {
+		if((init_speed_x > this.distance_to_pick || init_speed_y > this.distance_to_pick)) {
+			u.e.resetNestedEvents(this);
+			u.e.kill(event);
+			if(u.hasFixedParent(this)) {
+				this.has_fixed_parent = true;
+			}
+			else {
+				this.has_fixed_parent = false;
+			}
+			this.move_timestamp = event.timeStamp;
+			this.move_last_x = this._x;
+			this.move_last_y = this._y;
+			if(u.hasFixedParent(this)) {
+				this.start_input_x = u.eventX(event) - this._x - u.scrollX(); 
+				this.start_input_y = u.eventY(event) - this._y - u.scrollY();
+			}
+			else {
+				this.start_input_x = u.eventX(event) - this._x; 
+				this.start_input_y = u.eventY(event) - this._y;
+			}
+			this.current_xps = 0;
+			this.current_yps = 0;
+			u.a.transition(this, "none");
+			u.e.addMoveEvent(this, u.e._drag);
+			u.e.addEndEvent(this, u.e._drop);
+			if(fun(this[this.callback_picked])) {
+				this[this.callback_picked](event);
+			}
+			if(this.drag_dropout && event.type.match(/mouse/)) {
+				// 	
+				// 	
+				// 	
+				// 	
+				// 	
+				// 
+				// 
+				// 	
+				this._dropOutDrag = u.e._drag;
+				this._dropOutDrop = u.e._drop;
+				u.e.addOutEvent(this, u.e._dropOut);
+			}
+		}
+	}
+}
+u.e._drag = function(event) {
+	if(this.has_fixed_parent) {
+		this.current_x = u.eventX(event) - this.start_input_x - u.scrollX();
+		this.current_y = u.eventY(event) - this.start_input_y - u.scrollY();
+	}
+	else {
+		this.current_x = u.eventX(event) - this.start_input_x;
+		this.current_y = u.eventY(event) - this.start_input_y;
+	}
+	this.current_xps = Math.round(((this.current_x - this.move_last_x) / (event.timeStamp - this.move_timestamp)) * 1000);
+	this.current_yps = Math.round(((this.current_y - this.move_last_y) / (event.timeStamp - this.move_timestamp)) * 1000);
+	this.last_x_distance_travelled = (this.current_xps) ? this.current_x - this.move_last_x : this.last_x_distance_travelled;
+	this.last_y_distance_travelled = (this.current_yps) ? this.current_y - this.move_last_y : this.last_y_distance_travelled;
+	this.move_timestamp = event.timeStamp;
+	this.move_last_x = this.current_x;
+	this.move_last_y = this.current_y;
+	if(!this.locked && this.only_vertical) {
+		this._y = this.current_y;
+	}
+	else if(!this.locked && this.only_horizontal) {
+		this._x = this.current_x;
+	}
+	else if(!this.locked) {
+		this._x = this.current_x;
+		this._y = this.current_y;
+	}
+	if(this.e_swipe) {
+		if(this.only_horizontal) {
+			if(this.current_xps < 0 || this.current_xps === 0 && this.last_x_distance_travelled < 0) {
+				this.swiped = "left";
+			}
+			else {
+				this.swiped = "right";
+			}
+		}
+		else if(this.only_vertical) {
+			if(this.current_yps < 0 || this.current_yps === 0 && this.last_y_distance_travelled < 0) {
+				this.swiped = "up";
+			}
+			else {
+				this.swiped = "down";
+			}
+		}
+		else {
+			if(Math.abs(this.current_xps) > Math.abs(this.current_yps)) {
+				if(this.current_xps < 0) {
+					this.swiped = "left";
+				}
+				else {
+					this.swiped = "right";
+				}
+			}
+			else if(Math.abs(this.current_xps) < Math.abs(this.current_yps)) {
+				if(this.current_yps < 0) {
+					this.swiped = "up";
+				}
+				else {
+					this.swiped = "down";
+				}
+			}
+		}
+	}
+	if(!this.locked) {
+		if(u.e.overlap(this, [this.start_drag_x, this.start_drag_y, this.end_drag_x, this.end_drag_y], true)) {
+			u.a.translate(this, this._x, this._y);
+		}
+		else if(this.drag_elastica) {
+			this.swiped = false;
+			this.current_xps = 0;
+			this.current_yps = 0;
+			var offset = false;
+			if(!this.only_vertical && this._x < this.start_drag_x) {
+				offset = this._x < this.start_drag_x - this.drag_elastica ? - this.drag_elastica : this._x - this.start_drag_x;
+				this._x = this.start_drag_x;
+				this.current_x = this._x + offset + (Math.round(Math.pow(offset, 2)/this.drag_elastica));
+			}
+			else if(!this.only_vertical && this._x + this.offsetWidth > this.end_drag_x) {
+				offset = this._x + this.offsetWidth > this.end_drag_x + this.drag_elastica ? this.drag_elastica : this._x + this.offsetWidth - this.end_drag_x;
+				this._x = this.end_drag_x - this.offsetWidth;
+				this.current_x = this._x + offset - (Math.round(Math.pow(offset, 2)/this.drag_elastica));
+			}
+			else {
+				this.current_x = this._x;
+			}
+			if(!this.only_horizontal && this._y < this.start_drag_y) {
+				offset = this._y < this.start_drag_y - this.drag_elastica ? - this.drag_elastica : this._y - this.start_drag_y;
+				this._y = this.start_drag_y;
+				this.current_y = this._y + offset + (Math.round(Math.pow(offset, 2)/this.drag_elastica));
+			}
+			else if(!this.horizontal && this._y + this.offsetHeight > this.end_drag_y) {
+				offset = (this._y + this.offsetHeight > this.end_drag_y + this.drag_elastica) ? this.drag_elastica : (this._y + this.offsetHeight - this.end_drag_y);
+				this._y = this.end_drag_y - this.offsetHeight;
+				this.current_y = this._y + offset - (Math.round(Math.pow(offset, 2)/this.drag_elastica));
+			}
+			else {
+				this.current_y = this._y;
+			}
+			if(offset) {
+				u.a.translate(this, this.current_x, this.current_y);
+			}
+		}
+		else {
+			this.swiped = false;
+			this.current_xps = 0;
+			this.current_yps = 0;
+			if(this._x < this.start_drag_x) {
+				this._x = this.start_drag_x;
+			}
+			else if(this._x + this.offsetWidth > this.end_drag_x) {
+				this._x = this.end_drag_x - this.offsetWidth;
+			}
+			if(this._y < this.start_drag_y) {
+				this._y = this.start_drag_y;
+			}
+			else if(this._y + this.offsetHeight > this.end_drag_y) { 
+				this._y = this.end_drag_y - this.offsetHeight;
+			}
+			u.a.translate(this, this._x, this._y);
+		}
+	}
+	if(fun(this[this.callback_moved])) {
+		this[this.callback_moved](event);
+	}
+}
+u.e._drop = function(event) {
+	u.e.resetEvents(this);
+	if(this.e_swipe && this.swiped) {
+		this.e_swipe_options.eventAction = "Swiped "+ this.swiped;
+		u.stats.event(this, this.e_swipe_options);
+		if(this.swiped == "left" && fun(this.swipedLeft)) {
+			this.swipedLeft(event);
+		}
+		else if(this.swiped == "right" && fun(this.swipedRight)) {
+			this.swipedRight(event);
+		}
+		else if(this.swiped == "down" && fun(this.swipedDown)) {
+			this.swipedDown(event);
+		}
+		else if(this.swiped == "up" && fun(this.swipedUp)) {
+			this.swipedUp(event);
+		}
+	}
+	else if(!this.drag_strict && !this.locked) {
+		this.current_x = Math.round(this._x + (this.current_xps/2));
+		this.current_y = Math.round(this._y + (this.current_yps/2));
+		if(this.only_vertical || this.current_x < this.start_drag_x) {
+			this.current_x = this.start_drag_x;
+		}
+		else if(this.current_x + this.offsetWidth > this.end_drag_x) {
+			this.current_x = this.end_drag_x - this.offsetWidth;
+		}
+		if(this.only_horizontal || this.current_y < this.start_drag_y) {
+			this.current_y = this.start_drag_y;
+		}
+		else if(this.current_y + this.offsetHeight > this.end_drag_y) {
+			this.current_y = this.end_drag_y - this.offsetHeight;
+		}
+		this.transitioned = function() {
+			if(fun(this.projected)) {
+				this.projected(event);
+			}
+		}
+		if(this.current_xps || this.current_yps) {
+			u.a.transition(this, "all 1s cubic-bezier(0,0,0.25,1)");
+		}
+		else {
+			u.a.transition(this, "none");
+		}
+		u.a.translate(this, this.current_x, this.current_y);
+	}
+	if(this.e_drag && !this.e_swipe) {
+		this.e_drag_options.eventAction = u.stringOr(this.e_drag_options.eventAction, "Dropped");
+		u.stats.event(this, this.e_drag_options);
+	}
+	if(fun(this[this.callback_dropped])) {
+		this[this.callback_dropped](event);
+	}
+}
+u.e._dropOut = function(event) {
+	this._drop_out_id = u.randomString();
+	document["_DroppedOutNode" + this._drop_out_id] = this;
+	eval('document["_DroppedOutMove' + this._drop_out_id + '"] = function(event) {document["_DroppedOutNode' + this._drop_out_id + '"]._dropOutDrag(event);}');
+	eval('document["_DroppedOutOver' + this._drop_out_id + '"] = function(event) {u.e.removeEvent(document, "mousemove", document["_DroppedOutMove' + this._drop_out_id + '"]);u.e.removeEvent(document, "mouseup", document["_DroppedOutEnd' + this._drop_out_id + '"]);u.e.removeEvent(document["_DroppedOutNode' + this._drop_out_id + '"], "mouseover", document["_DroppedOutOver' + this._drop_out_id + '"]);}');
+	eval('document["_DroppedOutEnd' + this._drop_out_id + '"] = function(event) {u.e.removeEvent(document, "mousemove", document["_DroppedOutMove' + this._drop_out_id + '"]);u.e.removeEvent(document, "mouseup", document["_DroppedOutEnd' + this._drop_out_id + '"]);u.e.removeEvent(document["_DroppedOutNode' + this._drop_out_id + '"], "mouseover", document["_DroppedOutOver' + this._drop_out_id + '"]);document["_DroppedOutNode' + this._drop_out_id + '"]._dropOutDrop(event);}');
+	u.e.addEvent(document, "mousemove", document["_DroppedOutMove" + this._drop_out_id]);
+	u.e.addEvent(this, "mouseover", document["_DroppedOutOver" + this._drop_out_id]);
+	u.e.addEvent(document, "mouseup", document["_DroppedOutEnd" + this._drop_out_id]);
+}
+u.e._cancelPick = function(event) {
+	u.e.resetDragEvents(this);
+	if(fun(this.pickCancelled)) {
+		this.pickCancelled(event);
+	}
+}
+u.e.setDragBoundaries = function(node, boundaries) {
+	if((boundaries.constructor && boundaries.constructor.toString().match("Array")) || (boundaries.scopeName && boundaries.scopeName != "HTML")) {
+		node.start_drag_x = Number(boundaries[0]);
+		node.start_drag_y = Number(boundaries[1]);
+		node.end_drag_x = Number(boundaries[2]);
+		node.end_drag_y = Number(boundaries[3]);
+	}
+	else if((boundaries.constructor && boundaries.constructor.toString().match("HTML")) || (boundaries.scopeName && boundaries.scopeName == "HTML")) {
+		if(node.drag_overflow == "scroll") {
+			node.start_drag_x = node.offsetWidth > boundaries.offsetWidth ? boundaries.offsetWidth - node.offsetWidth : 0;
+			node.start_drag_y = node.offsetHeight > boundaries.offsetHeight ? boundaries.offsetHeight - node.offsetHeight : 0;
+			node.end_drag_x = node.offsetWidth > boundaries.offsetWidth ? node.offsetWidth : boundaries.offsetWidth;
+			node.end_drag_y = node.offsetHeight > boundaries.offsetHeight ? node.offsetHeight : boundaries.offsetHeight;
+		}
+		else {
+			node.start_drag_x = u.absX(boundaries) - u.absX(node);
+			node.start_drag_y = u.absY(boundaries) - u.absY(node);
+			node.end_drag_x = node.start_drag_x + boundaries.offsetWidth;
+			node.end_drag_y = node.start_drag_y + boundaries.offsetHeight;
+		}
+	}
+	if(node.show_bounds) {
+		var debug_bounds = u.ae(document.body, "div", {"class":"debug_bounds"})
+		debug_bounds.style.position = "absolute";
+		debug_bounds.style.background = "red"
+		debug_bounds.style.left = (u.absX(node) + node.start_drag_x - 1) + "px";
+		debug_bounds.style.top = (u.absY(node) + node.start_drag_y - 1) + "px";
+		debug_bounds.style.width = (node.end_drag_x - node.start_drag_x) + "px";
+		debug_bounds.style.height = (node.end_drag_y - node.start_drag_y) + "px";
+		debug_bounds.style.border = "1px solid white";
+		debug_bounds.style.zIndex = 9999;
+		debug_bounds.style.opacity = .5;
+		if(document.readyState && document.readyState == "interactive") {
+			debug_bounds.innerHTML = "WARNING - injected on DOMLoaded"; 
+		}
+		u.bug("node: ", node, " in (" + u.absX(node) + "," + u.absY(node) + "), (" + (u.absX(node)+node.offsetWidth) + "," + (u.absY(node)+node.offsetHeight) +")");
+		u.bug("boundaries: (" + node.start_drag_x + "," + node.start_drag_y + "), (" + node.end_drag_x + ", " + node.end_drag_y + ")");
+	}
+	node._x = node._x ? node._x : 0;
+	node._y = node._y ? node._y : 0;
+	if(node.drag_overflow == "scroll" && (boundaries.constructor && boundaries.constructor.toString().match("HTML")) || (boundaries.scopeName && boundaries.scopeName == "HTML")) {
+		node.locked = ((node.end_drag_x - node.start_drag_x <= boundaries.offsetWidth) && (node.end_drag_y - node.start_drag_y <= boundaries.offsetHeight));
+		node.only_vertical = (node.vertical_lock || (!node.locked && node.end_drag_x - node.start_drag_x <= boundaries.offsetWidth));
+		node.only_horizontal = (node.horizontal_lock || (!node.locked && node.end_drag_y - node.start_drag_y <= boundaries.offsetHeight));
+	}
+	else {
+		node.locked = ((node.end_drag_x - node.start_drag_x == node.offsetWidth) && (node.end_drag_y - node.start_drag_y == node.offsetHeight));
+		node.only_vertical = (node.vertical_lock || (!node.locked && node.end_drag_x - node.start_drag_x == node.offsetWidth));
+		node.only_horizontal = (node.horizontal_lock || (!node.locked && node.end_drag_y - node.start_drag_y == node.offsetHeight));
+	}
+}
+u.e.setDragPosition = function(node, x, y) {
+	node.current_xps = 0;
+	node.current_yps = 0;
+	node._x = x;
+	node._y = y;
+	u.a.translate(node, node._x, node._y);
+	if(fun(node[node.callback_moved])) {
+		node[node.callback_moved](event);
+	}
+}
+u.e.swipe = function(node, boundaries, _options) {
+	node.e_swipe_options = _options ? _options : {};
+	node.e_swipe = true;
+	u.e.drag(node, boundaries, _options);
+}
+
+
 /*u-events-browser.js*/
 u.e.addDOMReadyEvent = function(action) {
 	if(document.readyState && document.addEventListener) {
@@ -1188,6 +1589,7 @@ Util.Form = u.f = new function() {
 		_form._label_style = u.cv(_form, "labelstyle");
 		_form._callback_ready = "ready";
 		_form._callback_submitted = "submitted";
+		_form._callback_submit_failed = "submitFailed";
 		_form._callback_pre_submitted = "preSubmitted";
 		_form._callback_resat = "resat";
 		_form._callback_updated = "updated";
@@ -1206,6 +1608,7 @@ Util.Form = u.f = new function() {
 					case "label_style"              : _form._label_style               = _options[_argument]; break;
 					case "callback_ready"           : _form._callback_ready            = _options[_argument]; break;
 					case "callback_submitted"       : _form._callback_submitted        = _options[_argument]; break;
+					case "callback_submit_failed"   : _form._callback_submit_failed    = _options[_argument]; break;
 					case "callback_pre_submitted"   : _form._callback_pre_submitted    = _options[_argument]; break;
 					case "callback_resat"           : _form._callback_resat            = _options[_argument]; break;
 					case "callback_updated"         : _form._callback_updated          = _options[_argument]; break;
@@ -1450,6 +1853,11 @@ Util.Form = u.f = new function() {
 					}
 				}
 				this.DOMsubmit();
+			}
+		}
+		else {
+			if(fun(this[this._callback_submit_failed])) {
+				this[this._callback_submit_failed](iN);
 			}
 		}
 	}
@@ -2390,6 +2798,114 @@ Util.round = function(number, decimals) {
 	var round_number = number*Math.pow(10, decimals);
 	return Math.round(round_number)/Math.pow(10, decimals);
 }
+
+/*u-overlay.js*/
+u.overlay = function (_options) {
+	var title = "Overlay";
+	var drag = true;
+	var width = 400;
+	var height = 400;
+	var content_scroll = false;
+	var classname = "";
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "title"       : title          = _options[_argument]; break;
+				case "drag"        : drag           = _options[_argument]; break;
+				case "class"       : classname      = _options[_argument]; break;
+				case "width"       : width          = _options[_argument]; break;
+				case "height"      : height         = _options[_argument]; break;
+				case "content_scroll" : content_scroll    = _options[_argument]; break;
+			}
+		}
+	}
+	if (width > 500) {
+		classname = " large " + classname;
+	}
+	else {
+		classname = " small " + classname;
+	}
+	if (content_scroll) {
+		classname += "content_scroll"
+	}
+	var overlay = u.ae(document.body, "div", {"class": "overlay" + classname, "tabindex":"-1"});
+	u.ass(overlay, {
+		"opacity": 0,
+		"width": width + "px",
+		"height": height + "px",
+		"left": ((u.browserW() - width) / 2) + "px",
+		"top": ((u.browserH() - height) / 2) + "px",
+	});
+	overlay.protection = u.ae(document.body, "div", {"class": "overlay_protection"});
+	if (window._overlay_stack_index) {
+		u.ass(overlay.protection, { "z-index": window._overlay_stack_index});
+		u.ass(overlay, { "z-index": window._overlay_stack_index + 1 });
+	}
+	window._overlay_stack_index = Number(u.gcs(overlay, "z-index")) + 2;
+	u.ass(overlay, {
+		"transition": "all .4s ease-in-out",
+		"opacity": 1,
+	});
+	u.as(document.body, "overflow", "hidden");
+	overlay._resized = function (event) {
+		u.ass(this, {
+			"left": ((u.browserW() - this.w) / 2) + "px",
+			"top": ((u.browserH() - this.h) / 2) + "px",
+		});
+		u.ass(this.div_content, {
+			"height": ((this.offsetHeight - this.div_header.offsetHeight) - this.div_footer.offsetHeight) + "px"
+		});
+		if(fun(this.resized)) {
+			this.resized(event);
+		}
+	}
+	u.e.addWindowEvent(overlay, "resize", "_resized");
+	overlay.div_header = u.ae(overlay, "div", {class:"header"});
+	if(title) {
+		overlay.div_header.h2 = u.ae(overlay.div_header, "h2", {html: title});
+		overlay.div_header.overlay = overlay;
+	}
+	overlay.div_content = u.ae(overlay, "div", {class: "content"});
+	overlay.div_content.overlay = overlay;
+	overlay.div_footer = u.ae(overlay, "div", {class: "footer"});
+	overlay.div_footer.overlay = overlay;
+	overlay.w = width;
+	overlay.h = height;
+	if (drag) {
+		u.e.drag(overlay.div_header, overlay.div_header);
+		overlay._x = 0;
+		overlay._y = 0;
+		overlay.div_header.moved = function (event) {
+			var new_x = this.overlay._x + this.current_x;
+			var new_y = this.overlay._y + this.current_y;
+			u.ass(this.overlay, {
+				"transform": "translate(" + new_x + "px, " + new_y + "px)",
+			});
+		}
+		overlay.div_header.dropped = function (event) {
+			this.overlay._x += this.current_x;
+			this.overlay._y += this.current_y;
+		}
+	}
+	overlay.close = function (event) {
+		u.as(document.body, "overflow", "auto");
+		document.body.removeChild(this);
+		document.body.removeChild(this.protection);
+		if (fun (this.closed)) {
+			this.closed(event);
+		}
+	}
+	overlay.x_close = u.ae(overlay.div_header, "div", {class: "close"});
+	overlay.x_close.overlay = overlay;
+	u.ce(overlay.x_close);
+	overlay.x_close.clicked = function (event) {
+		this.overlay.close(event);
+	}
+	overlay._resized();
+	return overlay;
+}
+
 
 /*u-request.js*/
 Util.createRequestObject = function() {

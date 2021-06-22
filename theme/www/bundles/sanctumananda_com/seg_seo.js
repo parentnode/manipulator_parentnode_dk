@@ -1,4 +1,4 @@
 /*
-Manipulator v0.9.2-sanctumananda Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2019-04-30 19:14:15
+Manipulator v0.9.3-sanctumananda Copyright 2021 https://manipulator.parentnode.dk
+js-merged @ 2021-06-02 11:32:32
 */

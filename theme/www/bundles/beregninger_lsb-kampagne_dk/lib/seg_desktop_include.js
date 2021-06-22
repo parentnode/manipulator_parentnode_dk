@@ -12,7 +12,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.j
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-url.js"></script>');
 
