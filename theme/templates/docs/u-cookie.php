@@ -86,6 +86,11 @@
 											applicable for real cookies. 
 											For localStorage/sessionStorage only expires = true/false can be used.
 										</dd>
+										<dt><span class="value">samesite</span></dt>
+										<dd>
+											SameSite property to limit accessibility of cookie. Possible values are <em>lax</em>, <em>strict</em> and <em>none</em>.
+											SameSite property only applicable for real cookies. 
+										</dd>
 									</dl>
 								</div>
 							</dd>
