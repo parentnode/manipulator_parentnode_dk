@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-hek-service_dk Copyright 2008-2021 https://manipulator.parentnode.dk
-js-merged @ 2021-08-23 13:41:21
+js-merged @ 2021-08-31 11:10:19
 */
 
 /*seg_desktop_include.js*/
@@ -3088,6 +3088,45 @@ Util.Form = u.f = new function() {
 				}
 			}
 			return string;
+		}
+	}
+}
+
+
+/*u-form-labelstyle-inject.js*/
+Util.Form.customLabelStyle["inject"] = function(iN) {
+	if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
+		iN.default_value = u.text(iN.label);
+		u.e.addEvent(iN, "focus", u.f._changed_state);
+		u.e.addEvent(iN, "blur", u.f._changed_state);
+		if(iN.type.match(/number|integer|password|datetime|date/)) {
+			iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
+			iN.pseudolabel.iN = iN;
+			u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
+			u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
+			u.ce(iN.pseudolabel)
+			iN.pseudolabel.inputStarted = function(event) {
+				u.e.kill(event);
+				this.iN.focus();
+			}
+		}
+		u.f.updateDefaultState(iN);
+	}
+}
+u.f._changed_state = function() {
+	u.f.updateDefaultState(this);
+}
+u.f.updateDefaultState = function(iN) {
+	if(iN.is_focused || iN.val() !== "") {
+		u.rc(iN, "default");
+		if(iN.val() === "") {
+			iN.val("");
+		}
+	}
+	else {
+		if(iN.val() === "") {
+			u.ac(iN, "default");
+			iN.val(iN.default_value);
 		}
 	}
 }
