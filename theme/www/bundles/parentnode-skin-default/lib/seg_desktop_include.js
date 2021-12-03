@@ -25,6 +25,3 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-timer.
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-txt.js"></script>');
-
-
-document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom-desktop_ie.js"></script>');

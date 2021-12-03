@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-p1koersel_dk Copyright 2021 https://manipulator.parentnode.dk
-js-merged @ 2021-11-01 17:45:38
+js-merged @ 2021-11-02 11:56:30
 */
 
 /*seg_tablet_include.js*/

@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-p1koersel_dk Copyright 2021 https://manipulator.parentnode.dk
-js-merged @ 2021-11-01 17:45:38
+js-merged @ 2021-11-02 11:56:29
 */
 
 /*seg_desktop_include.js*/
@@ -2697,477 +2697,48 @@ Util.Form = u.f = new function() {
 }
 
 
-/*u-form-field-select.js*/
-Util.Form.customInit["select"] = function(field) {
-	field.type = "select";
-	field.input = u.qs("select", field);
-	field.input._form = field._form;
-	field.input.label = u.qs("label[for='"+field.input.id+"']", field);
-	field.input.field = field;
-	field._value_select = function (value) {
-		if (value !== undefined) {
-			var i, option;
-			for (i = 0; option = this.options[i]; i++) {
-				if (option.value == value) {
-					this.selectedIndex = i;
-					u.f.validate(this);
-					this.field.virtual_input.val(option.text);
-					return i;
-				}
-			}
-			if (value === "") {
-				this.selectedIndex = -1;
-				u.f.validate(this);
-				this.field.virtual_input.val("");
-				return -1;
-			}
-			return false;
-		}
-		else {
-			return (this.selectedIndex >= 0 && this.default_value != this.options[this.selectedIndex].value) ? this.options[this.selectedIndex].value : "";
-		}
-	}
-	field.input.val = field._value_select;
-	var virtual_input_wrapper = u.ae(field, "div", {"class": "virtual"});
-	field.insertBefore(virtual_input_wrapper, field.input);
-	field.virtual_input = u.ae(virtual_input_wrapper, "div", {"class": "input"});
-	field.virtual_input._form = field._form;
-	field.virtual_input.field = field;
-	field.bn_select = u.ae(virtual_input_wrapper, "div", {"class": "button"});
-	field.bn_select.arrow = u.svg({
-		"name":"arrow",
-		"node":field.bn_select,
-		"class":"arrow",
-		"width":30,
-		"height":30,
-		"viewBox": "0 0 30 30",
-		"shapes":[
-			{
-				"type": "line",
-				"x1": 8,
-				"y1": 12,
-				"x2": 15,
-				"y2": 19
-			},
-			{
-				"type": "line",
-				"x1": 22,
-				"y1": 12,
-				"x2": 15,
-				"y2": 19
-			}
-		]
-	});
-	field.bn_select._form = field._form;
-	field.bn_select.field = field;
-	field.select_options = u.ae(virtual_input_wrapper, "div", { "class": "options" });
-	field.select_options.field = field;
-	field.select_options_list = u.ae(field.select_options, "ul", { "class": "options" });
-	field._value_virtual = function(value) {
-		if (value !== undefined) {
-			this.field.virtual_input.innerHTML = value;
-			var i, node;
-			for(i = 0; option = this.field.select_options.nodes[i]; i++) {
-				if(option.option_text == value) {
-					u.ac(option, "selected");
-				}
-				else {
-					u.rc(option, "selected");
-				}
-			}
-			this.field.input.dispatchEvent(new Event("change"));
-			return;
-		}
-		else {
-			if (this.field.virtual_input) {
-				return u.text(this.field.virtual_input);
-			} else {
-				return "";
-			}
-		}
-	}
-	field.virtual_input.val = field._value_virtual;
-	if(u.e.event_support != "touch") {
-		u.e.addEvent(field.virtual_input, "mouseenter", u.f._mouseenter);
-		u.e.addEvent(field.virtual_input, "mouseleave", u.f._mouseleave);
-	}
-	u.e.addEvent(field.input, "change", u.f._updated);
-	u.e.addEvent(field.input, "keyup", u.f._updated);
-	u.e.addEvent(field.input, "change", u.f._changed);
-	field.windowClick = function() {
-		this.optionsHidden = function() {
-			this.virtual_input.blur();
-			delete this.optionsHidden;
-		}
-		this.hideOptions();
-	}
-	field.virtual_input._focus = function(event) {
-		u.bug("this._focus:", this);
-		if(!this.is_focused) {
-			this.blur_event_id = u.e.addWindowEndEvent(this.field, this.field.windowClick);
-			this.field.is_focused = true;
-			this.is_focused = true;
-			u.ac(this.field, "focus");
-			u.ac(this, "focus");
-			u.as(this.field, "zIndex", this._form._focus_z_index);
-			u.f.positionHint(this.field);
-			if(this.field.input && typeof(this.field.input.focused) == "function") {
-				this.field.input.focused(this);
-			}
-			if(typeof(this._form.focused) == "function") {
-				this._form.focused(this);
-			}
-		}
-	}
-	field.virtual_input.blur = function() {
-		u.bug("this.blur:", this, this.blur_event_id);
-		u.e.removeWindowEndEvent(this.blur_event_id);
-		u.rc(this.field, "focus");
-		u.rc(this, "focus");
-		if(this.field.highlighted_option) {
-			u.rc(this.field.highlighted_option, "hover");
-			this.field.highlighted_option = false;
-		}
-		this.field.input._used = true;
-		u.f.validate(this.field.input);
-		this.is_focused = false;
-		this.field.is_focused = false;
-		u.as(this.field, "zIndex", this.field._base_z_index);
-		if(this.field.input && typeof(this.field.input.blurred) == "function") {
-			this.field.input.blurred(this);
-		}
-		if(typeof(this._form.blurred) == "function") {
-			this._form.blurred(this);
-		}
-	}
-	u.e.addEvent(field.virtual_input, "focus", field.virtual_input._focus);
-	field.virtual_input.preKeyEvent = function (event) {
-		if (event.keyCode == 27) {
-			u.e.kill(event);
-			this.field.hideOptions();
-		}
-		else if (event.keyCode == 13) {
-			u.e.kill(event);
-			if (this.field.highlighted_option && this.field.is_expanded) {
-				this.field.selectOption(this.field.highlighted_option);
-			}
-			else if(this.field.is_expanded) {
-				this.field.hideOptions();
-			}
-			else if(!this.field.is_expanded) {
-				this._form.submit();
-			}
-		}
-		else if (event.keyCode == 9) {
-			if (this.field.highlighted_option) {
-				this.field.selectOption(this.field.highlighted_option);
-			}
-			else {
-				this.field.hideOptions();
-			}
-			this.blur();
-		}
-		else if (event.keyCode == 32) {
-			if (!this.field.is_expanded) {
-				this.field.showOptions();
-			}
-			else if (this.field.highlighted_option) {
-				this.field.selectOption(this.field.highlighted_option);
-			}
-			else {
-				this.field.hideOptions();
-			}
-		}
-		else if (event.keyCode == 38) {
-			u.e.kill(event);
-			if (!this.field.is_expanded) {
-				this.field.showOptions();
-			}
-			else {
-				this.field.highlightPreviousOption();
-			}
-		}
-		else if (event.keyCode == 40) {
-			u.e.kill(event);
-			if (!this.field.is_expanded) {
-				this.field.showOptions();
-			}
-			else {
-				this.field.highlightNextOption();
-			}
-		}
-	}
-	u.e.addEvent(field.virtual_input, "keydown", field.virtual_input.preKeyEvent);
-	u.ce(field.virtual_input);
-	field.virtual_input.clicked = function(event) {
-		u.e.kill(event);
-		if(this.field.is_expanded) {
-			this.field.hideOptions();
-		}
-		else {
-			this.field.showOptions();
-		}
-	}
-	field.showOptions = function() {
-		if(!this.is_expanded) {
-			u.ass(this.select_options, {
-				transition: "all 0.3s ease-in-out",
-				height: this.select_options_list.offsetHeight + "px"
-			});
-			this.is_expanded = true;
-		}
-	}
-	field.hideOptions = function() {
-		if(this.is_expanded) {
-			this.select_options.transitioned = function() {
-				if(fun(this.field.optionsHidden)) {
-					this.field.optionsHidden();
-				}
-			}
-			u.ass(this.select_options, {
-				transition: "all 0.2s ease-in-out",
-				height: "0px"
-			});
-			this.is_expanded = false;
-		}
-		else if(fun(this.optionsHidden)) {
-			this.optionsHidden();
-		}
-	}
-	field.highlightNextOption = function() {
-		var node;
-		if(this.highlighted_option) {
-			node = u.ns(this.highlighted_option);
-		}
-		else {
-			node = this.select_options.nodes[0];
-		}
-		if(node) {
-			if (this.highlighted_option) {
-				u.rc(this.highlighted_option, "hover");
-			}
-			u.ac(node, "hover");
-			this.highlighted_option = node;
-		}
-	}
-	field.highlightPreviousOption = function() {
-		var node;
-		if(this.highlighted_option) {
-			node = u.ps(this.highlighted_option);
-		}
-		if(node) {
-			if (field.highlighted_option) {
-				u.rc(field.highlighted_option, "hover");
-			}
-			u.ac(node, "hover");
-			field.highlighted_option = node;
-		}
-	}
-	field.addOption = function (node) {
-		if(node.text) {
-			var li = u.ae(this.select_options_list, "li", { "class": (!node.value ? " default" : ""), "html": node.text });
-			li.field = this;
-			li.option_value = node.value;
-			li.option_text = node.text;
-			u.ce(li);
-			li.clicked = function (event) {
+/*u-form-labelstyle-inject.js*/
+Util.Form.customLabelStyle["inject"] = function(iN) {
+	if(!iN.type || !iN.type.match(/file|radio|checkbox/)) {
+		iN.default_value = u.text(iN.label);
+		u.e.addEvent(iN, "focus", u.f._changed_state);
+		u.e.addEvent(iN, "blur", u.f._changed_state);
+		u.e.addEvent(iN, "change", u.f._changed_state);
+		if(iN.type.match(/number|integer|password|datetime|date/)) {
+			iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
+			iN.pseudolabel.iN = iN;
+			u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
+			u.as(iN.pseudolabel, "left", iN.offsetLeft+"px");
+			u.ce(iN.pseudolabel)
+			iN.pseudolabel.inputStarted = function(event) {
 				u.e.kill(event);
-				this.field.selectOption(this);
-			}
-			u.e.hover(li);
-			li.over = function (event) {
-				if(this.field.highlighted_option) {
-					u.rc(this.field.highlighted_option, "hover");
-				}
-				u.ac(this, "hover");
-				this.field.highlighted_option = this;
-			}
-			li.out = function (event) {
-				u.rc(this, "hover");
-				this.field.highlighted_option = false;
+				this.iN.focus();
 			}
 		}
+		u.f.updateDefaultState(iN);
 	}
-	field.selectOption = function(li) {
-		this.input.val(li.option_value);
-		this.hideOptions();
-	}
-	field.bn_select.clicked = function(event) {
-		u.e.kill(event);
-		this.field.virtual_input.focus();
- 		if(this.field.is_expanded) {
-			this.field.hideOptions();
-		}
-		else {
-			this.field.showOptions();
-		}
-	}
-	u.e.click(field.bn_select);
-	field.loadOptions = function() {
-		var i, node, li;
-		for (i = 0; node = this.input.options[i]; i++) {
-			this.addOption(node);
-		}
-		this.select_options.nodes = u.qsa("li", this.select_options_list);
-		this.input.val(this.input.val());
-	}
-	field.loadOptions();
-	u.f.activateInput(field.input);
 }
-Util.Form.customValidate["select"] = function(iN) {
-	if(iN.val()) {
-		u.f.inputIsCorrect(iN);
+u.f._changed_state = function() {
+	u.f.updateDefaultState(this);
+}
+u.f.updateDefaultState = function(iN) {
+	if(iN.is_focused || iN.val() !== "") {
+		u.rc(iN, "default");
+		if(iN.field.virtual_input) {
+			u.rc(iN.field.virtual_input, "default");
+		}
+		if(iN.val() === "") {
+			iN.val("");
+		}
 	}
 	else {
-		u.f.inputHasError(iN);
-	}
-}
-
-
-/*u-form-field-checkbox.js*/
-Util.Form.customInit["checkbox"] = function(field) {
-	field.type = "checkbox";
-	field.input = u.qs("input[type=checkbox]", field);
-	field.input._form = field._form;
-	field.input.label = u.qs("label[for='"+field.input.id+"']", field);
-	field.input.field = field;
-	field._value_checkbox = function(value) {
-		if(value !== undefined) {
-			if(value) {
-				this.checked = true
+		if(iN.val() === "") {
+			u.ac(iN, "default");
+			if(obj(iN.field.virtual_input)) {
+				u.ac(iN.field.virtual_input, "default");
 			}
-			else {
-				this.checked = false;
-			}
-			u.f._update_checkbox_field.bind(this)();
-			this.field.virtual_input.val(value);
-			u.f.validate(this);
+			iN.val(iN.default_value);
 		}
-		if(this.checked) {
-			return this.value;
-		}
-		return "";
-	}
-	field.input.val = field._value_checkbox;
-	u.f._update_checkbox_field.bind(field.input)();
-	var virtual_input_wrapper = u.ae(field, "div", {"class": "virtual"});
-	field.insertBefore(virtual_input_wrapper, field.input);
-	field.virtual_input = u.ae(virtual_input_wrapper, "div", {"class": "input"});
-	field.virtual_input._form = field._form;
-	field.virtual_input.field = field;
-	field.gx_checkmark = u.svg({
-		"name":"checkbox_checkmark",
-		"node":field.virtual_input,
-		"class":"checkbox_checkmark",
-		"width":30,
-		"height":30,
-		"viewBox": "0 0 30 30",
-		"shapes":[
-			{
-				"type": "line",
-				"class":"checkmark",
-				"x1": 7,
-				"y1": 15,
-				"x2": 14,
-				"y2": 26
-			},
-			{
-				"type": "line",
-				"class":"checkmark",
-				"x1": 14,
-				"y1": 26,
-				"x2": 23,
-				"y2": 6
-			}
-		]
-	});
-	field._value_virtual = function(value) {
-		if (value !== undefined) {
-			this.field.input.val(value);
-			this.field.input.dispatchEvent(new Event("change"));
-			return;
-		}
-		else {
-			return this.field.input.val();
-		}
-	}
-	field.virtual_input.val = field._value_virtual;
-	if(u.e.event_support != "touch") {
-		u.e.addEvent(field.virtual_input, "mouseenter", u.f._mouseenter);
-		u.e.addEvent(field.virtual_input, "mouseleave", u.f._mouseleave);
-	}
-	u.e.addEvent(field.input, "change", u.f._changed);
-	u.e.addEvent(field.input, "change", u.f._updated);
-	u.e.addEvent(field.input, "change", u.f._update_checkbox_field);
-	field.windowClick = function() {
-		this.virtual_input.blur();
-	}
-	field.virtual_input._focus = function(event) {
-		if(!this.is_focused) {
-			this.blur_event_id = u.e.addWindowEndEvent(this.field, this.field.windowClick);
-			this.field.is_focused = true;
-			this.is_focused = true;
-			u.ac(this.field, "focus");
-			u.ac(this, "focus");
-			u.as(this.field, "zIndex", this._form._focus_z_index);
-			u.f.positionHint(this.field);
-			if(this.field.input && typeof(this.field.input.focused) == "function") {
-				this.field.input.focused(this);
-			}
-			if(typeof(this._form.focused) == "function") {
-				this._form.focused(this);
-			}
-		}
-	}
-	field.virtual_input.blur = function() {
-		u.e.removeWindowEndEvent(this.blur_event_id);
-		u.rc(this.field, "focus");
-		u.rc(this, "focus");
-		this.field.input._used = true;
-		u.f.validate(this.field.input);
-		this.is_focused = false;
-		this.field.is_focused = false;
-		u.as(this.field, "zIndex", this.field._base_z_index);
-		if(this.field.input && typeof(this.field.input.blurred) == "function") {
-			this.field.input.blurred(this);
-		}
-		if(typeof(this._form.blurred) == "function") {
-			this._form.blurred(this);
-		}
-	}
-	u.e.addEvent(field.virtual_input, "focus", field.virtual_input._focus);
-	field.virtual_input.preKeyEvent = function (event) {
-		if (event.keyCode == 13) {
-			u.e.kill(event);
-			this._form.submit();
-		}
-		else if (event.keyCode == 9) {
-			this.blur();
-		}
-		else if (event.keyCode == 32) {
-			this.clicked();
-		}
-	}
-	u.e.addEvent(field.virtual_input, "keydown", field.virtual_input.preKeyEvent);
-	u.ce(field.virtual_input);
-	field.virtual_input.clicked = function(event) {
-		u.e.kill(event);
-		if(this.field.input.checked) {
-			this.field.input.checked = false;
-		}
-		else {
-			this.field.input.checked = true;
-		}
-		this.field.input.dispatchEvent(new Event("change"));
-	}
-	u.f.activateInput(field.input);
-}
-Util.Form.customValidate["checkbox"] = function(iN) {
-	if(iN.val()) {
-		u.f.inputIsCorrect(iN);
-	}
-	else {
-		u.f.inputHasError(iN);
 	}
 }
 
