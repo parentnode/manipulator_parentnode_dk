@@ -74,8 +74,8 @@
 										</dd>
 										<dt><span class="value">content_scroll</span></dt>
 										<dd>
-											 Adds a "content_scroll" class to overlay which functionality needs to be implemented
-											 in css. <br /> default: false
+											 Adds a "content_scroll" class to overlay to allow for custom scroll setting via CSS. (Effect must be implemented
+											 in css.) <br /> default: false
 										</dd>
 									</dl>
 								</div>
