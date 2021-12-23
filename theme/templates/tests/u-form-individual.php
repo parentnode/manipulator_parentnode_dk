@@ -2,7 +2,8 @@
 $this->headerIncludes(array(
 	"/css/tests/s-form.css",
 	"/assets/parentnode-skin-default/css/lib/".$this->segment(array("type" => "www"))."/s-form.css",
-	"/js/tests/m-form-individual.js"
+	"/assets/parentnode-skin-default/css/optionals/lib/".$this->segment(array("type" => "www"))."/s-form-field-html.css",
+	"/js/tests/m-form-individual.js",
 ));
 ?>
 

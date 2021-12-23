@@ -1,4 +1,4 @@
-Util.Modules["formIndividual"] = new function() {
+Util.Modules["formFieldHTML"] = new function() {
 	this.init = function(div) {
 
 

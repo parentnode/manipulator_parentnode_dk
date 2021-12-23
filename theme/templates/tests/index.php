@@ -37,6 +37,7 @@
 		<li class="test"><a href="/tests/u-flash">Flash</a></li>
 		<li class="test"><a href="/tests/u-form-combined">Form (Combined)</a></li>
 		<li class="test"><a href="/tests/u-form-individual">Form (Individual inputs)</a></li>
+		<li class="test"><a href="/tests/u-form-field-html">Form (HTML field)</a></li>
 		<li class="test"><a href="/tests/u-googleanalytics">Google Analytics</a></li>
 		<li class="test"><a href="/tests/u-googlemaps">Google Maps</a></li>
 		<li class="test"><a href="/tests/u-history">History</a></li>
