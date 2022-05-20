@@ -327,15 +327,31 @@ $this->headerIncludes(array(
 					<label for="solo_input_mediae_single_required">Files, required</label>
 					<input type="file" name="media_single_required[]" id="solo_input_mediae_single_required" />
 					<div class="help">
-						<div class="hint">Add image here. Use png or jpg in any proportion.</div>
+						<div class="hint">Add image here.</div>
 						<div class="error">File does not fit requirements.</div>
 					</div>
 				</div>
 				<div class="field files">
-					<label for="solo_input_media_single_optional">Files, optional</label>
-					<input type="file" name="media_single_optional[]" id="solo_input_media_single_optional" />
+					<label for="solo_input_media_single_optional">Files, optional, min-width: 500px and min-height: 500px</label>
+					<input type="file" name="media_single_optional[]" id="solo_input_media_single_optional" accept=".png,.jpg" data-min-height="500" data-min-width="500" />
 					<div class="help">
-						<div class="hint">Add image here. Use png or jpg in any proportion.</div>
+						<div class="hint">Add image here. Use png or jpg with min-height 500px and min-width 500px.</div>
+						<div class="error">File does not fit requirements.</div>
+					</div>
+				</div>
+				<div class="field files">
+					<label for="solo_input_media_single_optional">Files, optional, allowed sizes: 960x960, 960x540</label>
+					<input type="file" name="media_single_optional[]" id="solo_input_media_single_optional" accept=".png,.jpg" data-allowed-sizes="960x960,960x540" />
+					<div class="help">
+						<div class="hint">Add image here. Use png or jpg in 960x960, 960x540.</div>
+						<div class="error">File does not fit requirements.</div>
+					</div>
+				</div>
+				<div class="field files">
+					<label for="solo_input_media_single_optional">Files, optional, allowed proportions: 16/9, 1/1</label>
+					<input type="file" name="media_single_optional[]" id="solo_input_media_single_optional" accept=".png,.jpg" data-allowed-proportions="16/9,1/1" />
+					<div class="help">
+						<div class="hint">Add image here. Use png or jpg in 16/9 or 1/1 proportion.</div>
 						<div class="error">File does not fit requirements.</div>
 					</div>
 				</div>
@@ -354,13 +370,13 @@ $this->headerIncludes(array(
 					<label for="solo_input_mediae_multiple_required">Files, required</label>
 					<input type="file" name="media_multiple_required[]" multiple="multiple" id="solo_input_multiple_mediae_required" />
 					<div class="help">
-						<div class="hint">Add image here. Use png or jpg in any proportion.</div>
+						<div class="hint">Add image here.</div>
 						<div class="error">File does not fit requirements.</div>
 					</div>
 				</div>
 				<div class="field files">
 					<label for="solo_input_media_multiple_optional">Files, optional</label>
-					<input type="file" name="media_multiple_optional[]" multiple="multiple" id="solo_input_media_multiple_optional" />
+					<input type="file" name="media_multiple_optional[]" multiple="multiple" accept=".png,.jpg" id="solo_input_media_multiple_optional" />
 					<div class="help">
 						<div class="hint">Add image here. Use png or jpg in any proportion.</div>
 						<div class="error">File does not fit requirements.</div>
