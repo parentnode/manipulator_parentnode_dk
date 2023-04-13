@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.2-dorthetorp_dk Copyright 2018 http://manipulator.parentnode.dk
-js-merged @ 2018-07-07 02:00:07
+Manipulator v0.9.4-dorthetorp_dk Copyright 2023 https://manipulator.parentnode.dk
+js-merged @ 2023-02-17 10:07:54
 */
 
 /*seg_desktop_include.js*/
@@ -8,9 +8,10 @@ js-merged @ 2018-07-07 02:00:07
 /*u.js*/
 if(!u || !Util) {
 	var u, Util = u = new function() {};
-	u.version = "0.9.2";
+	u.version = "0.9.3";
 	u.bug = u.nodeId = u.exception = function() {};
 	u.stats = new function() {this.pageView = function(){};this.event = function(){};}
+	u.txt = function(index) {return index;}
 }
 function fun(v) {return (typeof(v) === "function")}
 function obj(v) {return (typeof(v) === "object")}
@@ -56,17 +57,17 @@ Util.exception = function(name, _arguments, _exception) {
 Util.bug = function() {
 	if(u.debugURL()) {
 		if(!u.bug_console_only) {
-			if(typeof(console) == "object") {
-				console.log(message);
+			var i, message;
+			if(obj(console)) {
+				for(i = 0; i < arguments.length; i++) {
+					if(arguments[i] || typeof(arguments[i]) == "undefined") {
+						console.log(arguments[i]);
+					}
+				}
 			}
 			var option, options = new Array([0, "auto", "auto", 0], [0, 0, "auto", "auto"], ["auto", 0, 0, "auto"], ["auto", "auto", 0, 0]);
-			if(isNaN(corner)) {
-				color = corner;
-				corner = 0;
-			}
-			if(typeof(color) != "string") {
-				color = "black";
-			}
+			var corner = u.bug_corner ? u.bug_corner : 0;
+			var color = u.bug_color ? u.bug_color : "black";
 			option = options[corner];
 			if(!document.getElementById("debug_id_"+corner)) {
 				var d_target = u.ae(document.body, "div", {"class":"debug_"+corner, "id":"debug_id_"+corner});
@@ -86,14 +87,22 @@ Util.bug = function() {
 				}
 				d_target.style.padding = "2px 3px";
 			}
-			if(typeof(message) != "string") {
-				message = message.toString();
+			for(i = 0; i < arguments.length; i++) {
+				if(arguments[i] === undefined) {
+					message = "undefined";
+				}
+				else if(!str(arguments[i]) && fun(arguments[i].toString)) {
+					message = arguments[i].toString();
+				}
+				else {
+					message = arguments[i];
+				}
+				var debug_div = document.getElementById("debug_id_"+corner);
+				message = message ? message.replace(/\>/g, "&gt;").replace(/\</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
+				u.ae(debug_div, "div", {"style":"color: " + color, "html": message});
 			}
-			var debug_div = document.getElementById("debug_id_"+corner);
-			message = message ? message.replace(/\>/g, "&gt;").replace(/\</g, "&lt;").replace(/&lt;br&gt;/g, "<br>") : "Util.bug with no message?";
-			u.ae(debug_div, "div", {"style":"color: " + color, "html": message});
 		}
-		else if(typeof(console) == "object") {
+		else if(typeof(console) !== "undefined" && obj(console)) {
 			var i;
 			for(i = 0; i < arguments.length; i++) {
 				console.log(arguments[i]);
@@ -105,7 +114,7 @@ Util.xInObject = function(object, _options) {
 	if(u.debugURL()) {
 		var return_string = false;
 		var explore_objects = false;
-		if(typeof(_options) == "object") {
+		if(obj(_options)) {
 			var _argument;
 			for(_argument in _options) {
 				switch(_argument) {
@@ -116,14 +125,14 @@ Util.xInObject = function(object, _options) {
 		}
 		var x, s = "--- start object ---\n";
 		for(x in object) {
-			if(explore_objects && object[x] && typeof(object[x]) == "object" && typeof(object[x].nodeName) != "string") {
+			if(explore_objects && object[x] && obj(object[x]) && !str(object[x].nodeName)) {
 				s += x + "=" + object[x]+" => \n";
 				s += u.xInObject(object[x], true);
 			}
-			else if(object[x] && typeof(object[x]) == "object" && typeof(object[x].nodeName) == "string") {
+			else if(object[x] && obj(object[x]) && str(object[x].nodeName)) {
 				s += x + "=" + object[x]+" -> " + u.nodeId(object[x], 1) + "\n";
 			}
-			else if(object[x] && typeof(object[x]) == "function") {
+			else if(object[x] && fun(object[x])) {
 				s += x + "=function\n";
 			}
 			else {
@@ -145,18 +154,20 @@ Util.xInObject = function(object, _options) {
 Util.saveCookie = function(name, value, _options) {
 	var expires = true;
 	var path = false;
+	var samesite = "lax";
 	var force = false;
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
 				case "expires"	: expires	= _options[_argument]; break;
 				case "path"		: path		= _options[_argument]; break;
+				case "samesite"	: samesite	= _options[_argument]; break;
 				case "force"	: force		= _options[_argument]; break;
 			}
 		}
 	}
-	if(!force && typeof(window.localStorage) == "object" && typeof(window.sessionStorage) == "object") {
+	if(!force && obj(window.localStorage) && obj(window.sessionStorage)) {
 		if(expires === true) {
 			window.sessionStorage.setItem(name, value);
 		}
@@ -166,35 +177,36 @@ Util.saveCookie = function(name, value, _options) {
 		return;
 	}
 	if(expires === false) {
-		expires = ";expires=Mon, 04-Apr-2020 05:00:00 GMT";
+		expires = ";expires="+(new Date((new Date()).getTime() + (1000*60*60*24*365))).toGMTString();
 	}
-	else if(typeof(expires) === "string") {
+	else if(str(expires)) {
 		expires = ";expires="+expires;
 	}
 	else {
 		expires = "";
 	}
-	if(typeof(path) === "string") {
+	if(str(path)) {
 		path = ";path="+path;
 	}
 	else {
 		path = "";
 	}
-	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + path + expires;
+	samesite = ";samesite="+samesite;
+	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + path + expires + samesite;
 }
 Util.getCookie = function(name) {
 	var matches;
-	if(typeof(window.sessionStorage) == "object" && window.sessionStorage.getItem(name)) {
+	if(obj(window.sessionStorage) && window.sessionStorage.getItem(name)) {
 		return window.sessionStorage.getItem(name)
 	}
-	else if(typeof(window.localStorage) == "object" && window.localStorage.getItem(name)) {
+	else if(obj(window.localStorage) && window.localStorage.getItem(name)) {
 		return window.localStorage.getItem(name)
 	}
 	return (matches = document.cookie.match(encodeURIComponent(name) + "=([^;]+)")) ? decodeURIComponent(matches[1]) : false;
 }
 Util.deleteCookie = function(name, _options) {
 	var path = false;
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -202,13 +214,13 @@ Util.deleteCookie = function(name, _options) {
 			}
 		}
 	}
-	if(typeof(window.sessionStorage) == "object") {
+	if(obj(window.sessionStorage)) {
 		window.sessionStorage.removeItem(name);
 	}
-	if(typeof(window.localStorage) == "object") {
+	if(obj(window.localStorage)) {
 		window.localStorage.removeItem(name);
 	}
-	if(typeof(path) === "string") {
+	if(str(path)) {
 		path = ";path="+path;
 	}
 	else {
@@ -233,7 +245,7 @@ Util.getNodeCookie = function(node, name, _options) {
 	var mem = JSON.parse(u.getCookie("man_mem"));
 	if(mem && mem[ref]) {
 		if(name) {
-			return mem[ref][name] ? mem[ref][name] : "";
+			return (typeof(mem[ref][name]) != "undefined") ? mem[ref][name] : false;
 		}
 		else {
 			return mem[ref];
@@ -258,7 +270,7 @@ Util.cookieReference = function(node, _options) {
 	var ref;
 	var ignore_classnames = false;
 	var ignore_classvars = false;
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -282,7 +294,7 @@ Util.cookieReference = function(node, _options) {
 				classname = classname.replace(regex, " ").replace(/[ ]{2,4}/, " ");
 			}
 			if(ignore_classvars) {
-				classname = classname.replace(/(^| )[a-zA-Z_]+\:[\?\=\w\/\\#~\:\.\,\+\&\%\@\!\-]+(^| )/g, " ").replace(/[ ]{2,4}/g, " ");
+				classname = classname.replace(/\b[a-zA-Z_]+\:[\?\=\w\/\\#~\:\.\,\+\&\%\@\!\-]+\b/g, "").replace(/[ ]{2,4}/g, " ");
 			}
 			node_identifier = node.nodeName+"."+classname.trim().replace(/ /g, ".");
 		}
@@ -320,13 +332,15 @@ Util.querySelectorAll = u.qsa = function(query, scope) {
 	return [];
 }
 Util.getElement = u.ge = function(identifier, scope) {
-	var node, i, regexp;
+	var node, nodes, i, regexp;
 	if(document.getElementById(identifier)) {
 		return document.getElementById(identifier);
 	}
 	scope = scope ? scope : document;
 	regexp = new RegExp("(^|\\s)" + identifier + "(\\s|$|\:)");
-	for(i = 0; node = scope.getElementsByTagName("*")[i]; i++) {
+	nodes = scope.getElementsByTagName("*");
+	for(i = 0; i < nodes.length; i++) {
+		node = nodes[i];
 		if(regexp.test(node.className)) {
 			return node;
 		}
@@ -334,21 +348,23 @@ Util.getElement = u.ge = function(identifier, scope) {
 	return scope.getElementsByTagName(identifier).length ? scope.getElementsByTagName(identifier)[0] : false;
 }
 Util.getElements = u.ges = function(identifier, scope) {
-	var node, i, regexp;
-	var nodes = new Array();
+	var node, nodes, i, regexp;
+	var return_nodes = new Array();
 	scope = scope ? scope : document;
 	regexp = new RegExp("(^|\\s)" + identifier + "(\\s|$|\:)");
-	for(i = 0; node = scope.getElementsByTagName("*")[i]; i++) {
+	nodes = scope.getElementsByTagName("*");
+	for(i = 0; i < nodes.length; i++) {
+		node = nodes[i];
 		if(regexp.test(node.className)) {
-			nodes.push(node);
+			return_nodes.push(node);
 		}
 	}
-	return nodes.length ? nodes : scope.getElementsByTagName(identifier);
+	return return_nodes.length ? return_nodes : scope.getElementsByTagName(identifier);
 }
 Util.parentNode = u.pn = function(node, _options) {
 	var exclude = "";
 	var include = "";
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -368,7 +384,7 @@ Util.parentNode = u.pn = function(node, _options) {
 Util.previousSibling = u.ps = function(node, _options) {
 	var exclude = "";
 	var include = "";
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -388,7 +404,7 @@ Util.previousSibling = u.ps = function(node, _options) {
 Util.nextSibling = u.ns = function(node, _options) {
 	var exclude = "";
 	var include = "";
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -408,7 +424,7 @@ Util.nextSibling = u.ns = function(node, _options) {
 Util.childNodes = u.cn = function(node, _options) {
 	var exclude = "";
 	var include = "";
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -421,7 +437,8 @@ Util.childNodes = u.cn = function(node, _options) {
 	var include_nodes = include ? u.qsa(include, node) : [];
 	var i, child;
 	var children = new Array();
-	for(i = 0; child = node.childNodes[i]; i++) {
+	for(i = 0; i < node.childNodes.length; i++) {
+		child = node.childNodes[i]
 		if(child && child.nodeType != 3 && child.nodeType != 8 && (!exclude || (!u.inNodeList(child, exclude_nodes))) && (!include || (u.inNodeList(child, include_nodes)))) {
 			children.push(child);
 		}
@@ -430,7 +447,7 @@ Util.childNodes = u.cn = function(node, _options) {
 }
 Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 	try {
-		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+		var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 		node = _parent.appendChild(node);
 		if(attributes) {
 			var attribute;
@@ -452,7 +469,7 @@ Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 }
 Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 	try {
-		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+		var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 		node = _parent.insertBefore(node, _parent.firstChild);
 		if(attributes) {
 			var attribute;
@@ -521,7 +538,7 @@ Util.textContent = u.text = function(node) {
 Util.clickableElement = u.ce = function(node, _options) {
 	node._use_link = "a";
 	node._click_type = "manual";
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 			switch(_argument) {
@@ -535,25 +552,28 @@ Util.clickableElement = u.ce = function(node, _options) {
 		u.ac(node, "link");
 		if(a.getAttribute("href") !== null) {
 			node.url = a.href;
-			a.removeAttribute("href");
+			a.url = a.href;
+			node.onclick = function(event) {
+				event.preventDefault();
+			}
 			node._a = a;
 		}
 	}
 	else {
 		u.ac(node, "clickable");
 	}
-	if(typeof(u.e) != "undefined" && typeof(u.e.click) == "function") {
+	if(obj(u.e) && fun(u.e.click)) {
 		u.e.click(node, _options);
 		if(node._click_type == "link") {
 			node.clicked = function(event) {
-				if(typeof(node.preClicked) == "function") {
+				if(fun(node.preClicked)) {
 					node.preClicked();
 				}
-				if(event && (event.metaKey || event.ctrlKey)) {
+				if(event && (event.metaKey || event.ctrlKey || (this._a && this._a.target))) {
 					window.open(this.url);
 				}
 				else {
-					if(typeof(u.h) != "undefined" && u.h.is_listening) {
+					if(obj(u.h) && u.h.is_listening) {
 						u.h.navigate(this.url, this);
 					}
 					else {
@@ -578,132 +598,100 @@ Util.classVar = u.cv = function(node, var_name) {
 	}
 	return false;
 }
-Util.setClass = u.sc = function(node, classname) {
-	try {
-		var old_class = node.className;
+Util.setClass = u.sc = function(node, classname, dom_update) {
+	var old_class;
+	if(node instanceof SVGElement) {
+		old_class = node.className.baseVal;
+		node.setAttribute("class", classname);
+	}
+	else {
+		old_class = node.className;
 		node.className = classname;
-		node.offsetTop;
-		return old_class;
 	}
-	catch(exception) {
-		u.exception("u.sc", arguments, exception);
-	}
-	return false;
+	dom_update = (dom_update === false) || (node.offsetTop);
+	return old_class;
 }
 Util.hasClass = u.hc = function(node, classname) {
-	try {
-		if(classname) {
-			var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+	if(node.classList.contains(classname)) {
+		return true;
+	}
+	else {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+		if(node instanceof SVGElement) {
+			if(regexp.test(node.className.baseVal)) {
+				return true;
+			}
+		}
+		else {
 			if(regexp.test(node.className)) {
 				return true;
 			}
 		}
 	}
-	catch(exception) {
-		u.exception("u.hc", arguments, exception);
-	}
 	return false;
 }
 Util.addClass = u.ac = function(node, classname, dom_update) {
-	try {
-		if(classname) {
-			if(node.classList){
-				node.classList.add(classname);
-				dom_update === false ? false : node.offsetTop;
-			}
-			else {
-				var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$)");
-				if(!regexp.test(node.className)) {
-					node.className += node.className ? " " + classname : classname;
-					dom_update === false ? false : node.offsetTop;
-				}
-			}
-			return node.className;
-		}
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		node.classList.add(classnames.shift());
 	}
-	catch(exception) {
-		u.exception("u.ac", arguments, exception);
-	}
-	return false;
+	dom_update = (dom_update === false) || (node.offsetTop);
+	return node.className;
 }
 Util.removeClass = u.rc = function(node, classname, dom_update) {
-	try {
-		if(classname) {
-			if(node.classList.contains(classname)) {
-				node.classList.remove(classname);
-			}
-			else {
-				var regexp = new RegExp("(\\b)" + classname + "(\\s|$)", "g");
-				node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
-				dom_update === false ? false : node.offsetTop;
-				return node.className;
-			}
-		}
+	if(node.classList.contains(classname)) {
+		node.classList.remove(classname);
 	}
-	catch(exception) {
-		u.exception("u.rc", arguments, exception);
-	}
-	return false;
-}
-Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
-	try {
-		if(node.classList) {
-			if(node.classList.contains(classname)) {
-				node.classList.remove(classname);
-				if(_classname) {
-					node.classList.add(_classname);
-				}
-			}
-			else {
-				node.classList.add(classname);
-				if(_classname) {
-					node.classList.remove(_classname);
-				}
-			}
+	else {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(?=[\\s]|$)", "g");
+		if(node instanceof SVGElement) {
+			node.setAttribute("class", node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " "));
 		}
 		else {
-			var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$|\:)");
-			if(regexp.test(node.className)) {
-				u.rc(node, classname, false);
-				if(_classname) {
-					u.ac(node, _classname, false);
-				}
-			}
-			else {
-				u.ac(node, classname, false);
-				if(_classname) {
-					u.rc(node, _classname, false);
-				}
-			}
-			dom_update === false ? false : node.offsetTop;
-			return node.className;
+			node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
 		}
 	}
-	catch(exception) {
-		u.exception("u.tc", arguments, exception);
+	dom_update = (dom_update === false) || (node.offsetTop);
+	return node.className;
+}
+Util.toggleClass = u.tc = function(node, classname, _classname, dom_update) {
+	if(u.hc(node, classname)) {
+		u.rc(node, classname, dom_update);
+		if(_classname) {
+			u.ac(node, _classname, dom_update);
+		}
 	}
-	return false;
+	else {
+		u.ac(node, classname);
+		if(_classname) {
+			u.rc(node, _classname, dom_update);
+		}
+	}
+	dom_update = (dom_update === false) || (node.offsetTop);
+	return node.className;
 }
 Util.applyStyle = u.as = function(node, property, value, dom_update) {
 	node.style[u.vendorProperty(property)] = value;
-	dom_update === false ? false : node.offsetTop;
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 Util.applyStyles = u.ass = function(node, styles, dom_update) {
 	if(styles) {
 		var style;
 		for(style in styles) {
-			node.style[u.vendorProperty(style)] = styles[style];
+			if(obj(u.a) && style == "transition") {
+				u.a.transition(node, styles[style]);
+			}
+			else {
+				node.style[u.vendorProperty(style)] = styles[style];
+			}
 		}
 	}
-	dom_update === false ? false : node.offsetTop;
+	dom_update = (dom_update === false) || (node.offsetTop);
 }
 Util.getComputedStyle = u.gcs = function(node, property) {
-	node.offsetHeight;
+	var dom_update = node.offsetHeight;
 	property = (u.vendorProperty(property).replace(/([A-Z]{1})/g, "-$1")).toLowerCase().replace(/^(webkit|ms)/, "-$1");
-	if(window.getComputedStyle) {
-		return window.getComputedStyle(node, null).getPropertyValue(property);
-	}
-	return false;
+	return window.getComputedStyle(node, null).getPropertyValue(property);
 }
 Util.hasFixedParent = u.hfp = function(node) {
 	while(node.nodeName.toLowerCase() != "body") {
@@ -714,10 +702,27 @@ Util.hasFixedParent = u.hfp = function(node) {
 	}
 	return false;
 }
-Util.insertAfter = u.ia = function(after_node, insert_node) {
+u.contains = function(scope, node) {
+	if(scope != node) {
+		if(scope.contains(node)) {
+			return true
+		}
+	}
+	return false;
+}
+u.containsOrIs = function(scope, node) {
+	if(scope == node || u.contains(scope, node)) {
+		return true
+	}
+	return false;
+}
+u.elementMatches = u.em = function(node, selector) {
+	return node.matches(selector);
+}
+Util.insertAfter = u.ia = function(insert_node, after_node) {
 	var next_node = u.ns(after_node);
 	if(next_node) {
-		after_node.parentNode.insertBefore(next_node, insert_node);
+		after_node.parentNode.insertBefore(insert_node, next_node);
 	}
 	else {
 		after_node.parentNode.appendChild(insert_node);
@@ -732,43 +737,27 @@ Util.selectText = function(node) {
 }
 Util.inNodeList = function(node, list) {
 	var i, list_node;
-	for(i = 0; list_node = list[i]; i++) {
+	for(i = 0; i < list.length; i++) {
+		list_node = list[i]
 		if(list_node === node) {
 			return true;
 		}
 	}
 	return false;
 }
-u.contains = Util.nodeWithin = u.nw = function(node, scope) {
-	if(scope != node) {
-		if(scope.contains(node)) {
-			return true
-		}
-	}
-	return false;
-}
-u.containsOrIs = function(node, scope) {
-	if(scope == node || u.contains(node, scope)) {
-		return true
-	}
-	return false;
-}
+
 
 /*u-events.js*/
 Util.Events = u.e = new function() {
 	this.event_pref = typeof(document.ontouchmove) == "undefined" || (navigator.maxTouchPoints > 1 && navigator.userAgent.match(/Windows/i)) ? "mouse" : "touch";
-	if(navigator.maxTouchPoints > 1) {
-		if((typeof(document.ontouchmove) == "undefined" && typeof(document.onmousemove) == "undefined") || (document.ontouchmove === null && document.onmousemove === null)) {
-			this.event_support = "multi";
-		}
+	if (navigator.userAgent.match(/Windows/i) && ((obj(document.ontouchmove) && obj(document.onmousemove)) || (fun(document.ontouchmove) && fun(document.onmousemove)))) {
+		this.event_support = "multi";
 	}
-	if(!this.event_support) {
-		if(typeof(document.ontouchmove) == "undefined") {
-			this.event_support = "mouse";
-		}
-		else {
-			this.event_support = "touch";
-		}
+	else if (obj(document.ontouchmove) || fun(document.ontouchmove)) {
+		this.event_support = "touch";
+	}
+	else {
+		this.event_support = "mouse";
 	}
 	this.events = {
 		"mouse": {
@@ -797,7 +786,7 @@ Util.Events = u.e = new function() {
 			node.addEventListener(type, action, false);
 		}
 		catch(exception) {
-			alert("exception in addEvent:" + node + "," + type + ":" + exception);
+			u.exception("u.e.addEvent", arguments, exception);
 		}
 	}
 	this.removeEvent = function(node, type, action) {
@@ -805,7 +794,7 @@ Util.Events = u.e = new function() {
 			node.removeEventListener(type, action, false);
 		}
 		catch(exception) {
-			u.bug("exception in removeEvent:" + node + "," + type + ":" + exception);
+			u.exception("u.e.removeEvent", arguments, exception);
 		}
 	}
 	this.addStartEvent = this.addDownEvent = function(node, action) {
@@ -903,6 +892,8 @@ Util.Events = u.e = new function() {
 		u.t.resetTimer(node.t_clicked);
 		this.removeEvent(node, "mouseup", this._dblclicked);
 		this.removeEvent(node, "touchend", this._dblclicked);
+		this.removeEvent(node, "mouseup", this._rightclicked);
+		this.removeEvent(node, "touchend", this._rightclicked);
 		this.removeEvent(node, "mousemove", this._cancelClick);
 		this.removeEvent(node, "touchmove", this._cancelClick);
 		this.removeEvent(node, "mouseout", this._cancelClick);
@@ -911,7 +902,7 @@ Util.Events = u.e = new function() {
 	}
 	this.resetEvents = function(node) {
 		this.resetClickEvents(node);
-		if(typeof(this.resetDragEvents) == "function") {
+		if(fun(this.resetDragEvents)) {
 			this.resetDragEvents(node);
 		}
 	}
@@ -932,37 +923,52 @@ Util.Events = u.e = new function() {
 		this.move_last_x = 0;
 		this.move_last_y = 0;
 		this.swiped = false;
-		if(this.e_click || this.e_dblclick || this.e_hold) {
-			if(event.type.match(/mouse/)) {
-				var node = this;
-				while(node) {
-					if(node.e_drag || node.e_swipe) {
-						u.e.addMoveEvent(this, u.e._cancelClick);
-						break;
+		if(!event.button) {
+			if(this.e_click || this.e_dblclick || this.e_hold) {
+				if(event.type.match(/mouse/)) {
+					var node = this;
+					while(node) {
+						if(node.e_drag || node.e_swipe) {
+							u.e.addMoveEvent(this, u.e._cancelClick);
+							break;
+						}
+						else {
+							node = node.parentNode;
+						}
 					}
-					else {
-						node = node.parentNode;
-					}
+					u.e.addEvent(this, "mouseout", u.e._cancelClick);
 				}
-				u.e.addEvent(this, "mouseout", u.e._cancelClick);
+				else {
+					u.e.addMoveEvent(this, u.e._cancelClick);
+				}
+				u.e.addMoveEvent(this, u.e._move);
+				u.e.addEndEvent(this, u.e._dblclicked);
+				if(this.e_hold) {
+					this.t_held = u.t.setTimer(this, u.e._held, 750);
+				}
 			}
-			else {
-				u.e.addMoveEvent(this, u.e._cancelClick);
+			if(this.e_drag || this.e_swipe) {
+				u.e.addMoveEvent(this, u.e._pick);
+				this.e_cancelPick = u.e.addWindowEndEvent(this, u.e._cancelPick);
 			}
-			u.e.addMoveEvent(this, u.e._move);
-			u.e.addEndEvent(this, u.e._dblclicked);
+			if(this.e_scroll) {
+				u.e.addMoveEvent(this, u.e._scrollStart);
+				u.e.addEndEvent(this, u.e._scrollEnd);
+			}
 		}
-		if(this.e_hold) {
-			this.t_held = u.t.setTimer(this, u.e._held, 750);
+		else if(event.button === 2) {
+			if(this.e_rightclick) {
+				if(event.type.match(/mouse/)) {
+					u.e.addEvent(this, "mouseout", u.e._cancelClick);
+				}
+				else {
+					u.e.addMoveEvent(this, u.e._cancelClick);
+				}
+				u.e.addMoveEvent(this, u.e._move);
+				u.e.addEndEvent(this, u.e._rightclicked);
+			}
 		}
-		if(this.e_drag || this.e_swipe) {
-			u.e.addMoveEvent(this, u.e._pick);
-		}
-		if(this.e_scroll) {
-			u.e.addMoveEvent(this, u.e._scrollStart);
-			u.e.addEndEvent(this, u.e._scrollEnd);
-		}
-		if(typeof(this.inputStarted) == "function") {
+		if(fun(this.inputStarted)) {
 			this.inputStarted(event);
 		}
 	}
@@ -971,13 +977,13 @@ Util.Events = u.e = new function() {
 		var offset_y = u.eventY(event) - this.start_event_y;
 		if(event.type.match(/mouseout/) || (event.type.match(/move/) && (Math.abs(offset_x) > 15 || Math.abs(offset_y) > 15))) {
 			u.e.resetClickEvents(this);
-			if(typeof(this.clickCancelled) == "function") {
+			if(fun(this.clickCancelled)) {
 				this.clickCancelled(event);
 			}
 		}
 	}
 	this._move = function(event) {
-		if(typeof(this.moved) == "function") {
+		if(fun(this.moved)) {
 			this.current_x = u.eventX(event) - this.start_event_x;
 			this.current_y = u.eventY(event) - this.start_event_y;
 			this.current_xps = Math.round(((this.current_x - this.move_last_x) / (event.timeStamp - this.move_timestamp)) * 1000);
@@ -995,10 +1001,10 @@ Util.Events = u.e = new function() {
 		u.e.addStartEvent(node, this._inputStart);
 	}
 	this._held = function(event) {
-		this.e_hold_options.event = event;
+		this.e_hold_options.event = this.e_hold_options.event || "hold";
 		u.stats.event(this, this.e_hold_options);
 		u.e.resetNestedEvents(this);
-		if(typeof(this.held) == "function") {
+		if(fun(this.held)) {
 			this.held(event);
 		}
 	}
@@ -1010,15 +1016,33 @@ Util.Events = u.e = new function() {
 	}
 	this._clicked = function(event) {
 		if(this.e_click_options) {
-			this.e_click_options.event = event;
+			this.e_click_options.event = this.e_click_options.event || "click";
 			u.stats.event(this, this.e_click_options);
 		}
 		u.e.resetNestedEvents(this);
-		if(typeof(this.clicked) == "function") {
+		if(fun(this.clicked)) {
 			this.clicked(event);
 		}
 	}
-	this.dblclick = this.doubletap = function(node, _options) {
+	this.rightclick = function(node, _options) {
+		node.e_rightclick_options = _options ? _options : {};
+		node.e_rightclick_options.eventAction = u.stringOr(node.e_rightclick_options.eventAction, "RightClicked");
+		node.e_rightclick = true;
+		u.e.addStartEvent(node, this._inputStart);
+		u.e.addEvent(node, "contextmenu", function(event){u.e.kill(event);});
+	}
+	this._rightclicked = function(event) {
+		u.bug("_rightclicked:", this);
+		if(this.e_rightclick_options) {
+			this.e_rightclick_options.event = this.e_rightclick_options.event || "rightclick";
+			u.stats.event(this, this.e_rightclick_options);
+		}
+		u.e.resetNestedEvents(this);
+		if(fun(this.rightclicked)) {
+			this.rightclicked(event);
+		}
+	}
+	this.dblclick = this.doubleclick = this.doubletap = this.dbltap = function(node, _options) {
 		node.e_dblclick_options = _options ? _options : {};
 		node.e_dblclick_options.eventAction = u.stringOr(node.e_dblclick_options.eventAction, "DblClicked");
 		node.e_dblclick = true;
@@ -1026,10 +1050,10 @@ Util.Events = u.e = new function() {
 	}
 	this._dblclicked = function(event) {
 		if(u.t.valid(this.t_clicked) && event) {
-			this.e_dblclick_options.event = event;
+			this.e_dblclick_options.event = this.e_dblclick_options.event || "doubleclick";
 			u.stats.event(this, this.e_dblclick_options);
 			u.e.resetNestedEvents(this);
-			if(typeof(this.dblclicked) == "function") {
+			if(fun(this.dblclicked)) {
 				this.dblclicked(event);
 			}
 			return;
@@ -1052,7 +1076,7 @@ Util.Events = u.e = new function() {
 		node._hover_over_delay = 0;
 		node._callback_out = "out";
 		node._callback_over = "over";
-		if(typeof(_options) == "object") {
+		if(obj(_options)) {
 			var argument;
 			for(argument in _options) {
 				switch(argument) {
@@ -1082,7 +1106,7 @@ Util.Events = u.e = new function() {
 			this.is_hovered = true;
 			u.e.removeOverEvent(this, u.e._over);
 			u.e.addOverEvent(this, u.e.__over);
-			if(typeof(this[this._callback_over]) == "function") {
+			if(fun(this[this._callback_over])) {
 				this[this._callback_over](event);
 			}
 		}
@@ -1096,7 +1120,7 @@ Util.Events = u.e = new function() {
 		this.is_hovered = false;
 		u.e.removeOverEvent(this, u.e.__over);
 		u.e.addOverEvent(this, u.e._over);
-		if(typeof(this[this._callback_out]) == "function") {
+		if(fun(this[this._callback_out])) {
 			this[this._callback_out](event);
 		}
 	}
@@ -1111,9 +1135,22 @@ u.e.addDOMReadyEvent = function(action) {
 		}
 		else {
 			var id = u.randomString();
-			window["DOMReady_" + id] = action;
-			eval('window["_DOMReady_' + id + '"] = function() {window["DOMReady_'+id+'"](); u.e.removeEvent(document, "DOMContentLoaded", window["_DOMReady_' + id + '"])}');
-			u.e.addEvent(document, "DOMContentLoaded", window["_DOMReady_" + id]);
+			window["_DOMReady_" + id] = {
+				id: id,
+				action: action,
+				callback: function(event) {
+					if(fun(this.action)) {
+						this.action.bind(window)(event);
+					}
+					else if(fun(this[this.action])){
+						this[this.action].bind(window)(event);
+					}
+ 					u.e.removeEvent(document, "DOMContentLoaded", window["_DOMReady_" + this.id].eventCallback); 
+					delete window["_DOMReady_" + this.id];
+				}
+			}
+			eval('window["_DOMReady_' + id + '"].eventCallback = function() {window["_DOMReady_'+id+'"].callback(event);}');
+			u.e.addEvent(document, "DOMContentLoaded", window["_DOMReady_" + id].eventCallback);
 		}
 	}
 	else {
@@ -1126,81 +1163,124 @@ u.e.addOnloadEvent = function(action) {
 	}
 	else {
 		var id = u.randomString();
-		window["Onload_" + id] = action;
-		eval('window["_Onload_' + id + '"] = function() {window["Onload_'+id+'"](); u.e.removeEvent(window, "load", window["_Onload_' + id + '"])}');
-		u.e.addEvent(window, "load", window["_Onload_" + id]);
+		window["_Onload_" + id] = {
+			id: id,
+			action: action,
+			callback: function(event) {
+				if(fun(this.action)) {
+					this.action.bind(window)(event);
+				}
+				else if(fun(this[this.action])){
+					this[this.action].bind(window)(event);
+				}
+				u.e.removeEvent(document, "load", window["_Onload_" + this.id].eventCallback); 
+				delete window["_Onload_" + this.id];
+			}
+		}
+		eval('window["_Onload_' + id + '"].eventCallback = function() {u.bug("load");window["_Onload_'+id+'"].callback(event);}');
+		u.e.addEvent(window, "load", window["_Onload_" + id].eventCallback);
 	}
 }
 u.e.addWindowEvent = function(node, type, action) {
 	var id = u.randomString();
-	window["_OnWindowEvent_node_"+ id] = node;
-	if(typeof(action) == "function") {
-		eval('window["_OnWindowEvent_callback_' + id + '"] = function(event) {window["_OnWindowEvent_node_'+ id + '"]._OnWindowEvent_callback_'+id+' = '+action+'; window["_OnWindowEvent_node_'+ id + '"]._OnWindowEvent_callback_'+id+'(event);};');
-	} 
-	else {
-		eval('window["_OnWindowEvent_callback_' + id + '"] = function(event) {if(typeof(window["_OnWindowEvent_node_'+ id + '"]["'+action+'"]) == "function") {window["_OnWindowEvent_node_'+id+'"]["'+action+'"](event);}};');
-	}
-	u.e.addEvent(window, type, window["_OnWindowEvent_callback_" + id]);
+	window["_OnWindowEvent_"+ id] = {
+		id: id,
+		node: node,
+		type: type,
+		action: action,
+		callback: function(event) {
+			if(fun(this.action)) {
+				this.action.bind(this.node)(event);
+			}
+			else if(fun(this[this.action])){
+				this[this.action](event);
+			}
+		}
+	};
+	eval('window["_OnWindowEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowEvent_'+ id + '"].callback(event);}');
+	u.e.addEvent(window, type, window["_OnWindowEvent_" + id].eventCallback);
 	return id;
 }
-u.e.removeWindowEvent = function(node, type, id) {
-	u.e.removeEvent(window, type, window["_OnWindowEvent_callback_"+id]);
-	window["_OnWindowEvent_node_"+id] = null;
-	window["_OnWindowEvent_callback_"+id] = null;
+u.e.removeWindowEvent = function(id) {
+	if(window["_OnWindowEvent_" + id]) {
+		u.e.removeEvent(window, window["_OnWindowEvent_"+id].type, window["_OnWindowEvent_"+id].eventCallback);
+		delete window["_OnWindowEvent_"+id];
+	}
 }
 u.e.addWindowStartEvent = function(node, action) {
 	var id = u.randomString();
-	window["_Onstart_node_"+ id] = node;
-	if(typeof(action) == "function") {
-		eval('window["_Onstart_callback_' + id + '"] = function(event) {window["_Onstart_node_'+ id + '"]._Onstart_callback_'+id+' = '+action+'; window["_Onstart_node_'+ id + '"]._Onstart_callback_'+id+'(event);};');
-	} 
-	else {
-		eval('window["_Onstart_callback_' + id + '"] = function(event) {if(typeof(window["_Onstart_node_'+ id + '"]["'+action+'"]) == "function") {window["_Onstart_node_'+id+'"]["'+action+'"](event);}};');
-	}
-	u.e.addStartEvent(window, window["_Onstart_callback_" + id]);
+	window["_OnWindowStartEvent_"+ id] = {
+		id: id,
+		node: node,
+		action: action,
+		callback: function(event) {
+			if(fun(this.action)) {
+				this.action.bind(this.node)(event);
+			}
+			else if(fun(this[this.action])){
+				this[this.action](event);
+			}
+		}
+	};
+	eval('window["_OnWindowStartEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowStartEvent_'+ id + '"].callback(event);}');
+	u.e.addStartEvent(window, window["_OnWindowStartEvent_" + id].eventCallback);
 	return id;
 }
-u.e.removeWindowStartEvent = function(node, id) {
-	u.e.removeStartEvent(window, window["_Onstart_callback_"+id]);
-	window["_Onstart_node_"+id]["_Onstart_callback_"+id] = null;
-	window["_Onstart_node_"+id] = null;
-	window["_Onstart_callback_"+id] = null;
+u.e.removeWindowStartEvent = function(id) {
+	if(window["_OnWindowStartEvent_" + id]) {
+		u.e.removeStartEvent(window, window["_OnWindowStartEvent_"+id].eventCallback);
+		delete window["_OnWindowStartEvent_"+id];
+	}
 }
 u.e.addWindowMoveEvent = function(node, action) {
 	var id = u.randomString();
-	window["_Onmove_node_"+ id] = node;
-	if(typeof(action) == "function") {
-		eval('window["_Onmove_callback_' + id + '"] = function(event) {window["_Onmove_node_'+ id + '"]._Onmove_callback_'+id+' = '+action+'; window["_Onmove_node_'+ id + '"]._Onmove_callback_'+id+'(event);};');
-	} 
-	else {
-		eval('window["_Onmove_callback_' + id + '"] = function(event) {if(typeof(window["_Onmove_node_'+ id + '"]["'+action+'"]) == "function") {window["_Onmove_node_'+id+'"]["'+action+'"](event);}};');
-	}
-	u.e.addMoveEvent(window, window["_Onmove_callback_" + id]);
+	window["_OnWindowMoveEvent_"+ id] = {
+		id: id,
+		node: node,
+		action: action,
+		callback: function(event) {
+			if(fun(this.action)) {
+				this.action.bind(this.node)(event);
+			}
+			else if(fun(this[this.action])){
+				this[this.action](event);
+			}
+		}
+	};
+	eval('window["_OnWindowMoveEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowMoveEvent_'+ id + '"].callback(event);}');
+	u.e.addMoveEvent(window, type, window["_OnWindowMoveEvent_" + id].eventCallback);
 	return id;
 }
-u.e.removeWindowMoveEvent = function(node, id) {
-	u.e.removeMoveEvent(window, window["_Onmove_callback_" + id]);
-	window["_Onmove_node_"+ id]["_Onmove_callback_"+id] = null;
-	window["_Onmove_node_"+ id] = null;
-	window["_Onmove_callback_"+ id] = null;
+u.e.removeWindowMoveEvent = function(id) {
+	if(window["_OnWindowMoveEvent_" + id]) {
+		u.e.removeMoveEvent(window, window["_OnWindowMoveEvent_"+id].eventCallback);
+		delete window["_OnWindowMoveEvent_"+id];
+	}
 }
 u.e.addWindowEndEvent = function(node, action) {
 	var id = u.randomString();
-	window["_Onend_node_"+ id] = node;
-	if(typeof(action) == "function") {
-		eval('window["_Onend_callback_' + id + '"] = function(event) {window["_Onend_node_'+ id + '"]._Onend_callback_'+id+' = '+action+'; window["_Onend_node_'+ id + '"]._Onend_callback_'+id+'(event);};');
-	} 
-	else {
-		eval('window["_Onend_callback_' + id + '"] = function(event) {if(typeof(window["_Onend_node_'+ id + '"]["'+action+'"]) == "function") {window["_Onend_node_'+id+'"]["'+action+'"](event);}};');
-	}
-	u.e.addEndEvent(window, window["_Onend_callback_" + id]);
+	window["_OnWindowEndEvent_"+ id] = {
+		id: id,
+		node: node,
+		action: action,
+		callback: function(event) {
+			if(fun(this.action)) {
+				this.action.bind(this.node)(event);
+			}
+			else if(fun(this[this.action])){
+				this[this.action](event);
+			}
+		}
+	};
+	eval('window["_OnWindowEndEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowEndEvent_'+ id + '"].callback(event);}');
+	u.e.addEndEvent(window, window["_OnWindowEndEvent_" + id].eventCallback);
 	return id;
 }
-u.e.removeWindowEndEvent = function(node, id) {
-	u.e.removeEndEvent(window, window["_Onend_callback_" + id]);
-	window["_Onend_node_"+ id]["_Onend_callback_"+id] = null;
-	window["_Onend_node_"+ id] = null;
-	window["_Onend_callback_"+ id] = null;
+u.e.removeWindowEndEvent = function(id) {
+	if(window["_OnWindowEndEvent_" + id]) {
+		u.e.removeEndEvent(window, window["_OnWindowEndEvent_" + id].eventCallback);
+		delete window["_OnWindowEndEvent_"+id];
+	}
 }
 
 
@@ -1262,16 +1342,17 @@ Util.pageScrollY = u.scrollY = function() {
 
 
 /*u-init.js*/
-Util.Objects = u.o = new Object();
+Util.Modules = u.m = new Object();
 Util.init = function(scope) {
-	var i, node, nodes, object;
+	var i, node, nodes, module;
 	scope = scope && scope.nodeName ? scope : document;
 	nodes = u.ges("i\:([_a-zA-Z0-9])+", scope);
-	for(i = 0; node = nodes[i]; i++) {
-		while((object = u.cv(node, "i"))) {
-			u.rc(node, "i:"+object);
-			if(object && typeof(u.o[object]) == "object") {
-				u.o[object].init(node);
+	for(i = 0; i < nodes.length; i++) {
+		node = nodes[i];
+		while((module = u.cv(node, "i"))) {
+			u.rc(node, "i:"+module);
+			if(module && obj(u.m[module])) {
+				u.m[module].init(node);
 			}
 		}
 	}
@@ -1304,7 +1385,8 @@ Util.cutString = function(string, length) {
 	}
 	matches = string.match(/\&[\w\d]+\;/g);
 	if(matches) {
-		for(i = 0; match = matches[i]; i++){
+		for(i = 0; i < matches.length; i++){
+			match = matches[i];
 			if(string.indexOf(match) < length){
 				length += match.length-1;
 			}
@@ -1364,11 +1446,89 @@ Util.lowerCaseFirst = u.lcfirst = function(string) {
 	return string.replace(/^(.){1}/, function($1) {return $1.toLowerCase()});
 }
 Util.normalize = function(string) {
+	var table = {
+		'À':'A',  'à':'a',
+		'Á':'A',  'á':'a',
+		'Â':'A',  'â':'a',
+		'Ã':'A',  'ã':'a',
+		'Ä':'A',  'ä':'a',
+		'Å':'Aa', 'å':'aa',
+		'Æ':'Ae', 'æ':'ae',
+		'Ç':'C',  'ç':'c',
+		'Č':'C',  'ć':'c',
+		'Ć':'C',  'č':'c',
+		'Đ':'D',  'đ':'d',  'ð':'d',
+		'È':'E',  'è':'e',
+		'É':'E',  'é':'e',
+		'Ê':'E',  'ê':'e',
+		'Ë':'E',  'ë':'e',
+		'Ģ':'G',  'ģ':'g',
+		'Ğ':'G',  'ğ':'g',
+		'Ì':'I',  'ì':'i',
+		'Í':'I',  'í':'i',
+		'Î':'I',  'î':'i',
+		'Ï':'I',  'ï':'i',
+		'Ī':'I',  'ī':'i',
+		'Ķ':'K',  'ķ':'k',
+		'Ļ':'L',  'ļ':'l',
+		'Ñ':'N',  'ñ':'n',
+		'Ņ':'N',  'ņ':'n',
+		'Ò':'O',  'ò':'o',
+		'Ó':'O',  'ó':'o',
+		'Ô':'O',  'ô':'o',
+		'Õ':'O',  'õ':'o',
+		'Ö':'O',  'ö':'o',
+		'Ō':'O',  'ō':'o',
+		'Ø':'Oe', 'ø':'oe',
+		'Ŕ':'R',  'ŕ':'r',
+		'Š':'S',  'š':'s',
+		'Ş':'S',  'ş':'s',
+		'Ṩ':'S',  'ṩ':'s',
+		'Ù':'U',  'ù':'u',
+		'Ú':'U',  'ú':'u',
+		'Û':'U',  'û':'u',
+		'Ü':'U',  'ü':'u',
+		'Ū':'U',  'ū':'u',
+		'Ų':'U',  'ų':'u',
+		'Ŭ':'U',  'ŭ':'u',
+		'Ý':'Y',  'ý':'y',
+		'Ÿ':'Y',  'ÿ':'y',
+		'Ž':'Z',  'ž':'z',
+		'Þ':'B',  'þ':'b',
+		'ß':'Ss',
+		'@':' at ',
+		'&':'and',
+		'%':' percent',
+		'\\$':'USD',
+		'¥':'JPY',
+		'€':'EUR',
+		'£':'GBP',
+		'™':'trademark',
+		'©':'copyright',
+		'§':'s',
+		'\\*':'x',
+		'×':'x'
+	}
+	var char, regex;
+	for(char in table) {
+		regex = new RegExp(char, "g");
+		string = string.replace(regex, table[char]);
+	}
+	return string;
+}
+Util.superNormalize = function(string) {
+	string = u.normalize(string);
 	string = string.toLowerCase();
+	string = u.stripTags(string);
 	string = string.replace(/[^a-z0-9\_]/g, '-');
 	string = string.replace(/-+/g, '-');
 	string = string.replace(/^-|-$/g, '');
 	return string;
+}
+Util.stripTags = function(string) {
+	var node = document.createElement("div");
+	node.innerHTML = string;
+	return u.text(node);
 }
 Util.pluralize = function(count, singular, plural) {
 	if(count != 1) {
@@ -1380,7 +1540,7 @@ Util.isStringJSON = function(string) {
 	if(string.trim().substr(0, 1).match(/[\{\[]/i) && string.trim().substr(-1, 1).match(/[\}\]]/i)) {
 		try {
 			var test = JSON.parse(string);
-			if(typeof(test) == "object") {
+			if(obj(test)) {
 				test.isJSON = true;
 				return test;
 			}
@@ -1443,7 +1603,8 @@ Util.browser = function(model, version) {
 		}
 	}
 	if(model.match(/\bsafari\b/i)) {
-		if(!window.chrome && document.body.style.webkitTransform != undefined && !u.browser("ie,edge")) {
+		u.bug(navigator.userAgent);
+		if(!window.chrome && navigator.userAgent.match(/WebKit[^$]+Version\/(\d+)(.\d)/i) && !u.browser("ie,edge")) {
 			current_version = navigator.userAgent.match(/Version\/(\d+)(.\d)/i)[1];
 		}
 	}
@@ -1478,7 +1639,8 @@ Util.segment = function(segment) {
 	if(!u.current_segment) {
 		var scripts = document.getElementsByTagName("script");
 		var script, i, src;
-		for(i = 0; script = scripts[i]; i++) {
+		for(i = 0; i < scripts.length; i++) {
+			script = scripts[i];
 			seg_src = script.src.match(/\/seg_([a-z_]+)/);
 			if(seg_src) {
 				u.current_segment = seg_src[1];
@@ -1571,11 +1733,12 @@ Util.vendor_prefix = false;
 Util.vendorPrefix = function() {
 	if(Util.vendor_prefix === false) {
 		Util.vendor_prefix = "";
-		if(document.documentElement && typeof(window.getComputedStyle) == "function") {
+		if(document.documentElement && fun(window.getComputedStyle)) {
 			var styles = window.getComputedStyle(document.documentElement, "");
 			if(styles.length) {
 				var i, style, match;
-				for(i = 0; style = styles[i]; i++) {
+				for(i = 0; i < styles.length; i++) {
+					style = styles[i];
 					match = style.match(/^-(moz|webkit|ms)-/);
 					if(match) {
 						Util.vendor_prefix = match[1];
@@ -1610,7 +1773,7 @@ Util.Timer = u.t = new function() {
 	this._timers = new Array();
 	this.setTimer = function(node, action, timeout, param) {
 		var id = this._timers.length;
-		param = param ? param : {"target":node, "type":"timeout"};
+		param = param != undefined ? param : {"target":node, "type":"timeout"};
 		this._timers[id] = {"_a":action, "_n":node, "_p":param, "_t":setTimeout("u.t._executeTimer("+id+")", timeout)};
 		return id;
 	}
@@ -1624,12 +1787,12 @@ Util.Timer = u.t = new function() {
 		var timer = this._timers[id];
 		this._timers[id] = false;
 		var node = timer._n;
-		if(typeof(timer._a) == "function") {
+		if(fun(timer._a)) {
 			node._timer_action = timer._a;
 			node._timer_action(timer._p);
 			node._timer_action = null;
 		}
-		else if(typeof(node[timer._a]) == "function") {
+		else if(fun(node[timer._a])) {
 			node[timer._a](timer._p);
 		}
 	}
@@ -1647,12 +1810,12 @@ Util.Timer = u.t = new function() {
 	}
 	this._executeInterval = function(id) {
 		var node = this._timers[id]._n;
-		if(typeof(this._timers[id]._a) == "function") {
+		if(fun(this._timers[id]._a)) {
 			node._interval_action = this._timers[id]._a;
 			node._interval_action(this._timers[id]._p);
 			node._interval_action = null;
 		}
-		else if(typeof(node[this._timers[id]._a]) == "function") {
+		else if(fun(node[this._timers[id]._a])) {
 			node[this._timers[id]._a](this._timers[id]._p);
 		}
 	}
@@ -1681,10 +1844,10 @@ Util.Timer = u.t = new function() {
 /*u-url.js*/
 Util.getVar = function(param, url) {
 	var string = url ? url.split("#")[0] : location.search;
-	var regexp = new RegExp("[\&\?\b]{1}"+param+"\=([^\&\b]+)");
+	var regexp = new RegExp("(?:^|\b|&|\\?)"+param.replace(/[\[\]\(\)]{1}/g, "\\$&")+"\=([^\&\b]+)");
 	var match = string.match(regexp);
 	if(match && match.length > 1) {
-		return match[1];
+		return decodeURIComponent(match[1]);
 	}
 	else {
 		return "";
@@ -1735,10 +1898,10 @@ if(!Object.keys) {
 }
 
 /*u-dom-desktop_ie.js*/
-if(false && document.documentMode <= 10) {
+if(document.documentMode && document.documentMode <= 10 && document.documentMode >= 8) {
 	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
@@ -1764,7 +1927,7 @@ if(false && document.documentMode <= 10) {
 	}
 	Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
@@ -1789,8 +1952,113 @@ if(false && document.documentMode <= 10) {
 		}
 	}
 }
+if(document.documentMode && document.documentMode <= 11 && document.documentMode >= 8) {
+	Util.hasClass = u.hc = function(node, classname) {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+		if(node instanceof SVGElement) {
+			if(regexp.test(node.className.baseVal)) {
+				return true;
+			}
+		}
+		else {
+			if(regexp.test(node.className)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	Util.addClass = u.ac = function(node, classname, dom_update) {
+		var classnames = classname.split(" ");
+		while(classnames.length) {
+			classname = classnames.shift();
+			var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$)");
+			if(node instanceof SVGElement) {
+				if(!regexp.test(node.className.baseVal)) {
+					node.className.baseVal += node.className.baseVal ? " " + classname : classname;
+				}
+			}
+			else {
+				if(!regexp.test(node.className)) {
+					node.className += node.className ? " " + classname : classname;
+				}
+			}
+		}
+		dom_update = (!dom_update) || (node.offsetTop);
+		return node.className;
+	}
+	Util.removeClass = u.rc = function(node, classname, dom_update) {
+		var regexp = new RegExp("(^|\\s)(" + classname + ")(?=[\\s]|$)", "g");
+		if(node instanceof SVGElement) {
+			node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+		}
+		else {
+			node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+		}
+		dom_update = (!dom_update) || (node.offsetTop);
+		return node.className;
+	}
+}
+
 
 /*u-dom-desktop_light.js*/
+Util.setClass = u.sc = function(node, classname, dom_update) {
+	var old_class;
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		old_class = node.className.baseVal;
+		node.className.baseVal = classname;
+	}
+	else {
+		old_class = node.className;
+		node.className = classname;
+	}
+	dom_update = (!dom_update) || (node.offsetTop);
+	return old_class;
+}
+Util.hasClass = u.hc = function(node, classname) {
+	var regexp = new RegExp("(^|\\s)(" + classname + ")(\\s|$)");
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		if(regexp.test(node.className.baseVal)) {
+			return true;
+		}
+	}
+	else {
+		if(regexp.test(node.className)) {
+			return true;
+		}
+	}
+	return false;
+}
+Util.addClass = u.ac = function(node, classname, dom_update) {
+	var classnames = classname.split(" ");
+	while(classnames.length) {
+		classname = classnames.shift();
+		var regexp = new RegExp("(^|\\s)" + classname + "(\\s|$)");
+		u.bug(classname, regexp.test(node.className));
+		if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+			if(!regexp.test(node.className.baseVal)) {
+				node.className.baseVal += node.className.baseVal ? " " + classname : classname;
+			}
+		}
+		else {
+			if(!regexp.test(node.className)) {
+				node.className += node.className ? " " + classname : classname;
+			}
+		}
+	}
+	dom_update = (!dom_update) || (node.offsetTop);
+	return node.className;
+}
+Util.removeClass = u.rc = function(node, classname, dom_update) {
+	var regexp = new RegExp("(^|\\s)(" + classname + ")(?=[\\s]|$)", "g");
+	if(typeof(SVGElement) !== "undefined" && node instanceof SVGElement) {
+		node.className.baseVal = node.className.baseVal.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+	}
+	else {
+		node.className = node.className.replace(regexp, " ").trim().replace(/[\s]{2}/g, " ");
+	}
+	dom_update = (!dom_update) || (node.offsetTop);
+	return node.className;
+}
 if(typeof(document.defaultView) == "undefined") {
 	Util.getComputedStyle = u.gcs = function(e, attribute) {
 		e.offsetHeight;
@@ -1817,7 +2085,7 @@ if(typeof(document.defaultView) == "undefined") {
 if(document.all && document.addEventListener == undefined) {
 	Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" && typeof(SVGElement) !== "undefined" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
@@ -1846,12 +2114,14 @@ if(document.all && document.addEventListener == undefined) {
 						var nodes, matches, n, i;
 						matches = u.getMatches(attributes["html"], new RegExp("src\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[src]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
 							n.src = matches[i];
 						}
 						matches = u.getMatches(attributes["html"], new RegExp("href\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[href]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes; i++) {
+							n = nodes[i];
 							n.href = matches[i];
 						}
 					}
@@ -1865,7 +2135,7 @@ if(document.all && document.addEventListener == undefined) {
 	}
 	Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 		try {
-			var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+			var node = (obj(node_type)) ? node_type : (node_type == "svg" && typeof(SVGElement) !== "undefined" ? document.createElementNS("http://www.w3.org/2000/svg", node_type) : document.createElement(node_type));
 			if(attributes) {
 				var attribute;
 				for(attribute in attributes) {
@@ -1894,12 +2164,14 @@ if(document.all && document.addEventListener == undefined) {
 						var nodes, matches, n, i;
 						matches = u.getMatches(attributes["html"], new RegExp("src\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[src]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
 							n.src = matches[i];
 						}
 						matches = u.getMatches(attributes["html"], new RegExp("href\=\"([^\"]+)\"", "ig") );
 						nodes = u.qsa("[href]", node);
-						for(i = 0; n = nodes[i]; i++) {
+						for(i = 0; i < nodes.length; i++) {
+							n = nodes[i];
 							n.href = matches[i];
 						}
 					}
@@ -1972,14 +2244,9 @@ if(typeof(document.textContent) == "undefined") {
 		}
 	}
 }
-u.contains = Util.nodeWithin = u.nw = function(node, scope) {
-	if(scope != node) {
-		if(typeof(scope.contains) == "function") {
-			if(scope.contains(node)) {
-				return true
-			}
-		}
-		else {
+if(typeof(document.contains) == "undefined") {
+	u.contains = function(scope, node) {
+		if(scope != node) {
 			while(node != null) {
 				if(node == scope) {
 					return true;
@@ -1987,8 +2254,16 @@ u.contains = Util.nodeWithin = u.nw = function(node, scope) {
 				node = node.parentNode;
 			}
 		}
+		return false;
 	}
-	return false;
+}
+if(!Element.prototype.matches) {
+	Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function(selector) {
+		var matches = (this.document || this.ownerDocument).querySelectorAll(selector);
+		var i = matches.length;
+		while (--i >= 0 && matches.item(i) !== this) {}
+		return i > -1;
+	};
 }
 if(document.querySelector == undefined) {
 	(function(){
@@ -2289,7 +2564,7 @@ if(document.querySelector == undefined) {
 		},
 		relative: {
 			"+": function(checkSet, part){
-				var isPartStr = typeof part === "string",
+				var isPartStr = str(part),
 					isTag = isPartStr && !rNonWord.test( part ),
 					isPartStrNotTag = isPartStr && !isTag;
 				if ( isTag ) {
@@ -2309,7 +2584,7 @@ if(document.querySelector == undefined) {
 			},
 			">": function( checkSet, part ) {
 				var elem,
-					isPartStr = typeof part === "string",
+					isPartStr = str(part),
 					i = 0,
 					l = checkSet.length;
 				if ( isPartStr && !rNonWord.test( part ) ) {
@@ -2339,7 +2614,7 @@ if(document.querySelector == undefined) {
 				var nodeCheck,
 					doneName = done++,
 					checkFn = dirCheck;
-				if ( typeof part === "string" && !rNonWord.test( part ) ) {
+				if ( str(part) && !rNonWord.test( part ) ) {
 					part = part.toLowerCase();
 					nodeCheck = part;
 					checkFn = dirNodeCheck;
@@ -2350,7 +2625,7 @@ if(document.querySelector == undefined) {
 				var nodeCheck,
 					doneName = done++,
 					checkFn = dirCheck;
-				if ( typeof part === "string" && !rNonWord.test( part ) ) {
+				if ( str(part) && !rNonWord.test( part ) ) {
 					part = part.toLowerCase();
 					nodeCheck = part;
 					checkFn = dirNodeCheck;
@@ -3069,7 +3344,8 @@ if(document.all && document.addEventListener == undefined) {
 		win_event.timeStamp = new Date().getTime();
 		if(element && eid && window.attachedEvents[eid] && window.attachedEvents[eid][window.event.type]) {
 			var i, attachedAction;
-			for(i = 0; attachedAction = window.attachedEvents[eid][window.event.type][i]; i++) {
+			for(i = 0; i < window.attachedEvents[eid][window.event.type].length; i++) {
+				attachedAction = window.attachedEvents[eid][window.event.type][i];
 				element.ie_event_action = attachedAction;
 				element.ie_event_action(win_event);
 			}
@@ -3085,7 +3361,7 @@ if(document.all && document.addEventListener == undefined) {
 		}
 	}
 	u.e.addEvent = function(node, type, action) {
-		if(typeof(node) == "object" && typeof(node.childNodes) == "undefined") {
+		if(obj(node) && typeof(node.childNodes) == "undefined") {
 			node["on"+ type] = action;
 			return;
 		}
@@ -3114,7 +3390,7 @@ if(document.all && document.addEventListener == undefined) {
 		}
 	}
 	u.e.removeEvent = function(node, type, action) {
-		if(typeof(node) == "object" && typeof(node.childNodes) == "undefined") {
+		if(obj(node) && typeof(node.childNodes) == "undefined") {
 			node["on"+ type] = null;
 			return;
 		}

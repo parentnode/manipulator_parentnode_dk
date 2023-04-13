@@ -1,6 +1,6 @@
 /*
-Manipulator v0.9.3-forms-lsb-kampagne Copyright 2021 https://manipulator.parentnode.dk
-js-merged @ 2022-09-06 12:47:55
+Manipulator v0.9.4-forms-lsb-kampagne Copyright 2023 https://manipulator.parentnode.dk
+js-merged @ 2023-04-12 21:13:48
 */
 
 /*seg_universal_include.js*/
@@ -147,6 +147,172 @@ Util.xInObject = function(object, _options) {
 			u.bug(s);
 		}
 	}
+}
+
+
+/*u-cookie.js*/
+Util.saveCookie = function(name, value, _options) {
+	var expires = true;
+	var path = false;
+	var samesite = "lax";
+	var force = false;
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "expires"	: expires	= _options[_argument]; break;
+				case "path"		: path		= _options[_argument]; break;
+				case "samesite"	: samesite	= _options[_argument]; break;
+				case "force"	: force		= _options[_argument]; break;
+			}
+		}
+	}
+	if(!force && obj(window.localStorage) && obj(window.sessionStorage)) {
+		if(expires === true) {
+			window.sessionStorage.setItem(name, value);
+		}
+		else {
+			window.localStorage.setItem(name, value);
+		}
+		return;
+	}
+	if(expires === false) {
+		expires = ";expires="+(new Date((new Date()).getTime() + (1000*60*60*24*365))).toGMTString();
+	}
+	else if(str(expires)) {
+		expires = ";expires="+expires;
+	}
+	else {
+		expires = "";
+	}
+	if(str(path)) {
+		path = ";path="+path;
+	}
+	else {
+		path = "";
+	}
+	samesite = ";samesite="+samesite;
+	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + path + expires + samesite;
+}
+Util.getCookie = function(name) {
+	var matches;
+	if(obj(window.sessionStorage) && window.sessionStorage.getItem(name)) {
+		return window.sessionStorage.getItem(name)
+	}
+	else if(obj(window.localStorage) && window.localStorage.getItem(name)) {
+		return window.localStorage.getItem(name)
+	}
+	return (matches = document.cookie.match(encodeURIComponent(name) + "=([^;]+)")) ? decodeURIComponent(matches[1]) : false;
+}
+Util.deleteCookie = function(name, _options) {
+	var path = false;
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "path"	: path	= _options[_argument]; break;
+			}
+		}
+	}
+	if(obj(window.sessionStorage)) {
+		window.sessionStorage.removeItem(name);
+	}
+	if(obj(window.localStorage)) {
+		window.localStorage.removeItem(name);
+	}
+	if(str(path)) {
+		path = ";path="+path;
+	}
+	else {
+		path = "";
+	}
+	document.cookie = encodeURIComponent(name) + "=" + path + ";expires=Thu, 01-Jan-70 00:00:01 GMT";
+}
+Util.saveNodeCookie = function(node, name, value, _options) {
+	var ref = u.cookieReference(node, _options);
+	var mem = JSON.parse(u.getCookie("man_mem"));
+	if(!mem) {
+		mem = {};
+	}
+	if(!mem[ref]) {
+		mem[ref] = {};
+	}
+	mem[ref][name] = (value !== false && value !== undefined) ? value : "";
+	u.saveCookie("man_mem", JSON.stringify(mem), {"path":"/"});
+}
+Util.getNodeCookie = function(node, name, _options) {
+	var ref = u.cookieReference(node, _options);
+	var mem = JSON.parse(u.getCookie("man_mem"));
+	if(mem && mem[ref]) {
+		if(name) {
+			return (typeof(mem[ref][name]) != "undefined") ? mem[ref][name] : false;
+		}
+		else {
+			return mem[ref];
+		}
+	}
+	return false;
+}
+Util.deleteNodeCookie = function(node, name, _options) {
+	var ref = u.cookieReference(node, _options);
+	var mem = JSON.parse(u.getCookie("man_mem"));
+	if(mem && mem[ref]) {
+		if(name) {
+			delete mem[ref][name];
+		}
+		else {
+			delete mem[ref];
+		}
+	}
+	u.saveCookie("man_mem", JSON.stringify(mem), {"path":"/"});
+}
+Util.cookieReference = function(node, _options) {
+	var ref;
+	var ignore_classnames = false;
+	var ignore_classvars = false;
+	if(obj(_options)) {
+		var _argument;
+		for(_argument in _options) {
+			switch(_argument) {
+				case "ignore_classnames"	: ignore_classnames	= _options[_argument]; break;
+				case "ignore_classvars" 	: ignore_classvars	= _options[_argument]; break;
+			}
+		}
+	}
+	if(node.id) {
+		ref = node.nodeName + "#" + node.id;
+	}
+	else {
+		var node_identifier = "";
+		if(node.name) {
+			node_identifier = node.nodeName + "["+node.name+"]";
+		}
+		else if(node.className) {
+			var classname = node.className;
+			if(ignore_classnames) {
+				var regex = new RegExp("(^| )("+ignore_classnames.split(",").join("|")+")($| )", "g");
+				classname = classname.replace(regex, " ").replace(/[ ]{2,4}/, " ");
+			}
+			if(ignore_classvars) {
+				classname = classname.replace(/\b[a-zA-Z_]+\:[\?\=\w\/\\#~\:\.\,\+\&\%\@\!\-]+\b/g, "").replace(/[ ]{2,4}/g, " ");
+			}
+			node_identifier = node.nodeName+"."+classname.trim().replace(/ /g, ".");
+		}
+		else {
+			node_identifier = node.nodeName
+		}
+		var id_node = node;
+		while(!id_node.id) {
+			id_node = id_node.parentNode;
+		}
+		if(id_node.id) {
+			ref = id_node.nodeName + "#" + id_node.id + " " + node_identifier;
+		}
+		else {
+			ref = node_identifier;
+		}
+	}
+	return ref;
 }
 
 
@@ -1559,13 +1725,13 @@ u.e.addWindowStartEvent = function(node, action) {
 			}
 		}
 	};
-	eval('window["_OnWindowEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowStartEvent_'+ id + '"].callback(event);}');
-	u.e.addEvent(window, type, window["_OnWindowStartEvent_" + id].eventCallback);
+	eval('window["_OnWindowStartEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowStartEvent_'+ id + '"].callback(event);}');
+	u.e.addStartEvent(window, window["_OnWindowStartEvent_" + id].eventCallback);
 	return id;
 }
 u.e.removeWindowStartEvent = function(id) {
 	if(window["_OnWindowStartEvent_" + id]) {
-		u.e.removeEvent(window, window["_OnWindowStartEvent_"+id].type, window["_OnWindowStartEvent_"+id].eventCallback);
+		u.e.removeStartEvent(window, window["_OnWindowStartEvent_"+id].eventCallback);
 		delete window["_OnWindowStartEvent_"+id];
 	}
 }
@@ -1585,12 +1751,12 @@ u.e.addWindowMoveEvent = function(node, action) {
 		}
 	};
 	eval('window["_OnWindowMoveEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowMoveEvent_'+ id + '"].callback(event);}');
-	u.e.addEvent(window, type, window["_OnWindowMoveEvent_" + id].eventCallback);
+	u.e.addMoveEvent(window, type, window["_OnWindowMoveEvent_" + id].eventCallback);
 	return id;
 }
 u.e.removeWindowMoveEvent = function(id) {
 	if(window["_OnWindowMoveEvent_" + id]) {
-		u.e.removeEvent(window, window["_OnWindowMoveEvent_"+id].type, window["_OnWindowMoveEvent_"+id].eventCallback);
+		u.e.removeMoveEvent(window, window["_OnWindowMoveEvent_"+id].eventCallback);
 		delete window["_OnWindowMoveEvent_"+id];
 	}
 }
@@ -3049,7 +3215,7 @@ u.overlay = function (_options) {
 			this.resized(event);
 		}
 	}
-	u.e.addWindowEvent(overlay, "resize", "_resized");
+	u.e.addWindowEvent(overlay, "resize", overlay._resized);
 	overlay.div_header = u.ae(overlay, "div", {class:"header"});
 	if(title) {
 		overlay.div_header.h2 = u.ae(overlay.div_header, "h2", {html: title});
@@ -3091,7 +3257,7 @@ u.overlay = function (_options) {
 	}
 	overlay._resized();
 	u.ass(overlay, {
-		"transition": "all .4s ease-in-out .1s",
+		"transition": "opacity .4s ease-in-out .1s",
 		"opacity": 1,
 	});
 	return overlay;

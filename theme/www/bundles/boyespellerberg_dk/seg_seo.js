@@ -1,4 +1,4 @@
 /*
-Manipulator v0.9.2-boyespellerberg Copyright 2019 https://manipulator.parentnode.dk
-js-merged @ 2020-06-21 21:52:38
+Manipulator v0.9.4-boyespellerberg Copyright 2023 https://manipulator.parentnode.dk
+js-merged @ 2023-02-16 11:24:36
 */
