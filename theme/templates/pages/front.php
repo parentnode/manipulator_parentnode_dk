@@ -19,7 +19,7 @@
 			</p>
 
 			<ul class="actions">
-				<li><a href="/bundles/archive/v0_9_2.zip" class="button primary">Download 0.9.2 (zip)</a></li>
+				<li><a href="/bundles/archive/v0_9_4.zip" class="button primary">Download 0.9.4 (zip)</a></li>
 			</ul>
 
 			<p>
@@ -62,8 +62,7 @@
 
 			<h2>Want to contribute?</h2>
 			<p>
-				parentNode is hosting events and meetups at think.dk regularly. Check out 
-				<a href="https://think.dk/events">our event schedule</a> and come by for a chat or send an email to 
+				Send an email to 
 				<a href="mailto:contribute@parentnode.dk">contribute@parentnode.dk</a> and join our team.
 			</p>
 
