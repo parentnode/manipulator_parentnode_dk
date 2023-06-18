@@ -1,1 +1,1 @@
-Manipulator v0.9.3-janitor Copyright 2020 https://manipulator.parentnode.dk
+Manipulator v0.9.4-janitor Copyright 2023 https://manipulator.parentnode.dk

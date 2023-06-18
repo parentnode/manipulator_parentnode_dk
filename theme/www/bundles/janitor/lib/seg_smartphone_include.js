@@ -14,6 +14,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-b
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-labelstyle-inject.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-location.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-dropdown.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
