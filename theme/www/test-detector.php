@@ -28,7 +28,7 @@ if(isset($read_access) && $read_access) {
 	<div id="header">
 		<ul class="servicenavigation">
 			<li class="keynav navigation nofollow"><a href="#navigation">To navigation</a></li>
-			<li class="keynav user nofollow"><a href="/login">Login</a></li>
+			<li class="keynav user login nofollow"><a href="<?= SITE_LOGIN_URL ?>">Login</a></li>
 		</ul>
 	</div>
 
