@@ -6,6 +6,13 @@
 
 class TypeProject extends Itemtype {
 
+
+	public $db;
+	public $db_groups;
+	public $db_group_modules;
+	public $db_group_segments;
+
+
 	/**
 	* Init, set varnames, validation rules
 	*/
