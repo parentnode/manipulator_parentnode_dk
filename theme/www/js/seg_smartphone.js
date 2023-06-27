@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.4 Copyright 2023 https://manipulator.parentnode.dk
-asset-builder @ 2023-06-18 12:56:29
+asset-builder @ 2023-06-27 09:49:19
 */
 
 /*seg_smartphone_include.js*/
