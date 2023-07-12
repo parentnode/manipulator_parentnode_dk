@@ -8,9 +8,13 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-events
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-browser.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
 
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-labelstyle-inject.js"></script>');
+
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-init.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-media.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-object.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
