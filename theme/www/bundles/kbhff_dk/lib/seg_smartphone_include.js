@@ -10,6 +10,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-events
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events-movements.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-builder.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-labelstyle-inject.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
@@ -24,6 +25,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-overla
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-sortable.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-string.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-svg.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-system.js"></script>');
