@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.3-campus_copenhagenskills_dk Copyright 2008-2021 https://manipulator.parentnode.dk
-js-merged @ 2022-09-20 13:19:15
+js-merged @ 2024-09-30 10:40:58
 */
 
 /*seg_desktop_include.js*/
@@ -302,6 +302,7 @@ Util.Animation = u.a = new function() {
 	// 	
 	this._animationqueue = {};
 	this.requestAnimationFrame = function(node, callback, duration) {
+		duration = duration || false;
 		if(!u.a.__animation_frame_start) {
 			u.a.__animation_frame_start = Date.now();
 		}
@@ -311,7 +312,9 @@ Util.Animation = u.a = new function() {
 		u.a._animationqueue[id].node = node;
 		u.a._animationqueue[id].callback = callback;
 		u.a._animationqueue[id].duration = duration;
-		u.t.setTimer(u.a, function() {u.a.finalAnimationFrame(id)}, duration);
+		if(duration) {
+			u.t.setTimer(u.a, function() {u.a.finalAnimationFrame(id)}, duration);
+		}
 		if(!u.a._animationframe) {
 			window._requestAnimationFrame = eval(u.vendorProperty("requestAnimationFrame"));
 			window._cancelAnimationFrame = eval(u.vendorProperty("cancelAnimationFrame"));
@@ -323,7 +326,7 @@ Util.Animation = u.a = new function() {
 						animation["__animation_frame_start_"+id] = timestamp;
 					}
 					if(fun(animation.node[animation.callback])) {
-						animation.node[animation.callback]((timestamp-animation["__animation_frame_start_"+id]) / animation.duration);
+						animation.node[animation.callback]((timestamp-animation["__animation_frame_start_"+id]) / (animation.duration ? animation.duration : 1));
 					}
 				}
 				if(Object.keys(u.a._animationqueue).length) {
@@ -1498,7 +1501,7 @@ u.e.addOnloadEvent = function(action) {
 				delete window["_Onload_" + this.id];
 			}
 		}
-		eval('window["_Onload_' + id + '"].eventCallback = function() {u.bug("load");window["_Onload_'+id+'"].callback(event);}');
+		eval('window["_Onload_' + id + '"].eventCallback = function() {window["_Onload_'+id+'"].callback(event);}');
 		u.e.addEvent(window, "load", window["_Onload_" + id].eventCallback);
 	}
 }
@@ -1543,13 +1546,13 @@ u.e.addWindowStartEvent = function(node, action) {
 			}
 		}
 	};
-	eval('window["_OnWindowEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowStartEvent_'+ id + '"].callback(event);}');
-	u.e.addEvent(window, type, window["_OnWindowStartEvent_" + id].eventCallback);
+	eval('window["_OnWindowStartEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowStartEvent_'+ id + '"].callback(event);}');
+	u.e.addStartEvent(window, window["_OnWindowStartEvent_" + id].eventCallback);
 	return id;
 }
 u.e.removeWindowStartEvent = function(id) {
 	if(window["_OnWindowStartEvent_" + id]) {
-		u.e.removeEvent(window, window["_OnWindowStartEvent_"+id].type, window["_OnWindowStartEvent_"+id].eventCallback);
+		u.e.removeStartEvent(window, window["_OnWindowStartEvent_"+id].eventCallback);
 		delete window["_OnWindowStartEvent_"+id];
 	}
 }
@@ -1569,12 +1572,12 @@ u.e.addWindowMoveEvent = function(node, action) {
 		}
 	};
 	eval('window["_OnWindowMoveEvent_' + id + '"].eventCallback = function(event) {window["_OnWindowMoveEvent_'+ id + '"].callback(event);}');
-	u.e.addEvent(window, type, window["_OnWindowMoveEvent_" + id].eventCallback);
+	u.e.addMoveEvent(window, window["_OnWindowMoveEvent_" + id].eventCallback);
 	return id;
 }
 u.e.removeWindowMoveEvent = function(id) {
 	if(window["_OnWindowMoveEvent_" + id]) {
-		u.e.removeEvent(window, window["_OnWindowMoveEvent_"+id].type, window["_OnWindowMoveEvent_"+id].eventCallback);
+		u.e.removeMoveEvent(window, window["_OnWindowMoveEvent_"+id].eventCallback);
 		delete window["_OnWindowMoveEvent_"+id];
 	}
 }
@@ -2135,8 +2138,8 @@ Util.Form = u.f = new function() {
 			}
 		}
 		if(!field._custom_initialized) {
-			if(u.hc(field, "string|email|tel|number|integer|password|date|datetime")) {
-				field.type = field.className.match(/(?:^|\b)(string|email|tel|number|integer|password|date|datetime)(?:\b|$)/)[0];
+			if(u.hc(field, "string|email|tel|number|integer|password")) {
+				field.type = field.className.match(/(?:^|\b)(string|email|tel|number|integer|password)(?:\b|$)/)[0];
 				field.input = u.qs("input", field);
 				field.input._form = _form;
 				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
@@ -2240,6 +2243,19 @@ Util.Form = u.f = new function() {
 					this.inputOnEnter(input);
 					this.activateInput(input);
 				}
+			}
+			else if(u.hc(field, "date|datetime")) {
+				field.type = field.className.match(/(?:^|\b)(date|datetime)(?:\b|$)/)[0];
+				field.input = u.qs("input", field);
+				field.input._form = _form;
+				field.input.label = u.qs("label[for='"+field.input.id+"']", field);
+				field.input.field = field;
+				field.input.val = this._value_date;
+				u.e.addEvent(field.input, "keyup", this._updated);
+				u.e.addEvent(field.input, "change", this._changed);
+				u.e.addEvent(field.input, "change", this._updated);
+				this.inputOnEnter(field.input);
+				this.activateInput(field.input);
 			}
 			else if(u.hc(field, "files")) {
 				field.type = "files";
@@ -2405,6 +2421,16 @@ Util.Form = u.f = new function() {
 			}
 		}
 		return (this.selectedIndex >= 0 && this.default_value != this.options[this.selectedIndex].value) ? this.options[this.selectedIndex].value : "";
+	}
+	this._value_date = function(value) {
+		if(value !== undefined) {
+			this.value = value;
+			if(value !== this.default_value) {
+				u.rc(this, "default");
+			}
+			u.f.validate(this);
+		}
+		return (this.value != this.default_value) ? this.value.replace("T", " ") : "";
 	}
 	this._value_file = function(value) {
 		if(value !== undefined) {
@@ -3286,7 +3312,7 @@ Util.Form.customLabelStyle["inject"] = function(iN) {
 		u.e.addEvent(iN, "focus", u.f._changed_state);
 		u.e.addEvent(iN, "blur", u.f._changed_state);
 		u.e.addEvent(iN, "change", u.f._changed_state);
-		if(iN.type.match(/number|integer|password|datetime|date/)) {
+		if(iN.type.match(/number|integer|password/)) {
 			iN.pseudolabel = u.ae(iN.parentNode, "span", {"class":"pseudolabel", "html":iN.default_value});
 			iN.pseudolabel.iN = iN;
 			u.as(iN.pseudolabel, "top", iN.offsetTop+"px");
@@ -3309,7 +3335,7 @@ u.f.updateDefaultState = function(iN) {
 		if(iN.field.virtual_input) {
 			u.rc(iN.field.virtual_input, "default");
 		}
-		if(iN.val() === "") {
+		if(iN.val() === "" && !iN.type.match(/date|datetime/)) {
 			iN.val("");
 		}
 	}
@@ -3319,7 +3345,9 @@ u.f.updateDefaultState = function(iN) {
 			if(obj(iN.field.virtual_input)) {
 				u.ac(iN.field.virtual_input, "default");
 			}
-			iN.val(iN.default_value);
+			if(!iN.type.match(/date|datetime/)) {
+				iN.val(iN.default_value);
+			}
 		}
 	}
 }
@@ -4533,7 +4561,7 @@ u.overlay = function (_options) {
 			this.resized(event);
 		}
 	}
-	u.e.addWindowEvent(overlay, "resize", "_resized");
+	u.e.addWindowEvent(overlay, "resize", overlay._resized);
 	overlay.div_header = u.ae(overlay, "div", {class:"header"});
 	if(title) {
 		overlay.div_header.h2 = u.ae(overlay.div_header, "h2", {html: title});
@@ -4575,7 +4603,7 @@ u.overlay = function (_options) {
 	}
 	overlay._resized();
 	u.ass(overlay, {
-		"transition": "all .4s ease-in-out .1s",
+		"transition": "opacity .4s ease-in-out .1s",
 		"opacity": 1,
 	});
 	return overlay;
@@ -4649,7 +4677,7 @@ u._queueLoader = function() {
 				u._preloader_processes++;
 				u.rc(next, "waiting");
 				u.ac(next, "loading");
-				if(next._file.match(/png|jpg|gif|svg/)) {
+				if(next._file.match(/png|jpg|gif|svg|avif|webp/)) {
 					next.loaded = function(event) {
 						this.image = event.target;
 						this._image = this.image;
