@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9.4-p1koersel_dk Copyright 2024 https://manipulator.parentnode.dk
-js-merged @ 2024-04-17 10:29:38
+js-merged @ 2025-12-02 11:40:52
 */
 
 /*seg_desktop_include.js*/
@@ -302,6 +302,7 @@ Util.Animation = u.a = new function() {
 	// 	
 	this._animationqueue = {};
 	this.requestAnimationFrame = function(node, callback, duration) {
+		duration = duration || false;
 		if(!u.a.__animation_frame_start) {
 			u.a.__animation_frame_start = Date.now();
 		}
@@ -311,7 +312,9 @@ Util.Animation = u.a = new function() {
 		u.a._animationqueue[id].node = node;
 		u.a._animationqueue[id].callback = callback;
 		u.a._animationqueue[id].duration = duration;
-		u.t.setTimer(u.a, function() {u.a.finalAnimationFrame(id)}, duration);
+		if(duration) {
+			u.t.setTimer(u.a, function() {u.a.finalAnimationFrame(id)}, duration);
+		}
 		if(!u.a._animationframe) {
 			window._requestAnimationFrame = eval(u.vendorProperty("requestAnimationFrame"));
 			window._cancelAnimationFrame = eval(u.vendorProperty("cancelAnimationFrame"));
@@ -323,7 +326,7 @@ Util.Animation = u.a = new function() {
 						animation["__animation_frame_start_"+id] = timestamp;
 					}
 					if(fun(animation.node[animation.callback])) {
-						animation.node[animation.callback]((timestamp-animation["__animation_frame_start_"+id]) / animation.duration);
+						animation.node[animation.callback]((timestamp-animation["__animation_frame_start_"+id]) / (animation.duration ? animation.duration : 1));
 					}
 				}
 				if(Object.keys(u.a._animationqueue).length) {
@@ -2458,7 +2461,31 @@ Util.Form = u.f = new function() {
 					u.ac(li_file, "loading");
 					this.field.filelist.load_queue++;
 					li_file.video.onloadedmetadata = function() {
-						u.bug("loaded", this);
+						if(!this.videoWidth || !this.videoHeight && this.li.input._form.div && this.li.input._form.div.media_info_url) {
+							delete this.li.video;
+							var data = new FormData();
+							data.append("type", "video");
+							data.append("video[]", file, file.name);
+							data.append("csrf-token", this.li.input._form.div.csrf_token);
+							this.response = function(response) {
+								var width = 0;
+								var height = 0;
+								if(response && response.cms_object && response.cms_object.length && response.cms_object[0].width && response.cms_object[0].height) {
+									width = response.cms_object[0].width;
+									height = response.cms_object[0].height;
+								}
+								u.ac(this.li, "width:"+width);
+								u.ac(this.li, "height:"+height);
+								u.rc(this.li, "loading");
+								this.li.input.field.filelist.load_queue--;
+								u.f.filelistUpdated(this.li.input);
+							}
+							u.request(this, this.li.input._form.div.media_info_url, {
+								"method": "post",
+								"data": data,
+							});
+							return;
+						}
 						u.ac(this.li, "width:"+this.videoWidth);
 						u.ac(this.li, "height:"+this.videoHeight);
 						u.rc(this.li, "loading");
