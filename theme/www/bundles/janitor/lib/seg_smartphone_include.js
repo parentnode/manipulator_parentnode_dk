@@ -3,6 +3,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-debug.
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-animation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-cookie.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-date.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-dom.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-easings.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-events.js"></script>');
@@ -15,6 +16,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-l
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-html.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-location.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-dropdown.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-form-field-range.js"></script>');
 
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-geometry.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-history.js"></script>');
@@ -24,6 +26,7 @@ document.write('<script type="text/javascript" src="/js/manipulator/src/u-math.j
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-media.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-navigation.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-object.js"></script>');
+document.write('<script type="text/javascript" src="/js/manipulator/src/u-overlay.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-preloader.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-request.js"></script>');
 document.write('<script type="text/javascript" src="/js/manipulator/src/u-scrollto.js"></script>');
